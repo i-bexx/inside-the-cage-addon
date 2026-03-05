@@ -169,12 +169,6 @@
       "sounds/sounds/Game/initializationBeforeLockingTheCam"
     ]
   },
-  "test": {
-    "category": "music",
-    "sounds": [
-      "sounds/sounds/Game/test"
-    ]
-  },
   "cameraNoSignal": {
     "category": "music",
     "sounds": [
