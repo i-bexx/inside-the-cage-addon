@@ -1,0 +1,79 @@
+{
+  "namespace": "coordinates_animation",
+
+  "no_coordinates_fade_in": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 1.0,
+    "from": 0.3,
+    "to": 0.8,
+    "next": "@coordinates_animation.no_coordinates_hold_high"
+  },
+
+  "no_coordinates_hold_high": {
+    "anim_type": "wait",
+    "duration": 1.7,
+    "next": "@coordinates_animation.no_coordinates_fade_out"
+  },
+
+
+  "no_coordinates_fade_out": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 1.0,
+    "from": 0.8,
+    "to": 0.3,
+    "next": "@coordinates_animation.no_coordinates_fade_in"
+  },
+
+
+
+  "position_lost_glitch_offset_wait": {
+    "anim_type": "wait",
+    "duration": 2.0,
+    "next": "@coordinates_animation.position_lost_glitch_slide_left"
+  },
+
+  "position_lost_glitch_slide_left": {
+    "anim_type": "offset",
+    "easing": "linear",
+    "duration": 0.01,
+    "from": [0, 0],
+    "to": [-12, 0],
+    "next": "@coordinates_animation.position_lost_glitch_slide_return"
+  },
+
+  "position_lost_glitch_slide_return": {
+    "anim_type": "offset",
+    "easing": "linear",
+    "duration": 0.01,
+    "from": [-12, 0],
+    "to": [0, 0],
+    "next": "@coordinates_animation.position_lost_glitch_offset_wait"
+  },
+
+
+  "position_lost_glitch_size_wait": {
+    "anim_type": "wait",
+    "duration": 3.3,
+    "next": "@coordinates_animation.position_lost_glitch_size_shrink"
+  },
+
+  "position_lost_glitch_size_shrink": {
+    "anim_type": "size",
+    "easing": "linear",
+    "duration": 0.01,
+    "from": ["100%", "100%"],
+    "to": ["80%", "60%"],
+    "next": "@coordinates_animation.position_lost_glitch_size_return"
+  },
+
+  "position_lost_glitch_size_return": {
+    "anim_type": "size",
+    "easing": "linear",
+    "duration": 0.01,
+    "from": ["80%", "60%"],
+    "to": ["100%", "100%"],
+    "next": "@coordinates_animation.position_lost_glitch_size_wait"
+  }
+}

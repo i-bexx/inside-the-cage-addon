@@ -1,0 +1,66 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.gun.first_person_hold": {
+			"loop": true,
+			"bones": {
+				"root_item": {
+					"rotation": [-540, 80, -292.5],
+					"position": [-1, 2, 3],
+					"scale": 0.7
+				}
+			}
+		},
+		"animation.gun.third_person_hold": {
+			"loop": true,
+			"bones": {
+				"root_item": {
+					"rotation": [90, 0, 0],
+					"position": [0.5, 3.5, -0.5],
+					"scale": 0.7
+				}
+			}
+		},
+		"animation.gun.chamber": {
+			"animation_length": 1,
+			"bones": {
+				"chamber": {
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.3333": [0, 0, 0],
+						"0.5": [0, 0, 3],
+						"0.6667": [0, 0, 0],
+						"1.0": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"animation.gun.fire": {
+			"loop": true,
+			"animation_length": 0.3333,
+			"bones": {
+				"ust": {
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.1667": [0, 0, 4],
+						"0.3333": [0, 0, 0]
+					}
+				},
+				"namlu1": {
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.1667": [0, 0, 4],
+						"0.3333": [0, 0, 0]
+					}
+				},
+				"namlu2": {
+					"position": {
+						"0.0": [0, 0, 0],
+						"0.1667": [0, 0, 4],
+						"0.3333": [0, 0, 0]
+					}
+				}
+			}
+		}
+	}
+}

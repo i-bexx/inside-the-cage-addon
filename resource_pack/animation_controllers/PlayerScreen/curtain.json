@@ -1,0 +1,32 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.curtain": {
+      "states": {
+          "default": {
+              "transitions": [
+                { "curtain_close": "query.is_alive && query.mark_variant == 554" }
+              ],
+              "blend_transition": 0.3
+          },
+          "curtain_close": {
+            "animations": [
+              "curtain_close_anim"
+            ],
+            "transitions": [
+              { "curtain_open": "query.mark_variant != 554 || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:camera')" },
+              { "default": "query.mark_variant == 0" }
+            ]
+          },
+          "curtain_open": {
+            "animations": [
+              "curtain_open_anim"
+            ],
+            "transitions": [
+              { "default": "query.is_alive && query.all_animations_finished && (query.mark_variant == 0 || (query.mark_variant >= 554 && query.mark_variant <= 562))" }
+            ]
+          }
+      }
+  }
+  }
+}

@@ -1,0 +1,31 @@
+{
+	"format_version": 2,
+	"metadata": {
+	},
+	"header": {
+		"name": "Game RP",
+		"description": "",
+		"min_engine_version": [
+			1,
+			20,
+			60
+		],
+		"uuid": "0031ebb9-afc5-42d8-a7e5-b8475abf77ee",
+		"version": [
+			1,
+			0,
+			0
+		]
+	},
+	"modules": [
+		{
+			"type": "resources",
+			"uuid": "e44502cb-be4a-41da-bbdd-27363e0a6525",
+			"version": [
+				1,
+				0,
+				0
+			]
+		}
+	]
+}

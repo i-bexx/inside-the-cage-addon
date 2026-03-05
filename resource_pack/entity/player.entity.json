@@ -1,0 +1,233 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "minecraft:player",
+      "materials": {
+        "default": "entity_alphatest",
+        "cape": "entity_alphatest",
+        "animated": "player_animated",
+        "spectator": "player_spectator",
+
+        "alphatest": "entity_alphatest",
+        "alphablend": "entity_alphablend",
+        "armor_stand": "armor_stand"
+      },
+      "textures": {
+        "default": "textures/entity/steve",
+        "cape": "textures/entity/cape_invisible",
+
+        "cursor": "textures/entity/game/Cursor/cursor",
+        "cursor_green": "textures/entity/game/Cursor/cursor_green",
+        "cursor_blue": "textures/entity/game/Cursor/cursor_blue",
+        "cursor_red": "textures/entity/game/Cursor/cursor_red",
+
+        "static": "textures/entity/game/Static/static1",
+        "static1": "textures/entity/game/Static/static1",
+        "static2": "textures/entity/game/Static/static2",
+        "static3": "textures/entity/game/Static/static3",
+        "cameraNoSignal": "textures/entity/game/Static/cameraNoSignal",
+
+        "battery": "textures/entity/game/battery_player",
+        "white_font": "textures/entity/game/Fonts/white_font",
+        "red_font": "textures/entity/game/Fonts/red_font"
+      },
+      "geometry": {
+        "default": "geometry.humanoid.custom",
+        "cape": "geometry.cape",
+        "static": "geometry.static",
+        "battery": "geometry.battery_player",
+        "curtain": "geometry.curtain",
+        "new_game_Started": "geometry.new_game_Started",
+        "game_over": "geometry.game_over",
+        "turnOffCamWarning": "geometry.turnOffCamWarning",
+        "cursor": "geometry.cursor"
+      },
+      "scripts": {
+        "scale": "0.9375",
+        "initialize": [
+          "variable.is_holding_right = 0.0;",
+          "variable.is_blinking = 0.0;",
+          "variable.last_blink_time = 0.0;",
+          "variable.hand_bob = 0.0;"
+        ],
+        "pre_animation": [
+          "variable.helmet_layer_visible = 1.0;",
+          "variable.leg_layer_visible = 1.0;",
+          "variable.boot_layer_visible = 1.0;",
+          "variable.chest_layer_visible = 1.0;",
+          "variable.attack_body_rot_y = Math.sin(360*Math.sqrt(variable.attack_time)) * 5.0;",
+          "variable.tcos0 = (math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / variable.gliding_speed_value) * 57.3;",
+          "variable.first_person_rotation_factor = math.sin((1 - variable.attack_time) * 180.0);",
+          "variable.hand_bob = query.life_time < 0.01 ? 0.0 : variable.hand_bob + ((query.is_on_ground && query.is_alive ? math.clamp(math.sqrt(math.pow(query.position_delta(0), 2.0) + math.pow(query.position_delta(2), 2.0)), 0.0, 0.1) : 0.0) - variable.hand_bob) * 0.02;",
+
+          "variable.map_angle = math.clamp(1 - variable.player_x_rotation / 45.1, 0.0, 1.0);",
+          "variable.item_use_normalized = query.main_hand_item_use_duration / query.main_hand_item_max_duration;",
+
+
+          "v.knife_attack_index = math.random(0, 1);",
+          "variable.not_holding_special_items = q.is_alive && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo'));"
+        ],
+        "animate": [
+          { "root": "!variable.is_first_person" },
+          { "hands_controller": "variable.is_first_person && (query.mark_variant == 0 || query.mark_variant == 553 || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit'))" },
+          { "hands_controller_3rd_person": "!(variable.is_first_person) && (query.mark_variant == 0 || query.mark_variant == 553 || !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')) || !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')) || !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')) || !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')))" },
+          
+          "static",
+          "static_normal",
+          "static_line",
+          "turnOffCamWarning",
+
+          "new_game_controller",
+          "curtain",
+          "game_over",
+          
+          "batteryhud1",
+          "batteryhud2",
+          "batteryhud3",
+          "batteryhud4",
+          "batteryStatic"
+
+        ]
+      },
+      "animations": {
+        "root": "controller.animation.player.root",
+
+        "static_normal": "controller.animation.static_normal",
+        "static_line": "controller.animation.static_line",
+        "static": "controller.animation.static",
+        "camera_start_anim": "animation.static.cameraStart",
+        "cameraNormalRecText": "animation.static.cameraNormalRecText",
+        "cameraStaticRecText": "animation.static.cameraStaticRecText",
+        "static_line_anim": "animation.static.line",
+        "static_anim": "animation.static.static",
+        "static_low_sanity_anim": "animation.static.sanity_low",
+        "static_back_to_normal_anim": "animation.static.back_to_normal",
+        "staticNoSignal": "animation.static.noSignal",
+        "initializationBeforeLockingTheCamAnim": "animation.static.initializationBeforeLockingTheCam",
+
+        "curtain": "controller.animation.curtain",
+        "curtain_close_anim": "animation.curtain_close",
+        "curtain_open_anim": "animation.curtain_open",
+
+        "game_over_anim": "animation.game_over",
+        "game_over": "controller.animation.game_over",
+
+        "new_game_text_anim": "animation.new_game_Started.text",
+        "new_game_spin_anim": "animation.new_game_Started",
+        "new_game_controller": "controller.animation.new_game_started",
+
+        "turnOffCamWarning": "controller.animation.turnOffCamWarning",
+        "turnOffCamWarningAnim": "animation.turnOffCamWarning",
+        "turnOffCamWarningStopAnim": "animation.turnOffCamWarningStop",
+
+        "battery_decrease1": "animation.battery.decrease1",
+        "battery_decrease2": "animation.battery.decrease2",
+        "battery_decrease3": "animation.battery.decrease3",
+        "battery_decrease4": "animation.battery.decrease4",
+
+        "battery_increase1": "animation.battery.increase1",
+        "battery_increase2": "animation.battery.increase2",
+        "battery_increase3": "animation.battery.increase3",
+        "battery_increase4": "animation.battery.increase4",
+
+        "batteryStaticAnim": "animation.battery_player.static",
+        "batteryStaticStopAnim": "animation.battery_player.staticStop",
+
+        "batteryIsCriticalAnim": "animation.battery_player.isCritical",
+
+        "batteryhud1": "controller.animation.battery1",
+        "batteryhud2": "controller.animation.battery2",
+        "batteryhud3": "controller.animation.battery3",
+        "batteryhud4": "controller.animation.battery4",
+        "batteryStatic": "controller.animation.battery_static",
+        
+        "hands_controller": "controller.animation.hand",
+        "hands": "animation.hands.still",
+        "attack": "animation.hands.attack",
+        "swim": "animation.hands.swim",
+        "run": "animation.hands.run",
+        "walk": "animation.hands.walk",
+        "move_right": "animation.hands.move_right",
+        "move_left": "animation.hands.move_left",
+        "still_left_arm": "animation.hands.still_left_arm",
+        "still_right_arm": "animation.hands.still_right_arm",
+        "despawn_right_but_left_not_empty": "animation.hands.despawn_right_but_left_not_empty",
+        "despawn_left_but_right_not_empty": "animation.hands.despawn_left_but_right_not_empty",
+        "despawn_right_but_left_empty": "animation.hands.despawn_right_but_left_empty",
+        "despawn_left_but_right_empty": "animation.hands.despawn_left_but_right_empty",
+        "respawn_right_but_left_empty": "animation.hands.respawn_right_but_left_empty",
+        "respawn_left_but_right_empty": "animation.hands.respawn_left_but_right_empty",
+        "respawn_right_but_left_not_empty": "animation.hands.respawn_right_but_left_not_empty",
+        "respawn_left_but_right_not_empty": "animation.hands.respawn_left_but_right_not_empty",
+        
+        "starting_gun": "animation.hands.gun.start",
+        "holding_gun": "animation.hands.gun.hold",
+        "walking_gun": "animation.hands.gun.walk",
+        "running_gun": "animation.hands.gun.run",
+        "shooting_gun": "animation.hands.gun.shoot",
+        "aiming_gun": "animation.hands.gun.aim",
+        "aiming_gun_still": "animation.hands.gun.aim_still",
+        "shoot_aiming": "animation.hands.gun.shoot_aiming",
+
+        "starting_knife": "animation.hands.knife.start",
+        "holding_knife": "animation.hands.knife.hold",
+        "attacking_knife": "animation.hands.knife.attack",
+        "attacking_knife2": "animation.hands.knife.attack2",
+        "attack_finishing_knife": "animation.hands.knife.attack_finishing",
+
+        "toxic_bomb_pick_up": "animation.hands.toxic_bomb_pick_up",
+        "toxic_bomb_hold": "animation.hands.toxic_bomb_hold",
+        "toxic_bomb_use": "animation.hands.toxic_bomb_use",
+
+        "kit_pick_up": "animation.hands.kit.pick_up",
+        "holding_kit": "animation.hands.kit.hold",
+
+        "hands_controller_3rd_person": "controller.animation.hands.3rd_person",
+        "3rd_person_gun": "animation.hands.3rd_person.gun",
+        "3rd_person_knife": "animation.hands.3rd_person.knife",
+        "3rd_person_toxic_bomb": "animation.hands.3rd_person.toxic_bomb",
+        "3rd_person_kit": "animation.hands.3rd_person.kit"
+
+      },
+      "sound_effects": {
+        "keyboard": "keyboard",
+        "camera_shutter": "camera_shutter",
+        "pick_up": "pick_up",
+        "tractor_door": "tractor_door",
+        "pistol_loading_chamber": "pistol_loading_chamber",
+        "gun_shoot": "gun_shoot",
+        "knife_draw": "knife_draw",
+        "knife_whoosh": "knife_whoosh",
+        "toxic_bomb_button": "toxic_bomb_button"
+      },
+           
+      "render_controllers": [
+        { "controller.render.game_over": "variable.is_first_person && query.mark_variant == 20"},
+        { "controller.render.player.first_person": "variable.is_first_person && !query.is_spectator && (query.mark_variant == 0 || query.mark_variant == 553 || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit'))" },
+        { "controller.render.player.third_person": "!variable.is_first_person && !variable.map_face_icon && !query.is_spectator" },
+
+        { "controller.render.player.cursor": "variable.is_first_person && !query.is_spectator && query.skin_id == 0" },
+        { "controller.render.player.cursor_green": "variable.is_first_person && !query.is_spectator && query.skin_id == 1" },
+        { "controller.render.player.cursor_blue": "variable.is_first_person && !query.is_spectator && query.skin_id == 2" },
+        { "controller.render.player.cursor_red": "variable.is_first_person && !query.is_spectator && query.skin_id == 3" },
+
+        { "controller.render.player.first_person_spectator": "variable.is_first_person && query.is_spectator" },
+        { "controller.render.player.third_person_spectator": "!variable.is_first_person && !variable.map_face_icon && query.is_spectator" },
+        
+        { "controller.render.player.map": "variable.map_face_icon" },
+
+        { "controller.render.new_game_Started": "variable.is_first_person && (query.mark_variant == 1 || query.mark_variant == 2)" },
+        { "controller.render.curtain.first_person": "variable.is_first_person && (query.mark_variant >= 553 && query.mark_variant <= 562)" },
+        { "controller.render.static.first_person": "variable.is_first_person && query.mark_variant >= 555 && !(query.mark_variant == 557) && !(query.mark_variant == 560) && !(query.mark_variant == 561) && !(query.mark_variant == 562) && !(query.mark_variant == 20)" },
+        { "controller.render.cameraNoSignal": "variable.is_first_person && query.mark_variant == 557"},
+        { "controller.render.static1": "variable.is_first_person && query.mark_variant == 560"},
+        { "controller.render.static2": "variable.is_first_person && query.mark_variant == 561"},
+        { "controller.render.static3": "variable.is_first_person && (query.mark_variant == 562 || query.mark_variant == 20)"},
+        { "controller.render.battery.first_person": "variable.is_first_person && (query.mark_variant >= 555 || query.mark_variant == 20)" },
+        { "controller.render.turnOffCamWarning": "variable.is_first_person && query.mark_variant >= 555 && q.is_item_name_any('slot.armor.chest', 'game:turnoffcamwarning')"}
+      ],
+      "enable_attachables": true
+    }
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "namespace": "hud",
+
+  "hud_title_text": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "title_frame"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "subtitle_frame"
+      }
+    ]
+  },
+
+  "progress_text_label": {
+    "modifications": [
+      {
+        "array_name": "bindings",
+        "operation": "remove",
+        "where": {
+          "binding_name": "#level_number_visible"
+        }
+      }
+    ]
+  },
+
+  //Classic PC UI
+  "centered_gui_elements_at_bottom_middle": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "horse_heart_rend_0"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "horse_heart_rend_1"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "armor_rend"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "hunger_rend"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "bubbles_rend_0"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "bubbles_rend_1"
+      }
+    ]
+  },
+
+  //Pocket UI
+  "not_centered_gui_elements": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "horse_heart_rend"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "armor_rend"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "hunger_rend"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "bubbles_rend_0"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "bubbles_rend_1"
+      }
+    ]
+  },
+
+  //Classic Pocket UI 
+  "centered_gui_elements_at_bottom_middle_touch": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "horse_heart_rend_0"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "horse_heart_rend_1"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "armor_rend"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "hunger_rend"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "bubbles_rend_0"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "bubbles_rend_1"
+      }
+    ]
+  },
+
+  "root_panel": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "chat_stack"
+      },
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "sidebar"
+      },
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": [
+            { 
+              "coin_panel@coin.coin_panel": {
+                "layer": 1
+              } 
+            },
+            { "chat_stack@chat.chat_stack": {
+              "layer": 2
+            } 
+          },
+          {
+            "@sanity_information_text.sanity_screen": {
+              "layer": 3
+            }
+          },
+          {
+            "@sanity_detailed.sanity_detailed_screen": {
+              "layer": 3
+            }
+          },
+          {
+            "@navigation_panel.navigation_panel_parent": {
+              "layer": 4
+            }
+          },
+          {
+            "@notification.notification_text": {
+              "layer": 5
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

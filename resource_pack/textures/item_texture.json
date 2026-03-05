@@ -1,0 +1,39 @@
+{
+	"resource_pack_name": "script",
+	"texture_name": "atlas.items",
+	"texture_data": {
+		"invisible": {
+			"textures": ["textures/items/invisible"]
+		},
+		"camera": {
+			"textures": ["textures/items/camera"]
+		},
+		"skip_cutscene": {
+			"textures": ["textures/items/skip_cutscene"]
+		},
+		"gun": {
+			"textures": ["textures/items/gun"]
+		},
+		"knife": {
+			"textures": ["textures/items/knife"]
+		},
+		"toxic_bomb": {
+			"textures": ["textures/items/toxic_bomb"]
+		},
+		"kit": {
+			"textures": ["textures/items/kit"]
+		},
+		"ammo": {
+			"textures": ["textures/items/ammo"]
+		},
+		"shop": {
+			"textures": ["textures/items/shop"]
+		},
+		"vote_manager": {
+			"textures": ["textures/items/vote_manager"]
+		},
+		"notification": {
+			"textures": ["textures/items/notification"]
+		}
+	}
+}

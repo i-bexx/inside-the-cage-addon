@@ -1,0 +1,27 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.gun_no_ammo": {
+      "states": {
+        "default": {
+          "animations": [
+            "no_ammo_confirmation_when_dropping_gun"
+          ],
+          "transitions": [
+            { "no_ammo_subtitle": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') == 0" }
+          ]
+        },
+        "no_ammo_subtitle": {
+          "animations": [
+            "no_ammo_subtitle"
+          ],
+          "transitions": [
+            { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')) || query.scoreboard('ammo') > 0" }
+          ]
+        }
+      }
+  }
+  }
+}
+
+

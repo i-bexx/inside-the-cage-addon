@@ -1,0 +1,31 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "game:coin",
+      "materials": {
+        "default": "armor_stand"
+      },
+      "textures": {
+        "default": "textures/entity/game/coin"
+      },
+      "geometry": {
+        "default": "geometry.coin"
+      },
+      "scripts": {
+        "animate": [
+          "coin_controller"
+        ]
+      },
+      "animations": {
+        "coin_controller": "controller.animation.coin",
+
+        "spin_anim": "animation.coin.spin",
+        "collected_anim": "animation.coin.collect"
+      },
+      "render_controllers": [
+         "controller.render.coin"
+         ]
+      }
+    }
+  }

@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "game:teleporter",
+      "materials": {
+        "default": "armor_stand"
+      },
+      "textures": {
+        "default": "textures/entity/game/invisible"
+      },
+      "geometry": {
+        "default": "geometry.invisible"
+      },
+      "render_controllers": [
+         "controller.render.teleporter"
+         ]
+      }
+    }
+  }

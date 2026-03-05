@@ -1,0 +1,69 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.static": {
+      "states": {
+        "default": {
+          "transitions": [
+            { "static_true": "q.is_alive && (query.mark_variant == 560 || query.mark_variant == 561 || query.mark_variant == 562 || query.mark_variant == 20)" },
+            { "static_low_sanity": "q.is_alive && q.mark_variant == 556" },
+            { "staticNoSignal": "q.is_alive && q.mark_variant == 557" },
+            { "initializationBeforeLockingTheCam": "q.is_alive && q.mark_variant == 558" }
+          ]
+        },
+        "static_true": {
+          "animations": [
+            "static_anim"
+          ],
+          "transitions": [
+            { "static_back_to_normal": "q.mark_variant == 555" },
+            { "static_low_sanity": "q.mark_variant == 556" },
+            { "staticNoSignal": "q.mark_variant == 557" },
+            { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
+          ]
+        },
+        "static_back_to_normal": {
+          "animations": [
+            "static_back_to_normal_anim"
+          ],
+          "transitions": [
+            { "static_true": "q.mark_variant >= 560" },
+            { "static_low_sanity": "q.mark_variant == 556" },
+            { "staticNoSignal": "q.mark_variant == 557" },
+            { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
+          ]
+        },
+        "static_low_sanity": {
+          "animations": [
+            "static_low_sanity_anim"
+          ],
+          "transitions": [
+            { "static_true": "q.mark_variant >= 560" },
+            { "static_back_to_normal": "q.mark_variant == 555" },
+            { "staticNoSignal": "q.mark_variant == 557" },
+            { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
+          ]
+        },
+        "staticNoSignal": {
+          "animations": [
+            "staticNoSignal"
+          ],
+          "transitions": [
+            { "static_true": "q.mark_variant >= 560" },
+            { "static_back_to_normal": "q.mark_variant == 555" },
+            { "static_low_sanity": "q.mark_variant == 556" },
+            { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
+          ]
+        },
+        "initializationBeforeLockingTheCam": {
+          "animations": [
+            "initializationBeforeLockingTheCamAnim"
+          ],
+          "transitions": [
+            { "default": "query.mark_variant == 0 || query.all_animations_finished" }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.toxic_bomb.use": {
+			"timeline": {
+				"0.5": [
+					"/scoreboard players set @s used_toxic_bomb 1",
+					"/clear @s game:toxic_bomb",
+					"/execute at @s run playsound toxic_bomb @a[r=15]"
+				],
+				"0.95": [
+					"/scoreboard players set @s used_toxic_bomb 0"
+				]
+			},
+			"animation_length": 1,
+			"loop": false
+		}
+	}
+}

@@ -1,0 +1,40 @@
+{
+  "namespace": "notification",
+
+  "notification_text": {
+    "type": "label",
+    "text": "You have a new notification!", 
+    "color": [1.0, 1.0, 0.0],
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "offset": [ -10, 0 ],
+    "anims": [ "@notification.notifications_fade_in" ],
+    "bindings": [
+      {
+        "binding_name": "#hud_title_text_string"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((#hud_title_text_string - 'sanityUI1' = ' new_notification') or (#hud_title_text_string - 'sanityUI2' = ' new_notification') or (#hud_title_text_string - 'sanityUI3' = ' new_notification') or (#hud_title_text_string - 'sanityUI4' = ' new_notification') or (#hud_title_text_string - 'sanityUI5' = ' new_notification') or (#hud_title_text_string - 'sanityUI6' = ' new_notification') or (#hud_title_text_string - 'sanityUI7' = ' new_notification'))",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+
+  "notifications_fade_in": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 1.5,
+    "from": 0.3,
+    "to": 0.8,
+    "next": "@notification.notifications_fade_out"
+  },
+  "notifications_fade_out": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 1.5,
+    "from": 0.8,
+    "to": 0.3,
+    "next": "@notification.notifications_fade_in"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "game:hostile_dead",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+
+      "scripts": {
+        "animate": [
+          "hostile_dead_controller"
+        ]
+      },
+      "animations": {
+        "hostile_dead_controller": "controller.animation.hostile_dead",
+        "hostile_dead": "animation.hostile.die"
+      }
+    },
+    "component_groups": {
+      "hostile_dead": {
+        "minecraft:instant_despawn": {
+          "remove_child_entities": true
+        }
+      }
+    },
+		"components": {
+            "minecraft:collision_box": {
+              "width": 0.6,
+              "height": 1.9
+            },
+            "minecraft:health": {
+              "value": 60,
+              "max": 60
+            },
+            "minecraft:knockback_resistance": {
+              "value": 100,
+              "max": 100
+            },
+			"minecraft:type_family": {
+				"family": [ "game"]
+			  },
+        "minecraft:damage_sensor": {
+              "triggers": [
+                {
+                  "cause": "all",
+                  "deals_damage": false
+                }
+              ]
+            },
+			"minecraft:pushable": {
+                "is_pushable": false,
+                "is_pushable_by_piston": false
+            },
+            "minecraft:nameable": {},
+			"minecraft:fire_immune": {
+      },
+			"minecraft:behavior.hurt_by_target": {
+				"priority": 1
+			},
+			"minecraft:physics": {}
+		},
+
+   "events": {
+			"hostile_dead_event": {
+        "add": {
+          "component_groups": [
+            "hostile_dead"
+          ]
+        }
+      }
+        }
+  }
+}
+

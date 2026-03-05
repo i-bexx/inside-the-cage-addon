@@ -1,0 +1,33 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.new_game_started": {
+      "states": {
+          "default": {
+              "transitions": [
+                { "new_game_started": "q.is_alive && query.mark_variant == 2" }
+              ]
+          },
+          "new_game_started": {
+            "animations": [
+                  { "new_game_text_anim" : "query.mark_variant == 2" }
+              ],
+              "transitions": [
+                { "spin": "q.all_animations_finished" },
+                { "default": "query.mark_variant != 2" }
+              ],
+              "blend_transition": 0.3
+          },
+          "spin": {
+            "animations": [
+              "new_game_spin_anim"
+            ],
+            "transitions": [
+                { "default": "query.mark_variant != 2" }
+              ],
+            "blend_transition": 0.3
+          }
+      }
+  }
+  }
+}

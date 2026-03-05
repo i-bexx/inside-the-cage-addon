@@ -1,0 +1,21 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "game:menu_panel",
+      "materials": {
+        "default": "menu_panel"
+      },
+      "textures": {
+        "default": "textures/entity/game/Menu/panel"
+      },
+      "geometry": {
+        "default": "geometry.menu_panel"
+      },
+      "scripts": {},
+      "render_controllers": [
+         "controller.render.menu_panel"
+         ]
+      }
+    }
+  }

@@ -1,0 +1,35 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.curtain",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 5,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "black_curtain",
+					"pivot": [0, 34, 0],
+					"cubes": [
+						{
+							"origin": [-30, 30, 1],
+							"size": [60, 4, 0],
+							"uv": {
+								"north": {"uv": [8, 0], "uv_size": [12, 4]},
+								"east": {"uv": [8, 0], "uv_size": [0, 4]},
+								"south": {"uv": [20, 0], "uv_size": [12, 4]},
+								"west": {"uv": [20, 0], "uv_size": [0, 4]},
+								"up": {"uv": [8, 0], "uv_size": [12, 0]},
+								"down": {"uv": [20, 0], "uv_size": [12, 0]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

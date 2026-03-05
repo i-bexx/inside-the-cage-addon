@@ -1,0 +1,127 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.player.first_person": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.default" ],
+      "part_visibility": [
+        { "*": false },
+        { "rightArm": true },
+        { "rightSleeve": true },
+        { "rightItem": true },
+        { "leftArm": true },
+        { "leftSleeve": true }
+      ]
+    },
+    "controller.render.player.cursor": {
+      "geometry": "Geometry.cursor",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Texture.cursor" ],
+      "part_visibility": [
+        { "*": true },
+        { "cursor": true },
+        { "cursor2": false },
+        { "shoot": "query.variant == 1" }
+      ]
+    },
+    "controller.render.player.cursor_green": {
+      "geometry": "Geometry.cursor",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Texture.cursor_green" ],
+      "part_visibility": [
+        { "*": true },
+        { "cursor": true },
+        { "cursor2": true },
+        { "shoot": "query.variant == 1" }
+      ]
+    },
+    "controller.render.player.cursor_blue": {
+      "geometry": "Geometry.cursor",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Texture.cursor_blue" ],
+      "part_visibility": [
+        { "*": true },
+        { "cursor": true },
+        { "cursor2": true },
+        { "shoot": "query.variant == 1" }
+      ]
+    },
+    "controller.render.player.cursor_red": {
+      "geometry": "Geometry.cursor",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Texture.cursor_red" ],
+      "part_visibility": [
+        { "*": true },
+        { "cursor": true },
+        { "cursor2": true },
+        { "shoot": "query.variant == 1" }
+      ]
+    },
+    "controller.render.static.first_person": {
+      "geometry": "geometry.static",
+      "materials": [{"*": "Material.alphablend"}],
+      "textures": ["Texture.static"]
+    },
+    "controller.render.cameraNoSignal": {
+      "geometry": "geometry.static",
+      "materials": [{"*": "Material.alphablend"}],
+      "textures": ["Texture.cameraNoSignal"]
+    },
+    "controller.render.static1": {
+      "geometry": "geometry.static",
+      "materials": [{"*": "Material.alphablend"}],
+      "textures": ["Texture.static1"]
+    },
+    "controller.render.static2": {
+      "geometry": "geometry.static",
+      "materials": [{"*": "Material.alphablend"}],
+      "textures": ["Texture.static2"]
+    },
+    "controller.render.static3": {
+      "geometry": "geometry.static",
+      "materials": [{"*": "Material.alphablend"}],
+      "textures": ["Texture.static3"]
+    },
+    "controller.render.battery.first_person": {
+      "geometry": "geometry.battery",
+      "materials": [{"*": "Material.alphatest"}],
+      "textures": ["Texture.battery"]
+    },
+    "controller.render.turnOffCamWarning": {
+      "geometry": "geometry.turnOffCamWarning",
+      "materials": [{"*": "Material.alphatest"}],
+      "textures": ["Texture.red_font"]
+    },
+    "controller.render.curtain.first_person": {
+      "geometry": "geometry.curtain",
+      "materials": [{"*": "Material.alphatest"}],
+      "textures": ["Texture.white_font"],
+      "part_visibility": [
+        { "*": "(query.mark_variant >= 553 && query.mark_variant <= 562)" }
+      ]
+    },
+    "controller.render.game_over": {
+      "geometry": "geometry.game_over",
+      "materials": [{"*": "Material.alphatest"}],
+      "textures": ["Texture.red_font"],
+      "part_visibility": [
+        { "*": true },
+        { "alphabet": false },
+        { "punctuation": false },
+        { "capitals": false }
+      ]
+    },
+    "controller.render.new_game_Started": {
+      "geometry": "geometry.new_game_Started",
+      "materials": [{"*": "Material.alphatest"}],
+      "textures": ["Texture.white_font"],
+      "part_visibility": [
+        { "*": true },
+        { "alphabet": false },
+        { "punctuation": false },
+        { "capitals": false }
+      ]
+    }
+  }
+}

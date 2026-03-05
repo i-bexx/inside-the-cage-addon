@@ -1,0 +1,22 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.game_over": {
+      "states": {
+        "default": {
+          "transitions": [
+            { "game_over": "q.is_alive && query.mark_variant == 20" }
+          ]
+        },
+        "game_over": {
+          "animations": [
+            "game_over_anim"
+          ],
+          "transitions": [
+            { "default": "query.mark_variant != 20" }
+          ]
+        }
+      }
+    }
+  }
+}

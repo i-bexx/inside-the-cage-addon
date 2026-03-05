@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "game:battery",
+      "materials": {
+        "default": "armor_stand"
+      },
+      "textures": {
+        "default": "textures/entity/game/battery"
+      },
+      "geometry": {
+        "default": "geometry.battery"
+      },
+      "render_controllers": [
+         "controller.render.battery"
+         ]
+      }
+    }
+  }

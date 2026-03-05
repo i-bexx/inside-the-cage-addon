@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "game:bottle",
+      "materials": {
+        "default": "armor_stand"
+      },
+      "textures": {
+        "default": "textures/entity/game/bottle"
+      },
+      "geometry": {
+        "default": "geometry.bottle_on_ground"
+      },
+      "render_controllers": [
+         "controller.render.bottle_on_ground"
+         ]
+      }
+    }
+  }

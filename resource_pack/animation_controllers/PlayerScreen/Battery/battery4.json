@@ -1,0 +1,34 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.battery4": {
+      "states": {
+          "default": {
+            "transitions": [
+              { "battery_increase4": "q.is_alive && q.is_item_name_any('slot.armor.head', 'battery:increase4')" },
+              { "battery_decrease4": "q.is_alive && q.is_item_name_any('slot.armor.head', 'battery:decrease4')" }
+            ]
+        },
+        "battery_increase4": {
+          "animations": [
+              "battery_increase4"
+            ],
+            "transitions": [
+            { "battery_decrease4": "q.is_item_name_any('slot.armor.head', 'battery:decrease4')" },
+            { "default": "query.mark_variant < 555"}
+          ]
+        },
+        "battery_decrease4": {
+          "animations": [
+              "battery_decrease4"
+              ],
+              "transitions": [
+                { "battery_increase4": "q.is_item_name_any('slot.armor.head', 'battery:increase4')" },
+                { "default": "query.mark_variant < 555"}
+              ],
+              "blend_transition": 0.3
+        } 
+      }
+  }
+  }
+}

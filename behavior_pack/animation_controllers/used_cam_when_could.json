@@ -1,0 +1,27 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.used_cam_when_could": {
+      "states": {
+        "default": {
+          "on_entry": [
+            "/stopsound @s camera_no_signal"
+          ],
+          "transitions": [
+            { "used_cam_when_could": "query.mark_variant == 558" }
+          ]
+        },
+        "used_cam_when_could": {
+          "animations": [
+            "used_cam_when_could_anim"
+          ],
+          "transitions": [
+            { "default": "query.all_animations_finished" }
+          ]
+        }
+      }
+  }
+  }
+}
+
+

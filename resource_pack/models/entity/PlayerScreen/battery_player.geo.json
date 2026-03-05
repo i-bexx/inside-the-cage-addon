@@ -1,0 +1,56 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.battery_player",
+				"texture_width": 32,
+				"texture_height": 32,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 5.5,
+				"visible_bounds_offset": [0, 2.25, 0]
+			},
+			"bones": [
+				{
+					"name": "battery",
+					"pivot": [0, 0, 0],
+					"cubes": [
+						{"origin": [-4.1, 28, 3.8], "size": [2, 2, 0], "uv": [28, 3]}
+					]
+				},
+				{
+					"name": "battery_4",
+					"parent": "battery",
+					"pivot": [-4, 29, 3],
+					"cubes": [
+						{"origin": [-3.85, 28.6, 3.8], "size": [1, 1, 0], "uv": [30, 0]}
+					]
+				},
+				{
+					"name": "battery_3",
+					"parent": "battery",
+					"pivot": [-4, 29, 3],
+					"cubes": [
+						{"origin": [-3.62, 28.6, 3.8], "size": [1, 1, 0], "uv": [30, 0]}
+					]
+				},
+				{
+					"name": "battery_2",
+					"parent": "battery",
+					"pivot": [-4, 29, 3],
+					"cubes": [
+						{"origin": [-3.39, 28.6, 3.8], "size": [1, 1, 0], "uv": [30, 0]}
+					]
+				},
+				{
+					"name": "battery_1",
+					"parent": "battery",
+					"pivot": [-4, 29, 3],
+					"cubes": [
+						{"origin": [-3.16, 28.6, 3.8], "size": [1, 1, 0], "uv": [30, 0]}
+					]
+				}
+			]
+		}
+	]
+}

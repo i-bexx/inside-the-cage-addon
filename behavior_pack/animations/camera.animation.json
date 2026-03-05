@@ -1,0 +1,22 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.static.camera_no_signal_playsound": {
+			"timeline": {
+				"0.0": [
+					"/playsound camera_no_signal @s"
+				]
+			},
+			"animation_length": 3.2,
+			"loop": true
+		},
+		"animation.static.used_cam_when_could": {
+			"timeline": {
+				"0.0": [
+					"/playsound turnedOnCamNowCanNot @s"
+				]
+			},
+			"animation_length": 0.125
+		}
+	}
+}

@@ -1,0 +1,275 @@
+{
+  "ambiance": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/ambiance",
+      "sounds/sounds/ambiance2",
+      "sounds/sounds/ambiance3"
+    ]
+  },
+  "game_starting": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/game_starting"
+    ]
+  },
+  "game_over": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/game_over"
+    ]
+  },
+  "static_game_over": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/static_game_over"
+    ]
+  },
+  "camera_shutter": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/camera_shutter"
+    ]
+  },
+  "coin_collect": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/coin_collect"
+    ]
+  },
+  "heart": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/heart"
+    ]
+  },
+  "pick_up": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/pick_up"
+    ]
+  },
+  "kit_used": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/kit_used"
+    ]
+  },
+  "toxic_bomb": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/ToxicBomb/toxic_bomb"
+    ]
+  },
+  "toxic_bomb_button": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/ToxicBomb/toxic_bomb_button"
+    ]
+  },
+  "pistol_loading_chamber": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Gun/pistol_loading_chamber"
+    ]
+  },
+  "gun_drawing": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Gun/gun_drawing"
+    ]
+  },
+  "gun_aim": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Gun/gun_aim"
+    ]
+  },
+  "gun_shoot": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Gun/gun_shoot"
+    ]
+  },
+  "no_ammo": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Gun/no_ammo"
+    ]
+  },
+  "shot_entity": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Gun/shot_entity"
+    ]
+  },
+  "knife_draw": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Knife/knife_draw"
+    ]
+  },
+  "knife_whoosh": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Knife/knife_whoosh"
+    ]
+  },
+  "knife_slice": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Knife/knife_slice"
+    ]
+  },
+  "break_cage": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Game/break_cage"
+    ]
+  },
+  "bottle_drink": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Game/bottle_drink"
+    ]
+  },
+  "static_low_sanity": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Game/static_low_sanity"
+    ]
+  },
+  "static_to_normal": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Game/static_to_normal"
+    ]
+  },
+  "static1": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Game/static1"
+    ]
+  },
+  "static2": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Game/static2"
+    ]
+  },
+  "static3": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Game/static3"
+    ]
+  },
+  "initializationBeforeLockingTheCam": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Game/initializationBeforeLockingTheCam"
+    ]
+  },
+  "test": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Game/test"
+    ]
+  },
+  "cameraNoSignal": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Game/cameraNoSignal"
+    ]
+  },
+  "new_game_Started": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Menu/new_game_Started"
+    ]
+  },
+  "menu_exit": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Menu/menu_exit"
+    ]
+  },
+  "keyboard": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Menu/keyboard"
+    ]
+  },
+  "engine_start": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Menu/Car/engine start"
+    ]
+  },
+  "driving": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Menu/Car/driving"
+    ]
+  },
+  "truck_container": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Menu/Car/truck container"
+    ]
+  },
+  "close_lid": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Menu/Car/close lid"
+    ]
+  },
+  "click_choosing": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Menu/Click/choosing"
+    ]
+  },
+  "click_chose": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/Menu/Click/chose"
+    ]
+  },
+  "notification": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/notification"
+    ]
+  },
+  "tractor_door": {
+    "category": "music",
+    "sounds": [
+      "sounds/sounds/tractor_door"
+    ]
+  },
+  "hostile_spawn": {
+    "category": "hostile",
+    "sounds": [
+      "sounds/sounds/Hostile/hostile_spawn"
+    ]
+  },
+  "hostile_hurt": {
+    "category": "hostile",
+    "sounds": [
+      "sounds/sounds/Hostile/hostile_hurt"
+    ]
+  },
+  "hostile_whisper": {
+    "category": "hostile",
+    "sounds": [
+      "sounds/sounds/Hostile/hostile_whisper1",
+      "sounds/sounds/Hostile/hostile_whisper2",
+      "sounds/sounds/Hostile/hostile_whisper3",
+      "sounds/sounds/Hostile/hostile_whisper4"
+    ]
+  }
+}
+
+
+
+

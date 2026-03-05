@@ -1,0 +1,25 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.toxic_bomb.first_person_hold": {
+			"loop": true,
+			"animation_length": 3,
+			"bones": {
+				"root_item": {
+					"rotation": [72.5, 3.5, -32],
+					"position": [2, 17, 1],
+					"scale": 0.55
+				}
+			}
+		},
+		"animation.toxic_bomb.third_person_hold": {
+			"loop": true,
+			"bones": {
+				"root_item": {
+					"rotation": [25, 0, 0],
+					"position": [0.5, 19, -2.5]
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,35 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.battery_static": {
+      "states": {
+          "default": {
+            "animations": [
+              "batteryStaticStopAnim"
+            ],
+            "transitions": [
+              { "batteryStaticAnim": "q.is_alive && (query.mark_variant == 557 || query.mark_variant == 560 || query.mark_variant == 561 || query.mark_variant == 562 || query.mark_variant == 20)" },
+              { "batteryIsCritical": "q.is_alive && query.is_item_name_any('slot.armor.head', 'battery:isCritical')" }
+            ]
+        },
+        "batteryStaticAnim": {
+          "animations": [
+              "batteryStaticAnim"
+            ],
+            "transitions": [
+            { "default": "query.mark_variant == 555 || query.mark_variant == 0" }
+          ]
+        },
+        "batteryIsCritical": {
+          "animations": [
+            "batteryIsCriticalAnim"
+          ],
+          "transitions": [
+            { "batteryStaticAnim": "(query.mark_variant == 557 || query.mark_variant == 560 || query.mark_variant == 561 || query.mark_variant == 562 || query.mark_variant == 20)" },
+            { "default": "(query.mark_variant == 0 || query.mark_variant == 555) && !query.is_item_name_any('slot.armor.head', 'battery:isCritical')" }
+          ]
+        }
+      }
+  }
+  }
+}

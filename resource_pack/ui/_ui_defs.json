@@ -1,0 +1,22 @@
+{
+  "ui_defs": [
+    "ui/hud_screen.json",
+
+    "ui/chat.json",
+    "ui/coin.json",
+    "ui/navigation_panel.json",
+    "ui/notification.json",
+
+    "ui/server_form.json",
+
+    "ui/Compass/compass.json",
+    "ui/Compass/compass_direction.json",
+    "ui/Compass/compass_frame.json",
+
+    "ui/Coordinates/coordinates.json",
+    "ui/Coordinates/coordinates_animation.json",
+
+    "ui/Sanity/sanity.json",
+    "ui/Sanity/sanity_detailed.json"
+  ]
+}
