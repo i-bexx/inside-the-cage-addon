@@ -36,3 +36,18 @@ A fully custom user interface provides real-time data:
 * **Bottom Right:** Coin balance.
 * **Bottom Left:** Sanity indicator.
 * **Top Right:** Dynamic compass and coordinates. **(Survival Twist: Coordinates will be hidden after a certain time during the round!)**
+
+## ⚖️ Legal Disclaimer
+This project is an independent community creation for Minecraft Bedrock Edition and contains modified versions of original game UI code structures (e.g., `server_form.json`).
+* `(c) Mojang AB` and `(c) Microsoft Corporation`. All rights reserved for the original game assets and baseline code structures.
+* It is not an official Minecraft product and is not approved by or associated with Mojang or Microsoft.
+
+## 📥 Downloads & Support
+
+This project is currently in active development (Alpha). 
+
+Once a playable build is ready, I will be providing:
+* **Free Downloads** for the public community.
+* **Patreon Early Access** for those who want to support the development and get updates before anyone else.
+
+Stay tuned for updates!
