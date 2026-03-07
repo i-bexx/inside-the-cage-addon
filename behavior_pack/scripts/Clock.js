@@ -14,6 +14,13 @@ const customUi = new ActionFormData()
     .button ("Rewards", "textures/ui/promo_holiday_gift_small")
     .button ("Shop", "textures/ui/ican_deals")
     .button ("Ban Tool", "textures/ui/hammer_1")
+    .button ("Skins", "textures/ui/icon_hangar")
+    .button ("Skins", "textures/ui/icon_hangar")
+    .button ("Skins", "textures/ui/icon_hangar")
+    .button ("Skins", "textures/ui/icon_hangar")
+    .button ("Skins", "textures/ui/icon_hangar")
+    .button ("Skins", "textures/ui/icon_hangar")
+    .button ("Skins", "textures/ui/icon_hangar")
     .button ("Skins", "textures/ui/icon_hangar");
 
     
