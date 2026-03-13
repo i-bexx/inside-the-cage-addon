@@ -2,12 +2,12 @@ import { world, system } from "@minecraft/server";
 import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 import { votePanel } from "./voteManager";
-import { getGameStartedObjective, getValueParticipant, getObjectiveScore } from "./Scoreboards";
+import { getGameStartedObjective, getCoinAmountObjective, getValueParticipant, getObjectiveScore } from "./Scoreboards";
 
 const DIMENSION = world.getDimension("overworld");
 
 const PANELS = [ shopPanel, votePanel, shopPanel, votePanel ];
-const SHOP_ITEMS = [ "game:gun", "game:knife", "game:kit", "game:toxic_bomb", "game:ammo" ];
+const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 3, "game:toxic_bomb": 6, "game:ammo": 1, "battery": 3 };
 
 let timeoutId = 0;
 
@@ -23,16 +23,16 @@ function mainPanel(player) {
             if (cancelationReason === FormCancelationReason.UserBusy) {
                 return mainPanel(player);
             }
-            if (canceled) return;
+            if (canceled) return;PANELS[selection](player);
 
             const isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
             if (isGameStarted == 0) {
-                player.sendMessage("§c§l[!] §r§cPanel is currently locked!");
+                player.sendMessage(" §6[§e!§6] §c§lPanel is currently locked!");
                 player.playSound("note.bass");
                 return;
             }
 
-            PANELS[selection](player);
+            
     })
 }
 
@@ -52,19 +52,33 @@ function shopPanel(player) {
             }
             if (canceled) return;
 
-				if (selection != 5) {
-					player.runCommand(`give @s ${SHOP_ITEMS[selection]}`);
-					return;
-				}
+            const coinAmount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity);
 
-				// --- Runs when player buys battery ---
+						const [itemName, itemCost] = Object.entries(SHOP_ITEMS)[selection] || [];
 
-				if (player.getDynamicProperty("batteryLevel") < 4) {
-						player.setDynamicProperty("batteryIsCollected", true)
-				} else {
-						world.getDimension("overworld").runCommand(`say "${player.name}" Your battery is already full`)
-						player.runCommand("playsound notification @s")
-				}
+						if (coinAmount >= itemCost) {
+							let transactionSuccessful = false;
+
+							if (itemName !== "battery") {
+									player.runCommand(`give @s ${itemName}`);
+									transactionSuccessful = true;
+							} else if (player.getDynamicProperty("batteryLevel") < 4) {
+									player.setDynamicProperty("batteryIsCollected", true);
+									transactionSuccessful = true;
+							} else {
+									player.sendMessage(" §6[§e!§6] §cYour battery is already full");
+									player.runCommand("playsound notification @s");
+							}
+
+							if (transactionSuccessful) {
+									player.runCommand(`xp -${itemCost} @s`);
+									player.runCommand(`scoreboard players remove @s coin_amount ${itemCost}`);
+							}
+					} else {
+							player.sendMessage(" §6[§e!§6] §cYou don't have enough coins!");
+							player.playSound("note.bass");
+					}
+						return;
     });
 }
 
