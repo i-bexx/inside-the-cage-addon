@@ -1,0 +1,16 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:fog_settings": {
+		"description": {
+			"identifier": "game:default"
+		},
+		"distance": {
+			"air": {
+				"fog_start": 1,
+				"fog_end": 20,
+				"fog_color": "#000000",
+				"render_distance_type": "fixed"
+			}
+		}
+	}
+}

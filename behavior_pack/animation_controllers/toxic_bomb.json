@@ -1,0 +1,24 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.toxic_bomb": {
+      "states": {
+        "default": {
+          "transitions": [
+            { "toxic_bomb_use": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') && q.is_using_item" }
+          ]
+        },
+        "toxic_bomb_use": {
+          "animations": [
+            "toxic_bomb_use"
+          ],
+          "transitions": [
+            { "default": "!(q.is_using_item) && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') && query.all_animations_finished" }
+          ]
+        }
+      }
+  }
+  }
+}
+
+

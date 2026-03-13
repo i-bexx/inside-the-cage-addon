@@ -1,0 +1,23 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "menu:new_game",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "a": "textures/entity/game/Menu/New game",
+        "b": "textures/entity/game/Menu/New game selected"
+      },
+      "geometry": {
+        "default": "geometry.new_game"
+      },
+      
+      "render_controllers": [
+         { "controller.render.new_game": "query.mark_variant == 0"},
+         { "controller.render.new_game_selected": "query.mark_variant == 1"}
+         ]
+      }
+    }
+  }

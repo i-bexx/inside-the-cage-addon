@@ -1,0 +1,26 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.knife.first_person_hold": {
+			"loop": true,
+			"animation_length": 0.2083,
+			"bones": {
+				"root_item": {
+					"rotation": [-644.33752, -75.83949, -67.27185],
+					"position": [-1, 2, 3],
+					"scale": 0.4
+				}
+			}
+		},
+		"animation.knife.third_person_hold": {
+			"loop": true,
+			"bones": {
+				"root_item": {
+					"rotation": [90, 15, 0],
+					"position": [-1.5, 1.5, 0.5],
+					"scale": 0.2
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,86 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "menu:continue",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "default": {
+        "minecraft:mark_variant": {
+            "value": 0
+        }
+      },
+      "selected": {
+        "minecraft:mark_variant": {
+            "value": 1
+        }
+      }
+    },
+		"components": {
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "all",
+            "deals_damage": false
+          }
+        ]
+      },
+      "minecraft:interact": {
+        "interactions": [
+          {
+            "interact_text": "Continue"
+          }
+        ]
+      },
+            "minecraft:collision_box": {
+              "width": 0.25,
+              "height": 0.1
+            },
+            "minecraft:health": {
+              "value": 6,
+              "max": 6
+            },
+            "minecraft:scale": {
+              "value": 6.55
+            },
+            "minecraft:knockback_resistance": {
+              "value": 100,
+              "max": 100
+            },
+			"minecraft:type_family": {
+				"family": [ "game"]
+			  },
+			"minecraft:pushable": {
+                "is_pushable": false,
+                "is_pushable_by_piston": false
+            },
+            "minecraft:nameable": {},
+			"minecraft:fire_immune": false,
+			"minecraft:behavior.hurt_by_target": {
+				"priority": 1
+			},
+			"minecraft:physics": {}
+		},
+
+   "events": {
+			"default": {
+        "add": {
+          "component_groups": [
+            "default"
+          ]
+        }
+      },
+      "selected": {
+        "add": {
+          "component_groups": [
+            "selected"
+          ]
+        }
+      }
+    }
+  }
+}
+

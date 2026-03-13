@@ -1,0 +1,57 @@
+{
+  "namespace": "coin",
+
+  "coin_panel": {
+    "type": "panel",
+    "size": ["100%c", "100%c"],
+    "anchor_from": "bottom_right",
+    "anchor_to": "bottom_right",
+    "offset": [-10, -5],
+    "controls": [
+      { "coin_background@coin.coin_background": {} }
+    ]
+  },
+
+  "coin_background": {
+    "type": "image",
+    "min_size": ["20px", "5px"],
+    "size": ["100%c + 20px", "100%c + 5px"],
+    "texture": "textures/ui/hud_tip_text_background",
+    "alpha": 0.6,
+    "controls": [
+      {
+        "coin_box@coin.coin_box": {
+          "offset": [0, 5]
+        }
+      }
+    ]
+  },
+
+  "coin_box": {
+    "type": "stack_panel",
+    "size": ["100%c", "20px"],
+    "orientation": "horizontal",
+    "controls": [
+      { "coin_image@coin.coin_image": {} },
+      {
+        "space": {
+          "type": "panel",
+          "size": [4, 0]
+        }
+      },
+      { "coin_text@coin.coin_text": {} }
+    ]
+  },
+
+  "coin_image": {
+    "type": "image",
+    "size": ["10px", "10px"],
+    "texture": "textures/ui/coin"
+  },
+  "coin_text@hud.progress_text_label": {
+    "type": "label",
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "color": [1.0, 1.0, 1.0]
+  }
+}

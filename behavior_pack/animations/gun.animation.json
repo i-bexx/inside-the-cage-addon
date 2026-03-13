@@ -1,0 +1,103 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.gun.shoot": {
+			"timeline": {
+				"0.0": [
+					"/camerashake add @s 0.05 0.3 rotational",
+					"/playsound gun_shoot @s",
+					"/scoreboard players set @s is_shooting 1",
+					"/scoreboard players remove @s ammo 1",
+					"/execute if score @s is_looking_at_hostile matches 1 run playsound shot_entity @s"
+				],
+				"0.3": [
+					"/scoreboard players set @s is_shooting 0"
+				]
+			},
+			"animation_length": 0.3333,
+			"loop": true
+		},
+		"animation.gun.aim": {
+			"timeline": {
+				"0.0": [
+					"/playsound gun_aim @s[scores={can_play_aiming_sound=1}]",
+					"/scoreboard players set @s is_shooting 0"
+				]
+			},
+			"animation_length": 0.3333
+		},
+		"animation.gun.draw": {
+			"timeline": {
+				"0.0": [
+					"/playsound gun_drawing @s"
+				]
+			},
+			"animation_length": 0.3333
+		},
+		"animation.gun.not_shooting": {
+			"timeline": {
+				"0.0": [
+					"/scoreboard players set @s is_shooting 0"
+				]
+			},
+			"animation_length": 0.3333
+		},
+		"animation.gun.no_ammo": {
+			"timeline": {
+				"0.0": [
+					"/playsound no_ammo @s"
+				]
+			},
+			"animation_length": 0.3333,
+			"loop": true
+		},
+		"animation.gun.no_ammo_subtitle": {
+			"timeline": {
+				"0.0": [
+					"/title @s actionbar §4NO AMMO LEFT!!"
+				]
+			},
+			"animation_length": 2.5,
+			"loop": true
+		},
+		"animation.gun.no_ammo_confirmation_when_dropping_gun": {
+			"timeline": {
+				"0.0": [
+					"/execute if score @s ammo matches !0 run event entity @s is_not_shooting_event"
+				]
+			},
+			"animation_length": 2.5
+		},
+		"animation.gun.ammo_reloaded": {
+			"animation_length": 1
+		},
+		"animation.gun.ammo_reloading": {
+			"timeline": {
+				"0.0": [
+					"/title @s actionbar §f|  |  |  |  |"
+				],
+				"0.4": [
+					"/title @s actionbar §4|  §f|  |  |  |"
+				],
+				"0.8": [
+					"/title @s actionbar §4|  |  §f|  |  |"
+				],
+				"1.2": [
+					"/title @s actionbar §4|  |  |  §f|  |"
+				],
+				"1.6": [
+					"/title @s actionbar §4|  |  |  |  §f|"
+				],
+				"2.0": [
+					"/title @s actionbar §4|  |  |  |  |"
+				],
+				"2.2": [
+					"/scoreboard players set @s ammo 20",
+					"/clear @s game:ammo",
+					"/event entity @s ammo_reloaded_event"
+				]
+			},
+			"animation_length": 2.5
+		}
+	}
+}

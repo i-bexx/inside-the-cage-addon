@@ -1,0 +1,26 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.turnOffCamWarning": {
+      "states": {
+          "default": {
+              "animations": [
+                  "turnOffCamWarningStopAnim"
+              ],
+              "transitions": [
+                { "turnOffCamWarning": "q.is_alive && variable.is_first_person && query.mark_variant >= 555 && q.is_item_name_any('slot.armor.chest', 'game:turnoffcamwarning')" }
+              ],
+              "blend_transition": 0.3
+          },
+          "turnOffCamWarning": {
+            "animations": [
+              "turnOffCamWarningAnim"
+            ],
+            "transitions": [
+              { "default": "query.mark_variant == 0 || !(variable.is_first_person && query.mark_variant >= 555 && q.is_item_name_any('slot.armor.chest', 'game:turnoffcamwarning'))" }
+            ]
+          }
+      }
+  }
+  }
+}

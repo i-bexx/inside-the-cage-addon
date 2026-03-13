@@ -1,0 +1,104 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.gun": {
+      "states": {
+        "default": {
+          "animations": [
+            "not_shooting"
+          ],
+          "transitions": [
+            { "drawing_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
+          ]
+        },
+        "drawing_gun": {
+            "on_entry": [
+              "/scoreboard players set @s can_play_aiming_sound 1"
+            ],
+          "animations": [
+            "drawing_gun"
+          ],
+          "transitions": [
+            { "holding_gun": "query.all_animations_finished && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+            { "aiming_gun": "query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+            { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
+          ]
+        },
+          "holding_gun": {
+            "on_entry": [
+              "/scoreboard players set @s can_play_aiming_sound 1"
+            ],
+            "animations": [
+            "not_shooting"
+          ],
+            "transitions": [
+              { "no_ammo": "q.is_using_item && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') == 0 && query.variant != 3" },
+              { "shooting_gun": "q.is_using_item && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') > 0 && query.variant != 3" },
+              { "aiming_gun": "query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.variant != 3" },
+              { "ammo_reloaded": "query.variant == 3"},
+              { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
+            ]
+          },
+          "aiming_gun": {
+            "animations": [
+              "aiming_gun"
+            ],
+            "transitions": [
+              { "no_ammo": "q.is_using_item && query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') == 0 && query.variant != 3" },
+              { "shooting_gun": "q.is_using_item && query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') > 0 && query.variant != 3" },
+              { "holding_gun": "!(query.is_sneaking) && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.variant != 3" },
+              { "ammo_reloaded": "query.variant == 3"},
+              { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
+            ]
+          },
+          "shooting_gun": {
+            "on_entry": [
+              "@s is_shooting_event"
+            ],
+            "animations": [
+              "shooting_gun"
+            ],
+            "transitions": [
+              { "no_ammo": "q.is_using_item && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') == 0" },
+              { "holding_gun": "!(q.is_using_item) && !(query.is_sneaking) && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+              { "aiming_gun": "!(q.is_using_item) && query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+              { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
+            ],
+            "on_exit": [
+              "/event entity @s is_not_shooting_event"
+            ]
+          },
+          "no_ammo": {
+            "on_entry": [
+              "@s no_ammo_event",
+              "/scoreboard players set @s can_play_aiming_sound 0"
+            ],
+              "animations": [
+                "no_ammo"
+              ],
+              "transitions": [
+                { "holding_gun": "!(q.is_using_item) && !(query.is_sneaking) && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+                { "aiming_gun": "!(q.is_using_item) && query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+                { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
+              ],
+              "on_exit": [
+                "/event entity @s is_not_shooting_event"
+              ]
+          },
+          "ammo_reloaded": {
+            "on_entry": [
+              "@s ammo_reloaded_after_event"
+            ],
+            "animations": [
+              "ammo_reloaded"
+            ],
+            "transitions": [
+              { "holding_gun": "query.all_animations_finished" }
+            ]
+          }
+      }
+  }
+  }
+}
+
+

@@ -1,0 +1,11 @@
+item.game:camera=Camera
+item.game:camera_turn_off=Camera turn off
+item.game:gun=Gun
+item.game:knife=Knife
+item.game:toxic_bomb=toxic_bomb
+item.game:kit=Kit
+item.game:ammo=Ammo 20X
+item.menu:skip_cutscene=Skip cutscene
+
+item.notification:restartconfirmation=§aNotification Panel
+item.notification:endroundconfirmation=§cNotification Panel

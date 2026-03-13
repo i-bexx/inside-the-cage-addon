@@ -1,0 +1,107 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "game:battery",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+     "die": {
+      "minecraft:instant_despawn": {}
+     }
+    },
+		"components": {
+			"minecraft:interact": {
+			"interactions": [
+				{
+					"interact_text": "Obtain",
+					"on_interact": {
+						"filters": {
+							"all_of": [
+								{
+									"test": "is_family",
+									"subject": "other",
+									"operator": "==",
+									"value": "battery_is_not_full"
+								}
+							]
+						},
+						"event": "dieEvent",
+						"target": "self"
+					}
+				},
+				{
+					"interact_text": "Obtain",
+					"on_interact": {
+						"filters": {
+							"all_of": [
+								{
+									"test": "is_family",
+									"subject": "other",
+									"operator": "==",
+									"value": "battery_is_full"
+								}
+							]
+						},
+						"event": "battery_is_fullErrorEvent",
+						"target": "other"
+					}
+				}
+			]
+			},
+			"minecraft:collision_box": {
+				"width": 0.15,
+				"height": 0.5
+			},
+			"minecraft:health": {
+				"value": 6,
+				"max": 6
+			},
+			"minecraft:scale": {
+				"value": 1.0
+			},
+			"minecraft:knockback_resistance": {
+				"value": 100,
+				"max": 100
+			},
+	"minecraft:type_family": {
+	"family": [ "game"]
+	},
+	"minecraft:damage_sensor": {
+				"triggers": [
+					{
+						"cause": "all",
+						"deals_damage": false
+					}
+				]
+			},
+	"minecraft:pushable": {
+					"is_pushable": false,
+					"is_pushable_by_piston": false
+			},
+			"minecraft:nameable": {},
+	"minecraft:fire_immune": false,
+	"minecraft:behavior.hurt_by_target": {
+	"priority": 1
+	},
+	"minecraft:physics": {}
+		},
+
+   "events": {
+    "dieEvent": {
+      "sequence": [
+        {
+          "add": {
+            "component_groups": [
+              "die"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
+}
+

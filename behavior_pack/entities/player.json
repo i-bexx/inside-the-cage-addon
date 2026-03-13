@@ -1,0 +1,605 @@
+{
+	"format_version": "1.18.10",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "minecraft:player",
+			"is_spawnable": false,
+			"is_summonable": false,
+			"is_experimental": false,
+
+	"scripts": {
+		"animate": [
+			"camera_no_signal",
+			"used_cam_when_could",
+			"gun",
+			"no_ammo_controller",
+			"ammo_reload_controller",
+			"toxic_bomb",
+			"kit"
+		]
+	},
+  "animations": {
+		"used_cam_when_could": "controller.animation.used_cam_when_could",
+		"used_cam_when_could_anim": "animation.static.used_cam_when_could",
+		"camera_no_signal": "controller.animation.camera_no_signal",
+		"camera_no_signal_playsound": "animation.static.camera_no_signal_playsound",
+
+		"gun": "controller.animation.gun",
+		"drawing_gun": "animation.gun.draw",
+		"aiming_gun": "animation.gun.aim",
+		"shooting_gun": "animation.gun.shoot",
+		"not_shooting": "animation.gun.not_shooting",
+		"no_ammo": "animation.gun.no_ammo",
+		"ammo_reloaded": "animation.gun.ammo_reloaded",
+
+		"no_ammo_controller": "controller.animation.gun_no_ammo",
+		"no_ammo_subtitle": "animation.gun.no_ammo_subtitle",
+		"no_ammo_confirmation_when_dropping_gun": "animation.gun.no_ammo_confirmation_when_dropping_gun",
+
+		"ammo_reload_controller": "controller.animation.ammo_reload",
+		"ammo_reloading_anim": "animation.gun.ammo_reloading",
+
+		"toxic_bomb": "controller.animation.toxic_bomb",
+		"toxic_bomb_use": "animation.toxic_bomb.use",
+
+		"kit": "controller.animation.kit",
+		"kit_use": "animation.kit.use"
+    }
+		},
+		"component_groups": {
+		"normal_component": {
+			"minecraft:mark_variant": {
+							"value": 0
+				},
+					"minecraft:attack": {
+							"damage": 1
+				},
+					"minecraft:health": {
+							"value": 20,
+							"max": 20
+				},
+					"minecraft:type_family": {
+							"family": ["player"]
+				}
+    	},
+			"cursor_normal": {
+        	"minecraft:skin_id": {
+					"value": 0
+			}
+    	},
+			"cursor_green": {
+        		"minecraft:skin_id": {
+					"value": 1
+			}
+    	},
+			"cursor_blue": {
+        		"minecraft:skin_id": {
+					"value": 2
+			}
+    	},
+			"cursor_red": {
+        		"minecraft:skin_id": {
+					"value": 3
+			}
+    	},
+			"is_shooting": {
+				"minecraft:variant": {
+					"value": 5
+			}
+			},
+			"ammo_reloaded_after": {
+				"minecraft:variant": {
+					"value": 4
+			}
+		},
+			"ammo_reloaded": {
+				"minecraft:variant": {
+					"value": 3
+			}
+		},
+			"no_ammo": {
+				"minecraft:variant": {
+					"value": 2
+			}
+		},
+			"shooting_the_entity": {
+        	"minecraft:variant": {
+						"value": 1
+			}
+    	},
+			"is_not_shooting": {
+        	"minecraft:variant": {
+						"value": 0
+			}
+    	},
+			"new_game_Started": {
+        		"minecraft:mark_variant": {
+            		"value": 1
+        	}
+    	},
+			"new_game_started_text": {
+        		"minecraft:mark_variant": {
+            		"value": 2
+        	}
+    	},
+			"static": {
+				"minecraft:mark_variant": {
+					"value": 555
+			}
+		},
+			"static_movement": {
+				"minecraft:movement": {
+					"value": 0.06
+			}
+		},
+		"normal_movement": {
+				"minecraft:movement": {
+					"value": 0.1
+			}
+		},
+			"static_low_sanity": {
+				"minecraft:mark_variant": {
+					"value": 556
+			}
+		},
+		"camera_no_signal": {
+			"minecraft:mark_variant": {
+					"value": 557
+			}
+		},
+		"initializationBeforeLockingTheCam": {
+			"minecraft:mark_variant": {
+					"value": 558
+			}
+		},
+			"static_true1": {
+				"minecraft:mark_variant": {
+					"value": 560
+			}
+		},
+			"static_true2": {
+				"minecraft:mark_variant": {
+					"value": 561
+			}
+		},
+			"static_true3": {
+				"minecraft:mark_variant": {
+					"value": 562
+			}
+		},
+		"battery_is_full": {
+			"minecraft:type_family": {
+				"family": [
+					"battery_is_full"
+				]
+			}
+		},
+		"battery_is_not_full": {
+			"minecraft:type_family": {
+				"family": [
+					"battery_is_not_full"
+				]
+			}
+		},
+			"slowness": {
+				"minecraft:movement": {
+					"value": 0.03
+			}
+		},
+			"curtain_close": {
+        		"minecraft:mark_variant": {
+            		"value": 554
+        	},
+        		"minecraft:movement": {
+            		"value": 0.0
+        	}
+    	},
+			"curtain_open": {
+        		"minecraft:mark_variant": {
+            		"value": 553
+        	},
+        		"minecraft:movement": {
+            		"value": 0.1
+        	}
+    	},
+			"game_over": {
+        		"minecraft:mark_variant": {
+            		"value": 20
+        	},
+        		"minecraft:movement": {
+            		"value": 0.1
+        	}
+    	}
+		},
+		"components": {
+			"minecraft:experience_reward": {
+				"on_death": "math.min(query.player_level*7,100)"
+			},
+			"minecraft:type_family": {
+				"family": [
+					"player"
+				]
+			},
+			"minecraft:is_hidden_when_invisible": {},
+			"minecraft:loot": {
+				"table": "loot_tables/empty.json"
+			},
+			"minecraft:collision_box": {
+				"width": 0.6,
+				"height": 1.8
+			},
+			"minecraft:can_climb": {},
+			"minecraft:movement": {
+				"value": 0.1
+			},
+			"minecraft:hurt_on_condition": {
+				"damage_conditions": [
+					{
+						"filters": {
+							"test": "in_lava",
+							"subject": "self",
+							"operator": "==",
+							"value": true
+						},
+						"cause": "lava",
+						"damage_per_tick": 4
+					}
+				]
+			},
+			"minecraft:attack": {
+				"damage": 1
+			},
+			"minecraft:player.saturation": {
+				"value": 20
+			},
+			"minecraft:player.exhaustion": {
+				"value": 0,
+				"max": 4
+			},
+			"minecraft:player.level": {
+				"value": 0,
+				"max": 24791
+			},
+			"minecraft:player.experience": {
+				"value": 0,
+				"max": 1
+			},
+			"minecraft:breathable": {
+				"total_supply": 15,
+				"suffocate_time": -1,
+				"inhale_time": 3.75,
+				"generates_bubbles": false
+			},
+			"minecraft:nameable": {
+				"always_show": true,
+				"allow_name_tag_renaming": false
+			},
+			"minecraft:physics": {},
+			"minecraft:pushable": {
+				"is_pushable": false,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:rideable": {
+				"seat_count": 2,
+				"family_types": [
+					"parrot_tame"
+				],
+				"pull_in_entities": true,
+				"seats": [
+					{
+						"position": [
+							0.4,
+							-0.2,
+							-0.1
+						],
+						"min_rider_count": 0,
+						"max_rider_count": 0,
+						"lock_rider_rotation": 0
+					},
+					{
+						"position": [
+							-0.4,
+							-0.2,
+							-0.1
+						],
+						"min_rider_count": 1,
+						"max_rider_count": 2,
+						"lock_rider_rotation": 0
+					}
+				]
+			},
+			"minecraft:conditional_bandwidth_optimization": {},
+			"minecraft:block_climber": {}
+		},
+		"events": {
+			"normal_event": {
+				"remove": {
+					"component_groups": [
+						]
+					},
+				"add": {
+					"component_groups": [
+						"normal_component",
+						"normal_movement"
+					]
+					}
+					},
+					"normal_movement_event": {
+						"add": {
+								"component_groups": [
+									"normal_movement"
+					]
+					}
+					},
+			"cursor_normal_event": {
+        		"add": {
+          			"component_groups": [
+            			"cursor_normal"
+					]
+					}
+				},
+			"cursor_green_event": {
+        		"add": {
+          			"component_groups": [
+            			"cursor_green"
+					]
+					}
+				},
+				"cursor_blue_event": {
+        		"add": {
+          			"component_groups": [
+            			"cursor_blue"
+					]
+					}
+				},
+			"cursor_red_event": {
+        		"add": {
+          			"component_groups": [
+            			"cursor_red"
+					]
+					}
+					
+				},
+				"is_shooting_event": {
+        		"add": {
+          			"component_groups": [
+            			"is_shooting"
+					]
+					}
+					
+				},
+			"ammo_reloaded_after_event": {
+        		"add": {
+          			"component_groups": [
+            			"ammo_reloaded_after"
+					]
+					}
+					
+				},
+			"ammo_reloaded_event": {
+        		"add": {
+          			"component_groups": [
+            			"ammo_reloaded"
+					]
+					}
+					
+				},
+			"no_ammo_event": {
+        		"add": {
+          			"component_groups": [
+            			"no_ammo"
+					]
+					}
+					
+				},
+			"shooting_the_entity_event": {
+        		"add": {
+          			"component_groups": [
+            			"shooting_the_entity"
+					]
+					}
+					
+				},
+			"is_not_shooting_event": {
+        		"add": {
+          			"component_groups": [
+            			"is_not_shooting"
+					]
+					}
+					
+				},
+			"game_over_event": {
+        		"add": {
+          			"component_groups": [
+            			"game_over"
+					]
+					}
+					
+				},
+			"curtain_close_event": {
+        		"add": {
+          			"component_groups": [
+            			"curtain_close"
+					]
+					}
+				},
+			"curtain_open_event": {
+        		"add": {
+          			"component_groups": [
+            			"curtain_open"
+					]
+					}
+					
+				},
+			"static_event": {
+        		"add": {
+          			"component_groups": [
+            			"static"
+					]
+					}
+					
+				},
+			"static_movement_event": {
+        		"add": {
+          			"component_groups": [
+            			"static_movement"
+					]
+					}
+					
+				},
+			"static_low_sanity_event": {
+				"add": {
+					"component_groups": [
+						"static_low_sanity"
+					]
+					}
+				},
+			"static_true_event1": {
+        		"add": {
+          			"component_groups": [
+            			"static_true1"
+					]
+					}
+					
+				},
+			"static_true_event2": {
+        		"add": {
+          			"component_groups": [
+            			"static_true2"
+					]
+					}
+					
+				},
+			"static_true_event3": {
+        		"add": {
+          			"component_groups": [
+            			"static_true3"
+					]
+					}
+					
+				},
+				"camera_no_signal_event": {
+        		"add": {
+          			"component_groups": [
+            			"camera_no_signal"
+					]
+					}
+				},
+				"initializationBeforeLockingTheCamEvent": {
+        		"add": {
+          			"component_groups": [
+            			"initializationBeforeLockingTheCam"
+					]
+					}
+				},
+				"battery_is_full_event": {
+					"filters": {
+						"all_of": [
+							{
+								"test": "is_family",
+								"subject": "self",
+								"operator": "==",
+								"value": "battery_is_not_full"
+							},
+							{
+								"test": "is_family",
+								"subject": "self",
+								"operator": "!=",
+								"value": "battery_is_full"
+							}
+						]
+					},
+					"remove": {
+						"component_groups": [
+							"battery_is_not_full"
+						]
+					},
+					"add": {
+						"component_groups": [
+							"battery_is_full"
+						]
+					}
+				},
+				"battery_is_not_full_event": {
+					"filters": {
+						"all_of": [
+							{
+								"test": "is_family",
+								"subject": "self",
+								"operator": "==",
+								"value": "battery_is_full"
+							},
+							{
+								"test": "is_family",
+								"subject": "self",
+								"operator": "!=",
+								"value": "battery_is_not_full"
+							}
+						]
+					},
+					"remove": {
+						"component_groups": [
+							"battery_is_full"
+						]
+					},
+					"add": {
+						"component_groups": [
+							"battery_is_not_full"
+						]
+					}
+				},
+				"battery_is_fullErrorEvent": {
+					"filters": {
+						"all_of": [
+							{
+								"test": "is_family",
+								"subject": "self",
+								"operator": "==",
+								"value": "battery_is_full"
+							}
+						]
+					},
+					"queue_command": {
+						"command": [
+							"say @s Your battery is already full",
+							"playsound notification @s"
+					]
+					}
+				},
+			"slowness_event": {
+        		"add": {
+          			"component_groups": [
+            			"slowness"
+					]
+					}
+				},
+			"new_game_Started": {
+        		"add": {
+          			"component_groups": [
+            			"new_game_Started"
+					]
+					}
+				},
+			"new_game_started_text": {
+        		"add": {
+          			"component_groups": [
+            			"new_game_started_text"
+					]
+					}
+				},
+					"bad_luck": {
+				"randomize": [
+					{
+						"weight": 15,
+						"queue_command": {
+							"command": ["effect @s slowness 20 2 true"]
+						}
+					},
+					{
+						"weight": 85
+					}
+				]
+			}
+		}
+	}
+}

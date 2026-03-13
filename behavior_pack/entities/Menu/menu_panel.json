@@ -1,0 +1,53 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "game:menu_panel",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {},
+		"components": {
+            "minecraft:collision_box": {
+              "width": 0.1,
+              "height": 0.1
+            },
+            "minecraft:health": {
+              "value": 6,
+              "max": 6
+            },
+            "minecraft:scale": {
+              "value": 3
+            },
+            "minecraft:knockback_resistance": {
+              "value": 100,
+              "max": 100
+            },
+            "minecraft:damage_sensor": {
+              "triggers": [
+                {
+                  "cause": "all",
+                  "deals_damage": false
+                }
+              ]
+            },
+			"minecraft:type_family": {
+				"family": [ "game"]
+			  },
+			"minecraft:pushable": {
+                "is_pushable": false,
+                "is_pushable_by_piston": false
+            },
+            "minecraft:nameable": {},
+			"minecraft:fire_immune": false,
+			"minecraft:behavior.hurt_by_target": {
+				"priority": 1
+			},
+			"minecraft:physics": {}
+		},
+
+   "events": {}
+  }
+}
+

@@ -1,0 +1,31 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "game:door",
+      "materials": {
+        "default": "entity_alphablend"
+      },
+      "textures": {
+        "a": "textures/entity/game/Door/0",
+        "b": "textures/entity/game/Door/1",
+        "c": "textures/entity/game/Door/2",
+        "d": "textures/entity/game/Door/3",
+        "game_started": "textures/entity/game/Door/started",
+        "waiting_for_host": "textures/entity/game/Door/waiting_for_host"
+      },
+      "geometry": {
+        "default": "geometry.door"
+      },
+      
+      "render_controllers": [
+         { "controller.render.door0": "query.mark_variant == 0"},
+         { "controller.render.door1": "query.mark_variant == 1"},
+         { "controller.render.door2": "query.mark_variant == 2"},
+         { "controller.render.door3": "query.mark_variant == 3"},
+         { "controller.render.door4": "query.mark_variant == 4"},
+         { "controller.render.door5": "query.mark_variant == 5"}
+         ]
+      }
+    }
+  }

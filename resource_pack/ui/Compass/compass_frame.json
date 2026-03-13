@@ -1,0 +1,20 @@
+{
+  "namespace": "compass_frame_panel",
+
+  "compass_frame_p": {
+    "type": "panel",
+    "controls": [
+      { "@compass_frame_panel.compass_frame": {} },
+      { "@compass_frame_panel.compass_background": {} }
+    ]
+  },
+
+  "compass_frame": {
+    "type": "image",
+    "texture": "textures/ui/Compass/compass_frame"
+  },
+  "compass_background": {
+    "type": "image",
+    "texture": "textures/ui/Compass/compass_bg"
+  }
+}

@@ -1,0 +1,39 @@
+{
+	"format_version": "1.10.0",
+	"minecraft:attachable": {
+		"description": {
+			"identifier": "game:gun",
+			"render_controllers": ["controller.render.item_default"],
+			"materials": {
+				"default": "entity_alphatest",
+				"enchanted": "entity_alphatest_glint"
+			},
+			"textures": {
+				"default": "textures/entity/attachable/gun",
+				"enchanted": "textures/misc/enchanted_item_glint"
+			},
+			"geometry": {
+				"default": "geometry.gun"
+			},
+			"animations": {
+				"gun_controller": "controller.animation.gun",
+				"chamber_controller": "controller.animation.gun_chamber",
+				"fire_controller": "controller.animation.gun_fire",
+				"first_person_hold": "animation.gun.first_person_hold",
+				"third_person_hold": "animation.gun.third_person_hold",
+				"chamber_anim": "animation.gun.chamber",
+				"fire_anim": "animation.gun.fire"
+			},
+			"scripts": {
+				"animate": [
+					"gun_controller",
+					"chamber_controller",
+					"fire_controller"
+				]
+			},
+			"particle_effects": {
+				"gun_fire_particle": "game:gun_fire_particle"
+			}
+		}
+	}
+}

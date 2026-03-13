@@ -1,0 +1,127 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "game:door",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "0": {
+        "minecraft:mark_variant": {
+            "value": 0
+        }
+      },
+      "1": {
+        "minecraft:mark_variant": {
+            "value": 1
+        }
+      },
+      "2": {
+        "minecraft:mark_variant": {
+            "value": 2
+        }
+      },
+      "3": {
+        "minecraft:mark_variant": {
+            "value": 3
+        }
+      },
+      "game_started": {
+        "minecraft:mark_variant": {
+            "value": 4
+        }
+      },
+      "waiting_for_host": {
+        "minecraft:mark_variant": {
+            "value": 5
+        }
+      }
+    },
+		"components": {
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "all",
+            "deals_damage": false
+          }
+        ]
+      },
+            "minecraft:collision_box": {
+              "width": 0.6,
+              "height": 1.0
+            },
+            "minecraft:health": {
+              "value": 6,
+              "max": 6
+            },
+            "minecraft:scale": {
+              "value": 6.55
+            },
+            "minecraft:knockback_resistance": {
+              "value": 100,
+              "max": 100
+            },
+			"minecraft:type_family": {
+				"family": [ "game"]
+			  },
+			"minecraft:pushable": {
+                "is_pushable": false,
+                "is_pushable_by_piston": false
+            },
+            "minecraft:nameable": {},
+			"minecraft:fire_immune": false,
+			"minecraft:behavior.hurt_by_target": {
+				"priority": 1
+			},
+			"minecraft:physics": {}
+		},
+
+   "events": {
+			"0": {
+        "add": {
+          "component_groups": [
+            "0"
+          ]
+        }
+      },
+      "1": {
+        "add": {
+          "component_groups": [
+            "1"
+          ]
+        }
+      },
+      "2": {
+        "add": {
+          "component_groups": [
+            "2"
+          ]
+        }
+      },
+      "3": {
+        "add": {
+          "component_groups": [
+            "3"
+          ]
+        }
+      },
+      "game_started": {
+        "add": {
+          "component_groups": [
+            "game_started"
+          ]
+        }
+      },
+      "waiting_for_host": {
+        "add": {
+          "component_groups": [
+            "waiting_for_host"
+          ]
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,11 @@
+{
+  "materials": {
+    "version": "1.0.0",
+    "menu_panel:entity_alphablend": {
+      "+defines": [
+        "USE_UV_ANIM"
+      ]
+    }
+  }
+}
+

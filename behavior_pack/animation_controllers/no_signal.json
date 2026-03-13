@@ -1,0 +1,27 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.camera_no_signal": {
+      "states": {
+        "default": {
+          "on_entry": [
+            "/stopsound @s camera_no_signal"
+          ],
+          "transitions": [
+            { "camera_no_signal_playsound": "query.mark_variant == 557" }
+          ]
+        },
+        "camera_no_signal_playsound": {
+          "animations": [
+            "camera_no_signal_playsound"
+          ],
+          "transitions": [
+            { "default": "query.mark_variant != 557" }
+          ]
+        }
+      }
+  }
+  }
+}
+
+

@@ -1,0 +1,134 @@
+{
+  "namespace": "sanity_information_text",
+
+  "sanity_screen": {
+    "type": "image",
+    "texture": "textures/ui/hud_tip_text_background",
+    "anchor_from": "bottom_left",
+    "anchor_to": "bottom_left",
+    "offset": [5, -2],  
+    "min_size": ["20px", "5px"],
+    "size": ["100%c + 10px", "100%c - 10px"],
+    "alpha": 0.4,
+    "controls": [
+      { 
+        "@sanity_information_text.sanity_panel": {
+          "offset": ["0px", "10px"]
+        } 
+      }
+    ]
+  },
+
+  "sanity_panel": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": ["100%c", "100%c"],
+    "controls": [
+      { "@sanity_information_text.sanity_objective": {} },
+      
+      {
+        "colon": {
+          "type": "label",
+          "text": ":",
+          "size": ["default", "default"]
+        }
+      },
+
+      {
+        "space": {
+          "type": "panel",
+          "size": [4, 0]
+        }
+      },
+
+      { "@sanity_information_text.sanity_value": {} }
+    ]
+  },
+
+  "sanity_objective": {
+    "type": "label",
+    "text": "Sanity",
+    "size": ["default", "default"]
+  },
+  "sanity_value": {
+    "type": "panel",
+    "size": [ "100%c", "100%c" ],
+    "controls": [
+      { 
+        "is_stable": {
+            "type": "label",
+            "text": "STABLE",
+            "color": [ 0.0, 0.0, 0.7 ],
+            "bindings": [
+                {
+                  "binding_name": "#hud_title_text_string"
+                },
+                {
+                  "binding_name": "#sanity_title"
+                },
+                {
+                  "binding_type": "view",
+                  "source_property_name": "(#hud_title_text_string - ' new_notification')",
+                  "target_property_name": "#sanity_title"
+                },
+                {
+                  "binding_type": "view",
+                  "source_property_name": "((#sanity_title = 'sanityUI1') or (#sanity_title = 'sanityUI2'))", 
+                  "target_property_name": "#visible"
+                }
+            ]
+        } 
+      },
+      { 
+        "is_normal": {
+            "type": "label",
+            "text": "NORMAL",
+            "color": [ 0.7, 0.7, 0.0 ],
+            "bindings": [
+                {
+                  "binding_name": "#hud_title_text_string"
+                },
+                {
+                  "binding_name": "#sanity_title"
+                },
+                {
+                  "binding_type": "view",
+                  "source_property_name": "(#hud_title_text_string - ' new_notification')",
+                  "target_property_name": "#sanity_title"
+                },
+                {
+                  "binding_type": "view",
+                  "source_property_name": "((#sanity_title = 'sanityUI3') or (#sanity_title = 'sanityUI4'))",
+                  "target_property_name": "#visible"
+                }
+            ]
+        } 
+      },
+      { 
+        "is_poor": {
+            "type": "label",
+            "text": "POOR",
+            "color": [ 0.7, 0.0, 0.0 ],
+            "bindings": [
+                {
+                  "binding_name": "#hud_title_text_string"
+                },
+                {
+                  "binding_name": "#sanity_title"
+                },
+                {
+                  "binding_type": "view",
+                  "source_property_name": "(#hud_title_text_string - ' new_notification')",
+                  "target_property_name": "#sanity_title"
+                },
+                {
+                  "binding_type": "view",
+                  "source_property_name": "((#sanity_title = 'sanityUI5') or (#sanity_title = 'sanityUI6') or (#sanity_title = 'sanityUI7'))",
+                  "target_property_name": "#visible"
+                }
+            ]
+        } 
+      }
+    ]
+  }
+}

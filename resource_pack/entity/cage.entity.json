@@ -1,0 +1,36 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "game:cage",
+      "materials": {
+        "default": "entity_alphablend",
+        "opaque": "entity",
+        "transparent": "entity_alphablend"
+      },
+      "textures": {
+        "cage": "textures/entity/game/Cage/cage",
+        "cage_broken": "textures/entity/game/Cage/cage_broken"
+      },
+      "geometry": {
+        "default": "geometry.cage",
+        "cage_broken": "geometry.cage_broken"
+      },
+      "scripts": {
+        "animate": [
+          { "soul_controllers": "query.mark_variant == 0" }
+        ]
+      },
+      "animations": {
+          "soul": "animation.cage.soul",
+          "soul_controllers": "controller.animation.cage"
+        },
+      "render_controllers": [
+         { "controller.render.cage_opaque": "query.mark_variant == 0"},
+         { "controller.render.cage_glass": "query.mark_variant == 0"},
+         { "controller.render.cage_broken_glass": "query.mark_variant == 1"},
+         { "controller.render.cage_broken_opaque": "query.mark_variant == 1"}
+         ]
+      }
+    }
+  }

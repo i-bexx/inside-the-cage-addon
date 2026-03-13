@@ -1,0 +1,100 @@
+{
+  "namespace": "coordinates",
+
+  "coordinates_panel": {
+    "type": "panel",
+    "size": ["100%c", "100%c"],
+    "controls": [
+      { "@coordinates.coordinates_text": {} },
+      { "@coordinates.position_lost_image_container": {} },
+      { "@coordinates.no_coordinates_text": {} }
+    ]
+  },
+
+  "coordinates_text": {
+    "type": "label",
+    "text": "#text",
+    "size": ["default", "default"],
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "shadow": true,
+    "bindings": [
+      {
+        "binding_name": "#player_position_visible"
+      },
+      {
+        "binding_name": "#player_score_sidebar",
+        "binding_type": "collection",
+        "binding_collection_name": "scoreboard_scores"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((#player_position_visible) and (#player_score_sidebar - §c = 1))",
+        "target_property_name": "#visible"
+      },
+      {
+        "binding_name": "#player_position_text",
+        "binding_name_override": "#text",
+        "binding_condition": "always_when_visible",
+        "binding_type": "global"
+      }
+    ]
+  },
+  "position_lost_image_container": {
+    "type": "panel",
+    "size": [120, 20],
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "controls": [
+      {
+        "position_lost_image": {
+          "type": "image",
+          "texture": "textures/ui/position_lost",
+          "size": ["100%", "100%"],
+          "anims": [
+            "@coordinates_animation.position_lost_glitch_size_return", 
+            "@coordinates_animation.position_lost_glitch_slide_return"  
+          ],
+          "bindings": [
+            {
+              "binding_name": "#player_position_visible"
+            },
+            {
+              "binding_name": "#player_score_sidebar",
+              "binding_type": "collection",
+              "binding_collection_name": "scoreboard_scores"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((#player_position_visible) and (#player_score_sidebar - §c = 0))",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "no_coordinates_text": {
+    "type": "label",
+    "text": "Coordinates turned off",
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "color": [ 1.0, 0.3, 0.3 ], 
+    "shadow": true, 
+    "alpha": 0.3, 
+    "size": ["default", "default"],
+    "anims": [
+      "@coordinates_animation.no_coordinates_fade_in" 
+    ],
+    "bindings": [
+      {
+        "binding_name": "#player_position_visible"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not (#player_position_visible))",
+        "target_property_name": "#visible"
+      }
+    ]
+  }
+}

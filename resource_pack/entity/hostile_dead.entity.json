@@ -1,0 +1,31 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "game:hostile_dead",
+      "materials": {
+        "default": "entity_beam_additive"
+      },
+      "textures": {
+        "default": "textures/entity/game/hostile"
+      },
+      "geometry": {
+        "default": "geometry.hostile"
+      },
+      "scripts": {
+        "animate": [
+          "die"
+        ]
+      },
+      "animations": {
+        "die": "animation.hostile.die"
+      },
+      "particle_effects": {
+        "hostile": "spawn:hostile"
+      },
+      "render_controllers": [
+         "controller.render.hostile"
+         ]
+      }
+    }
+  }

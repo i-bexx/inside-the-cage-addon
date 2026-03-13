@@ -1,0 +1,12 @@
+{
+  "namespace": "compass",
+
+  "dynamic_compass": {
+    "type": "panel",
+    "size": ["100%y", "30%"],
+    "controls": [
+      { "@compass_frame_panel.compass_frame_p": {} },
+      { "@compass_direction_panel.compass_direction_p": {} }
+    ]
+  }
+}

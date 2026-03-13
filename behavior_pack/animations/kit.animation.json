@@ -1,0 +1,35 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.kit.use": {
+			"timeline": {
+				"0.0": [
+					"/title @s actionbar §f|  |  |  |  |"
+				],
+				"0.4": [
+					"/title @s actionbar §4|  §f|  |  |  |"
+				],
+				"0.8": [
+					"/title @s actionbar §4|  |  §f|  |  |"
+				],
+				"1.2": [
+					"/title @s actionbar §4|  |  |  §f|  |"
+				],
+				"1.6": [
+					"/title @s actionbar §4|  |  |  |  §f|"
+				],
+				"2.0": [
+					"/title @s actionbar §4|  |  |  |  |"
+				],
+				"2.2": [
+					"/execute at @s run particle game:kit_used ~ ~ ~",
+					"/clear @s game:kit",
+					"/playsound kit_used @s",
+					"/scoreboard players set @s sanity 100"
+				]
+			},
+			"animation_length": 2.5,
+			"loop": false
+		}
+	}
+}

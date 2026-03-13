@@ -1,0 +1,23 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "menu:continue",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "a": "textures/entity/game/Menu/continue",
+        "b": "textures/entity/game/Menu/continue selected"
+      },
+      "geometry": {
+        "default": "geometry.continue"
+      },
+      
+      "render_controllers": [
+         { "controller.render.continue": "query.mark_variant == 0"},
+         { "controller.render.continue_selected": "query.mark_variant == 1"}
+         ]
+      }
+    }
+  }

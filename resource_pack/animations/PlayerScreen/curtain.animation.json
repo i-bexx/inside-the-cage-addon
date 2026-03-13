@@ -1,0 +1,29 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.curtain_close": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 1.5,
+			"bones": {
+				"black_curtain": {
+					"scale": {
+						"0.0": [1, 1, 1],
+						"1.0": [1, 4, 1]
+					}
+				}
+			}
+		},
+		"animation.curtain_open": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 1.5,
+			"bones": {
+				"black_curtain": {
+					"scale": {
+						"0.0": [1, 4, 1],
+						"1.0": [1, 1, 1]
+					}
+				}
+			}
+		}
+	}
+}

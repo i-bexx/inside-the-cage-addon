@@ -1,0 +1,52 @@
+{
+	"format_version": 2,
+	"metadata": {
+	},
+	"header": {
+		"name": "Game BP",
+		"description": "",
+		"min_engine_version": [
+			1,
+			20,
+			70
+		],
+		"uuid": "f9c573e1-781a-437a-bd42-10384edc85bf",
+		"version": [
+			1,
+			0,
+			0
+		]
+	},
+	"modules": [
+		{
+			"type": "data",
+			"uuid": "4456bd78-0579-4013-b089-7108c6cc5c66",
+			"version": [
+				1,
+				0,
+				0
+			]
+		},
+		{
+			"type": "script",
+			"language": "javascript",
+			"uuid": "c6e2eab8-d21f-4373-9cf7-77665211e999",
+			"entry": "scripts/main.js",
+			"version": [
+				1,
+				0,
+				0
+			]
+		}
+	],
+	"dependencies": [
+		{
+			"module_name": "@minecraft/server",
+			"version": "1.10.0"
+		},
+		{
+			"module_name": "@minecraft/server-ui",
+			"version": "1.2.0"
+		}
+	]
+}

@@ -1,0 +1,24 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.ammo_reload": {
+      "states": {
+        "default": {
+          "transitions": [
+            { "reloading": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo') && query.is_using_item" }
+          ]
+        },
+        "reloading": {
+          "animations": [
+            "ammo_reloading_anim"
+          ],
+          "transitions": [
+            { "default": "(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo') && !(query.is_using_item)) || !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo')) " }
+          ]
+        }
+      }
+  }
+  }
+}
+
+

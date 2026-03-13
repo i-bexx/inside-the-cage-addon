@@ -1,0 +1,35 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "game:hostile",
+      "materials": {
+        "default": "entity_beam_additive"
+      },
+      "textures": {
+        "default": "textures/entity/game/hostile"
+      },
+      "geometry": {
+        "default": "geometry.hostile"
+      },
+      "scripts": {
+        "animate": [
+          "controller",
+
+          { "die": "!(query.is_alive)"}
+        ]
+      },
+      "animations": {
+        "controller": "controller.animation.hostile",
+        "spawn": "animation.hostile.spawn",
+        "move": "animation.hostile.move",
+        "idle": "animation.hostile.idle",
+        "attack": "animation.hostile.attack",
+        "die": "animation.hostile.die"
+      },
+      "render_controllers": [
+         "controller.render.hostile"
+         ]
+      }
+    }
+  }

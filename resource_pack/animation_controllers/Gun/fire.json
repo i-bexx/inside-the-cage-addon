@@ -1,0 +1,25 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.gun_fire": {
+      "states": {
+          "default": {
+            "transitions": [
+              { "fire": "q.is_using_item && q.variant != 2 && q.variant != 3 && q.variant != 4" }
+            ]
+          },
+          "fire": {
+            "animations": [
+              "fire_anim"
+            ],
+            "transitions": [
+              { "default": "!(q.is_using_item) || q.variant == 2" }
+            ],
+            "blend_transition": 0.3
+          }
+      }
+  }
+  }
+}
+
+
