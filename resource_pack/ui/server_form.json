@@ -28,6 +28,7 @@
     "controls": [
       { "main_panel@server_form.main_panel": {} },
       { "shop_panel@server_form.shop_panel": {} },
+      { "vote_panel@server_form.vote_panel": {} },
       { "other_panels@server_form.other_panels": {} }
     ]   
   },
@@ -45,7 +46,7 @@
       {
         "binding_name": "#title_text",
         "binding_type": "view",
-        "source_property_name": "(not (#title_text = 'MAIN PANEL') and (not (#title_text = 'SHOP')) and (not (#title_text = 'VOTE PANEL')))",
+        "source_property_name": "(not (#title_text = 'MAIN PANEL') and not (#title_text = 'SHOP') and not (#title_text = 'VOTE PANEL'))",
         "target_property_name": "#visible"
       }
     ]
@@ -57,8 +58,8 @@
     "layer": 2,
     "bindings": [
       {
-        "binding_name": "#title_text",
         "binding_type": "view",
+        "binding_name": "#title_text",
         "source_property_name": "(#title_text = 'MAIN PANEL')",
         "target_property_name": "#visible"
       }
@@ -117,7 +118,7 @@
     ]
   },
 
-  "voting_panel": {
+  "vote_panel": {
     "type": "panel",
     "size": [284, 190],
     "layer": 2,
