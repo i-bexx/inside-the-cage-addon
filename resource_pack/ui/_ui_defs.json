@@ -11,6 +11,7 @@
 
     "ui/button_panel_templates/main_panel.json",
     "ui/button_panel_templates/shop_panel.json",
+    "ui/button_panel_templates/vote_panel.json",
 
     "ui/Compass/compass.json",
     "ui/Compass/compass_direction.json",

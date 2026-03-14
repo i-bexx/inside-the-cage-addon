@@ -23,7 +23,7 @@ function mainPanel(player) {
             if (cancelationReason === FormCancelationReason.UserBusy) {
                 return mainPanel(player);
             }
-            if (canceled) return;PANELS[selection](player);
+            if (canceled) return;
 
             const isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
             if (isGameStarted == 0) {
@@ -32,7 +32,7 @@ function mainPanel(player) {
                 return;
             }
 
-            
+            PANELS[selection](player);
     })
 }
 

@@ -30,7 +30,7 @@ const VOTE_CONFIG = {
 
 // ======= PANELS =======
 const mainPanel = new ActionFormData()
-    .title("MENU")
+    .title("VOTE PANEL")
     .button("Restart Round")
     .button("End Round")
     .button("Go Back");
