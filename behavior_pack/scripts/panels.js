@@ -2,11 +2,11 @@ import { world, system } from "@minecraft/server";
 import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 import { votePanel } from "./voteManager";
-import { getGameStartedObjective, getCoinAmountObjective, getValueParticipant, getObjectiveScore } from "./Scoreboards";
+import { getGameStartedObjective, getCoinAmountObjective, getStaminaLimitObjective, getValueParticipant, getObjectiveScore } from "./Scoreboards";
 
 const DIMENSION = world.getDimension("overworld");
 
-const PANELS = [ shopPanel, votePanel, shopPanel, votePanel ];
+const PANELS = [ shopPanel, votePanel, shopPanel, increaseStaminaLimit ];
 const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 3, "game:toxic_bomb": 6, "game:ammo": 1, "battery": 3 };
 
 let timeoutId = 0;
@@ -18,7 +18,7 @@ function mainPanel(player) {
     .button ("Shop", "textures/ui/promo_holiday_gift_small")
     .button ("Vote Manager", "textures/ui/invite_base")
     .button ("")
-    .button ("")
+    .button ("Upgrade Stamina", "textures/ui/panels/main_panel/icons/stamina_limit_increase")
         .show(player).then(({ cancelationReason, canceled, selection }) => {
             if (cancelationReason === FormCancelationReason.UserBusy) {
                 return mainPanel(player);
@@ -82,6 +82,27 @@ function shopPanel(player) {
     });
 }
 
+function increaseStaminaLimit(player) {
+    const coinAmount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity);
+    const staminaLimit = getObjectiveScore(getStaminaLimitObjective(), player.scoreboardIdentity);
+
+    if (staminaLimit > 10) {
+        player.sendMessage(" §6[§e!§6] §cYou already have this feat!");
+		player.playSound("note.bass");
+        return;
+    }
+
+    if (coinAmount >= 7) {
+        player.runCommand("scoreboard players set @s stamina_limit 20");
+        player.runCommand(`xp -7 @s`);
+		player.runCommand(`scoreboard players remove @s coin_amount 7`);
+    } else {
+        player.sendMessage(" §6[§e!§6] §cYou need 7 coins!");
+		player.playSound("note.bass");
+    }
+    return;
+}
+
 
 export function givePanelItem() {
     timeoutId = system.runTimeout(() => {
@@ -91,7 +112,6 @@ export function givePanelItem() {
 export function getPanelItemCountdownId() {
     return timeoutId;
 }
-
 
     
 world.afterEvents.itemUse.subscribe((eventData) => {

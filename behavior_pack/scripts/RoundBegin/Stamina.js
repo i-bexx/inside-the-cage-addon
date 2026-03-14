@@ -1,7 +1,7 @@
 import { world, system } from "@minecraft/server";
 
 import { getPlayersInRound } from "../getPlayersArray";
-import { getStaminaObjective, getObjectiveScore } from "../Scoreboards";
+import { getStaminaObjective, getStaminaLimitObjective, getObjectiveScore } from "../Scoreboards";
 
 const cooldowns = new Map();
 const DURATION_TIME = 3000
@@ -10,12 +10,14 @@ let intervalId = 0;
 let players = [];
 
 let staminaObjective;
+let staminaLimitObjective;
 
 function initialFunction() {
 	staminaObjective = getStaminaObjective();
+	staminaLimitObjective = getStaminaLimitObjective();
 
 	//Security Check
-	if (!staminaObjective) {
+	if (!staminaObjective || !staminaLimitObjective) {
 		world.sendMessage("Scoreboard objective not found.");
 		return;
 	}
@@ -33,10 +35,11 @@ intervalId = system.runInterval(() => {
 
 function checkPlayerRunningState(players) {
 	for (const player of players) {
-		let staminaValue = getObjectiveScore(staminaObjective, player.scoreboardIdentity) ?? 10;
+		const staminaValue = getObjectiveScore(staminaObjective, player.scoreboardIdentity) ?? 10;
+		const staminaLimit = getObjectiveScore(staminaLimitObjective, player.scoreboardIdentity) ?? 10;
 		
 		let isPlayerRunning = player.isSprinting;
-		let isStaminaFull = staminaValue == 10;
+		let isStaminaFull = staminaValue == staminaLimit;
 		let isStaminaEmpty = staminaValue == 0;
 		
 		if (isPlayerRunning) {

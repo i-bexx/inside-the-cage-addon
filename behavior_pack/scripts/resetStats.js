@@ -106,6 +106,7 @@ export function commandsToResetPlayerData(player, playerJoined = false) {
   player.runCommand("event entity @s battery_is_full_event");
   player.runCommand("fog @s remove default_fog");
   player.runCommand("scoreboard players set @s Stamina 10");
+  player.runCommand("scoreboard players set @s stamina_limit 10");
   player.runCommand("scoreboard players set @s Sanity 100");
   player.runCommand("scoreboard players set @s stalker_match_id 0");
   

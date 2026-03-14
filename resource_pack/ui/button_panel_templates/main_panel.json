@@ -42,6 +42,7 @@
                     {
                       "fourth_button@main_panel.button_panel": {
                         "$padding_size": [148, 52],
+                        "$icon_size": [96, 48],
                         "collection_index": 3
                       }
                     }
@@ -75,7 +76,6 @@
                 "type": "image",
                 "layer": 10,
                 "size": "$icon_size",
-                "offset": [0, -5],
                 "bindings":[
                   {
                     "binding_name": "#form_button_texture",

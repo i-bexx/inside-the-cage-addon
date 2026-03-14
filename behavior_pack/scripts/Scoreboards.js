@@ -8,6 +8,7 @@ const OBJECTIVE_IDS = {
   SOULS_FREED: "souls_freed",
   SANITY: "Sanity",
   STAMINA: "Stamina",
+  STAMINA_LIMIT: "stamina_limit",
   IS_SHOOTING: "is_shooting",
   AMMO: "ammo",
   USED_TOXIC_BOMB: "used_toxic_bomb",
@@ -44,6 +45,9 @@ export function getSanityObjective() {
 }
 export function getStaminaObjective() {
   return world.scoreboard.getObjective(OBJECTIVE_IDS.STAMINA);
+}
+export function getStaminaLimitObjective() {
+  return world.scoreboard.getObjective(OBJECTIVE_IDS.STAMINA_LIMIT);
 }
 export function getIsShootingObjective() {
   return world.scoreboard.getObjective(OBJECTIVE_IDS.IS_SHOOTING);
