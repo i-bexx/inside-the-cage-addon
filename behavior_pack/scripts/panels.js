@@ -6,7 +6,7 @@ import { getGameStartedObjective, getCoinAmountObjective, getStaminaLimitObjecti
 
 const DIMENSION = world.getDimension("overworld");
 
-const PANELS = [ shopPanel, votePanel, shopPanel, increaseStaminaLimit ];
+const PANELS = [ shopPanel, votePanel, upgradeBattery, increaseStaminaLimit ];
 const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_bomb": 6, "game:ammo": 1, "battery": 3 };
 
 let timeoutId = 0;
@@ -17,7 +17,7 @@ function mainPanel(player) {
     .body ("")
     .button ("Shop", "textures/ui/promo_holiday_gift_small")
     .button ("Vote Manager", "textures/ui/invite_base")
-    .button ("")
+    .button ("Upgrade Battery")
     .button ("Upgrade Stamina", "textures/ui/panels/main_panel/icons/stamina_limit_increase")
         .show(player).then(({ cancelationReason, canceled, selection }) => {
             if (cancelationReason === FormCancelationReason.UserBusy) {
@@ -82,6 +82,30 @@ function shopPanel(player) {
     });
 }
 
+function upgradeBattery(player) {
+    const coinAmount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity);
+    const hasUpgraded = player.getDynamicProperty("batteryIsUpgraded");
+
+    if (hasUpgraded) {
+        player.sendMessage(" §6[§e!§6] §cYou already have this feat!");
+		player.playSound("note.bass");
+        return;
+    }
+
+    if (coinAmount < 7) {
+        player.sendMessage(" §6[§e!§6] §cYou need 7 coins!");
+		player.playSound("note.bass");
+        return;
+    }
+    player.setDynamicProperty("batteryIsUpgraded", true);
+    player.sendMessage(" §6[§e!§6] §aBattery efficiency upgraded!");
+    player.playSound("random.levelup");
+
+    player.runCommand(`xp -7 @s`);
+	player.runCommand(`scoreboard players remove @s coin_amount 7`);
+    return;
+}
+
 function increaseStaminaLimit(player) {
     const coinAmount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity);
     const staminaLimit = getObjectiveScore(getStaminaLimitObjective(), player.scoreboardIdentity);
@@ -92,14 +116,17 @@ function increaseStaminaLimit(player) {
         return;
     }
 
-    if (coinAmount >= 7) {
-        player.runCommand("scoreboard players set @s stamina_limit 20");
-        player.runCommand(`xp -7 @s`);
-		player.runCommand(`scoreboard players remove @s coin_amount 7`);
-    } else {
+    if (coinAmount < 7) {
         player.sendMessage(" §6[§e!§6] §cYou need 7 coins!");
 		player.playSound("note.bass");
+        return;
     }
+    player.runCommand("scoreboard players set @s stamina_limit 20");
+    player.sendMessage(" §6[§e!§6] §aStamina upgraded!");
+    player.playSound("random.levelup");
+
+    player.runCommand(`xp -7 @s`);
+	player.runCommand(`scoreboard players remove @s coin_amount 7`);
     return;
 }
 

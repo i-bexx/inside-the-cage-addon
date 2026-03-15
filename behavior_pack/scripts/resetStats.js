@@ -119,6 +119,7 @@ export function resetPlayerDynamicPropertyData(player) {
   player.setDynamicProperty("batteryIsDraining", false);
   player.setDynamicProperty("batteryIsFullyDrained", false);
   player.setDynamicProperty("batteryIsCollected", false);
+  player.setDynamicProperty("batteryIsUpgraded", false);
   player.setDynamicProperty("is_looking", false);
   player.setDynamicProperty("camUsing", false);
   player.setDynamicProperty("canTurnOffCam", false);

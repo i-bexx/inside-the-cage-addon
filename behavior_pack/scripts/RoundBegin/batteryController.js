@@ -9,7 +9,8 @@ const BATTERY_CONFIG = {
     // Time Settings (In Ticks)
     TIME: {
         UPDATE_INTERVAL: 10,
-        DRAIN_DURATION: 6000,
+        DRAIN_DURATION_DEFAULT: 6000,
+        DRAIN_DURATION_UPGRADED: 8000,
         CRITICAL_WARNING: 4500,
         HUD_ANIMATION: 40
     },
@@ -25,7 +26,8 @@ const BATTERY_CONFIG = {
         LEVEL: "batteryLevel",
         IS_DRAINING: "batteryIsDraining",
         IS_FULLY_DRAINED: "batteryIsFullyDrained",
-        IS_COLLECTED: "batteryIsCollected"
+        IS_COLLECTED: "batteryIsCollected",
+        IS_UPGRADED: "batteryIsUpgraded"
     },
     // In-Game Event Names
     EVENTS: {
@@ -124,9 +126,10 @@ function batteryDrain(player) {
     if (playerDrainingBattery.has(player.id)) {
         system.clearRun(playerDrainingBattery.get(player.id));
     }
-
+    let drainDuration = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_UPGRADED) ? BATTERY_CONFIG.TIME.DRAIN_DURATION_UPGRADED : BATTERY_CONFIG.TIME.DRAIN_DURATION_DEFAULT;
     player.setDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_DRAINING, true);
 
+    // başlangıçta sayaç hemen bitiyor sonra tekrar çalışmıyor
     let timeoutId = system.runTimeout(() => {
         if (!player || !player.isValid()) return;
 
@@ -152,7 +155,7 @@ function batteryDrain(player) {
 
         player.setDynamicProperty(BATTERY_CONFIG.PROPERTIES.LEVEL, decidedBatteryLevel);
         player.setDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_DRAINING, false);
-    }, BATTERY_CONFIG.TIME.DRAIN_DURATION);
+    }, drainDuration);
     
     playerDrainingBattery.set(player.id, timeoutId);
 }
