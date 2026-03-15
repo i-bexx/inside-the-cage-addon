@@ -42,9 +42,9 @@
                 "anchor_to": "top_middle",
                 "collection_name": "form_buttons",
                 "controls": [
-                  { "btn_0@shop_panel.button_panel": { "collection_index": 0, "$hover_text": "§l§e4 Coins" } },
-                  { "btn_1@shop_panel.button_panel": { "collection_index": 1, "$hover_text": "§l§e2 Coins" } },
-                  { "btn_2@shop_panel.button_panel": { "collection_index": 2, "$hover_text": "§l§e3 Coins" } }
+                  { "gun_button@shop_panel.button_panel": { "collection_index": 0, "$hover_text": "§l§e4 Coins" } },
+                  { "knife_button@shop_panel.button_panel": { "collection_index": 1, "$hover_text": "§l§e2 Coins" } },
+                  { "kit_button@shop_panel.button_panel": { "collection_index": 2, "$hover_text": "§l§e7 Coins" } }
                 ]
               }
             }
@@ -71,9 +71,9 @@
                 "anchor_to": "top_middle",
                 "collection_name": "form_buttons",
                 "controls": [
-                  { "btn_3@shop_panel.button_panel": { "collection_index": 3, "$hover_text": "§l§e6 Coins" } },
-                  { "btn_4@shop_panel.button_panel": { "collection_index": 4, "$hover_text": "§l§e1 Coins" } },
-                  { "btn_5@shop_panel.button_panel": { "collection_index": 5, "$hover_text": "§l§e3 Coins" } }
+                  { "toxic_bomb_button@shop_panel.button_panel": { "collection_index": 3, "$hover_text": "§l§e6 Coins" } },
+                  { "ammo_button@shop_panel.button_panel": { "collection_index": 4, "$hover_text": "§l§e1 Coins" } },
+                  { "battery_button@shop_panel.button_panel": { "collection_index": 5, "$hover_text": "§l§e3 Coins" } }
                 ]
               }
             }

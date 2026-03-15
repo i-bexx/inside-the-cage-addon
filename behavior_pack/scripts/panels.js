@@ -7,7 +7,7 @@ import { getGameStartedObjective, getCoinAmountObjective, getStaminaLimitObjecti
 const DIMENSION = world.getDimension("overworld");
 
 const PANELS = [ shopPanel, votePanel, shopPanel, increaseStaminaLimit ];
-const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 3, "game:toxic_bomb": 6, "game:ammo": 1, "battery": 3 };
+const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_bomb": 6, "game:ammo": 1, "battery": 3 };
 
 let timeoutId = 0;
 
