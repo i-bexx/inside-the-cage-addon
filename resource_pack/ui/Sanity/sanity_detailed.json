@@ -27,16 +27,8 @@
         "binding_name": "#hud_title_text_string"
       },
       {
-        "binding_name": "#sanity_title_for_image"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(#hud_title_text_string - ' new_notification')",
-        "target_property_name": "#sanity_title_for_image"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#sanity_title_for_image = 'sanityUI1')",
+        "source_property_name": "(%.9s * #hud_title_text_string = 'sanityUI1')",
         "target_property_name": "#visible"
       }
     ]
@@ -50,16 +42,8 @@
         "binding_name": "#hud_title_text_string"
       },
       {
-        "binding_name": "#sanity_title_for_image"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(#hud_title_text_string - ' new_notification')",
-        "target_property_name": "#sanity_title_for_image"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#sanity_title_for_image = 'sanityUI2')",
+        "source_property_name": "(%.9s * #hud_title_text_string = 'sanityUI2')",
         "target_property_name": "#visible"
       }
     ]
@@ -73,16 +57,8 @@
         "binding_name": "#hud_title_text_string"
       },
       {
-        "binding_name": "#sanity_title_for_image"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(#hud_title_text_string - ' new_notification')",
-        "target_property_name": "#sanity_title_for_image"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#sanity_title_for_image = 'sanityUI3')",
+        "source_property_name": "(%.9s * #hud_title_text_string = 'sanityUI3')",
         "target_property_name": "#visible"
       }
     ]
@@ -96,16 +72,8 @@
         "binding_name": "#hud_title_text_string"
       },
       {
-        "binding_name": "#sanity_title_for_image"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(#hud_title_text_string - ' new_notification')",
-        "target_property_name": "#sanity_title_for_image"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#sanity_title_for_image = 'sanityUI4')",
+        "source_property_name": "(%.9s * #hud_title_text_string = 'sanityUI4')",
         "target_property_name": "#visible"
       }
     ]
@@ -120,16 +88,8 @@
         "binding_name": "#hud_title_text_string"
       },
       {
-        "binding_name": "#sanity_title_for_image"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(#hud_title_text_string - ' new_notification')",
-        "target_property_name": "#sanity_title_for_image"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#sanity_title_for_image = 'sanityUI5')",
+        "source_property_name": "(%.9s * #hud_title_text_string = 'sanityUI5')",
         "target_property_name": "#visible"
       }
     ]
@@ -144,16 +104,8 @@
         "binding_name": "#hud_title_text_string"
       },
       {
-        "binding_name": "#sanity_title_for_image"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(#hud_title_text_string - ' new_notification')",
-        "target_property_name": "#sanity_title_for_image"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#sanity_title_for_image = 'sanityUI6')",
+        "source_property_name": "(%.9s * #hud_title_text_string = 'sanityUI6')",
         "target_property_name": "#visible"
       }
     ]
@@ -167,16 +119,8 @@
         "binding_name": "#hud_title_text_string"
       },
       {
-        "binding_name": "#sanity_title_for_image"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(#hud_title_text_string - ' new_notification')",
-        "target_property_name": "#sanity_title_for_image"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#sanity_title_for_image = 'sanityUI7')",
+        "source_property_name": "(%.9s * #hud_title_text_string = 'sanityUI7')",
         "target_property_name": "#visible"
       }
     ]

@@ -22,7 +22,9 @@ function init() {
         else if (score <= 14 && score >= 1) stage = 6;
         else if (score === 0) stage = 7;
 
-        let uiString = `sanityUI${stage}`;
+        let cursorState = player.getComponent("skin_id").value;
+
+        let uiString = `sanityUI${stage} cursorState${cursorState}`;
         
         if (player.hasTag("hasNotification")) {
             uiString += " new_notification";

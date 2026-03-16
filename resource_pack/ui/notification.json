@@ -15,7 +15,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "((#hud_title_text_string - 'sanityUI1' = ' new_notification') or (#hud_title_text_string - 'sanityUI2' = ' new_notification') or (#hud_title_text_string - 'sanityUI3' = ' new_notification') or (#hud_title_text_string - 'sanityUI4' = ' new_notification') or (#hud_title_text_string - 'sanityUI5' = ' new_notification') or (#hud_title_text_string - 'sanityUI6' = ' new_notification') or (#hud_title_text_string - 'sanityUI7' = ' new_notification'))",
+        "source_property_name": "(#hud_title_text_string - (%.22s * #hud_title_text_string) = ' new_notification')",
         "target_property_name": "#visible"
       }
     ]

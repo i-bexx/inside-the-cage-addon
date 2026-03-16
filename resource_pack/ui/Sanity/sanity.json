@@ -64,16 +64,8 @@
                   "binding_name": "#hud_title_text_string"
                 },
                 {
-                  "binding_name": "#sanity_title"
-                },
-                {
                   "binding_type": "view",
-                  "source_property_name": "(#hud_title_text_string - ' new_notification')",
-                  "target_property_name": "#sanity_title"
-                },
-                {
-                  "binding_type": "view",
-                  "source_property_name": "((#sanity_title = 'sanityUI1') or (#sanity_title = 'sanityUI2'))", 
+                  "source_property_name": "((%.9s * #hud_title_text_string = 'sanityUI1') or (%.9s * #hud_title_text_string = 'sanityUI2'))",
                   "target_property_name": "#visible"
                 }
             ]
@@ -89,16 +81,8 @@
                   "binding_name": "#hud_title_text_string"
                 },
                 {
-                  "binding_name": "#sanity_title"
-                },
-                {
                   "binding_type": "view",
-                  "source_property_name": "(#hud_title_text_string - ' new_notification')",
-                  "target_property_name": "#sanity_title"
-                },
-                {
-                  "binding_type": "view",
-                  "source_property_name": "((#sanity_title = 'sanityUI3') or (#sanity_title = 'sanityUI4'))",
+                  "source_property_name": "((%.9s * #hud_title_text_string = 'sanityUI3') or (%.9s * #hud_title_text_string = 'sanityUI4'))",
                   "target_property_name": "#visible"
                 }
             ]
@@ -114,16 +98,8 @@
                   "binding_name": "#hud_title_text_string"
                 },
                 {
-                  "binding_name": "#sanity_title"
-                },
-                {
                   "binding_type": "view",
-                  "source_property_name": "(#hud_title_text_string - ' new_notification')",
-                  "target_property_name": "#sanity_title"
-                },
-                {
-                  "binding_type": "view",
-                  "source_property_name": "((#sanity_title = 'sanityUI5') or (#sanity_title = 'sanityUI6') or (#sanity_title = 'sanityUI7'))",
+                  "source_property_name": "((%.9s * #hud_title_text_string = 'sanityUI5') or (%.9s * #hud_title_text_string = 'sanityUI6') or (%.9s * #hud_title_text_string = 'sanityUI7'))",
                   "target_property_name": "#visible"
                 }
             ]
