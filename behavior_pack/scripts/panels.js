@@ -13,12 +13,12 @@ let timeoutId = 0;
 
 function mainPanel(player) {
  	new ActionFormData()
-    .title ("MAIN PANEL")
-    .body ("")
-    .button ("Shop", "textures/ui/promo_holiday_gift_small")
-    .button ("Vote Manager", "textures/ui/invite_base")
-    .button ("Upgrade Battery")
-    .button ("Upgrade Stamina", "textures/ui/panels/main_panel/icons/stamina_limit_increase")
+    .title("MAIN PANEL")
+    .body("")
+    .button("Shop", "textures/ui/promo_holiday_gift_small")
+    .button("Vote Manager", "textures/ui/invite_base")
+    .button("Upgrade Battery", "textures/ui/panels/main_panel/icons/battery_upgrade")
+    .button("Upgrade Stamina", "textures/ui/panels/main_panel/icons/stamina_limit_increase")
         .show(player).then(({ cancelationReason, canceled, selection }) => {
             if (cancelationReason === FormCancelationReason.UserBusy) {
                 return mainPanel(player);
@@ -38,14 +38,14 @@ function mainPanel(player) {
 
 function shopPanel(player) {
 	new ActionFormData()
-    .title ("SHOP")
-    .body ("") 
-    .button ("Gun", "textures/ui/panels/shop/gun")
-    .button ("Knife", "textures/ui/panels/shop/knife")
-    .button ("Kit", "textures/ui/panels/shop/kit")
-    .button ("toxic_bomb", "textures/ui/panels/shop/toxic_bomb")
-    .button ("Ammo", "textures/ui/panels/shop/ammo")
-    .button ("Battery", "textures/ui/panels/shop/battery")
+    .title("SHOP")
+    .body("") 
+    .button("Gun", "textures/ui/panels/shop/gun")
+    .button("Knife", "textures/ui/panels/shop/knife")
+    .button("Kit", "textures/ui/panels/shop/kit")
+    .button("toxic_bomb", "textures/ui/panels/shop/toxic_bomb")
+    .button("Ammo", "textures/ui/panels/shop/ammo")
+    .button("Battery", "textures/ui/panels/shop/battery")
 		.show(player).then(({ cancelationReason, canceled, selection }) => {
             if (cancelationReason === FormCancelationReason.UserBusy) {
                 return shopPanel(player);

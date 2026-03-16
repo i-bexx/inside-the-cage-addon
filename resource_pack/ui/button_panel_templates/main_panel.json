@@ -36,6 +36,7 @@
                     {
                       "third_button@main_panel.button_panel": {
                         "$padding_size": [148, 52],
+                        "$icon_size": [96, 48],
                         "collection_index": 2
                       }
                     },
