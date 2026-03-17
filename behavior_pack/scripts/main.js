@@ -23,7 +23,7 @@ import "./Player/playerSituation";
 import "./Player/playerLeave";
 import "./Player/resetPlayerData";
 
-import "./UI/compass";
-import "./UI/sanity_notification_controller";
+import "./UI/fastUiTick";
+import "./UI/slowUiTick";
 
 import "./Test/learning";

@@ -1,6 +1,6 @@
 import { world, system } from "@minecraft/server";
 
-function init() {
+function slowUiTick() {
     const players = world.getAllPlayers();
     const sanityObjective = world.scoreboard.getObjective("Sanity");
 
@@ -33,4 +33,4 @@ function init() {
     }
 }
 
-system.runInterval(init, 80);
+system.runInterval(slowUiTick, 80);
