@@ -1,17 +1,32 @@
 import { world, system } from "@minecraft/server";
 
-function slowUiTick() {
-    const players = world.getAllPlayers();
-    const sanityObjective = world.scoreboard.getObjective("Sanity");
+// ----- MAIN FUNCTION -----
 
-    if (!sanityObjective) return; 
+function otherUIs() {
+    const players = world.getAllPlayers();
 
     for (const player of players) {
-        let score;
+        
+        const sanityState = sanityString(player);
+
+        let uiString = `${sanityState}`;
+        
+        if (player.hasTag("hasNotification")) {
+            uiString += " new_notification";
+        }
+        player.onScreenDisplay.setTitle(uiString);
+    }
+}
+
+// ----- HELPER FUNCTION -----
+
+function sanityString(player) {
+    let score;
+    let sanityObjective = world.scoreboard.getObjective("Sanity");
         try {
             score = sanityObjective.getScore(player);
         } catch (e) {
-            continue;
+            return;
         }
 
         let stage = 1;
@@ -22,15 +37,9 @@ function slowUiTick() {
         else if (score <= 14 && score >= 1) stage = 6;
         else if (score === 0) stage = 7;
 
-        let cursorState = player.getComponent("skin_id").value;
-
-        let uiString = `sanityUI${stage} cursorState${cursorState}`;
-        
-        if (player.hasTag("hasNotification")) {
-            uiString += " new_notification";
-        }
-        player.onScreenDisplay.setTitle(uiString);
-    }
+        return `sanityUI${stage}`;
 }
 
-system.runInterval(slowUiTick, 80);
+// ----- RUN MAIN FUNCTION -----
+
+system.runInterval(otherUIs, 80);
