@@ -4,6 +4,7 @@
 
     "ui/chat.json",
     "ui/coin.json",
+    "ui/cursor.json",
     "ui/navigation_panel.json",
     "ui/notification.json",
 

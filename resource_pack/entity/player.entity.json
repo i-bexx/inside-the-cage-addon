@@ -17,11 +17,6 @@
         "default": "textures/entity/steve",
         "cape": "textures/entity/cape_invisible",
 
-        "cursor": "textures/entity/game/Cursor/cursor",
-        "cursor_green": "textures/entity/game/Cursor/cursor_green",
-        "cursor_blue": "textures/entity/game/Cursor/cursor_blue",
-        "cursor_red": "textures/entity/game/Cursor/cursor_red",
-
         "static": "textures/entity/game/Static/static1",
         "static1": "textures/entity/game/Static/static1",
         "static2": "textures/entity/game/Static/static2",
@@ -40,8 +35,7 @@
         "curtain": "geometry.curtain",
         "new_game_Started": "geometry.new_game_Started",
         "game_over": "geometry.game_over",
-        "turnOffCamWarning": "geometry.turnOffCamWarning",
-        "cursor": "geometry.cursor"
+        "turnOffCamWarning": "geometry.turnOffCamWarning"
       },
       "scripts": {
         "scale": "0.9375",
@@ -206,11 +200,6 @@
         { "controller.render.game_over": "variable.is_first_person && query.mark_variant == 20"},
         { "controller.render.player.first_person": "variable.is_first_person && !query.is_spectator && (query.mark_variant == 0 || query.mark_variant == 553 || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit'))" },
         { "controller.render.player.third_person": "!variable.is_first_person && !variable.map_face_icon && !query.is_spectator" },
-
-        { "controller.render.player.cursor": "variable.is_first_person && !query.is_spectator && query.skin_id == 0" },
-        { "controller.render.player.cursor_green": "variable.is_first_person && !query.is_spectator && query.skin_id == 1" },
-        { "controller.render.player.cursor_blue": "variable.is_first_person && !query.is_spectator && query.skin_id == 2" },
-        { "controller.render.player.cursor_red": "variable.is_first_person && !query.is_spectator && query.skin_id == 3" },
 
         { "controller.render.player.first_person_spectator": "variable.is_first_person && query.is_spectator" },
         { "controller.render.player.third_person_spectator": "!variable.is_first_person && !variable.map_face_icon && query.is_spectator" },

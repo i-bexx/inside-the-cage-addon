@@ -175,6 +175,11 @@
             "@notification.notification_text": {
               "layer": 5
             }
+          },
+          {
+            "@cursor.cursor_states": {
+              "layer": 500
+            }
           }
         ]
       }

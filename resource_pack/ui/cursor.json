@@ -1,0 +1,88 @@
+{
+  "namespace": "cursor",
+
+  "cursor_states": {
+    "type": "panel",
+    "size": [10, 10],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "controls": [
+      { "@cursor.cursor_normal": {} },
+      { "@cursor.cursor_green": {} },
+      { "@cursor.cursor_blue": {} },
+      { "@cursor.cursor_red": {} }
+    ]
+  },
+
+  "cursor_normal": {
+    "type": "image",
+    "size": ["100%", "100%"],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "texture": "textures/ui/cursors/cursor_normal",
+    "bindings": [
+      {
+        "binding_name": "#hud_subtitle_text_string"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_00')",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+
+  "cursor_green": {
+    "type": "image",
+    "size": ["100%", "100%"],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "texture": "textures/ui/cursors/cursor_green",
+    "bindings": [
+      {
+        "binding_name": "#hud_subtitle_text_string"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_01')",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+
+  "cursor_blue": {
+    "type": "image",
+    "size": ["100%", "100%"],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "texture": "textures/ui/cursors/cursor_blue",
+    "bindings": [
+      {
+        "binding_name": "#hud_subtitle_text_string"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_02')",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+
+  "cursor_red": {
+    "type": "image",
+    "size": ["100%", "100%"],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "texture": "textures/ui/cursors/cursor_red",
+    "bindings": [
+      {
+        "binding_name": "#hud_subtitle_text_string"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_03')",
+        "target_property_name": "#visible"
+      }
+    ]
+  }
+}

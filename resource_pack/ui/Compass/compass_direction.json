@@ -48,7 +48,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_00')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_00')",
         "target_property_name": "#visible"
       }
     ]
@@ -62,7 +62,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_01')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_01')",
         "target_property_name": "#visible"
       }
     ]
@@ -76,7 +76,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_02')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_02')",
         "target_property_name": "#visible"
       }
     ]
@@ -90,7 +90,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_03')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_03')",
         "target_property_name": "#visible"
       }
     ]
@@ -104,7 +104,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_04')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_04')",
         "target_property_name": "#visible"
       }
     ]
@@ -118,7 +118,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_05')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_05')",
         "target_property_name": "#visible"
       }
     ]
@@ -132,7 +132,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_06')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_06')",
         "target_property_name": "#visible"
       }
     ]
@@ -146,7 +146,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_07')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_07')",
         "target_property_name": "#visible"
       }
     ]
@@ -160,7 +160,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_08')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_08')",
         "target_property_name": "#visible"
       }
     ]
@@ -174,7 +174,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_09')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_09')",
         "target_property_name": "#visible"
       }
     ]
@@ -188,7 +188,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_10')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_10')",
         "target_property_name": "#visible"
       }
     ]
@@ -202,7 +202,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_11')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_11')",
         "target_property_name": "#visible"
       }
     ]
@@ -216,7 +216,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_12')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_12')",
         "target_property_name": "#visible"
       }
     ]
@@ -230,7 +230,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_13')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_13')",
         "target_property_name": "#visible"
       }
     ]
@@ -244,7 +244,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_14')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_14')",
         "target_property_name": "#visible"
       }
     ]
@@ -258,7 +258,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_15')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_15')",
         "target_property_name": "#visible"
       }
     ]
@@ -272,7 +272,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_16')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_16')",
         "target_property_name": "#visible"
       }
     ]
@@ -286,7 +286,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_17')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_17')",
         "target_property_name": "#visible"
       }
     ]
@@ -300,7 +300,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_18')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_18')",
         "target_property_name": "#visible"
       }
     ]
@@ -314,7 +314,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_19')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_19')",
         "target_property_name": "#visible"
       }
     ]
@@ -328,7 +328,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_20')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_20')",
         "target_property_name": "#visible"
       }
     ]
@@ -342,7 +342,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_21')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_21')",
         "target_property_name": "#visible"
       }
     ]
@@ -356,7 +356,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_22')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_22')",
         "target_property_name": "#visible"
       }
     ]
@@ -370,7 +370,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_23')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_23')",
         "target_property_name": "#visible"
       }
     ]
@@ -384,7 +384,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_24')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_24')",
         "target_property_name": "#visible"
       }
     ]
@@ -398,7 +398,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_25')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_25')",
         "target_property_name": "#visible"
       }
     ]
@@ -412,7 +412,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_26')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_26')",
         "target_property_name": "#visible"
       }
     ]
@@ -426,7 +426,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_27')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_27')",
         "target_property_name": "#visible"
       }
     ]
@@ -440,7 +440,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_28')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_28')",
         "target_property_name": "#visible"
       }
     ]
@@ -454,7 +454,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_29')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_29')",
         "target_property_name": "#visible"
       }
     ]
@@ -468,7 +468,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_30')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_30')",
         "target_property_name": "#visible"
       }
     ]
@@ -482,7 +482,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.10s * #hud_subtitle_text_string = 'compass_31')",
+        "source_property_name": "(#hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_31')",
         "target_property_name": "#visible"
       }
     ]

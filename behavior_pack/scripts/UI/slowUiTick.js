@@ -2,7 +2,7 @@ import { world, system } from "@minecraft/server";
 
 // ----- MAIN FUNCTION -----
 
-function otherUIs() {
+function slowUiTick() {
     const players = world.getAllPlayers();
 
     for (const player of players) {
@@ -15,6 +15,8 @@ function otherUIs() {
             uiString += " new_notification";
         }
         player.onScreenDisplay.setTitle(uiString);
+
+        player.setDynamicProperty("compassShowing", false); // Hides compass when time is out
     }
 }
 
@@ -42,4 +44,4 @@ function sanityString(player) {
 
 // ----- RUN MAIN FUNCTION -----
 
-system.runInterval(otherUIs, 80);
+system.runInterval(slowUiTick, 80);

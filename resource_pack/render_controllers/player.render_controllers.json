@@ -14,50 +14,6 @@
         { "leftSleeve": true }
       ]
     },
-    "controller.render.player.cursor": {
-      "geometry": "Geometry.cursor",
-      "materials": [ { "*": "Material.alphatest" } ],
-      "textures": [ "Texture.cursor" ],
-      "part_visibility": [
-        { "*": true },
-        { "cursor": true },
-        { "cursor2": false },
-        { "shoot": "query.variant == 1" }
-      ]
-    },
-    "controller.render.player.cursor_green": {
-      "geometry": "Geometry.cursor",
-      "materials": [ { "*": "Material.alphatest" } ],
-      "textures": [ "Texture.cursor_green" ],
-      "part_visibility": [
-        { "*": true },
-        { "cursor": true },
-        { "cursor2": true },
-        { "shoot": "query.variant == 1" }
-      ]
-    },
-    "controller.render.player.cursor_blue": {
-      "geometry": "Geometry.cursor",
-      "materials": [ { "*": "Material.alphatest" } ],
-      "textures": [ "Texture.cursor_blue" ],
-      "part_visibility": [
-        { "*": true },
-        { "cursor": true },
-        { "cursor2": true },
-        { "shoot": "query.variant == 1" }
-      ]
-    },
-    "controller.render.player.cursor_red": {
-      "geometry": "Geometry.cursor",
-      "materials": [ { "*": "Material.alphatest" } ],
-      "textures": [ "Texture.cursor_red" ],
-      "part_visibility": [
-        { "*": true },
-        { "cursor": true },
-        { "cursor2": true },
-        { "shoot": "query.variant == 1" }
-      ]
-    },
     "controller.render.static.first_person": {
       "geometry": "geometry.static",
       "materials": [{"*": "Material.alphablend"}],
