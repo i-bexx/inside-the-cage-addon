@@ -1,4 +1,4 @@
-import { world, system } from "@minecraft/server";
+import { world, system, EquipmentSlot } from "@minecraft/server";
 
 const playerCompassStates = new Map();
 
@@ -15,7 +15,12 @@ function fastUiTick() {
     if (isShooting) cursorState = shootingCursorString(player);
     else cursorState = cursorString(player);
 
-    let uiString = `${cursorState}`;
+    const equippable = player.getComponent("minecraft:equippable");
+    const mainHandItem = equippable.getEquipment(EquipmentSlot.Mainhand);
+    const isHoldingGun = mainHandItem?.typeId === "game:gun";
+
+    let uiString = "";
+    if (isHoldingGun) uiString = `${cursorState}`;
 
     const shouldCompassShown = playerCompassStates.get(player.id) !== compassState || player.getDynamicProperty("compassShowing");
     
@@ -25,7 +30,8 @@ function fastUiTick() {
 
         uiString += ` ${compassState}`;
     }
-    player.onScreenDisplay.updateSubtitle(uiString);
+    if (uiString.length > 0) player.onScreenDisplay.updateSubtitle(uiString);
+    else player.onScreenDisplay.updateSubtitle(" ");
   }
 }
 
@@ -47,6 +53,10 @@ function compassString(player) {
   let newCompassString = `compass_${paddedFrame}`;
 
   return newCompassString;
+}
+
+export function getCompassStates() {
+  return playerCompassStates;
 }
 
 // ----- RUN MAIN FUNCTION -----

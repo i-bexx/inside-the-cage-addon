@@ -1,20 +1,21 @@
 {
-  "namespace": "cursor",
+  "namespace": "custom_cursor",
 
-  "cursor_states": {
+  "custom_cursor_states": {
     "type": "panel",
     "size": [7, 7],
     "anchor_from": "center",
     "anchor_to": "center",
-    "alpha": 0.7,
+    "offset": [0, -2],
+    "alpha": 0.5,
     "propagate_alpha": true,
     "controls": [
-      { "@cursor.cursor_normal": {} },
-      { "@cursor.cursor_green": {} },
-      { "@cursor.cursor_blue": {} },
-      { "@cursor.cursor_red": {} },
+      { "@custom_cursor.cursor_normal": {} },
+      { "@custom_cursor.cursor_green": {} },
+      { "@custom_cursor.cursor_blue": {} },
+      { "@custom_cursor.cursor_red": {} },
 
-      { "@cursor.hitmarker": {} }
+      { "@custom_cursor.hitmarker": {} }
     ]
   },
 
@@ -24,7 +25,7 @@
     "offset": [-1, 5],
     "anchor_from": "center",
     "anchor_to": "center",
-    "texture": "textures/ui/cursors/hitmarker",
+    "texture": "textures/ui/custom_cursors/hitmarker",
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -42,7 +43,7 @@
     "size": ["100%", "100%"],
     "anchor_from": "center",
     "anchor_to": "center",
-    "texture": "textures/ui/cursors/cursor_normal",
+    "texture": "textures/ui/custom_cursors/cursor_normal",
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -60,7 +61,7 @@
     "size": ["100%", "100%"],
     "anchor_from": "center",
     "anchor_to": "center",
-    "texture": "textures/ui/cursors/cursor_green",
+    "texture": "textures/ui/custom_cursors/cursor_green",
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -78,7 +79,7 @@
     "size": ["100%", "100%"],
     "anchor_from": "center",
     "anchor_to": "center",
-    "texture": "textures/ui/cursors/cursor_blue",
+    "texture": "textures/ui/custom_cursors/cursor_blue",
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -96,7 +97,7 @@
     "size": ["100%", "100%"],
     "anchor_from": "center",
     "anchor_to": "center",
-    "texture": "textures/ui/cursors/cursor_red",
+    "texture": "textures/ui/custom_cursors/cursor_red",
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"

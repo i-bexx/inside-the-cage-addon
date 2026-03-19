@@ -145,6 +145,11 @@
       },
       {
         "array_name": "controls",
+        "operation": "remove",
+        "control_name": "curor_rend" // This child element renders itself if the binding values are NOT met
+      },
+      {
+        "array_name": "controls",
         "operation": "insert_front",
         "value": [
             { 
@@ -177,7 +182,26 @@
             }
           },
           {
-            "@cursor.cursor_states": {
+            "cursor_main": {
+              "type": "custom",
+              "size": [ 16, 16 ],
+              "renderer": "cursor_renderer",
+              "layer": 4,
+              "bindings": [
+                {
+                  "binding_type": "global",
+                  "binding_name": "#hud_subtitle_text_string"
+                },
+                {
+                  "binding_type": "view",
+                  "source_property_name": "((%.1s * #hud_subtitle_text_string = ' ') or (#hud_subtitle_text_string = ''))",
+                  "target_property_name": "#visible"
+                }
+              ]
+            }
+          },
+          {
+            "@custom_cursor.custom_cursor_states": {
               "layer": 500
             }
           }

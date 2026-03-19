@@ -44,6 +44,8 @@ import { checkIfPositionClear } from "./gameStarter";
 
 import { getTeleportCooldown } from "./Teleporter";
 
+import { getCompassStates } from "./UI/fastUiTick";
+
 // ==========================================
 // CONSTANTS
 // ==========================================
@@ -131,6 +133,8 @@ export function resetPlayerDynamicPropertyData(player) {
 }
 
 export function clearPlayerMaps(playerId) { // Clears maps of player
+  getCompassStates().delete(playerId);
+  
   getCursorStates().delete(playerId);
   getShootingStates().delete(playerId);
 
