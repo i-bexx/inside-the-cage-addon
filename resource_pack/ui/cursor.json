@@ -3,14 +3,37 @@
 
   "cursor_states": {
     "type": "panel",
-    "size": [10, 10],
+    "size": [7, 7],
     "anchor_from": "center",
     "anchor_to": "center",
+    "alpha": 0.7,
+    "propagate_alpha": true,
     "controls": [
       { "@cursor.cursor_normal": {} },
       { "@cursor.cursor_green": {} },
       { "@cursor.cursor_blue": {} },
-      { "@cursor.cursor_red": {} }
+      { "@cursor.cursor_red": {} },
+
+      { "@cursor.hitmarker": {} }
+    ]
+  },
+
+  "hitmarker": {
+    "type": "image",
+    "size": [44, 44],
+    "offset": [-1, 5],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "texture": "textures/ui/cursors/hitmarker",
+    "bindings": [
+      {
+        "binding_name": "#hud_subtitle_text_string"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_x3')",
+        "target_property_name": "#visible"
+      }
     ]
   },
 
@@ -26,7 +49,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_00')",
+        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_00' or %.14s * #hud_subtitle_text_string = 'cursorState_x0')",
         "target_property_name": "#visible"
       }
     ]
@@ -44,7 +67,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_01')",
+        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_01' or %.14s * #hud_subtitle_text_string = 'cursorState_x1')",
         "target_property_name": "#visible"
       }
     ]
@@ -62,7 +85,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_02')",
+        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_02' or %.14s * #hud_subtitle_text_string = 'cursorState_x2')",
         "target_property_name": "#visible"
       }
     ]
@@ -80,7 +103,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_03')",
+        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_03' or %.14s * #hud_subtitle_text_string = 'cursorState_x3')",
         "target_property_name": "#visible"
       }
     ]

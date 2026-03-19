@@ -8,12 +8,16 @@ function fastUiTick() {
   const players = world.getPlayers();
 
   for (const player of players) {
-    const cursorState = cursorString(player);
+    let cursorState;
+    const isShooting = player.getComponent("variant").value == 5;
     const compassState = compassString(player);
+
+    if (isShooting) cursorState = shootingCursorString(player);
+    else cursorState = cursorString(player);
 
     let uiString = `${cursorState}`;
 
-    const shouldCompassShown = playerCompassStates.get(player.id) !== compassState || player.getDynamicProperty("compassShowing")
+    const shouldCompassShown = playerCompassStates.get(player.id) !== compassState || player.getDynamicProperty("compassShowing");
     
     if (shouldCompassShown) {
         player.setDynamicProperty("compassShowing", true);
@@ -29,6 +33,10 @@ function fastUiTick() {
 
 function cursorString(player) {
   return "cursorState_0" + player.getComponent("skin_id").value.toString();
+}
+
+function shootingCursorString(player) {
+  return "cursorState_x" + player.getComponent("skin_id").value.toString();
 }
 
 function compassString(player) {
