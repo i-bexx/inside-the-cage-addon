@@ -222,8 +222,26 @@
                   },
                   {
                     "pressed_state": {
-                      "type": "image",
-                      "texture": "$pressed_button_texture"
+                      "type": "panel",
+                      "size": [ "100%", "100%" ],
+                      "controls": [
+                        {
+                          "hover_image": {
+                            "type": "image",
+                            "texture": "$pressed_button_texture"
+                          }
+                        },
+                        {
+                          "hover_text": {
+                            "type": "label",
+                            "text": "$hover_text",
+                            "anchor_from": "bottom_middle",
+                            "anchor_to": "bottom_middle",
+                            "offset": [0, -2],
+			                      "layer": 200
+                          }
+                        }
+                      ]
                     }
                   }
                 ],
