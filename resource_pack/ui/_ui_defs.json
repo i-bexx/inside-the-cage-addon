@@ -14,14 +14,14 @@
     "ui/button_panel_templates/shop_panel.json",
     "ui/button_panel_templates/vote_panel.json",
 
-    "ui/Compass/compass.json",
-    "ui/Compass/compass_direction.json",
-    "ui/Compass/compass_frame.json",
+    "ui/compass/compass.json",
+    "ui/compass/compass_direction.json",
+    "ui/compass/compass_frame.json",
 
-    "ui/Coordinates/coordinates.json",
-    "ui/Coordinates/coordinates_animation.json",
+    "ui/coordinates/coordinates.json",
+    "ui/coordinates/coordinates_animation.json",
 
-    "ui/Sanity/sanity.json",
-    "ui/Sanity/sanity_detailed.json"
+    "ui/sanity/sanity.json",
+    "ui/sanity/sanity_detailed.json"
   ]
 }

@@ -1,58 +1,6 @@
 {
   "namespace": "chat",
 
-  "chat_stack": {
-    "type": "stack_panel",
-    "orientation": "vertical",
-    "size": [ "40%", "100%" ],
-    "anchor_from": "bottom_left",
-    "anchor_to": "bottom_left",
-    "controls": [
-      {
-        "paper_doll_padding": {
-          "type": "panel",
-          "size": [ "100%", 50 ],
-          "bindings": [
-            {
-              "binding_name": "#paper_doll_visible",
-              "binding_name_override": "#visible"
-            }
-          ]
-        }
-      },
-      {
-        "non_centered_gui_padding": {
-          "type": "panel",
-          "size": [ "100%", 32 ],
-          "bindings": [
-            {
-              "binding_name": "#hud_visible_not_centered",
-              "binding_name_override": "#visible",
-              "binding_type": "global"
-            }
-          ]
-        }
-      },
-      { "number_of_days_played@hud.number_of_days_played": {} },
-      {
-        "game_tip@game_tip.game_tip_chat_stack_factory": {
-          "size": [ "100%", "100%c" ]
-        }
-      },
-      {
-        "chat": {
-          "type": "panel",
-          "size": ["100%", "25%"],
-          "controls": [
-            { "chat_panel@chat.chat_panel": {} }
-          ]
-        }
-      }
-    ]
-  },
-
-  
-
   "anim_countdown_decrease": {
     "anim_type": "clip",
     "easing": "linear",
