@@ -1,7 +1,7 @@
 import { world, system } from "@minecraft/server";
 
 import { getPlayersInRound } from "../getPlayersArray";
-import { getSoulsFreedObjective, getValueParticipant, getObjectiveScore } from "../Scoreboards";
+import { getSoulsFreedObjective, getValueParticipant, getObjectiveScore } from "../scoreboards";
 
 let dimension;
 let soulsFreedObjective;

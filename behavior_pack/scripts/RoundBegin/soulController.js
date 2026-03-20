@@ -12,7 +12,7 @@ import { timeSetter } from "./Null/nullTeleport";
 import { hostileCounter, stopHostileSpawn, Cages_4, Cages_5 } from "./Hostile";
 import { getStopHostileSpawnId, getContinueHostileSpawnId, getCages_4Id, getCages_5Id } from "./Hostile";
 
-import { getSoulsFreedObjective, getSanityObjective, getStaminaObjective, getValueParticipant, getObjectiveScore } from "../Scoreboards";
+import { getSoulsFreedObjective, getSanityObjective, getStaminaObjective, getValueParticipant, getObjectiveScore } from "../scoreboards";
 
 let intervalId = 0;
 

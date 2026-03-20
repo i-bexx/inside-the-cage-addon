@@ -1,6 +1,6 @@
 import { world, system } from "@minecraft/server";
 
-import { getAmmoObjective, getUsedToxicBombObjective, getObjectiveScore } from "../Scoreboards";
+import { getAmmoObjective, getUsedToxicBombObjective, getObjectiveScore } from "../scoreboards";
 import { getAllPlayers } from "../getPlayersArray";
 
 // =============================================================================

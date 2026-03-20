@@ -72,6 +72,7 @@ const COMMANDS_TO_RESET_GAME = [
     "scoreboard players set value game_restarted 0",
     "scoreboard players set value game_ended_early 0",
     "scoreboard players set value show_position 1",
+    "scoreboard players set value global_ui 1",
     "fog @a remove b",
     "clear @a",
     "camerashake stop @a"

@@ -29,7 +29,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "((#player_position_visible) and (#player_score_sidebar - §c = 1))",
+        "source_property_name": "((#player_position_visible) and ((#player_score_sidebar - §c) - (((#player_score_sidebar - §c) / 10) * 10) = 1))",
         "target_property_name": "#visible"
       },
       {
@@ -66,7 +66,7 @@
             },
             {
               "binding_type": "view",
-              "source_property_name": "((#player_position_visible) and (#player_score_sidebar - §c = 0))",
+              "source_property_name": "((#player_position_visible) and ((#player_score_sidebar - §c) - (((#player_score_sidebar - §c) / 10) * 10) = 0))",
               "target_property_name": "#visible"
             }
           ]

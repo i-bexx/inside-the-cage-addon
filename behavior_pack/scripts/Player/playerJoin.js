@@ -1,7 +1,7 @@
 import { world, system } from "@minecraft/server";
 
 import { startProcesses, startProcessesAfterMenuReady } from "../startProcesses";
-import { getNewGamedObjective, getStalkerMatchIdObjective, getWorldParticipant, getObjectiveScore } from "../Scoreboards";
+import { getNewGamedObjective, getStalkerMatchIdObjective, getWorldParticipant, getObjectiveScore } from "../scoreboards";
 import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetWorldDynamicPropertyData, resetMaps, stopTheFunctions, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
 // =============================================================

@@ -1,45 +1,6 @@
 {
   "namespace": "hud",
 
-  "souls_freed_counter": {
-    "type": "image",
-    "size": [ "100%c + 6px", "100%c + 2px" ],
-    "texture": "textures/ui/hud_tip_text_background",
-    "alpha": 0.7,
-    "controls": [
-      {
-        "stack": {
-          "type": "stack_panel",
-          "orientation": "horizontal",
-          "size": ["100%c", "100%c"],
-          "anchor_from": "left_middle",
-          "anchor_to": "left_middle",
-          "controls": [
-            {
-              "label_1": {
-                "type": "label",
-                "size": ["default", "default"],
-                "text": "Souls Freed: "
-              }
-            },
-            {
-              "label_2": {
-                "type": "label",
-                "size": ["default", "default"],
-                "text": "#text",
-                "bindings": [
-                  {
-
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      }
-    ]
-  },
-
   "hud_title_text": {
     "modifications": [
       {
@@ -100,6 +61,7 @@
         }
       },
       { "number_of_days_played@hud.number_of_days_played": {} },
+      { "souls_freed_counter@souls_freed_counter.souls_freed_counter": {} },
       {
         "game_tip@game_tip.game_tip_chat_stack_factory": {
           "size": [ "100%", "100%c" ]

@@ -25,5 +25,6 @@ import "./Player/resetPlayerData";
 
 import "./UI/fastUiTick";
 import "./UI/slowUiTick";
+import "./UI/globalUi";
 
 import "./Test/learning";

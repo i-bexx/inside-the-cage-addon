@@ -6,7 +6,7 @@ import { world, system } from "@minecraft/server";
 
 import { resetWorldDynamicPropertyData, resetPlayerDynamicPropertyData, commandsToResetTheGame, resetMaps, clearPlayerMaps, stopFunctionsInMaps, commandsToResetPlayerData } from "./resetStats";
 import { gameStarter, getGameStarterId, checkIfPositionClear } from "./gameStarter";
-import { getGameStartedObjective, getGameRestartedObjective, getGameEndedObjective, getPlayersInRoundObjective, getValueParticipant, getObjectiveScore } from "./Scoreboards";
+import { getGameStartedObjective, getGameRestartedObjective, getGameEndedObjective, getPlayersInRoundObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 import { getPlayersInRound } from "./getPlayersArray"; 
 
 import { playerLookingControl } from "./RoundBegin/playerLooking";

@@ -1,0 +1,52 @@
+{
+  "namespace": "souls_freed_counter",
+
+  "souls_freed_counter": {
+    "type": "image",
+    "size": [ "100%c + 14px", 20 ],
+    "texture": "textures/ui/hud_tip_text_background",
+    "alpha": 0.7,
+    "controls": [
+      {
+        "stack": {
+          "type": "stack_panel",
+          "orientation": "horizontal",
+          "size": ["100%c", "50%"],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "controls": [
+            {
+              "label_1": {
+                "type": "label",
+                "size": ["default", "default"],
+                "text": "Souls Freed: "
+              }
+            },
+            {
+              "label_2": {
+                "type": "label",
+                "size": ["default", "default"],
+                "text": "#text",
+                "bindings": [
+                  {
+                    "binding_name": "#text"
+                  },
+                  {
+                    "binding_name": "#player_score_sidebar",
+                    "binding_type": "collection",
+                    "binding_collection_name": "scoreboard_scores"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "('§z' + ((#player_score_sidebar - §c) / 10))",
+                    "target_property_name": "#text"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

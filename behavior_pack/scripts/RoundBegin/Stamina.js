@@ -1,7 +1,7 @@
 import { world, system } from "@minecraft/server";
 
 import { getPlayersInRound } from "../getPlayersArray";
-import { getStaminaObjective, getStaminaLimitObjective, getObjectiveScore } from "../Scoreboards";
+import { getStaminaObjective, getStaminaLimitObjective, getObjectiveScore } from "../scoreboards";
 
 const cooldowns = new Map();
 const DURATION_TIME = 3000

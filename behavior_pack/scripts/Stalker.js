@@ -1,7 +1,7 @@
 import { world, system } from "@minecraft/server";
 
 import { getAllPlayers, getPlayersInRound } from "./getPlayersArray";
-import { getStalkerMatchIdObjective } from "./Scoreboards";
+import { getStalkerMatchIdObjective } from "./scoreboards";
 
 // =============================================================================
 // CONFIGURATION

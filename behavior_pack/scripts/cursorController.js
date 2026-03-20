@@ -1,5 +1,5 @@
 import { world, system } from "@minecraft/server";
-import { getIsShootingObjective, getAmmoObjective, getObjectiveScore } from "./Scoreboards";
+import { getIsShootingObjective, getAmmoObjective, getObjectiveScore } from "./scoreboards";
 
 // ==========================================
 // CONFIGURATION

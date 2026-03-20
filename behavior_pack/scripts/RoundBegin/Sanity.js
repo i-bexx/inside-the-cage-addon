@@ -2,7 +2,7 @@ import { world, system } from "@minecraft/server";
 
 import { getPlayersInRound } from "../getPlayersArray";
 import { game_over } from "../Player/resetPlayerData";
-import { getSanityObjective, getObjectiveScore } from "../Scoreboards";
+import { getSanityObjective, getObjectiveScore } from "../scoreboards";
 
 let sanityObjective;
 

@@ -1,5 +1,5 @@
 import { world, system } from "@minecraft/server";
-import { getCoinAmountObjective, getObjectiveScore } from "../Scoreboards";
+import { getCoinAmountObjective, getObjectiveScore } from "../scoreboards";
 
 // ==========================================
 // CONFIGURATION & VARIABLES

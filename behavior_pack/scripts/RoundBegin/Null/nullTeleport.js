@@ -1,7 +1,7 @@
 import { world, system } from "@minecraft/server";
 
 import { getAllPlayers } from "../../getPlayersArray";
-import { getSoulsFreedObjective, getValueParticipant, getObjectiveScore } from "../../Scoreboards";
+import { getSoulsFreedObjective, getValueParticipant, getObjectiveScore } from "../../scoreboards";
 
 const TELEPORT_STAGES = [
     [2400, 2000, 2800], // Stage 0

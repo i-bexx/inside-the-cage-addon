@@ -1,5 +1,7 @@
 import { world, system } from "@minecraft/server";
+
 import { getAllPlayers } from "../getPlayersArray";
+import { updateGlobalUi } from "../UI/globalUi";
 
 // ==========================================
 // CONFIGURATION & VARIABLES
@@ -133,6 +135,8 @@ world.afterEvents.entityHitEntity.subscribe(({ hitEntity, damagingEntity }) => {
 
         DIMENSION.spawnParticle(CONFIG.PARTICLE, loc);
         DIMENSION.runCommand(CONFIG.UPDATE_SCORE);
+
+        updateGlobalUi();
 
         // In case player leaves
         if (damagingEntity && damagingEntity.isValid()) {

@@ -1,7 +1,7 @@
 import { world, system } from "@minecraft/server";
 
 import { getPlayersInRound } from "../getPlayersArray";
-import { getStalkerMatchIdObjective, getSanityObjective, getStaminaObjective, getObjectiveScore } from "../Scoreboards";
+import { getStalkerMatchIdObjective, getSanityObjective, getStaminaObjective, getObjectiveScore } from "../scoreboards";
 
 // --- CONSTANTS ---
 const GAME_ENTITIES = {
