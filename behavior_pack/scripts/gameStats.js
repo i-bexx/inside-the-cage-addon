@@ -26,6 +26,8 @@ import { givePanelItem } from "./panels";
 import { restartRound } from "./RoundBegin/RoundOperations/restartRound";
 import { finishRoundEarly } from "./RoundBegin/RoundOperations/finishRoundEarly";
 
+import { updateGlobalUi } from "./UI/globalUi";
+
 // ==========================================
 // SYSTEM: CONFIGURATION & COMMANDS
 // ==========================================
@@ -69,7 +71,8 @@ const FUNCTIONS_TO_START = {
     Sanity_control,
     Battery_control,
     spawnCages,
-    startCoinSpawner
+    startCoinSpawner,
+    updateGlobalUi
 };
 
 const FUNCTIONS_TO_END_ROUND = {

@@ -15,7 +15,7 @@ const CONFIG = {
         IN_MENU: "in_menu", 
         IN_LOBBY: "in_lobby", 
         MENU: "menu",
-        TO_REMOVE: ["in_game", "in_lobby", "waiting_for_start", "starting", "starter", "menu", "eliminated", "aa_matched", "hasNotification"]
+        TO_REMOVE: ["in_game", "in_lobby", "waiting_for_start", "starting", "starter", "menu", "eliminated", "aa_matched", "hasNotification", "show_in_round_personal_ui"]
     },
     DYN_PROPS: { 
         IN_MENU: "in_menu",
@@ -142,8 +142,6 @@ world.afterEvents.playerSpawn.subscribe(async ({ player }) => {
 
     await player.runCommand(`tp @s ${targetCoords.x} ${targetCoords.y} ${targetCoords.z} 0`);
 
-    uploadPlayerUI(player);
-
     // Check Game Data
     const worldValue = getObjectiveScore(newGameObjective, worldParticipant);
     const playerValue = getObjectiveScore(newGameObjective, player.scoreboardIdentity);
@@ -244,10 +242,6 @@ function killConnectedStalker(player) {
         if (entities.length > 0) entities[0].kill();
         
     } catch (e) { }
-}
-
-function uploadPlayerUI(player) {
-    player.runCommand("title @s title sanityUI1");
 }
 
 function ensureEntitiesAreReset() {

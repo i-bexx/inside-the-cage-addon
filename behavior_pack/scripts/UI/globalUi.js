@@ -1,5 +1,7 @@
 import { world } from "@minecraft/server";
 
+import { slowUiTick } from "./slowUiTick";
+
 export function updateGlobalUi() {
   const dimension = world.getDimension("overworld");
   const showPositionObjective = world.scoreboard.getObjective("show_position");
@@ -10,4 +12,5 @@ export function updateGlobalUi() {
   const showPosition = showPositionObjective.getScore(valueParticipant);
 
   dimension.runCommand(`scoreboard players set value global_ui ${soulsFreedNumber}${showPosition}`);
+  slowUiTick(); // Force an immediate update for sanity stats and notifications without waiting for the next loop tick.
 }

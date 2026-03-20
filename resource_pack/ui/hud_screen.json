@@ -61,6 +61,12 @@
         }
       },
       { "number_of_days_played@hud.number_of_days_played": {} },
+      {
+        "padding": {
+          "type": "panel",
+          "size": [ "100%", 5 ]
+        }
+      },
       { "souls_freed_counter@souls_freed_counter.souls_freed_counter": {} },
       {
         "game_tip@game_tip.game_tip_chat_stack_factory": {
@@ -146,7 +152,7 @@
     ]
   },
 
-  //Classic Pocket UI 
+  //Classic UI (for Pocket Edition)
   "centered_gui_elements_at_bottom_middle_touch": {
     "modifications": [
       {

@@ -7,6 +7,24 @@
     "anchor_from": "bottom_left",
     "anchor_to": "bottom_left",
     "offset": [5, -35],
+    "bindings": [
+      {
+        "binding_name": "#hud_title_text_string"
+      },
+      {
+        "binding_name": "#hide_in_round_personal_ui"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((%.9s * #hud_title_text_string = 'sanityUIx') or (%.9s * #hud_title_text_string = ''))",
+        "target_property_name": "#hide_in_round_personal_ui"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not #hide_in_round_personal_ui)",
+        "target_property_name": "#visible"
+      }
+    ],
     "controls": [
       { "@sanity_detailed.sanity_brain_image_1": {} },
       { "@sanity_detailed.sanity_brain_image_2": {} },

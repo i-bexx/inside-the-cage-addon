@@ -57,6 +57,7 @@ const COMMANDS_TO_RESET_GAME = [
     "tag @a remove starter",
     "tag @a remove aa_matched",
     "tag @a remove hasNotification",
+    "tag @a remove show_in_round_personal_ui",
     "kill @e[type=game:stalker_cursor]",
     "kill @e[type=game:cage]",
     "kill @e[type=game:coin]",
@@ -72,7 +73,7 @@ const COMMANDS_TO_RESET_GAME = [
     "scoreboard players set value game_restarted 0",
     "scoreboard players set value game_ended_early 0",
     "scoreboard players set value show_position 1",
-    "scoreboard players set value global_ui 1",
+    "scoreboard players set value global_ui 91",
     "fog @a remove b",
     "clear @a",
     "camerashake stop @a"
@@ -112,9 +113,8 @@ export function commandsToResetPlayerData(player, playerJoined = false) {
   player.runCommand("scoreboard players set @s stamina_limit 10");
   player.runCommand("scoreboard players set @s Sanity 100");
   player.runCommand("scoreboard players set @s stalker_match_id 0");
-  
-  // Update the UI right away
-  player.onScreenDisplay.setTitle("sanityUI1");
+
+  player.removeTag("show_in_round_personal_ui");
 }
 
 export function resetPlayerDynamicPropertyData(player) {

@@ -6,6 +6,26 @@
     "size": [ "100%c + 14px", 20 ],
     "texture": "textures/ui/hud_tip_text_background",
     "alpha": 0.7,
+    "bindings": [
+      {
+        "binding_name": "#show_in_round_global_ui"
+      },
+      {
+        "binding_type": "collection",
+        "binding_collection_name": "scoreboard_scores",
+        "binding_name": "#player_score_sidebar"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((#player_score_sidebar - §c) / 10 < 9)",
+        "target_property_name": "#show_in_round_global_ui"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(#show_in_round_global_ui)",
+        "target_property_name": "#visible"
+      }
+    ],
     "controls": [
       {
         "stack": {
@@ -42,6 +62,13 @@
                     "target_property_name": "#text"
                   }
                 ]
+              }
+            },
+            {
+              "label_3": {
+                "type": "label",
+                "size": ["default", "default"],
+                "text": "/7"
               }
             }
           ]

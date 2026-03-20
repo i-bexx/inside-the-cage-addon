@@ -2,14 +2,16 @@ import { world, system } from "@minecraft/server";
 
 // ----- MAIN FUNCTION -----
 
-function slowUiTick() {
+export function slowUiTick() {
     const players = world.getAllPlayers();
 
     for (const player of players) {
-        
-        const sanityState = sanityString(player);
-
-        let uiString = `${sanityState}`;
+        let sanityState;
+        let uiString;
+        if (player.hasTag("show_in_round_personal_ui")) {
+            sanityState = sanityString(player);
+            uiString = `${sanityState}`;
+        } else uiString = "sanityUIx"
         
         if (player.hasTag("hasNotification")) {
             uiString += " new_notification";
