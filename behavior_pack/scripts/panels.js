@@ -71,7 +71,7 @@ function shopPanel(player) {
 							}
 
 							if (transactionSuccessful) {
-									player.runCommand(`xp -${itemCost} @s`);
+									player.runCommand(`xp -${itemCost}L @s`);
 									player.runCommand(`scoreboard players remove @s coin_amount ${itemCost}`);
 							}
 					} else {

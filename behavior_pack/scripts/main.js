@@ -3,7 +3,6 @@ import "./cursorController";
 import "./gameStarter";
 import "./gameStats";
 import "./getPlayersArray";
-import "./Menu";
 import "./panels";
 import "./preStart";
 import "./Stalker";
