@@ -1,0 +1,262 @@
+{
+  "namespace": "question_panel",
+
+  "question_panel_container" : {
+    "type": "panel",
+    "size": ["100%", "fill"],
+    "layer": 1,
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "controls": [
+      { "button_creator@question_panel.button_creator": {} }
+    ]
+  },
+  "button_creator": {
+    "type": "grid",
+    "size": [180, "100%c"],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "grid_dimensions": [1, 2],
+    "maximum_grid_items": 2,
+    "grid_item_template": "question_panel.button_panel",
+    "collection_name": "form_buttons"
+  },
+
+  "button_panel": {
+    "type": "panel",
+    "size": "$padding_size",
+
+    "$padding_size|default": [180, 52],
+    "$button_size|default": ["100% - 10px", "100% - 10px"],
+
+    "$default_button_texture": "textures/ui/panels/main_panel/background",
+    "$hover_button_texture": "textures/ui/panels/main_panel/background_hover",
+    "$pressed_button_texture": "textures/ui/panels/main_panel/background_pressed",
+
+    "$hover_text|default": "#form_button_text",
+    "controls": [
+      {
+        "container": {
+          "type": "panel",
+          "size": ["100% - 10px", "100% - 10px"],
+          "controls": [
+            {
+              "image": {
+                "type": "image",
+                "layer": 200,
+                "size": ["50%", "50%"],
+                "offset": [0, -5]
+              }
+            },
+            {
+              "form_button": {
+                "type": "button",
+                "size": "$button_size",
+                "sound_name": "random.click",
+                
+                "default_control": "default_state",
+                "hover_control": "hover_state",
+                "pressed_control": "pressed_state",
+
+                "controls": [
+                  {
+                    "default_state": {
+                      "type": "panel",
+                      "size": [ "100%", "100%" ],
+                      "controls": [
+                        {
+                          "default_image": {
+                            "type": "image",
+                            "texture": "$default_button_texture"
+                          }
+                        },
+                        {
+                          "default_text": {
+                            "type": "label",
+                            "text": "#form_button_text",
+                            "anchor_from": "center",
+                            "anchor_to": "center",
+			                      "layer": 200,
+                            "bindings": [
+                              {
+                                "binding_name": "#form_button_text",
+                                "binding_type": "collection",
+                                "binding_collection_name": "form_buttons"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "hover_state": {
+                      "type": "panel",
+                      "size": [ "100%", "100%" ],
+                      "controls": [
+                        {
+                          "hover_image": {
+                            "type": "image",
+                            "texture": "$hover_button_texture"
+                          }
+                        },
+                        {
+                          "hover_text": {
+                            "type": "label",
+                            "text": "$hover_text",
+                            "anchor_from": "center",
+                            "anchor_to": "center",
+			                      "layer": 200,
+                            "bindings": [
+                              {
+                                "binding_name": "#form_button_text",
+                                "binding_type": "collection",
+                                "binding_collection_name": "form_buttons"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "pressed_state": {
+                      "type": "image",
+                      "texture": "$pressed_button_texture"
+                    }
+                  }
+                ],
+                "button_mappings": [
+                  {
+                    "from_button_id": "button.menu_select",
+                    "to_button_id": "button.form_button_click",
+                    "button_up_right_of_first_refusal": true
+                  },
+                  {
+                    "from_button_id": "button.menu_ok",
+                    "to_button_id": "button.form_button_click",
+                    "mapping_type": "focused"
+                  }
+                ],
+                "bindings": [
+                  {
+                    "binding_type": "collection_details",
+                    "binding_collection_name": "form_buttons"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+
+
+  "content_stack": {
+    "type": "stack_panel",
+    "orientation": "vertical",
+    "anchor_from": "top_middle",
+    "anchor_to": "top_middle",
+    "size": ["100%", "100%"],
+    "controls": [
+      {
+        "padding": {
+          "type": "panel",
+          "size": ["100%", 8]
+        }
+      },
+      { "form_body@question_panel.form_body": {} },
+      {
+        "padding_2": {
+          "type": "panel",
+          "size": ["100%", 8]
+        }
+      },
+      { "question_panel_container@question_panel.question_panel_container": {} }
+    ]
+  },
+
+  "background_image": {
+    "type": "image",
+    "size": ["100% + 5px", "100% + 5px"],
+    "texture": "textures/ui/panels/main_panel/background",
+    "alpha": 0.8
+  },
+
+  "form_body": {
+    "type": "panel",
+    "size": ["100%", 16],
+    "layer": 5,
+    "controls": [
+      { 
+        "background_image@question_panel.background_image": {
+          "size": ["100% - 32px", "100%"]
+        } 
+      },
+      { "form_text@question_panel.form_text": {} }
+    ]
+  },
+
+  "form_text": {
+    "type": "label",
+    "text": "#form_text",
+    "font_size": "normal",
+    "layer": 4,
+    "bindings": [
+      {
+        "binding_name": "#form_text"
+      }
+    ]
+  },
+
+  "close_button": {
+    "type": "button",
+    "size": [14, 14],
+    "anchor_from": "top_right",
+    "anchor_to": "top_right",
+    "default_control": "default_state",
+    "hover_control": "hover_state",
+    "sound_name": "random.click",
+    "$default_texture": "textures/ui/panels/main_panel/close_button",
+    "$hover_texture": "textures/ui/panels/main_panel/close_button_hover",
+    "$alpha": 1,
+    "$size": [16, 16],
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_select",
+        "to_button_id": "button.menu_exit",
+        "mapping_type": "pressed"
+      },
+      {
+        "from_button_id": "button.menu_ok",
+        "to_button_id": "button.menu_exit",
+        "mapping_type": "focused"
+      }
+    ],
+    "controls": [
+      {
+        "background_image@question_panel.background_image": {
+            "alpha": 1
+        }
+      },
+      {
+        "default_state": {
+            "type": "image",
+            "size": "$size",
+            "texture": "$default_texture",
+            "alpha": "$alpha"
+        }
+      },
+      {
+        "hover_state": {
+            "type": "image",
+            "size": "$size",
+            "texture": "$hover_texture",
+            "alpha": "$alpha"
+        }
+      }
+    ]
+  }
+}

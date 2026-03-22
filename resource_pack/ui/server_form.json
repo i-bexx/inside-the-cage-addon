@@ -26,30 +26,13 @@
     "type": "panel",
     "size": ["100%", "100%"],
     "controls": [
+      { "other_panels@server_form.other_panels": {} },
       { "main_panel@server_form.main_panel": {} },
       { "shop_panel@server_form.shop_panel": {} },
       { "vote_panel@server_form.vote_panel": {} },
-      { "other_panels@server_form.other_panels": {} }
-    ]   
-  },
 
-  "other_panels@common_dialogs.main_panel_no_buttons": {
-    "$title_panel": "common_dialogs.standard_title_label",
-    "$title_size": [ "100% - 15px", 10 ],
-    "$title_max_size": [ "100% - 15px", 10 ],
-    "size": [225, 200],
-    "$text_name": "#title_text",
-    "$title_text_binding_type": "none",
-    "$child_control": "server_form.long_form_panel",
-    "layer": 2,
-    "bindings": [
-      {
-        "binding_name": "#title_text",
-        "binding_type": "view",
-        "source_property_name": "(not (#title_text = 'MAIN PANEL') and not (#title_text = 'SHOP') and not (#title_text = 'VOTE PANEL'))",
-        "target_property_name": "#visible"
-      }
-    ]
+      { "question_panel@server_form.question_panel": {} }
+    ]   
   },
 
   "main_panel": {
@@ -147,6 +130,64 @@
             }
           ]
         }
+      }
+    ]
+  },
+
+  "question_panel": {
+    "type": "panel",
+    "size": [284, 190],
+    "layer": 2,
+    "$two_button_question_prefix|default": "Do you want to",
+    "bindings": [
+      {
+        "binding_type": "view",
+        "binding_name": "#form_text",
+        "source_property_name": "(%.14s * #form_text = $two_button_question_prefix)",
+        "target_property_name": "#visible"
+      }
+    ],
+    "controls": [
+      {
+        "indent_panel": {
+          "type": "panel",
+          "size": ["100%", "100%"],
+          "controls": [
+            { "background_image@question_panel.background_image": {} },
+            { "content_stack@question_panel.content_stack": {} },
+            {
+              "close_button@question_panel.close_button": {
+                "offset": [8, -8],
+                "layer": 64
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "other_panels@common_dialogs.main_panel_no_buttons": {
+    "$title_panel": "common_dialogs.standard_title_label",
+    "$title_size": [ "100% - 15px", 10 ],
+    "$title_max_size": [ "100% - 15px", 10 ],
+    "size": [225, 200],
+    "$text_name": "#title_text",
+    "$title_text_binding_type": "none",
+    "$child_control": "server_form.long_form_panel",
+    "layer": 2,
+    "bindings": [
+      {
+        "binding_name": "#title_text"
+      },
+      {
+        "binding_name": "#form_text"
+      },
+      {
+        
+        "binding_type": "view",
+        "source_property_name": "(#title_text = '' and #form_text = '')",
+        "target_property_name": "#visible"
       }
     ]
   }

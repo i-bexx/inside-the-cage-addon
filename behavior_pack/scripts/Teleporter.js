@@ -1,5 +1,5 @@
 import { world, system } from "@minecraft/server";
-import { MessageFormData, FormCancelationReason } from "@minecraft/server-ui";
+import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 
 // ==========================================
@@ -106,16 +106,16 @@ world.afterEvents.entityDie.subscribe(({ deadEntity }) => {
 // ==========================================
 
 function showTeleportUI(player, targetEntity) {
-    new MessageFormData()
-        .title("Teleporter")
+    new ActionFormData()
+        .title("")
         .body("Do you want to teleport?")
-        .button1("No")
-        .button2("Yes")
+        .button("Yes")
+        .button("No")
         .show(player).then(({ cancelationReason, canceled, selection }) => {
             if (canceled || cancelationReason === FormCancelationReason.UserBusy) return;
 
             // Button 2 (Yes) corresponds to selection index 1
-            if (selection === 1) {
+            if (selection === 0) {
                 teleportPlayer(player, targetEntity);
             }
         });

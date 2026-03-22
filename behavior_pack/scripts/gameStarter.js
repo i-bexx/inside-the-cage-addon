@@ -1,5 +1,5 @@
 import { world, system } from "@minecraft/server";
-import { MessageFormData } from "@minecraft/server-ui";
+import { ActionFormData } from "@minecraft/server-ui";
 
 import { stalkerMatch } from "./Stalker";
 import { getAllPlayers } from "./getPlayersArray";
@@ -111,7 +111,7 @@ async function playerInRange(player) {
 			player.addTag("starter");
 			world.setDynamicProperty("starter", true);
 
-			MessageForm(player);
+			ActionForm(player);
 	}
 	updateDoorEvent();
 	return;
@@ -124,26 +124,26 @@ function kickOut(check) {
 	playersWaitingToStart = world.getPlayers({ tags: ["waiting_for_start"] });
 }
 
-function MessageForm(player) {
-	new MessageFormData()
-	.title("")
-	.body("Do you want to start the game?")
-	.button1("Cancel")
-	.button2("Start")
-	.show(player).then(({ selection }) => {
+function ActionForm(player) {
+	new ActionFormData()
+		.title("")
+		.body("Do you want to start the game?")
+		.button("Start")
+		.button("Cancel")
+		.show(player).then(({ selection }) => {
 
-	if (selection == 1) {
-		startFunction();
+		if (selection == 0) {
+			startFunction();
+			return;
+		}
+
+		// If cancelled, lines below will run
+		for (const command of Object.values(TELEPORT_BACK_COMMANDS)) {
+			DIMENSION.runCommand(command);
+		}
+		world.setDynamicProperty("starter", false);
 		return;
-	}
-
-	// If cancelled, lines below will run
-	for (const command of Object.values(TELEPORT_BACK_COMMANDS)) {
-		DIMENSION.runCommand(command);
-	}
-	world.setDynamicProperty("starter", false);
-	return;
-	})
+		})
 }
 
 export function startFunction() {

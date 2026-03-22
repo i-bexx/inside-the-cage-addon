@@ -1,5 +1,5 @@
 import { world, system } from "@minecraft/server";
-import { MessageFormData, FormCancelationReason } from "@minecraft/server-ui";
+import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 import { getCoinAmountObjective, getObjectiveScore } from "../scoreboards";
 
@@ -14,8 +14,8 @@ const CONFIG = {
     TITLES: {
         TITLE: "",
 				BODY: "Do you want to buy this drink?",
-				BUTTON1: "No",
-				BUTTON2: "Yes",
+				BUTTON1: "Yes",
+				BUTTON2: "No",
     },
 		COMMANDS_ACCEPT: {
 			PLAYSOUND: "playsound note.didgeridoo @s",
@@ -27,7 +27,7 @@ const CONFIG = {
 			DECREASE_COIN: "scoreboard players remove @s coin_amount 1",
 			DECREASE_XP: "xp -1L @s"
     }
-}
+};
 
 // ==========================================
 // FUNCTIONS
@@ -55,15 +55,15 @@ let scoreSecurityInterval = system.runInterval(() => {
 // ------------ LOGICAL FUNCTIONS ------------
 
 function buyBottle(p) {
-    new MessageFormData()
+    new ActionFormData()
     .title(CONFIG.TITLES.TITLE)
     .body(CONFIG.TITLES.BODY)
-    .button1(CONFIG.TITLES.BUTTON1)
-    .button2(CONFIG.TITLES.BUTTON2)
+    .button(CONFIG.TITLES.BUTTON1)
+    .button(CONFIG.TITLES.BUTTON2)
     .show(p)
 				.then(({ cancelationReason, canceled, selection }) => {
 						if (canceled || cancelationReason === FormCancelationReason.UserBusy) return;
-						else if (selection != 1) return;
+						else if (selection == 1) return;
 						Purchase(p);
     })
 }
@@ -87,7 +87,7 @@ function Purchase(player) {
 
 world.afterEvents.entityHitEntity.subscribe(({damagingEntity, hitEntity}) => {
     if (hitEntity.typeId == "game:bottle") {
-        buyBottle(damagingEntity)
+        buyBottle(damagingEntity);
     }
 })
     

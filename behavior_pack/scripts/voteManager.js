@@ -1,9 +1,8 @@
 import { world, system } from "@minecraft/server";
-import { ActionFormData, MessageFormData, FormCancelationReason } from "@minecraft/server-ui";
+import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 import { getPlayersInRound } from "./getPlayersArray";
 
-let timeoutId = 0;
 const DIMENSION = world.getDimension("overworld");
 
 // ======= CONFIGURATION =======
@@ -36,14 +35,14 @@ const mainPanel = new ActionFormData()
     .button("Go Back");
 
 const confirmPanels = {
-    [VOTE_TYPES.RESTART]: new MessageFormData()
-        .title("RESTART")
+    [VOTE_TYPES.RESTART]: new ActionFormData()
+        .title("")
         .body("Do you want to restart?")
-        .button1("No").button2("Yes"),
-    [VOTE_TYPES.END_ROUND]: new MessageFormData()
-        .title("END ROUND")
+        .button("Yes").button("No"),
+    [VOTE_TYPES.END_ROUND]: new ActionFormData()
+        .title("")
         .body("Do you want to end this round?")
-        .button1("No").button2("Yes")
+        .button("Yes").button("No"),
 };
 
 // ======= STATE =======
@@ -97,7 +96,7 @@ function startRequest(player, type) {
           return;
         } 
         if (canceled) return;
-        if (selection == 0) return;
+        if (selection == 1) return;
 
         const players = getPlayersInRound();
 
