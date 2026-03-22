@@ -240,6 +240,7 @@
     "anchor_to": "top_right",
     "default_control": "default_state",
     "hover_control": "hover_state",
+    "pressed_control": "pressed_state",
     "sound_name": "random.click",
     "$default_texture": "textures/ui/panels/main_panel/close_button",
     "$hover_texture": "textures/ui/panels/main_panel/close_button_hover",
