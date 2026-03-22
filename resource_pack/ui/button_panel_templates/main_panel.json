@@ -266,6 +266,14 @@
             "texture": "$hover_texture",
             "alpha": "$alpha"
         }
+      },
+      {
+        "pressed_state": {
+            "type": "image",
+            "size": "$size",
+            "texture": "$hover_texture",
+            "alpha": "$alpha"
+        }
       }
     ]
   }
