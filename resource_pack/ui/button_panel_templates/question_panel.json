@@ -123,13 +123,13 @@
                       "size": [ "100%", "100%" ],
                       "controls": [
                         {
-                          "hover_image": {
+                          "pressed_image": {
                             "type": "image",
                             "texture": "$pressed_button_texture"
                           }
                         },
                         {
-                          "hover_text": {
+                          "pressed_text": {
                             "type": "label",
                             "text": "#form_button_text",
                             "anchor_from": "center",

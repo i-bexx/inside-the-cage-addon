@@ -32,8 +32,7 @@
     "$default_button_texture": "textures/ui/panels/main_panel/background",
     "$hover_button_texture": "textures/ui/panels/main_panel/background_hover",
     "$pressed_button_texture": "textures/ui/panels/main_panel/background_pressed",
-
-    "$hover_text|default": "#form_button_text",
+    
     "controls": [
       {
         "container": {
@@ -124,7 +123,7 @@
                         {
                           "hover_text": {
                             "type": "label",
-                            "text": "$hover_text",
+                            "text": "#form_button_text",
                             "anchor_from": "center",
                             "anchor_to": "center",
 			                      "layer": 200,
@@ -142,8 +141,32 @@
                   },
                   {
                     "pressed_state": {
-                      "type": "image",
-                      "texture": "$pressed_button_texture"
+                      "type": "panel",
+                      "size": [ "100%", "100%" ],
+                      "controls": [
+                        {
+                          "pressed_image": {
+                            "type": "image",
+                            "texture": "$pressed_button_texture"
+                          }
+                        },
+                        {
+                          "pressed_text": {
+                            "type": "label",
+                            "text": "#form_button_text",
+                            "anchor_from": "center",
+                            "anchor_to": "center",
+			                      "layer": 200,
+                            "bindings": [
+                              {
+                                "binding_name": "#form_button_text",
+                                "binding_type": "collection",
+                                "binding_collection_name": "form_buttons"
+                              }
+                            ]
+                          }
+                        }
+                      ]
                     }
                   }
                 ],

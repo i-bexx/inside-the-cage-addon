@@ -226,13 +226,13 @@
                       "size": [ "100%", "100%" ],
                       "controls": [
                         {
-                          "hover_image": {
+                          "pressed_image": {
                             "type": "image",
                             "texture": "$pressed_button_texture"
                           }
                         },
                         {
-                          "hover_text": {
+                          "pressed_text": {
                             "type": "label",
                             "text": "$hover_text",
                             "anchor_from": "bottom_middle",
