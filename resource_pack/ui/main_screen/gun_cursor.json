@@ -1,7 +1,7 @@
 {
-  "namespace": "custom_cursor",
+  "namespace": "gun_cursor",
 
-  "custom_cursor_states": {
+  "gun_cursor_states": {
     "type": "panel",
     "size": [7, 7],
     "anchor_from": "center",
@@ -10,12 +10,12 @@
     "alpha": 0.5,
     "propagate_alpha": true,
     "controls": [
-      { "@custom_cursor.cursor_normal": {} },
-      { "@custom_cursor.cursor_green": {} },
-      { "@custom_cursor.cursor_blue": {} },
-      { "@custom_cursor.cursor_red": {} },
+      { "cursor_normal@gun_cursor.cursor_normal": {} },
+      { "cursor_green@gun_cursor.cursor_green": {} },
+      { "cursor_blue@gun_cursor.cursor_blue": {} },
+      { "cursor_red@gun_cursor.cursor_red": {} },
 
-      { "@custom_cursor.hitmarker": {} }
+      { "hitmarker@gun_cursor.hitmarker": {} }
     ]
   },
 
@@ -25,7 +25,7 @@
     "offset": [-1, 5],
     "anchor_from": "center",
     "anchor_to": "center",
-    "texture": "textures/ui/custom_cursors/hitmarker",
+    "texture": "textures/ui/gun_cursors/hitmarker",
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -43,7 +43,7 @@
     "size": ["100%", "100%"],
     "anchor_from": "center",
     "anchor_to": "center",
-    "texture": "textures/ui/custom_cursors/cursor_normal",
+    "texture": "textures/ui/gun_cursors/cursor_normal",
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -61,7 +61,7 @@
     "size": ["100%", "100%"],
     "anchor_from": "center",
     "anchor_to": "center",
-    "texture": "textures/ui/custom_cursors/cursor_green",
+    "texture": "textures/ui/gun_cursors/cursor_green",
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -79,7 +79,7 @@
     "size": ["100%", "100%"],
     "anchor_from": "center",
     "anchor_to": "center",
-    "texture": "textures/ui/custom_cursors/cursor_blue",
+    "texture": "textures/ui/gun_cursors/cursor_blue",
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -97,7 +97,7 @@
     "size": ["100%", "100%"],
     "anchor_from": "center",
     "anchor_to": "center",
-    "texture": "textures/ui/custom_cursors/cursor_red",
+    "texture": "textures/ui/gun_cursors/cursor_red",
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"

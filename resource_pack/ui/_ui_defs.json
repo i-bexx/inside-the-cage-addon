@@ -1,15 +1,17 @@
 {
   "ui_defs": [
     "ui/hud_screen.json",
-
-    "ui/chat.json",
-    "ui/coin.json",
-    "ui/custom_cursor.json",
-    "ui/navigation_panel.json",
-    "ui/notification.json",
-    "ui/souls_freed_counter.json",
-
     "ui/server_form.json",
+
+    "ui/main_screen/chat.json",
+    "ui/main_screen/coin.json",
+    "ui/main_screen/gun_cursor.json",
+    "ui/main_screen/notification.json",
+    "ui/main_screen/souls_freed_counter.json",
+
+    "ui/main_screen/sanity/sanity.json",
+    "ui/main_screen/sanity/sanity_detailed.json",
+
 
     "ui/button_panel_templates/main_panel.json",
     "ui/button_panel_templates/shop_panel.json",
@@ -17,14 +19,13 @@
 
     "ui/button_panel_templates/question_panel.json",
 
-    "ui/compass/compass.json",
-    "ui/compass/compass_direction.json",
-    "ui/compass/compass_frame.json",
+    "ui/navigation/navigation_panel.json",
 
-    "ui/coordinates/coordinates.json",
-    "ui/coordinates/coordinates_animation.json",
+    "ui/navigation/compass/compass.json",
+    "ui/navigation/compass/compass_direction.json",
+    "ui/navigation/compass/compass_frame.json",
 
-    "ui/sanity/sanity.json",
-    "ui/sanity/sanity_detailed.json"
+    "ui/navigation/coordinates/coordinates.json",
+    "ui/navigation/coordinates/coordinates_animation.json"
   ]
 }

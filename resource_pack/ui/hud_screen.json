@@ -259,7 +259,7 @@
             }
           },
           {
-            "@custom_cursor.custom_cursor_states": {
+            "@gun_cursor.gun_cursor_states": {
               "layer": 500
             }
           }

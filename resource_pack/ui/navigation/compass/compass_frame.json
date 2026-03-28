@@ -4,8 +4,8 @@
   "compass_frame_p": {
     "type": "panel",
     "controls": [
-      { "@compass_frame_panel.compass_frame": {} },
-      { "@compass_frame_panel.compass_background": {} }
+      { "compass_frame@compass_frame_panel.compass_frame": {} },
+      { "compass_background@compass_frame_panel.compass_background": {} }
     ]
   },
 
