@@ -6,11 +6,12 @@
     "ui/main_screen/chat.json",
     "ui/main_screen/coin.json",
     "ui/main_screen/gun_cursor.json",
+    "ui/main_screen/mini_player.json",
     "ui/main_screen/notification.json",
     "ui/main_screen/souls_freed_counter.json",
 
     "ui/main_screen/sanity/sanity.json",
-    "ui/main_screen/sanity/sanity_detailed.json",
+    "ui/main_screen/sanity/sanity_frame.json",
 
 
     "ui/button_panel_templates/main_panel.json",

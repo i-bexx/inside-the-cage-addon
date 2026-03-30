@@ -271,7 +271,7 @@
 				"generates_bubbles": false
 			},
 			"minecraft:nameable": {
-				"always_show": true,
+				"always_show": false,
 				"allow_name_tag_renaming": false
 			},
 			"minecraft:physics": {},

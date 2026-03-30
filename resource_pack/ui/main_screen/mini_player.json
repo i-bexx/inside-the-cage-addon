@@ -1,0 +1,37 @@
+{
+  "namespace": "mini_player",
+
+  "mini_player_panel": {
+    "type": "panel",
+    "size": [80, 80],
+    "clips_children": true,
+    "controls": [
+      {
+        "mini_player_background@mini_player.mini_player_background": {}
+      },
+      {
+        "sanity_frame@sanity_detailed.sanity_detailed_screen": {}
+      }
+    ]
+  },
+
+  "mini_player_renderer": {
+    "type": "custom",
+    "renderer": "live_player_renderer",
+    "size": ["100% - 20px", "100% - 20px"],
+    "offset": [0, 5]
+  },
+  
+  "mini_player_background": {
+    "type": "image",
+    "size": ["100%", "100%"],
+    "texture": "textures/ui/mini_player/background",
+    "alpha": 0.4,
+    "clips_children": true,
+    "controls": [
+      {
+        "mini_player_renderer@mini_player.mini_player_renderer": {}
+      }
+    ]
+  }
+}

@@ -4,9 +4,6 @@
   "sanity_screen": {
     "type": "image",
     "texture": "textures/ui/hud_tip_text_background",
-    "anchor_from": "bottom_left",
-    "anchor_to": "bottom_left",
-    "offset": [5, -2],  
     "min_size": ["20px", "5px"],
     "size": ["100%c + 10px", "100%c - 10px"],
     "alpha": 0.4,

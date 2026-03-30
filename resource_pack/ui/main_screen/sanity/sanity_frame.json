@@ -1,0 +1,88 @@
+{
+  "namespace": "sanity_detailed",
+
+  "sanity_detailed_screen": {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "controls": [
+      { "sanity_frame_empty@sanity_detailed.sanity_frame_empty": {} },
+      {
+        "sanity_frame_1@sanity_detailed.sanity_frame_template": {
+          "$texture": "textures/ui/mini_player/frames/1",
+          "$title_string": "sanityUI1"
+        }
+      },
+      {
+        "sanity_frame_2@sanity_detailed.sanity_frame_template": {
+          "$texture": "textures/ui/mini_player/frames/2",
+          "$title_string": "sanityUI2"
+        }
+      },
+      {
+        "sanity_frame_3@sanity_detailed.sanity_frame_template": {
+          "$texture": "textures/ui/mini_player/frames/3",
+          "$title_string": "sanityUI3"
+        }
+      },
+      {
+        "sanity_frame_4@sanity_detailed.sanity_frame_template": {
+          "$texture": "textures/ui/mini_player/frames/4",
+          "$title_string": "sanityUI4"
+        }
+      },
+      {
+        "sanity_frame_5@sanity_detailed.sanity_frame_template": {
+          "$texture": "textures/ui/mini_player/frames/5",
+          "$title_string": "sanityUI5"
+        }
+      },
+      {
+        "sanity_frame_6@sanity_detailed.sanity_frame_template": {
+          "$texture": "textures/ui/mini_player/frames/6",
+          "$title_string": "sanityUI6"
+        }
+      },
+      {
+        "sanity_frame_7@sanity_detailed.sanity_frame_template": {
+          "$texture": "textures/ui/mini_player/frames/7",
+          "$title_string": "sanityUI7"
+        }
+      }
+    ]
+  },
+
+
+  "sanity_frame_empty": {
+    "type": "image",
+    "texture": "textures/ui/mini_player/frames/0",
+    "size": ["100%", "100%"],
+    "bindings": [
+      {
+        "binding_name": "#hud_title_text_string"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((%.9s * #hud_title_text_string = 'sanityUIx') or (%.9s * #hud_title_text_string = ''))",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
+
+  "sanity_frame_template": {
+    "type": "image",
+    "$texture|default": "textures/ui/mini_player/frames/1",
+    "$title_string|default": "sanityUI1",
+    "texture": "$texture",
+    "size": ["100%", "100%"],
+    "bindings": [
+      {
+        "binding_name": "#hud_title_text_string"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(%.9s * #hud_title_text_string = $title_string)",
+        "target_property_name": "#visible"
+      }
+    ]
+  }
+}

@@ -85,6 +85,38 @@
     ]
   },
 
+  "screen_bottom_left_stack": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": ["100%", 80],
+    "anchor_from": "bottom_left",
+    "anchor_to": "bottom_left",
+    "offset": [5, -5],
+    "controls": [
+      { "mini_player_panel@mini_player.mini_player_panel": {} },
+      {
+        "space": {
+          "type": "panel",
+          "size": [5, 0]
+        }
+      },
+      {
+        "sanity_panel": {
+          "type": "panel",
+          "size": ["100%c", 79],
+          "controls": [
+            {
+              "sanity_screen@sanity_information_text.sanity_screen": {
+                "anchor_from": "bottom_middle",
+                "anchor_to": "bottom_middle"
+              } 
+            }
+          ]
+        }
+      }
+    ]
+  },
+
   //Classic PC UI
   "centered_gui_elements_at_bottom_middle": {
     "modifications": [
@@ -220,12 +252,7 @@
             } 
           },
           {
-            "@sanity_information_text.sanity_screen": {
-              "layer": 3
-            }
-          },
-          {
-            "@sanity_detailed.sanity_detailed_screen": {
+            "@hud.screen_bottom_left_stack": {
               "layer": 3
             }
           },
