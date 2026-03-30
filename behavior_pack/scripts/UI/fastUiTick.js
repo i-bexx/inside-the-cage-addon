@@ -1,5 +1,7 @@
 import { world, system, EquipmentSlot } from "@minecraft/server";
 
+import { slowUiTick } from "./slowUiTick";
+
 const playerCompassStates = new Map();
 
 // ----- MAIN FUNCTION -----
@@ -32,6 +34,11 @@ function fastUiTick() {
     }
     if (uiString.length > 0) player.onScreenDisplay.updateSubtitle(uiString);
     else player.onScreenDisplay.updateSubtitle(" ");
+
+    if (player.hasTag("updateSanityUI")) { // When kit is used, sanity info updates right away
+      slowUiTick();
+      player.removeTag("updateSanityUI");
+    }
   }
 }
 

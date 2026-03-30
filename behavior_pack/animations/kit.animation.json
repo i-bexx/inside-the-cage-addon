@@ -25,7 +25,8 @@
 					"/execute at @s run particle game:kit_used ~ ~ ~",
 					"/clear @s game:kit",
 					"/playsound kit_used @s",
-					"/scoreboard players set @s sanity 100"
+					"/scoreboard players set @s Sanity 100",
+					"/tag @s add updateSanityUI"
 				]
 			},
 			"animation_length": 2.5,
