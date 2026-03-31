@@ -57,7 +57,7 @@
     ]
   },
 
-  "screen_left_stack": {
+  "screen_middle_left_stack": {
     "type": "stack_panel",
     "orientation": "vertical",
     "size": [ "40%", "100%" ],
@@ -259,54 +259,40 @@
         "operation": "insert_front",
         "value": [
             { 
-              "coin_panel@coin.coin_panel": {
-                "layer": 1
+              "@coin.coin_panel": {
+                "layer": 10
               } 
             },
             {
-              "screen_left_stack@hud.screen_left_stack": {
-                "layer": 2
-            } 
-          },
-          {
-            "@hud.screen_bottom_left_stack": {
-              "layer": 3
-            }
-          },
-          {
             "@navigation_panel.navigation_panel_parent": {
-              "layer": 4
+                "layer": 20
+              }
+            },
+            {
+              "@hud.screen_middle_left_stack": {
+                "layer": 30
+              } 
+            },
+            {
+              "@hud.screen_bottom_left_stack": {
+                "layer": 40
+              }
+            },
+            {
+              "@notification.notification_text": {
+                "layer": 50
+              }
+            },
+            {
+              "@cursors.cursor_main": {
+                "layer": 600
+              }
+            },
+            {
+              "@cursors.gun_cursor_states": {
+                "layer": 600
+              }
             }
-          },
-          {
-            "@notification.notification_text": {
-              "layer": 5
-            }
-          },
-          {
-            "cursor_main": {
-              "type": "custom",
-              "size": [ 16, 16 ],
-              "renderer": "cursor_renderer",
-              "layer": 4,
-              "bindings": [
-                {
-                  "binding_type": "global",
-                  "binding_name": "#hud_subtitle_text_string"
-                },
-                {
-                  "binding_type": "view",
-                  "source_property_name": "((%.1s * #hud_subtitle_text_string = ' ') or (#hud_subtitle_text_string = ''))",
-                  "target_property_name": "#visible"
-                }
-              ]
-            }
-          },
-          {
-            "@gun_cursor.gun_cursor_states": {
-              "layer": 500
-            }
-          }
         ]
       }
     ]

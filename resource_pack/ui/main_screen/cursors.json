@@ -1,5 +1,23 @@
 {
-  "namespace": "gun_cursor",
+  "namespace": "cursors",
+
+  "cursor_main": {
+    "type": "custom",
+    "size": [ 16, 16 ],
+    "renderer": "cursor_renderer",
+    "layer": 4,
+    "bindings": [
+      {
+        "binding_type": "global",
+        "binding_name": "#hud_subtitle_text_string"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((%.1s * #hud_subtitle_text_string = ' ') or (#hud_subtitle_text_string = ''))",
+        "target_property_name": "#visible"
+      }
+    ]
+  },
 
   "gun_cursor_states": {
     "type": "panel",
@@ -10,12 +28,12 @@
     "alpha": 0.5,
     "propagate_alpha": true,
     "controls": [
-      { "cursor_normal@gun_cursor.cursor_normal": {} },
-      { "cursor_green@gun_cursor.cursor_green": {} },
-      { "cursor_blue@gun_cursor.cursor_blue": {} },
-      { "cursor_red@gun_cursor.cursor_red": {} },
+      { "cursor_normal@cursors.cursor_normal": {} },
+      { "cursor_green@cursors.cursor_green": {} },
+      { "cursor_blue@cursors.cursor_blue": {} },
+      { "cursor_red@cursors.cursor_red": {} },
 
-      { "hitmarker@gun_cursor.hitmarker": {} }
+      { "hitmarker@cursors.hitmarker": {} }
     ]
   },
 
