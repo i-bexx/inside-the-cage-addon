@@ -41,7 +41,7 @@
 
   "compass_00": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_00",
+    "texture": "textures/ui/compass/compass_00",
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -55,7 +55,7 @@
   },
   "compass_01": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_01", 
+    "texture": "textures/ui/compass/compass_01", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -69,7 +69,7 @@
   },
   "compass_02": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_02", 
+    "texture": "textures/ui/compass/compass_02", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -83,7 +83,7 @@
   },
   "compass_03": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_03", 
+    "texture": "textures/ui/compass/compass_03", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -97,7 +97,7 @@
   },
   "compass_04": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_04", 
+    "texture": "textures/ui/compass/compass_04", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -111,7 +111,7 @@
   },
   "compass_05": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_05", 
+    "texture": "textures/ui/compass/compass_05", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -125,7 +125,7 @@
   },
   "compass_06": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_06", 
+    "texture": "textures/ui/compass/compass_06", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -139,7 +139,7 @@
   },
   "compass_07": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_07", 
+    "texture": "textures/ui/compass/compass_07", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -153,7 +153,7 @@
   },
   "compass_08": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_08", 
+    "texture": "textures/ui/compass/compass_08", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -167,7 +167,7 @@
   },
   "compass_09": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_09", 
+    "texture": "textures/ui/compass/compass_09", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -181,7 +181,7 @@
   },
   "compass_10": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_10", 
+    "texture": "textures/ui/compass/compass_10", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -195,7 +195,7 @@
   },
   "compass_11": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_11", 
+    "texture": "textures/ui/compass/compass_11", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -209,7 +209,7 @@
   },
   "compass_12": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_12", 
+    "texture": "textures/ui/compass/compass_12", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -223,7 +223,7 @@
   },
   "compass_13": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_13", 
+    "texture": "textures/ui/compass/compass_13", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -237,7 +237,7 @@
   },
   "compass_14": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_14", 
+    "texture": "textures/ui/compass/compass_14", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -251,7 +251,7 @@
   },
   "compass_15": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_15", 
+    "texture": "textures/ui/compass/compass_15", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -265,7 +265,7 @@
   },
   "compass_16": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_16", 
+    "texture": "textures/ui/compass/compass_16", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -279,7 +279,7 @@
   },
   "compass_17": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_17", 
+    "texture": "textures/ui/compass/compass_17", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -293,7 +293,7 @@
   },
   "compass_18": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_18", 
+    "texture": "textures/ui/compass/compass_18", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -307,7 +307,7 @@
   },
   "compass_19": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_19", 
+    "texture": "textures/ui/compass/compass_19", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -321,7 +321,7 @@
   },
   "compass_20": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_20", 
+    "texture": "textures/ui/compass/compass_20", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -335,7 +335,7 @@
   },
   "compass_21": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_21", 
+    "texture": "textures/ui/compass/compass_21", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -349,7 +349,7 @@
   },
   "compass_22": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_22", 
+    "texture": "textures/ui/compass/compass_22", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -363,7 +363,7 @@
   },
   "compass_23": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_23", 
+    "texture": "textures/ui/compass/compass_23", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -377,7 +377,7 @@
   },
   "compass_24": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_24", 
+    "texture": "textures/ui/compass/compass_24", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -391,7 +391,7 @@
   },
   "compass_25": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_25", 
+    "texture": "textures/ui/compass/compass_25", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -405,7 +405,7 @@
   },
   "compass_26": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_26", 
+    "texture": "textures/ui/compass/compass_26", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -419,7 +419,7 @@
   },
   "compass_27": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_27", 
+    "texture": "textures/ui/compass/compass_27", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -433,7 +433,7 @@
   },
   "compass_28": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_28", 
+    "texture": "textures/ui/compass/compass_28", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -447,7 +447,7 @@
   },
   "compass_29": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_29", 
+    "texture": "textures/ui/compass/compass_29", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -461,7 +461,7 @@
   },
   "compass_30": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_30", 
+    "texture": "textures/ui/compass/compass_30", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"
@@ -475,7 +475,7 @@
   },
   "compass_31": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_31", 
+    "texture": "textures/ui/compass/compass_31", 
     "bindings": [
       {
         "binding_name": "#hud_subtitle_text_string"

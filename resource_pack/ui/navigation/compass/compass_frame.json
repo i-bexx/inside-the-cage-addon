@@ -11,10 +11,10 @@
 
   "compass_frame": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_frame"
+    "texture": "textures/ui/compass/compass_frame"
   },
   "compass_background": {
     "type": "image",
-    "texture": "textures/ui/Compass/compass_bg"
+    "texture": "textures/ui/compass/compass_bg"
   }
 }
