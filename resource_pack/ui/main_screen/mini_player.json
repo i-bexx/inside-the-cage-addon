@@ -1,6 +1,49 @@
 {
   "namespace": "mini_player",
 
+  "mini_player_container": {
+    "type": "panel",
+    "size": ["100%", "100%c"],
+    "controls": [
+      {
+        "mini_player_stack@mini_player.mini_player_stack": {}
+      }
+    ]
+  },
+
+  "mini_player_stack": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": ["100%", 80],
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "offset": [5, 5],
+    "controls": [
+      { "mini_player_panel@mini_player.mini_player_panel": {} },
+      {
+        "space": {
+          "type": "panel",
+          "size": [5, 0]
+        }
+      },
+      {
+        "sanity_panel": {
+          "type": "panel",
+          "size": ["100%c", "100%"],
+          "controls": [
+            {
+              "sanity_screen@sanity_information_text.sanity_screen": {
+                "anchor_from": "top_middle",
+                "anchor_to": "top_middle"
+              } 
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+
   "mini_player_panel": {
     "type": "panel",
     "size": [80, 80],
@@ -15,13 +58,6 @@
     ]
   },
 
-  "mini_player_renderer": {
-    "type": "custom",
-    "renderer": "live_player_renderer",
-    "size": ["100% - 20px", "100% - 20px"],
-    "offset": [0, 5]
-  },
-  
   "mini_player_background": {
     "type": "image",
     "size": ["100%", "100%"],
@@ -33,5 +69,12 @@
         "mini_player_renderer@mini_player.mini_player_renderer": {}
       }
     ]
+  },
+
+  "mini_player_renderer": {
+    "type": "custom",
+    "renderer": "live_player_renderer",
+    "size": ["100% - 20px", "100% - 20px"],
+    "offset": [0, 5]
   }
 }

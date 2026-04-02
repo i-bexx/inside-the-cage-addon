@@ -21,7 +21,7 @@
           "type": "stack_panel",
           "factory": {
             "name": "chat_item_factory",
-            "max_children_size": 7,
+            "max_children_size": 5,
             "control_ids": {
               "chat_item": "chat_item@chat.chat_grid_item"
             }

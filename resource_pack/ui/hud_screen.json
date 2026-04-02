@@ -30,6 +30,50 @@
     ]
   },
 
+  "screen_middle_left_stack": {
+    "type": "stack_panel",
+    "orientation": "vertical",
+    "size": [ "40%", "100%" ],
+    "anchor_from": "bottom_left",
+    "anchor_to": "bottom_left",
+    "controls": [
+      { "mini_player_container@mini_player.mini_player_container": {} },
+      {
+        "padding": {
+          "type": "panel",
+          "size": [ "100%", 10 ]
+        }
+      },
+      { "souls_freed_counter_container@souls_freed_counter.souls_freed_counter_container": {} },
+      {
+        "padding": {
+          "type": "panel",
+          "size": [ "100%", 10 ]
+        }
+      },
+      {
+        "game_tip@game_tip.game_tip_chat_stack_factory": {
+          "size": [ "100%", "100%c" ]
+        }
+      },
+      {
+        "padding": {
+          "type": "panel",
+          "size": [ "100%", 10 ]
+        }
+      },
+      {
+        "chat": {
+          "type": "panel",
+          "size": ["100%", "25%"],
+          "controls": [
+            { "chat_panel@chat.chat_panel": {} }
+          ]
+        }
+      }
+    ]
+  },
+
   "hud_title_text": {
     "modifications": [
       {
@@ -52,83 +96,6 @@
         "operation": "remove",
         "where": {
           "binding_name": "#level_number_visible"
-        }
-      }
-    ]
-  },
-
-  "screen_middle_left_stack": {
-    "type": "stack_panel",
-    "orientation": "vertical",
-    "size": [ "40%", "100%" ],
-    "anchor_from": "bottom_left",
-    "anchor_to": "bottom_left",
-    "controls": [
-      {
-        "non_centered_gui_padding": {
-          "type": "panel",
-          "size": [ "100%", 32 ],
-          "bindings": [
-            {
-              "binding_name": "#hud_visible_not_centered",
-              "binding_name_override": "#visible",
-              "binding_type": "global"
-            }
-          ]
-        }
-      },
-      { "number_of_days_played@hud.number_of_days_played": {} },
-      {
-        "padding": {
-          "type": "panel",
-          "size": [ "100%", 5 ]
-        }
-      },
-      { "souls_freed_counter@souls_freed_counter.souls_freed_counter": {} },
-      {
-        "game_tip@game_tip.game_tip_chat_stack_factory": {
-          "size": [ "100%", "100%c" ]
-        }
-      },
-      {
-        "chat": {
-          "type": "panel",
-          "size": ["100%", "25%"],
-          "controls": [
-            { "chat_panel@chat.chat_panel": {} }
-          ]
-        }
-      }
-    ]
-  },
-
-  "screen_bottom_left_stack": {
-    "type": "stack_panel",
-    "orientation": "horizontal",
-    "size": ["100%", 80],
-    "anchor_from": "bottom_left",
-    "anchor_to": "bottom_left",
-    "offset": [5, -5],
-    "controls": [
-      { "mini_player_panel@mini_player.mini_player_panel": {} },
-      {
-        "space": {
-          "type": "panel",
-          "size": [5, 0]
-        }
-      },
-      {
-        "sanity_panel": {
-          "type": "panel",
-          "size": ["100%c", 79],
-          "controls": [
-            {
-              "sanity_screen@sanity_information_text.sanity_screen": {
-                "anchor_from": "bottom_middle",
-                "anchor_to": "bottom_middle"
-              } 
-            }
-          ]
         }
       }
     ]
@@ -272,11 +239,6 @@
               "@hud.screen_middle_left_stack": {
                 "layer": 30
               } 
-            },
-            {
-              "@hud.screen_bottom_left_stack": {
-                "layer": 40
-              }
             },
             {
               "@notification.notification_text": {
