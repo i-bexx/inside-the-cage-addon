@@ -1,0 +1,15 @@
+{
+  "namespace": "pause",
+
+  "pause_screen_content": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": [
+          { "@pause_social.container": {} }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "namespace": "pause_social",
+
+  "container": {
+    "type": "panel",
+    "size": [ 120, 35 ],
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "offset": [ 5, 5 ],
+    "controls": [
+      { "button@pause_social.button": {} },
+      { "content_wrapper@pause_social.content_wrapper": {} }
+    ]
+  },
+
+  "button": {
+    "type": "button",
+    "size": [ "100%", "100%" ],
+    "sound_name": "random.click",
+    "layer": 10,
+    
+    "default_control": "default_state",
+    "hover_control": "hover_state",
+    "pressed_control": "pressed_state",
+
+    "$default_button_texture": "textures/ui/pause_screen/social/background",
+    "$hover_button_texture": "textures/ui/pause_screen/social/background_hover",
+    "$pressed_button_texture": "textures/ui/pause_screen/social/background_pressed",
+    
+    "$light_border_default_color": "textures/ui/focus_border_black",
+    "$light_border_hover_color": "textures/ui/focus_border_white",
+
+    "controls": [
+      {
+        "default_state": {
+          "type": "panel",
+          "size": [ "100%", "100%" ],
+          "controls": [
+            {
+              "default_image": {
+                "type": "image",
+                "texture": "$default_button_texture"
+              }
+            },
+            {
+              "default_border_image": {
+                "type": "image",
+                "texture": "$light_border_default_color"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "hover_state": {
+          "type": "panel",
+          "size": [ "100%", "100%" ],
+          "controls": [
+            {
+              "hover_image": {
+                "type": "image",
+                "texture": "$hover_button_texture"
+              }
+            },
+            {
+              "hover_border_image": {
+                "type": "image",
+                "texture": "$light_border_hover_color"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "pressed_state": {
+          "type": "panel",
+          "size": [ "100%", "100%" ],
+          "controls": [
+            {
+              "pressed_image": {
+                "type": "image",
+                "texture": "$pressed_button_texture"
+              }
+            },
+            {
+              "pressed_border_image": {
+                "type": "image",
+                "texture": "$light_border_hover_color"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_select",
+        "to_button_id": "button.custom",
+        "button_up_right_of_first_refusal": true
+      }
+    ]
+  },
+
+  "content_wrapper": {
+    "type": "panel",
+    "size": [ "100%", "100%" ],
+    "controls": [
+      {
+        "main_stack": {
+          "type": "stack_panel",
+          "orientation": "horizontal",
+          "size": [ "100%c", 20 ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "layer": 20,
+          "controls": [
+            {
+              "icon_panel": {
+                "type": "panel",
+                "size": [ 12, 20 ],
+                "ignored": true, // REMOVE WHEN IMAGE IS SET
+                "controls": [
+                  {
+                    "image": {
+                      "type": "image",
+                      "size": [ 12, 12 ],
+                      "anchor_from": "center",
+                      "anchor_to": "center",
+                      "texture": "textures/ui/xxx" // SET THE IMAGE
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "padding": {
+                "type": "panel",
+                "size": [ 4, 20 ]
+              }
+            },
+            {
+              "label_panel": {
+                "type": "panel",
+                "size": [ "100%c", 20 ],
+                "controls": [
+                  {
+                    "label": {
+                      "type": "label",
+                      "text": "Follow me:\n[ social ]",
+                      "text_alignment": "center",
+                      "anchor_from": "center",
+                      "anchor_to": "center",
+                      "size": [ "default", "default" ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

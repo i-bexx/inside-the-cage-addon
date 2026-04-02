@@ -1,8 +1,11 @@
 {
   "ui_defs": [
     "ui/hud_screen.json",
+    "ui/pause_screen.json",
     "ui/server_form.json",
 
+    "ui/pause_screen_panel/social.json",
+    
     "ui/main_screen/chat.json",
     "ui/main_screen/coin.json",
     "ui/main_screen/cursors.json",
