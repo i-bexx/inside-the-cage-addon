@@ -3,7 +3,7 @@
 
   "container": {
     "type": "panel",
-    "size": [ 120, 35 ],
+    "size": [ "13%", "5%" ],
     "anchor_from": "top_left",
     "anchor_to": "top_left",
     "offset": [ 5, 5 ],
@@ -94,8 +94,9 @@
     ],
     "button_mappings": [
       {
+        "mapping_type": "pressed",
         "from_button_id": "button.menu_select",
-        "to_button_id": "button.custom",
+        "to_button_id": "button.no_affection",
         "button_up_right_of_first_refusal": true
       }
     ]
@@ -146,7 +147,7 @@
                   {
                     "label": {
                       "type": "label",
-                      "text": "Follow me:\n[ social ]",
+                      "text": "", // SET THE LABEL
                       "text_alignment": "center",
                       "anchor_from": "center",
                       "anchor_to": "center",
