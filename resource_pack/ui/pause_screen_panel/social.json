@@ -3,7 +3,7 @@
 
   "container": {
     "type": "panel",
-    "size": [ "13%", "5%" ],
+    "size": [ 115, 26 ],
     "anchor_from": "top_left",
     "anchor_to": "top_left",
     "offset": [ 5, 5 ],

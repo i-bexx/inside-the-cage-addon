@@ -16,7 +16,7 @@ function mainPanel(player) {
     .title("MAIN PANEL")
     .body("")
     .button("Shop", "textures/ui/promo_holiday_gift_small")
-    .button("Vote Manager", "textures/ui/invite_base")
+    .button("Vote Manager", "textures/ui/panels/main_panel/icons/vote")
     .button("Upgrade Battery", "textures/ui/panels/main_panel/icons/battery_upgrade")
     .button("Upgrade Stamina", "textures/ui/panels/main_panel/icons/stamina_limit_increase")
         .show(player).then(({ cancelationReason, canceled, selection }) => {
