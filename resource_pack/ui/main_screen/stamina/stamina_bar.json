@@ -1,0 +1,235 @@
+{
+  "namespace": "stamina_bar",
+
+  "stamina_bar": {
+    "type": "panel",
+    "size": [ 0, 0 ],
+    "controls": [
+      {
+        "stamina_receiver@stamina_bar.stamina_receiver": {}
+      },
+      {
+        "stamina_math_core@stamina_bar.stamina_math_core": {}
+      }
+    ]
+  },
+
+  // --------------------------------------------------------------------------
+  // STAMINA RECEIVER: The "Ear" and "Pulse Generator" of the algorithm.
+  // Listens to the actionbar text, extracts the raw value, and generates a 
+  // 1-frame pulse (visibility_changed) to trigger the animation math.
+  // --------------------------------------------------------------------------
+  "stamina_receiver": {
+    "type": "panel",
+    "size": [ 0, 0 ],
+    "bindings": [
+      {
+        "binding_name": "#hud_title_text_string"
+      },
+      {
+        "binding_name": "#hud_title_text_string",
+        "binding_name_override": "#stamina_raw",
+        // CRITICAL: Triggers a 1-frame pulse needed for the #key in math core.
+        // Without this, old and new values update simultaneously, killing animations.
+        "binding_condition": "visibility_changed"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not (#hud_title_text_string = #stamina_raw) and not ((#hud_title_text_string - 'stamina:') = #hud_title_text_string))",
+        "target_property_name": "#visible"
+      },
+      {
+        "binding_type": "view",
+        // Strips the "stamina:" prefix and extracts the pure integer.
+        "source_property_name": "((#stamina_raw - 'stamina:') + 0)",
+        "target_property_name": "#changed_value"
+      }
+    ]
+  },
+
+  // --------------------------------------------------------------------------
+  // MATH CORE: The "Brain". Calculates the gap between the old and new value
+  // to dynamically size the animation trail.
+  // --------------------------------------------------------------------------
+  "stamina_math_core": {
+    "type": "panel",
+    "size": [ 120, 12 ],
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": [ 0, -45 ],
+    "$one": 1.0,
+    "controls": [
+      {
+        // 1. Static Background: Always visible underneath when stamina depletes.
+        "stamina_background": {
+          "type": "image",
+          "layer": 0,
+          "texture": "textures/ui/stamina_bar/stamina_fill",
+          "alpha": 0.16,
+          "size": [ "100%", "100%" ]
+        }
+      },
+      {
+        "stamina_bar_panel": {
+          "type": "panel",
+          "layer": 1,
+          "size": [ "100%", "100%" ],
+          "controls": [
+            {
+              "stamina_animation_host": {
+                "type": "panel",
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "size": [ "100%", "100%" ],
+                "$ignore_trail|default": false,
+                "property_bag": {
+                  "#prev_value": 0,
+                  "#multiplier": 0.1 // Scales the value to fit the UI (1 / Max Stamina)
+                },
+                "bindings": [
+                  {
+                    "binding_type": "view",
+                    "source_control_name": "stamina_receiver",
+                    "source_property_name": "#visible",
+                    "target_property_name": "#key"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_control_name": "stamina_receiver",
+                    "source_property_name": "#changed_value",
+                    "target_property_name": "#new_value"
+                  },
+                  {
+                    // Checks if new value is greater than the old one
+                    // If new value is greater, the algorithm finds the gap between them and adds it to the new value
+                    // Therefore, finding the minimum value
+                    "binding_type": "view",
+                    "source_property_name": "(#new_value + (#prev_value - #new_value) * (#prev_value < #new_value))",
+                    "target_property_name": "#min_value"
+                  },
+                  {
+                    // Multiplies the maximum value
+                    // Calculates the exact width of the gap for the animation segment.
+                    "binding_type": "view",
+                    "source_property_name": "((#new_value + #prev_value - #min_value) * #multiplier)",
+                    "target_property_name": "#size_binding_x"
+                  },
+                  {
+                    // If value is changed, sets the #prev_value to the #new_value
+                    // If not, keeps the #prev_value the same
+                    "binding_type": "view",
+                    "source_property_name": "(#prev_value * (1 - #key) + #new_value * #key)",
+                    "target_property_name": "#prev_value"
+                  }
+                ],
+                "controls": [
+                  {
+                    // ----------------------------------------------------------------
+                    // COLLECTION PANELS: The "Muscles". They spawn the animation 
+                    // segments ONLY when their specific condition (gain or loss) is met.
+                    // ----------------------------------------------------------------
+                    "stamina_gain_collection": {
+                      "type": "collection_panel",
+                      "$ignore_trail": true,
+                      "$size_anim": "('@stamina_bar_anims.stamina_gain_anim')",
+                      "factory": {
+                        "name": "stamina_gain_factory",
+                        "control_name": "stamina_bar.animated_bar_image"
+                      },
+                      "bindings": [
+                        {
+                          // Activates ONLY if Stamina increases (Healing).
+                          "binding_type": "view",
+                          "source_control_name": "stamina_animation_host",
+                          "resolve_sibling_scope": true,
+                          "source_property_name": "((#new_value > #prev_value) * 1)",
+                          "target_property_name": "#collection_length"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "stamina_loss_collection": {
+                      "type": "collection_panel",
+                      "$size_anim": "('@stamina_bar_anims.stamina_loss_anim')",
+                      "factory": {
+                        "name": "stamina_loss_factory",
+                        "control_name": "stamina_bar.animated_bar_image"
+                      },
+                      "bindings": [
+                        {
+                          // Activates ONLY if Stamina decreases (Taking Damage).
+                          "binding_type": "view",
+                          "source_control_name": "stamina_animation_host",
+                          "resolve_sibling_scope": true,
+                          "source_property_name": "((#prev_value > #new_value) * 1)",
+                          "target_property_name": "#collection_length"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              // ----------------------------------------------------------------------
+              // BASE LIVE FILL: The main solid bar. Instantly snaps to the minimum 
+              // value using clipping, leaving space for the animation segments above.
+              // ----------------------------------------------------------------------
+              "stamina_live_fill": {
+                "type": "image",
+                "layer": 1,
+                "texture": "textures/ui/stamina_bar/stamina_fill",
+                "size": [ "100%", "100%" ],
+                "clip_direction": "left",
+                "clip_pixelperfect": false,
+                "bindings": [
+                  {
+                    "binding_type": "view",
+                    "source_control_name": "stamina_animation_host",
+                    "resolve_sibling_scope": true,
+                    "source_property_name": "($one - (#min_value * #multiplier))",
+                    "target_property_name": "#clip_ratio"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  // --------------------------------------------------------------------------
+  // ANIMATION SEGMENTS & KEYFRAMES: 
+  // Determines the visual behavior (shrinking, growing, trails, duration).
+  // --------------------------------------------------------------------------
+  "animated_bar_image": {
+    "type": "panel",
+    "size": [ "100%", "100%" ],
+    "controls": [
+      {
+        "bar_image_cx0": {
+          "type": "image",
+          "texture": "textures/ui/stamina_bar/stamina_fill",
+          "size": "$size_anim", // Shrinks or grows based on the factory's target anim.
+          "layer": 1,
+          "anchor_from": "top_left",
+          "anchor_to": "top_left"
+        }
+      },
+      {
+        "trail_image_cx0": {
+          "ignored": "$ignore_trail",
+          "type": "image",
+          "layer": 0,
+          "size": "@stamina_bar_anims.stamina_trail_anim",
+          "alpha": 0.35, // Semi-transparent "damage taken" ghost trail.
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "texture": "textures/ui/black"
+        }
+      }
+    ]
+  }
+}

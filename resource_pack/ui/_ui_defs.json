@@ -16,6 +16,9 @@
     "ui/main_screen/sanity/sanity.json",
     "ui/main_screen/sanity/sanity_frame.json",
 
+    "ui/main_screen/stamina/stamina_bar.json",
+    "ui/main_screen/stamina/stamina_bar_anims.json",
+
 
     "ui/button_panel_templates/main_panel.json",
     "ui/button_panel_templates/shop_panel.json",

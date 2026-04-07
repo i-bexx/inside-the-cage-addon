@@ -1,0 +1,25 @@
+{
+  "namespace": "stamina_bar_anims",
+
+  "stamina_gain_anim": {
+    "anim_type": "size",
+    "from": [ 0, "100%" ],
+    "to": [ "100%", "100%" ],
+    "duration": 0.18,
+    "easing": "out_expo"
+  },
+
+  "stamina_loss_anim": {
+    "anim_type": "size",
+    "from": [ "100%", "100%" ],
+    "to": [ 0, "100%" ],
+    "duration": 0.22,
+    "easing": "in_expo"
+  },
+
+  "stamina_trail_anim": {
+    "anim_type": "wait",
+    "duration": 0.15, // Waits slightly before shrinking to give the player feedback.
+    "next": "@stamina_bar.stamina_loss_anim"
+  }
+}
