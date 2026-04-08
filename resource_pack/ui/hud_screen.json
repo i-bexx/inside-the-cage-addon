@@ -168,6 +168,20 @@
     "modifications": [
       {
         "array_name": "controls",
+        "operation": "replace",
+        "where": "heart_rend",
+        "value": [
+          {
+            "heart_rend@heart_renderer": {
+              "offset": [ -1, -40 ],
+              "anchor_from": "bottom_left",
+              "anchor_to": "bottom_left"
+            }
+          }
+        ]
+      },
+      {
+        "array_name": "controls",
         "operation": "remove",
         "control_name": "horse_heart_rend"
       },
