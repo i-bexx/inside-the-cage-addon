@@ -16,7 +16,7 @@
 
   // --------------------------------------------------------------------------
   // STAMINA RECEIVER: The "Ear" and "Pulse Generator" of the algorithm.
-  // Listens to the actionbar text, extracts the raw value, and generates a 
+  // Listens to the text, extracts the raw value, and generates a 
   // 1-frame pulse (visibility_changed) to trigger the animation math.
   // --------------------------------------------------------------------------
   "stamina_receiver": {
@@ -27,6 +27,7 @@
         "binding_name": "#hud_title_text_string"
       },
       {
+        // #stamina_raw changes only when the text changes
         "binding_name": "#hud_title_text_string",
         "binding_name_override": "#stamina_raw",
         // CRITICAL: Triggers a 1-frame pulse needed for the #key in math core.
@@ -53,27 +54,34 @@
   // --------------------------------------------------------------------------
   "stamina_math_core": {
     "type": "panel",
-    "size": [ 120, 12 ],
+    "size": [ 84, 12 ],
     "anchor_from": "bottom_middle",
     "anchor_to": "bottom_middle",
     "offset": [ 0, -45 ],
     "$one": 1.0,
     "controls": [
       {
-        // 1. Static Background: Always visible underneath when stamina depletes.
+        "stamina_container": {
+          "type": "image",
+          "layer": 0,
+          "texture": "textures/ui/stamina_bar/stamina_container",
+          "size": [ "100%", "100%" ]
+        }
+      },
+      {
         "stamina_background": {
           "type": "image",
           "layer": 0,
-          "texture": "textures/ui/stamina_bar/stamina_fill",
+          "texture": "textures/ui/Black",
           "alpha": 0.16,
-          "size": [ "100%", "100%" ]
+          "size": [ "95%", "45%" ]
         }
       },
       {
         "stamina_bar_panel": {
           "type": "panel",
           "layer": 1,
-          "size": [ "100%", "100%" ],
+          "size": [ "95%", "45%" ],
           "controls": [
             {
               "stamina_animation_host": {
@@ -83,7 +91,7 @@
                 "size": [ "100%", "100%" ],
                 "$ignore_trail|default": false,
                 "property_bag": {
-                  "#prev_value": 0,
+                  "#prev_value": 10,
                   "#multiplier": 0.1 // Scales the value to fit the UI (1 / Max Stamina)
                 },
                 "bindings": [
@@ -94,6 +102,7 @@
                     "target_property_name": "#key"
                   },
                   {
+                    // NOTE: When stamina value changes, #new_value and #prev_value becomes equal for 1 tick.
                     "binding_type": "view",
                     "source_control_name": "stamina_receiver",
                     "source_property_name": "#changed_value",
@@ -103,6 +112,9 @@
                     // Checks if new value is greater than the old one
                     // If new value is greater, the algorithm finds the gap between them and adds it to the new value
                     // Therefore, finding the minimum value
+
+                    // Minimum value is an essential to find the maximum value for the animation segment, which determines the size of the gap.
+                    // Minimum value is also needed to clip the live fill bar
                     "binding_type": "view",
                     "source_property_name": "(#new_value + (#prev_value - #new_value) * (#prev_value < #new_value))",
                     "target_property_name": "#min_value"
@@ -112,10 +124,15 @@
                     // Calculates the exact width of the gap for the animation segment.
                     "binding_type": "view",
                     "source_property_name": "((#new_value + #prev_value - #min_value) * #multiplier)",
+                    "target_property_name": "#max_value"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "#max_value",
                     "target_property_name": "#size_binding_x"
                   },
                   {
-                    // If value is changed, sets the #prev_value to the #new_value
+                    // If value is changed, sets the #prev_value to the #new_value (these two are equal for 1 tick)
                     // If not, keeps the #prev_value the same
                     "binding_type": "view",
                     "source_property_name": "(#prev_value * (1 - #key) + #new_value * #key)",
@@ -138,12 +155,14 @@
                       },
                       "bindings": [
                         {
-                          // Activates ONLY if Stamina increases (Healing).
+                          // Activates ONLY if Stamina increases
                           "binding_type": "view",
                           "source_control_name": "stamina_animation_host",
                           "resolve_sibling_scope": true,
                           "source_property_name": "((#new_value > #prev_value) * 1)",
                           "target_property_name": "#collection_length"
+                          // #collection_length prevents the multiple elements from spawning at every tick
+                          // When stamina value changes, #new_value and #prev_value becomes equal for 1 tick. Which sets the #collection_length to 0, deleting the element previously spawned
                         }
                       ]
                     }
@@ -158,12 +177,14 @@
                       },
                       "bindings": [
                         {
-                          // Activates ONLY if Stamina decreases (Taking Damage).
+                          // Activates ONLY if Stamina decreases
                           "binding_type": "view",
                           "source_control_name": "stamina_animation_host",
                           "resolve_sibling_scope": true,
                           "source_property_name": "((#prev_value > #new_value) * 1)",
                           "target_property_name": "#collection_length"
+                          // #collection_length prevents the multiple elements from spawning at every tick
+                          // When stamina value changes, #new_value and #prev_value becomes equal for 1 tick. Which sets the #collection_length to 0, deleting the element previously spawned
                         }
                       ]
                     }
@@ -224,10 +245,10 @@
           "type": "image",
           "layer": 0,
           "size": "@stamina_bar_anims.stamina_trail_anim",
-          "alpha": 0.35, // Semi-transparent "damage taken" ghost trail.
+          "alpha": 0.35, // Semi-transparent trail.
           "anchor_from": "top_left",
           "anchor_to": "top_left",
-          "texture": "textures/ui/black"
+          "texture": "textures/ui/white"
         }
       }
     ]

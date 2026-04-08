@@ -133,12 +133,38 @@
         "array_name": "controls",
         "operation": "remove",
         "control_name": "bubbles_rend_1"
+      },
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": [
+          {
+            "@stamina_bar.stamina_bar": {
+              "offset": [ -40, 13 ],
+              "anchor_from": "bottom_right",
+              "anchor_to": "bottom_right"
+            }
+          }
+        ]
       }
     ]
   },
 
   //Pocket UI
   "not_centered_gui_elements": {
+    "size": "$size",
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "variables": [
+      {
+        "requires": "($pocket_edition)",
+        "$size": [ 200, 50 ]
+      },
+      {
+        "requires": "(not $pocket_edition)",
+        "$size": [ 180, 50 ]
+      }
+    ],
     "modifications": [
       {
         "array_name": "controls",
@@ -164,6 +190,19 @@
         "array_name": "controls",
         "operation": "remove",
         "control_name": "bubbles_rend_1"
+      },
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": [
+          {
+            "@stamina_bar.stamina_bar": {
+              "offset": [ -40, 13 ],
+              "anchor_from": "bottom_right",
+              "anchor_to": "bottom_right"
+            }
+          }
+        ]
       }
     ]
   },
@@ -200,6 +239,19 @@
         "array_name": "controls",
         "operation": "remove",
         "control_name": "bubbles_rend_1"
+      },
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": [
+          {
+            "@stamina_bar.stamina_bar": {
+              "offset": [ -40, 13 ],
+              "anchor_from": "bottom_right",
+              "anchor_to": "bottom_right"
+            }
+          }
+        ]
       }
     ]
   },

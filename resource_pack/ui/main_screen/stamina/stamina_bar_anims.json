@@ -20,6 +20,6 @@
   "stamina_trail_anim": {
     "anim_type": "wait",
     "duration": 0.15, // Waits slightly before shrinking to give the player feedback.
-    "next": "@stamina_bar.stamina_loss_anim"
+    "next": "@stamina_bar_anims.stamina_loss_anim"
   }
 }
