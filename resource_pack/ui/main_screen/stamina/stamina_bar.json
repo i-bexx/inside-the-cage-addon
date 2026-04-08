@@ -24,25 +24,31 @@
     "size": [ 0, 0 ],
     "bindings": [
       {
-        "binding_name": "#hud_title_text_string"
-      },
-      {
-        // #stamina_raw changes only when the text changes
-        "binding_name": "#hud_title_text_string",
-        "binding_name_override": "#stamina_raw",
-        // CRITICAL: Triggers a 1-frame pulse needed for the #key in math core.
-        // Without this, old and new values update simultaneously, killing animations.
-        "binding_condition": "visibility_changed"
+        "binding_name": "#hud_subtitle_text_string"
       },
       {
         "binding_type": "view",
-        "source_property_name": "(not (#hud_title_text_string = #stamina_raw) and not ((#hud_title_text_string - 'stamina:') = #hud_title_text_string))",
+        "source_property_name": "(#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string))",
+        "target_property_name": "#stamina_text"
+      },
+      {
+        // #stamina_raw changes only when the text changes
+        // CRITICAL: Triggers a 1-frame pulse needed for the #key in math core.
+        // Without this, old and new values update simultaneously, killing animations.
+        "binding_type": "view",
+        "binding_condition": "visibility_changed",
+        "source_property_name": "#stamina_text",
+        "target_property_name": "#stamina_raw"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not (#stamina_text = #stamina_raw) and not ((#stamina_text - ' stamina_x') = #stamina_text))",
         "target_property_name": "#visible"
       },
       {
         "binding_type": "view",
         // Strips the "stamina:" prefix and extracts the pure integer.
-        "source_property_name": "((#stamina_raw - 'stamina:') + 0)",
+        "source_property_name": "((#stamina_raw - ' stamina_x') + 0)",
         "target_property_name": "#changed_value"
       }
     ]
@@ -81,7 +87,7 @@
         "stamina_bar_panel": {
           "type": "panel",
           "layer": 1,
-          "size": [ "95%", "45%" ],
+          "size": [ "94%", "45%" ],
           "controls": [
             {
               "stamina_animation_host": {
@@ -188,6 +194,27 @@
                         }
                       ]
                     }
+                  }
+                ]
+              }
+            },
+            {
+              "test_label": {
+                "type": "label",
+                "anchor_from": "center",
+                "anchor_to": "center",
+                "offset": [0, -20],
+                "text": "#text",
+                "bindings": [
+                  {
+                    "binding_name": "#text"
+                  },
+                  {
+                    "binding_type": "view",
+                    "resolve_sibling_scope": true,
+                    "source_control_name": "stamina_animation_host",
+                    "source_property_name": "('§z' + #prev_value)",
+                    "target_property_name": "#text"
                   }
                 ]
               }

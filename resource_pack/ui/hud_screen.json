@@ -82,9 +82,9 @@
         "control_name": "title_frame"
       },
       {
-        "array_name": "controls",
-        "operation": "remove",
-        "control_name": "subtitle_frame"
+        "array_name" : "controls",
+        "operation" : "remove",
+        "control_name" : "subtitle_frame"
       }
     ]
   },
