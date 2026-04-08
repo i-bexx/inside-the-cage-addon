@@ -5,60 +5,12 @@
     "type": "panel",
     "size": [ 0, 0 ],
     "controls": [
-      {
-        "stamina_receiver@stamina_bar.stamina_receiver": {}
-      },
-      {
-        "stamina_math_core@stamina_bar.stamina_math_core": {}
-      }
+      { "stamina_logic_core@stamina_bar.stamina_logic_core": {} }
     ]
   },
 
-  // --------------------------------------------------------------------------
-  // STAMINA RECEIVER: The "Ear" and "Pulse Generator" of the algorithm.
-  // Listens to the text, extracts the raw value, and generates a 
-  // 1-frame pulse (visibility_changed) to trigger the animation math.
-  // --------------------------------------------------------------------------
-  "stamina_receiver": {
-    "type": "panel",
-    "size": [ 0, 0 ],
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string))",
-        "target_property_name": "#stamina_text"
-      },
-      {
-        // #stamina_raw changes only when the text changes
-        // CRITICAL: Triggers a 1-frame pulse needed for the #key in math core.
-        // Without this, old and new values update simultaneously, killing animations.
-        "binding_type": "view",
-        "binding_condition": "visibility_changed",
-        "source_property_name": "#stamina_text",
-        "target_property_name": "#stamina_raw"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(not (#stamina_text = #stamina_raw) and not ((#stamina_text - ' stamina_x') = #stamina_text))",
-        "target_property_name": "#visible"
-      },
-      {
-        "binding_type": "view",
-        // Strips the "stamina:" prefix and extracts the pure integer.
-        "source_property_name": "((#stamina_raw - ' stamina_x') + 0)",
-        "target_property_name": "#changed_value"
-      }
-    ]
-  },
 
-  // --------------------------------------------------------------------------
-  // MATH CORE: The "Brain". Calculates the gap between the old and new value
-  // to dynamically size the animation trail.
-  // --------------------------------------------------------------------------
-  "stamina_math_core": {
+  "stamina_logic_core": {
     "type": "panel",
     "size": [ 84, 12 ],
     "anchor_from": "bottom_middle",
@@ -95,39 +47,51 @@
                 "anchor_from": "top_left",
                 "anchor_to": "top_left",
                 "size": [ "100%", "100%" ],
-                "$ignore_trail|default": false,
                 "property_bag": {
-                  "#prev_value": 10,
-                  "#multiplier": 0.1 // Scales the value to fit the UI (1 / Max Stamina)
+                  "#multiplier": 0.1,
+                  "#memory_val": 10,
+                  "#frozen_val": 10
                 },
                 "bindings": [
                   {
-                    "binding_type": "view",
-                    "source_control_name": "stamina_receiver",
-                    "source_property_name": "#visible",
-                    "target_property_name": "#key"
+                    "binding_name": "#hud_subtitle_text_string"
                   },
                   {
-                    // NOTE: When stamina value changes, #new_value and #prev_value becomes equal for 1 tick.
                     "binding_type": "view",
-                    "source_control_name": "stamina_receiver",
-                    "source_property_name": "#changed_value",
+                    "source_property_name": "(((#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string)) - ' stamina_x') + 0)",
+                    "target_property_name": "#live_val"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(1 - (#live_val = #memory_val))",
+                    "target_property_name": "#is_changed"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((#memory_val * #is_changed) + (#live_val * (1 - #is_changed)))",
                     "target_property_name": "#new_value"
                   },
                   {
-                    // Checks if new value is greater than the old one
-                    // If new value is greater, the algorithm finds the gap between them and adds it to the new value
-                    // Therefore, finding the minimum value
-
-                    // Minimum value is an essential to find the maximum value for the animation segment, which determines the size of the gap.
-                    // Minimum value is also needed to clip the live fill bar
+                    "binding_type": "view",
+                    "source_property_name": "((#memory_val * #is_changed) + (#frozen_val * (1 - #is_changed)))",
+                    "target_property_name": "#prev_value"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((#memory_val * #is_changed) + (#frozen_val * (1 - #is_changed)))",
+                    "target_property_name": "#frozen_val"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "#live_val",
+                    "target_property_name": "#memory_val"
+                  },
+                  {
                     "binding_type": "view",
                     "source_property_name": "(#new_value + (#prev_value - #new_value) * (#prev_value < #new_value))",
                     "target_property_name": "#min_value"
                   },
                   {
-                    // Multiplies the maximum value
-                    // Calculates the exact width of the gap for the animation segment.
                     "binding_type": "view",
                     "source_property_name": "((#new_value + #prev_value - #min_value) * #multiplier)",
                     "target_property_name": "#max_value"
@@ -136,21 +100,10 @@
                     "binding_type": "view",
                     "source_property_name": "#max_value",
                     "target_property_name": "#size_binding_x"
-                  },
-                  {
-                    // If value is changed, sets the #prev_value to the #new_value (these two are equal for 1 tick)
-                    // If not, keeps the #prev_value the same
-                    "binding_type": "view",
-                    "source_property_name": "(#prev_value * (1 - #key) + #new_value * #key)",
-                    "target_property_name": "#prev_value"
                   }
                 ],
                 "controls": [
                   {
-                    // ----------------------------------------------------------------
-                    // COLLECTION PANELS: The "Muscles". They spawn the animation 
-                    // segments ONLY when their specific condition (gain or loss) is met.
-                    // ----------------------------------------------------------------
                     "stamina_gain_collection": {
                       "type": "collection_panel",
                       "$ignore_trail": true,
@@ -167,8 +120,8 @@
                           "resolve_sibling_scope": true,
                           "source_property_name": "((#new_value > #prev_value) * 1)",
                           "target_property_name": "#collection_length"
-                          // #collection_length prevents the multiple elements from spawning at every tick
-                          // When stamina value changes, #new_value and #prev_value becomes equal for 1 tick. Which sets the #collection_length to 0, deleting the element previously spawned
+                          // #collection_length prevents the multiple elements from spawning
+                          // When stamina value changes, #new_value and #prev_value becomes equal for a short moment. Which sets the #collection_length to 0, deleting the element previously spawned
                         }
                       ]
                     }
@@ -176,6 +129,7 @@
                   {
                     "stamina_loss_collection": {
                       "type": "collection_panel",
+                      "$ignore_trail": false,
                       "$size_anim": "('@stamina_bar_anims.stamina_loss_anim')",
                       "factory": {
                         "name": "stamina_loss_factory",
@@ -189,8 +143,8 @@
                           "resolve_sibling_scope": true,
                           "source_property_name": "((#prev_value > #new_value) * 1)",
                           "target_property_name": "#collection_length"
-                          // #collection_length prevents the multiple elements from spawning at every tick
-                          // When stamina value changes, #new_value and #prev_value becomes equal for 1 tick. Which sets the #collection_length to 0, deleting the element previously spawned
+                          // #collection_length prevents the multiple elements from spawning
+                          // When stamina value changes, #new_value and #prev_value becomes equal for a short moment. Which sets the #collection_length to 0, deleting the element previously spawned
                         }
                       ]
                     }
@@ -199,31 +153,6 @@
               }
             },
             {
-              "test_label": {
-                "type": "label",
-                "anchor_from": "center",
-                "anchor_to": "center",
-                "offset": [0, -20],
-                "text": "#text",
-                "bindings": [
-                  {
-                    "binding_name": "#text"
-                  },
-                  {
-                    "binding_type": "view",
-                    "resolve_sibling_scope": true,
-                    "source_control_name": "stamina_animation_host",
-                    "source_property_name": "('§z' + #prev_value)",
-                    "target_property_name": "#text"
-                  }
-                ]
-              }
-            },
-            {
-              // ----------------------------------------------------------------------
-              // BASE LIVE FILL: The main solid bar. Instantly snaps to the minimum 
-              // value using clipping, leaving space for the animation segments above.
-              // ----------------------------------------------------------------------
               "stamina_live_fill": {
                 "type": "image",
                 "layer": 1,
@@ -248,31 +177,28 @@
     ]
   },
 
-  // --------------------------------------------------------------------------
-  // ANIMATION SEGMENTS & KEYFRAMES: 
-  // Determines the visual behavior (shrinking, growing, trails, duration).
-  // --------------------------------------------------------------------------
+
   "animated_bar_image": {
     "type": "panel",
     "size": [ "100%", "100%" ],
     "controls": [
       {
-        "bar_image_cx0": {
+        "bar_image": {
           "type": "image",
           "texture": "textures/ui/stamina_bar/stamina_fill",
-          "size": "$size_anim", // Shrinks or grows based on the factory's target anim.
+          "size": "$size_anim",
           "layer": 1,
           "anchor_from": "top_left",
           "anchor_to": "top_left"
         }
       },
       {
-        "trail_image_cx0": {
+        "trail_image": {
           "ignored": "$ignore_trail",
           "type": "image",
           "layer": 0,
           "size": "@stamina_bar_anims.stamina_trail_anim",
-          "alpha": 0.35, // Semi-transparent trail.
+          "alpha": 0.35,
           "anchor_from": "top_left",
           "anchor_to": "top_left",
           "texture": "textures/ui/white"
