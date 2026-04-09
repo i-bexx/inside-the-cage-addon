@@ -4,6 +4,7 @@ import { slowUiTick } from "./slowUiTick";
 import { getStaminaObjective, getStaminaLimitObjective, getObjectiveScore } from "../scoreboards";
 
 const playerCompassStates = new Map();
+let staminaTick = 0;
 
 // ----- MAIN FUNCTION -----
 
@@ -31,6 +32,7 @@ function fastUiTick() {
     const playerStaminaLimit = getObjectiveScore(staminaLimitObjective, player.scoreboardIdentity) ?? 10;
 
     let uiString = "";
+    let staminaTickString = "";
 
     if (isHoldingGun) uiString = `${cursorState}`;
     else uiString = "cursorState_zz";
@@ -45,8 +47,11 @@ function fastUiTick() {
       uiString += " compass_zz";
     }
 
-    if (playerStaminaLimit == 10) uiString += ` stamina_x${playerStamina}`;
-    else if (playerStaminaLimit == 20) uiString += ` stamina_y${playerStamina}`;
+    if (staminaTick % 2 == 0) staminaTickString = "§z";
+    else staminaTickString = "§y";
+
+    if (playerStaminaLimit == 10) uiString += ` stamina_x${playerStamina}${staminaTickString}`;
+    else if (playerStaminaLimit == 20) uiString += ` stamina_y${playerStamina}${staminaTickString}`;
 
 
     player.onScreenDisplay.updateSubtitle(uiString);
@@ -56,6 +61,8 @@ function fastUiTick() {
       player.removeTag("updateSanityUI");
     }
   }
+  if (staminaTick % 2 == 0) staminaTick++;
+    else staminaTick--;
 }
 
 // ----- HELPER FUNCTIONS -----

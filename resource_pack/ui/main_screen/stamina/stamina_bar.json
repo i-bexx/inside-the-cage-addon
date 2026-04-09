@@ -23,7 +23,13 @@
           "type": "image",
           "layer": 0,
           "texture": "textures/ui/stamina_bar/stamina_container",
-          "size": [ "100%", "100%" ]
+          "size": [ "100%", "100%" ],
+          "bindings": [
+            {
+              "binding_name": "(not #is_spectator_mode)",
+              "binding_name_override": "#visible"
+            }
+          ]
         }
       },
       {
@@ -32,7 +38,13 @@
           "layer": 0,
           "texture": "textures/ui/Black",
           "alpha": 0.16,
-          "size": [ "95%", "45%" ]
+          "size": [ "95%", "45%" ],
+          "bindings": [
+            {
+              "binding_name": "(not #is_spectator_mode)",
+              "binding_name_override": "#visible"
+            }
+          ]
         }
       },
       {
@@ -50,15 +62,38 @@
                 "property_bag": {
                   "#multiplier": 0.1,
                   "#memory_val": 10,
-                  "#frozen_val": 10
+                  "#frozen_val": 10,
+                  "#memory_raw_string": ""
                 },
                 "bindings": [
                   {
-                    "binding_name": "#hud_subtitle_text_string"
+                    "binding_name": "#hud_subtitle_text_string",
+                    "binding_condition": "always"
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "(((#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string)) - ' stamina_x') + 0)",
+                    "source_property_name": "((#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string)) - ' stamina_x')",
+                    "target_property_name": "#raw_string"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "((#raw_string - '§z' - '§y') + 0)",
+                    "target_property_name": "#raw_val"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(1 - (#raw_string = #memory_raw_string))",
+                    "target_property_name": "#tick_jitter"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "#raw_string",
+                    "target_property_name": "#memory_raw_string"
+                  },
+                  {
+                    "binding_type": "view",
+                    "binding_condition": "always",
+                    "source_property_name": "#raw_val",
                     "target_property_name": "#live_val"
                   },
                   {
@@ -163,9 +198,10 @@
                 "bindings": [
                   {
                     "binding_type": "view",
+                    "binding_condition": "always",
                     "source_control_name": "stamina_animation_host",
                     "resolve_sibling_scope": true,
-                    "source_property_name": "($one - (#min_value * #multiplier))",
+                    "source_property_name": "($one - (#min_value * #multiplier) + (#tick_jitter * 0.0001))",
                     "target_property_name": "#clip_ratio"
                   }
                 ]
