@@ -247,14 +247,15 @@
                 ],
                 "button_mappings": [
                   {
+                    "mapping_type": "pressed",
                     "from_button_id": "button.menu_select",
                     "to_button_id": "button.form_button_click",
                     "button_up_right_of_first_refusal": true
                   },
                   {
+                    "mapping_type": "focused",
                     "from_button_id": "button.menu_ok",
-                    "to_button_id": "button.form_button_click",
-                    "mapping_type": "focused"
+                    "to_button_id": "button.form_button_click"
                   }
                 ],
                 "bindings": [
@@ -361,14 +362,14 @@
     "$size": [16, 16],
     "button_mappings": [
       {
+        "mapping_type": "pressed",
         "from_button_id": "button.menu_select",
-        "to_button_id": "button.menu_exit",
-        "mapping_type": "pressed"
+        "to_button_id": "button.menu_exit"
       },
       {
+        "mapping_type": "focused",
         "from_button_id": "button.menu_ok",
-        "to_button_id": "button.menu_exit",
-        "mapping_type": "focused"
+        "to_button_id": "button.menu_exit"
       }
     ],
     "controls": [

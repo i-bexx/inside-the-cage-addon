@@ -62,8 +62,7 @@
                 "property_bag": {
                   "#multiplier": 0.1,
                   "#memory_val": 10,
-                  "#frozen_val": 10,
-                  "#memory_raw_string": ""
+                  "#frozen_val": 10
                 },
                 "bindings": [
                   {
@@ -72,28 +71,8 @@
                   },
                   {
                     "binding_type": "view",
-                    "source_property_name": "((#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string)) - ' stamina_x')",
-                    "target_property_name": "#raw_string"
-                  },
-                  {
-                    "binding_type": "view",
-                    "source_property_name": "((#raw_string - '§z' - '§y') + 0)",
-                    "target_property_name": "#raw_val"
-                  },
-                  {
-                    "binding_type": "view",
-                    "source_property_name": "(1 - (#raw_string = #memory_raw_string))",
-                    "target_property_name": "#tick_jitter"
-                  },
-                  {
-                    "binding_type": "view",
-                    "source_property_name": "#raw_string",
-                    "target_property_name": "#memory_raw_string"
-                  },
-                  {
-                    "binding_type": "view",
                     "binding_condition": "always",
-                    "source_property_name": "#raw_val",
+                    "source_property_name": "(((#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string)) - ' stamina_x' - '§z' - '§y') + 0)",
                     "target_property_name": "#live_val"
                   },
                   {
@@ -201,7 +180,7 @@
                     "binding_condition": "always",
                     "source_control_name": "stamina_animation_host",
                     "resolve_sibling_scope": true,
-                    "source_property_name": "($one - (#min_value * #multiplier) + (#tick_jitter * 0.0001))",
+                    "source_property_name": "($one - (#min_value * #multiplier))",
                     "target_property_name": "#clip_ratio"
                   }
                 ]
