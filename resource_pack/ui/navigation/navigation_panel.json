@@ -5,7 +5,7 @@
     "type": "panel",
     "size": ["100%", "100%"],
     "controls": [
-      { "@navigation_panel.navigation_panel_child": {} }
+      { "navigation_panel_child@navigation_panel.navigation_panel_child": {} }
     ]
   },
 
@@ -16,14 +16,14 @@
     "anchor_to": "top_right",
     "offset": [-10, 5],
     "controls": [
-      { "@coordinates.coordinates_panel": {} },
+      { "coordinates_panel@coordinates.coordinates_panel": {} },
       {
         "space": {
           "type": "panel",
           "size": [5, 0]
         }
       },
-      { "@compass.dynamic_compass": {} }
+      { "dynamic_compass@compass.dynamic_compass": {} }
     ]
   }
 }

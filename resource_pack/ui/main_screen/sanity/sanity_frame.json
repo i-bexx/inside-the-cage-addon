@@ -5,6 +5,7 @@
     "type": "panel",
     "size": ["100%", "100%"],
     "controls": [
+      { "math_core@sanity_detailed.math_core": {} },
       { "sanity_frame_empty@sanity_detailed.sanity_frame_empty": {} },
       {
         "sanity_frame_1@sanity_detailed.sanity_frame_template": {
@@ -52,17 +53,34 @@
   },
 
 
-  "sanity_frame_empty": {
-    "type": "image",
-    "texture": "textures/ui/mini_player/sanity_frames/0",
-    "size": ["100%", "100%"],
+  "math_core": {
+    "type": "panel",
+    "size": [ 0, 0 ],
+    "property_bag": {
+      "#sanity_string": "sanityUIx"
+    },
     "bindings": [
       {
         "binding_name": "#hud_title_text_string"
       },
       {
         "binding_type": "view",
-        "source_property_name": "((%.9s * #hud_title_text_string = 'sanityUIx') or (%.9s * #hud_title_text_string = ''))",
+        "source_property_name": "(%.9s * #hud_title_text_string)",
+        "target_property_name": "#sanity_string"
+      }
+    ]
+  },
+
+  "sanity_frame_empty": {
+    "type": "image",
+    "texture": "textures/ui/mini_player/sanity_frames/0",
+    "size": ["100%", "100%"],
+    "bindings": [
+      {
+        "binding_type": "view",
+        "resolve_sibling_scope": true,
+        "source_control_name": "math_core",
+        "source_property_name": "((#sanity_string = 'sanityUIx') or (#sanity_string = ''))",
         "target_property_name": "#visible"
       }
     ]
@@ -76,11 +94,10 @@
     "size": ["100%", "100%"],
     "bindings": [
       {
-        "binding_name": "#hud_title_text_string"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(%.9s * #hud_title_text_string = $title_string)",
+        "resolve_sibling_scope": true,
+        "source_control_name": "math_core",
+        "source_property_name": "(#sanity_string = $title_string)",
         "target_property_name": "#visible"
       }
     ]

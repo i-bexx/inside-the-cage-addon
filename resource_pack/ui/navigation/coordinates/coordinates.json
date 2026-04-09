@@ -3,33 +3,56 @@
 
   "coordinates_panel": {
     "type": "panel",
-    "size": ["100%c", "100%c"],
+    "size": [ "100%c", "100%c" ],
     "controls": [
-      { "@coordinates.coordinates_text": {} },
-      { "@coordinates.position_lost_image_container": {} },
-      { "@coordinates.no_coordinates_text": {} }
+      { "math_core@coordinates.math_core": {} },
+      { "coordinates_text@coordinates.coordinates_text": {} },
+      { "position_lost_image_container@coordinates.position_lost_image_container": {} },
+      { "no_coordinates_text@coordinates.no_coordinates_text": {} }
+    ]
+  },
+
+  "math_core": {
+    "type": "panel",
+    "size": [ 0, 0 ],
+    "property_bag": {
+      "#ones_place_result": 1
+    },
+    "bindings": [
+      {
+        "binding_name": "#player_position_visible"
+      },
+      {
+        "binding_type": "collection",
+        "binding_name": "#player_score_sidebar",
+        "binding_collection_name": "scoreboard_scores"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((#player_score_sidebar - '§c') - (((#player_score_sidebar - '§c') / 10) * 10))",
+        "target_property_name": "#ones_place_result"
+      }
     ]
   },
 
   "coordinates_text": {
     "type": "label",
     "text": "#text",
-    "size": ["default", "default"],
+    "size": [ "default", "default" ],
     "anchor_from": "right_middle",
     "anchor_to": "right_middle",
     "shadow": true,
     "bindings": [
       {
-        "binding_name": "#player_position_visible"
-      },
-      {
-        "binding_name": "#player_score_sidebar",
-        "binding_type": "collection",
-        "binding_collection_name": "scoreboard_scores"
-      },
-      {
+        // When using source_control_name, only the bindings inside the element mentioned can be used. Even the bindings inside this element cannot be used
+        // source_control_name can only access the elements in the same layer as this element
+        // For instance, if this element is in outer layer, it can access the elements in outer layer, but not the elements in inner layer nor further out
+        // NOTE: If the bindings inside the parent element (does not matter how outer layer it is) must be used, source_control_name has to be set to the parent element
+        // NOTE: A binding with the binding_type of collection cannot be accesssed with source_control_name, unless a sibling node is being used with resolve_sibling_scope set to true
         "binding_type": "view",
-        "source_property_name": "((#player_position_visible) and ((#player_score_sidebar - §c) - (((#player_score_sidebar - §c) / 10) * 10) = 1))",
+        "resolve_sibling_scope": true,
+        "source_control_name": "math_core",
+        "source_property_name": "(#player_position_visible and (#ones_place_result = 1))",
         "target_property_name": "#visible"
       },
       {
@@ -40,51 +63,51 @@
       }
     ]
   },
+
   "position_lost_image_container": {
     "type": "panel",
-    "size": [120, 20],
+    "size": [ 120, 20 ],
     "anchor_from": "right_middle",
     "anchor_to": "right_middle",
+    "bindings": [
+      {
+        // source_control_name can only access the elements in the same layer as this element
+        // For instance, if this element is in outer layer, it can access the elements in outer layer, but not the elements in inner layer nor further out
+        // NOTE: If the bindings inside the parent element (does not matter how outer layer it is) must be used, source_control_name has to be set to the parent element
+        // NOTE: A binding with the binding_type of collection cannot be accesssed with source_control_name, unless a sibling node is being used with resolve_sibling_scope set to true
+        "binding_type": "view",
+        "resolve_sibling_scope": true,
+        "source_control_name": "math_core",
+        "source_property_name": "(#player_position_visible and (#ones_place_result = 0))",
+        "target_property_name": "#visible"
+      }
+    ],
     "controls": [
       {
         "position_lost_image": {
           "type": "image",
           "texture": "textures/ui/position_lost",
-          "size": ["100%", "100%"],
+          "size": [ "100%", "100%" ],
           "anims": [
-            "@coordinates_animation.position_lost_glitch_size_return", 
+            "@coordinates_animation.position_lost_glitch_size_return",
             "@coordinates_animation.position_lost_glitch_slide_return"  
-          ],
-          "bindings": [
-            {
-              "binding_name": "#player_position_visible"
-            },
-            {
-              "binding_name": "#player_score_sidebar",
-              "binding_type": "collection",
-              "binding_collection_name": "scoreboard_scores"
-            },
-            {
-              "binding_type": "view",
-              "source_property_name": "((#player_position_visible) and ((#player_score_sidebar - §c) - (((#player_score_sidebar - §c) / 10) * 10) = 0))",
-              "target_property_name": "#visible"
-            }
           ]
         }
       }
     ]
   },
+
   "no_coordinates_text": {
     "type": "label",
     "text": "Coordinates turned off",
     "anchor_from": "right_middle",
     "anchor_to": "right_middle",
-    "color": [ 1.0, 0.3, 0.3 ], 
-    "shadow": true, 
-    "alpha": 0.3, 
-    "size": ["default", "default"],
+    "color": [ 1.0, 0.3, 0.3 ],
+    "shadow": true,
+    "alpha": 0.3,
+    "size": [ "default", "default" ],
     "anims": [
-      "@coordinates_animation.no_coordinates_fade_in" 
+      "@coordinates_animation.no_coordinates_fade_in"
     ],
     "bindings": [
       {
@@ -92,7 +115,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(not (#player_position_visible))",
+        "source_property_name": "(not #player_position_visible)",
         "target_property_name": "#visible"
       }
     ]

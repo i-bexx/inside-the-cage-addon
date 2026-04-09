@@ -3,486 +3,223 @@
 
   "compass_direction_p": {
     "type": "panel",
+    "$compass_id|default": " compass_00",
+    "$compass_texture|default": "textures/ui/compass/compass_00",
+    "bindings": [
+      {
+        "binding_name": "#hud_subtitle_text_string"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string))",
+        "target_property_name": "#compass_direction_string"
+      }
+    ],
     "controls": [
-      { "@compass_direction_panel.compass_00": {} },
-      { "@compass_direction_panel.compass_01": {} },
-      { "@compass_direction_panel.compass_02": {} },
-      { "@compass_direction_panel.compass_03": {} },
-      { "@compass_direction_panel.compass_04": {} },
-      { "@compass_direction_panel.compass_05": {} },
-      { "@compass_direction_panel.compass_06": {} },
-      { "@compass_direction_panel.compass_07": {} },
-      { "@compass_direction_panel.compass_08": {} },
-      { "@compass_direction_panel.compass_09": {} },
-      { "@compass_direction_panel.compass_10": {} },
-      { "@compass_direction_panel.compass_11": {} },
-      { "@compass_direction_panel.compass_12": {} },
-      { "@compass_direction_panel.compass_13": {} },
-      { "@compass_direction_panel.compass_14": {} },
-      { "@compass_direction_panel.compass_15": {} },
-      { "@compass_direction_panel.compass_16": {} },
-      { "@compass_direction_panel.compass_17": {} },
-      { "@compass_direction_panel.compass_18": {} },
-      { "@compass_direction_panel.compass_19": {} },
-      { "@compass_direction_panel.compass_20": {} },
-      { "@compass_direction_panel.compass_21": {} },
-      { "@compass_direction_panel.compass_22": {} },
-      { "@compass_direction_panel.compass_23": {} },
-      { "@compass_direction_panel.compass_24": {} },
-      { "@compass_direction_panel.compass_25": {} },
-      { "@compass_direction_panel.compass_26": {} },
-      { "@compass_direction_panel.compass_27": {} },
-      { "@compass_direction_panel.compass_28": {} },
-      { "@compass_direction_panel.compass_29": {} },
-      { "@compass_direction_panel.compass_30": {} },
-      { "@compass_direction_panel.compass_31": {} }
+      {
+        "compass_00@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_00",
+          "$compass_texture": "textures/ui/compass/compass_00"
+        }
+      },
+      {
+        "compass_01@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_01",
+          "$compass_texture": "textures/ui/compass/compass_01"
+        }
+      },
+      {
+        "compass_02@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_02",
+          "$compass_texture": "textures/ui/compass/compass_02"
+        }
+      },
+      {
+        "compass_03@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_03",
+          "$compass_texture": "textures/ui/compass/compass_03"
+        }
+      },
+      {
+        "compass_04@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_04",
+          "$compass_texture": "textures/ui/compass/compass_04"
+        }
+      },
+      {
+        "compass_05@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_05",
+          "$compass_texture": "textures/ui/compass/compass_05"
+        }
+      },
+      {
+        "compass_06@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_06",
+          "$compass_texture": "textures/ui/compass/compass_06"
+        }
+      },
+      {
+        "compass_07@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_07",
+          "$compass_texture": "textures/ui/compass/compass_07"
+        }
+      },
+      {
+        "compass_08@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_08",
+          "$compass_texture": "textures/ui/compass/compass_08"
+        }
+      },
+      {
+        "compass_09@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_09",
+          "$compass_texture": "textures/ui/compass/compass_09"
+        }
+      },
+      {
+        "compass_10@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_10",
+          "$compass_texture": "textures/ui/compass/compass_10"
+        }
+      },
+      {
+        "compass_11@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_11",
+          "$compass_texture": "textures/ui/compass/compass_11"
+        }
+      },
+      {
+        "compass_12@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_12",
+          "$compass_texture": "textures/ui/compass/compass_12"
+        }
+      },
+      {
+        "compass_13@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_13",
+          "$compass_texture": "textures/ui/compass/compass_13"
+        }
+      },
+      {
+        "compass_14@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_14",
+          "$compass_texture": "textures/ui/compass/compass_14"
+        }
+      },
+      {
+        "compass_15@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_15",
+          "$compass_texture": "textures/ui/compass/compass_15"
+        }
+      },
+      {
+        "compass_16@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_16",
+          "$compass_texture": "textures/ui/compass/compass_16"
+        }
+      },
+      {
+        "compass_17@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_17",
+          "$compass_texture": "textures/ui/compass/compass_17"
+        }
+      },
+      {
+        "compass_18@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_18",
+          "$compass_texture": "textures/ui/compass/compass_18"
+        }
+      },
+      {
+        "compass_19@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_19",
+          "$compass_texture": "textures/ui/compass/compass_19"
+        }
+      },
+      {
+        "compass_20@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_20",
+          "$compass_texture": "textures/ui/compass/compass_20"
+        }
+      },
+      {
+        "compass_21@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_21",
+          "$compass_texture": "textures/ui/compass/compass_21"
+        }
+      },
+      {
+        "compass_22@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_22",
+          "$compass_texture": "textures/ui/compass/compass_22"
+        }
+      },
+      {
+        "compass_23@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_23",
+          "$compass_texture": "textures/ui/compass/compass_23"
+        }
+      },
+      {
+        "compass_24@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_24",
+          "$compass_texture": "textures/ui/compass/compass_24"
+        }
+      },
+      {
+        "compass_25@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_25",
+          "$compass_texture": "textures/ui/compass/compass_25"
+        }
+      },
+      {
+        "compass_26@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_26",
+          "$compass_texture": "textures/ui/compass/compass_26"
+        }
+      },
+      {
+        "compass_27@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_27",
+          "$compass_texture": "textures/ui/compass/compass_27"
+        }
+      },
+      {
+        "compass_28@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_28",
+          "$compass_texture": "textures/ui/compass/compass_28"
+        }
+      },
+      {
+        "compass_29@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_29",
+          "$compass_texture": "textures/ui/compass/compass_29"
+        }
+      },
+      {
+        "compass_30@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_30",
+          "$compass_texture": "textures/ui/compass/compass_30"
+        }
+      },
+      {
+        "compass_31@compass_direction_panel.compass_template": {
+          "$compass_id": " compass_31",
+          "$compass_texture": "textures/ui/compass/compass_31"
+        }
+      }
     ]
   },
 
-  "compass_00": {
+  "compass_template": {
     "type": "image",
-    "texture": "textures/ui/compass/compass_00",
+    "texture": "$compass_texture",
     "bindings": [
       {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
+        // Must define the parent node (does not matter how outer layer it is) in source_control_name to access its global bindings
         "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_00' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_00'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_01": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_01", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_01' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_01'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_02": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_02", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_02' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_02'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_03": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_03", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_03' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_03'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_04": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_04", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_04' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_04'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_05": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_05", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_05' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_05'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_06": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_06", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_06' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_06'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_07": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_07", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_07' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_07'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_08": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_08", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_08' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_08'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_09": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_09", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_09' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_09'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_10": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_10", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_10' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_10'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_11": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_11", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_11' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_11'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_12": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_12", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_12' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_12'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_13": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_13", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_13' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_13'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_14": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_14", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_14' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_14'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_15": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_15", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_15' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_15'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_16": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_16", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_16' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_16'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_17": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_17", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_17' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_17'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_18": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_18", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_18' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_18'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_19": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_19", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_19' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_19'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_20": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_20", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_20' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_20'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_21": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_21", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_21' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_21'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_22": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_22", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_22' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_22'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_23": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_23", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_23' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_23'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_24": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_24", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_24' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_24'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_25": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_25", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_25' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_25'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_26": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_26", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_26' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_26'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_27": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_27", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_27' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_27'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_28": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_28", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_28' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_28'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_29": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_29", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_29' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_29'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_30": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_30", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_30' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_30'))",
-        "target_property_name": "#visible"
-      }
-    ]
-  },
-  "compass_31": {
-    "type": "image",
-    "texture": "textures/ui/compass/compass_31", 
-    "bindings": [
-      {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = ' compass_31' or (%.25s * #hud_subtitle_text_string - (%.14s * #hud_subtitle_text_string) = ' compass_31'))",
+        "source_control_name": "compass_direction_p",
+        "source_property_name": "(#compass_direction_string = $compass_id)",
         "target_property_name": "#visible"
       }
     ]

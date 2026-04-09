@@ -8,12 +8,9 @@
     "layer": 4,
     "bindings": [
       {
-        "binding_type": "global",
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(#hud_subtitle_text_string = '' or %.14s * #hud_subtitle_text_string = 'cursorState_zz')",
+        "source_control_name": "math_core",
+        "source_property_name": "(#cursor_string = 'cursorState_zz')",
         "target_property_name": "#visible"
       }
     ]
@@ -28,12 +25,32 @@
     "alpha": 0.5,
     "propagate_alpha": true,
     "controls": [
+      { "math_core@cursors.math_core": {} },
+
       { "cursor_normal@cursors.cursor_normal": {} },
       { "cursor_green@cursors.cursor_green": {} },
       { "cursor_blue@cursors.cursor_blue": {} },
       { "cursor_red@cursors.cursor_red": {} },
 
       { "hitmarker@cursors.hitmarker": {} }
+    ]
+  },
+
+  "math_core": {
+    "type": "panel",
+    "size": [ 0, 0 ],
+    "property_bag": {
+      "#cursor_string": "cursorState_zz"
+    },
+    "bindings": [
+      {
+        "binding_name": "#hud_subtitle_text_string"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(%.14s * #hud_subtitle_text_string)",
+        "target_property_name": "#cursor_string"
+      }
     ]
   },
 
@@ -46,11 +63,10 @@
     "texture": "textures/ui/gun_cursors/hitmarker",
     "bindings": [
       {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_x3')",
+        "resolve_sibling_scope": true,
+        "source_control_name": "math_core",
+        "source_property_name": "(#cursor_string = 'cursorState_x3')",
         "target_property_name": "#visible"
       }
     ]
@@ -64,11 +80,10 @@
     "texture": "textures/ui/gun_cursors/cursor_normal",
     "bindings": [
       {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_00' or %.14s * #hud_subtitle_text_string = 'cursorState_x0')",
+        "resolve_sibling_scope": true,
+        "source_control_name": "math_core",
+        "source_property_name": "(#cursor_string = 'cursorState_00' or #cursor_string = 'cursorState_x0')",
         "target_property_name": "#visible"
       }
     ]
@@ -82,11 +97,10 @@
     "texture": "textures/ui/gun_cursors/cursor_green",
     "bindings": [
       {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_01' or %.14s * #hud_subtitle_text_string = 'cursorState_x1')",
+        "resolve_sibling_scope": true,
+        "source_control_name": "math_core",
+        "source_property_name": "(#cursor_string = 'cursorState_01' or #cursor_string = 'cursorState_x1')",
         "target_property_name": "#visible"
       }
     ]
@@ -100,11 +114,10 @@
     "texture": "textures/ui/gun_cursors/cursor_blue",
     "bindings": [
       {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_02' or %.14s * #hud_subtitle_text_string = 'cursorState_x2')",
+        "resolve_sibling_scope": true,
+        "source_control_name": "math_core",
+        "source_property_name": "(#cursor_string = 'cursorState_02' or #cursor_string = 'cursorState_x2')",
         "target_property_name": "#visible"
       }
     ]
@@ -118,11 +131,10 @@
     "texture": "textures/ui/gun_cursors/cursor_red",
     "bindings": [
       {
-        "binding_name": "#hud_subtitle_text_string"
-      },
-      {
         "binding_type": "view",
-        "source_property_name": "(%.14s * #hud_subtitle_text_string = 'cursorState_03' or %.14s * #hud_subtitle_text_string = 'cursorState_x3')",
+        "resolve_sibling_scope": true,
+        "source_control_name": "math_core",
+        "source_property_name": "(#cursor_string = 'cursorState_03' or #cursor_string = 'cursorState_x3')",
         "target_property_name": "#visible"
       }
     ]

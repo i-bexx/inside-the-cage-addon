@@ -3,7 +3,7 @@
 
   "mini_player_container": {
     "type": "panel",
-    "size": ["25%", "100%x"],
+    "size": [ "100%y", "20%" ],
     "controls": [
       {
         "mini_player_stack@mini_player.mini_player_stack": {}
@@ -14,16 +14,16 @@
   "mini_player_stack": {
     "type": "stack_panel",
     "orientation": "horizontal",
-    "size": ["100%", "100%"],
+    "size": [ "100%", "100%" ],
     "anchor_from": "top_left",
     "anchor_to": "top_left",
-    "offset": [5, 5],
+    "offset": [ 5, 5 ],
     "controls": [
       { "mini_player_panel@mini_player.mini_player_panel": {} },
       {
         "space": {
           "type": "panel",
-          "size": [5, 0]
+          "size": [ 5, 0 ]
         }
       },
       {
@@ -46,7 +46,7 @@
 
   "mini_player_panel": {
     "type": "panel",
-    "size": ["100%", "100%"],
+    "size": [ "100%", "100%" ],
     "clips_children": true,
     "controls": [
       {
@@ -60,7 +60,7 @@
 
   "mini_player_background": {
     "type": "image",
-    "size": ["100%", "100%"],
+    "size": [ "100%", "100%" ],
     "texture": "textures/ui/mini_player/background",
     "alpha": 0.4,
     "clips_children": true,
@@ -74,7 +74,7 @@
   "mini_player_renderer": {
     "type": "custom",
     "renderer": "live_player_renderer",
-    "size": ["100% - 20px", "100% - 20px"],
-    "offset": [0, 5]
+    "size": [ "85% - 20px", "85% - 20px" ],
+    "offset": [ 0, 5 ]
   }
 }
