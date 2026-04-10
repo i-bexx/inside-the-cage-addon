@@ -20,7 +20,7 @@
 		"animation.gun.aim": {
 			"timeline": {
 				"0.0": [
-					"/playsound gun_aim @s[scores={can_play_aiming_sound=1}]",
+					"/execute if score @s can_play_aiming_sound matches 1 run playsound gun_aim @s",
 					"/scoreboard players set @s is_shooting 0"
 				]
 			},
