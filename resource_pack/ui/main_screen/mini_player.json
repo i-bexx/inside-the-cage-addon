@@ -35,7 +35,7 @@
               "sanity_screen@sanity_information_text.sanity_screen": {
                 "anchor_from": "top_middle",
                 "anchor_to": "top_middle"
-              } 
+              }
             }
           ]
         }
@@ -74,7 +74,7 @@
   "mini_player_renderer": {
     "type": "custom",
     "renderer": "live_player_renderer",
-    "size": [ "85% - 20px", "85% - 20px" ],
+    "size": [ "85%", "85%" ],
     "offset": [ 0, 5 ]
   }
 }

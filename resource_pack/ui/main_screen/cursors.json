@@ -10,7 +10,7 @@
       {
         "binding_type": "view",
         "source_control_name": "math_core",
-        "source_property_name": "(#cursor_string = 'cursorState_zz')",
+        "source_property_name": "(#cursor_string = '' or #cursor_string = 'cursorState_zz')",
         "target_property_name": "#visible"
       }
     ]
