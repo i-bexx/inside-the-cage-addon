@@ -5,6 +5,7 @@ import { getStaminaObjective, getStaminaLimitObjective, getObjectiveScore } from
 
 const playerCompassStates = new Map();
 let staminaTick = 0;
+let staminaTickTimerActive = false;
 
 // ----- MAIN FUNCTION -----
 
@@ -61,8 +62,10 @@ function fastUiTick() {
       player.removeTag("updateSanityUI");
     }
   }
-  if (staminaTick % 2 == 0) staminaTick++;
-    else staminaTick--;
+  if (!staminaTickTimerActive) {
+    staminaTickTimerActive = true;
+    system.runTimeout(staminaTickTimer, 40);
+  }
 }
 
 // ----- HELPER FUNCTIONS -----
@@ -84,6 +87,14 @@ function compassString(player) {
 
   return newCompassString;
 }
+
+function staminaTickTimer() {
+  if (staminaTick % 2 == 0) staminaTick++;
+  else staminaTick--;
+
+  staminaTickTimerActive = false;
+}
+
 
 export function getCompassStates() {
   return playerCompassStates;

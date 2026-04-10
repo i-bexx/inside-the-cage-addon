@@ -9,7 +9,6 @@
     ]
   },
 
-
   "stamina_logic_core": {
     "type": "panel",
     "size": [ 84, 12 ],
@@ -18,173 +17,141 @@
     "offset": [ 0, -45 ],
     "$one": 1.0,
     "controls": [
-      {
-        "stamina_container": {
-          "type": "image",
-          "layer": 0,
-          "texture": "textures/ui/stamina_bar/stamina_container",
-          "size": [ "100%", "100%" ],
-          "bindings": [
-            {
-              "binding_name": "(not #is_spectator_mode)",
-              "binding_name_override": "#visible"
-            }
-          ]
-        }
-      },
-      {
-        "stamina_background": {
-          "type": "image",
-          "layer": 0,
-          "texture": "textures/ui/Black",
-          "alpha": 0.16,
-          "size": [ "95%", "45%" ],
-          "bindings": [
-            {
-              "binding_name": "(not #is_spectator_mode)",
-              "binding_name_override": "#visible"
-            }
-          ]
-        }
-      },
+      { "stamina_container@stamina_bar.stamina_container": {} },
+      { "stamina_background@stamina_bar.stamina_background": {} },
       {
         "stamina_bar_panel": {
           "type": "panel",
           "layer": 1,
           "size": [ "94%", "45%" ],
           "controls": [
+            { "stamina_animation_host@stamina_bar.stamina_animation_host": {} },
+            { "stamina_live_fill@stamina_bar.stamina_live_fill": {} }
+          ]
+        }
+      }
+    ]
+  },
+
+
+
+  "stamina_animation_host": {
+    "type": "panel",
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "size": [ "100%", "100%" ],
+    "property_bag": {
+      "#multiplier": 0.1,
+      "#memory_val": 10,
+      "#frozen_val": 10,
+      "#memory_val_string": ""
+    },
+    "bindings": [
+      {
+        "binding_name": "#hud_subtitle_text_string",
+        "binding_condition": "always"
+      },
+      {
+        "binding_type": "view",
+        "binding_condition": "always",
+        "source_property_name": "(#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string))",
+        "target_property_name": "#live_val_string"
+      },
+      {
+        "binding_type": "view",
+        "binding_condition": "always",
+        "source_property_name": "(((#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string)) - ' stamina_x' - '§z' - '§y') + 0)",
+        "target_property_name": "#live_val"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(1 - (#live_val_string = #memory_val_string))",
+        "target_property_name": "#is_changed"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((#memory_val * #is_changed) + (#live_val * (1 - #is_changed)))",
+        "target_property_name": "#new_value"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((#memory_val * #is_changed) + (#frozen_val * (1 - #is_changed)))",
+        "target_property_name": "#prev_value"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((#memory_val * #is_changed) + (#frozen_val * (1 - #is_changed)))",
+        "target_property_name": "#frozen_val"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "#live_val",
+        "target_property_name": "#memory_val"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "#live_val_string",
+        "target_property_name": "#memory_val_string"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(#new_value + (#prev_value - #new_value) * (#prev_value < #new_value))",
+        "target_property_name": "#min_value"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((#new_value + #prev_value - #min_value) * #multiplier)",
+        "target_property_name": "#max_value"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "#max_value",
+        "target_property_name": "#size_binding_x"
+      }
+    ],
+    "controls": [
+      {
+        "stamina_gain_collection": {
+          "type": "collection_panel",
+          "$ignore_trail": true,
+          "$size_anim": "('@stamina_bar_anims.stamina_gain_anim')",
+          "factory": {
+            "name": "stamina_gain_factory",
+            "control_name": "stamina_bar.animated_bar_image"
+          },
+          "bindings": [
             {
-              "stamina_animation_host": {
-                "type": "panel",
-                "anchor_from": "top_left",
-                "anchor_to": "top_left",
-                "size": [ "100%", "100%" ],
-                "property_bag": {
-                  "#multiplier": 0.1,
-                  "#memory_val": 10,
-                  "#frozen_val": 10
-                },
-                "bindings": [
-                  {
-                    "binding_name": "#hud_subtitle_text_string",
-                    "binding_condition": "always"
-                  },
-                  {
-                    "binding_type": "view",
-                    "binding_condition": "always",
-                    "source_property_name": "(((#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string)) - ' stamina_x' - '§z' - '§y') + 0)",
-                    "target_property_name": "#live_val"
-                  },
-                  {
-                    "binding_type": "view",
-                    "source_property_name": "(1 - (#live_val = #memory_val))",
-                    "target_property_name": "#is_changed"
-                  },
-                  {
-                    "binding_type": "view",
-                    "source_property_name": "((#memory_val * #is_changed) + (#live_val * (1 - #is_changed)))",
-                    "target_property_name": "#new_value"
-                  },
-                  {
-                    "binding_type": "view",
-                    "source_property_name": "((#memory_val * #is_changed) + (#frozen_val * (1 - #is_changed)))",
-                    "target_property_name": "#prev_value"
-                  },
-                  {
-                    "binding_type": "view",
-                    "source_property_name": "((#memory_val * #is_changed) + (#frozen_val * (1 - #is_changed)))",
-                    "target_property_name": "#frozen_val"
-                  },
-                  {
-                    "binding_type": "view",
-                    "source_property_name": "#live_val",
-                    "target_property_name": "#memory_val"
-                  },
-                  {
-                    "binding_type": "view",
-                    "source_property_name": "(#new_value + (#prev_value - #new_value) * (#prev_value < #new_value))",
-                    "target_property_name": "#min_value"
-                  },
-                  {
-                    "binding_type": "view",
-                    "source_property_name": "((#new_value + #prev_value - #min_value) * #multiplier)",
-                    "target_property_name": "#max_value"
-                  },
-                  {
-                    "binding_type": "view",
-                    "source_property_name": "#max_value",
-                    "target_property_name": "#size_binding_x"
-                  }
-                ],
-                "controls": [
-                  {
-                    "stamina_gain_collection": {
-                      "type": "collection_panel",
-                      "$ignore_trail": true,
-                      "$size_anim": "('@stamina_bar_anims.stamina_gain_anim')",
-                      "factory": {
-                        "name": "stamina_gain_factory",
-                        "control_name": "stamina_bar.animated_bar_image"
-                      },
-                      "bindings": [
-                        {
-                          // Activates ONLY if Stamina increases
-                          "binding_type": "view",
-                          "source_control_name": "stamina_animation_host",
-                          "resolve_sibling_scope": true,
-                          "source_property_name": "((#new_value > #prev_value) * 1)",
-                          "target_property_name": "#collection_length"
-                          // #collection_length prevents the multiple elements from spawning
-                          // When stamina value changes, #new_value and #prev_value becomes equal for a short moment. Which sets the #collection_length to 0, deleting the element previously spawned
-                        }
-                      ]
-                    }
-                  },
-                  {
-                    "stamina_loss_collection": {
-                      "type": "collection_panel",
-                      "$ignore_trail": false,
-                      "$size_anim": "('@stamina_bar_anims.stamina_loss_anim')",
-                      "factory": {
-                        "name": "stamina_loss_factory",
-                        "control_name": "stamina_bar.animated_bar_image"
-                      },
-                      "bindings": [
-                        {
-                          // Activates ONLY if Stamina decreases
-                          "binding_type": "view",
-                          "source_control_name": "stamina_animation_host",
-                          "resolve_sibling_scope": true,
-                          "source_property_name": "((#prev_value > #new_value) * 1)",
-                          "target_property_name": "#collection_length"
-                          // #collection_length prevents the multiple elements from spawning
-                          // When stamina value changes, #new_value and #prev_value becomes equal for a short moment. Which sets the #collection_length to 0, deleting the element previously spawned
-                        }
-                      ]
-                    }
-                  }
-                ]
-              }
-            },
+              // Activates ONLY if Stamina increases
+              "binding_type": "view",
+              "source_control_name": "stamina_animation_host",
+              "resolve_sibling_scope": true,
+              "source_property_name": "((#new_value > #prev_value) * 1)",
+              "target_property_name": "#collection_length"
+              // #collection_length prevents the multiple elements from spawning
+              // When stamina value changes, #new_value and #prev_value becomes equal for a short moment. Which sets the #collection_length to 0, deleting the element previously spawned
+            }
+          ]
+        }
+      },
+      {
+        "stamina_loss_collection": {
+          "type": "collection_panel",
+          "$ignore_trail": false,
+          "$size_anim": "('@stamina_bar_anims.stamina_loss_anim')",
+          "factory": {
+            "name": "stamina_loss_factory",
+            "control_name": "stamina_bar.animated_bar_image"
+          },
+          "bindings": [
             {
-              "stamina_live_fill": {
-                "type": "image",
-                "layer": 1,
-                "texture": "textures/ui/stamina_bar/stamina_fill",
-                "size": [ "100%", "100%" ],
-                "clip_direction": "left",
-                "clip_pixelperfect": false,
-                "bindings": [
-                  {
-                    "binding_type": "view",
-                    "binding_condition": "always",
-                    "source_control_name": "stamina_animation_host",
-                    "resolve_sibling_scope": true,
-                    "source_property_name": "($one - (#min_value * #multiplier))",
-                    "target_property_name": "#clip_ratio"
-                  }
-                ]
-              }
+              // Activates ONLY if Stamina decreases
+              "binding_type": "view",
+              "source_control_name": "stamina_animation_host",
+              "resolve_sibling_scope": true,
+              "source_property_name": "((#prev_value > #new_value) * 1)",
+              "target_property_name": "#collection_length"
+              // #collection_length prevents the multiple elements from spawning
+              // When stamina value changes, #new_value and #prev_value becomes equal for a short moment. Which sets the #collection_length to 0, deleting the element previously spawned
             }
           ]
         }
@@ -192,6 +159,53 @@
     ]
   },
 
+  "stamina_live_fill": {
+    "type": "image",
+    "layer": 1,
+    "texture": "textures/ui/stamina_bar/stamina_fill",
+    "size": [ "100%", "100%" ],
+    "clip_direction": "left",
+    "clip_pixelperfect": false,
+    "bindings": [
+      {
+        "binding_type": "view",
+        "binding_condition": "always",
+        "source_control_name": "stamina_animation_host",
+        "resolve_sibling_scope": true,
+        "source_property_name": "($one - (#min_value * #multiplier))",
+        "target_property_name": "#clip_ratio"
+      }
+    ]
+  },
+
+
+
+  "stamina_container": {
+    "type": "image",
+    "layer": 0,
+    "texture": "textures/ui/stamina_bar/stamina_container",
+    "size": [ "100%", "100%" ],
+    "bindings": [
+      {
+        "binding_name": "(not #is_spectator_mode)",
+        "binding_name_override": "#visible"
+      }
+    ]
+  },
+
+  "stamina_background": {
+    "type": "image",
+    "layer": 0,
+    "texture": "textures/ui/Black",
+    "alpha": 0.16,
+    "size": [ "95%", "45%" ],
+    "bindings": [
+      {
+        "binding_name": "(not #is_spectator_mode)",
+        "binding_name_override": "#visible"
+      }
+    ]
+  },
 
   "animated_bar_image": {
     "type": "panel",
