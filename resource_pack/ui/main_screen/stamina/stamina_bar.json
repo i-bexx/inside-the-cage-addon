@@ -34,14 +34,15 @@
   },
 
 
-
   "stamina_animation_host": {
     "type": "panel",
     "anchor_from": "top_left",
     "anchor_to": "top_left",
     "size": [ "100%", "100%" ],
     "property_bag": {
-      "#multiplier": 0.1,
+      "#multiplier_conclusion": 0.1,
+      "#default_multiplier": 0.1,
+      "#changed_multiplier": 0.05,
       "#memory_val": 10,
       "#frozen_val": 10,
       "#memory_val_string": ""
@@ -60,51 +61,72 @@
       {
         "binding_type": "view",
         "binding_condition": "always",
-        "source_property_name": "(((#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string)) - ' stamina_x' - '§z' - '§y') + 0)",
+        "source_property_name": "(%.10s * #live_val_string = ' stamina_y')",
+        "target_property_name": "#limit_increased"
+      },
+      {
+        "binding_type": "view",
+        "binding_condition": "always",
+        "source_property_name": "(#default_multiplier * (1 - #limit_increased) + #changed_multiplier * #limit_increased)",
+        "target_property_name": "#multiplier_conclusion"
+      },
+      {
+        "binding_type": "view",
+        "binding_condition": "always",
+        "source_property_name": "(((#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string)) - ' stamina_x' - ' stamina_y' - '§z' - '§y') + 0)",
         "target_property_name": "#live_val"
       },
       {
         "binding_type": "view",
+        "binding_condition": "always",
         "source_property_name": "(1 - (#live_val_string = #memory_val_string))",
         "target_property_name": "#is_changed"
       },
       {
         "binding_type": "view",
+        "binding_condition": "always",
         "source_property_name": "((#memory_val * #is_changed) + (#live_val * (1 - #is_changed)))",
         "target_property_name": "#new_value"
       },
       {
         "binding_type": "view",
+        "binding_condition": "always",
         "source_property_name": "((#memory_val * #is_changed) + (#frozen_val * (1 - #is_changed)))",
         "target_property_name": "#prev_value"
       },
       {
         "binding_type": "view",
-        "source_property_name": "((#memory_val * #is_changed) + (#frozen_val * (1 - #is_changed)))",
+        "binding_condition": "always",
+        "source_property_name": "#prev_value",
         "target_property_name": "#frozen_val"
       },
       {
         "binding_type": "view",
+        "binding_condition": "always",
         "source_property_name": "#live_val",
         "target_property_name": "#memory_val"
       },
       {
         "binding_type": "view",
+        "binding_condition": "always",
         "source_property_name": "#live_val_string",
         "target_property_name": "#memory_val_string"
       },
       {
         "binding_type": "view",
+        "binding_condition": "always",
         "source_property_name": "(#new_value + (#prev_value - #new_value) * (#prev_value < #new_value))",
         "target_property_name": "#min_value"
       },
       {
         "binding_type": "view",
-        "source_property_name": "((#new_value + #prev_value - #min_value) * #multiplier)",
+        "binding_condition": "always",
+        "source_property_name": "((#new_value + #prev_value - #min_value) * #multiplier_conclusion)",
         "target_property_name": "#max_value"
       },
       {
         "binding_type": "view",
+        "binding_condition": "always",
         "source_property_name": "#max_value",
         "target_property_name": "#size_binding_x"
       }
@@ -123,6 +145,7 @@
             {
               // Activates ONLY if Stamina increases
               "binding_type": "view",
+              "binding_condition": "always",
               "source_control_name": "stamina_animation_host",
               "resolve_sibling_scope": true,
               "source_property_name": "((#new_value > #prev_value) * 1)",
@@ -146,6 +169,7 @@
             {
               // Activates ONLY if Stamina decreases
               "binding_type": "view",
+              "binding_condition": "always",
               "source_control_name": "stamina_animation_host",
               "resolve_sibling_scope": true,
               "source_property_name": "((#prev_value > #new_value) * 1)",
@@ -172,12 +196,11 @@
         "binding_condition": "always",
         "source_control_name": "stamina_animation_host",
         "resolve_sibling_scope": true,
-        "source_property_name": "($one - (#min_value * #multiplier))",
+        "source_property_name": "($one - (#min_value * #multiplier_conclusion))",
         "target_property_name": "#clip_ratio"
       }
     ]
   },
-
 
 
   "stamina_container": {
