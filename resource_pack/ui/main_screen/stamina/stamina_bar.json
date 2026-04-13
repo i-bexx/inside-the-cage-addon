@@ -55,13 +55,13 @@
       {
         "binding_type": "view",
         "binding_condition": "always",
-        "source_property_name": "(#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string))",
+        "source_property_name": "(%.39s * #hud_subtitle_text_string - (%.26s * #hud_subtitle_text_string))",
         "target_property_name": "#live_val_string"
       },
       {
         "binding_type": "view",
         "binding_condition": "always",
-        "source_property_name": "(%.10s * #live_val_string = ' stamina_y')",
+        "source_property_name": "(%.10s * #live_val_string = 'stamina_y')",
         "target_property_name": "#limit_increased"
       },
       {
@@ -73,7 +73,7 @@
       {
         "binding_type": "view",
         "binding_condition": "always",
-        "source_property_name": "(((#hud_subtitle_text_string - (%.25s * #hud_subtitle_text_string)) - ' stamina_x' - ' stamina_y' - '§z' - '§y') + 0)",
+        "source_property_name": "(((%.39s * #hud_subtitle_text_string - (%.26s * #hud_subtitle_text_string)) - 'stamina_x' - 'stamina_y' - '§z' - '§y') + 0)",
         "target_property_name": "#live_val"
       },
       {

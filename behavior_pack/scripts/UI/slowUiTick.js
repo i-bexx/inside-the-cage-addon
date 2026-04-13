@@ -14,7 +14,7 @@ export function slowUiTick() {
         } else uiString = "sanityUIx"
         
         if (player.hasTag("hasNotification")) {
-            uiString += " new_notification";
+            uiString += "\nnew_notification";
         }
         player.onScreenDisplay.setTitle(uiString);
 

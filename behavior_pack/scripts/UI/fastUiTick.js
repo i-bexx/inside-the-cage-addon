@@ -31,9 +31,9 @@ function fastUiTick() {
     if (compassState.shouldCompassShown) {
         player.setDynamicProperty("compassShowing", true);
         playerCompassStates.set(player.id, compassState.compassString);
-        uiString += ` ${compassState.compassString}`;
+        uiString += `\n${compassState.compassString}`;
     }
-    else uiString += " compass_zz";
+    else uiString += "\ncompass_zz";
     
 
     // Stamina state
@@ -128,8 +128,8 @@ function staminaString(player) {
 
   playerStamina = String(playerStamina).padStart(2, '0');
 
-  if (playerStaminaLimit == 10) return ` stamina_x${playerStamina}${staminaTickString}`;
-  else if (playerStaminaLimit == 20) return ` stamina_y${playerStamina}${staminaTickString}`;
+  if (playerStaminaLimit == 10) return `\nstamina_x${playerStamina}${staminaTickString}`;
+  else if (playerStaminaLimit == 20) return `\nstamina_y${playerStamina}${staminaTickString}`;
 }
 
 function staminaTickTimer() {
