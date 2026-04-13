@@ -32,7 +32,7 @@
       { "cursor_blue@cursors.cursor_blue": {} },
       { "cursor_red@cursors.cursor_red": {} },
 
-      { "hitmarker@cursors.hitmarker": {} }
+      { "shoot_panel@cursors.shoot_panel": {} }
     ]
   },
 
@@ -50,24 +50,6 @@
         "binding_type": "view",
         "source_property_name": "(%.14s * #hud_subtitle_text_string)",
         "target_property_name": "#cursor_string"
-      }
-    ]
-  },
-
-  "hitmarker": {
-    "type": "image",
-    "size": [44, 44],
-    "offset": [-1, 5],
-    "anchor_from": "center",
-    "anchor_to": "center",
-    "texture": "textures/ui/gun_cursors/hitmarker",
-    "bindings": [
-      {
-        "binding_type": "view",
-        "resolve_sibling_scope": true,
-        "source_control_name": "math_core",
-        "source_property_name": "(#cursor_string = 'cursorState_x3')",
-        "target_property_name": "#visible"
       }
     ]
   },
@@ -134,9 +116,77 @@
         "binding_type": "view",
         "resolve_sibling_scope": true,
         "source_control_name": "math_core",
-        "source_property_name": "(#cursor_string = 'cursorState_03' or #cursor_string = 'cursorState_x3')",
+        "source_property_name": "(#cursor_string = 'cursorState_03')",
         "target_property_name": "#visible"
       }
     ]
+  },
+
+
+  "shoot_panel": {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "bindings": [
+      {
+        "binding_type": "view",
+        "binding_condition": "always",
+        "resolve_sibling_scope": true,
+        "source_control_name": "math_core",
+        "source_property_name": "(#cursor_string = 'cursorState_03' or #cursor_string = 'cursorState_x3')",
+        "target_property_name": "#visible"
+      }
+    ],
+    "controls": [
+      {
+        "factory": {
+          "type": "collection_panel",
+          "factory": {
+            "name": "hitmarker",
+            "control_name": "cursors.hitmarker"
+          },
+          "bindings": [
+            {
+              "binding_type": "view",
+              "binding_condition": "always",
+              "source_control_name": "math_core",
+              "source_property_name": "((#cursor_string = 'cursorState_x3') * 1)",
+              "target_property_name": "#collection_length"
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "hitmarker": {
+    "type": "image",
+    "size": [44, 44],
+    "offset": [0, 1],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "texture": "textures/ui/gun_cursors/hitmarker",
+    "uv": [ 0, 0 ],
+    "uv_size": [ 256, 256 ],
+    "anims": [ "@cursors.hitmarker_flipbook_anim" ]
+  },
+
+  "hitmarker_flipbook_anim": {
+    "anim_type": "flip_book",
+    "initial_uv": [ 0, 0 ],
+    "frame_count": 12,
+    "frame_step": 256,
+    "fps": 60,
+    "reversible": false,
+    "next": "@cursors.hitmarker_fade_out_anim"
+  },
+
+  "hitmarker_fade_out_anim": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 0.2,
+    "from": 1.0,
+    "to": 0.0
   }
 }
