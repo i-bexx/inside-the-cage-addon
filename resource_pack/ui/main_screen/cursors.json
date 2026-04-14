@@ -18,10 +18,9 @@
 
   "gun_cursor_states": {
     "type": "panel",
-    "size": [7, 7],
+    "size": [ 7, 7 ],
     "anchor_from": "center",
     "anchor_to": "center",
-    "offset": [0, -2],
     "alpha": 0.5,
     "propagate_alpha": true,
     "controls": [
@@ -173,7 +172,6 @@
 
   "hitmarker_flipbook_anim": {
     "anim_type": "flip_book",
-    "initial_uv": [ 0, 0 ],
     "frame_count": 12,
     "frame_step": 256,
     "fps": 60,

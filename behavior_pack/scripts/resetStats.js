@@ -131,6 +131,7 @@ export function resetPlayerDynamicPropertyData(player) {
   player.setDynamicProperty("lookingCooldown", false);
   player.setDynamicProperty("notLookingCooldown", false);
   player.setDynamicProperty("nowPlayerWillGetNoSignal", false);
+  player.setDynamicProperty("isShooting", false);
 }
 
 export function clearPlayerMaps(playerId) { // Clears maps of player

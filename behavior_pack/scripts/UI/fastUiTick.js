@@ -4,6 +4,7 @@ import { slowUiTick } from "./slowUiTick";
 import { getStaminaObjective, getStaminaLimitObjective, getObjectiveScore } from "../scoreboards";
 
 const playerCompassStates = new Map();
+
 let staminaTick = 0;
 let staminaTickTimerActive = false;
 
@@ -77,7 +78,7 @@ function getCursorState(player) {
   const isShooting = player.getComponent("variant").value == 5;
 
   // Set the string
-  if (isShooting) cursorState.cursorString = shootingCursorString(player);
+  if (isShooting || player.getDynamicProperty("isShooting")) cursorState.cursorString = shootingCursorString(player);
   else cursorState.cursorString = cursorString(player);
 
   return cursorState;
@@ -98,12 +99,16 @@ function getCompassState(player) {
 
 // -----  OTHER HELPER FUNCTIONS -----
 
-function cursorString(player) {
-  return "cursorState_0" + player.getComponent("skin_id").value.toString();
-}
+function cursorString(player) { return "cursorState_0" + player.getComponent("skin_id").value.toString(); }
 
 function shootingCursorString(player) {
+  if (!player.getDynamicProperty("isShooting")) shootingCursorCountdown(player);
   return "cursorState_x" + player.getComponent("skin_id").value.toString();
+}
+
+function shootingCursorCountdown(player) {
+  player.setDynamicProperty("isShooting", true);
+  system.runTimeout(() => player.setDynamicProperty("isShooting", false), 2);
 }
 
 function compassString(player) {
@@ -140,9 +145,8 @@ function staminaTickTimer() {
 }
 
 
-export function getCompassStates() {
-  return playerCompassStates;
-}
+export function getCompassStates() { return playerCompassStates; }
+export function getPlayerShotMap() { return playerShotMap; }
 
 // ----- RUN MAIN FUNCTION -----
 
