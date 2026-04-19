@@ -121,6 +121,81 @@
     ]
   },
 
+  "grid_item_for_inventory@common.container_item": {
+    "$item_collection_name": "inventory_items",
+    "$button_ref": "common.gray_slot_button",
+    "$item_renderer": "common.empty_panel",
+    "$hide_white_border_slot": true
+  },
+
+  "grid_item_for_hotbar@common.container_item": {
+    "$item_collection_name": "hotbar_items",
+    "$button_ref": "common.gray_slot_button",
+    "$item_renderer": "common.empty_panel",
+    "$hide_white_border_slot": true
+  },
+
+  "hotbar_grid_template": {
+    "type": "grid",
+    "size": [ 162, 18 ],
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": [ 0, -5 ],
+    "grid_dimensions": [ 9, 1 ],
+    "grid_item_template": "common.grid_item_for_hotbar",
+    "collection_name": "hotbar_items"
+  },
+
+  "inventory_panel": {
+    "type": "panel",
+    "size": [ 88, 83 ],
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "controls": [
+      {
+        "inventory_grid": {
+          "type": "grid",
+          "size": [ 162, 54 ],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [ 0, -26 ],
+          "grid_dimensions": [ 9, 3 ],
+          "grid_item_template": "common.grid_item_for_inventory",
+          "collection_name": "inventory_items"
+        }
+      }
+    ]
+  },
+
+  // Bottom half of ui, inventory panel
+  "inventory_panel_bottom_half": {
+    "type": "panel",
+    "size": [ "100%", "50%" ],
+    "anchor_from": "left_middle",
+    "anchor_to": "top_left",
+    "controls": [
+      { "inventory_panel@inventory_panel": {} }
+    ]
+  },
+
+  "inventory_panel_bottom_half_with_label@inventory_panel_bottom_half": {
+    "anchor_from": "bottom_left",
+    "anchor_to": "bottom_left",
+    "size": [ "100%", 93 ],
+    "controls": [
+      { "inventory_panel@inventory_panel": {} },
+      {
+        "inventory_label@section_heading_label": {
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [ 7, 3 ],
+          "layer": 2,
+          "text": "container.inventory"
+        }
+      }
+    ]
+  },
+
   "item_renderer": {
     "type": "custom",
     "renderer": "inventory_item_renderer",
