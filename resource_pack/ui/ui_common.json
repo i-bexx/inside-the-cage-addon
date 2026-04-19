@@ -436,6 +436,15 @@
     ]
   },
 
+  "hover_text": {
+    "$hover_text_max_width|default": 0, // A value greater than zero will result in line breaks being added to limit width
+    "type": "custom",
+    "renderer": "hover_text_renderer",
+    "hover_text_max_width": "$hover_text_max_width",
+    "layer": 5,
+    "allow_clipping": false
+  },
+
   "highlight_slot_panel": {
     "type": "panel",
     "$hide_white_border_slot|default": false,
