@@ -1,0 +1,68 @@
+{
+  "namespace": "crafting_pocket",
+
+  "hotbar_panel": {
+    "type": "input_panel",
+    "size": [ 260, 36 ],
+    "layer": 5,
+    "controls": [
+      {
+        "bg@common.common_panel": {
+          "$show_close_button": false
+        }
+      },
+      {
+        "hotbar_grid": {
+          "type": "grid",
+          "size": [ 252, 28 ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "grid_dimensions": [ 9, 1 ],
+          "grid_item_template": "crafting_pocket.hotbar_grid_item",
+          "collection_name": "hotbar_items"
+        }
+      }
+    ]
+  },
+
+  "hotbar_grid_item@common.pocket_ui_container_item": {
+    "$item_collection_name": "hotbar_items",
+    "size": [ 28, 28 ],
+    "$cell_image_size": [ 28, 28 ],
+    "$item_renderer_panel_size": [ 28, 28 ],
+    "$item_renderer_size": [ 24, 24 ],
+    "$durability_bar_size": [ 18, 1 ],
+    "$durability_bar_offset": [ 0, 8 ],
+    "$button_ref": "common.gray_slot_button",
+    "$item_renderer": "common.empty_panel",
+    "$background_images": "crafting.container_cell_images"
+  },
+
+  
+
+  "grid_item_for_inventory@common.grid_item_for_inventory": {
+    "$scrolling_grid_item_size|default": [ 18, 18 ],
+    "size": "$scrolling_grid_item_size",
+    "$button_ref": "common.gray_slot_button",
+    "$item_renderer": "common.empty_panel",
+    "$background_images": "crafting.container_cell_images"
+  },
+
+  "survival_inventory_grid@crafting.scroll_grid_panel": {
+    "$grid_rescaling_type": "horizontal",
+    "$grid_item_template": "crafting_pocket.grid_item_for_inventory"
+  },
+
+  "survival_scroll_panel@crafting_pocket.scroll_panel_pocket": {
+    "$scrolling_content": "crafting_pocket.survival_inventory_grid",
+    "$collection_name": "inventory_items"
+  },
+
+  "inventory_tab_content@crafting.tab_content": {
+    "$text_alignment": "left",
+    "$is_pocket_mode": true,
+    "$scroll_view_name": "inventory_book_scroll_view",
+    "$scrolling_pane_control": "crafting_pocket.survival_scroll_panel",
+    "$navigation_tab_name": "survival_tab_toggle"
+  }
+}

@@ -317,7 +317,15 @@
     "anchor_from": "left_middle",
     "anchor_to": "top_left",
     "controls": [
-      { "inventory_panel@inventory_panel": {} }
+      { "inventory_panel@inventory_panel": {} },
+      {
+        "a": {
+          "type": "label",
+          "text": "a",
+          "anchor_from": "center",
+          "anchor_to": "center"
+        }
+      }
     ]
   },
 
@@ -384,7 +392,7 @@
     "controls": [
       {
         "default_state@common.item_renderer": {
-          "size": [ 12, 12 ]
+          "size": [ 15, 15 ]
         }
       },
       {
@@ -393,7 +401,7 @@
           "controls": [
             {
               "item_renderer@common.item_renderer": {
-                "size": [ 16, 16 ]
+                "size": [ 17, 17 ]
               }
             },
             {
@@ -416,7 +424,9 @@
           "type": "panel",
           "controls": [
             {
-              "item_renderer@common.item_renderer": {}
+              "item_renderer@common.item_renderer": {
+                "size": [ 17, 17 ]
+              }
             },
             {
               "highlight@$highlight_control": {
