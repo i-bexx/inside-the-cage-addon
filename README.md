@@ -1,79 +1,57 @@
-⚠️ Status: Alpha Build
-This addon and its accompanying world are currently in the Alpha stage of development. Features are actively being worked on, and gameplay mechanics are subject to change.
+# Inside the Cage ⛓️
 
-🛑 Important Note: This is a World-Specific Addon. It is specifically designed to work exclusively within a custom-built Minecraft map (currently in development). It is not intended for standard, randomly generated survival worlds.
+An advanced, server-side Minecraft Bedrock Add-on that introduces complex survival, psychological horror mechanics, and highly customized JSON UI systems using the **Minecraft Script API**.
 
-🔦 Core Features
-🏃 Stamina & Movement System
-To enhance the survival experience, a custom Stamina mechanic is implemented:
+⚠️ **Status: Alpha Build**
+This project and its accompanying world are in active development.
+🛑 **Project Scope:** This is a *World-Specific Addon* designed exclusively for a custom-built adventure map. It heavily modifies core engine rules and is not intended for standard procedural survival generation.
 
-Running for extended periods during a round will deplete your stamina.
+---
 
-When exhausted, your movement speed will significantly decrease.
+## 💡 Technical Highlights (Under the Hood)
+This project bypasses standard engine limitations by heavily utilizing advanced Bedrock JSON UI scripting and server-side logic:
 
-You must stop sprinting and rest to recover your stamina and regain full speed.
+* **Live 3D UI Rendering:** Implementation of the `live_player_renderer` component to display a real-time, interactive 3D model of the player directly inside a 2D HUD frame.
+* **Scope Resolution & Reactive UI:** Custom implementation of sibling scope targeting (`resolve_sibling_scope`) to create reactive UI elements without redundant server-side scoreboard queries.
+* **Dual-State UI Synchronization:** Utilizing baseline engine globals (e.g., `#hud_title_text_string`) as data carriers to seamlessly synchronize multiple UI components—such as the dynamic Eye texture and Sanity text.
+* **Custom Animations:** Frame-by-frame UI animations and VHS-style glitch effects integrated directly into the HUD panels.
 
-📸 Custom Camera & Vision System
-Players start with a custom camera item. Using it opens a realistic camera overlay (built with custom geo.json models). Watch your surroundings through the lens, but beware of what lurks in the shadows.
+---
 
-🧠 Sanity Mechanic
-A mysterious entity roams the forest.
+## 🎮 Core Gameplay Mechanics
 
-Looking directly at it drains your Sanity much faster.
+### 🏃 Custom Stamina & Movement
+A fully server-side stamina system to enhance survival tension:
+* Running for extended periods drains stamina.
+* Exhaustion triggers a severe movement speed penalty.
+* Players must actively manage their pacing, stopping to rest and recover stamina.
 
-As danger approaches, you'll experience screen shaking and static effects on your camera overlay.
+### 📸 Camera Overlay & Sanity System (Line-of-Sight)
+A mysterious entity roams the map, governed by custom Line-of-Sight (LoS) detection and dynamic teleportation.
+* **Camera Mechanics:** Players utilize a custom camera item that opens a realistic overlay (built via custom `geo.json` models).
+* **Sanity Drain:** Looking directly at the stalker entity drains Sanity rapidly.
+* **Psychological Effects:** Approaching danger triggers screen shaking and static UI effects. Reaching 0 Sanity teleports the player to a dark dimension featuring a custom animated "Game Over" screen.
 
-If your sanity drops to 0, you are teleported to a dark dimension with an animated, static "Game Over" screen.
+### 🖥️ Custom HUD Implementation
+A fully responsive user interface:
+* **Top Left (Sanity & Player Model):** A custom wooden frame housing a live 3D player model. Features a Dual-Feedback Sanity System (a dynamic Eye Icon and precise text shifting between STABLE, NORMAL, and POOR).
+* **Bottom Middle:** Fully animated Stamina Bar.
+* **Top Right:** Dynamic compass and coordinates. *(Survival Twist: Coordinates are forcefully disabled mid-round, triggering VHS-style "position lost" visual glitches).*
+* **Bottom Right:** Real-time coin balance.
 
-💰 Economy & Shop System
-Custom coin entities spawn across the map. Collect them to increase your balance and use the Shop Item to purchase gear:
+### 💰 Economy & Objectives
+* **Shop System:** Custom coin entities spawn across the map. Players can use the Shop Item to purchase Survival Kits (restores Sanity) or Weapons & Ammo (Pistol, Knife, Toxic Bomb).
+* **Win Condition:** 7 custom lantern entities spawn at predefined locations. Players must find and break them to release the trapped blue souls to secure a win.
+* **Combat:** As rounds progress, hostile entities dynamically spawn and hunt the player, requiring active use of the purchased arsenal.
 
-🩹 Survival Kit: Restores sanity to maximum.
+---
 
-⚔️ Weapons & Ammo: Buy a Pistol, Knife, Toxic Bomb, or ammunition.
+## 📥 Downloads & Support
+Once a stable playable build is finalized, I will be providing:
+* Free Downloads for the public Bedrock community.
+* Patreon Early Access for supporters to test new mechanics and updates before public release.
 
-👻 Win Condition
-At the start of each round, 7 lanterns spawn in predefined locations. Find and break them to release the blue souls trapped inside to win.
+*Stay tuned for updates!*
 
-⚔️ Combat
-As time passes, "hostile" entities will spawn and hunt you down. Use your purchased arsenal to defend yourself.
-
-🖥️ Custom HUD (JSON UI)
-A fully custom, highly responsive user interface provides real-time data without relying on ticking functions that lag the server:
-
-Bottom Middle (Above Hotbar): A fully animated Stamina Bar providing visual feedback on your exhaustion level.
-
-Top Left (Sanity & Player Model): Housed in a custom wooden frame, this area features a live 3D model of the player. It utilizes a Dual-Feedback Sanity System: a highly detailed, dynamic Eye Icon for immediate visual cues, paired with a precise text readout shifting between STABLE, NORMAL, and POOR.
-
-Bottom Right: Real-time coin balance.
-
-Top Right: Dynamic compass and coordinates. (Survival Twist: Coordinates will be forcefully disabled mid-round, accompanied by custom VHS-style "position lost" visual glitches!)
-
-🛠️ Technical Highlights (Under the Hood)
-This project heavily utilizes advanced Bedrock JSON UI scripting to bypass standard engine limitations:
-
-Live 3D UI Rendering: Implementation of the live_player_renderer component to display a real-time, interactive 3D model of the player directly inside the 2D HUD frame.
-
-Dual-State UI Synchronization: Utilizing baseline engine globals (like #hud_title_text_string) as data carriers to seamlessly synchronize multiple UI components—such as the dynamic Eye texture and the Sanity text—without server-side delay.
-
-Scope Resolution & Reactive UI: Custom implementation of sibling scope targeting (resolve_sibling_scope) to create reactive UI elements without redundant scoreboard queries.
-
-Custom Animations: Frame-by-frame UI animations (like the stamina bar depletion) and glitch effects integrated directly into the HUD panels.
-
-⚖️ Legal Disclaimer
-This project is an independent community creation for Minecraft Bedrock Edition and contains modified versions of original game UI code structures (e.g., server_form.json).
-
-(c) Mojang AB and (c) Microsoft Corporation. All rights reserved for the original game assets and baseline code structures.
-
-It is not an official Minecraft product and is not approved by or associated with Mojang or Microsoft.
-
-📥 Downloads & Support
-This project is currently in active development (Alpha).
-
-Once a playable build is ready, I will be providing:
-
-Free Downloads for the public community.
-
-Patreon Early Access for those who want to support the development and get updates before anyone else.
-
-Stay tuned for updates!
+---
+**⚖️ Legal Disclaimer:** *This project is an independent community creation for Minecraft Bedrock Edition and contains modified versions of original game UI code structures (e.g., `server_form.json`). (c) Mojang AB and (c) Microsoft Corporation. All rights reserved for the original game assets and baseline code structures. It is not an official Minecraft product and is not approved by or associated with Mojang or Microsoft.*
