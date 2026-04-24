@@ -13,15 +13,37 @@
     ]
   },
 
+  "hover_text_renderer": {
+    "type": "custom",
+    "renderer": "hover_text_renderer",
+    "layer": 50,
+    "allow_clipping": false,
+    "$hover_text|default": "Click to see socials",
+    "property_bag": {
+      "#text_value": "$hover_text"
+    },
+    "bindings": [
+      {
+        "binding_type": "view",
+        "source_property_name": "#text_value",
+        "target_property_name": "#hover_text"
+      }
+    ]
+  },
+
   "button": {
-    "type": "button",
+    "type": "toggle",
+    "toggle_name": "social_media_toggle",
+    "focus_identifier": "social_media_toggle",
+    "toggle_default_state": false,
     "size": [ "100%", "100%" ],
     "sound_name": "random.click",
     "layer": 10,
     
-    "default_control": "default_state",
-    "hover_control": "hover_state",
-    "pressed_control": "pressed_state",
+    "unchecked_control": "button_default_state",
+    "unchecked_hover_control": "button_hover_state",
+    "checked_control": "button_checked_state",
+    "checked_hover_control": "button_checked_hover_state",
 
     "$default_button_texture": "textures/ui/pause_screen/social/background",
     "$hover_button_texture": "textures/ui/pause_screen/social/background_hover",
@@ -30,9 +52,22 @@
     "$light_border_default_color": "textures/ui/focus_border_black",
     "$light_border_hover_color": "textures/ui/focus_border_white",
 
+    "$enable_directional_toggling|default": false,
+    "$toggle_on_button|default": "toggle.toggle_on",
+    "$toggle_off_button|default": "toggle.toggle_off",
+    "$allow_controller_back_button_mapping|default": false,
+
+    "bindings": [
+      {
+        "binding_type": "none",
+        "binding_name": "#toggle_state",
+        "binding_name_override": "#toggle_state"
+      }
+    ],
+
     "controls": [
       {
-        "default_state": {
+        "button_default_state": {
           "type": "panel",
           "size": [ "100%", "100%" ],
           "controls": [
@@ -52,7 +87,7 @@
         }
       },
       {
-        "hover_state": {
+        "button_hover_state": {
           "type": "panel",
           "size": [ "100%", "100%" ],
           "controls": [
@@ -67,12 +102,17 @@
                 "type": "image",
                 "texture": "$light_border_hover_color"
               }
+            },
+            {
+              "hover_text_renderer@pause_social.hover_text_renderer": {
+                "$hover_text": "Click to see socials"
+              }
             }
           ]
         }
       },
       {
-        "pressed_state": {
+        "button_checked_state": {
           "type": "panel",
           "size": [ "100%", "100%" ],
           "controls": [
@@ -90,14 +130,63 @@
             }
           ]
         }
+      },
+      {
+        "button_checked_hover_state": {
+          "type": "panel",
+          "size": [ "100%", "100%" ],
+          "controls": [
+            {
+              "pressed_image": {
+                "type": "image",
+                "texture": "$pressed_button_texture"
+              }
+            },
+            {
+              "pressed_border_image": {
+                "type": "image",
+                "texture": "$light_border_hover_color"
+              }
+            },
+            {
+              "hover_text_renderer@pause_social.hover_text_renderer": {
+                "$hover_text": "..."
+              }
+            }
+          ]
+        }
       }
     ],
     "button_mappings": [
       {
-        "mapping_type": "pressed",
         "from_button_id": "button.menu_select",
-        "to_button_id": "button.no_affection",
-        "button_up_right_of_first_refusal": true
+        "to_button_id": "button.menu_select",
+        "mapping_type": "pressed"
+      },
+      {
+        "from_button_id": "button.menu_ok",
+        "to_button_id": "button.menu_ok",
+        "mapping_type": "focused"
+      },
+      {
+        "from_button_id": "button.controller_back",
+        "to_button_id": "button.controller_back",
+        "mapping_type": "focused",
+        "ignored": "(not $allow_controller_back_button_mapping)"
+      },
+      {
+        "ignored": "(not $enable_directional_toggling)",
+        "from_button_id": "button.menu_left",
+        "to_button_id": "$toggle_off_button",
+        "mapping_type": "pressed",
+        "input_mode_condition": "gamepad"
+      },
+      {
+        "ignored": "(not $enable_directional_toggling)",
+        "from_button_id": "button.menu_right",
+        "to_button_id": "$toggle_on_button",
+        "mapping_type": "pressed",
+        "input_mode_condition": "gamepad"
       }
     ]
   },
