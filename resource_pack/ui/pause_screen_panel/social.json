@@ -18,7 +18,7 @@
     "renderer": "hover_text_renderer",
     "layer": 50,
     "allow_clipping": false,
-    "$hover_text|default": "Click to see socials",
+    "$hover_text|default": "https://github.com/i-bexx/",
     "property_bag": {
       "#text_value": "$hover_text"
     },
@@ -103,11 +103,7 @@
                 "texture": "$light_border_hover_color"
               }
             },
-            {
-              "hover_text_renderer@pause_social.hover_text_renderer": {
-                "$hover_text": "Click to see socials"
-              }
-            }
+            { "hover_text_renderer@pause_social.hover_text_renderer": {} }
           ]
         }
       },
@@ -148,11 +144,7 @@
                 "texture": "$light_border_hover_color"
               }
             },
-            {
-              "hover_text_renderer@pause_social.hover_text_renderer": {
-                "$hover_text": "..."
-              }
-            }
+            { "hover_text_renderer@pause_social.hover_text_renderer": {} }
           ]
         }
       }
