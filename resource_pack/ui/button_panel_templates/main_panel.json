@@ -208,6 +208,11 @@
                             "texture": "$light_border_hover_color",
                             "layer": 32
                           }
+                        },
+                        {
+                          "hover_text_renderer@main_panel.hover_text_renderer": {
+                            "$must_show_hover_text_final": "$must_show_hover_text"
+                          }
                         }
                       ]
                     }
@@ -367,7 +372,7 @@
     "layer": 128,
     "allow_clipping": false,
 
-    "$hover_text|default": "§e7 §fCoins",
+    "$hover_text|default": "Price: §e7 §fCoins\n------------\nClick to buy",
     "$must_show_hover_text_final|default": false,
 
     "property_bag": {
