@@ -42,9 +42,38 @@
                 "anchor_to": "top_middle",
                 "collection_name": "form_buttons",
                 "controls": [
-                  { "gun_button@shop_panel.button_panel": { "collection_index": 0, "$hover_text": "§l§e4 Coins" } },
-                  { "knife_button@shop_panel.button_panel": { "collection_index": 1, "$hover_text": "§l§e2 Coins" } },
-                  { "kit_button@shop_panel.button_panel": { "collection_index": 2, "$hover_text": "§l§e7 Coins" } }
+                  {
+                    "gun_button@shop_panel.button_panel": {
+                      "collection_index": 0,
+                      "$hover_text": "§l§e4 Coins",
+                      "$focus_identifier": "gun_button_focus_id",
+                      "$focus_change_up": "shop_panel_close_button_focus_id",
+                      "$focus_change_down": "toxic_bomb_button_focus_id",
+                      "$focus_change_right": "knife_button_focus_id"
+                    }
+                  },
+                  {
+                    "knife_button@shop_panel.button_panel":
+                    {
+                      "collection_index": 1,
+                      "$hover_text": "§l§e2 Coins",
+                      "$focus_identifier": "knife_button_focus_id",
+                      "$focus_change_up": "shop_panel_close_button_focus_id",
+                      "$focus_change_down": "ammo_button_focus_id",
+                      "$focus_change_right": "kit_button_focus_id",
+                      "$focus_change_left": "gun_button_focus_id"
+                    }
+                  },
+                  {
+                    "kit_button@shop_panel.button_panel": {
+                    "collection_index": 2,
+                    "$hover_text": "§l§e7 Coins",
+                    "$focus_identifier": "kit_button_focus_id",
+                    "$focus_change_up": "shop_panel_close_button_focus_id",
+                    "$focus_change_down": "battery_button_focus_id",
+                    "$focus_change_left": "knife_button_focus_id"
+                  }
+                }
                 ]
               }
             }
@@ -71,9 +100,37 @@
                 "anchor_to": "top_middle",
                 "collection_name": "form_buttons",
                 "controls": [
-                  { "toxic_bomb_button@shop_panel.button_panel": { "collection_index": 3, "$hover_text": "§l§e6 Coins" } },
-                  { "ammo_button@shop_panel.button_panel": { "collection_index": 4, "$hover_text": "§l§e1 Coins" } },
-                  { "battery_button@shop_panel.button_panel": { "collection_index": 5, "$hover_text": "§l§e3 Coins" } }
+                  {
+                    "toxic_bomb_button@shop_panel.button_panel": {
+                      "collection_index": 3,
+                      "$hover_text": "§l§e6 Coins",
+                      "$focus_identifier": "toxic_bomb_button_focus_id",
+                      "$focus_change_up": "gun_button_focus_id",
+                      "$focus_change_down": "null1_button_focus_id",
+                      "$focus_change_right": "ammo_button_focus_id"
+                  }
+                  },
+                  {
+                    "ammo_button@shop_panel.button_panel": {
+                      "collection_index": 4,
+                      "$hover_text": "§l§e1 Coins",
+                      "$focus_identifier": "ammo_button_focus_id",
+                      "$focus_change_up": "knife_button_focus_id",
+                      "$focus_change_down": "null2_button_focus_id",
+                      "$focus_change_right": "battery_button_focus_id",
+                      "$focus_change_left": "toxic_bomb_button_focus_id"
+                    }
+                  },
+                  {
+                    "battery_button@shop_panel.button_panel": {
+                      "collection_index": 5,
+                      "$hover_text": "§l§e3 Coins",
+                      "$focus_identifier": "battery_button_focus_id",
+                      "$focus_change_up": "kit_button_focus_id",
+                      "$focus_change_down": "null3_button_focus_id",
+                      "$focus_change_left": "ammo_button_focus_id"
+                    }
+                  }
                 ]
               }
             }
@@ -100,9 +157,34 @@
                 "anchor_to": "top_middle",
                 "collection_name": "form_buttons",
                 "controls": [
-                  { "btn_6@shop_panel.button_panel": { "collection_index": 6, "$hover_text": "§l§e... Coins" } },
-                  { "btn_7@shop_panel.button_panel": { "collection_index": 7, "$hover_text": "§l§e... Coins" } },
-                  { "btn_8@shop_panel.button_panel": { "collection_index": 8, "$hover_text": "§l§e... Coins" } }
+                  {
+                    "btn_6@shop_panel.button_panel": {
+                      "collection_index": 6,
+                      "$hover_text": "§l§e... Coins",
+                      "$focus_identifier": "null1_button_focus_id",
+                      "$focus_change_up": "toxic_bomb_button_focus_id",
+                      "$focus_change_right": "null2_button_focus_id"
+                    }
+                  },
+                  {
+                    "btn_7@shop_panel.button_panel": {
+                      "collection_index": 7,
+                      "$hover_text": "§l§e... Coins",
+                      "$focus_identifier": "null2_button_focus_id",
+                      "$focus_change_up": "ammo_button_focus_id",
+                      "$focus_change_right": "null3_button_focus_id",
+                      "$focus_change_left": "null1_button_focus_id"
+                    }
+                  },
+                  {
+                    "btn_8@shop_panel.button_panel": {
+                      "collection_index": 8,
+                      "$hover_text": "§l§e... Coins",
+                      "$focus_identifier": "null3_button_focus_id",
+                      "$focus_change_up": "battery_button_focus_id",
+                      "$focus_change_left": "null2_button_focus_id"
+                    }
+                  }
                 ]
               }
             }
@@ -159,6 +241,21 @@
                 "anchor_to": "top_left",
                 "size": [ "100%", "100%" ],
                 "sound_name": "random.click",
+
+                "$focus_identifier|default": "",
+                "$focus_change_up|default": "FOCUS_OVERRIDE_STOP",
+                "$focus_change_down|default": "FOCUS_OVERRIDE_STOP",
+                "$focus_change_right|default": "FOCUS_OVERRIDE_STOP",
+                "$focus_change_left|default": "FOCUS_OVERRIDE_STOP",
+
+                "focus_enabled": true,
+                "reset_on_focus_lost": true,
+                "use_last_focus": true,
+                "focus_identifier": "$focus_identifier",
+                "focus_change_up": "$focus_change_up",
+                "focus_change_down": "$focus_change_down",
+                "focus_change_right": "$focus_change_right",
+                "focus_change_left": "$focus_change_left",
                 
                 "default_control": "default_state",
                 "hover_control": "hover_state",
@@ -352,10 +449,16 @@
     "size": [14, 14],
     "anchor_from": "top_right",
     "anchor_to": "top_right",
+    "sound_name": "random.click",
+
+    "focus_enabled": true,
+    "focus_identifier": "shop_panel_close_button_focus_id",
+    "focus_change_down": "gun_button_focus_id",
+
     "default_control": "default_state",
     "hover_control": "hover_state",
     "pressed_control": "pressed_state",
-    "sound_name": "random.click",
+
     "$default_texture": "textures/ui/panels/main_panel/close_button",
     "$hover_texture": "textures/ui/panels/main_panel/close_button_hover",
     "$alpha": 1,

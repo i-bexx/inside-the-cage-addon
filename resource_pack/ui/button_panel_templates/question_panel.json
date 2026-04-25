@@ -51,6 +51,13 @@
                 "type": "button",
                 "size": "$button_size",
                 "sound_name": "random.click",
+
+                "focus_enabled": true,
+                "focus_container": true,
+                "focus_identifier": "question_panel_button_focus_id",
+                "focus_navigation_mode_left": "contained",
+                "focus_navigation_mode_right": "custom",
+                "focus_change_right": "question_panel_close_button_focus_id",
                 
                 "default_control": "default_state",
                 "hover_control": "hover_state",
@@ -239,10 +246,16 @@
     "size": [14, 14],
     "anchor_from": "top_right",
     "anchor_to": "top_right",
+    "sound_name": "random.click",
+
+    "focus_enabled": true,
+    "focus_identifier": "question_panel_close_button_focus_id",
+    "focus_change_down": "question_panel_button_focus_id",
+
     "default_control": "default_state",
     "hover_control": "hover_state",
     "pressed_control": "pressed_state",
-    "sound_name": "random.click",
+
     "$default_texture": "textures/ui/panels/main_panel/close_button",
     "$hover_texture": "textures/ui/panels/main_panel/close_button_hover",
     "$alpha": 1,
