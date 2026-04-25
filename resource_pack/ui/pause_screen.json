@@ -11,5 +11,151 @@
         ]
       }
     ]
+  },
+
+  "return_to_game_button@pause.pause_button_template": {
+    "$pressed_button_name": "button.menu_continue",
+    "$button_text": "menu.returnToGame",
+    "anchor_to": "top_middle",
+    "anchor_from": "top_middle",
+    "$button_focus_precedence": 1,
+    "focus_identifier": "return_to_game",
+    "$focus_override_up": "icon_panel_main_focus",
+    "focus_change_right": "friendsdrawer_button",
+    "focus_change_left": "social_media_focus_id",
+    "focus_change_up": "social_media_focus_id",
+    "variables": [
+      {
+        "requires": "$is_editor_playtest_roundtrip",
+        "$button_text": "pauseScreen.editor.returnToTesting"
+      },
+      {
+        "requires": "$is_editor_mode_enabled",
+        "$button_text": "pauseScreen.editor.returnToEditing"
+      }
+    ]
+  },
+
+  "settings_button@pause.pause_button_template": {
+    "$pressed_button_name": "button.menu_settings",
+    "$button_text": "menu.settings",
+    "focus_change_right": "friendsdrawer_button",
+    "focus_change_left": "social_media_focus_id",
+    "anchor_to": "top_middle",
+    "anchor_from": "top_middle"
+  },
+
+  "store_button@pause.pause_button_template": {
+    "$pressed_button_name": "button.menu_store",
+    "$button_text": "$store_button_text",
+    "focus_change_left": "social_media_focus_id",
+    "bindings": [
+      {
+        "binding_name": "#store_button_visible",
+        "binding_name_override": "#visible",
+        "binding_type": "global"
+      }
+    ]
+  },
+
+  "store_error_button@common_buttons.dynamic_tooltip_notification_panel": {
+    "size": [ "100%", "100%" ],
+    "focus_change_left": "social_media_focus_id",
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_select",
+        "to_button_id": "button.menu_store_error",
+        "mapping_type": "pressed"
+      },
+      {
+        "to_button_id": "button.is_hovered",
+        "mapping_type": "pressed"
+      }
+    ],
+    "consume_hover_events": false,
+    "focus_enabled": true,
+    "$dynamic_tooltip_button_visibility_binding_name": "(not #store_button_visible)",
+    "$tooltip_popup_visible_binding": "#store_error_tooltip_visible",
+    "$override_tooltip_popup_image": true,
+    "$tooltip_popup_override_image_panel": "start.store_error_image",
+    "$tooltip_text_binding_name": "#store_error_text",
+    "$tool_tip_text_max_size": [ "160px", "default" ],
+    "$tooltip_panel_content": "pause.store_error_button_content",
+    "bindings": [
+      {
+        "binding_name": "(not #store_button_visible)",
+        "binding_name_override": "#visible"
+      }
+    ]
+  },
+
+  "quit_button@pause.pause_button_template": {
+    "$pressed_button_name": "button.menu_quit",
+    "$button_text": "pauseScreen.quit",
+    "anchor_to": "top_middle",
+    "anchor_from": "top_middle",
+    "focus_change_left": "social_media_focus_id",
+    "$focus_override_down": "icon_panel_main_focus",
+    "variables": [
+      {
+        "requires": "($is_secondary_client and not $is_editor_playtest_roundtrip)",
+        "$button_text": "pauseScreen.secondaryClientLeave"
+      },
+      {
+        "requires": "$is_editor_playtest_roundtrip",
+        "$button_text": "pauseScreen.editor.quit"
+      }
+    ]
+  },
+
+  "friendsdrawer_button_panel": {
+    "type": "panel",
+    "anchor_from": "top_right",
+    "anchor_to": "top_right",
+    "size": [ "100%c", "100%c" ],
+    "controls": [
+      {
+        "friendsdrawer_button@friendsbutton.button": {
+          "$pressed_button_name": "button.friends_drawer",
+          "focus_change_up": "profile_button",
+          "focus_change_right": "FOCUS_OVERRIDE_STOP",
+          "focus_change_left": "social_media_focus_id",
+          "anchor_from": "top_right",
+          "anchor_to": "top_right",
+          "$context": "ingame",
+          "bindings": [
+            {
+              "binding_name": "#friends_drawer_button_focus_override",
+              "binding_name_override": "#focus_change_down"
+            }
+          ]
+        }
+      },
+      {
+        "friends_drawer_ftue_popup_wrapper": {
+          "type": "panel",
+          "size": [ 0, 0 ],
+          "anchor_from": "top_right",
+          "anchor_to": "top_right",
+          "allow_clipping": false,
+          "controls": [
+            {
+              "friends_drawer_ftue_popup@friendsbutton.friends_drawer_popup": {
+                "offset": [ -100, 28 ],
+                "focus_enabled": false
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "bindings": [
+      {
+        "binding_name": "#friends_drawer_button_visible",
+        "binding_name_override": "#visible",
+        "binding_type": "global"
+      }
+    ],
+    "$focus_id": "friendsdrawer_button"
   }
 }

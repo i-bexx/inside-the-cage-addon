@@ -34,8 +34,11 @@
   "button": {
     "type": "toggle",
     "toggle_name": "social_media_toggle",
-    "focus_identifier": "social_media_toggle",
     "toggle_default_state": false,
+    "reset_on_focus_lost": true,
+    "focus_enabled": true,
+    "focus_identifier": "social_media_focus_id",
+    "focus_change_down": "return_to_game",
     "size": [ "100%", "100%" ],
     "sound_name": "random.click",
     "layer": 10,

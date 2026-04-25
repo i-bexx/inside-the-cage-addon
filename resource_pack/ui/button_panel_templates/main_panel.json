@@ -18,6 +18,9 @@
                   "$image_size": [64, 64],
                   "$padding_size": [138, 156],
                   "$must_show_hover_text": false,
+                  "$focus_identifier": "main_panel_first_button_focus_id",
+                  "$focus_change_up": "main_panel_close_button_focus_id",
+                  "$focus_change_right": "main_panel_second_button_focus_id",
                   "collection_index": 0
                 }
               },
@@ -32,6 +35,10 @@
                       "second_button@main_panel.button_panel": {
                         "$padding_size": [148, 52],
                         "$must_show_hover_text": false,
+                        "$focus_identifier": "main_panel_second_button_focus_id",
+                        "$focus_change_up": "main_panel_close_button_focus_id",
+                        "$focus_change_left": "main_panel_first_button_focus_id",
+                        "$focus_change_down": "main_panel_third_button_focus_id",
                         "collection_index": 1
                       }
                     },
@@ -40,6 +47,10 @@
                         "$padding_size": [148, 52],
                         "$icon_size": [96, 48],
                         "$must_show_hover_text": true,
+                        "$focus_identifier": "main_panel_third_button_focus_id",
+                        "$focus_change_left": "main_panel_first_button_focus_id",
+                        "$focus_change_down": "main_panel_fourth_button_focus_id",
+                        "$focus_change_up": "main_panel_second_button_focus_id",
                         "collection_index": 2
                       }
                     },
@@ -48,6 +59,9 @@
                         "$padding_size": [148, 52],
                         "$icon_size": [96, 48],
                         "$must_show_hover_text": true,
+                        "$focus_identifier": "main_panel_fourth_button_focus_id",
+                        "$focus_change_left": "main_panel_first_button_focus_id",
+                        "$focus_change_up": "main_panel_third_button_focus_id",
                         "collection_index": 3
                       }
                     }
@@ -135,6 +149,21 @@
                 "size": [ "100%", "100%" ],
                 "sound_name": "random.click",
                 "layer": 10,
+
+                "$focus_identifier|default": "",
+                "$focus_change_up|default": "FOCUS_OVERRIDE_STOP",
+                "$focus_change_down|default": "FOCUS_OVERRIDE_STOP",
+                "$focus_change_right|default": "FOCUS_OVERRIDE_STOP",
+                "$focus_change_left|default": "FOCUS_OVERRIDE_STOP",
+
+                "focus_enabled": true,
+                "reset_on_focus_lost": true,
+                "use_last_focus": true,
+                "focus_identifier": "$focus_identifier",
+                "focus_change_up": "$focus_change_up",
+                "focus_change_down": "$focus_change_down",
+                "focus_change_right": "$focus_change_right",
+                "focus_change_left": "$focus_change_left",
                 
                 "default_control": "default_state",
                 "hover_control": "hover_state",
@@ -224,6 +253,11 @@
                     "from_button_id": "button.menu_select",
                     "to_button_id": "button.form_button_click",
                     "button_up_right_of_first_refusal": true
+                  },
+                  {
+                    "mapping_type": "focused",
+                    "from_button_id": "button.menu_ok",
+                    "to_button_id": "button.form_button_click"
                   }
                 ]
               }
@@ -313,12 +347,19 @@
     "size": [14, 14],
     "anchor_from": "top_right",
     "anchor_to": "top_right",
+    "sound_name": "random.click",
+
     "default_control": "default_state",
     "hover_control": "hover_state",
     "pressed_control": "pressed_state",
-    "sound_name": "random.click",
+
+    "focus_enabled": true,
+    "focus_identifier": "main_panel_close_button_focus_id",
+    "focus_change_down": "main_panel_first_button_focus_id",
+
     "$default_texture": "textures/ui/panels/main_panel/close_button",
     "$hover_texture": "textures/ui/panels/main_panel/close_button_hover",
+    
     "$alpha": 1,
     "$size": [16, 16],
     "button_mappings": [
