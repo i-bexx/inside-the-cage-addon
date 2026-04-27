@@ -61,7 +61,7 @@
       {
         "binding_type": "view",
         "binding_condition": "always",
-        "source_property_name": "(%.10s * #live_val_string = 'stamina_y')",
+        "source_property_name": "(%.9s * #live_val_string = 'stamina_y')",
         "target_property_name": "#limit_increased"
       },
       {
