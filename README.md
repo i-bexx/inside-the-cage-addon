@@ -32,6 +32,9 @@ A mysterious entity roams the map, governed by custom Line-of-Sight (LoS) detect
 * **Sanity Drain:** Looking directly at the stalker entity drains Sanity rapidly.
 * **Psychological Effects:** Approaching danger triggers screen shaking and static UI effects. Reaching 0 Sanity teleports the player to a dark dimension featuring a custom animated "Game Over" screen.
 
+![static_normal](./assets/gifs/static_normal.gif)
+![static_glitch](./assets/gifs/static_glitch.gif)
+
 ### 🖥️ Custom HUD Implementation
 A fully responsive user interface:
 * **Top Left (Sanity & Player Model):** A custom wooden frame housing a live 3D player model. Features a Dual-Feedback Sanity System.
@@ -43,11 +46,18 @@ A fully responsive user interface:
 ![stamina_bar_deplate](./assets/gifs/stamina_bar_deplate.gif)
 ![stamina_bar_fill](./assets/gifs/stamina_bar_fill.gif)
 
-* **Top Right:** Dynamic compass and coordinates. *(Survival Twist: Coordinates are forcefully disabled mid-round, triggering VHS-style "position lost" visual glitches).*
+* **Top Right:** Dynamic compass and coordinates. *(Survival Twist: Coordinates are forcefully disabled mid-round, triggering VHS-style "position lost" visual glitches).
+
+![compass](./assets/gifs/compass.gif)
+![position_lost](./assets/gifs/position_lost.gif)
+
 * **Bottom Right:** Real-time coin balance.
 
 ### 💰 Economy & Objectives
-* **Shop System:** Custom coin entities spawn across the map. Players can use the Shop Item to purchase Survival Kits (restores Sanity) or Weapons & Ammo (Pistol, Knife, Toxic Bomb).
+* **Shop System:** Coins spawn across the map. Players can use the Compass Item to spend these coins to upgrade their stamina and battery capacity, or to purchase goods such as a survival kit or weapons and ammo (Pistol, Knife, Toxic Bomb).
+
+![main_panel](./assets/gifs/main_panel.gif)
+
 * **Win Condition:** 7 custom lantern entities spawn at predefined locations. Players must find and break them to release the trapped blue souls to secure a win.
 * **Combat:** As rounds progress, hostile entities dynamically spawn and hunt the player, requiring active use of the purchased arsenal.
 
