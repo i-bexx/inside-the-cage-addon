@@ -1,10 +1,31 @@
 # Inside the Cage ⛓️
 
+> *Developed by i-bexx — Bedrock Add-On Developer & Software Engineering Student*
+
 An advanced, server-side Minecraft Bedrock Add-on that introduces complex survival, psychological horror mechanics, and highly customized JSON UI systems using the **Minecraft Script API**.
 
-⚠️ **Status: Alpha Build**
-This project and its accompanying world are in active development.
+🚧 **Status: In Active Development — Core systems complete**
 🛑 **Project Scope:** This is a *World-Specific Addon* designed exclusively for a custom-built adventure map. It heavily modifies core engine rules and is not intended for standard procedural survival generation.
+
+---
+
+## 🛠️ Tech Stack
+
+`Minecraft Script API` · `JSON UI` · `JavaScript` · `Bedrock Add-On` · `Custom Geo Models` · `Frame Animation`
+
+---
+
+## 📁 Project Structure
+
+```
+inside-the-cage-addon/
+├── behavior_pack/      # Entity behaviors, scripts, game logic
+├── resource_pack/      # UI, textures, geo models, animations
+├── assets/gifs/        # README preview GIFs
+├── .gitignore
+├── LICENSE
+└── README.md
+```
 
 ---
 
@@ -46,7 +67,7 @@ A fully responsive user interface:
 ![stamina_bar_deplate](./assets/gifs/stamina_bar_deplate.gif)
 ![stamina_bar_fill](./assets/gifs/stamina_bar_fill.gif)
 
-* **Top Right:** Dynamic compass and coordinates. *(Survival Twist: Coordinates are forcefully disabled mid-round, triggering VHS-style "position lost" visual glitches).
+* **Top Right:** Dynamic compass and coordinates. *(Survival Twist: Coordinates are forcefully disabled mid-round, triggering VHS-style "position lost" visual glitches).*
 
 ![compass](./assets/gifs/compass.gif)
 ![position_lost](./assets/gifs/position_lost.gif)
@@ -71,4 +92,5 @@ Once a stable playable build is finalized, I will be providing:
 *Stay tuned for updates!*
 
 ---
+
 **⚖️ Legal Disclaimer:** *This project is an independent community creation for Minecraft Bedrock Edition and contains modified versions of original game UI code structures (e.g., `server_form.json`). (c) Mojang AB and (c) Microsoft Corporation. All rights reserved for the original game assets and baseline code structures. It is not an official Minecraft product and is not approved by or associated with Mojang or Microsoft.*
