@@ -34,8 +34,15 @@ A mysterious entity roams the map, governed by custom Line-of-Sight (LoS) detect
 
 ### 🖥️ Custom HUD Implementation
 A fully responsive user interface:
-* **Top Left (Sanity & Player Model):** A custom wooden frame housing a live 3D player model. Features a Dual-Feedback Sanity System (a dynamic Eye Icon and precise text shifting between STABLE, NORMAL, and POOR).
+* **Top Left (Sanity & Player Model):** A custom wooden frame housing a live 3D player model. Features a Dual-Feedback Sanity System.
+
+![mini_player](./assets/gifs/mini_player.gif)
+
 * **Bottom Middle:** Fully animated Stamina Bar.
+
+![stamina_bar_deplate](./assets/gifs/stamina_bar_deplate.gif)
+![stamina_bar_fill](./assets/gifs/stamina_bar_fill.gif)
+
 * **Top Right:** Dynamic compass and coordinates. *(Survival Twist: Coordinates are forcefully disabled mid-round, triggering VHS-style "position lost" visual glitches).*
 * **Bottom Right:** Real-time coin balance.
 
