@@ -121,13 +121,13 @@
       {
         "binding_type": "view",
         "binding_condition": "always",
-        "source_property_name": "((#new_value + #prev_value - #min_value) * #multiplier_conclusion)",
+        "source_property_name": "(#new_value + #prev_value - #min_value)",
         "target_property_name": "#max_value"
       },
       {
         "binding_type": "view",
         "binding_condition": "always",
-        "source_property_name": "#max_value",
+        "source_property_name": "(#max_value * #multiplier_conclusion)",
         "target_property_name": "#size_binding_x"
       }
     ],
