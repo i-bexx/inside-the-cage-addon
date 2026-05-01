@@ -59,7 +59,6 @@
                 "sound_name": "random.click",
 
                 "focus_enabled": true,
-                "focus_identifier": "question_panel_button_focus_id",
                 
                 "default_control": "default_state",
                 "hover_control": "hover_state",
@@ -179,128 +178,6 @@
               }
             }
           ]
-        }
-      }
-    ]
-  },
-
-
-
-  "content_stack": {
-    "type": "stack_panel",
-    "orientation": "vertical",
-    "anchor_from": "top_middle",
-    "anchor_to": "top_middle",
-    "size": ["100%", "100%"],
-    "controls": [
-      {
-        "padding": {
-          "type": "panel",
-          "size": ["100%", 8]
-        }
-      },
-      { "form_body@question_panel.form_body": {} },
-      {
-        "padding_2": {
-          "type": "panel",
-          "size": ["100%", 8]
-        }
-      },
-      { "question_panel_container@question_panel.question_panel_container": {} }
-    ]
-  },
-
-  "background_image": {
-    "type": "image",
-    "size": ["100% + 5px", "100% + 5px"],
-    "texture": "textures/ui/panels/main_panel/background",
-    "alpha": 0.8
-  },
-
-  "form_body": {
-    "type": "panel",
-    "size": ["100%", 16],
-    "layer": 5,
-    "controls": [
-      { 
-        "background_image@question_panel.background_image": {
-          "size": ["100% - 32px", "100%"]
-        } 
-      },
-      { "form_text@question_panel.form_text": {} }
-    ]
-  },
-
-  "form_text": {
-    "type": "label",
-    "text": "#form_text",
-    "font_size": "normal",
-    "layer": 4,
-    "bindings": [
-      {
-        "binding_name": "#form_text"
-      }
-    ]
-  },
-
-  "close_button": {
-    "type": "button",
-    "size": [14, 14],
-    "anchor_from": "top_right",
-    "anchor_to": "top_right",
-    "sound_name": "random.click",
-
-    "focus_enabled": true,
-    "focus_change_down": "question_panel_button_focus_id",
-
-    "default_control": "default_state",
-    "hover_control": "hover_state",
-    "pressed_control": "pressed_state",
-
-    "$default_texture": "textures/ui/panels/main_panel/close_button",
-    "$hover_texture": "textures/ui/panels/main_panel/close_button_hover",
-    "$alpha": 1,
-    "$size": [16, 16],
-    "button_mappings": [
-      {
-        "mapping_type": "pressed",
-        "from_button_id": "button.menu_select",
-        "to_button_id": "button.menu_exit"
-      },
-      {
-        "mapping_type": "focused",
-        "from_button_id": "button.menu_ok",
-        "to_button_id": "button.menu_exit"
-      }
-    ],
-    "controls": [
-      {
-        "background_image@question_panel.background_image": {
-            "alpha": 1
-        }
-      },
-      {
-        "default_state": {
-            "type": "image",
-            "size": "$size",
-            "texture": "$default_texture",
-            "alpha": "$alpha"
-        }
-      },
-      {
-        "hover_state": {
-            "type": "image",
-            "size": "$size",
-            "texture": "$hover_texture",
-            "alpha": "$alpha"
-        }
-      },
-      {
-        "pressed_state": {
-            "type": "image",
-            "size": "$size",
-            "texture": "$hover_texture",
-            "alpha": "$alpha"
         }
       }
     ]

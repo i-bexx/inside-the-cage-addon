@@ -53,13 +53,13 @@
           "type": "panel",
           "size": ["100%", "100%"],
           "controls": [
-            { "label_text@main_panel.label_text": {} },
-            { "background_image@main_panel.background_image": {} },
-            { "content_stack@main_panel.content_stack": {} },
+            { "background_image@button_elements_template.background_image": {} },
+            { "close_button_container@main_panel.close_button_container": {} },
+            { "label_text@button_elements_template.label_text": {} },
             {
-              "close_button_container@main_panel.close_button_container": {
-                "offset": [8, -8],
-                "layer": 64
+              "content_stack@button_elements_template.content_stack": {
+                "$container_name": "main_panel_container",
+                "$container_reference": "main_panel.main_panel_container"
               }
             }
           ]
@@ -86,13 +86,17 @@
           "type": "panel",
           "size": ["100%", "100%"],
           "controls": [
-            { "label_text@shop_panel.label_text": {} },
-            { "background_image@shop_panel.background_image": {} },
-            { "content_stack@shop_panel.content_stack": {} },
+            { "label_text@button_elements_template.label_text": {} },
+            { "background_image@button_elements_template.background_image": {} },
             {
-              "close_button_container@shop_panel.close_button_container": {
-                "offset": [8, -8],
-                "layer": 64
+              "content_stack@button_elements_template.content_stack": {
+                "$container_name": "main_panel_container",
+                "$container_reference": "shop_panel.shop_panel_container"
+              }
+            },
+            {
+              "close_button_container@button_elements_template.close_button_container": {
+                "$focus_identifier": "shop_panel_close_button_focus_id"
               }
             }
           ]
@@ -119,13 +123,17 @@
           "type": "panel",
           "size": ["100%", "100%"],
           "controls": [
-            { "label_text@vote_panel.label_text": {} },
-            { "background_image@vote_panel.background_image": {} },
-            { "content_stack@vote_panel.content_stack": {} },
+            { "label_text@button_elements_template.label_text": {} },
+            { "background_image@button_elements_template.background_image": {} },
             {
-              "close_button@vote_panel.close_button": {
-                "offset": [8, -8],
-                "layer": 64
+              "content_stack@button_elements_template.content_stack": {
+                "$container_name": "vote_panel_container",
+                "$container_reference": "vote_panel.vote_panel_container"
+              }
+            },
+            {
+              "close_button_container@button_elements_template.close_button_container": {
+                "$focus_identifier": "vote_panel_button_focus_id"
               }
             }
           ]
@@ -153,12 +161,16 @@
           "type": "panel",
           "size": ["100%", "100%"],
           "controls": [
-            { "background_image@question_panel.background_image": {} },
-            { "content_stack@question_panel.content_stack": {} },
+            { "background_image@button_elements_template.background_image": {} },
             {
-              "close_button@question_panel.close_button": {
-                "offset": [8, -8],
-                "layer": 64
+              "content_stack@button_elements_template.content_stack": {
+                "$container_name": "question_panel_container",
+                "$container_reference": "question_panel.question_panel_container"
+              }
+            },
+            {
+              "close_button_container@button_elements_template.close_button_container": {
+                "$focus_identifier": "question_panel_button_focus_id"
               }
             }
           ]
