@@ -54,12 +54,18 @@
           "size": ["100%", "100%"],
           "controls": [
             { "background_image@button_elements_template.background_image": {} },
-            { "close_button_container@main_panel.close_button_container": {} },
             { "label_text@button_elements_template.label_text": {} },
             {
               "content_stack@button_elements_template.content_stack": {
                 "$container_name": "main_panel_container",
-                "$container_reference": "main_panel.main_panel_container"
+                "$container_reference": "main_panel.main_panel_container",
+                "$button_down_name": "first_button"
+              }
+            },
+            {
+              "close_button_container_detailed@button_elements_template.close_button_container_detailed": {
+                "$focus_identifier": "main_panel_close_button_focus_id",
+                "$button_down_name": "first_button"
               }
             }
           ]
@@ -95,8 +101,9 @@
               }
             },
             {
-              "close_button_container@button_elements_template.close_button_container": {
-                "$focus_identifier": "shop_panel_close_button_focus_id"
+              "close_button_container_detailed@button_elements_template.close_button_container_detailed": {
+                "$focus_identifier": "shop_panel_close_button_focus_id",
+                "$button_down_name": "creator_1"
               }
             }
           ]
