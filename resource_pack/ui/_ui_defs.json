@@ -23,8 +23,8 @@
     "ui/button_panel_templates/main_panel.json",
     "ui/button_panel_templates/shop_panel.json",
     "ui/button_panel_templates/vote_panel.json",
-
     "ui/button_panel_templates/question_panel.json",
+    "ui/button_panel_templates/button_elements_template.json",
 
     "ui/navigation/navigation_panel.json",
 

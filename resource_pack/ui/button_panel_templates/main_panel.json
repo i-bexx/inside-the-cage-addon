@@ -269,83 +269,12 @@
     ]
   },
 
-
-  "content_stack": {
-    "type": "stack_panel",
-    "orientation": "vertical",
-    "anchor_from": "top_middle",
-    "anchor_to": "top_middle",
-    "size": ["100%", "100%"],
-    "controls": [
-      {
-        "padding": {
-          "type": "panel",
-          "size": ["100%", 8]
-        }
-      },
-      { "form_body@main_panel.form_body": {} },
-      {
-        "padding_2": {
-          "type": "panel",
-          "size": ["100%", 8]
-        }
-      },
-      { "main_panel_container@main_panel.main_panel_container": {} }
-    ]
-  },
-
-  "background_image": {
-    "type": "image",
-    "size": ["100% + 5px", "100% + 5px"],
-    "texture": "textures/ui/panels/main_panel/background",
-    "alpha": 0.8
-  },
-
-  "label_text": {
-    "type": "label",
-    "text": "#title_text",
-    "anchor_from": "top_left",
-    "anchor_to": "top_left",
-    "offset": [9, -16],
-    "font_type": "MinecraftTen",
-    "font_size": "large",
-    "layer": 5,
-    "bindings": [
-      {
-        "binding_name": "#title_text"
-      }
-    ]
-  },
-
-  "form_body": {
-    "type": "panel",
-    "size": ["100%", 16],
-    "layer": 5,
-    "controls": [
-      { 
-        "background_image@main_panel.background_image": {
-          "size": ["100% - 32px", "100%"]
-        } 
-      },
-      { "form_text@main_panel.form_text": {} }
-    ]
-  },
-
-  "form_text": {
-    "type": "label",
-    "text": "#form_text",
-    "font_size": "normal",
-    "layer": 4,
-    "bindings": [
-      {
-        "binding_name": "#form_text"
-      }
-    ]
-  },
-
   
   "close_button_container": {
     "type": "panel",
+    "offset": [8, -8],
+    "layer": 64,
+
     "focus_container": true,
     "focus_navigation_mode_right": "stop",
     "focus_navigation_mode_left": "stop",
@@ -391,7 +320,7 @@
           ],
           "controls": [
             {
-              "background_image@main_panel.background_image": {
+              "background_image@button_elements_template.background_image": {
                   "alpha": 1
               }
             },
@@ -424,7 +353,6 @@
       }
     ]
   },
-
   
 
   "hover_text_renderer": {
