@@ -7,7 +7,6 @@
     "layer": 64,
 
     "$focus_identifier|default": "",
-    "$focus_container_custom_down|default": "",
     "focus_container": true,
     "focus_navigation_mode_right": "stop",
     "focus_navigation_mode_left": "stop",

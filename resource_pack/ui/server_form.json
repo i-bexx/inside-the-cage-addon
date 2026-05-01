@@ -58,8 +58,7 @@
             {
               "content_stack@button_elements_template.content_stack": {
                 "$container_name": "main_panel_container",
-                "$container_reference": "main_panel.main_panel_container",
-                "$button_down_name": "first_button"
+                "$container_reference": "main_panel.main_panel_container"
               }
             },
             {

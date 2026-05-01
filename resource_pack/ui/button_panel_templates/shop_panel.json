@@ -44,7 +44,6 @@
                 "collection_name": "form_buttons",
 
                 "focus_container": true,
-                "use_last_focus": true,
                 "focus_navigation_mode_right": "stop",
                 "focus_navigation_mode_left": "stop",
                 "focus_navigation_mode_down": "custom",
