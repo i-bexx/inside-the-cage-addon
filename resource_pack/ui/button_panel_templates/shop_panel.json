@@ -7,6 +7,8 @@
     "layer": 1,
     "anchor_from": "center",
     "anchor_to": "center",
+    "use_last_focus": true,
+    "focus_container": true,
     "controls": [
       {
         "scrolling_panel@common.scrolling_panel": {
@@ -249,8 +251,6 @@
                 "$focus_change_left|default": "FOCUS_OVERRIDE_STOP",
 
                 "focus_enabled": true,
-                "reset_on_focus_lost": true,
-                "use_last_focus": true,
                 "focus_identifier": "$focus_identifier",
                 "focus_change_up": "$focus_change_up",
                 "focus_change_down": "$focus_change_down",
@@ -444,65 +444,75 @@
     ]
   },
 
-  "close_button": {
-    "type": "button",
-    "size": [14, 14],
-    "anchor_from": "top_right",
-    "anchor_to": "top_right",
-    "sound_name": "random.click",
-
-    "focus_enabled": true,
-    "focus_identifier": "shop_panel_close_button_focus_id",
-    "focus_change_down": "gun_button_focus_id",
-
-    "default_control": "default_state",
-    "hover_control": "hover_state",
-    "pressed_control": "pressed_state",
-
-    "$default_texture": "textures/ui/panels/main_panel/close_button",
-    "$hover_texture": "textures/ui/panels/main_panel/close_button_hover",
-    "$alpha": 1,
-    "$size": [16, 16],
-    "button_mappings": [
-      {
-        "mapping_type": "pressed",
-        "from_button_id": "button.menu_select",
-        "to_button_id": "button.menu_exit"
-      },
-      {
-        "mapping_type": "focused",
-        "from_button_id": "button.menu_ok",
-        "to_button_id": "button.menu_exit"
-      }
-    ],
+  "close_button_container": {
+    "type": "panel",
+    "focus_container": true,
+    "focus_navigation_mode_right": "stop",
+    "focus_navigation_mode_left": "stop",
+    "focus_navigation_mode_up": "stop",
     "controls": [
       {
-        "background_image@shop_panel.background_image": {
-            "alpha": 1
-        }
-      },
-      {
-        "default_state": {
-            "type": "image",
-            "size": "$size",
-            "texture": "$default_texture",
-            "alpha": "$alpha"
-        }
-      },
-      {
-        "hover_state": {
-            "type": "image",
-            "size": "$size",
-            "texture": "$hover_texture",
-            "alpha": "$alpha"
-        }
-      },
-      {
-        "pressed_state": {
-            "type": "image",
-            "size": "$size",
-            "texture": "$hover_texture",
-            "alpha": "$alpha"
+        "close_button": {
+          "type": "button",
+          "size": [14, 14],
+          "anchor_from": "top_right",
+          "anchor_to": "top_right",
+          "sound_name": "random.click",
+
+          "focus_enabled": true,
+          "focus_identifier": "shop_panel_close_button_focus_id",
+
+          "default_control": "default_state",
+          "hover_control": "hover_state",
+          "pressed_control": "pressed_state",
+
+          "$default_texture": "textures/ui/panels/main_panel/close_button",
+          "$hover_texture": "textures/ui/panels/main_panel/close_button_hover",
+          "$alpha": 1,
+          "$size": [16, 16],
+          "button_mappings": [
+            {
+              "mapping_type": "pressed",
+              "from_button_id": "button.menu_select",
+              "to_button_id": "button.menu_exit"
+            },
+            {
+              "mapping_type": "focused",
+              "from_button_id": "button.menu_ok",
+              "to_button_id": "button.menu_exit"
+            }
+          ],
+          "controls": [
+            {
+              "background_image@shop_panel.background_image": {
+                  "alpha": 1
+              }
+            },
+            {
+              "default_state": {
+                  "type": "image",
+                  "size": "$size",
+                  "texture": "$default_texture",
+                  "alpha": "$alpha"
+              }
+            },
+            {
+              "hover_state": {
+                  "type": "image",
+                  "size": "$size",
+                  "texture": "$hover_texture",
+                  "alpha": "$alpha"
+              }
+            },
+            {
+              "pressed_state": {
+                  "type": "image",
+                  "size": "$size",
+                  "texture": "$hover_texture",
+                  "alpha": "$alpha"
+              }
+            }
+          ]
         }
       }
     ]
