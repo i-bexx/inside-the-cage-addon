@@ -159,7 +159,6 @@
                 "$focus_change_left|default": "FOCUS_OVERRIDE_STOP",
 
                 "focus_enabled": true,
-                "use_last_focus": true,
                 "focus_identifier": "$focus_identifier",
                 "focus_change_up": "$focus_change_up",
                 "focus_change_down": "$focus_change_down",
