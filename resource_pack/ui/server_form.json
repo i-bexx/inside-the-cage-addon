@@ -57,7 +57,7 @@
             { "background_image@main_panel.background_image": {} },
             { "content_stack@main_panel.content_stack": {} },
             {
-              "close_button@main_panel.close_button": {
+              "close_button_container@main_panel.close_button_container": {
                 "offset": [8, -8],
                 "layer": 64
               }
@@ -90,7 +90,7 @@
             { "background_image@shop_panel.background_image": {} },
             { "content_stack@shop_panel.content_stack": {} },
             {
-              "close_button@shop_panel.close_button": {
+              "close_button_container@shop_panel.close_button_container": {
                 "offset": [8, -8],
                 "layer": 64
               }
