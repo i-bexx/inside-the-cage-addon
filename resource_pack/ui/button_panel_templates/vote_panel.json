@@ -80,6 +80,7 @@
                 "sound_name": "random.click",
 
                 "focus_enabled": true,
+                "focus_wrap_enabled": true, // This does not work for panels
                 
                 "default_control": "default_state",
                 "hover_control": "hover_state",

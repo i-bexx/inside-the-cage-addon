@@ -84,8 +84,8 @@
     "type": "panel",
     "offset": [8, -8],
     "layer": 64,
-    "$focus_identifier|default": "main_panel_close_button_focus_id",
-    "$button_down_name|default": "first_button",
+    "$focus_identifier|default": "",
+    "$button_down_name|default": "",
 
     "focus_container": true,
     "focus_navigation_mode_right": "stop",

@@ -12,8 +12,8 @@
         "scrolling_panel@common.scrolling_panel": {
           "anchor_from": "center",
           "anchor_to": "center",
-          "$show_background": false,
           "size": [ "100%", "100%" ],
+          "$show_background": false,
           "$scrolling_content": "shop_panel.button_creator",
           "$scroll_size": [ 5, "100% - 4px" ],
           "$scrolling_pane_size": [ "100% - 4px", "100% - 2px" ],
@@ -251,9 +251,11 @@
                 "anchor_to": "top_left",
                 "size": [ "100%", "100%" ],
                 "sound_name": "random.click",
-                "$focus_identifier|default": "",
+
                 "focus_enabled": true,
+                "$focus_identifier|default": "",
                 "focus_identifier": "$focus_identifier",
+
                 "default_control": "default_state",
                 "hover_control": "hover_state",
                 "pressed_control": "pressed_state",
