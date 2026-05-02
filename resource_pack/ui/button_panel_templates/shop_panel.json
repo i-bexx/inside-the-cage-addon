@@ -35,7 +35,7 @@
           "size": ["100%", 74], 
           "controls": [
             {
-              "creator_1": {
+              "shop_button_container_1": {
                 "type": "stack_panel",
                 "orientation": "horizontal",
                 "size": ["100%c", 74], 
@@ -50,7 +50,7 @@
                 "focus_navigation_mode_up": "none",
                 "focus_container_custom_down": [
                   {
-                    "other_focus_container_name": "creator_2"
+                    "other_focus_container_name": "shop_button_container_2"
                   }
                 ],
                 "controls": [
@@ -93,7 +93,7 @@
           "size": ["100%", 74],
           "controls": [
             {
-              "creator_2": {
+              "shop_button_container_2": {
                 "type": "stack_panel",
                 "orientation": "horizontal",
                 "size": ["100%c", 74],
@@ -108,12 +108,12 @@
                 "focus_navigation_mode_up": "custom",
                 "focus_container_custom_down": [
                   {
-                    "other_focus_container_name": "creator_3"
+                    "other_focus_container_name": "shop_button_container_3"
                   }
                 ],
                 "focus_container_custom_up": [
                   {
-                    "other_focus_container_name": "creator_1"
+                    "other_focus_container_name": "shop_button_container_1"
                   }
                 ],
                 "controls": [
@@ -156,7 +156,7 @@
           "size": ["100%", 74],
           "controls": [
             {
-              "creator_3": {
+              "shop_button_container_3": {
                 "type": "stack_panel",
                 "orientation": "horizontal",
                 "size": ["100%c", 74],
@@ -171,7 +171,7 @@
                 "focus_navigation_mode_up": "custom",
                 "focus_container_custom_up": [
                   {
-                    "other_focus_container_name": "creator_2"
+                    "other_focus_container_name": "shop_button_container_2"
                   }
                 ],
                 "controls": [
