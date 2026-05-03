@@ -21,7 +21,6 @@
     "focus_container": true,
     "focus_navigation_mode_left": "contained",
     "focus_navigation_mode_right": "contained",
-    "default_focus_precedence": 1,
     
     "grid_dimensions": [1, 2],
     "maximum_grid_items": 2,

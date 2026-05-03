@@ -64,7 +64,7 @@
             {
               "close_button_container_detailed@button_elements_template.close_button_container_detailed": {
                 "$focus_identifier": "main_panel_close_button_focus_id",
-                "$button_down_name": "main_shop_button"
+                "$other_focus_container_name": "main_shop_button"
               }
             }
           ]
@@ -102,7 +102,7 @@
             {
               "close_button_container_detailed@button_elements_template.close_button_container_detailed": {
                 "$focus_identifier": "shop_panel_close_button_focus_id",
-                "$button_down_name": "shop_button_container_1"
+                "$other_focus_container_name": "shop_button_container_1"
               }
             }
           ]

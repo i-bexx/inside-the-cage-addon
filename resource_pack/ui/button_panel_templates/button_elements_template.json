@@ -25,6 +25,7 @@
           "pressed_control": "pressed_state",
 
           "focus_enabled": true,
+          "default_focus_precedence": 1,
           "focus_identifier": "$focus_identifier",
 
           "$default_texture": "textures/ui/panels/main_panel/close_button",
@@ -88,13 +89,14 @@
     "$button_down_name|default": "",
 
     "focus_container": true,
+    "default_focus_precedence": 1,
     "focus_navigation_mode_right": "stop",
     "focus_navigation_mode_left": "stop",
     "focus_navigation_mode_up": "stop",
     "focus_navigation_mode_down": "custom",
     "focus_container_custom_down": [
       {
-        "other_focus_container_name": "$button_down_name"
+        "other_focus_container_name": "$other_focus_container_name"
       }
     ],
     "controls": [

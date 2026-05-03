@@ -15,13 +15,15 @@
             "controls": [
               {
                 "main_shop_button@main_panel.button_panel": {
+                  "collection_index": 0,
                   "$image_size": [64, 64],
                   "$padding_size": [138, 156],
                   "$must_show_hover_text": false,
+
+                  "$default_focus_precedence": 5,
                   "$focus_identifier": "main_shop_button_focus_id",
                   "$focus_change_up": "main_panel_close_button_focus_id",
-                  "$focus_change_right": "main_vote_button_focus_id",
-                  "collection_index": 0
+                  "$focus_change_right": "main_vote_button_focus_id"
                 }
               },
               {
@@ -33,36 +35,43 @@
                   "controls": [
                     {
                       "main_vote_button@main_panel.button_panel": {
+                        "collection_index": 1,
                         "$padding_size": [148, 52],
                         "$must_show_hover_text": false,
+
+                        "$default_focus_precedence": 4,
                         "$focus_identifier": "main_vote_button_focus_id",
                         "$focus_change_up": "main_panel_close_button_focus_id",
                         "$focus_change_left": "main_shop_button_focus_id",
-                        "$focus_change_down": "main_battery_button_focus_id",
-                        "collection_index": 1
+                        "$focus_change_down": "main_battery_button_focus_id"
                       }
                     },
                     {
                       "main_battery_button@main_panel.button_panel": {
+                        "collection_index": 2,
                         "$padding_size": [148, 52],
                         "$icon_size": [96, 48],
                         "$must_show_hover_text": true,
+
+                        "$default_focus_precedence": 3,
                         "$focus_identifier": "main_battery_button_focus_id",
                         "$focus_change_left": "main_shop_button_focus_id",
                         "$focus_change_down": "main_stamina_button_focus_id",
-                        "$focus_change_up": "main_vote_button_focus_id",
-                        "collection_index": 2
+                        "$focus_change_up": "main_vote_button_focus_id"
                       }
                     },
                     {
                       "main_stamina_button@main_panel.button_panel": {
+                        "collection_index": 3,
+
                         "$padding_size": [148, 52],
                         "$icon_size": [96, 48],
                         "$must_show_hover_text": true,
+
+                        "$default_focus_precedence": 2,
                         "$focus_identifier": "main_stamina_button_focus_id",
                         "$focus_change_left": "main_shop_button_focus_id",
-                        "$focus_change_up": "main_battery_button_focus_id",
-                        "collection_index": 3
+                        "$focus_change_up": "main_battery_button_focus_id"
                       }
                     }
                   ]
@@ -154,12 +163,14 @@
                 "layer": 10,
 
                 "$focus_identifier|default": "",
+                "$default_focus_precedence|default": 0,
                 "$focus_change_up|default": "FOCUS_OVERRIDE_STOP",
                 "$focus_change_down|default": "FOCUS_OVERRIDE_STOP",
                 "$focus_change_right|default": "FOCUS_OVERRIDE_STOP",
                 "$focus_change_left|default": "FOCUS_OVERRIDE_STOP",
 
                 "focus_enabled": true,
+                "default_focus_precedence": "$default_focus_precedence",
                 "focus_identifier": "$focus_identifier",
                 "focus_change_up": "$focus_change_up",
                 "focus_change_down": "$focus_change_down",
