@@ -26,14 +26,27 @@
     "type": "panel",
     "size": ["100%", "100%"],
     "controls": [
-      { "other_panels@server_form.other_panels": {} },
       { "main_panel@server_form.main_panel": {} },
       { "shop_panel@server_form.shop_panel": {} },
       { "vote_panel@server_form.vote_panel": {} },
+      { "question_panel@server_form.question_panel": {} },
 
-      { "question_panel@server_form.question_panel": {} }
+      { "other_panels@server_form.other_panels": {} }
     ]   
   },
+
+  "custom_form": {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "$text_name": "custom_text",
+    "$text_name_reference": "button_elements_template.custom_text",
+    "controls": [
+      { "password_panel@server_form.password_panel": {} }
+    ]   
+  },
+
+
+  // LONG FORM PANELS
 
   "main_panel": {
     "type": "panel",
@@ -95,7 +108,7 @@
             { "background_image@button_elements_template.background_image": {} },
             {
               "content_stack@button_elements_template.content_stack": {
-                "$container_name": "main_panel_container",
+                "$container_name": "shop_panel_container",
                 "$container_reference": "shop_panel.shop_panel_container"
               }
             },
@@ -206,6 +219,42 @@
         "binding_type": "view",
         "source_property_name": "(#title_text = '' and #form_text = '')",
         "target_property_name": "#visible"
+      }
+    ]
+  },
+
+  // CUSTOM FORM PANELS
+
+  "password_panel": {
+    "type": "panel",
+    "size": [284, 190],
+    "layer": 2,
+    "bindings": [
+      {
+        "binding_type": "view",
+        "binding_name": "#title_text",
+        "source_property_name": "(#title_text = 'PASSWORD PANEL')",
+        "target_property_name": "#visible"
+      }
+    ],
+    "controls": [
+      { "background_image@button_elements_template.background_image": {} },
+      { "label_text@button_elements_template.label_text": {} },
+      {
+        "content_stack@button_elements_template.content_stack": {
+          "$container_name": "password_panel_container",
+          "$container_reference": "password_panel.password_panel_container",
+
+          "$text_name": "custom_text",
+          "$text_name_reference": "button_elements_template.custom_text"
+        }
+      },
+      {
+        "close_button_container_detailed@button_elements_template.close_button_container_detailed": {
+          "$focus_identifier": "password_panel_close_button_focus_id",
+          "$default_focus_precedence": 1,
+          "$other_focus_container_name": "password_submit_button" // SONRADAN EDIT BOXA ÇEVİR
+        }
       }
     ]
   }
