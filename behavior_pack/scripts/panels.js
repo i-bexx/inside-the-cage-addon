@@ -1,5 +1,5 @@
 import { world, system } from "@minecraft/server";
-import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
+import { ActionFormData, ModalFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 import { votePanel } from "./voteManager";
 import { getGameStartedObjective, getCoinAmountObjective, getStaminaLimitObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
@@ -10,6 +10,26 @@ const PANELS = [ shopPanel, votePanel, upgradeBattery, increaseStaminaLimit ];
 const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_bomb": 6, "game:ammo": 1, "battery": 3 };
 
 let timeoutId = 0;
+
+function customPanel(player) {
+    new ModalFormData()
+    .title("PASSWORD PANEL")
+    .textField("Enter Password", "Type here...")
+    .submitButton("Submit")
+        .show(player).then(({ cancelationReason, canceled, selection }) => {
+            if (cancelationReason === FormCancelationReason.UserBusy) {
+                return customPanel(player);
+            }
+            if (canceled) return;
+
+            const isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
+            if (isGameStarted == 0) {
+                player.sendMessage(" §6[§e!§6] §c§lPanel is currently locked!");
+                player.playSound("note.bass");
+                return;
+            }
+    })
+}
 
 function mainPanel(player) {
  	new ActionFormData()
@@ -144,8 +164,8 @@ export function getPanelItemCountdownId() {
 world.afterEvents.itemUse.subscribe((eventData) => {
       const { source, itemStack } = eventData
       
-      if (itemStack.typeId != "minecraft:compass") return;
-      mainPanel(source);
+      if (itemStack.typeId == "minecraft:compass") mainPanel(source);
+      else if (itemStack.typeId == "minecraft:gold_ingot") customPanel(source);
 })
 
 
