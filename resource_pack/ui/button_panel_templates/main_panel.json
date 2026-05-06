@@ -18,7 +18,7 @@
                   "collection_index": 0,
                   "$image_size": [64, 64],
                   "$padding_size": [138, 156],
-                  "$must_show_hover_text": false,
+                  "$show_hover_text_renderer": false,
 
                   "$default_focus_precedence": 5,
                   "$focus_identifier": "main_shop_button_focus_id",
@@ -37,7 +37,7 @@
                       "main_vote_button@button_elements_template.button_panel": {
                         "collection_index": 1,
                         "$padding_size": [148, 52],
-                        "$must_show_hover_text": false,
+                        "$show_hover_text_renderer": false,
 
                         "$default_focus_precedence": 4,
                         "$focus_identifier": "main_vote_button_focus_id",
@@ -51,7 +51,7 @@
                         "collection_index": 2,
                         "$padding_size": [148, 52],
                         "$icon_size": [96, 48],
-                        "$must_show_hover_text": true,
+                        "$show_hover_text_renderer": true,
 
                         "$default_focus_precedence": 3,
                         "$focus_identifier": "main_battery_button_focus_id",
@@ -66,7 +66,7 @@
 
                         "$padding_size": [148, 52],
                         "$icon_size": [96, 48],
-                        "$must_show_hover_text": true,
+                        "$show_hover_text_renderer": true,
 
                         "$default_focus_precedence": 2,
                         "$focus_identifier": "main_stamina_button_focus_id",
@@ -79,34 +79,6 @@
               }
             ]
         }
-      }
-    ]
-  },
-  
-
-  "hover_text_renderer": {
-    "type": "custom",
-    "renderer": "hover_text_renderer",
-    "layer": 128,
-    "allow_clipping": false,
-
-    "$hover_text|default": "Price: §e7 §fCoins\n------------\nClick to buy",
-    "$must_show_hover_text_final|default": false,
-
-    "property_bag": {
-      "#text_value": "$hover_text",
-      "#render_hover_text": "$must_show_hover_text_final"
-    },
-    "bindings": [
-      {
-        "binding_type": "view",
-        "source_property_name": "#text_value",
-        "target_property_name": "#hover_text"
-      },
-      {
-        "binding_type": "view",
-        "source_property_name": "#render_hover_text",
-        "target_property_name": "#visible"
       }
     ]
   }
