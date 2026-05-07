@@ -53,7 +53,7 @@
     "$pressed_button_texture": "textures/ui/pause_screen/social/background_pressed",
     
     "$light_border_default_color": "textures/ui/focus_border_black",
-    "$light_border_hover_color": "textures/ui/focus_border_white",
+    "$button_light_borders": "textures/ui/focus_border_white",
 
     "$enable_directional_toggling|default": false,
     "$toggle_on_button|default": "toggle.toggle_on",
@@ -103,7 +103,7 @@
             {
               "hover_border_image": {
                 "type": "image",
-                "texture": "$light_border_hover_color"
+                "texture": "$button_light_borders"
               }
             },
             { "hover_text_renderer@pause_social.hover_text_renderer": {} }
@@ -124,7 +124,7 @@
             {
               "pressed_border_image": {
                 "type": "image",
-                "texture": "$light_border_hover_color"
+                "texture": "$button_light_borders"
               }
             }
           ]
@@ -144,7 +144,7 @@
             {
               "pressed_border_image": {
                 "type": "image",
-                "texture": "$light_border_hover_color"
+                "texture": "$button_light_borders"
               }
             },
             { "hover_text_renderer@pause_social.hover_text_renderer": {} }

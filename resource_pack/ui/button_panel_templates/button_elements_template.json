@@ -9,19 +9,14 @@
 
     "focus_container": true,
 
-    "$button_panel_control_path|default": "button_elements_template.main_panel_buttons",
-    "$button_panel_control_name|default": "main_panel_buttons",
+    "$button_panel_control_path|default": "button_elements_template.buttons_template",
+    "$button_panel_control_name|default": "buttons_template",
  
     "$padding_size|default": [74, 74],
     "$button_size|default": ["100% - 10px", "100% - 10px"],
     "$icon_size|default": ["50%", "100x%"],
     "$show_outer_text|default": true,
 
-    "$default_button_texture": "textures/ui/panels/main_panel/background",
-    "$hover_button_texture": "textures/ui/panels/main_panel/background_hover",
-    "$pressed_button_texture": "textures/ui/panels/main_panel/background_pressed",
-
-    "$light_border_hover_color": "textures/ui/focus_border_white",
     "controls": [
       {
         "button_ui": {
@@ -33,7 +28,7 @@
                 "type": "image",
                 "layer": 64,
                 "size": "$icon_size",
-                "bindings":[
+                "bindings": [
                   {
                     "binding_name": "#form_button_texture",
                     "binding_name_override": "#texture",
@@ -73,6 +68,8 @@
     "$default_button_texture": "textures/ui/panels/main_panel/background",
     "$hover_button_texture": "textures/ui/panels/main_panel/background_hover",
     "$pressed_button_texture": "textures/ui/panels/main_panel/background_pressed",
+    "$button_light_borders": "textures/ui/focus_border_white",
+    
     "controls": [
       {
         "container": {
@@ -84,7 +81,26 @@
                 "type": "image",
                 "layer": 200,
                 "size": ["50%", "50%"],
-                "offset": [0, -5]
+                "offset": [0, -5],
+                "bindings": [
+                  {
+                    "binding_name": "#form_button_texture",
+                    "binding_name_override": "#texture",
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons"
+                  },
+                  {
+                    "binding_name": "#form_button_texture_file_system",
+                    "binding_name_override": "#texture_file_system",
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not ((#texture = '') or (#texture = 'loading')))",
+                    "target_property_name": "#visible"
+                  }
+                ]
               }
             },
             {
@@ -143,6 +159,13 @@
                           }
                         },
                         {
+                          "hover_border_image": {
+                            "type": "image",
+                            "texture": "$button_light_borders",
+                            "layer": 32
+                          }
+                        },
+                        {
                           "hover_text": {
                             "type": "label",
                             "text": "#form_button_text",
@@ -170,6 +193,13 @@
                           "pressed_image": {
                             "type": "image",
                             "texture": "$pressed_button_texture"
+                          }
+                        },
+                        {
+                          "pressed_border_image": {
+                            "type": "image",
+                            "texture": "$button_light_borders",
+                            "layer": 32
                           }
                         },
                         {
@@ -225,26 +255,13 @@
 
     "$padding_size|default": ["100%", 32],
     "$button_size|default": ["100% - 10px", 22],
-
-    "$default_button_texture": "textures/ui/panels/main_panel/background",
-    "$hover_button_texture": "textures/ui/panels/main_panel/background_hover",
-    "$pressed_button_texture": "textures/ui/panels/main_panel/background_pressed",
-
-    "$light_border_hover_color": "textures/ui/focus_border_white",
+    
     "controls": [
       {
         "container": {
           "type": "panel",
           "size": "$button_size",
           "controls": [
-            {
-              "image": {
-                "type": "image",
-                "layer": 200,
-                "size": ["50%", "50%"],
-                "offset": [0, -5]
-              }
-            },
             { "password_submit_button@password_submit_button": {} }
           ]
         }
@@ -271,6 +288,11 @@
 
     "$focus_identifier|default": "",
     "$default_focus_precedence|default": 0,
+
+    "$default_button_texture|default": "textures/ui/panels/main_panel/background",
+    "$hover_button_texture|default": "textures/ui/panels/main_panel/background_hover",
+    "$pressed_button_texture|default": "textures/ui/panels/main_panel/background_pressed",
+    "$button_light_borders|default": "textures/ui/focus_border_white",
     
     "focus_enabled": true,
     "focus_identifier": "$focus_identifier",
@@ -337,7 +359,7 @@
             {
               "hover_border_image": {
                 "type": "image",
-                "texture": "$light_border_hover_color",
+                "texture": "$button_light_borders",
                 "layer": 32
               }
             },
@@ -376,7 +398,7 @@
             {
               "pressed_border_image": {
                 "type": "image",
-                "texture": "$light_border_hover_color",
+                "texture": "$button_light_borders",
                 "layer": 32
               }
             },
@@ -423,7 +445,6 @@
     "$focus_change_right|default": "FOCUS_OVERRIDE_STOP",
     "$focus_change_left|default": "FOCUS_OVERRIDE_STOP",
 
-    "focus_identifier": "$focus_identifier",
     "focus_change_up": "$focus_change_up",
     "focus_change_down": "$focus_change_down",
     "focus_change_right": "$focus_change_right",
@@ -731,11 +752,11 @@
     "layer": 128,
     "allow_clipping": false,
 
-    "$hover_text|default": "Price: §e7 §fCoins\n------------\nClick to buy",
+    "$custom_hover_text|default": "",
     "$show_hover_text_renderer|default": false,
 
     "property_bag": {
-      "#text_value": "$hover_text",
+      "#text_value": "$custom_hover_text",
       "#render_hover_text": "$show_hover_text_renderer"
     },
     "bindings": [
