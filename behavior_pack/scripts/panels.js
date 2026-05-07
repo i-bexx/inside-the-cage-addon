@@ -16,7 +16,7 @@ function customPanel(player) {
     .title("PASSWORD PANEL")
     .textField("Enter Password", "Type here...")
     .submitButton("Submit")
-        .show(player).then(({ cancelationReason, canceled, selection }) => {
+        .show(player).then(({ cancelationReason, canceled, formValues }) => {
             if (cancelationReason === FormCancelationReason.UserBusy) {
                 return customPanel(player);
             }
@@ -27,6 +27,16 @@ function customPanel(player) {
                 player.sendMessage(" §6[§e!§6] §c§lPanel is currently locked!");
                 player.playSound("note.bass");
                 return;
+            }
+
+            const passwordInput = formValues[0];
+            
+            if (passwordInput === "1234") {
+                player.playSound("random.orb");
+                // FUNCTION
+            } else {
+                player.sendMessage(" §c[!] Incorrect Password!");
+                player.playSound("note.bass");
             }
     })
 }
