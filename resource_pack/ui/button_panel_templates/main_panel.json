@@ -5,6 +5,10 @@
     "type": "panel",
     "size": ["100%", "100%"],
     "offset": [0, 10],
+
+    "$button_panel_control_path": "button_elements_template.main_panel_buttons",
+    "$button_panel_control_name": "main_panel_buttons",
+
     "controls": [
       {
         "main_stack_panel": {
@@ -16,6 +20,7 @@
               {
                 "main_shop_button@button_elements_template.button_panel": {
                   "collection_index": 0,
+                  
                   "$image_size": [64, 64],
                   "$padding_size": [138, 156],
                   "$show_hover_text_renderer": false,
@@ -36,6 +41,7 @@
                     {
                       "main_vote_button@button_elements_template.button_panel": {
                         "collection_index": 1,
+
                         "$padding_size": [148, 52],
                         "$show_hover_text_renderer": false,
 
@@ -49,9 +55,12 @@
                     {
                       "main_battery_button@button_elements_template.button_panel": {
                         "collection_index": 2,
+
                         "$padding_size": [148, 52],
                         "$icon_size": [96, 48],
+
                         "$show_hover_text_renderer": true,
+                        "$custom_hover_text": "Price: §e7 §fCoins\n------------\nClick to buy",
 
                         "$default_focus_precedence": 3,
                         "$focus_identifier": "main_battery_button_focus_id",
@@ -66,7 +75,9 @@
 
                         "$padding_size": [148, 52],
                         "$icon_size": [96, 48],
+
                         "$show_hover_text_renderer": true,
+                        "$custom_hover_text": "Price: §e7 §fCoins\n------------\nClick to buy",
 
                         "$default_focus_precedence": 2,
                         "$focus_identifier": "main_stamina_button_focus_id",
