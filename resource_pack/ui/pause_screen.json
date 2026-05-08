@@ -115,8 +115,7 @@
     "size": [ "100%c", "100%c" ],
     "controls": [
       {
-        "friendsdrawer_button@friendsbutton.button": {
-          "$pressed_button_name": "button.friends_drawer",
+        "friendsdrawer_button@friendsbutton.button_base": {
           "focus_change_up": "profile_button",
           "focus_change_right": "FOCUS_OVERRIDE_STOP",
           "focus_change_left": "social_media_focus_id",
@@ -131,6 +130,7 @@
           ]
         }
       },
+      { "friendsdrawer_button_badge@friendsbutton.social_notification_icon_panel": {} },
       {
         "friends_drawer_ftue_popup_wrapper": {
           "type": "panel",
