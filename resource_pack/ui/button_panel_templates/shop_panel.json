@@ -29,7 +29,6 @@
     "orientation": "vertical",
     "size": ["100%", "100%c"], 
     
-    "$show_outer_text": false,
     "$button_panel_control_path": "button_elements_template.shop_panel_buttons",
     "$button_panel_control_name": "shop_panel_buttons",
     "controls": [
