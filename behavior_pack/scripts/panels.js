@@ -23,12 +23,12 @@ function customPanel(player) {
             }
             if (canceled) return;
 
-           /* const isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
+           const isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
             if (isGameStarted == 0) {
                 player.sendMessage(" §6[§e!§6] §c§lPanel is currently locked!");
                 player.playSound("note.bass");
                 return;
-            }*/
+            }
 
             const firstPasswordInput = formValues[0];
             const secondPasswordInput = formValues[1];
