@@ -14,7 +14,8 @@ let timeoutId = 0;
 function customPanel(player) {
     new ModalFormData()
     .title("PASSWORD PANEL")
-    .textField("Enter Password", "Type here...")
+    .textField("First Password", "Type here...")
+    .textField("Second Password", "Type here...")
     .submitButton("Submit")
         .show(player).then(({ cancelationReason, canceled, formValues }) => {
             if (cancelationReason === FormCancelationReason.UserBusy) {
@@ -22,16 +23,17 @@ function customPanel(player) {
             }
             if (canceled) return;
 
-            const isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
+           /* const isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
             if (isGameStarted == 0) {
                 player.sendMessage(" §6[§e!§6] §c§lPanel is currently locked!");
                 player.playSound("note.bass");
                 return;
-            }
+            }*/
 
-            const passwordInput = formValues[0];
+            const firstPasswordInput = formValues[0];
+            const secondPasswordInput = formValues[1];
             
-            if (passwordInput === "1234") {
+            if (firstPasswordInput === "1234" && secondPasswordInput === "1234") {
                 player.playSound("random.orb");
                 // FUNCTION
             } else {
