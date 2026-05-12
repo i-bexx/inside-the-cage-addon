@@ -1,0 +1,90 @@
+{
+  "namespace": "action_form_panels",
+
+  "button_panel": {
+    "type": "panel",
+    "size": "$padding_size",
+
+    "focus_container": true,
+
+    "$button_control_path|default": "action_form_buttons.buttons_template",
+    "$button_control_name|default": "buttons_template",
+ 
+    "$padding_size|default": [74, 74],
+    "$button_size|default": ["100% - 10px", "100% - 10px"],
+    "$icon_size|default": ["50%", "100x%"],
+
+    "controls": [
+      {
+        "button_ui": {
+          "type": "panel",
+          "size": "$button_size",
+          "controls": [
+            {
+              "image": {
+                "type": "image",
+                "layer": 64,
+                "size": "$icon_size",
+                "bindings": [
+                  {
+                    "binding_name": "#form_button_texture",
+                    "binding_name_override": "#texture",
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons"
+                  },
+                  {
+                    "binding_name": "#form_button_texture_file_system",
+                    "binding_name_override": "#texture_file_system",
+                    "binding_type": "collection",
+                    "binding_collection_name": "form_buttons"
+                  },
+                  {
+                    "binding_type": "view",
+                    "source_property_name": "(not ((#texture = '') or (#texture = 'loading')))",
+                    "target_property_name": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "$button_control_name@$button_control_path": {}
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "button_panel_small": {
+    "type": "panel",
+    "size": "$padding_size",
+
+    "$padding_size|default": [248, 52],
+    "$button_size|default": ["100% - 10px", "100% - 10px"],
+
+    "$default_button_texture": "textures/ui/panels/main_panel/background",
+    "$hover_button_texture": "textures/ui/panels/main_panel/background_hover",
+    "$pressed_button_texture": "textures/ui/panels/main_panel/background_pressed",
+    "$button_light_borders": "textures/ui/focus_border_white",
+
+    "$focus_wrap_enabled|default": false,
+    
+    "controls": [
+      {
+        "container": {
+          "type": "panel",
+          "size": ["100% - 10px", "100% - 10px"],
+          "controls": [
+            {
+              "small_button@action_form_buttons.buttons_template": {
+                "size": "$button_size",
+                "focus_wrap_enabled": "$focus_wrap_enabled",
+                "$button_text_anchors": "center"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

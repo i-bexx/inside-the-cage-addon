@@ -26,7 +26,7 @@
     
     "grid_dimensions": [1, 2],
     "maximum_grid_items": 2,
-    "grid_item_template": "button_elements_template.button_panel_small",
+    "grid_item_template": "action_form_panels.button_panel_small",
     "collection_name": "form_buttons"
   }
 }

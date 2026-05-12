@@ -29,8 +29,8 @@
     "orientation": "vertical",
     "size": ["100%", "100%c"], 
     
-    "$button_panel_control_path": "button_elements_template.shop_panel_buttons",
-    "$button_panel_control_name": "shop_panel_buttons",
+    "$button_control_path": "shop_panel.shop_panel_buttons",
+    "$button_control_name": "shop_panel_buttons",
     "controls": [
       {
         "row_1_wrapper": {
@@ -58,7 +58,7 @@
                 ],
                 "controls": [
                   {
-                    "gun_button@button_elements_template.button_panel": {
+                    "gun_button@action_form_panels.button_panel": {
                       "collection_index": 0,
 
                       "$hover_text": "§l§e4 Coins",
@@ -67,7 +67,7 @@
                     }
                   },
                   {
-                    "knife_button@button_elements_template.button_panel": {
+                    "knife_button@action_form_panels.button_panel": {
                       "collection_index": 1,
 
                       "$hover_text": "§l§e2 Coins",
@@ -76,7 +76,7 @@
                     }
                   },
                   {
-                    "kit_button@button_elements_template.button_panel": {
+                    "kit_button@action_form_panels.button_panel": {
                       "collection_index": 2,
 
                       "$hover_text": "§l§e7 Coins",
@@ -127,7 +127,7 @@
                 ],
                 "controls": [
                   {
-                    "toxic_bomb_button@button_elements_template.button_panel": {
+                    "toxic_bomb_button@action_form_panels.button_panel": {
                       "collection_index": 3,
 
                       "$hover_text": "§l§e6 Coins",
@@ -136,7 +136,7 @@
                     }
                   },
                   {
-                    "ammo_button@button_elements_template.button_panel": {
+                    "ammo_button@action_form_panels.button_panel": {
                       "collection_index": 4,
 
                       "$hover_text": "§l§e1 Coin",
@@ -145,7 +145,7 @@
                     }
                   },
                   {
-                    "battery_button@button_elements_template.button_panel": {
+                    "battery_button@action_form_panels.button_panel": {
                       "collection_index": 5,
                       
                       "$hover_text": "§l§e3 Coins",
@@ -191,7 +191,7 @@
                 ],
                 "controls": [
                   {
-                    "btn_6@button_elements_template.button_panel": {
+                    "btn_6@action_form_panels.button_panel": {
                       "collection_index": 6,
 
                       "$hover_text": "§l§e... Coins",
@@ -200,7 +200,7 @@
                     }
                   },
                   {
-                    "btn_7@button_elements_template.button_panel": {
+                    "btn_7@action_form_panels.button_panel": {
                       "collection_index": 7,
 
                       "$hover_text": "§l§e... Coins",
@@ -209,7 +209,7 @@
                     }
                   },
                   {
-                    "btn_8@button_elements_template.button_panel": {
+                    "btn_8@action_form_panels.button_panel": {
                       "collection_index": 8,
                       
                       "$hover_text": "§l§e... Coins",
@@ -224,5 +224,10 @@
         }
       }
     ]
+  },
+
+
+  "shop_panel_buttons@action_form_buttons.buttons_template": {
+    "$offset": [ 0, -2 ]
   }
 }
