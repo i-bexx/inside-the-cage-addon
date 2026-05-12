@@ -1,0 +1,35 @@
+{
+  "namespace": "modal_form_buttons",
+
+  "submit_button@action_form_buttons.buttons_template": {
+    "size": ["100%", 32],
+    "offset": [ 0, 10 ],
+
+    "$default_text": "#submit_text",
+    "$hover_text": "#submit_text",
+    "$button_text_anchors": "center",
+
+    "bindings": [
+      {
+        "binding_name": "#submit_button_visible",
+        "binding_name_override": "#visible"
+      },
+      {
+        "binding_name": "#submit_text",
+        "binding_condition": "once"
+      }
+    ],
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_select",
+        "to_button_id": "button.submit_custom_form",
+        "mapping_type": "pressed"
+      },
+      {
+        "from_button_id": "button.menu_ok",
+        "to_button_id": "button.submit_custom_form",
+        "mapping_type": "focused"
+      }
+    ]
+  }
+}

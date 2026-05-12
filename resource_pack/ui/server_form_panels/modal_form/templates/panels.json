@@ -1,0 +1,223 @@
+{
+  "namespace": "modal_form_panels",
+
+  "text_field_panel": {
+    "type": "stack_panel",
+    "size": ["100%", "100%c"],
+    "orientation": "vertical",
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+
+    "controls": [
+      {
+        "label": {
+          "type": "label",
+          "text": "#custom_text",
+          "bindings": [
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "custom_form",
+              "binding_name": "#custom_text"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(not (#custom_text = ''))",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "space_1": {
+          "type": "panel",
+          "size": ["100%", 4]
+        }
+      },
+      {
+        "input": {
+          "type": "edit_box",
+          "size": ["100%", 30],
+
+          "focus_enabled": true,
+
+          "default_control": "default",
+          "hover_control": "hover",
+          "pressed_control": "pressed",
+
+          "max_length": 4,
+          "text_box_name": "custom_input",
+          "text_control": "display_text",
+          "place_holder_control": "place_holder",
+          "text_edit_box_grid_collection_name": "custom_form",
+
+          "controls": [
+            { "default@common.edit_box_indent": {} },
+            { "hover@common.edit_box_indent_hover": {} },
+            { "pressed@common.edit_box_indent_hover": {} },
+            {
+              "display_text": {
+                "type": "label",
+                "anchor_from": "left_middle",
+                "anchor_to": "left_middle",
+                "offset": [ 4, 0 ],
+                "layer": 2,
+
+                "text": "#item_name",
+                "color": [ 1.0, 1.0, 1.0 ],
+                "text_alignment": "left",
+                
+                "bindings": [
+                  {
+                    "binding_type": "none",
+                    "binding_collection_name": "",
+                    "binding_collection_prefix": ""
+                  },
+                  {
+                    "binding_type": "collection",
+                    "binding_collection_name": "custom_form",
+                    "binding_name": "#custom_input_text",
+                    "binding_name_override": "#item_name",
+                    "binding_condition": "visible"
+                  },
+                  {
+                    "binding_type": "none",
+                    "binding_name": "#edit_box_text_color",
+                    "binding_name_override": "#color"
+                  },
+                  {
+                    "binding_name": "#newline_refresh"
+                  }
+                ]
+              }
+            },
+            {
+              "place_holder": {
+                "type": "label",
+                "text": "#custom_placeholder_text",
+                "color": [0.6, 0.6, 0.6], 
+                "offset": [4, 0],
+                "layer": 2,
+                "anchor_from": "left_middle",
+                "anchor_to": "left_middle",
+                "bindings": [
+                  {
+                    "binding_type": "view",
+                    "resolve_sibling_scope": true,
+                    "source_control_name": "display_text",
+                    "source_property_name": "(#item_name = '')",
+                    "target_property_name": "#visible"
+                  },
+                  {
+                    "binding_type": "collection",
+                    "binding_collection_name": "custom_form",
+                    "binding_name": "#custom_placeholder_text",
+                    "binding_condition": "visible"
+                  }
+                ]
+              }
+            }
+          ],
+          "bindings": [
+            {
+              "binding_type": "none",
+              "binding_collection_name": "",
+              "binding_collection_prefix": ""
+            },
+            {
+              "binding_type": "global",
+              "binding_collection_name": "custom_form",
+              "binding_name": "#custom_input_enabled",
+              "binding_name_override": "#enabled"
+            },
+            {
+              "binding_type": "none",
+              "binding_name": "#can_be_deselected",
+              "binding_name_override": "#can_be_deselected"
+            },
+            {
+              "binding_type": "none",
+              "binding_name": "#text_edit_box_focusable",
+              "binding_name_override": "#focus_enabled"
+            },
+            {
+              "binding_type": "none",
+              "binding_collection_name": "",
+              "binding_name": "#text_edit_box_visible",
+              "binding_name_override": "#visible"
+            },
+            {
+              "binding_type": "collection_details",
+              "binding_collection_name": "factory_collection",
+              "binding_collection_prefix": "factory"
+            },
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "custom_form",
+              "binding_name": "#custom_input_text"
+            },
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "custom_form",
+              "binding_name": "#custom_text"
+            }
+          ],
+          "button_mappings": [
+            {
+              "from_button_id": "button.menu_select",
+              "to_button_id": "button.text_edit_box_selected",
+              "handle_select": true,
+              "handle_deselect": false,
+              "mapping_type": "pressed"
+            },
+            {
+              "from_button_id": "button.menu_select",
+              "to_button_id": "button.text_edit_box_deselected",
+              "handle_select": false,
+              "handle_deselect": true,
+              "consume_event": false,
+              "mapping_type": "global"
+            },
+            {
+              "from_button_id": "button.menu_ok",
+              "to_button_id": "button.text_edit_box_selected",
+              "handle_select": true,
+              "handle_deselect": true,
+              "mapping_type": "pressed"
+            },
+            {
+              "from_button_id": "button.menu_ok",
+              "to_button_id": "button.text_edit_box_selected",
+              "handle_select": false,
+              "handle_deselect": true,
+              "mapping_type": "global"
+            },
+            {
+              "from_button_id": "button.menu_cancel",
+              "to_button_id": "button.text_edit_box_deselected",
+              "handle_select": false,
+              "handle_deselect": true,
+              "mapping_type": "global"
+            },
+            {
+              "to_button_id": "button.text_edit_box_hovered",
+              "mapping_type": "pressed"
+            },
+            {
+              "from_button_id": "button.menu_clear",
+              "to_button_id": "button.text_edit_box_clear",
+              "handle_select": false,
+              "handle_deselect": false,
+              "mapping_type": "focused"
+            }
+          ]
+        }
+      },
+      {
+        "space_2": {
+          "type": "panel",
+          "size": ["100%", 8]
+        }
+      }
+    ]
+  }
+}

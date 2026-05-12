@@ -11,6 +11,7 @@
       { "button_creator@vote_panel.button_creator": {} }
     ]
   },
+  
   "button_creator": {
     "type": "grid",
     "size": [248, "100%c"],
@@ -25,7 +26,7 @@
     
     "grid_dimensions": [1, 3],
     "maximum_grid_items": 3,
-    "grid_item_template": "button_elements_template.button_panel_small",
+    "grid_item_template": "action_form_panels.button_panel_small",
     "collection_name": "form_buttons"
   }
 }

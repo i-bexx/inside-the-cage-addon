@@ -20,12 +20,18 @@
     "ui/main_screen/stamina/stamina_bar_anims.json",
 
 
-    "ui/button_panel_templates/main_panel.json",
-    "ui/button_panel_templates/shop_panel.json",
-    "ui/button_panel_templates/vote_panel.json",
-    "ui/button_panel_templates/question_panel.json",
-    "ui/button_panel_templates/password_panel.json",
-    "ui/button_panel_templates/button_elements_template.json",
+    "ui/server_form_panels/server_form_main_templates.json",
+    "ui/server_form_panels/action_form/templates/panels.json",
+    "ui/server_form_panels/action_form/templates/buttons.json",
+    "ui/server_form_panels/modal_form/templates/panels.json",
+    "ui/server_form_panels/modal_form/templates/buttons.json",
+
+    "ui/server_form_panels/action_form/main_panel.json",
+    "ui/server_form_panels/action_form/shop_panel.json",
+    "ui/server_form_panels/action_form/vote_panel.json",
+    "ui/server_form_panels/action_form/question_panel.json",
+    "ui/server_form_panels/modal_form/password_panel.json",
+    
 
     "ui/navigation/navigation_panel.json",
 

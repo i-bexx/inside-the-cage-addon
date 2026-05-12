@@ -39,7 +39,7 @@
     "type": "panel",
     "size": ["100%", "100%"],
     "$text_name": "custom_text",
-    "$text_name_reference": "button_elements_template.custom_text",
+    "$text_name_reference": "server_form_main_templates.custom_text",
     "controls": [
       { "password_panel@server_form.password_panel": {} }
     ]   
@@ -66,16 +66,16 @@
           "type": "panel",
           "size": ["100%", "100%"],
           "controls": [
-            { "background_image@button_elements_template.background_image": {} },
-            { "label_text@button_elements_template.label_text": {} },
+            { "background_image@server_form_main_templates.background_image": {} },
+            { "label_text@server_form_main_templates.label_text": {} },
             {
-              "content_stack@button_elements_template.content_stack": {
+              "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
                 "$container_name": "main_panel_container",
                 "$container_reference": "main_panel.main_panel_container"
               }
             },
             {
-              "close_button_container_detailed@button_elements_template.close_button_container_detailed": {
+              "close_button_container_detailed@server_form_main_templates.close_button_container_detailed": {
                 "$focus_identifier": "main_panel_close_button_focus_id",
                 "$other_focus_container_name": "main_shop_button"
               }
@@ -104,16 +104,16 @@
           "type": "panel",
           "size": ["100%", "100%"],
           "controls": [
-            { "label_text@button_elements_template.label_text": {} },
-            { "background_image@button_elements_template.background_image": {} },
+            { "label_text@server_form_main_templates.label_text": {} },
+            { "background_image@server_form_main_templates.background_image": {} },
             {
-              "content_stack@button_elements_template.content_stack": {
+              "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
                 "$container_name": "shop_panel_container",
                 "$container_reference": "shop_panel.shop_panel_container"
               }
             },
             {
-              "close_button_container_detailed@button_elements_template.close_button_container_detailed": {
+              "close_button_container_detailed@server_form_main_templates.close_button_container_detailed": {
                 "$focus_identifier": "shop_panel_close_button_focus_id",
                 "$other_focus_container_name": "shop_button_container_1"
               }
@@ -142,16 +142,16 @@
           "type": "panel",
           "size": ["100%", "100%"],
           "controls": [
-            { "label_text@button_elements_template.label_text": {} },
-            { "background_image@button_elements_template.background_image": {} },
+            { "label_text@server_form_main_templates.label_text": {} },
+            { "background_image@server_form_main_templates.background_image": {} },
             {
-              "content_stack@button_elements_template.content_stack": {
+              "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
                 "$container_name": "vote_panel_container",
                 "$container_reference": "vote_panel.vote_panel_container"
               }
             },
             {
-              "close_button_container@button_elements_template.close_button_container": {
+              "close_button_container@server_form_main_templates.close_button_container": {
                 "$focus_identifier": "vote_panel_button_focus_id"
               }
             }
@@ -180,15 +180,15 @@
           "type": "panel",
           "size": ["100%", "100%"],
           "controls": [
-            { "background_image@button_elements_template.background_image": {} },
+            { "background_image@server_form_main_templates.background_image": {} },
             {
-              "content_stack@button_elements_template.content_stack": {
+              "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
                 "$container_name": "question_panel_container",
                 "$container_reference": "question_panel.question_panel_container"
               }
             },
             {
-              "close_button_container@button_elements_template.close_button_container": {
+              "close_button_container@server_form_main_templates.close_button_container": {
                 "$focus_identifier": "question_panel_button_focus_id"
               }
             }
@@ -238,19 +238,19 @@
       }
     ],
     "controls": [
-      { "background_image@button_elements_template.background_image": {} },
-      { "label_text@button_elements_template.label_text": {} },
+      { "background_image@server_form_main_templates.background_image": {} },
+      { "label_text@server_form_main_templates.label_text": {} },
       {
-        "content_stack@button_elements_template.content_stack": {
+        "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
           "$container_name": "password_panel_container",
           "$container_reference": "password_panel.password_panel_container",
 
           "$text_name": "custom_text",
-          "$text_name_reference": "button_elements_template.custom_text"
+          "$text_name_reference": "server_form_main_templates.custom_text"
         }
       },
       {
-        "close_button_container_detailed@button_elements_template.close_button_container_detailed": {
+        "close_button_container_detailed@server_form_main_templates.close_button_container_detailed": {
           "$focus_identifier": "password_panel_close_button_focus_id",
           "$default_focus_precedence": 1,
           "$other_focus_container_name": "password_text_field_factory"
