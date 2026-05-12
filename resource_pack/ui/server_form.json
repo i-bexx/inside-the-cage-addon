@@ -253,7 +253,7 @@
         "close_button_container_detailed@button_elements_template.close_button_container_detailed": {
           "$focus_identifier": "password_panel_close_button_focus_id",
           "$default_focus_precedence": 1,
-          "$other_focus_container_name": "password_submit_button" // SONRADAN EDIT BOXA ÇEVİR
+          "$other_focus_container_name": "password_text_field_factory"
         }
       }
     ]
