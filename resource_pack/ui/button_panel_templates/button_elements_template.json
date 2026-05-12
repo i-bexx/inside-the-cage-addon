@@ -68,6 +68,8 @@
     "$hover_button_texture": "textures/ui/panels/main_panel/background_hover",
     "$pressed_button_texture": "textures/ui/panels/main_panel/background_pressed",
     "$button_light_borders": "textures/ui/focus_border_white",
+
+    "$focus_wrap_enabled|default": false,
     
     "controls": [
       {
@@ -78,7 +80,7 @@
             {
               "small_button@buttons_template": {
                 "size": "$button_size",
-                "focus_wrap_enabled": false, // This does not work for panels
+                "focus_wrap_enabled": "$focus_wrap_enabled", // This does not work for panels
                 "$button_text_anchors": "center"
               }
             }
