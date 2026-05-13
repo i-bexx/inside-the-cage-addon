@@ -3,6 +3,7 @@
   "minecraft:client_entity": {
     "description": {
       "identifier": "minecraft:player",
+
       "materials": {
         "default": "entity_alphatest",
         "cape": "entity_alphatest",
@@ -13,6 +14,7 @@
         "alphablend": "entity_alphablend",
         "armor_stand": "armor_stand"
       },
+
       "textures": {
         "default": "textures/entity/steve",
         "cape": "textures/entity/cape_invisible",
@@ -27,6 +29,7 @@
         "white_font": "textures/entity/game/Fonts/white_font",
         "red_font": "textures/entity/game/Fonts/red_font"
       },
+
       "geometry": {
         "default": "geometry.humanoid.custom",
         "cape": "geometry.cape",
@@ -37,6 +40,7 @@
         "game_over": "geometry.game_over",
         "turnOffCamWarning": "geometry.turnOffCamWarning"
       },
+
       "scripts": {
         "scale": "0.9375",
         "initialize": [
@@ -45,6 +49,7 @@
           "variable.last_blink_time = 0.0;",
           "variable.hand_bob = 0.0;"
         ],
+
         "pre_animation": [
           "variable.helmet_layer_visible = 1.0;",
           "variable.leg_layer_visible = 1.0;",
@@ -62,6 +67,7 @@
           "v.knife_attack_index = math.random(0, 1);",
           "variable.not_holding_special_items = q.is_alive && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo'));"
         ],
+
         "animate": [
           { "root": "!variable.is_first_person" },
           { "hands_controller": "variable.is_first_person && (query.mark_variant == 0 || query.mark_variant == 553 || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit'))" },
@@ -84,6 +90,7 @@
 
         ]
       },
+
       "animations": {
         "root": "controller.animation.player.root",
 
@@ -184,6 +191,7 @@
         "3rd_person_kit": "animation.hands.3rd_person.kit"
 
       },
+
       "sound_effects": {
         "keyboard": "keyboard",
         "camera_shutter": "camera_shutter",
@@ -216,6 +224,7 @@
         { "controller.render.battery.first_person": "variable.is_first_person && (query.mark_variant >= 555 || query.mark_variant == 20)" },
         { "controller.render.turnOffCamWarning": "variable.is_first_person && query.mark_variant >= 555 && q.is_item_name_any('slot.armor.chest', 'game:turnoffcamwarning')"}
       ],
+      
       "enable_attachables": true
     }
   }
