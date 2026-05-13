@@ -317,15 +317,7 @@
     "anchor_from": "left_middle",
     "anchor_to": "top_left",
     "controls": [
-      { "inventory_panel@inventory_panel": {} },
-      {
-        "a": {
-          "type": "label",
-          "text": "a",
-          "anchor_from": "center",
-          "anchor_to": "center"
-        }
-      }
+      { "inventory_panel@inventory_panel": {} }
     ]
   },
 
