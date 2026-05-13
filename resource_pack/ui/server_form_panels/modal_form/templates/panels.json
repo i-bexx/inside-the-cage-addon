@@ -51,9 +51,9 @@
           "text_edit_box_grid_collection_name": "custom_form",
 
           "controls": [
-            { "default@common.edit_box_indent": {} },
-            { "hover@common.edit_box_indent_hover": {} },
-            { "pressed@common.edit_box_indent_hover": {} },
+            { "default@modal_form_panels.dark_edit_box_indent": {} },
+            { "hover@modal_form_panels.dark_edit_box_indent_hover": {} },
+            { "pressed@modal_form_panels.dark_edit_box_indent_hover": {} },
             {
               "display_text": {
                 "type": "label",
@@ -219,5 +219,15 @@
         }
       }
     ]
+  },
+
+  "dark_edit_box_indent": {
+    "type": "image",
+    "texture": "textures/ui/panels/password_panel/edit_box_indent",
+    "alpha": 1.0
+  },
+
+  "dark_edit_box_indent_hover@modal_form_panels.dark_edit_box_indent": {
+    "texture": "textures/ui/panels/password_panel/edit_box_indent_hover"
   }
 }
