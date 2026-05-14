@@ -9,6 +9,11 @@ import { gameStarter, getGameStarterId, checkIfPositionClear } from "./gameStart
 import { getGameStartedObjective, getGameRestartedObjective, getGameEndedObjective, getPlayersInRoundObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 import { getPlayersInRound } from "./getPlayersArray"; 
 
+import { stopTheFunctions } from "./resetStats";
+import { initiateCam } from "./cameraUsage";
+import { teleportStalker } from "./Stalker";
+import { givePanelItem } from "./panels";
+
 import { playerLookingControl } from "./RoundBegin/playerLooking";
 import { Ambiance_control } from "./RoundBegin/ambianceController";
 import { Stamina_control } from "./RoundBegin/Stamina";
@@ -17,11 +22,9 @@ import { Battery_control } from "./RoundBegin/batteryController";
 import { spawnCages } from "./RoundBegin/cageController";
 import { startCoinSpawner } from "./RoundBegin/coinSpawner";
 import { soulsAmountCheck } from "./RoundBegin/soulController";
+import { decidePasswords } from "./RoundBegin/passwordManager";
+
 import { timeSetter } from "./RoundBegin/Null/nullTeleport";
-import { stopTheFunctions } from "./resetStats";
-import { initiateCam } from "./cameraUsage";
-import { teleportStalker } from "./Stalker";
-import { givePanelItem } from "./panels";
 
 import { restartRound } from "./RoundBegin/RoundOperations/restartRound";
 import { finishRoundEarly } from "./RoundBegin/RoundOperations/finishRoundEarly";
@@ -72,6 +75,7 @@ const FUNCTIONS_TO_START = {
     Battery_control,
     spawnCages,
     startCoinSpawner,
+    decidePasswords,
     updateGlobalUi
 };
 
