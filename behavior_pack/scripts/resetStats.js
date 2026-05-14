@@ -19,6 +19,7 @@ import { getCoinId } from "./RoundBegin/coinSpawner";
 import { getWarnPlayerAboutCamId } from "./RoundBegin/cameraController";
 import { getInitiateCamId } from "./cameraUsage";
 import { getSoulsAmountCheckId } from "./RoundBegin/soulController";
+import { resetPasswords } from "./RoundBegin/passwordManager";
 
 import { stopAmbiance } from "./RoundBegin/ambianceController";
 import { resetBatteryIntervalId } from "./RoundBegin/batteryController";
@@ -208,6 +209,8 @@ export function stopTheFunctions() {
   resetBatteryIntervalId();
   resetCameraWarningIntervalId();
   resetCoinIntervalId();
+
+  resetPasswords();
 }
 
 export async function commandsToResetTheGame(dimension) {

@@ -3,10 +3,11 @@ import { ActionFormData, ModalFormData, FormCancelationReason } from "@minecraft
 
 import { votePanel } from "./voteManager";
 import { getGameStartedObjective, getCoinAmountObjective, getStaminaLimitObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
+import { getPasswords } from "./RoundBegin/passwordManager";
 
 const DIMENSION = world.getDimension("overworld");
 
-const PANELS = [ shopPanel, votePanel, upgradeBattery, increaseStaminaLimit ];
+const MAIN_PANELS = [ shopPanel, votePanel, upgradeBattery, increaseStaminaLimit ];
 const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_bomb": 6, "game:ammo": 1, "battery": 3 };
 
 let timeoutId = 0;
@@ -30,15 +31,20 @@ function customPanel(player) {
                 return;
             }
 
+            const firstPassword = getPasswords()[0];
+            const secondPassword = getPasswords()[1];
+
             const firstPasswordInput = formValues[0];
             const secondPasswordInput = formValues[1];
             
-            if (firstPasswordInput === "1234" && secondPasswordInput === "1234") {
+            if (firstPasswordInput === firstPassword && secondPasswordInput === secondPassword) {
                 player.playSound("random.orb");
                 // FUNCTION
             } else {
                 player.sendMessage(" §c[!] Incorrect Password!");
                 player.playSound("note.bass");
+
+                world.sendMessage(`${firstPassword}, ${secondPassword}`)
             }
     })
 }
@@ -64,7 +70,7 @@ function mainPanel(player) {
                 return;
             }
 
-            PANELS[selection](player);
+            MAIN_PANELS[selection](player);
     })
 }
 

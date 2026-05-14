@@ -134,10 +134,32 @@
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]
     },
+
     "controller.render.teleporter": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]
+    },
+    
+    "controller.render.password_label": {
+      "arrays": {
+        "textures": {
+          "Array.PasswordTextures": [
+            "Texture.text_not_set",
+            "Texture.text_A7K2",
+            "Texture.text_9F3B",
+            "Texture.text_R4D8",
+            "Texture.text_6HW1",
+            "Texture.text_M5X9",
+            "Texture.text_3JP6",
+            "Texture.text_T8C4",
+            "Texture.text_2YN7"
+          ]
+        }
+      },
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Array.PasswordTextures[query.variant]" ]
     }
   }
 }
