@@ -15,8 +15,7 @@
       },
       
       "render_controllers": [
-         { "controller.render.new_game": "query.mark_variant == 0"},
-         { "controller.render.new_game_selected": "query.mark_variant == 1"}
+         "controller.render.new_game"
          ]
       }
     }

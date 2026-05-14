@@ -1,0 +1,66 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.new_game": {
+      "arrays": {
+        "textures": {
+          "Array.MenuNewgameTextures": [
+            "Texture.texture_default",
+            "Texture.texture_selected"
+          ]
+        }
+      },
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Array.MenuNewgameTextures[query.mark_variant]" ]
+    },
+
+    "controller.render.continue": {
+      "arrays": {
+        "textures": {
+          "Array.MenuContinueTextures": [
+            "Texture.texture_default",
+            "Texture.texture_selected"
+          ]
+        }
+      },
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Array.MenuContinueTextures[query.mark_variant]" ]
+    },
+
+    "controller.render.door": {
+      "arrays": {
+        "textures": {
+          "Array.DoorTextures": [
+            "texture.texture_0",
+            "texture.texture_1",
+            "texture.texture_2",
+            "texture.texture_3",
+            "texture.game_started",
+            "texture.waiting_for_host"
+          ]
+        }
+      },
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Array.DoorTextures[query.mark_variant]" ]
+    },
+
+    "controller.render.menu_panel": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.default" ],
+      "uv_anim": {
+				"scale": [1, "1 / 2"],
+				"offset": [0, "Math.mod(Math.floor(query.life_time * 15), 2) / 2"]
+			}
+    },
+
+    "controller.render.teleporter": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.default" ]
+    }
+  }
+}

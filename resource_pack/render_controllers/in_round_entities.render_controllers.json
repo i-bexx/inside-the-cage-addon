@@ -1,17 +1,19 @@
 {
   "format_version": "1.8.0",
   "render_controllers": {
+    "controller.render.null": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.default" ]
+    },
+
     "controller.render.stalker_cursor": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]
     },
-    "controller.render.battery": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.default" ]
-    },
-    "controller.render.bottle_on_ground": {
+    
+    "controller.render.hostile": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]
@@ -27,6 +29,7 @@
         { "glass": false }
       ]
     },
+
     "controller.render.cage_glass": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.transparent" } ],
@@ -37,6 +40,7 @@
         { "glass": true }
       ]
     },
+
     "controller.render.cage_broken_glass": {
       "geometry": "Geometry.cage_broken",
       "materials": [ { "*": "Material.transparent" } ],
@@ -46,6 +50,7 @@
         { "glass": true }
       ]
     },
+
     "controller.render.cage_broken_opaque": {
       "geometry": "Geometry.cage_broken",
       "materials": [ { "*": "Material.opaque" } ],
@@ -56,91 +61,24 @@
       ]
     },
 
+    "controller.render.battery": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.default" ]
+    },
+
+    "controller.render.bottle_on_ground": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.default" ]
+    },
+
     "controller.render.coin": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]
     },
-    "controller.render.continue": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.a" ]
-    },
-    "controller.render.continue_selected": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.b" ]
-    },
 
-    "controller.render.door0": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.a" ]
-    },
-    "controller.render.door1": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.b" ]
-    },
-    "controller.render.door2": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.c" ]
-    },
-    "controller.render.door3": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.d" ]
-    },
-    "controller.render.door4": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.game_started" ]
-    },
-    "controller.render.door5": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.waiting_for_host" ]
-    },
-
-    "controller.render.hostile": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.default" ]
-    },
-    "controller.render.menu_panel": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.default" ],
-      "uv_anim": {
-				"scale": [1, "1 / 2"],
-				"offset": [0, "Math.mod(Math.floor(query.life_time * 15), 2) / 2"]
-			}
-    },
-
-    "controller.render.new_game": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.a" ]
-    },
-    "controller.render.new_game_selected": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.b" ]
-    },
-
-    "controller.render.null": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.default" ]
-    },
-
-    "controller.render.teleporter": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.default" ]
-    },
-    
     "controller.render.password_label": {
       "arrays": {
         "textures": {
