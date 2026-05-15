@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.21.50",
   "minecraft:entity": {
     "description": {
       "identifier": "game:coin",
@@ -48,50 +48,37 @@
         "max": 100
       },
       "minecraft:type_family": {
-        "family": ["game"]
+        "family": [ "game" ]
       },
+
       "minecraft:damage_sensor": {
         "triggers": [
           {
             "cause": "all",
-            "deals_damage": false
+            "deals_damage": "no"
           }
         ]
       },
+
       "minecraft:pushable": {
         "is_pushable": false,
         "is_pushable_by_piston": false
       },
+
       "minecraft:nameable": {},
       "minecraft:fire_immune": false,
+
       "minecraft:behavior.hurt_by_target": {
         "priority": 1
       },
+
       "minecraft:physics": {}
     },
 
    "events": {
-    "minecraft:entity_spawned": {
-      "add": {
-        "component_groups": [
-          "default"
-        ]
-      }
-    },
-      "collected_event": {
-        "add": {
-          "component_groups": [
-            "collected"
-          ]
-        }
-      },
-      "disappear_event": {
-        "add": {
-          "component_groups": [
-            "disappear"
-          ]
-        }
-      }
+    "minecraft:entity_spawned": { "add": { "component_groups": [ "default" ] } },
+    "collected_event": { "add": { "component_groups": [ "collected" ] } },
+    "disappear_event": { "add": { "component_groups": [ "disappear" ] } }
     }
   }
 }

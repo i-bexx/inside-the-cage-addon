@@ -1,6 +1,9 @@
 {
 	"format_version": 2,
 	"metadata": {
+		"authors": [ "i-bexx" ],
+		"license": "All Rights Reserved",
+		"url": "https://github.com/i-bexx"
 	},
 	"header": {
 		"name": "Game BP",
@@ -40,6 +43,10 @@
 		}
 	],
 	"dependencies": [
+		{
+			"uuid": "0031ebb9-afc5-42d8-a7e5-b8475abf77ee",
+			"version": [1, 0, 0]
+		},
 		{
 			"module_name": "@minecraft/server",
 			"version": "1.10.0"
