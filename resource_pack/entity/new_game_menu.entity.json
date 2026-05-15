@@ -7,8 +7,8 @@
         "default": "entity_alphatest"
       },
       "textures": {
-        "a": "textures/entity/game/Menu/New game",
-        "b": "textures/entity/game/Menu/New game selected"
+        "texture_default": "textures/entity/game/Menu/New game",
+        "texture_selected": "textures/entity/game/Menu/New game selected"
       },
       "geometry": {
         "default": "geometry.new_game"
