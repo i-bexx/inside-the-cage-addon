@@ -264,29 +264,33 @@
     ]
   },
 
-  "grid_item_for_inventory@common.container_item": {
-    "$item_collection_name": "inventory_items",
-    "$button_ref": "common.gray_slot_button",
-    "$item_renderer": "common.empty_panel",
-    "$hide_white_border_slot": true
+
+  "inventory_panel_bottom_half_with_label@inventory_panel_bottom_half": {
+    "anchor_from": "bottom_left",
+    "anchor_to": "bottom_left",
+    "size": [ "100%", 93 ],
+    "controls": [
+      { "inventory_panel@inventory_panel": {} },
+      {
+        "inventory_label@section_heading_label": {
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [ 7, 3 ],
+          "layer": 2,
+          "text": "container.inventory"
+        }
+      }
+    ]
   },
 
-  "grid_item_for_hotbar@common.container_item": {
-    "$item_collection_name": "hotbar_items",
-    "$button_ref": "common.gray_slot_button",
-    "$item_renderer": "common.empty_panel",
-    "$hide_white_border_slot": true
-  },
-
-  "hotbar_grid_template": {
-    "type": "grid",
-    "size": [ 162, 18 ],
-    "anchor_from": "bottom_middle",
-    "anchor_to": "bottom_middle",
-    "offset": [ 0, -5 ],
-    "grid_dimensions": [ 9, 1 ],
-    "grid_item_template": "common.grid_item_for_hotbar",
-    "collection_name": "hotbar_items"
+  "inventory_panel_bottom_half": {
+    "type": "panel",
+    "size": [ "100%", "50%" ],
+    "anchor_from": "left_middle",
+    "anchor_to": "top_left",
+    "controls": [
+      { "inventory_panel@inventory_panel": {} }
+    ]
   },
 
   "inventory_panel": {
@@ -310,34 +314,31 @@
     ]
   },
 
-  
-  "inventory_panel_bottom_half": {
-    "type": "panel",
-    "size": [ "100%", "50%" ],
-    "anchor_from": "left_middle",
-    "anchor_to": "top_left",
-    "controls": [
-      { "inventory_panel@inventory_panel": {} }
-    ]
+  "grid_item_for_inventory@common.container_item": {
+    "$item_collection_name": "inventory_items",
+    "$button_ref": "common.gray_slot_button", // Gray slot button instead of vanilla
+    "$item_renderer": "common.empty_panel",
+    "$hide_white_border_slot": true
   },
 
-  "inventory_panel_bottom_half_with_label@inventory_panel_bottom_half": {
-    "anchor_from": "bottom_left",
-    "anchor_to": "bottom_left",
-    "size": [ "100%", 93 ],
-    "controls": [
-      { "inventory_panel@inventory_panel": {} },
-      {
-        "inventory_label@section_heading_label": {
-          "anchor_from": "top_left",
-          "anchor_to": "top_left",
-          "offset": [ 7, 3 ],
-          "layer": 2,
-          "text": "container.inventory"
-        }
-      }
-    ]
+  "hotbar_grid_template": {
+    "type": "grid",
+    "size": [ 162, 18 ],
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": [ 0, -5 ],
+    "grid_dimensions": [ 9, 1 ],
+    "grid_item_template": "common.grid_item_for_hotbar",
+    "collection_name": "hotbar_items"
   },
+
+  "grid_item_for_hotbar@common.container_item": {
+    "$item_collection_name": "hotbar_items",
+    "$button_ref": "common.gray_slot_button", // Gray slot button instead of vanilla
+    "$item_renderer": "common.empty_panel",
+    "$hide_white_border_slot": true
+  },
+
 
   "item_renderer": {
     "type": "custom",
@@ -452,31 +453,50 @@
     "$hide_white_border_slot|default": false,
     "$highlight_slot|default": "common.highlight_slot",
     "controls": [
-      {
-        "highlight@$highlight_slot": {
-          "controls": [
-            {
-              "hover_text@common.hover_text": {
-                "layer": 29,
-                "$hover_text_binding_name|default": "#hover_text",
-                "bindings": [
-                  {
-                    "binding_name": "$hover_text_binding_name",
-                    "binding_name_override": "#hover_text",
-                    "binding_type": "collection",
-                    "binding_collection_name": "$item_collection_name"
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      },
+      { "highlight@$highlight_slot": {} },
       {
         "white_border@common.white_border_slot": {
           "bindings": [
             {
               "binding_name": "#show_persistent_bundle_hover_text",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "hover_text@common.hover_text": {
+          "layer": 29,
+          "$hover_text_binding_name|default": "#hover_text",
+          "bindings": [
+            {
+              "binding_name": "$hover_text_binding_name",
+              "binding_name_override": "#hover_text",
+              "binding_type": "collection",
+              "binding_collection_name": "$item_collection_name"
+            },
+            {
+              "binding_name": "#show_persistent_bundle_hover_text",
+              "binding_name_override": "#visible"
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "inventory_icon_panel": {
+    "type": "panel",
+    "controls": [
+      { "selected_item_icon@common.inventory_selected_icon": {} },
+      { "selected_stack_size_text@common.inventory_selected_stack_size_text": {} },
+      { "selected_item_lock_overlay@common.inventory_selected_item_lock_overlay": {} },
+      {
+        "hover_text@common.hover_text": {
+          "layer": 59,
+          "bindings": [
+            {
+              "binding_name": "#using_touch",
               "binding_name_override": "#visible"
             }
           ]

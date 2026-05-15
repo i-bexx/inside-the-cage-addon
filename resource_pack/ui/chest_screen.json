@@ -106,13 +106,7 @@
                       "$hide_white_border_slot": true
                     } 
                   },
-                  {
-                    "inventory_panel_bottom_half_with_label@common.inventory_panel_bottom_half_with_label": {
-                      "$button_ref": "common.gray_slot_button",
-                      "$item_renderer": "common.empty_panel",
-                      "$hide_white_border_slot": true
-                    }
-                  },
+                  { "inventory_panel_bottom_half_with_label@common.inventory_panel_bottom_half_with_label": {} },
                   { "hotbar_grid@common.hotbar_grid_template": {} },
                   { "inventory_take_progress_icon_button@common.inventory_take_progress_icon_button": {} },
                   { "flying_item_renderer@common.flying_item_renderer": { "layer": 15 } }
@@ -163,13 +157,7 @@
                       "$hide_white_border_slot": true
                     }
                   },
-                  {
-                    "inventory_panel_bottom_half_with_label@common.inventory_panel_bottom_half_with_label": {
-                      "$button_ref": "common.gray_slot_button",
-                      "$item_renderer": "common.empty_panel",
-                      "$hide_white_border_slot": true
-                    }
-                  },
+                  { "inventory_panel_bottom_half_with_label@common.inventory_panel_bottom_half_with_label": {} },
                   { "hotbar_grid@common.hotbar_grid_template": {} },
                   { "inventory_take_progress_icon_button@common.inventory_take_progress_icon_button": {} },
                   { "flying_item_renderer@common.flying_item_renderer": { "layer": 15 } }
