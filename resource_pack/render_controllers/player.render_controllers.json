@@ -14,53 +14,51 @@
         { "leftSleeve": true }
       ]
     },
+
     "controller.render.static.first_person": {
-      "geometry": "geometry.static",
-      "materials": [{"*": "Material.alphablend"}],
-      "textures": ["Texture.static"]
+      "arrays": {
+        "textures": {
+          "Array.StaticTextures": [
+            "Texture.static",
+            "Texture.cameraNoSignal",
+            "Texture.static1",
+            "Texture.static2",
+            "Texture.static3"
+          ]
+        }
+      },
+      "geometry": "Geometry.static",
+      "materials": [ { "*": "Material.alphablend" } ],
+      "textures": [
+        "Array.StaticTextures[ query.mark_variant == 557 ? 1 : (query.mark_variant == 560 ? 2 : (query.mark_variant == 561 ? 3 : ((query.mark_variant == 562 || query.mark_variant == 20) ? 4 : 0))) ]"
+      ]
     },
-    "controller.render.cameraNoSignal": {
-      "geometry": "geometry.static",
-      "materials": [{"*": "Material.alphablend"}],
-      "textures": ["Texture.cameraNoSignal"]
-    },
-    "controller.render.static1": {
-      "geometry": "geometry.static",
-      "materials": [{"*": "Material.alphablend"}],
-      "textures": ["Texture.static1"]
-    },
-    "controller.render.static2": {
-      "geometry": "geometry.static",
-      "materials": [{"*": "Material.alphablend"}],
-      "textures": ["Texture.static2"]
-    },
-    "controller.render.static3": {
-      "geometry": "geometry.static",
-      "materials": [{"*": "Material.alphablend"}],
-      "textures": ["Texture.static3"]
-    },
-    "controller.render.battery.first_person": {
-      "geometry": "geometry.battery",
-      "materials": [{"*": "Material.alphatest"}],
-      "textures": ["Texture.battery"]
-    },
+
     "controller.render.turnOffCamWarning": {
-      "geometry": "geometry.turnOffCamWarning",
-      "materials": [{"*": "Material.alphatest"}],
-      "textures": ["Texture.red_font"]
+      "geometry": "Geometry.turnOffCamWarning",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Texture.red_font" ]
     },
+
+    "controller.render.battery.first_person": {
+      "geometry": "Geometry.battery",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Texture.battery" ]
+    },
+
     "controller.render.curtain.first_person": {
-      "geometry": "geometry.curtain",
-      "materials": [{"*": "Material.alphatest"}],
-      "textures": ["Texture.white_font"],
+      "geometry": "Geometry.curtain",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Texture.white_font" ],
       "part_visibility": [
         { "*": "(query.mark_variant >= 553 && query.mark_variant <= 562)" }
       ]
     },
+
     "controller.render.game_over": {
-      "geometry": "geometry.game_over",
-      "materials": [{"*": "Material.alphatest"}],
-      "textures": ["Texture.red_font"],
+      "geometry": "Geometry.game_over",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Texture.red_font" ],
       "part_visibility": [
         { "*": true },
         { "alphabet": false },
@@ -68,10 +66,11 @@
         { "capitals": false }
       ]
     },
+
     "controller.render.new_game_Started": {
-      "geometry": "geometry.new_game_Started",
-      "materials": [{"*": "Material.alphatest"}],
-      "textures": ["Texture.white_font"],
+      "geometry": "Geometry.new_game_Started",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Texture.white_font" ],
       "part_visibility": [
         { "*": true },
         { "alphabet": false },

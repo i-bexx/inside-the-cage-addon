@@ -63,15 +63,15 @@
           "variable.map_angle = math.clamp(1 - variable.player_x_rotation / 45.1, 0.0, 1.0);",
           "variable.item_use_normalized = query.main_hand_item_use_duration / query.main_hand_item_max_duration;",
 
-
-          "v.knife_attack_index = math.random(0, 1);",
-          "variable.not_holding_special_items = q.is_alive && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo'));"
+          "variable.knife_attack_index = math.random(0, 1);",
+          "variable.not_holding_special_items = query.is_alive && !query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun', 'game:knife', 'game:toxic_bomb', 'game:kit', 'game:ammo');"
         ],
 
         "animate": [
           { "root": "!variable.is_first_person" },
-          { "hands_controller": "variable.is_first_person && (query.mark_variant == 0 || query.mark_variant == 553 || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit'))" },
-          { "hands_controller_3rd_person": "!(variable.is_first_person) && (query.mark_variant == 0 || query.mark_variant == 553 || !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')) || !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')) || !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')) || !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')) && !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')))" },
+          
+          { "hands_controller": "variable.is_first_person && variable.not_holding_special_items && (query.mark_variant == 0 || query.mark_variant == 553)" },
+          { "hands_controller_3rd_person": "!variable.is_first_person && !variable.not_holding_special_items" },
           
           "static",
           "static_normal",
@@ -205,7 +205,6 @@
       },
            
       "render_controllers": [
-        { "controller.render.game_over": "variable.is_first_person && query.mark_variant == 20"},
         { "controller.render.player.first_person": "variable.is_first_person && !query.is_spectator && (query.mark_variant == 0 || query.mark_variant == 553 || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit'))" },
         { "controller.render.player.third_person": "!variable.is_first_person && !variable.map_face_icon && !query.is_spectator" },
 
@@ -214,15 +213,12 @@
         
         { "controller.render.player.map": "variable.map_face_icon" },
 
+        { "controller.render.static.first_person": "variable.is_first_person && (query.mark_variant >= 555 || query.mark_variant == 20)" },
+        { "controller.render.turnOffCamWarning": "variable.is_first_person && query.mark_variant >= 555 && query.is_item_name_any('slot.armor.chest', 0, 'game:turnoffcamwarning')"},
+        { "controller.render.battery.first_person": "variable.is_first_person && (query.mark_variant >= 555 || query.mark_variant == 20)" },
         { "controller.render.new_game_Started": "variable.is_first_person && (query.mark_variant == 1 || query.mark_variant == 2)" },
         { "controller.render.curtain.first_person": "variable.is_first_person && (query.mark_variant >= 553 && query.mark_variant <= 562)" },
-        { "controller.render.static.first_person": "variable.is_first_person && query.mark_variant >= 555 && !(query.mark_variant == 557) && !(query.mark_variant == 560) && !(query.mark_variant == 561) && !(query.mark_variant == 562) && !(query.mark_variant == 20)" },
-        { "controller.render.cameraNoSignal": "variable.is_first_person && query.mark_variant == 557"},
-        { "controller.render.static1": "variable.is_first_person && query.mark_variant == 560"},
-        { "controller.render.static2": "variable.is_first_person && query.mark_variant == 561"},
-        { "controller.render.static3": "variable.is_first_person && (query.mark_variant == 562 || query.mark_variant == 20)"},
-        { "controller.render.battery.first_person": "variable.is_first_person && (query.mark_variant >= 555 || query.mark_variant == 20)" },
-        { "controller.render.turnOffCamWarning": "variable.is_first_person && query.mark_variant >= 555 && q.is_item_name_any('slot.armor.chest', 'game:turnoffcamwarning')"}
+        { "controller.render.game_over": "variable.is_first_person && query.mark_variant == 20" }
       ],
       
       "enable_attachables": true
