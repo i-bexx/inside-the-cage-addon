@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.21.50",
   "minecraft:entity": {
     "description": {
       "identifier": "menu:new_game",
@@ -7,6 +7,7 @@
       "is_summonable": true,
       "is_experimental": false
     },
+
     "component_groups": {
       "default": {
         "minecraft:mark_variant": {
@@ -19,12 +20,13 @@
         }
       }
     },
+
 		"components": {
       "minecraft:damage_sensor": {
         "triggers": [
           {
             "cause": "all",
-            "deals_damage": false
+            "deals_damage": "no"
           }
         ]
       },
@@ -35,51 +37,42 @@
           }
         ]
       },
-            "minecraft:collision_box": {
-              "width": 0.25,
-              "height": 0.1
-            },
-            "minecraft:health": {
-              "value": 6,
-              "max": 6
-            },
-            "minecraft:scale": {
-              "value": 6.55
-            },
-            "minecraft:knockback_resistance": {
-              "value": 100,
-              "max": 100
-            },
+      "minecraft:collision_box": {
+        "width": 0.25,
+        "height": 0.1
+      },
+      "minecraft:health": {
+        "value": 6,
+        "max": 6
+      },
+      "minecraft:scale": {
+        "value": 6.55
+      },
+      "minecraft:knockback_resistance": {
+        "value": 100,
+        "max": 100
+      },
 			"minecraft:type_family": {
-				"family": [ "game"]
-			  },
+				"family": [ "game" ]
+      },
 			"minecraft:pushable": {
-                "is_pushable": false,
-                "is_pushable_by_piston": false
-            },
-            "minecraft:nameable": {},
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+
+      "minecraft:nameable": {},
 			"minecraft:fire_immune": false,
+      
 			"minecraft:behavior.hurt_by_target": {
 				"priority": 1
 			},
+
 			"minecraft:physics": {}
 		},
 
    "events": {
-			"default": {
-        "add": {
-          "component_groups": [
-            "default"
-          ]
-        }
-      },
-      "selected": {
-        "add": {
-          "component_groups": [
-            "selected"
-          ]
-        }
-      }
+			"default": { "add": { "component_groups": [ "default" ] } },
+      "selected": { "add": { "component_groups": [ "selected" ] } }
     }
   }
 }

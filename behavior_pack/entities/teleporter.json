@@ -1,5 +1,5 @@
 {
-  "format_version": "1.13.0",
+  "format_version": "1.21.50",
   "minecraft:entity": {
     "description": {
       "identifier": "game:teleporter",
@@ -7,7 +7,7 @@
       "is_summonable": true,
       "is_experimental": false
     },
-    "component_groups": {},
+
 		"components": {
       "minecraft:collision_box": {
         "width": 0.4,
@@ -25,17 +25,17 @@
         "max": 100
       },
       "minecraft:type_family": {
-        "family": [ "game"]
+        "family": [ "game" ]
         },
         
       "minecraft:damage_sensor": {
-            "triggers": [
-              {
-                "cause": "all",
-                "deals_damage": false
-              }
-            ]
-          },
+        "triggers": [
+          {
+            "cause": "all",
+            "deals_damage": "no"
+          }
+        ]
+      },
 
       "minecraft:interact": {
         "interactions": [
@@ -52,12 +52,13 @@
 
       "minecraft:nameable": {},
       "minecraft:fire_immune": false,
+      
       "minecraft:behavior.hurt_by_target": {
         "priority": 1
       },
+
       "minecraft:physics": {}
-    },
-   "events": {}
+    }
   }
 }
 

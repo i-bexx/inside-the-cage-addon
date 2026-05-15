@@ -1,6 +1,9 @@
 {
 	"format_version": 2,
 	"metadata": {
+		"authors": [ "i-bexx" ],
+		"license": "All Rights Reserved",
+		"url": "https://github.com/i-bexx"
 	},
 	"header": {
 		"name": "Game RP",
@@ -8,7 +11,7 @@
 		"min_engine_version": [
 			1,
 			20,
-			60
+			70
 		],
 		"uuid": "0031ebb9-afc5-42d8-a7e5-b8475abf77ee",
 		"version": [
@@ -26,6 +29,12 @@
 				0,
 				0
 			]
+		}
+	],
+	"dependencies": [
+		{
+			"uuid": "f9c573e1-781a-437a-bd42-10384edc85bf",
+			"version": [1, 0, 0]
 		}
 	]
 }
