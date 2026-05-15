@@ -87,8 +87,18 @@
         }
       },
       {
-        "item_selected_image@common.slot_selected": {
-          "layer": 4
+        "item_selected_image@common.slot_selected": { // Hid selected icon for pocket ui
+          "property_bag": {
+            "#show": false
+          },
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_type": "view",
+              "source_property_name": "#show",
+              "target_property_name": "#visible"
+            }
+          ]
         }
       },
       {
@@ -477,26 +487,6 @@
             },
             {
               "binding_name": "#show_persistent_bundle_hover_text",
-              "binding_name_override": "#visible"
-            }
-          ]
-        }
-      }
-    ]
-  },
-
-  "inventory_icon_panel": {
-    "type": "panel",
-    "controls": [
-      { "selected_item_icon@common.inventory_selected_icon": {} },
-      { "selected_stack_size_text@common.inventory_selected_stack_size_text": {} },
-      { "selected_item_lock_overlay@common.inventory_selected_item_lock_overlay": {} },
-      {
-        "hover_text@common.hover_text": {
-          "layer": 59,
-          "bindings": [
-            {
-              "binding_name": "#using_touch",
               "binding_name_override": "#visible"
             }
           ]
