@@ -2,7 +2,7 @@
   "namespace": "modal_form_buttons",
 
   "submit_button@action_form_buttons.buttons_template": {
-    "size": ["100%", 32],
+    "size": [ "100%", 24 ],
     "offset": [ 0, 10 ],
 
     "$default_text": "#submit_text",
