@@ -46,23 +46,5 @@
     "$button_ref": "common.gray_slot_button",
     "$item_renderer": "common.empty_panel",
     "$background_images": "crafting.container_cell_images"
-  },
-
-  "survival_inventory_grid@crafting.scroll_grid_panel": {
-    "$grid_rescaling_type": "horizontal",
-    "$grid_item_template": "crafting_pocket.grid_item_for_inventory"
-  },
-
-  "survival_scroll_panel@crafting_pocket.scroll_panel_pocket": {
-    "$scrolling_content": "crafting_pocket.survival_inventory_grid",
-    "$collection_name": "inventory_items"
-  },
-
-  "inventory_tab_content@crafting.tab_content": {
-    "$text_alignment": "left",
-    "$is_pocket_mode": true,
-    "$scroll_view_name": "inventory_book_scroll_view",
-    "$scrolling_pane_control": "crafting_pocket.survival_scroll_panel",
-    "$navigation_tab_name": "survival_tab_toggle"
   }
 }

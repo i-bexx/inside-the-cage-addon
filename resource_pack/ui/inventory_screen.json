@@ -29,7 +29,6 @@
           "layer": 2,
           "$button_ref": "crafting.inventory_container_slot_button",
           "$background_images": "crafting.container_cell_images"
-
         }
       }
     ]
