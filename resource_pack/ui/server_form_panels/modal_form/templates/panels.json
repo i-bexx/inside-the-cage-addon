@@ -44,11 +44,14 @@
           "hover_control": "hover",
           "pressed_control": "pressed",
 
-          "max_length": 4,
           "text_box_name": "custom_input",
+          "text_edit_box_grid_collection_name": "custom_form",
+          "text_type": "ExtendedASCII",
+          "max_length": 4,
+          "enabled_newline": false,
+          "can_be_deselected": true,
           "text_control": "display_text",
           "place_holder_control": "place_holder",
-          "text_edit_box_grid_collection_name": "custom_form",
 
           "controls": [
             { "default@modal_form_panels.dark_edit_box_indent": {} },
@@ -65,6 +68,7 @@
                 "text": "#item_name",
                 "color": [ 1.0, 1.0, 1.0 ],
                 "text_alignment": "left",
+                "font_type": "unicode",
                 
                 "bindings": [
                   {

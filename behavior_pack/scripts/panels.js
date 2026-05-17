@@ -43,8 +43,6 @@ function customPanel(player) {
             } else {
                 player.sendMessage(" §c[!] Incorrect Password!");
                 player.playSound("note.bass");
-
-                world.sendMessage(`${firstPassword}, ${secondPassword}`)
             }
     })
 }
