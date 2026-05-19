@@ -3,7 +3,6 @@
 
   "submit_button@action_form_buttons.buttons_template": {
     "size": [ "100%", 24 ],
-    "offset": [ 0, 10 ],
 
     "$default_text": "#submit_text",
     "$hover_text": "#submit_text",
