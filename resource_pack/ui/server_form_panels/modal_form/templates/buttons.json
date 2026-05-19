@@ -2,7 +2,7 @@
   "namespace": "modal_form_buttons",
 
   "submit_button@action_form_buttons.buttons_template": {
-    "size": [ "100%", 24 ],
+    "size": [ "100% - 8px", 24 ],
 
     "$default_text": "#submit_text",
     "$hover_text": "#submit_text",
