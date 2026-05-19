@@ -1,13 +1,5 @@
 {
   "namespace": "chat",
-
-  "anim_countdown_decrease": {
-    "anim_type": "clip",
-    "easing": "linear",
-    "duration": "$chat_item_lifetime",
-    "from": 0.0,
-    "to": 1.0
-  },
   
   "chat_panel": {
     "type": "panel",
@@ -19,11 +11,15 @@
       {
         "stack_panel": {
           "type": "stack_panel",
+          "orientation": "vertical",
+
+          // HARDCODED: Both "chat_item_factory" and "chat_item" names are
+          // engine-bound identifiers. Renaming either will break chat rendering.
           "factory": {
             "name": "chat_item_factory",
             "max_children_size": 5,
             "control_ids": {
-              "chat_item": "chat_item@chat.chat_grid_item"
+              "chat_item": "chat_container@chat.chat_container"
             }
           }
         }
@@ -31,10 +27,11 @@
     ]
   },
 
-  "chat_grid_item": {
+  "chat_container": {
     "type": "panel",
     "layer": 1,
     "size": [ "100%-2px", "100%c" ],
+
     "bindings": [
       {
         "binding_name": "(not #on_new_death_screen)",
@@ -58,40 +55,40 @@
                 "orientation": "vertical",
                 "size": [ "100%", "100%c" ],
                 "controls": [
-                    {
-                      "chat_text@hud.chat_label": {
-                          "anchor_from": "top_left",
-                          "anchor_to": "top_left",
-                          "offset": [ 2, 0 ]
-                      }
-                    },
-                    {
-                      "space_top": {
-                          "type": "panel",
-                          "size": [ "100%", 2 ],
-                          "anims": [ "@hud.anim_chat_bg_wait" ]
-                      }
-                    },
-                    {
-                      "countdown": {
-                          "type": "image",
-                          "texture": "textures/ui/white",
-                          "anchor_from": "top_left",
-                          "anchor_to": "top_left",
-                          "size": [ "100%", 1 ],
-                          "clip_direction": "left",
-                          "clip_pixelperfect": false,
-                          "anims": [ "@chat.anim_countdown_decrease" ]
-                      }
-                    },
-                    {
-                      "space_bottom": {
-                          "type": "panel",
-                          "size": [ "100%", 3 ],
-                          "alpha": 1,
-                          "anims": [ "@hud.anim_chat_bg_wait" ]
-                      }
+                  {
+                    "chat_text@hud.chat_label": {
+                        "anchor_from": "top_left",
+                        "anchor_to": "top_left",
+                        "offset": [ 2, 0 ]
                     }
+                  },
+                  {
+                    "space_top": {
+                        "type": "panel",
+                        "size": [ "100%", 2 ],
+                        "anims": [ "@hud.anim_chat_bg_wait" ]
+                    }
+                  },
+                  {
+                    "countdown": {
+                        "type": "image",
+                        "texture": "textures/ui/white",
+                        "anchor_from": "top_left",
+                        "anchor_to": "top_left",
+                        "size": [ "100%", 1 ],
+                        "clip_direction": "left",
+                        "clip_pixelperfect": false,
+                        "anims": [ "@chat.anim_countdown_decrease" ]
+                    }
+                  },
+                  {
+                    "space_bottom": {
+                        "type": "panel",
+                        "size": [ "100%", 3 ],
+                        "alpha": 1,
+                        "anims": [ "@hud.anim_chat_bg_wait" ]
+                    }
+                  }
                 ]
               }
             }
@@ -99,5 +96,14 @@
         }
       }
     ]
+  },
+
+
+  "anim_countdown_decrease": {
+    "anim_type": "clip",
+    "easing": "linear",
+    "duration": "$chat_item_lifetime",
+    "from": 0.0,
+    "to": 1.0
   }
 }
