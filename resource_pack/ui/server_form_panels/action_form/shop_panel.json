@@ -9,16 +9,8 @@
     "anchor_to": "center",
     "controls": [
       {
-        "scrolling_panel@common.scrolling_panel": {
-          "anchor_from": "center",
-          "anchor_to": "center",
-          "size": [ "100%", "100%" ],
-          "$show_background": false,
-          "$scrolling_content": "shop_panel.button_creator",
-          "$scroll_size": [ 5, "100% - 4px" ],
-          "$scrolling_pane_size": [ "100% - 4px", "100% - 2px" ],
-          "$scrolling_pane_offset": [ 2, 0 ],
-          "$scroll_bar_right_padding_size": [ 0, 0 ]
+        "scroll_view@server_form_main_templates.scroll_view": {
+          "$scrolling_content": "shop_panel.button_creator"
         }
       }
     ]
