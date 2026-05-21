@@ -20,6 +20,7 @@
     "ui/main_screen/stamina/stamina_bar_anims.json",
 
 
+    "ui/server_form_panels/server_form_panel_anims.json",
     "ui/server_form_panels/server_form_main_templates.json",
     "ui/server_form_panels/action_form/templates/panels.json",
     "ui/server_form_panels/action_form/templates/buttons.json",
