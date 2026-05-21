@@ -6,6 +6,25 @@
 {
   "namespace": "server_form",
 
+  "third_party_server_screen@common.base_screen": {
+    "$screen_animations": [
+      "@server_form_anims.screen_exit_animation_push_offset",
+      "@server_form_anims.screen_exit_animation_pop_offset",
+      "@server_form_anims.screen_entrance_animation_push_offset",
+      "@server_form_anims.screen_entrance_animation_pop_offset",
+      "@server_form_anims.screen_exit_animation_push_fade",
+      "@server_form_anims.screen_exit_animation_pop_fade",
+      "@server_form_anims.screen_entrance_animation_push_fade",
+      "@server_form_anims.screen_entrance_animation_pop_fade"
+    ],
+    "$background_animations": [
+      "@server_form_anims.screen_exit_animation_push_alpha",
+      "@server_form_anims.screen_exit_animation_pop_alpha",
+      "@server_form_anims.screen_entrance_animation_push_alpha",
+      "@server_form_anims.screen_entrance_animation_pop_alpha"
+    ]
+  },
+
   "main_screen_content": {
     "type": "panel",
     "size": [0, 0],
