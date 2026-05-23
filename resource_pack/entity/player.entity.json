@@ -70,7 +70,7 @@
         "animate": [
           { "root": "!variable.is_first_person" },
           
-          { "hands_controller": "variable.is_first_person && variable.not_holding_special_items && (query.mark_variant == 0 || query.mark_variant == 553)" },
+          { "hands_controller": "variable.is_first_person && (query.mark_variant == 0 || query.mark_variant == 553)" },
           { "hands_controller_3rd_person": "!variable.is_first_person && !variable.not_holding_special_items" },
           
           "static",
@@ -205,7 +205,7 @@
       },
            
       "render_controllers": [
-        { "controller.render.player.first_person": "variable.is_first_person && !query.is_spectator && (query.mark_variant == 0 || query.mark_variant == 553 || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit'))" },
+        { "controller.render.player.first_person": "variable.is_first_person && !query.is_spectator && (query.mark_variant == 0 || query.mark_variant == 553 || !!variable.not_holding_special_items)" },
         { "controller.render.player.third_person": "!variable.is_first_person && !variable.map_face_icon && !query.is_spectator" },
 
         { "controller.render.player.first_person_spectator": "variable.is_first_person && query.is_spectator" },
