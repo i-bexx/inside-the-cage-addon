@@ -13,8 +13,9 @@ const CONFIG = {
 			STOPSOUND: "stopsound @s",
 			STOP_SHAKING: "camerashake stop @s"
 		},
-		COMMANDS_2: {
-			PLAYSOUND_GAME_OVER: "playsound game_over @s"
+		SOUNDS: {
+			PLAYSOUND_GAME_OVER: "game_over",
+            PLAYSOUND_STATIC: "static3"
 		},
 		EVENTS: {
 			STATIC: "static_true_event1",
@@ -50,7 +51,7 @@ export async function game_over(player) {
 
     player.triggerEvent(CONFIG.EVENTS.STATIC);
 		await sleep(1);
-		player.runCommand(CONFIG.COMMANDS_2.PLAYSOUND_GAME_OVER);
+		player.playSound(CONFIG.SOUNDS.PLAYSOUND_GAME_OVER, {volume: 0.8});
     await sleep(40);
 
     player.triggerEvent(CONFIG.EVENTS.GAME_OVER);
@@ -63,8 +64,13 @@ export async function game_over(player) {
 }
 
 function staticSoundLoop(player) {
+    player.playSound(CONFIG.SOUNDS.PLAYSOUND_STATIC, {volume: 0.2});
+
     const soundLoop = system.runInterval(() => {
-        player.runCommand(CONFIG.COMMANDS_2.PLAYSOUND_GAME_OVER);
+        player.playSound(CONFIG.SOUNDS.PLAYSOUND_GAME_OVER, {volume: 0.8});
+        player.playSound(CONFIG.SOUNDS.PLAYSOUND_STATIC, {volume: 0.2});
+
+        world.sendMessage(`${soundLoop}`);
     }, 100);
     return soundLoop;
 }
