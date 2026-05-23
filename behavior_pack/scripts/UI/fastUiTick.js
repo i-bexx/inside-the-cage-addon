@@ -146,7 +146,6 @@ function staminaTickTimer() {
 
 
 export function getCompassStates() { return playerCompassStates; }
-export function getPlayerShotMap() { return playerShotMap; }
 
 // ----- RUN MAIN FUNCTION -----
 
