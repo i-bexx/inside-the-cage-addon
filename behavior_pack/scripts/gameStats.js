@@ -11,7 +11,7 @@ import { getPlayersInRound } from "./getPlayersArray";
 
 import { stopTheFunctions } from "./resetStats";
 import { initiateCam } from "./cameraUsage";
-import { teleportStalker } from "./Stalker";
+import { teleportStalker } from "./stalkerEntity";
 import { givePanelItem } from "./panels";
 
 import { playerLookingControl } from "./RoundBegin/playerLooking";

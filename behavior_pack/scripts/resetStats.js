@@ -8,7 +8,7 @@ import { getHostileCounterId, getStopHostileSpawnId, getContinueHostileSpawnId, 
 import { getTeleportEntityId, getTimeSetterId } from "./RoundBegin/Null/nullTeleport";
 import { getSanityId } from "./RoundBegin/Sanity";
 
-import { getTeleportStalkerId } from "./Stalker";
+import { getTeleportStalkerId } from "./stalkerEntity";
 import { getPlayerCanShootId } from "./cursorController";
 import { getPanelItemCountdownId } from "./panels";
 
@@ -45,6 +45,8 @@ import { checkIfPositionClear } from "./gameStarter";
 
 import { getTeleportCooldown } from "./Teleporter";
 
+import { getStalkerEntityMatchedMap } from "./stalkerEntity";
+
 import { getCompassStates } from "./UI/fastUiTick";
 
 // ==========================================
@@ -56,7 +58,7 @@ const COMMANDS_TO_RESET_GAME = [
     "tag @a remove waiting_for_start",
     "tag @a remove starting",
     "tag @a remove starter",
-    "tag @a remove aa_matched",
+    "tag @a remove stalker_matched",
     "tag @a remove hasNotification",
     "tag @a remove show_in_round_personal_ui",
     "kill @e[type=game:stalker_cursor]",
@@ -144,6 +146,8 @@ export function clearPlayerMaps(playerId) { // Clears maps of player
   checkIfPositionClear().delete(playerId);
 
   getTeleportCooldown().delete(playerId);
+
+  getStalkerEntityMatchedMap().delete(playerId);
 
   playerStatesOfBatteryMap().delete(playerId);
   playerDrainingBatteryCountdownMap().delete(playerId);

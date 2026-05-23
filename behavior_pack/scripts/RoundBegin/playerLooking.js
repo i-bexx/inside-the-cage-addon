@@ -36,7 +36,7 @@ const DIMENSION = world.getDimension("overworld");
 
 let nullEntity;
 
-let aaValueObjective;
+let stalkerMatchIdObjective;
 let sanityObjective;
 let staminaObjective;
 
@@ -51,12 +51,12 @@ function initialFunction() {
     if (isInitialized) return;
     
     try {
-        aaValueObjective = getStalkerMatchIdObjective();
+        stalkerMatchIdObjective = getStalkerMatchIdObjective();
     		sanityObjective = getSanityObjective();
     		staminaObjective = getStaminaObjective();
     
     // Safety check
-    if (!aaValueObjective || !sanityObjective || !staminaObjective) return;
+    if (!stalkerMatchIdObjective || !sanityObjective || !staminaObjective) return;
     
         isInitialized = true;
     } catch(e) {  }
@@ -115,7 +115,7 @@ export function playerLookingControl() {
         const playersLookingNow = new Set();
 
         for (const stalker of stalkers) {
-            const matchedPlayer = getMatchingPlayer(players, stalker, aaValueObjective);
+            const matchedPlayer = getMatchingPlayer(players, stalker, stalkerMatchIdObjective);
 
             const dx = stalker.location.x - nullEntity.location.x;
             const dy = stalker.location.y - nullEntity.location.y;
@@ -284,11 +284,11 @@ function sanityPoor(player) {
     player.runCommand("camerashake add @s[tag=in_game] 0.3 8 rotational");
 }
 
-function getMatchingPlayer(players, aaEntity, aaValueObjective) {
+function getMatchingPlayer(players, aaEntity, stalkerMatchIdObjective) {
     return players.find(p => {
         if (!p.isValid() || !p.scoreboardIdentity || !aaEntity.scoreboardIdentity) return false;
-        const playerScore = getObjectiveScore(aaValueObjective, p.scoreboardIdentity);
-        const aaScore = getObjectiveScore(aaValueObjective, aaEntity.scoreboardIdentity);
+        const playerScore = getObjectiveScore(stalkerMatchIdObjective, p.scoreboardIdentity);
+        const aaScore = getObjectiveScore(stalkerMatchIdObjective, aaEntity.scoreboardIdentity);
         return playerScore === aaScore;
     });
 }
