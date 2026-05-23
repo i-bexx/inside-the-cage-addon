@@ -267,29 +267,29 @@ function playerIsLooking(player, sanity) {
 }
 
 function sanityStable(player) {
-    if (!player || !player.isValid()) return;
-    player.runCommand(`playsound ${SOUNDS.STATIC_1} @s[tag=in_game]`);
+    if (!player || !player.isValid() || !player.hasTag("in_game")) return;
+    player.playSound(SOUNDS.STATIC_1, {volume: 0.2});
     player.runCommand("camerashake add @s[tag=in_game] 0.3 8 rotational");
 }
 
 function sanityNormal(player) {
-    if (!player || !player.isValid()) return;
-    player.runCommand(`playsound ${SOUNDS.STATIC_2} @s[tag=in_game]`);
+    if (!player || !player.isValid() || !player.hasTag("in_game")) return;
+    player.playSound(SOUNDS.STATIC_2, {volume: 0.2});
     player.runCommand("camerashake add @s[tag=in_game] 0.3 8 rotational");
 }
 
 function sanityPoor(player) {
-    if (!player || !player.isValid()) return;
-    player.runCommand(`playsound ${SOUNDS.STATIC_3} @s[tag=in_game]`);
+    if (!player || !player.isValid() || !player.hasTag("in_game")) return;
+    player.playSound(SOUNDS.STATIC_3, {volume: 0.2});
     player.runCommand("camerashake add @s[tag=in_game] 0.3 8 rotational");
 }
 
-function getMatchingPlayer(players, aaEntity, stalkerMatchIdObjective) {
+function getMatchingPlayer(players, stalkerEntity, stalkerMatchIdObjective) {
     return players.find(p => {
-        if (!p.isValid() || !p.scoreboardIdentity || !aaEntity.scoreboardIdentity) return false;
+        if (!p.isValid() || !p.scoreboardIdentity || !stalkerEntity.scoreboardIdentity) return false;
         const playerScore = getObjectiveScore(stalkerMatchIdObjective, p.scoreboardIdentity);
-        const aaScore = getObjectiveScore(stalkerMatchIdObjective, aaEntity.scoreboardIdentity);
-        return playerScore === aaScore;
+        const stalkerScore = getObjectiveScore(stalkerMatchIdObjective, stalkerEntity.scoreboardIdentity);
+        return playerScore === stalkerScore;
     });
 }
 

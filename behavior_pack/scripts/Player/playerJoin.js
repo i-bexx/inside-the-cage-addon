@@ -15,7 +15,7 @@ const CONFIG = {
         IN_MENU: "in_menu", 
         IN_LOBBY: "in_lobby", 
         MENU: "menu",
-        TO_REMOVE: ["in_game", "in_lobby", "waiting_for_start", "starting", "starter", "menu", "eliminated", "aa_matched", "hasNotification", "show_in_round_personal_ui"]
+        TO_REMOVE: ["in_game", "in_lobby", "waiting_for_start", "starting", "starter", "menu", "eliminated", "stalker_matched", "hasNotification", "show_in_round_personal_ui"]
     },
     DYN_PROPS: { 
         IN_MENU: "in_menu",
