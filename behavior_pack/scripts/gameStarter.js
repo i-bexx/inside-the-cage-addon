@@ -1,7 +1,7 @@
 import { world, system } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 
-import { stalkerMatch } from "./Stalker";
+import { stalkerMatch } from "./stalkerEntity";
 import { getAllPlayers } from "./getPlayersArray";
 
 // ==========================================

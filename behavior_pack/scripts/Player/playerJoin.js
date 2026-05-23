@@ -77,7 +77,7 @@ const CONFIG = {
 
 const DIMENSION = world.getDimension(CONFIG.DIMENSION);
 
-let aaValueObjective;
+let stalkerMatchIdObjective;
 let newGameObjective;
 let worldParticipant;
 let isInitialized = false;
@@ -91,10 +91,10 @@ function initializeSystem() {
 
     try {
         newGameObjective = getNewGamedObjective();
-        aaValueObjective = getStalkerMatchIdObjective();
+        stalkerMatchIdObjective = getStalkerMatchIdObjective();
         worldParticipant = getWorldParticipant();
 
-        if (newGameObjective && aaValueObjective && worldParticipant) {
+        if (newGameObjective && stalkerMatchIdObjective && worldParticipant) {
             isInitialized = true;
         }
     } catch (e) { }
@@ -223,10 +223,10 @@ async function handleOwnerJoinLogic(player) {
 }
 
 function killConnectedStalker(player) {
-    if (!aaValueObjective) return;
+    if (!stalkerMatchIdObjective) return;
     
     try {
-        const stalkerScore = getObjectiveScore(aaValueObjective, player.scoreboardIdentity);
+        const stalkerScore = getObjectiveScore(stalkerMatchIdObjective, player.scoreboardIdentity);
         if (stalkerScore === undefined) return;
 
         const filter = {

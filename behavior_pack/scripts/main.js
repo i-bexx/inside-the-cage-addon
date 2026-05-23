@@ -5,7 +5,7 @@ import "./gameStats";
 import "./getPlayersArray";
 import "./panels";
 import "./preStart";
-import "./Stalker";
+import "./stalkerEntity";
 import "./Teleporter";
 import "./voteManager";
 
