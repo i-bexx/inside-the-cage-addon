@@ -175,7 +175,7 @@ export function cameraUsed(player, sanityValue, staminaValue) {
  * Logic for turning the camera off.
  * Clears effects and restores the original camera item.
  */
-function cameraDeused(player) {
+function cameraDeactivated(player) {
     const stamina = getObjectiveScore(staminaObjective, player.scoreboardIdentity);
     let isStaminaEmpty = stamina === 0;
 
@@ -218,10 +218,8 @@ world.afterEvents.itemUse.subscribe(({source, itemStack}) => {
         cameraUsed(source, sanityValue, staminaValue);
 
     } else if (itemStack.typeId === CONFIG.ITEMS.CAMERA_OFF) {
-        cameraDeused(source);
+        cameraDeactivated(source);
     }
 });
 
-export function getInitiateCamId() {
-    return timeoutId;
-}
+export function getInitiateCamId() { return timeoutId; }

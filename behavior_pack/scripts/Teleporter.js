@@ -14,7 +14,7 @@ const CONFIG = {
 };
 
 const DIMENSION = world.getDimension("overworld");
-const cooldowns = new Map();
+const COOLDOWNS = new Map();
 
 // ==========================================
 // MAIN SYSTEM
@@ -48,7 +48,7 @@ system.runInterval(() => {
 
 function teleportPlayer(player, targetEntity) {
     const now = Date.now();
-    const lastTeleport = cooldowns.get(player.id) || 0;
+    const lastTeleport = COOLDOWNS.get(player.id) || 0;
 
     // Cooldown Check
     if (now < lastTeleport) {
@@ -62,7 +62,7 @@ function teleportPlayer(player, targetEntity) {
     player.tryTeleport(targetEntity.location);
     
     // Update Cooldown
-    cooldowns.set(player.id, now + CONFIG.cooldownTime);
+    COOLDOWNS.set(player.id, now + CONFIG.cooldownTime);
 }
 
 // ==========================================
@@ -174,4 +174,4 @@ function getLinkTag(entity) {
     return entity.getTags().find(tag => tag.startsWith(CONFIG.tagPrefix));
 }
 
-export function getTeleportCooldown() { return cooldowns; }
+export function getTeleportCooldown() { return COOLDOWNS; }
