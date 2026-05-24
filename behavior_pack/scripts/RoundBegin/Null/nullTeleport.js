@@ -46,20 +46,6 @@ function initialFunction() {
 // Run when world loads
 system.run(initialFunction);
 
-/**
-	*@param {number} stageIndex - Must be a number
-*/
-
-function runTeleporter(stageIndex) {
-	const possibleTicks = TELEPORT_STAGES[stageIndex];
-	const randomTickValue = possibleTicks[Math.floor(Math.random() * possibleTicks.length)];
-
-	teleportEntity(randomTickValue);
-
-	world.setDynamicProperty("nullTeleportChecking", true);
-	
-}
-
 export function timeSetter() {
 	intervalId = system.runInterval(() => {
 		const isChecking = world.getDynamicProperty("nullTeleportChecking");
@@ -69,6 +55,19 @@ export function timeSetter() {
 			runTeleporter(soulsFreedAmount);
 		}
 	}, 60);
+}
+
+/**
+	*@param {number} stageIndex
+*/
+
+function runTeleporter(stageIndex) {
+	const possibleTicks = TELEPORT_STAGES[stageIndex];
+	const randomTickValue = possibleTicks[Math.floor(Math.random() * possibleTicks.length)];
+
+	teleportEntity(randomTickValue);
+
+	world.setDynamicProperty("nullTeleportChecking", true);
 }
 
 // Configuration constants
