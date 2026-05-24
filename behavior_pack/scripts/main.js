@@ -1,3 +1,5 @@
+import "./initializeWorld";
+
 import "./cameraUsage";
 import "./cursorController";
 import "./gameStarter";

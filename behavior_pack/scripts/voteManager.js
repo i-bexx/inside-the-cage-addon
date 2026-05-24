@@ -3,7 +3,7 @@ import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 import { getPlayersInRound } from "./getPlayersArray";
 
-const DIMENSION = world.getDimension("overworld");
+let DIMENSION;
 
 // ======= CONFIGURATION =======
 
@@ -28,13 +28,17 @@ const VOTE_CONFIG = {
 };
 
 // ======= PANELS =======
-const mainPanel = new ActionFormData()
+let mainPanel;
+let confirmPanels;
+
+world.afterEvents.worldLoad.subscribe(() => {
+    mainPanel = new ActionFormData()
     .title("VOTE PANEL")
     .button("Restart Round")
     .button("End Round")
     .button("Go Back");
 
-const confirmPanels = {
+    confirmPanels = {
     [VOTE_TYPES.RESTART]: new ActionFormData()
         .title("")
         .body("Do you want to restart?")
@@ -44,6 +48,7 @@ const confirmPanels = {
         .body("Do you want to end this round?")
         .button("Yes").button("No"),
 };
+})
 
 // ======= STATE =======
 
@@ -178,3 +183,5 @@ world.afterEvents.itemUse.subscribe((event) => {
         }
     }
 });
+
+export function voteManagerSetVariables() { DIMENSION = world.getDimension("overworld"); }

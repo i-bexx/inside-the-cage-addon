@@ -13,7 +13,7 @@ const CONFIG = {
     checkInterval: 20  
 };
 
-const DIMENSION = world.getDimension("overworld");
+let DIMENSION;
 const COOLDOWNS = new Map();
 
 // ==========================================
@@ -175,3 +175,4 @@ function getLinkTag(entity) {
 }
 
 export function getTeleportCooldown() { return COOLDOWNS; }
+export function teleporterSetVariables() { DIMENSION = world.getDimension("overworld"); }

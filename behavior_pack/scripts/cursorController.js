@@ -202,7 +202,7 @@ function isShootingState(player) {
 
 						const entity = result.entity;
 
-						if (entity.isValid()) {
+						if (entity.isValid) {
 							player.triggerEvent(CONFIG.EVENTS.SHOOTING_ENTITY);
             	entity.applyDamage(CONFIG.DAMAGE, damageOptions);
 						}

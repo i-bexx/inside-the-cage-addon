@@ -108,7 +108,7 @@ export function Battery_control() {
         const players = getPlayersInRound();
 
         for (const player of players) {
-            if (!player || !player.isValid()) continue;
+            if (!player || !player.isValid) continue;
 
             let batteryState = getBatteryState(player);
             // Reading Dynamic Properties (Coming from Config)
@@ -131,7 +131,7 @@ function batteryDrain(player) {
 
     // başlangıçta sayaç hemen bitiyor sonra tekrar çalışmıyor
     let timeoutId = system.runTimeout(() => {
-        if (!player || !player.isValid()) return;
+        if (!player || !player.isValid) return;
 
         let oldBatteryLevel = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.LEVEL) ?? BATTERY_CONFIG.LEVELS.DEFAULT;
 
@@ -201,7 +201,7 @@ function pickupBattery(player) {
     player.runCommand(itemCommand);
     
     system.runTimeout(() => {
-        if (!player || !player.isValid()) return;
+        if (!player || !player.isValid) return;
         
         player.runCommand(clearCommand);
     }, BATTERY_CONFIG.TIME.HUD_ANIMATION);
@@ -215,7 +215,7 @@ function decreaseBatteryHud(player, batteryLevel) {
     player.runCommand(itemCommand);
 
     system.runTimeout(() => {
-        if (!player || !player.isValid()) return;
+        if (!player || !player.isValid) return;
 
         player.runCommand(clearCommand);
     }, BATTERY_CONFIG.TIME.HUD_ANIMATION);
@@ -225,7 +225,7 @@ function batteryIsCritical(player) {
     if (playerIsBatteryCritical.has(player.id)) return;
 
     let batteryCriticalId = system.runTimeout(() => {
-        if (!player || !player.isValid()) return;
+        if (!player || !player.isValid) return;
         
         player.runCommand(`replaceitem entity @s ${BATTERY_CONFIG.ITEMS.HUD_SLOT} 1 ${BATTERY_CONFIG.ITEMS.PREFIX_CRITICAL}`);
         playerIsBatteryCritical.delete(player.id);
