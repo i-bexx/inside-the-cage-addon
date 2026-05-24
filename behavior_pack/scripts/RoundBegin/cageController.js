@@ -75,7 +75,7 @@ function attemptSpawnWithRetry(data, attempt) {
     if (attempt > 5) {
         const owner = getAllPlayers().find(p => p.hasTag("owner"));
         owner.sendMessage(`§4[SYSTEM FAILURE] §cCage ${data.cageNumber} could NOT be spawned after 5 attempts.`);
-        owner.playSound("note.bass", { pitch: 0.5, volume: 1.0 });
+        owner.playSound("note.bass", { pitch: 0.5, volume: 0.8 });
 
         return;
     }

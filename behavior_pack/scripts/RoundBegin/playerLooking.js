@@ -268,19 +268,19 @@ function playerIsLooking(player, sanity) {
 
 function sanityStable(player) {
     if (!player || !player.isValid() || !player.hasTag("in_game")) return;
-    player.playSound(SOUNDS.STATIC_1, {volume: 0.2});
+    player.playSound(SOUNDS.STATIC_1, {volume: 0.3});
     player.runCommand("camerashake add @s[tag=in_game] 0.3 8 rotational");
 }
 
 function sanityNormal(player) {
     if (!player || !player.isValid() || !player.hasTag("in_game")) return;
-    player.playSound(SOUNDS.STATIC_2, {volume: 0.2});
+    player.playSound(SOUNDS.STATIC_2, {volume: 0.3});
     player.runCommand("camerashake add @s[tag=in_game] 0.3 8 rotational");
 }
 
 function sanityPoor(player) {
     if (!player || !player.isValid() || !player.hasTag("in_game")) return;
-    player.playSound(SOUNDS.STATIC_3, {volume: 0.2});
+    player.playSound(SOUNDS.STATIC_3, {volume: 0.3});
     player.runCommand("camerashake add @s[tag=in_game] 0.3 8 rotational");
 }
 

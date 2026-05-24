@@ -59,8 +59,8 @@ function playerIsRunning(player, isStaminaEmpty) {
 		}
 }
 function playerIsNotRunning(player, isStaminaFull, isStaminaEmpty) {
-	const isLookingAtHostile = player.getDynamicProperty("is_looking");
-	if (isLookingAtHostile) return;
+	const isLookingAtNull = player.getDynamicProperty("is_looking");
+	if (isLookingAtNull) return;
 	
 	const time = Date.now();
 

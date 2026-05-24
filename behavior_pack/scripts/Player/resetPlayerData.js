@@ -64,13 +64,11 @@ export async function game_over(player) {
 }
 
 function staticSoundLoop(player) {
-    player.playSound(CONFIG.SOUNDS.PLAYSOUND_STATIC, {volume: 0.2});
+    player.playSound(CONFIG.SOUNDS.PLAYSOUND_STATIC, {volume: 0.3});
 
     const soundLoop = system.runInterval(() => {
         player.playSound(CONFIG.SOUNDS.PLAYSOUND_GAME_OVER, {volume: 0.8});
-        player.playSound(CONFIG.SOUNDS.PLAYSOUND_STATIC, {volume: 0.2});
-
-        world.sendMessage(`${soundLoop}`);
+        player.playSound(CONFIG.SOUNDS.PLAYSOUND_STATIC, {volume: 0.3});
     }, 100);
     return soundLoop;
 }

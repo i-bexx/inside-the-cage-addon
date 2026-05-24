@@ -4,7 +4,6 @@ import { world, system } from "@minecraft/server";
 // SYSTEM: MODULE IMPORTS
 // ==========================================
 
-import { getHostileCounterId, getStopHostileSpawnId, getContinueHostileSpawnId, getCages_4Id, getCages_5Id } from "./RoundBegin/Hostile";
 import { getTeleportEntityId, getTimeSetterId } from "./RoundBegin/Null/nullTeleport";
 import { getSanityId } from "./RoundBegin/Sanity";
 
@@ -196,11 +195,6 @@ export function stopTheFunctions() {
   system.clearRun(getPanelItemCountdownId());
   
   system.clearRun(getSoulsAmountCheckId());
-  system.clearRun(getHostileCounterId());
-  system.clearRun(getContinueHostileSpawnId());
-  system.clearRun(getStopHostileSpawnId());
-  system.clearRun(getCages_4Id());
-  system.clearRun(getCages_5Id());
   
   system.clearRun(getSanityId());
   

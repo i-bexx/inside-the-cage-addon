@@ -9,9 +9,6 @@ import { warnPlayerAboutCam, getWarnPlayerAboutCamId, resetCameraWarningInterval
 import { getTeleportEntityId, getTimeSetterId } from "./Null/nullTeleport";
 import { timeSetter } from "./Null/nullTeleport";
 
-import { hostileCounter, stopHostileSpawn, Cages_4, Cages_5 } from "./Hostile";
-import { getStopHostileSpawnId, getContinueHostileSpawnId, getCages_4Id, getCages_5Id } from "./Hostile";
-
 import { getSoulsFreedObjective, getSanityObjective, getStaminaObjective, getValueParticipant, getObjectiveScore } from "../scoreboards";
 
 let intervalId = 0;
@@ -66,17 +63,17 @@ const state = new Proxy({ ...initialState }, {
 		let isSoulsFreedValue5 = target["isSoulsFreedValue5"]
 		let doesSoulsFreedValueExceed = target["doesSoulsFreedValueExceed"]
 
-		const players = getPlayersInRound()
+		const players = getPlayersInRound();
 
 		if (isSoulsFreedValueSufficient) {
-			soulsFreedValueSufficient()
+			soulsFreedValueSufficient();
 	}
 		if (isSoulsFreedValue4) { //Will initiate only once when souls freed become 4
-			soulsFreedValue4()
+			soulsFreedValue4();
 	} else if (isSoulsFreedValue5) { //Will initiate only once when souls freed become 5
-			soulsFreedValue5()
+			soulsFreedValue5();
 	} else if (doesSoulsFreedValueExceed) {
-			soulsFreedValueExceeded(players)
+			soulsFreedValueExceeded(players);
 	}
 	return true;
 }
@@ -94,55 +91,49 @@ export function soulsAmountCheck() {
 }
 
 function soulsFreedValueSufficient() {
-	warnPlayerAboutCam()
-	canTurnOffCam()
-	playerCanShoot()
-	hostileCounter()
+	warnPlayerAboutCam();
+	canTurnOffCam();
+	playerCanShoot();
 
-	system.clearRun(getTeleportEntityId())
-	system.clearRun(getTimeSetterId())
+	system.clearRun(getTeleportEntityId());
+	system.clearRun(getTimeSetterId());
 
-	world.getDimension("overworld").runCommand("tp @e[type=game:null] -65 75 -150")
-	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", true)
+	world.getDimension("overworld").runCommand("tp @e[type=game:null] -65 75 -150");
+	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", true);
+	world.setDynamicProperty("nullTeleportChecking", false);
 }
+
 function soulsFreedValue4() {
-	Cages_4()
-	stopHostileSpawn()
-
-	world.setDynamicProperty("cages4Activated", true)
-	world.setDynamicProperty("cages5Activated", false)
+	world.setDynamicProperty("cages4Activated", true);
+	world.setDynamicProperty("cages5Activated", false);
 }
+
 function soulsFreedValue5() {
-	Cages_5()
-	stopHostileSpawn()
-
-	world.setDynamicProperty("cages5Activated", true)
-	world.setDynamicProperty("cages4Activated", false)
-
-	system.clearRun(getCages_4Id())
+	world.setDynamicProperty("cages5Activated", true);
+	world.setDynamicProperty("cages4Activated", false);
 }
+
 async function soulsFreedValueExceeded(players) {
 	const functionsToStop = {
-		continueHostileSpawn  				: getContinueHostileSpawnId(), 
-    stopHostileSpawn      				: getStopHostileSpawnId(),
-    cages4                				: getCages_4Id(),
-    cages5                				: getCages_5Id(),
 		warnPlayerAboutCam	  				: getWarnPlayerAboutCamId(),
-		resetCameraWarningIntervalId	: resetCameraWarningIntervalId(),
 		playerCanShoot		    				: getPlayerCanShootId(),
 		intervalId					 					: intervalId
 	}
+
 	for (const [, value] of Object.entries(functionsToStop)) {
-		system.clearRun(value)
+		system.clearRun(value);
 	}
-	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", false)
+
+	resetCameraWarningIntervalId();
+	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", false);
 	
   for (const player of players) {
-		await player.setDynamicProperty("nowPlayerWillGetNoSignal", false)
-		await player.setDynamicProperty("initializationBeforeLockingTheCam", true)
-		await player.setDynamicProperty("canTurnOffCam", false)
-		player.runCommand("clear @s game:camera")
-		player.runCommand("clear @s game:camera_turn_off")
+		await player.setDynamicProperty("nowPlayerWillGetNoSignal", false);
+		await player.setDynamicProperty("initializationBeforeLockingTheCam", true);
+		await player.setDynamicProperty("canTurnOffCam", false);
+		
+		player.runCommand("clear @s game:camera");
+		player.runCommand("clear @s game:camera_turn_off");
 
 		let sanityValue = getObjectiveScore(sanityObjective, player.scoreboardIdentity);
 		let staminaValue = getObjectiveScore(staminaObjective, player.scoreboardIdentity);
@@ -150,14 +141,14 @@ async function soulsFreedValueExceeded(players) {
 		cameraUsed(player, sanityValue, staminaValue);
 		
   }
-    timeSetter()
+    timeSetter();
 }
 
 function canTurnOffCam() {
-const players = getPlayersInRound()
+const players = getPlayersInRound();
     for (const player of players) {
-        player.setDynamicProperty("canTurnOffCam", true)
-        player.runCommand("replaceitem entity @s slot.hotbar 8 game:camera_turn_off 1")
+        player.setDynamicProperty("canTurnOffCam", true);
+        player.runCommand("replaceitem entity @s slot.hotbar 8 game:camera_turn_off 1");
     }
 }
 
