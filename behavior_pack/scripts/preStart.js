@@ -7,7 +7,7 @@ import { gameStarter } from "./gameStarter";
 // CONFIGURATION
 // =============================================================================
 
-const DIMENSION = world.getDimension("overworld");
+let DIMENSION;
 
 const CONFIG = {
     TAGS: {
@@ -71,7 +71,7 @@ const MENU_STATE = new Proxy({ onNewGame: false, onContinue: false }, {
 
         const entity = (key === "onNewGame") ? MENU_ENTITIES.newGame : MENU_ENTITIES.continue;
         
-        if (entity && entity.isValid()) {
+        if (entity && entity.isValid) {
             value ? (entity.triggerEvent("selected"), DIMENSION.runCommand("playsound click_choosing @a")) 
                   : entity.triggerEvent("default");
         }
@@ -80,9 +80,6 @@ const MENU_STATE = new Proxy({ onNewGame: false, onContinue: false }, {
 });
 
 let ownerPlayer = undefined;
-
-world.setDynamicProperty("in_menu", true);
-world.setDynamicProperty("skip_cutscene_limit", 0);
 
 // =============================================================================
 // COMMAND LISTS
@@ -308,3 +305,5 @@ function playSceneArrival() {
         system.clearRun(ACTIVE_TIMERS.skipLoop);
     }, CONFIG.TIMESTAMPS.ARRIVAL);
 }
+
+export function preStartSetVariables() { DIMENSION = world.getDimension("overworld"); }

@@ -5,7 +5,7 @@ import { votePanel } from "./voteManager";
 import { getGameStartedObjective, getCoinAmountObjective, getStaminaLimitObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 import { getPasswords } from "./RoundBegin/passwordManager";
 
-const DIMENSION = world.getDimension("overworld");
+let DIMENSION;
 
 const MAIN_PANELS = [ shopPanel, votePanel, upgradeBattery, increaseStaminaLimit ];
 const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_bomb": 6, "game:ammo": 1, "battery": 3 };
@@ -184,6 +184,6 @@ world.afterEvents.itemUse.subscribe((eventData) => {
       else if (itemStack.typeId == "minecraft:gold_ingot") customPanel(source);
 })
 
-
+export function panelsSetVariables() { DIMENSION = world.getDimension("overworld"); }
 
 

@@ -7,7 +7,7 @@ import { updateGlobalUi } from "../UI/globalUi";
 // CONFIGURATION & VARIABLES
 // ==========================================
 
-const DIMENSION = world.getDimension("overworld");
+let DIMENSION;
 const CONFIG = {
     CAGE_ID: "game:cage",
     PROPERTY_NAME: "cageBroken",
@@ -127,7 +127,7 @@ world.afterEvents.entityHitEntity.subscribe(({ hitEntity, damagingEntity }) => {
     hitEntity.setDynamicProperty(CONFIG.PROPERTY_NAME, true);
 
     system.run(() => {
-        if (!hitEntity.isValid()) return;
+        if (!hitEntity.isValid) return;
 
         hitEntity.triggerEvent(CONFIG.EVENT_NAME);
 
@@ -139,8 +139,10 @@ world.afterEvents.entityHitEntity.subscribe(({ hitEntity, damagingEntity }) => {
         updateGlobalUi();
 
         // In case player leaves
-        if (damagingEntity && damagingEntity.isValid()) {
+        if (damagingEntity && damagingEntity.isValid) {
             damagingEntity.runCommand(CONFIG.PLAYSOUND);
         }
     });
 });
+
+export function cageControllerSetVariables() { DIMENSION = world.getDimension("overworld"); }

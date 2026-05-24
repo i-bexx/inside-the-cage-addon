@@ -32,7 +32,7 @@ const SOUNDS = {
     STATIC_3: "static3"
 };
 
-const DIMENSION = world.getDimension("overworld");
+let DIMENSION;
 
 let nullEntity;
 
@@ -44,34 +44,7 @@ let playerStates = new Map();
 let listOfPlayersLooking = new Map();
 let listOfPlayersPlayingStatic = new Map();
 
-let isInitialized = false;
 let intervalId = 0;
-
-function initialFunction() {
-    if (isInitialized) return;
-    
-    try {
-        stalkerMatchIdObjective = getStalkerMatchIdObjective();
-    		sanityObjective = getSanityObjective();
-    		staminaObjective = getStaminaObjective();
-    
-    // Safety check
-    if (!stalkerMatchIdObjective || !sanityObjective || !staminaObjective) return;
-    
-        isInitialized = true;
-    } catch(e) {  }
-}
-
-// Run immediately to check for the scoreboard
-system.run(initialFunction);
-
-// If scoreboard objective or participant is not loaded, this loop will define them
-let scoreSecurityInterval = system.runInterval(() => {
-        if (!isInitialized) {
-                initialFunction();
-                return;
-        } else system.clearRun(scoreSecurityInterval);
-}, 40);
 
 function isPlayerLookingAtEntity(player) {
 
@@ -123,9 +96,11 @@ export function playerLookingControl() {
             
             const distance = Math.hypot(dx, dy, dz);
 
+            if (!matchedPlayer?.isValid) continue;
+
             const state = isPlayerLookingAtEntity(matchedPlayer);
 
-            if (state && distance <= 10) {
+            if (matchedPlayer?.isValid && state && distance <= 10) {
                 state.isLooking = true;
                 playersLookingNow.add(matchedPlayer.id);
             }
@@ -136,7 +111,7 @@ export function playerLookingControl() {
             if (state.isLooking && !playersLookingNow.has(playerId)) {
                 const player = players.find(p => p.id === playerId);
                 
-                if (player && player.isValid()) {
+                if (player && player.isValid) {
                     // Triggers playerStoppedLooking via Proxy
                     state.isLooking = false; 
                 } else {
@@ -153,7 +128,7 @@ export function playerLookingControl() {
 }
 
 function handleStaticEffect(player) {
-    if (!player || !player.isValid()) return;
+    if (!player || !player.isValid) return;
 
     const playerStats = getPlayerStats();
     const isUsingCam = player.getDynamicProperty(DYNAMIC_PROPS.CAM_USING);
@@ -179,7 +154,7 @@ function handleStaticEffect(player) {
 }
 
 function playerStoppedLooking(player) {
-    if (!player || !player.isValid()) return;
+    if (!player || !player.isValid) return;
 
     // 1. GUARANTEE CLEANUP FIRST
     const staticIntervalId = listOfPlayersPlayingStatic.get(player.id);
@@ -225,7 +200,7 @@ function playerStoppedLooking(player) {
 }
 
 function playerIsLooking(player, sanity) {
-    if (!player || !player.isValid()) return;
+    if (!player || !player.isValid) return;
 
     listOfPlayersLooking.set(player.id, 1);
     player.setDynamicProperty(DYNAMIC_PROPS.IS_LOOKING, true);
@@ -256,7 +231,7 @@ function playerIsLooking(player, sanity) {
     
     const staticIntervalId = system.runInterval(() => {
         // Validation check is crucial inside the interval
-        if (!player || !player.isValid()) {
+        if (!player || !player.isValid) {
             system.clearRun(staticIntervalId);
             return;
         }
@@ -267,26 +242,26 @@ function playerIsLooking(player, sanity) {
 }
 
 function sanityStable(player) {
-    if (!player || !player.isValid() || !player.hasTag("in_game")) return;
+    if (!player || !player.isValid || !player.hasTag("in_game")) return;
     player.playSound(SOUNDS.STATIC_1, {volume: 0.3});
     player.runCommand("camerashake add @s[tag=in_game] 0.3 8 rotational");
 }
 
 function sanityNormal(player) {
-    if (!player || !player.isValid() || !player.hasTag("in_game")) return;
+    if (!player || !player.isValid || !player.hasTag("in_game")) return;
     player.playSound(SOUNDS.STATIC_2, {volume: 0.3});
     player.runCommand("camerashake add @s[tag=in_game] 0.3 8 rotational");
 }
 
 function sanityPoor(player) {
-    if (!player || !player.isValid() || !player.hasTag("in_game")) return;
+    if (!player || !player.isValid || !player.hasTag("in_game")) return;
     player.playSound(SOUNDS.STATIC_3, {volume: 0.3});
     player.runCommand("camerashake add @s[tag=in_game] 0.3 8 rotational");
 }
 
 function getMatchingPlayer(players, stalkerEntity, stalkerMatchIdObjective) {
     return players.find(p => {
-        if (!p.isValid() || !p.scoreboardIdentity || !stalkerEntity.scoreboardIdentity) return false;
+        if (!p.isValid || !p.scoreboardIdentity || !stalkerEntity.scoreboardIdentity) return false;
         const playerScore = getObjectiveScore(stalkerMatchIdObjective, p.scoreboardIdentity);
         const stalkerScore = getObjectiveScore(stalkerMatchIdObjective, stalkerEntity.scoreboardIdentity);
         return playerScore === stalkerScore;
@@ -314,4 +289,11 @@ export function playerStatesOfPlayerLookingMap() {
 
 export function listOfPlayersPlayingStaticMap() {
     return listOfPlayersPlayingStatic;
+}
+
+export function playerLookingSetVariables() {
+    DIMENSION = world.getDimension("overworld");
+    stalkerMatchIdObjective = getStalkerMatchIdObjective();
+    sanityObjective = getSanityObjective();
+    staminaObjective = getStaminaObjective();
 }

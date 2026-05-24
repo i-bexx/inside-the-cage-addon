@@ -15,38 +15,12 @@ const CONFIG = {
     INIT_RETRY_TICKS: 40
 };
 
-const DIMENSION = world.getDimension("overworld");
+let DIMENSION;
 
 const STALKER_ENTITY_MATCHED = new Map();
 
 let stalkerMatchIdObjective = null;
 let intervalId = 0;
-let isInitialized = false;
-
-// =============================================================================
-// Initialization Logic
-// =============================================================================
-
-function initialFunction() {
-	if (isInitialized) return;
-
-	try {
-		stalkerMatchIdObjective = getStalkerMatchIdObjective();
-
-    if (!stalkerMatchIdObjective) return;
-		
-		isInitialized = true;
-	} catch (e) {}
-}
-
-system.run(initialFunction);
-
-// If scoreboard objective is not loaded, this loop will define them
-let scoreSecurityInterval = system.runInterval(() => {
-    if (!isInitialized) {
-        initialFunction();
-    } else system.clearRun(scoreSecurityInterval);
-}, CONFIG.INIT_RETRY_TICKS);
 
 // =============================================================================
 // Main Functions
@@ -55,8 +29,6 @@ let scoreSecurityInterval = system.runInterval(() => {
 // --- Matching Stalker Logic ---
 
 export function stalkerMatch() {
-    if (!isInitialized) return;
-
     const players = getAllPlayers()
                     .filter(player => !player.hasTag(CONFIG.MATCH_TAG));
 
@@ -98,8 +70,6 @@ function stalkerMatchLogic(player) {
 export function teleportStalker() { intervalId = system.runInterval(teleportStalkerLoop, 1); }
 
 function teleportStalkerLoop() {
-        if (!isInitialized) return;
-
         const players = getPlayersInRound();
 
         for (const player of players) {
@@ -108,7 +78,7 @@ function teleportStalkerLoop() {
 
             const linkedEntity = STALKER_ENTITY_MATCHED.get(player.id);
 
-            if (!linkedEntity || linkedEntity.length === 0 || !linkedEntity[0].isValid()) {
+            if (!linkedEntity || linkedEntity.length === 0 || !linkedEntity[0].isValid) {
                 stalkerMatchLogic(player);
                 continue;
             }
@@ -156,3 +126,8 @@ function getLinkID(player) {
 
 export function getStalkerEntityMatchedMap() { return STALKER_ENTITY_MATCHED; }
 export function getTeleportStalkerId() { return intervalId; }
+
+export function stalkerEntitySetVariables() {
+    DIMENSION = world.getDimension("overworld");
+    stalkerMatchIdObjective = getStalkerMatchIdObjective();
+}

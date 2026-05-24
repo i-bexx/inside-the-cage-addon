@@ -31,7 +31,7 @@ const CONFIG = {
     }
 };
 
-const DIMENSION = world.getDimension(CONFIG.DIMENSION);
+let DIMENSION;
 
 // =============================================================================
 // STATE MANAGEMENT
@@ -39,22 +39,8 @@ const DIMENSION = world.getDimension(CONFIG.DIMENSION);
 
 let objectives = {
     ammo: null,
-    toxic: null,
-    isInitialized: false
+    toxic: null
 };
-
-function initialFunction() {
-    try {
-        objectives.ammo = getAmmoObjective();
-        objectives.toxic = getUsedToxicBombObjective();
-
-        if (objectives.ammo && objectives.toxic) {
-            objectives.isInitialized = true;
-            return true;
-        }
-    } catch (e) {}
-    return false;
-}
 
 // =============================================================================
 // LOGIC HANDLERS
@@ -114,21 +100,7 @@ function handleCombatLogic(player) {
 // 5. MAIN LOOP
 // =============================================================================
 
-system.run(initialFunction);
-
-
-const initInterval = system.runInterval(() => {
-    if (objectives.isInitialized) {
-        system.clearRun(initInterval);
-    } else {
-        initialFunction();
-    }
-}, 40);
-
-// --------- GAME LOOP ---------
 system.runInterval(() => {
-    if (!objectives.isInitialized) return;
-
     const players = getAllPlayers();
     for (const player of players) {
         handleStrafeAnimation(player);
@@ -189,4 +161,10 @@ function updateEquipment(player, slotName, targetItemId) {
     else if (currentItem && (currentItem.startsWith("p:") || slotName === "Offhand")) {
         player.runCommand(`replaceitem entity @s ${commandSlot} 1 air`);
     }
+}
+
+export function playerSituationSetVariables() {
+    DIMENSION = world.getDimension(CONFIG.DIMENSION);
+    objectives.ammo = getAmmoObjective();
+    objectives.toxic = getUsedToxicBombObjective();
 }

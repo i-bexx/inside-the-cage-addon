@@ -30,35 +30,10 @@ const CONFIG = {
     ]
 };
 
-const DIMENSION = world.getDimension(CONFIG.DIMENSION_ID);
+let DIMENSION;
 
 let coinAmountObjective;
 let intervalId = 0;
-let isInitialized = false;
-
-// ==========================================
-// INITIALIZATION
-// ==========================================
-
-function initialFunction() {
-    coinAmountObjective = getCoinAmountObjective();
-
-    // Security Check
-    if (!coinAmountObjective) return;
-    
-    isInitialized = true;
-    return;
-}
-
-// Run when world loads
-system.run(initialFunction);
-
-// If scoreboard objective is not loaded, this loop will define them
-let scoreSecurityInterval = system.runInterval(() => {
-    if (!isInitialized) {
-        initialFunction();
-    } else system.clearRun(scoreSecurityInterval);
-}, 40);
 
 // ==========================================
 // FUNCTIONS
@@ -139,7 +114,7 @@ function collectCoin(player, target) {
     target.triggerEvent(CONFIG.MAGIC_STRINGS.COLLECTED_EVENT); 
 
     system.runTimeout(() => {
-        if (target.isValid()) {
+        if (target.isValid) {
             target.remove();
         }
     }, CONFIG.ANIMATION_DURATION_TICKS);
@@ -198,3 +173,8 @@ world.afterEvents.playerInteractWithEntity.subscribe((event) => {
 
     collectCoin(player, target);
 });
+
+export function coinSpawnerSetVariables() {
+    DIMENSION = world.getDimension(CONFIG.DIMENSION_ID);
+    coinAmountObjective = getCoinAmountObjective();
+}

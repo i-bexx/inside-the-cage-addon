@@ -34,7 +34,7 @@ function playAmbiance() {
         const players = getPlayersInRound();
 
         for (const player of players) {
-            if (player.isValid()) {
+            if (player.isValid) {
                 player.runCommand(COMMAND); 
             }
         }

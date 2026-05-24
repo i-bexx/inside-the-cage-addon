@@ -4,7 +4,7 @@ import { getPlayersInRound } from "../../getPlayersArray";
 
 // ======= CONFIGURATION =======
 
-const DIMENSION = world.getDimension("overworld");
+let DIMENSION;
 const CONFIG = {
   CURTAIN_CLOSE: "curtain_close_event",
   CURTAIN_OPEN_CMD: "event entity @a[tag=!in_lobby] curtain_open_event",
@@ -53,3 +53,5 @@ export async function finishRoundEarly() {
 function sleep(ticks) {
   return new Promise((resolve) => system.runTimeout(resolve, ticks));
 }
+
+export function finishRoundEarlySetVariables() { DIMENSION = world.getDimension("overworld"); }

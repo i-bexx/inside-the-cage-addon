@@ -5,7 +5,7 @@ import { startFunction } from "../../gameStarter";
 
 // ======= CONFIGURATION =======
 
-const DIMENSION = world.getDimension("overworld");
+let DIMENSION;
 const CONFIG = {
   CURTAIN_CLOSE: "curtain_close_event",
   STOPSOUND: "stopsound @s",
@@ -42,3 +42,5 @@ export async function restartRound() {
 function sleep(ticks) {
   return new Promise((resolve) => system.runTimeout(resolve, ticks));
 }
+
+export function restartRoundSetVariables() { DIMENSION = world.getDimension("overworld"); }

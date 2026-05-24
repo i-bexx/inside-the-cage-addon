@@ -9,7 +9,7 @@ import { getAllPlayers } from "./getPlayersArray";
 // ==========================================
 
 const STARTER_RANGE_STATES = new Map();
-const DIMENSION = world.getDimension("overworld");
+let DIMENSION;
 
 const TELEPORT_BACK_COMMANDS = {
 	toOut: "tp @a[tag=waiting_for_start] -183 68 -97",
@@ -161,9 +161,9 @@ export function startFunction() {
 		if (!isTheRoundRestarted) player.triggerEvent("curtain_close_event");
 	}
 
-		world.getDimension("overworld").runCommand("setblock -54 75 -152 redstone_block");
-		world.getDimension("overworld").runCommand("event entity @e[type=game:door] game_started");
-		world.getDimension("overworld").runCommand("fill -180 68 -92 -180 71 -84 barrier");
+		DIMENSION.runCommand("setblock -54 75 -152 redstone_block");
+		DIMENSION.runCommand("event entity @e[type=game:door] game_started");
+		DIMENSION.runCommand("fill -180 68 -92 -180 71 -84 barrier");
 		
 		stalkerMatch();
 
@@ -185,3 +185,5 @@ export function getGameStarterId() {
 export function checkIfPositionClear() {
     return STARTER_RANGE_STATES;
 }
+
+export function gameStarterSetVariables() { DIMENSION = world.getDimension("overworld"); }

@@ -23,8 +23,6 @@ let teleportCountdown = 0;
 let intervalId = 0;
 
 function initialFunction() {
-    DIMENSION = world.getDimension("overworld");
-
     soulsFreedObjective = getSoulsFreedObjective();
     valueParticipant = getValueParticipant();
     
@@ -151,3 +149,5 @@ export function getTimeSetterId() {
 export function getTeleportEntityId() {
     return teleportCountdown;
 }
+
+export function nullTeleportSetVariables() { DIMENSION = world.getDimension("overworld"); }

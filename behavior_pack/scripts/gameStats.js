@@ -35,7 +35,7 @@ import { updateGlobalUi } from "./UI/globalUi";
 // SYSTEM: CONFIGURATION & COMMANDS
 // ==========================================
 
-const DIMENSION = world.getDimension("overworld");
+let DIMENSION;
 
 const INITIAL_GAME_STATE = {
     isGameStarted: 0
@@ -90,8 +90,6 @@ const FUNCTIONS_TO_END_ROUND = {
 // SYSTEM: GLOBAL VARIABLES
 // ==========================================
 
-let isInitialized = false;
-
 let gameStartedObjective;
 let gameRestartedObjective;
 let gameEndedObjective;
@@ -100,45 +98,6 @@ let playersInRoundObjective;
 let valueParticipant;
 
 let isGameStarted;
-
-// ==========================================
-// SYSTEM: INITIALIZATION
-// ==========================================
-
-
-/**
- * Runs immediately when the world loads to initialize scoreboards.
- */
-function initialFunction() {
-	if (isInitialized) return;
-
-	try {
-		gameStartedObjective = getGameStartedObjective();
-        gameRestartedObjective = getGameRestartedObjective();
-		gameEndedObjective = getGameEndedObjective();
-        playersInRoundObjective = getPlayersInRoundObjective();
-        valueParticipant = getValueParticipant();
-
-    // Safety check
-    if (!gameStartedObjective || !gameRestartedObjective || !gameEndedObjective || !playersInRoundObjective || !valueParticipant) return;
-		
-		isInitialized = true;
-    
-    isGameStarted = getObjectiveScore(gameStartedObjective, valueParticipant);
-	} catch (e) {}
-}
-
-// Run initialization immediately
-system.run(initialFunction);
-
-// If scoreboard objective or participant is not loaded, this loop will define them
-let scoreSecurityInterval = system.runInterval(() => {
-    if (!isInitialized) {
-        initialFunction();
-        return;
-    } else system.clearRun(scoreSecurityInterval);
-    
-}, 40);
 
 // ==========================================
 // SYSTEM: STATE MANAGEMENT
@@ -243,4 +202,13 @@ function roundOver() {
         resetPlayerDynamicPropertyData(player);
         commandsToResetPlayerData(player);
     }
+}
+
+export function gameStatsSetVariables() {
+    DIMENSION = world.getDimension("overworld");
+    gameStartedObjective = getGameStartedObjective();
+    gameRestartedObjective = getGameRestartedObjective();
+    gameEndedObjective = getGameEndedObjective();
+    playersInRoundObjective = getPlayersInRoundObjective();
+    valueParticipant = getValueParticipant();
 }

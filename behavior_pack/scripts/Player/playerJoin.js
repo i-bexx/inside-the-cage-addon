@@ -75,45 +75,17 @@ const CONFIG = {
 // GLOBAL VARIABLES
 // =============================================================
 
-const DIMENSION = world.getDimension(CONFIG.DIMENSION);
+let DIMENSION;
 
 let stalkerMatchIdObjective;
 let newGameObjective;
 let worldParticipant;
-let isInitialized = false;
-
-// =============================================================
-// INITIALIZATION
-// =============================================================
-
-function initializeSystem() {
-    if (isInitialized) return;
-
-    try {
-        newGameObjective = getNewGamedObjective();
-        stalkerMatchIdObjective = getStalkerMatchIdObjective();
-        worldParticipant = getWorldParticipant();
-
-        if (newGameObjective && stalkerMatchIdObjective && worldParticipant) {
-            isInitialized = true;
-        }
-    } catch (e) { }
-}
-
-system.run(initializeSystem);
-
-const initInterval = system.runInterval(() => {
-    if (!isInitialized) initializeSystem();
-    else system.clearRun(initInterval);
-}, 40);
 
 // =============================================================
 // MAIN EVENT LISTENER
 // =============================================================
 
 world.afterEvents.playerSpawn.subscribe(async ({ player }) => {
-    if (!isInitialized) return;
-
     // Prepare Stats
     stopFunctionsInMaps(player.id);
     clearPlayerMaps(player.id);
@@ -182,7 +154,7 @@ function checkPlayerGameData(player, worldValue, playerValue) {
         }
 
         system.runTimeout(() => {
-            if (player.isValid()) {
+            if (player.isValid) {
                 player.sendMessage(CONFIG.MESSAGES.RESET_WARNING);
                 player.runCommand("playsound notification @s");
             }
@@ -210,7 +182,7 @@ async function handleOwnerJoinLogic(player) {
 
     await sleep(320);
 
-    if (player.isValid()) {
+    if (player.isValid) {
         player.setDynamicProperty(CONFIG.DYN_PROPS.MENU_READY, true);
         player.runCommand(`tag @s add ${CONFIG.TAGS.MENU}`);
         
@@ -283,4 +255,12 @@ function ensureEntitiesAreReset() {
 
 function sleep(ticks) {
     return new Promise((resolve) => system.runTimeout(resolve, ticks));
+}
+
+export function playerJoinSetVariables() {
+    DIMENSION = world.getDimension(CONFIG.DIMENSION);
+
+    newGameObjective = getNewGamedObjective();
+    stalkerMatchIdObjective = getStalkerMatchIdObjective();
+    worldParticipant = getWorldParticipant();
 }
