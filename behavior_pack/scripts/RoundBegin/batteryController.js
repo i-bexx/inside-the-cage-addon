@@ -54,7 +54,7 @@ const BATTERY_CONFIG = {
 // VARIABLES AND MAPS
 // =============================================================
 
-let intervalId = 0;
+let intervalId = undefined;
 
 // Maps
 const playerStates = new Map();
@@ -102,7 +102,7 @@ function getBatteryState(player) {
 // =============================================================
 
 export function Battery_control() {
-    if (intervalId !== 0) return;
+    if (intervalId !== undefined) return;
   
     intervalId = system.runInterval(() => {
         const players = getPlayersInRound();
@@ -252,11 +252,12 @@ world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
     }
 });
 
-export function resetBatteryIntervalId() {
-    intervalId = 0;
+export function stopBatteryControl() {
+    if (intervalId === undefined) return;
+    system.clearRun(intervalId);
+    intervalId = undefined;
 }
 
-export function getBatteryId() { return intervalId; }
 export function playerStatesOfBatteryMap() { return playerStates; }
 export function playerDrainingBatteryCountdownMap() { return playerDrainingBattery; }
 export function playerIsBatteryCriticalCountdownMap() { return playerIsBatteryCritical; }

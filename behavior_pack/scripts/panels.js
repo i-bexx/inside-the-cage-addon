@@ -5,12 +5,12 @@ import { votePanel } from "./voteManager";
 import { getGameStartedObjective, getCoinAmountObjective, getStaminaLimitObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 import { getPasswords } from "./RoundBegin/passwordManager";
 
-let DIMENSION;
+let dimension;
 
 const MAIN_PANELS = [ shopPanel, votePanel, upgradeBattery, increaseStaminaLimit ];
 const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_bomb": 6, "game:ammo": 1, "battery": 3 };
 
-let timeoutId = 0;
+let timeoutId = undefined;
 
 function customPanel(player) {
     new ModalFormData()
@@ -169,11 +169,8 @@ function increaseStaminaLimit(player) {
 
 export function givePanelItem() {
     timeoutId = system.runTimeout(() => {
-        DIMENSION.runCommand("replaceitem entity @a[tag=in_game] slot.inventory 0 minecraft:compass");
+        dimension.runCommand("replaceitem entity @a[tag=in_game] slot.inventory 0 minecraft:compass");
     }, 2400)
-}
-export function getPanelItemCountdownId() {
-    return timeoutId;
 }
 
     
@@ -184,6 +181,12 @@ world.afterEvents.itemUse.subscribe((eventData) => {
       else if (itemStack.typeId == "minecraft:gold_ingot") customPanel(source);
 })
 
-export function panelsSetVariables() { DIMENSION = world.getDimension("overworld"); }
+export function stopGivePanelItem() {
+    if (timeoutId === undefined) return;
+    system.clearRun(timeoutId);
+    timeoutId = undefined;
+}
+
+export function setGlobalVariables() { dimension = world.getDimension("overworld"); }
 
 

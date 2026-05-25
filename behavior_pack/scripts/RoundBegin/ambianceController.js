@@ -8,7 +8,7 @@ import { getPlayersInRound } from "../getPlayersArray";
 const TICKS = [ 4950, 5260, 7210, 3250, 4210 ];
 const COMMAND = "playsound ambiance @s";
 
-let timeoutId = 0;
+let timeoutId = undefined;
 let isRunning = false;
 
 // =============================================================
@@ -49,9 +49,9 @@ function getIndex() {
 }
 
 export function stopAmbiance() {
-    isRunning = false;
-    if (timeoutId !== 0) {
+    if (timeoutId !== undefined) {
         system.clearRun(timeoutId);
-        timeoutId = 0;
+        timeoutId = undefined;
     }
+    isRunning = false;
 }

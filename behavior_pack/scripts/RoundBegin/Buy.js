@@ -33,25 +33,6 @@ const CONFIG = {
 // FUNCTIONS
 // ==========================================
 
-function initialFunction() {
-  coinAmountObjective = getCoinAmountObjective();
-
-	// Security Check
-	if (!coinAmountObjective) return;
-	
-    isInitialized = true;
-}
-
-// Run when world loads
-system.run(initialFunction);
-
-let scoreSecurityInterval = system.runInterval(() => {
-    if (!isInitialized) {
-        initialFunction();
-        return;
-    } else system.clearRun(scoreSecurityInterval);
-}, 40);
-
 // ------------ LOGICAL FUNCTIONS ------------
 
 function buyBottle(p) {
@@ -69,7 +50,7 @@ function buyBottle(p) {
 }
 
 function Purchase(player) {
-    const amount = getObjectiveScore(coinAmountObjective, player.scoreboardIdentity)
+    const amount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity)
 
     if (amount == 0 || amount == undefined) {
         player.sendMessage(CONFIG.COMMANDS_ACCEPT.MESSAGE);

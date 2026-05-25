@@ -4,26 +4,21 @@ import { world, system } from "@minecraft/server";
 // SYSTEM: MODULE IMPORTS
 // ==========================================
 
-import { getTeleportEntityId, getTimeSetterId } from "./RoundBegin/Null/nullTeleport";
-import { getSanityId } from "./RoundBegin/Sanity";
+import { stopGivePanelItem } from "./panels";
+import { stopInitiateCam } from "./cameraUsage";
+import { stopCrosshairTracker, stopPlayerShootTracker } from "./cursorController";
+import { stopTeleportStalker } from "./stalkerEntity";
 
-import { getTeleportStalkerId } from "./stalkerEntity";
-import { getPlayerCanShootId } from "./cursorController";
-import { getPanelItemCountdownId } from "./panels";
-
-import { getPlayerLookingId } from "./RoundBegin/playerLooking";
-import { getStaminaId } from "./RoundBegin/Stamina";
-import { getBatteryId } from "./RoundBegin/batteryController";
-import { getCoinId } from "./RoundBegin/coinSpawner";
-import { getWarnPlayerAboutCamId } from "./RoundBegin/cameraController";
-import { getInitiateCamId } from "./cameraUsage";
-import { getSoulsAmountCheckId } from "./RoundBegin/soulController";
+import { stopTeleportNull, stopNullTeleportTimeSetter } from "./RoundBegin/Null/nullTeleport";
+import { stopSanityControl } from "./RoundBegin/Sanity";
+import { stopPlayerLookingControl } from "./RoundBegin/playerLooking";
+import { stopStaminaControl } from "./RoundBegin/Stamina";
+import { stopSoulsAmountCheck } from "./RoundBegin/soulController";
 import { resetPasswords } from "./RoundBegin/passwordManager";
-
 import { stopAmbiance } from "./RoundBegin/ambianceController";
-import { resetBatteryIntervalId } from "./RoundBegin/batteryController";
-import { resetCameraWarningIntervalId } from "./RoundBegin/cameraController";
-import { resetCoinIntervalId } from "./RoundBegin/coinSpawner";
+import { stopBatteryControl } from "./RoundBegin/batteryController";
+import { stopWarnPlayerAboutCam } from "./RoundBegin/cameraController";
+import { stopCoinSpawner } from "./RoundBegin/coinSpawner";
 
 
 // ==========================================
@@ -185,28 +180,27 @@ export function resetWorldDynamicPropertyData() {
 }
 
 export function stopTheFunctions() {
-  system.clearRun(getInitiateCamId());
-  system.clearRun(getPlayerLookingId());
-  system.clearRun(getBatteryId());
-  system.clearRun(getStaminaId());
-  system.clearRun(getCoinId());
-  system.clearRun(getWarnPlayerAboutCamId());
-  system.clearRun(getPlayerCanShootId());
-  system.clearRun(getPanelItemCountdownId());
+  stopPlayerLookingControl();
+  stopStaminaControl();
+  stopGivePanelItem();
   
-  system.clearRun(getSoulsAmountCheckId());
+  stopSoulsAmountCheck();
+  stopSanityControl();
   
-  system.clearRun(getSanityId());
-  
-  system.clearRun(getTeleportStalkerId());
-  
-  system.clearRun(getTeleportEntityId());
-  system.clearRun(getTimeSetterId());
+  stopTeleportNull();
+  stopNullTeleportTimeSetter();
+
+  stopCrosshairTracker();
+  stopPlayerShootTracker();
+
+  stopInitiateCam();
+
+  stopTeleportStalker();
 
   stopAmbiance();
-  resetBatteryIntervalId();
-  resetCameraWarningIntervalId();
-  resetCoinIntervalId();
+  stopBatteryControl();
+  stopWarnPlayerAboutCam();
+  stopCoinSpawner();
 
   resetPasswords();
 }

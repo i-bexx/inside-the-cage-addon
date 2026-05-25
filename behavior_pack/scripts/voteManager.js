@@ -3,7 +3,7 @@ import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 import { getPlayersInRound } from "./getPlayersArray";
 
-let DIMENSION;
+let dimension;
 
 // ======= CONFIGURATION =======
 
@@ -31,42 +31,23 @@ const VOTE_CONFIG = {
 let mainPanel;
 let confirmPanels;
 
-world.afterEvents.worldLoad.subscribe(() => {
-    mainPanel = new ActionFormData()
-    .title("VOTE PANEL")
-    .button("Restart Round")
-    .button("End Round")
-    .button("Go Back");
-
-    confirmPanels = {
-    [VOTE_TYPES.RESTART]: new ActionFormData()
-        .title("")
-        .body("Do you want to restart?")
-        .button("Yes").button("No"),
-    [VOTE_TYPES.END_ROUND]: new ActionFormData()
-        .title("")
-        .body("Do you want to end this round?")
-        .button("Yes").button("No"),
-};
-})
-
 // ======= STATE =======
 
-let voteTimeout = null;
+let voteTimeout = undefined;
 let requestExists = false;
 
 // ======= CORE FUNCTIONS =======
 
 function cleanup(type) {
     Object.values(TAGS).forEach(tag => {
-        DIMENSION.runCommand(`tag @a remove ${tag}`);
+        dimension.runCommand(`tag @a remove ${tag}`);
     });
-    DIMENSION.runCommand(`clear @a ${ITEMS.NOTIFICATION_PREFIX}${type}`);
+    dimension.runCommand(`clear @a ${ITEMS.NOTIFICATION_PREFIX}${type}`);
     
     requestExists = false;
     if (voteTimeout) {
         system.clearRun(voteTimeout);
-        voteTimeout = null;
+        voteTimeout = undefined;
     }
 }
 
@@ -164,10 +145,10 @@ function handleVote(player, type) {
 function runOperation(type) {
     if (type === VOTE_TYPES.RESTART) {
         world.setDynamicProperty("gameRestart", true);
-        DIMENSION.runCommand("scoreboard players set value game_restarted 1");
+        dimension.runCommand("scoreboard players set value game_restarted 1");
     } else if (type === VOTE_TYPES.END_ROUND) {
         world.setDynamicProperty("roundEndedEarly", true);
-        DIMENSION.runCommand("scoreboard players set value game_ended_early 1");
+        dimension.runCommand("scoreboard players set value game_ended_early 1");
     }
 }
 
@@ -184,4 +165,22 @@ world.afterEvents.itemUse.subscribe((event) => {
     }
 });
 
-export function voteManagerSetVariables() { DIMENSION = world.getDimension("overworld"); }
+export function setGlobalVariables() { dimension = world.getDimension("overworld"); }
+export function setForms() {
+    mainPanel = new ActionFormData()
+    .title("VOTE PANEL")
+    .button("Restart Round")
+    .button("End Round")
+    .button("Go Back");
+
+    confirmPanels = {
+    [VOTE_TYPES.RESTART]: new ActionFormData()
+        .title("")
+        .body("Do you want to restart?")
+        .button("Yes").button("No"),
+    [VOTE_TYPES.END_ROUND]: new ActionFormData()
+        .title("")
+        .body("Do you want to end this round?")
+        .button("Yes").button("No"),
+    };
+}

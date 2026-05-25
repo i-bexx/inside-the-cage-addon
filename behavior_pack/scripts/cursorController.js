@@ -25,10 +25,8 @@ const CONFIG = {
 // FILTERS & VARIABLES
 // ==========================================
 
-let isInitialized = false;
-let isShootingObjective = null;
-let ammoObjective = null;
-let shootingIntervalId = 0;
+let crosshairTrackerIntervalId = undefined;
+let shootingIntervalId = undefined;
 
 const CURSOR_STATES = new Map();
 const SHOOTING_STATES = new Map();
@@ -83,39 +81,11 @@ const ENTITY_RULES = [
     }
 ];
 
-
-function initialFunction() {
-	if (isInitialized) return;
-	
-	try {
-		isShootingObjective = getIsShootingObjective();
-		ammoObjective = getAmmoObjective();
-    
-    // Safety check
-    if (!isShootingObjective || !ammoObjective) return;
-    
-		isInitialized = true;
-
-		Cursor();
-	} catch(e) {}
-}
-
-// Run immediately to check for the scoreboard
-system.run(initialFunction);
-
-// If scoreboard objective or participant is not loaded, this loop will define them
-let scoreSecurityInterval = system.runInterval(() => {
-		if (!isInitialized) {
-				initialFunction();
-				return;
-		} else system.clearRun(scoreSecurityInterval);
-}, 40);
-
 // ==========================================
-// SYSTEM A: CURSOR
+// SYSTEM A: LOOKING
 // ==========================================
 
-function getLookingState(player) {
+function crosshairTracker(player) {
     let state = CURSOR_STATES.get(player.id);
     if (state) return state;
 
@@ -156,16 +126,17 @@ function getLookingState(player) {
     return state;
 }
 
-// Global Loop for Cursor
-function Cursor() {
-	system.runInterval(() => {
-    for (const player of world.getPlayers()) {
-        const isLooking = getLookingState(player);
+// Global Loop for Cursor Tracker
+export function startCrosshairTracker() {
+	if (crosshairTrackerIntervalId !== undefined) return;
 
-				const raycastResult = player.getEntitiesFromViewDirection(ENTITY_DISTANCE)
-        
-        isLooking.lookingAtEntity = (raycastResult.length > 0) ? 1 : 0;
-    }
+	crosshairTrackerIntervalId = system.runInterval(() => {
+        for (const player of world.getPlayers()) {
+            const isLooking = crosshairTracker(player);
+            const raycastResult = player.getEntitiesFromViewDirection(ENTITY_DISTANCE)
+            
+            isLooking.lookingAtEntity = (raycastResult.length > 0) ? 1 : 0;
+        }
 }, 4);
 }
 
@@ -173,7 +144,7 @@ function Cursor() {
 // SYSTEM B: SHOOTING
 // ==========================================
 
-function isShootingState(player) {
+function playerShootTracker(player) {
     let state = SHOOTING_STATES.get(player.id);
     if (state) return state;
 
@@ -187,26 +158,21 @@ function isShootingState(player) {
 
             target[key] = value;
 
-						const isLooking = target.isLooking === 1;
+			const isLooking = target.isLooking === 1;
             const isShooting = target.isShootingValue === 1;
-						const ammoValue = target.ammoValue > 0;
+			const ammoValue = target.ammoValue > 0;
 
-						if (!isLooking || !isShooting || !ammoValue)
-              return true;
+			if (!isLooking || !isShooting || !ammoValue) return true;
+
+			const result = player.getEntitiesFromViewDirection(MONSTER_FILTER)[0];
+
+			if (!result) return true;
 						
-
-						const result = player.getEntitiesFromViewDirection(MONSTER_FILTER)[0];
-
-						if (!result) return true;
-						
-
-						const entity = result.entity;
-
-						if (entity.isValid) {
-							player.triggerEvent(CONFIG.EVENTS.SHOOTING_ENTITY);
+			const entity = result.entity;
+			if (entity.isValid) {
+				player.triggerEvent(CONFIG.EVENTS.SHOOTING_ENTITY);
             	entity.applyDamage(CONFIG.DAMAGE, damageOptions);
-						}
-
+			}
             return true;
         }
     });
@@ -216,42 +182,47 @@ function isShootingState(player) {
 }
 
 // Function to start the shooting loop
-export function playerCanShoot() {
-    if (shootingIntervalId !== 0) return;
+export function startPlayerShootTracker() {
+    if (shootingIntervalId !== undefined) return;
 
     shootingIntervalId = system.runInterval(() => {
-        if (!isShootingObjective) return;
+        if (!getIsShootingObjective()) return;
 
         const players = world.getPlayers();
 
         for (const player of players) {
-            let isPlayerShooting = isShootingState(player);
+            let isPlayerShooting = playerShootTracker(player);
 
             // Raycast only for monsters
             const raycastResult = player.getEntitiesFromViewDirection(MONSTER_FILTER);
 						
-						isPlayerShooting.isLooking = (raycastResult.length > 0) ? 1 : 0;
+			isPlayerShooting.isLooking = (raycastResult.length > 0) ? 1 : 0;
 
             // Safe scoreboard reading
             try {
-								isPlayerShooting.ammoValue = getObjectiveScore(ammoObjective, player.scoreboardIdentity);
-                isPlayerShooting.isShootingValue = getObjectiveScore(isShootingObjective, player.scoreboardIdentity);
+				isPlayerShooting.ammoValue = getObjectiveScore(getAmmoObjective(), player.scoreboardIdentity);
+                isPlayerShooting.isShootingValue = getObjectiveScore(getIsShootingObjective(), player.scoreboardIdentity);
             } catch (e) {
                 isPlayerShooting.isShootingValue = 0;
-								isPlayerShooting.ammoValue = 0;
+				isPlayerShooting.ammoValue = 0;
             }
         }
     }, 4); 
 }
 
-export function stopShooting() {
-    if (shootingIntervalId !== 0) {
-        system.clearRun(shootingIntervalId);
-        shootingIntervalId = 0;
-    }
+export function stopCrosshairTracker() {
+    if (crosshairTrackerIntervalId == undefined) return;
+
+    system.clearRun(crosshairTrackerIntervalId);
+    crosshairTrackerIntervalId = undefined;
 }
 
-export function getPlayerCanShootId() { return shootingIntervalId; }
+export function stopPlayerShootTracker() {
+    if (shootingIntervalId == undefined) return;
+
+    system.clearRun(shootingIntervalId);
+    shootingIntervalId = undefined;
+}
 
 export function getCursorStates() { return CURSOR_STATES; }
 export function getShootingStates() { return SHOOTING_STATES; }

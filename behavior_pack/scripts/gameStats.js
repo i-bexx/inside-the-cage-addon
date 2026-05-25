@@ -5,7 +5,7 @@ import { world, system } from "@minecraft/server";
 // ==========================================
 
 import { resetWorldDynamicPropertyData, resetPlayerDynamicPropertyData, commandsToResetTheGame, resetMaps, clearPlayerMaps, stopFunctionsInMaps, commandsToResetPlayerData } from "./resetStats";
-import { gameStarter, getGameStarterId, checkIfPositionClear } from "./gameStarter";
+import { gameStarter, checkIfPositionClear } from "./gameStarter";
 import { getGameStartedObjective, getGameRestartedObjective, getGameEndedObjective, getPlayersInRoundObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 import { getPlayersInRound } from "./getPlayersArray"; 
 
@@ -24,7 +24,7 @@ import { startCoinSpawner } from "./RoundBegin/coinSpawner";
 import { soulsAmountCheck } from "./RoundBegin/soulController";
 import { decidePasswords } from "./RoundBegin/passwordManager";
 
-import { timeSetter } from "./RoundBegin/Null/nullTeleport";
+import { nullTeleportTimeSetter } from "./RoundBegin/Null/nullTeleport";
 
 import { restartRound } from "./RoundBegin/RoundOperations/restartRound";
 import { finishRoundEarly } from "./RoundBegin/RoundOperations/finishRoundEarly";
@@ -35,7 +35,7 @@ import { updateGlobalUi } from "./UI/globalUi";
 // SYSTEM: CONFIGURATION & COMMANDS
 // ==========================================
 
-let DIMENSION;
+let dimension;
 
 const INITIAL_GAME_STATE = {
     isGameStarted: 0
@@ -64,7 +64,7 @@ const GAME_COMMANDS = {
 
 const FUNCTIONS_TO_START = {
     initiateCam,
-    timeSetter,
+    nullTeleportTimeSetter,
     playerLookingControl,
     teleportStalker,
     givePanelItem,
@@ -156,19 +156,19 @@ const gameEndedState = new Proxy({ ...INITIAL_ENDED_GAME_STATE }, {
 // Only called after the players no longer in menu
 export function startMainGameLoop() {
     system.runInterval(() => {
-        state.isGameStarted = getObjectiveScore(gameStartedObjective, valueParticipant);
-        gameRestartState.isGameRestarted = getObjectiveScore(gameRestartedObjective, valueParticipant);
-				gameEndedState.isGameEnded = getObjectiveScore(gameEndedObjective, valueParticipant);
+        state.isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
+        gameRestartState.isGameRestarted = getObjectiveScore(getGameRestartedObjective(), getValueParticipant());
+				gameEndedState.isGameEnded = getObjectiveScore(getGameEndedObjective(), getValueParticipant());
 
         isGameStarted = state.isGameStarted;
 
         if (isGameStarted == 0) { // Run commands if the game has NOT started
-          DIMENSION.runCommand(GAME_COMMANDS.LOBBY_MAINTENANCE.NULL_TELEPORT);
+          dimension.runCommand(GAME_COMMANDS.LOBBY_MAINTENANCE.NULL_TELEPORT);
         } else { // If game started and no people left, the game shall reset
 					const inGamePlayers = getPlayersInRound();
 
 					if (inGamePlayers.length == 0) world.setDynamicProperty("roundOver", true);
-					if (world.getDynamicProperty("roundOver")) DIMENSION.runCommand(GAME_COMMANDS.GAME_OVER.RESET_SCOREBOARD);
+					if (world.getDynamicProperty("roundOver")) dimension.runCommand(GAME_COMMANDS.GAME_OVER.RESET_SCOREBOARD);
 				}
     }, 5);
 }
@@ -181,8 +181,6 @@ function roundStarted() {
     for (const func of Object.values(FUNCTIONS_TO_START)) {
         func();
     }
-    
-    system.clearRun(getGameStarterId());
     checkIfPositionClear().clear();
 }
 
@@ -193,22 +191,15 @@ function roundOver() {
     for (const func of Object.values(FUNCTIONS_TO_END_ROUND)) {
         func();
     }
-    commandsToResetTheGame(DIMENSION);
+    commandsToResetTheGame(dimension);
     
     // Reset data for each player
     for (const player of players) {
-				stopFunctionsInMaps(player.id);
+		stopFunctionsInMaps(player.id);
         clearPlayerMaps(player.id);
         resetPlayerDynamicPropertyData(player);
         commandsToResetPlayerData(player);
     }
 }
 
-export function gameStatsSetVariables() {
-    DIMENSION = world.getDimension("overworld");
-    gameStartedObjective = getGameStartedObjective();
-    gameRestartedObjective = getGameRestartedObjective();
-    gameEndedObjective = getGameEndedObjective();
-    playersInRoundObjective = getPlayersInRoundObjective();
-    valueParticipant = getValueParticipant();
-}
+export function setGlobalVariables() { dimension = world.getDimension("overworld"); }

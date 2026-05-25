@@ -4,7 +4,7 @@ import { getPlayersInRound } from "../../getPlayersArray";
 
 // ======= CONFIGURATION =======
 
-let DIMENSION;
+let dimension;
 const CONFIG = {
   CURTAIN_CLOSE: "curtain_close_event",
   CURTAIN_OPEN_CMD: "event entity @a[tag=!in_lobby] curtain_open_event",
@@ -29,23 +29,23 @@ export async function finishRoundEarly() {
     player.triggerEvent(CONFIG.CURTAIN_CLOSE);
     player.runCommand(CONFIG.STOPSOUND);
   }
-  await DIMENSION.runCommand(CONFIG.SET_SCOREBOARD);
+  await dimension.runCommand(CONFIG.SET_SCOREBOARD);
 
   await sleep(10);
-  await DIMENSION.runCommand(CONFIG.TP_ELSEWHERE);
+  await dimension.runCommand(CONFIG.TP_ELSEWHERE);
 
   await sleep(100);
-  await DIMENSION.runCommand(CONFIG.TP_TO_LOBBBY);
-  await DIMENSION.runCommand(CONFIG.CURTAIN_OPEN_CMD);
-  await DIMENSION.runCommand(CONFIG.NORMAL_EVENT_CMD);
-  await DIMENSION.runCommand(CONFIG.ADD_TAG_CMD);
+  await dimension.runCommand(CONFIG.TP_TO_LOBBBY);
+  await dimension.runCommand(CONFIG.CURTAIN_OPEN_CMD);
+  await dimension.runCommand(CONFIG.NORMAL_EVENT_CMD);
+  await dimension.runCommand(CONFIG.ADD_TAG_CMD);
 
   // 'roundEndedEarly' dynamic property must reset only here
   world.setDynamicProperty("roundEndedEarly", false);
 
   await sleep(30);
-  await DIMENSION.runCommand(CONFIG.OPEN_DOOR_EVENT);
-  await DIMENSION.runCommand(CONFIG.REMOVE_DOOR_BARRIERS);
+  await dimension.runCommand(CONFIG.OPEN_DOOR_EVENT);
+  await dimension.runCommand(CONFIG.REMOVE_DOOR_BARRIERS);
 }
 
 // ======= HELPER FUNCTION =======
@@ -54,4 +54,4 @@ function sleep(ticks) {
   return new Promise((resolve) => system.runTimeout(resolve, ticks));
 }
 
-export function finishRoundEarlySetVariables() { DIMENSION = world.getDimension("overworld"); }
+export function setGlobalVariables() { dimension = world.getDimension("overworld"); }
