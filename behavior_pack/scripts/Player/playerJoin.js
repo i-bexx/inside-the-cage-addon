@@ -75,7 +75,7 @@ const CONFIG = {
 // GLOBAL VARIABLES
 // =============================================================
 
-let DIMENSION;
+let dimension;
 
 let stalkerMatchIdObjective;
 let newGameObjective;
@@ -173,10 +173,10 @@ async function handleOwnerJoinLogic(player) {
     resetMaps();
     resetWorldDynamicPropertyData();
 
-	await commandsToResetTheGame(DIMENSION);
+	await commandsToResetTheGame(dimension);
     await ensureEntitiesAreReset();
     
-    DIMENSION.runCommand("fill -180 68 -92 -180 71 -84 barrier");
+    dimension.runCommand("fill -180 68 -92 -180 71 -84 barrier");
 
     startProcesses();
 
@@ -210,7 +210,7 @@ function killConnectedStalker(player) {
             }]
         };
 
-        const entities = DIMENSION.getEntities(filter);
+        const entities = dimension.getEntities(filter);
         if (entities.length > 0) entities[0].kill();
         
     } catch (e) { }
@@ -221,16 +221,16 @@ function ensureEntitiesAreReset() {
         const attemptReset = () => {
             // Run the commands (Even if it has bug)
             try {
-                DIMENSION.runCommand(`event entity @e[type=${CONFIG.ENTITIES.MENU_NEW_GAME}] ${CONFIG.ENTITY_EVENTS.RESET_DEFAULT}`);
-                DIMENSION.runCommand(`event entity @e[type=${CONFIG.ENTITIES.MENU_CONTINUE}] ${CONFIG.ENTITY_EVENTS.RESET_DEFAULT}`);
-                DIMENSION.runCommand(`event entity @e[type=${CONFIG.ENTITIES.GAME_DOOR}] ${CONFIG.ENTITY_EVENTS.WAITING_HOST}`);
+                dimension.runCommand(`event entity @e[type=${CONFIG.ENTITIES.MENU_NEW_GAME}] ${CONFIG.ENTITY_EVENTS.RESET_DEFAULT}`);
+                dimension.runCommand(`event entity @e[type=${CONFIG.ENTITIES.MENU_CONTINUE}] ${CONFIG.ENTITY_EVENTS.RESET_DEFAULT}`);
+                dimension.runCommand(`event entity @e[type=${CONFIG.ENTITIES.GAME_DOOR}] ${CONFIG.ENTITY_EVENTS.WAITING_HOST}`);
             } catch (e) { }
 
             // Check entities
             try {
-                const newGame = DIMENSION.getEntities({ type: CONFIG.ENTITIES.MENU_NEW_GAME })[0];
-                const contGame = DIMENSION.getEntities({ type: CONFIG.ENTITIES.MENU_CONTINUE })[0];
-                const doorGame = DIMENSION.getEntities({ type: CONFIG.ENTITIES.GAME_DOOR })[0];
+                const newGame = dimension.getEntities({ type: CONFIG.ENTITIES.MENU_NEW_GAME })[0];
+                const contGame = dimension.getEntities({ type: CONFIG.ENTITIES.MENU_CONTINUE })[0];
+                const doorGame = dimension.getEntities({ type: CONFIG.ENTITIES.GAME_DOOR })[0];
 
                 if (newGame && contGame && doorGame) {
                     const val1 = newGame.getComponent("minecraft:mark_variant")?.value;
@@ -257,8 +257,8 @@ function sleep(ticks) {
     return new Promise((resolve) => system.runTimeout(resolve, ticks));
 }
 
-export function playerJoinSetVariables() {
-    DIMENSION = world.getDimension(CONFIG.DIMENSION);
+export function setGlobalVariables() {
+    dimension = world.getDimension(CONFIG.DIMENSION);
 
     newGameObjective = getNewGamedObjective();
     stalkerMatchIdObjective = getStalkerMatchIdObjective();

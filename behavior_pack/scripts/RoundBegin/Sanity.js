@@ -1,29 +1,15 @@
-import { world, system } from "@minecraft/server";
+import { system } from "@minecraft/server";
 
 import { getPlayersInRound } from "../getPlayersArray";
 import { game_over } from "../Player/resetPlayerData";
 import { getSanityObjective, getObjectiveScore } from "../scoreboards";
 
-let sanityObjective;
-
 let players = [];
-let intervalId = 0;
+let intervalId = undefined;
 
 let playsoundHeart = new Map();
 let sanityLowStaticSoundId = new Map();
 let sanityLowStaticEventId = new Map();
-
-function initialFunction() {
-	sanityObjective = getSanityObjective();
-
-	if (!sanityObjective) {
-		world.sendMessage("Scoreboard objective not found.");
-		return;
-	}
-}
-
-// Run when world loads
-system.run(initialFunction);
 
 //SANITY CONTROL INTERVAL
 export function Sanity_control() {
@@ -43,7 +29,7 @@ async function checkPlayerLookingState(players) {
 		let isPlayerLooking = player.getDynamicProperty("is_looking")
 		let playerIsNotLookingCooldown = player.getDynamicProperty("notLookingCooldown")
 		let playerIsLookingCooldown = player.getDynamicProperty("lookingCooldown")
-		let isSanityZero = getObjectiveScore(sanityObjective, player.scoreboardIdentity) == 0
+		let isSanityZero = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity) == 0
 		
 		let decreaseSanityWhenNotLooking = !isPlayerLooking && !playerIsNotLookingCooldown && !isSanityZero
 		let decreaseSanityWhenLooking = isPlayerLooking && !playerIsLookingCooldown && !isSanityZero
@@ -77,7 +63,7 @@ function playerIsNotLooking(player) {
 
 function lowSanityStatic(players) {
 	for (const player of players) {
-		let sanityScore = getObjectiveScore(sanityObjective, player.scoreboardIdentity);
+		let sanityScore = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
 		let isSanityLow = sanityScore <= 33
 
 		let isUsingCam = player.getDynamicProperty("camUsing")
@@ -105,7 +91,7 @@ function checkPlayerHeartPoundingState(players) {
 			const isPlayersHeartPounding = playsoundHeart.has(player.id);
 			const component = player.getComponent("minecraft:mark_variant");
 
-			let sanityScore = getObjectiveScore(sanityObjective, player.scoreboardIdentity);
+			let sanityScore = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
 			let shouldHeartPound = sanityScore <= 33 && component.value === 556;
 
 			if (shouldHeartPound && !isPlayersHeartPounding) {
@@ -138,7 +124,7 @@ function checkPlayerSanityLowStaticSound(players) {
         const isPlayingStaticSound = sanityLowStaticSoundId.has(player.id);
         const component = player.getComponent("minecraft:mark_variant");
 
-        let sanityScore = getObjectiveScore(sanityObjective, player.scoreboardIdentity);
+        let sanityScore = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
         let shouldPlayStatic = sanityScore <= 33 && component.value === 556;
 
         if (shouldPlayStatic && !isPlayingStaticSound) {
@@ -164,15 +150,12 @@ function sanityLowStaticSound(player) {
 		sanityLowStaticSoundId.set(player.id, func)
 }
 
-export function getSanityId() {
-    return intervalId;
+export function stopSanityControl() {
+		if (intervalId === undefined) return;
+    system.clearRun(intervalId);
+    intervalId = undefined;
 }
-export function getPlaysoundHeartMap() {
-    return playsoundHeart;
-}
-export function getSanityLowStaticSoundMap() {
-    return sanityLowStaticSoundId;
-}
-export function getSanityLowStaticEventMap() {
-		return sanityLowStaticEventId;
-}
+
+export function getPlaysoundHeartMap() { return playsoundHeart; }
+export function getSanityLowStaticSoundMap() { return sanityLowStaticSoundId; }
+export function getSanityLowStaticEventMap() { return sanityLowStaticEventId; }

@@ -31,7 +31,7 @@ const CONFIG = {
     }
 };
 
-let DIMENSION;
+let dimension;
 
 // =============================================================================
 // STATE MANAGEMENT
@@ -55,7 +55,7 @@ function handleStrafeAnimation(player) {
     
     const strafeSpeed = v.x * Math.cos(rotation) + v.z * Math.sin(rotation);
     
-    let targetItem = null;
+    let targetItem = undefined;
     if (strafeSpeed > CONFIG.THRESHOLDS.STRAFE_SPEED) {
         targetItem = CONFIG.ITEMS.STRAFE_LEFT;
     } else if (strafeSpeed < -CONFIG.THRESHOLDS.STRAFE_SPEED) {
@@ -127,7 +127,7 @@ world.afterEvents.entityHitEntity.subscribe((event) => {
         };
 
         damagingEntity.runCommand("playsound knife_slice @s");
-        DIMENSION.spawnParticle(CONFIG.ITEMS.BLOOD_PARTICLE, particleLoc);
+        dimension.spawnParticle(CONFIG.ITEMS.BLOOD_PARTICLE, particleLoc);
     }
 });
 
@@ -163,8 +163,8 @@ function updateEquipment(player, slotName, targetItemId) {
     }
 }
 
-export function playerSituationSetVariables() {
-    DIMENSION = world.getDimension(CONFIG.DIMENSION);
+export function setGlobalVariables() {
+    dimension = world.getDimension(CONFIG.DIMENSION);
     objectives.ammo = getAmmoObjective();
     objectives.toxic = getUsedToxicBombObjective();
 }

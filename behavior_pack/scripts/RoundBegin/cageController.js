@@ -7,7 +7,7 @@ import { updateGlobalUi } from "../UI/globalUi";
 // CONFIGURATION & VARIABLES
 // ==========================================
 
-let DIMENSION;
+let dimension;
 const CONFIG = {
     CAGE_ID: "game:cage",
     PROPERTY_NAME: "cageBroken",
@@ -48,8 +48,8 @@ export function spawnCages() {
         const location = group[randomIndex];
 
         try {
-            DIMENSION.spawnEntity(CONFIG.CAGE_ID, location);
-            DIMENSION.runCommand(`say @a "Cage ${index + 1} spawned at ${JSON.stringify(location)}"`);
+            dimension.spawnEntity(CONFIG.CAGE_ID, location);
+            dimension.runCommand(`say @a "Cage ${index + 1} spawned at ${JSON.stringify(location)}"`);
         } catch (error) {
             UNLOADED_LOCATIONS.push({
                 location: location, 
@@ -86,21 +86,21 @@ function attemptSpawnWithRetry(data, attempt) {
     const removeTickingArea = getRemoveTickingArea(areaName);
 
     try {
-        DIMENSION.runCommand(addTickingArea);
+        dimension.runCommand(addTickingArea);
 
         system.runTimeout(() => {
             try {
-                DIMENSION.spawnEntity(CONFIG.CAGE_ID, location);
-                DIMENSION.runCommand(`say @a "Cage ${cageNumber} (Recovered) spawned at ${JSON.stringify(location)}"`);
-                DIMENSION.runCommand(removeTickingArea);
+                dimension.spawnEntity(CONFIG.CAGE_ID, location);
+                dimension.runCommand(`say @a "Cage ${cageNumber} (Recovered) spawned at ${JSON.stringify(location)}"`);
+                dimension.runCommand(removeTickingArea);
             } catch (err) {
-                DIMENSION.runCommand(removeTickingArea);
+                dimension.runCommand(removeTickingArea);
                 system.runTimeout(() => attemptSpawnWithRetry(data, attempt + 1), 40);
             }
         }, 20);
 
     } catch (err) {
-        DIMENSION.runCommand(removeTickingArea);
+        dimension.runCommand(removeTickingArea);
         system.runTimeout(() => attemptSpawnWithRetry(data, attempt + 1), 40);
     }
 }
@@ -133,8 +133,8 @@ world.afterEvents.entityHitEntity.subscribe(({ hitEntity, damagingEntity }) => {
 
         const loc = hitEntity.location;
 
-        DIMENSION.spawnParticle(CONFIG.PARTICLE, loc);
-        DIMENSION.runCommand(CONFIG.UPDATE_SCORE);
+        dimension.spawnParticle(CONFIG.PARTICLE, loc);
+        dimension.runCommand(CONFIG.UPDATE_SCORE);
 
         updateGlobalUi();
 
@@ -145,4 +145,4 @@ world.afterEvents.entityHitEntity.subscribe(({ hitEntity, damagingEntity }) => {
     });
 });
 
-export function cageControllerSetVariables() { DIMENSION = world.getDimension("overworld"); }
+export function setGlobalVariables() { dimension = world.getDimension("overworld"); }

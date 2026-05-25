@@ -14,37 +14,13 @@ const TELEPORT_STAGES = [
     [280, 310, 340]     // Stage 7
 ];
 
-let DIMENSION;
-let soulsFreedObjective;
-let valueParticipant;
-let soulsFreedValue;
+let dimension;
 
-let teleportCountdown = 0;
-let intervalId = 0;
+let teleportCountdown = undefined;
+let intervalId = undefined;
 
-function initialFunction() {
-    soulsFreedObjective = getSoulsFreedObjective();
-    valueParticipant = getValueParticipant();
-    
-    // Safety Check
-    if (!soulsFreedObjective) {
-        world.sendMessage(`Scoreboard objective is not found.`);
-        return;
-    }
 
-    // Safety Check
-    if (!valueParticipant) {
-        world.sendMessage(`Scoreboard 'value' participant is not found.`);
-        return;
-    }
-
-    soulsFreedValue = getObjectiveScore(soulsFreedObjective, valueParticipant) ?? 0;
-}
-
-// Run when world loads
-system.run(initialFunction);
-
-export function timeSetter() {
+export function nullTeleportTimeSetter() {
 	intervalId = system.runInterval(() => {
 		const isChecking = world.getDynamicProperty("nullTeleportChecking");
 		let soulsFreedAmount = getCurrentSouls();
@@ -63,7 +39,7 @@ function runTeleporter(stageIndex) {
 	const possibleTicks = TELEPORT_STAGES[stageIndex];
 	const randomTickValue = possibleTicks[Math.floor(Math.random() * possibleTicks.length)];
 
-	teleportEntity(randomTickValue);
+	teleportNull(randomTickValue);
 
 	world.setDynamicProperty("nullTeleportChecking", true);
 }
@@ -77,12 +53,12 @@ const TELEPORT_OFFSETS = [
     { x: 3, y: 0, z: 0 }
 ];
 
-function teleportEntity(ticks) {
+function teleportNull(ticks) {
     teleportCountdown = system.runTimeout(() => {
         const players = getAllPlayers();
         const chosenPlayer = getRandomPlayer(players);
 
-        const nullEntities = DIMENSION.getEntities({ type: "game:null" });
+        const nullEntities = dimension.getEntities({ type: "game:null" });
         const nullEntity = nullEntities[0];
 
         if (!nullEntity) return; 
@@ -121,8 +97,8 @@ function attemptNullTeleport(coordinate, entity) {
     return false; // Failed to find a spot
 }
 function isValidLocation(pos, beneathPos) {
-    const block = DIMENSION.getBlock(pos);
-    const blockBeneath = DIMENSION.getBlock(beneathPos);
+    const block = dimension.getBlock(pos);
+    const blockBeneath = dimension.getBlock(beneathPos);
 
     if (!block || !blockBeneath) return false;
 
@@ -135,7 +111,7 @@ function isValidLocation(pos, beneathPos) {
 
 //GETTER FUNCTIONS
 function getCurrentSouls() {
-	return getObjectiveScore(soulsFreedObjective, valueParticipant);
+	return getObjectiveScore(getSoulsFreedObjective(), getValueParticipant());
 }
 
 function getRandomPlayer(playersArray) {
@@ -143,11 +119,15 @@ function getRandomPlayer(playersArray) {
     return playersArray[index];
 }
 
-export function getTimeSetterId() {
-    return intervalId;
+export function stopNullTeleportTimeSetter() {
+    if (intervalId === undefined) return;
+    system.clearRun(intervalId);
+    intervalId = undefined;
 }
-export function getTeleportEntityId() {
-    return teleportCountdown;
+export function stopTeleportNull() {
+    if (teleportCountdown === undefined) return;
+    system.clearRun(teleportCountdown);
+    teleportCountdown = undefined;
 }
 
-export function nullTeleportSetVariables() { DIMENSION = world.getDimension("overworld"); }
+export function setGlobalVariables() { dimension = world.getDimension("overworld"); }

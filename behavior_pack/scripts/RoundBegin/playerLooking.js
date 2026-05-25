@@ -32,19 +32,14 @@ const SOUNDS = {
     STATIC_3: "static3"
 };
 
-let DIMENSION;
-
+let dimension;
 let nullEntity;
-
-let stalkerMatchIdObjective;
-let sanityObjective;
-let staminaObjective;
 
 let playerStates = new Map();
 let listOfPlayersLooking = new Map();
 let listOfPlayersPlayingStatic = new Map();
 
-let intervalId = 0;
+let intervalId = undefined;
 
 function isPlayerLookingAtEntity(player) {
 
@@ -76,11 +71,11 @@ function isPlayerLookingAtEntity(player) {
 }
 
 export function playerLookingControl() {
-    nullEntity = DIMENSION.getEntities({ type: GAME_ENTITIES.NULL })[0];
+    nullEntity = dimension.getEntities({ type: GAME_ENTITIES.NULL })[0];
 
     intervalId = system.runInterval(() => {
         const players = getPlayersInRound();
-        const stalkers = DIMENSION.getEntities({ type: GAME_ENTITIES.STALKER_CURSOR });
+        const stalkers = dimension.getEntities({ type: GAME_ENTITIES.STALKER_CURSOR });
 
         if (stalkers.length === 0) return;
 
@@ -88,7 +83,7 @@ export function playerLookingControl() {
         const playersLookingNow = new Set();
 
         for (const stalker of stalkers) {
-            const matchedPlayer = getMatchingPlayer(players, stalker, stalkerMatchIdObjective);
+            const matchedPlayer = getMatchingPlayer(players, stalker, getStalkerMatchIdObjective());
 
             const dx = stalker.location.x - nullEntity.location.x;
             const dy = stalker.location.y - nullEntity.location.y;
@@ -135,7 +130,7 @@ function handleStaticEffect(player) {
     const initializationBeforeLockingTheCam = player.getDynamicProperty(DYNAMIC_PROPS.CAM_INIT);
 
     if (isUsingCam && !initializationBeforeLockingTheCam) {
-        playerStats.sanity = getObjectiveScore(sanityObjective, player.scoreboardIdentity);
+        playerStats.sanity = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
         const sanityValue = playerStats.sanity;
 
         // Switched to triggerEvent for consistency and better performance
@@ -147,7 +142,7 @@ function handleStaticEffect(player) {
             player.triggerEvent(EVENTS.STATIC_TRUE_3);
         }
         
-        if (listOfPlayersLooking.get(player.id) == null) {
+        if (listOfPlayersLooking.get(player.id) == undefined) {
             playerIsLooking(player, sanityValue);
         }
     }
@@ -170,8 +165,8 @@ function playerStoppedLooking(player) {
         player.setDynamicProperty(DYNAMIC_PROPS.IS_LOOKING, false);
         
         const playerStats = getPlayerStats();
-        playerStats.stamina = getObjectiveScore(staminaObjective, player.scoreboardIdentity);
-        playerStats.sanity = getObjectiveScore(sanityObjective, player.scoreboardIdentity);
+        playerStats.stamina = getObjectiveScore(getStaminaObjective(), player.scoreboardIdentity);
+        playerStats.sanity = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
 
         const stamina = playerStats.stamina;
         const sanity = playerStats.sanity;
@@ -208,7 +203,7 @@ function playerIsLooking(player, sanity) {
 		player.triggerEvent(EVENTS.SLOWNESS);
     
     // Determine the right function to call to prevent code duplication
-    let effectFunction = null;
+    let effectFunction = undefined;
 
     if (sanity <= 100 && sanity > 66) {
         effectFunction = sanityStable;
@@ -275,25 +270,18 @@ function getPlayerStats() {
     };
 }
 
-export function getPlayerLookingId() {
-    return intervalId;
+export function stopPlayerLookingControl() {
+    if (intervalId === undefined) return;
+    system.clearRun(intervalId);
+    intervalId = undefined;
 }
 
-export function listOfPlayersLookingMap() {
-    return listOfPlayersLooking;
-}
+export function listOfPlayersLookingMap() { return listOfPlayersLooking; }
 
-export function playerStatesOfPlayerLookingMap() {
-    return playerStates;
-}
+export function playerStatesOfPlayerLookingMap() { return playerStates; }
 
-export function listOfPlayersPlayingStaticMap() {
-    return listOfPlayersPlayingStatic;
-}
+export function listOfPlayersPlayingStaticMap() { return listOfPlayersPlayingStatic; }
 
-export function playerLookingSetVariables() {
-    DIMENSION = world.getDimension("overworld");
-    stalkerMatchIdObjective = getStalkerMatchIdObjective();
-    sanityObjective = getSanityObjective();
-    staminaObjective = getStaminaObjective();
+export function setGlobalVariables() {
+    dimension = world.getDimension("overworld");
 }

@@ -30,17 +30,17 @@ const CONFIG = {
     ]
 };
 
-let DIMENSION;
+let dimension;
 
 let coinAmountObjective;
-let intervalId = 0;
+let intervalId = undefined;
 
 // ==========================================
 // FUNCTIONS
 // ==========================================
 
 export function startCoinSpawner() {
-    if (intervalId !== 0) return;
+    if (intervalId !== undefined) return;
 
     intervalId = system.runInterval(spawnRandomCoin, CONFIG.SPAWN_INTERVAL);
 }
@@ -71,7 +71,7 @@ function spawnRandomCoin() {
         // Check if there is coin on specified location
         if (existingCoins.length > 0) return;
 
-        DIMENSION.spawnEntity(CONFIG.ENTITY_TYPE, targetLoc);
+        dimension.spawnEntity(CONFIG.ENTITY_TYPE, targetLoc);
 				world.sendMessage(`Coin location: ${targetLoc.x} ${targetLoc.y} ${targetLoc.z}`)
 
     } catch (e) {
@@ -83,25 +83,25 @@ function spawnRandomCoin() {
 function forceSpawn(targetLoc) {
     const uniqueName = getUniqueName();
     
-    DIMENSION.runCommand(`tickingarea add circle ${targetLoc.x} ${targetLoc.y} ${targetLoc.z} 2 ${uniqueName}`)
+    dimension.runCommand(`tickingarea add circle ${targetLoc.x} ${targetLoc.y} ${targetLoc.z} 2 ${uniqueName}`)
         .then(() => {
             system.runTimeout(() => {
                 try {
                     const existingCoins = getExistingCoin(targetLoc);
                     if (existingCoins.length > 0) return;
                     
-                    DIMENSION.spawnEntity(CONFIG.ENTITY_TYPE, targetLoc);
+                    dimension.spawnEntity(CONFIG.ENTITY_TYPE, targetLoc);
 										world.sendMessage(`Coin location: ${targetLoc.x} ${targetLoc.y} ${targetLoc.z}`)
                 } catch (spawnError) {
                     console.warn(`Still couldn't spawn: ${spawnError}`);
                 } finally {
-                    DIMENSION.runCommand(`tickingarea remove ${uniqueName}`);
+                    dimension.runCommand(`tickingarea remove ${uniqueName}`);
                 }
             }, 20);
         })
         .catch((err) => {
              console.warn(`Ticking Area Error: ${err}`);
-             DIMENSION.runCommand(`tickingarea remove ${uniqueName}`);
+             dimension.runCommand(`tickingarea remove ${uniqueName}`);
         });
 }
 
@@ -121,7 +121,7 @@ function collectCoin(player, target) {
 }
 
 function getExistingCoin(targetLoc) {
-    return DIMENSION.getEntities({
+    return dimension.getEntities({
                 type: CONFIG.ENTITY_TYPE,
                 location: targetLoc,
                 maxDistance: 1,
@@ -130,7 +130,7 @@ function getExistingCoin(targetLoc) {
 }
 
 function getNearbyCoinPlayers(location) {
-	return DIMENSION.getPlayers({
+	return dimension.getPlayers({
 		location: location,
 		maxDistance: CONFIG.MIN_PLAYER_DISTANCE,
 		closest: 1
@@ -144,12 +144,10 @@ function getUniqueName() {
     return `c_load_${uniqueTime}${randomSuffix}`;
 }
 
-export function resetCoinIntervalId() {
-        intervalId = 0;
-}
-
-export function getCoinId() {
-    return intervalId;
+export function stopCoinSpawner() {
+    if (intervalId === undefined) return;
+    system.clearRun(intervalId);
+    intervalId = undefined;
 }
 
 // ==========================================
@@ -161,9 +159,9 @@ world.afterEvents.playerInteractWithEntity.subscribe((event) => {
 
     if (target.typeId !== CONFIG.ENTITY_TYPE || target.hasTag(CONFIG.MAGIC_STRINGS.COLLECTED_TAG)) return;
 
-    if (!coinAmountObjective) return;
+    if (!getCoinAmountObjective()) return;
 
-    let currentScore = getObjectiveScore(coinAmountObjective, player.scoreboardIdentity) ?? 0;
+    let currentScore = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity) ?? 0;
 
     if (currentScore >= CONFIG.MAX_COINS_PLAYER) {
         player.playSound(CONFIG.MAGIC_STRINGS.WARNING_SOUND, { volume: 0.8, pitch: 0.8 });
@@ -174,7 +172,6 @@ world.afterEvents.playerInteractWithEntity.subscribe((event) => {
     collectCoin(player, target);
 });
 
-export function coinSpawnerSetVariables() {
-    DIMENSION = world.getDimension(CONFIG.DIMENSION_ID);
-    coinAmountObjective = getCoinAmountObjective();
+export function setGlobalVariables() {
+    dimension = world.getDimension(CONFIG.DIMENSION_ID);
 }

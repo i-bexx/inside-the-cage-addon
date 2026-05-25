@@ -9,7 +9,7 @@ import { getAllPlayers } from "./getPlayersArray";
 // ==========================================
 
 const STARTER_RANGE_STATES = new Map();
-let DIMENSION;
+let dimension;
 
 const TELEPORT_BACK_COMMANDS = {
 	toOut: "tp @a[tag=waiting_for_start] -183 68 -97",
@@ -31,7 +31,7 @@ const initialPlayerLoc = {
 };
 
 
-let intervalId = 0;
+let intervalId = undefined;
 let playersWaitingToStart = [];
 
 // ==========================================
@@ -139,7 +139,7 @@ function ActionForm(player) {
 
 		// If cancelled, lines below will run
 		for (const command of Object.values(TELEPORT_BACK_COMMANDS)) {
-			DIMENSION.runCommand(command);
+			dimension.runCommand(command);
 		}
 		world.setDynamicProperty("starter", false);
 		return;
@@ -149,6 +149,9 @@ function ActionForm(player) {
 export function startFunction() {
 	const isTheRoundRestarted = world.getDynamicProperty("gameRestart");
 	const players = getAllPlayers().filter(p => p.hasTag("waiting_for_start"));
+
+	system.clearRun(intervalId); // Stops the main loop of this file
+	intervalId = undefined;
 	
 	for (const player of players) {
 		player.addTag("starting");
@@ -161,9 +164,9 @@ export function startFunction() {
 		if (!isTheRoundRestarted) player.triggerEvent("curtain_close_event");
 	}
 
-		DIMENSION.runCommand("setblock -54 75 -152 redstone_block");
-		DIMENSION.runCommand("event entity @e[type=game:door] game_started");
-		DIMENSION.runCommand("fill -180 68 -92 -180 71 -84 barrier");
+		dimension.runCommand("setblock -54 75 -152 redstone_block");
+		dimension.runCommand("event entity @e[type=game:door] game_started");
+		dimension.runCommand("fill -180 68 -92 -180 71 -84 barrier");
 		
 		stalkerMatch();
 
@@ -172,18 +175,13 @@ export function startFunction() {
 
 function updateDoorEvent() {
 	try {
-		const door = DIMENSION.getEntities({ type: "game:door" })[0];
+		const door = dimension.getEntities({ type: "game:door" })[0];
 		const event = playersWaitingToStart.length.toString();
 
 		door.triggerEvent(event);
 	} catch(e) { }
 }
 
-export function getGameStarterId() {
-    return intervalId;
-}
-export function checkIfPositionClear() {
-    return STARTER_RANGE_STATES;
-}
+export function checkIfPositionClear() { return STARTER_RANGE_STATES; }
 
-export function gameStarterSetVariables() { DIMENSION = world.getDimension("overworld"); }
+export function setGlobalVariables() { dimension = world.getDimension("overworld"); }

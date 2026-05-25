@@ -15,12 +15,12 @@ const CONFIG = {
     INIT_RETRY_TICKS: 40
 };
 
-let DIMENSION;
+let dimension;
 
 const STALKER_ENTITY_MATCHED = new Map();
 
-let stalkerMatchIdObjective = null;
-let intervalId = 0;
+let stalkerMatchIdObjective = undefined;
+let intervalId = undefined;
 
 // =============================================================================
 // Main Functions
@@ -39,7 +39,7 @@ export function stalkerMatch() {
 
 function stalkerMatchLogic(player) {
     try {
-            const entity = DIMENSION.spawnEntity(CONFIG.ENTITY_TYPE, player.location);
+            const entity = dimension.spawnEntity(CONFIG.ENTITY_TYPE, player.location);
             const linkId = getLinkID(player);
 
             stalkerMatchIdObjective.setScore(player, linkId);
@@ -56,7 +56,7 @@ function stalkerMatchLogic(player) {
                 ]
             };
 
-            const matchedEntity = DIMENSION.getEntities(stalkerFilter);
+            const matchedEntity = dimension.getEntities(stalkerFilter);
 
             STALKER_ENTITY_MATCHED.set(player.id, matchedEntity);
 
@@ -78,7 +78,7 @@ function teleportStalkerLoop() {
 
             const linkedEntity = STALKER_ENTITY_MATCHED.get(player.id);
 
-            if (!linkedEntity || linkedEntity.length === 0 || !linkedEntity[0].isValid) {
+            if (!linkedEntity || linkedEntity.length === 0 || !linkedEntity[0].isValid) { // Creates another stalker if it is stuck in an unloaded chunk
                 stalkerMatchLogic(player);
                 continue;
             }
@@ -125,9 +125,13 @@ function getLinkID(player) {
 }
 
 export function getStalkerEntityMatchedMap() { return STALKER_ENTITY_MATCHED; }
-export function getTeleportStalkerId() { return intervalId; }
 
-export function stalkerEntitySetVariables() {
-    DIMENSION = world.getDimension("overworld");
+export function stopTeleportStalker() {
+    if (intervalId == undefined) return;
+    system.clearRun(intervalId);
+}
+
+export function setGlobalVariables() {
+    dimension = world.getDimension("overworld");
     stalkerMatchIdObjective = getStalkerMatchIdObjective();
 }

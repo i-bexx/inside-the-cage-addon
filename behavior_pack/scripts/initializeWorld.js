@@ -1,42 +1,46 @@
-import { world, system } from "@minecraft/server";
+import { world } from "@minecraft/server";
 
-import { playerJoinSetVariables } from "./Player/playerJoin";
-import { playerSituationSetVariables } from "./Player/playerSituation";
+import { setGlobalVariables as playerJoinSetGlobalVariables } from "./Player/playerJoin";
+import { setGlobalVariables as playerSituationSetGlobalVariables } from "./Player/playerSituation";
 
-import { nullTeleportSetVariables } from "./RoundBegin/Null/nullTeleport";
-import { finishRoundEarlySetVariables } from "./RoundBegin/RoundOperations/finishRoundEarly";
-import { restartRoundSetVariables } from "./RoundBegin/RoundOperations/restartRound";
-import { cageControllerSetVariables } from "./RoundBegin/cageController";
-import { coinSpawnerSetVariables } from "./RoundBegin/coinSpawner";
-import { playerLookingSetVariables } from "./RoundBegin/playerLooking";
+import { setGlobalVariables as nullTeleportSetGlobalVariables } from "./RoundBegin/Null/nullTeleport";
+import { setGlobalVariables as finishRoundEarlySetGlobalVariables } from "./RoundBegin/RoundOperations/finishRoundEarly";
+import { setGlobalVariables as restartRoundSetGlobalVariables } from "./RoundBegin/RoundOperations/restartRound";
+import { setGlobalVariables as cageControllerSetGlobalVariables } from "./RoundBegin/cageController";
+import { setGlobalVariables as coinSpawnerSetGlobalVariables } from "./RoundBegin/coinSpawner";
+import { setGlobalVariables as playerLookingSetGlobalVariables } from "./RoundBegin/playerLooking";
 
-import { gameStarterSetVariables } from "./gameStarter";
-import { gameStatsSetVariables } from "./gameStats";
-import { panelsSetVariables } from "./panels";
-import { preStartSetVariables } from "./preStart";
-import { stalkerEntitySetVariables } from "./stalkerEntity";
-import { teleporterSetVariables } from "./Teleporter";
-import { voteManagerSetVariables } from "./voteManager";
+import { setGlobalVariables as gameStarterSetGlobalVariables } from "./gameStarter";
+import { setGlobalVariables as gameStatsSetGlobalVariables } from "./gameStats";
+import { setGlobalVariables as panelsSetGlobalVariables } from "./panels";
+import { setGlobalVariables as preStartSetGlobalVariables } from "./preStart";
+import { setGlobalVariables as stalkerEntitySetGlobalVariables } from "./stalkerEntity";
+import { setGlobalVariables as teleporterSetGlobalVariables } from "./Teleporter";
+import { setGlobalVariables as voteManagerSetGlobalVariables } from "./voteManager";
+
+import { setForms as voteManagerSetForms } from "./voteManager";
 
 
 world.afterEvents.worldLoad.subscribe(() => {
-  playerJoinSetVariables();
-  playerSituationSetVariables();
+  playerJoinSetGlobalVariables();
+  playerSituationSetGlobalVariables();
 
-  nullTeleportSetVariables();
-  finishRoundEarlySetVariables();
-  restartRoundSetVariables();
-  cageControllerSetVariables();
-  coinSpawnerSetVariables();
-  playerLookingSetVariables();
+  nullTeleportSetGlobalVariables();
+  finishRoundEarlySetGlobalVariables();
+  restartRoundSetGlobalVariables();
+  cageControllerSetGlobalVariables();
+  coinSpawnerSetGlobalVariables();
+  playerLookingSetGlobalVariables();
 
-  gameStarterSetVariables();
-  gameStatsSetVariables();
-  panelsSetVariables();
-  preStartSetVariables();
-  stalkerEntitySetVariables();
-  teleporterSetVariables();
-  voteManagerSetVariables();
+  gameStarterSetGlobalVariables();
+  gameStatsSetGlobalVariables();
+  panelsSetGlobalVariables();
+  preStartSetGlobalVariables();
+  stalkerEntitySetGlobalVariables();
+  teleporterSetGlobalVariables();
+  voteManagerSetGlobalVariables();
+
+  voteManagerSetForms();
 
   world.setDynamicProperty("in_menu", true);
   world.setDynamicProperty("skip_cutscene_limit", 0);

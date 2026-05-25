@@ -48,53 +48,13 @@ const CONFIG = {
 // GLOBAL VARIABLES
 // =============================================================
 
-let soulsFreedObjective;
-let sanityObjective;
-let staminaObjective;
-let valueParticipant;
-
 let soulsFreedValue = 0;
-let timeoutId = 0;
-let isInitialized = false; // Flag to track if the system is ready
-
-// Runs immediately when the world loads to initialize scoreboards.
-function initialFunction() {
-	if (isInitialized) return;
-	
-	try {
-		soulsFreedObjective = getSoulsFreedObjective();
-    sanityObjective = getSanityObjective();
-    staminaObjective = getStaminaObjective();
-
-    // Safety Check: Ensure all objectives exist
-    if (!(soulsFreedObjective && sanityObjective && staminaObjective)) return; 
-    
-    valueParticipant = getValueParticipant();
-
-    // Safety Check: Ensure participant exists
-    if (!valueParticipant) return;
-    
-		isInitialized = true;
-
-    soulsFreedValue = getObjectiveScore(soulsFreedObjective, valueParticipant);
-	} catch(e) {}
-}
-
-// Run initialization immediately
-system.run(initialFunction);
-
-// If scoreboard objective or participant is not loaded, this loop will define them
-let scoreSecurityInterval = system.runInterval(() => {
-    if (!isInitialized) {
-        initialFunction();
-        return;
-    } else system.clearRun(scoreSecurityInterval);
-}, 40);
+let timeoutId = undefined;
 
 // If player does not turn on the camera in the given time, function will force them to
 export function initiateCam() {
     timeoutId = system.runTimeout(() => {
-        soulsFreedValue = getObjectiveScore(soulsFreedObjective, valueParticipant);
+        soulsFreedValue = getObjectiveScore(getSoulsFreedObjective(), getValueParticipant());
 
         // If game is in end-phase (4 or 5 souls), do not force camera usage.
         if (soulsFreedValue === CONFIG.THRESHOLDS.UNLOCK_MIN || soulsFreedValue === CONFIG.THRESHOLDS.UNLOCK_MAX) return;
@@ -107,8 +67,8 @@ export function initiateCam() {
             // Skip if player is already using the camera
             if (isUsingCam) continue;
 
-            const sanityValue = getObjectiveScore(sanityObjective, player.scoreboardIdentity);
-            const staminaValue = getObjectiveScore(staminaObjective, player.scoreboardIdentity);
+            const sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
+            const staminaValue = getObjectiveScore(getStaminaObjective(), player.scoreboardIdentity);
 
             // Force camera usage
             cameraUsed(player, sanityValue, staminaValue);
@@ -176,7 +136,7 @@ export function cameraUsed(player, sanityValue, staminaValue) {
  * Clears effects and restores the original camera item.
  */
 function cameraDeactivated(player) {
-    const stamina = getObjectiveScore(staminaObjective, player.scoreboardIdentity);
+    const stamina = getObjectiveScore(getStaminaObjective(), player.scoreboardIdentity);
     let isStaminaEmpty = stamina === 0;
 
     // Execute all turn-off commands defined in CONFIG
@@ -212,8 +172,8 @@ function cameraDeactivated(player) {
 // Detect if player is using a camera item
 world.afterEvents.itemUse.subscribe(({source, itemStack}) => {
     if (itemStack.typeId === CONFIG.ITEMS.CAMERA) {
-        const sanityValue = getObjectiveScore(sanityObjective, source.scoreboardIdentity);
-        const staminaValue = getObjectiveScore(staminaObjective, source.scoreboardIdentity);
+        const sanityValue = getObjectiveScore(getSanityObjective(), source.scoreboardIdentity);
+        const staminaValue = getObjectiveScore(getStaminaObjective(), source.scoreboardIdentity);
 
         cameraUsed(source, sanityValue, staminaValue);
 
@@ -222,4 +182,7 @@ world.afterEvents.itemUse.subscribe(({source, itemStack}) => {
     }
 });
 
-export function getInitiateCamId() { return timeoutId; }
+export function stopInitiateCam() {
+    if (timeoutId == undefined) return;
+    system.clearRun(timeoutId);
+}

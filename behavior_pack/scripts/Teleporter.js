@@ -13,7 +13,7 @@ const CONFIG = {
     checkInterval: 20  
 };
 
-let DIMENSION;
+let dimension;
 const COOLDOWNS = new Map();
 
 // ==========================================
@@ -130,7 +130,7 @@ function showTeleportUI(player, targetEntity) {
  */
 
 function getUnlinkedEntities() {
-    return DIMENSION.getEntities({
+    return dimension.getEntities({
         type: CONFIG.entityType,
         excludeTags: ["linked"]
     });
@@ -145,7 +145,7 @@ function getPartner(entity) {
     const linkTag = getLinkTag(entity);
     if (!linkTag) return null;
 
-    const partners = DIMENSION.getEntities({
+    const partners = dimension.getEntities({
         type: CONFIG.entityType,
         tags: [linkTag]
     });
@@ -175,4 +175,4 @@ function getLinkTag(entity) {
 }
 
 export function getTeleportCooldown() { return COOLDOWNS; }
-export function teleporterSetVariables() { DIMENSION = world.getDimension("overworld"); }
+export function setGlobalVariables() { dimension = world.getDimension("overworld"); }

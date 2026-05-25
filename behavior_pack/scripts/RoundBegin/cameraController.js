@@ -1,4 +1,4 @@
-import { system } from "@minecraft/server";
+import { world, system } from "@minecraft/server";
 
 import { getPlayersInRound } from "../getPlayersArray";
 
@@ -16,7 +16,7 @@ const CONFIG = {
     }
 };
 
-let intervalId = 0;
+let intervalId = undefined;
 
 // =============================================================
 // MAIN AND HELPER FUNCTIONS
@@ -25,6 +25,7 @@ let intervalId = 0;
 export function warnPlayerAboutCam() {
     intervalId = system.runInterval(() => {
         const players = filterPlayers();
+        world.sendMessage("a")
 
         for (const player of players) {
 						player.setDynamicProperty(CONFIG.PROPERTIES.TURN_OFF_WARNING, true);
@@ -42,10 +43,8 @@ function filterPlayers() {
     });
 }
 
-export function resetCameraWarningIntervalId() {
-		intervalId = 0;
-}
-
-export function getWarnPlayerAboutCamId() {
-    return intervalId;
+export function stopWarnPlayerAboutCam() { // This does not work
+    if (intervalId === undefined) return;
+    system.clearRun(intervalId);
+	intervalId = undefined;
 }

@@ -5,7 +5,7 @@ import { startFunction } from "../../gameStarter";
 
 // ======= CONFIGURATION =======
 
-let DIMENSION;
+let dimension;
 const CONFIG = {
   CURTAIN_CLOSE: "curtain_close_event",
   STOPSOUND: "stopsound @s",
@@ -25,11 +25,11 @@ export async function restartRound() {
       player.triggerEvent(CONFIG.CURTAIN_CLOSE);
       player.runCommand(CONFIG.STOPSOUND);
   }
-  await DIMENSION.runCommand(CONFIG.SET_SCOREBOARD);
+  await dimension.runCommand(CONFIG.SET_SCOREBOARD);
   await sleep(10);
 
-  await DIMENSION.runCommand(CONFIG.TP);
-  await DIMENSION.runCommand(CONFIG.ADD_TAG);
+  await dimension.runCommand(CONFIG.TP);
+  await dimension.runCommand(CONFIG.ADD_TAG);
 
   startFunction();
 
@@ -43,4 +43,4 @@ function sleep(ticks) {
   return new Promise((resolve) => system.runTimeout(resolve, ticks));
 }
 
-export function restartRoundSetVariables() { DIMENSION = world.getDimension("overworld"); }
+export function setGlobalVariables() { dimension = world.getDimension("overworld"); }

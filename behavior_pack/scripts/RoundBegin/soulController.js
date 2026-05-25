@@ -1,49 +1,17 @@
 import { world, system } from "@minecraft/server";
 
-import { getPlayersInRound } from "../getPlayersArray";
 import { cameraUsed } from "../cameraUsage";
-import { playerCanShoot, getPlayerCanShootId } from "../cursorController";
-
-import { warnPlayerAboutCam, getWarnPlayerAboutCamId, resetCameraWarningIntervalId } from "./cameraController";
-
-import { getTeleportEntityId, getTimeSetterId } from "./Null/nullTeleport";
-import { timeSetter } from "./Null/nullTeleport";
-
+import { getPlayersInRound } from "../getPlayersArray";
+import { teleportStalker, stopTeleportStalker } from "../stalkerEntity";
+import { warnPlayerAboutCam, stopWarnPlayerAboutCam } from "./cameraController";
+import { startCrosshairTracker, startPlayerShootTracker, stopCrosshairTracker, stopPlayerShootTracker } from "../cursorController";
 import { getSoulsFreedObjective, getSanityObjective, getStaminaObjective, getValueParticipant, getObjectiveScore } from "../scoreboards";
 
-let intervalId = 0;
+import { nullTeleportTimeSetter } from "./Null/nullTeleport";
+import { stopTeleportNull, stopNullTeleportTimeSetter } from "./Null/nullTeleport";
 
-let soulsFreedObjective;
-let sanityObjective;
-let staminaObjective;
 
-let valueParticipant;
-let soulsFreedValue;
-
-function initialFunction() {
-	soulsFreedObjective = getSoulsFreedObjective();
-	sanityObjective = getSanityObjective();
-	staminaObjective = getStaminaObjective();
-
-	// Security Check
-	if (!(soulsFreedObjective && sanityObjective && staminaObjective)) {
-		world.sendMessage("Scoreboard objective not found.");
-		return;
-	}
-	
-	valueParticipant = getValueParticipant();
-
-	// Security Check
-	if (!valueParticipant) {
-		world.sendMessage("Scoreboard 'value' participant is not found.");
-		return;
-	}
-
-	soulsFreedValue = getObjectiveScore(soulsFreedObjective, valueParticipant);
-}
-
-// Run when world loads
-system.run(initialFunction);
+let intervalId = undefined;
 
 const initialState = {
 	isSoulsFreedValueSufficient: false,
@@ -81,7 +49,7 @@ const state = new Proxy({ ...initialState }, {
 
 export function soulsAmountCheck() {
 	intervalId = system.runInterval(() => {
-	soulsFreedValue = getObjectiveScore(soulsFreedObjective, valueParticipant);
+	let soulsFreedValue = getObjectiveScore(getSoulsFreedObjective(), getValueParticipant());
 
 	state.isSoulsFreedValueSufficient = [4, 5].includes(soulsFreedValue) && !world.getDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam")
 	state.isSoulsFreedValue4 = soulsFreedValue == 4 && world.getDynamicProperty("cages4Activated") == false
@@ -93,10 +61,12 @@ export function soulsAmountCheck() {
 function soulsFreedValueSufficient() {
 	warnPlayerAboutCam();
 	canTurnOffCam();
-	playerCanShoot();
+	startCrosshairTracker();
+	startPlayerShootTracker();
+	stopTeleportStalker();
 
-	system.clearRun(getTeleportEntityId());
-	system.clearRun(getTimeSetterId());
+	stopTeleportNull();
+	stopNullTeleportTimeSetter();
 
 	world.getDimension("overworld").runCommand("tp @e[type=game:null] -65 75 -150");
 	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", true);
@@ -114,17 +84,12 @@ function soulsFreedValue5() {
 }
 
 async function soulsFreedValueExceeded(players) {
-	const functionsToStop = {
-		warnPlayerAboutCam	  				: getWarnPlayerAboutCamId(),
-		playerCanShoot		    				: getPlayerCanShootId(),
-		intervalId					 					: intervalId
-	}
+	stopCrosshairTracker();
+	stopPlayerShootTracker();
+	teleportStalker();
+	system.clearRun(intervalId);
 
-	for (const [, value] of Object.entries(functionsToStop)) {
-		system.clearRun(value);
-	}
-
-	resetCameraWarningIntervalId();
+	stopWarnPlayerAboutCam();
 	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", false);
 	
   for (const player of players) {
@@ -135,13 +100,13 @@ async function soulsFreedValueExceeded(players) {
 		player.runCommand("clear @s game:camera");
 		player.runCommand("clear @s game:camera_turn_off");
 
-		let sanityValue = getObjectiveScore(sanityObjective, player.scoreboardIdentity);
-		let staminaValue = getObjectiveScore(staminaObjective, player.scoreboardIdentity);
+		let sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
+		let staminaValue = getObjectiveScore(getStaminaObjective(), player.scoreboardIdentity);
 		
 		cameraUsed(player, sanityValue, staminaValue);
 		
   }
-    timeSetter();
+    nullTeleportTimeSetter();
 }
 
 function canTurnOffCam() {
@@ -152,6 +117,8 @@ const players = getPlayersInRound();
     }
 }
 
-export function getSoulsAmountCheckId() {
-    return intervalId;
+export function stopSoulsAmountCheck() {
+	if (intervalId === undefined) return;
+    system.clearRun(intervalId);
+    intervalId = undefined;
 }
