@@ -168,6 +168,8 @@ function increaseStaminaLimit(player) {
 
 
 export function givePanelItem() {
+    if (timeoutId !== undefined) return;
+    
     timeoutId = system.runTimeout(() => {
         dimension.runCommand("replaceitem entity @a[tag=in_game] slot.inventory 0 minecraft:compass");
     }, 2400)

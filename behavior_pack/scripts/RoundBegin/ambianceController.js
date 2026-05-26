@@ -23,7 +23,7 @@ export function Ambiance_control() {
 }
 
 function playAmbiance() {
-    if (!isRunning) return;
+    if (!isRunning || timeoutId !== undefined) return;
 
     const index = getIndex();
     const chosenTick = TICKS[index];
@@ -40,7 +40,7 @@ function playAmbiance() {
         }
         
         playAmbiance();
-        
+        timeoutId = undefined;
     }, chosenTick);
 }
 

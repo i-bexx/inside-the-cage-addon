@@ -67,7 +67,11 @@ function stalkerMatchLogic(player) {
 
 // --- Teleporting Stalker Logic ---
 
-export function teleportStalker() { intervalId = system.runInterval(teleportStalkerLoop, 1); }
+export function teleportStalker() {
+    if (intervalId !== undefined) return;
+    
+    intervalId = system.runInterval(teleportStalkerLoop, 1);
+}
 
 function teleportStalkerLoop() {
         const players = getPlayersInRound();
@@ -129,6 +133,7 @@ export function getStalkerEntityMatchedMap() { return STALKER_ENTITY_MATCHED; }
 export function stopTeleportStalker() {
     if (intervalId == undefined) return;
     system.clearRun(intervalId);
+    intervalId = undefined;
 }
 
 export function setGlobalVariables() {

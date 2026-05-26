@@ -45,10 +45,10 @@ function cleanup(type) {
     dimension.runCommand(`clear @a ${ITEMS.NOTIFICATION_PREFIX}${type}`);
     
     requestExists = false;
-    if (voteTimeout) {
-        system.clearRun(voteTimeout);
-        voteTimeout = undefined;
-    }
+
+    if (voteTimeout == undefined) return;
+    system.clearRun(voteTimeout);
+    voteTimeout = undefined;
 }
 
 export function votePanel(source) {

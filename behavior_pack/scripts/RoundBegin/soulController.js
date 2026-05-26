@@ -48,6 +48,8 @@ const state = new Proxy({ ...initialState }, {
 })
 
 export function soulsAmountCheck() {
+	if (intervalId !== undefined) return;
+	
 	intervalId = system.runInterval(() => {
 	let soulsFreedValue = getObjectiveScore(getSoulsFreedObjective(), getValueParticipant());
 

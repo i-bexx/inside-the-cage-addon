@@ -71,6 +71,7 @@ function isPlayerLookingAtEntity(player) {
 }
 
 export function playerLookingControl() {
+    if (intervalId !== undefined) return;
     nullEntity = dimension.getEntities({ type: GAME_ENTITIES.NULL })[0];
 
     intervalId = system.runInterval(() => {

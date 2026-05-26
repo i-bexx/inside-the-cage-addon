@@ -13,6 +13,8 @@ let sanityLowStaticEventId = new Map();
 
 //SANITY CONTROL INTERVAL
 export function Sanity_control() {
+	if (intervalId !== undefined) return;
+
 	intervalId = system.runInterval(() => {
 		players = getPlayersInRound()
 
@@ -35,16 +37,16 @@ async function checkPlayerLookingState(players) {
 		let decreaseSanityWhenLooking = isPlayerLooking && !playerIsLookingCooldown && !isSanityZero
 
 		if (decreaseSanityWhenNotLooking) { // When player is not looking, sanity will decrease every 8 seconds
-				playerIsLooking(player)
-		} else if (decreaseSanityWhenLooking) { // When player is looking, sanity will decrease every 1.5 seconds
 				playerIsNotLooking(player)
+		} else if (decreaseSanityWhenLooking) { // When player is looking, sanity will decrease every 1.5 seconds
+				playerIsLooking(player)
 		}
 		if (isSanityZero) {
 				game_over(player)
 		}
 	}
 }
-function playerIsLooking(player) {
+function playerIsNotLooking(player) {
 	player.setDynamicProperty("notLookingCooldown", true)
 
 	system.runTimeout(() => {
@@ -52,7 +54,7 @@ function playerIsLooking(player) {
 		player.setDynamicProperty("notLookingCooldown", false)
 },160)
 }
-function playerIsNotLooking(player) {
+function playerIsLooking(player) {
 	player.setDynamicProperty("lookingCooldown", true)
 
 	system.runTimeout(() => {
@@ -110,6 +112,8 @@ function checkPlayerHeartPoundingState(players) {
 	}
 }
 function playerHeartPounding(player) {
+	if (playsoundHeart.has(player.id)) return;
+
 	let func = system.runInterval(() => {
 		const isPlayersHeartPounding = playsoundHeart.has(player.id);
 		if (isPlayersHeartPounding) player.runCommand("playsound heart @s") //When player joins, the map clears so the sound will not play
@@ -143,6 +147,8 @@ function checkPlayerSanityLowStaticSound(players) {
     }
 }
 function sanityLowStaticSound(player) {
+	if (sanityLowStaticSoundId.has(player.id)) return;
+	
 		let func = system.runInterval(() => {
 			const shouldPlayingStaticSound = sanityLowStaticSoundId.has(player.id);
 			if (shouldPlayingStaticSound) player.runCommand("playsound static_low_sanity @s") //When player joins, the map clears so the sound will not play
