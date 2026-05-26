@@ -21,6 +21,8 @@ let intervalId = undefined;
 
 
 export function nullTeleportTimeSetter() {
+    if (intervalId !== undefined) return;
+    
 	intervalId = system.runInterval(() => {
 		const isChecking = world.getDynamicProperty("nullTeleportChecking");
 		let soulsFreedAmount = getCurrentSouls();
@@ -54,6 +56,8 @@ const TELEPORT_OFFSETS = [
 ];
 
 function teleportNull(ticks) {
+    if (teleportCountdown !== undefined) return;
+
     teleportCountdown = system.runTimeout(() => {
         const players = getAllPlayers();
         const chosenPlayer = getRandomPlayer(players);
@@ -66,6 +70,7 @@ function teleportNull(ticks) {
         attemptNullTeleport(chosenPlayer.location, nullEntity);
 
         world.setDynamicProperty("nullTeleportChecking", false);
+        teleportCountdown = undefined;
     }, ticks);
 }
 function attemptNullTeleport(coordinate, entity) {

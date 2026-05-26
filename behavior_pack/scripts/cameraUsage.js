@@ -53,6 +53,8 @@ let timeoutId = undefined;
 
 // If player does not turn on the camera in the given time, function will force them to
 export function initiateCam() {
+    if (timeoutId !== undefined) return;
+
     timeoutId = system.runTimeout(() => {
         soulsFreedValue = getObjectiveScore(getSoulsFreedObjective(), getValueParticipant());
 

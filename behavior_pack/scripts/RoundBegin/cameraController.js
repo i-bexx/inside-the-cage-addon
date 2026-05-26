@@ -23,9 +23,10 @@ let intervalId = undefined;
 // =============================================================
 
 export function warnPlayerAboutCam() {
+    if (intervalId !== undefined) return;
+
     intervalId = system.runInterval(() => {
         const players = filterPlayers();
-        world.sendMessage("a")
 
         for (const player of players) {
 						player.setDynamicProperty(CONFIG.PROPERTIES.TURN_OFF_WARNING, true);
@@ -43,7 +44,7 @@ function filterPlayers() {
     });
 }
 
-export function stopWarnPlayerAboutCam() { // This does not work
+export function stopWarnPlayerAboutCam() {
     if (intervalId === undefined) return;
     system.clearRun(intervalId);
 	intervalId = undefined;

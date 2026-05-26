@@ -86,16 +86,6 @@ const FUNCTIONS_TO_END_ROUND = {
     gameStarter
 };
 
-// ==========================================
-// SYSTEM: GLOBAL VARIABLES
-// ==========================================
-
-let gameStartedObjective;
-let gameRestartedObjective;
-let gameEndedObjective;
-let playersInRoundObjective;
-
-let valueParticipant;
 
 let isGameStarted;
 

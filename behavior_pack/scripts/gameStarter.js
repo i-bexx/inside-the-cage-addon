@@ -62,30 +62,32 @@ return state;
 
 // Checks for players in range to start the game
 export function gameStarter() {
-intervalId = system.runInterval(() => {
-	const players = world.getPlayers()
-										.filter(p => !p.hasTag("starting"));
-		
-	for (const player of players) {
-		player.isInRange = {
-				isInRangeX: false,
-				isInRangeY: false,
-				isInRangeZ: false
-			};
+	if (intervalId !== undefined) return;
+	
+	intervalId = system.runInterval(() => {
+		const players = world.getPlayers()
+											.filter(p => !p.hasTag("starting"));
+			
+		for (const player of players) {
+			player.isInRange = {
+					isInRangeX: false,
+					isInRangeY: false,
+					isInRangeZ: false
+				};
 
-			let checker = locationState(player);
+				let checker = locationState(player);
 
-			let checkX = Math.floor(player.location.x);
-			let checkY = Math.floor(player.location.y);
-			let checkZ = Math.floor(player.location.z);
+				let checkX = Math.floor(player.location.x);
+				let checkY = Math.floor(player.location.y);
+				let checkZ = Math.floor(player.location.z);
 
-			player.isInRange.isInRangeX = checkX <= -175 && checkX >= -179;
-			player.isInRange.isInRangeY = checkY <= 71 && checkY >= 68;
-			player.isInRange.isInRangeZ = checkZ <= -83 && checkZ >= -93;
+				player.isInRange.isInRangeX = checkX <= -175 && checkX >= -179;
+				player.isInRange.isInRangeY = checkY <= 71 && checkY >= 68;
+				player.isInRange.isInRangeZ = checkZ <= -83 && checkZ >= -93;
 
-	checker.isPlayerInRange = player.isInRange.isInRangeX && player.isInRange.isInRangeY && player.isInRange.isInRangeZ;
-  }
-},30)
+		checker.isPlayerInRange = player.isInRange.isInRangeX && player.isInRange.isInRangeY && player.isInRange.isInRangeZ;
+		}
+	},30)
 }
 
 async function playerInRange(player) {

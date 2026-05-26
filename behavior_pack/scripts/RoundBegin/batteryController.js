@@ -125,6 +125,7 @@ export function Battery_control() {
 function batteryDrain(player) {
     if (playerDrainingBattery.has(player.id)) {
         system.clearRun(playerDrainingBattery.get(player.id));
+        playerDrainingBattery.delete(player.id);
     }
     let drainDuration = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_UPGRADED) ? BATTERY_CONFIG.TIME.DRAIN_DURATION_UPGRADED : BATTERY_CONFIG.TIME.DRAIN_DURATION_DEFAULT;
     player.setDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_DRAINING, true);

@@ -11,10 +11,12 @@ let players = [];
 
 
 export function Stamina_control () {
-intervalId = system.runInterval(() => {
-	players = getPlayersInRound();
-	checkPlayerRunningState(players);
-},20)
+	if (intervalId !== undefined) return;
+
+	intervalId = system.runInterval(() => {
+		players = getPlayersInRound();
+		checkPlayerRunningState(players);
+	},20)
 }
 
 function checkPlayerRunningState(players) {

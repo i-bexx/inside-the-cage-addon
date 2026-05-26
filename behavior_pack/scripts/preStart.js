@@ -44,16 +44,16 @@ const CONFIG = {
 // Timers are now named descriptively. 
 // Note: We keep the 'scene' prefix so the skip logic knows what to clear.
 const ACTIVE_TIMERS = {
-    sceneIntro: null, 
-    sceneTruck: null, 
-    sceneEngine: null, 
-    sceneDriving: null, 
-    sceneNoise: null, 
-    sceneLid: null, 
-    sceneArrival: null,
+    sceneIntro: undefined, 
+    sceneTruck: undefined, 
+    sceneEngine: undefined, 
+    sceneDriving: undefined, 
+    sceneNoise: undefined, 
+    sceneLid: undefined, 
+    sceneArrival: undefined,
     
-    menuLoop: null,
-    skipLoop: null
+    menuLoop: undefined,
+    skipLoop: undefined
 };
 
 // Cache for Menu Entities
@@ -142,6 +142,8 @@ system.run(() => {
 // =============================================================================
 
 export function isLookingAtMenuEntity() {
+    if (ACTIVE_TIMERS.menuLoop !== undefined) return;
+
     ACTIVE_TIMERS.menuLoop = system.runInterval(() => {
 			const isMenuReady = ownerPlayer?.getDynamicProperty("menu_ready");
 
@@ -186,10 +188,9 @@ world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
     world.setDynamicProperty("in_menu", false);
     dimension.runCommand("tag @a add in_lobby");
 
-    if (ACTIVE_TIMERS.menuLoop) {
-        system.clearRun(ACTIVE_TIMERS.menuLoop);
-        ACTIVE_TIMERS.menuLoop = undefined;
-    }
+    if (ACTIVE_TIMERS.menuLoop == undefined) return;
+    system.clearRun(ACTIVE_TIMERS.menuLoop);
+    ACTIVE_TIMERS.menuLoop = undefined;
 
     system.runTimeout(() => {
         MENU_ENTITIES.newGame.triggerEvent("default");
@@ -231,6 +232,8 @@ function startAllCutscenes(players) {
 }
 
 function startSkipSystem(playersInCutscene) {
+    if (ACTIVE_TIMERS.skipLoop !== undefined) return;
+
     ACTIVE_TIMERS.skipLoop = system.runInterval(() => {
         const playerCount = world.getDynamicProperty("skip_cutscene_limit");
         const playerLimit = playersInCutscene.length;
@@ -245,7 +248,9 @@ function startSkipSystem(playersInCutscene) {
 
             startMainGameLoop();
             gameStarter();
+            resetTimerVariables();
 
+            if (ACTIVE_TIMERS.skipLoop == undefined) return;
             system.clearRun(ACTIVE_TIMERS.skipLoop);
             ACTIVE_TIMERS.skipLoop = undefined;
         }
@@ -262,6 +267,8 @@ world.afterEvents.itemUse.subscribe((event) => {
 // --- SCENE FUNCTIONS ---
 
 function playSceneIntro(players) {
+    if (ACTIVE_TIMERS.sceneIntro !== undefined) return;
+
     ACTIVE_TIMERS.sceneIntro = system.runTimeout(() => {
         runCommandList(COMMANDS.SCENE_INTRO);
         startSkipSystem(players);
@@ -269,30 +276,40 @@ function playSceneIntro(players) {
 }
 
 function playSceneTruckInterior() {
+    if (ACTIVE_TIMERS.sceneTruck !== undefined) return;
+
     ACTIVE_TIMERS.sceneTruck = system.runTimeout(() => {
         runCommandList(COMMANDS.SCENE_TRUCK);
     }, CONFIG.TIMESTAMPS.TRUCK_INTERIOR);
 }
 
 function playSceneEngineStart() {
+    if (ACTIVE_TIMERS.sceneEngine !== undefined) return;
+
     ACTIVE_TIMERS.sceneEngine = system.runTimeout(() => {
         dimension.runCommand(`playsound engine_start @a[tag=${CONFIG.TAGS.CUTSCENE}]`);
     }, CONFIG.TIMESTAMPS.ENGINE_START);
 }
 
 function playSceneDriving() {
+    if (ACTIVE_TIMERS.sceneDriving !== undefined) return;
+
     ACTIVE_TIMERS.sceneDriving = system.runTimeout(() => {
         dimension.runCommand(`playsound driving @a[tag=${CONFIG.TAGS.CUTSCENE}]`);
     }, CONFIG.TIMESTAMPS.DRIVING);
 }
 
 function playSceneContainerNoise() {
+    if (ACTIVE_TIMERS.sceneNoise !== undefined) return;
+
     ACTIVE_TIMERS.sceneNoise = system.runTimeout(() => {
         dimension.runCommand(`playsound truck_container @a[tag=${CONFIG.TAGS.CUTSCENE}]`);
     }, CONFIG.TIMESTAMPS.CONTAINER_NOISE);
 }
 
 function playSceneCloseLid() {
+    if (ACTIVE_TIMERS.sceneLid !== undefined) return;
+
     ACTIVE_TIMERS.sceneLid = system.runTimeout(() => {
         dimension.runCommand(`playsound close_lid @a[tag=${CONFIG.TAGS.CUTSCENE}]`);
         dimension.runCommand(`clear @a[tag=${CONFIG.TAGS.CUTSCENE}] ${CONFIG.IDS.SKIP_ITEM}`);
@@ -300,15 +317,26 @@ function playSceneCloseLid() {
 }
 
 function playSceneArrival() {
+    if (ACTIVE_TIMERS.sceneArrival !== undefined) return;
+
     ACTIVE_TIMERS.sceneArrival = system.runTimeout(() => {
         runCommandList(COMMANDS.SCENE_ARRIVAL);
 
         startMainGameLoop();
         gameStarter();
+        resetTimerVariables();
         
         system.clearRun(ACTIVE_TIMERS.skipLoop);
         ACTIVE_TIMERS.skipLoop = undefined;
     }, CONFIG.TIMESTAMPS.ARRIVAL);
+}
+
+function resetTimerVariables() {
+    for (const key of Object.keys(ACTIVE_TIMERS)) {
+        if (ACTIVE_TIMERS[key] == undefined) continue;
+        system.clearRun(ACTIVE_TIMERS[key]);
+        ACTIVE_TIMERS[key] = undefined;
+    }
 }
 
 export function setGlobalVariables() { dimension = world.getDimension("overworld"); }
