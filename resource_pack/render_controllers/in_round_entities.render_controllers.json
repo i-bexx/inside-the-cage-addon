@@ -7,6 +7,28 @@
       "textures": [ "Texture.default" ]
     },
 
+    "controller.render.random_peep": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.default" ],
+      "part_visibility": [
+        { "*": true },
+        { "bottle": false },
+        { "lid": false }
+      ]
+    },
+
+    "controller.render.bottle": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.bottle" } ],
+      "textures": [ "Texture.bottle" ],
+      "part_visibility": [
+        { "*": false },
+        { "bottle": true },
+        { "lid": true }
+      ]
+    },
+
     "controller.render.stalker_cursor": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
@@ -62,12 +84,6 @@
     },
 
     "controller.render.battery": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.default" ]
-    },
-
-    "controller.render.bottle_on_ground": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]

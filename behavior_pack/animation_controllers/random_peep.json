@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.random_peep_BP": {
+      "states": {
+        "default": {
+          "transitions": [ { "is_drinking": "query.mark_variant == 1" } ]
+        },
+        "is_drinking": {
+          "animations": [ "waiting_to_finish_drinking" ],
+          "transitions": [ { "is_healed": "query.all_animations_finished" } ]
+        },
+        "is_healed": {
+          "on_entry": [ "@s is_healed_event" ],
+          "transitions": [ { "default": "query.mark_variant == 0" } ]
+        }
+      }
+    }
+  }
+}

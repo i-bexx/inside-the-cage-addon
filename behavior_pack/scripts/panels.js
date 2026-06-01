@@ -118,6 +118,20 @@ function shopPanel(player) {
     });
 }
 
+function randomPeepPanel(player) {
+    new ActionFormData()
+    .title("random_peep_panel")
+    .button("Next")
+    .button("Wow thank you so much for helping me!")
+    .button("Now I do seek to help you. So, here: a few coins and a useful device!")
+    .show(player).then(({ cancelationReason, canceled, selection }) => {
+            if (cancelationReason === FormCancelationReason.UserBusy) {
+                return randomPeepPanel(player);
+            }
+            if (canceled) return;
+    })
+}
+
 function upgradeBattery(player) {
     const coinAmount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity);
     const hasUpgraded = player.getDynamicProperty("batteryIsUpgraded");
@@ -183,6 +197,10 @@ world.afterEvents.itemUse.subscribe((eventData) => {
       else if (itemStack.typeId == "minecraft:gold_ingot") customPanel(source);
 })
 
+world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
+    if (target.typeId == "game:random_peep") randomPeepPanel(player);
+})
+
 export function stopGivePanelItem() {
     if (timeoutId === undefined) return;
     system.clearRun(timeoutId);
@@ -190,5 +208,3 @@ export function stopGivePanelItem() {
 }
 
 export function setGlobalVariables() { dimension = world.getDimension("overworld"); }
-
-

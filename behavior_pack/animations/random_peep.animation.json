@@ -1,0 +1,9 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.waiting_to_finish_drinking": {
+      "animation_length": 5,
+      "loop": false
+    }
+  }
+}
