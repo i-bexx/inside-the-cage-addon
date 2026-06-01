@@ -27,7 +27,7 @@
 
   "main_screen_content": {
     "type": "panel",
-    "size": [0, 0],
+    "size": ["100%", "100%"],
     "controls": [
         {
           "server_form_factory": {
@@ -49,6 +49,7 @@
       { "shop_panel@server_form.shop_panel": {} },
       { "vote_panel@server_form.vote_panel": {} },
       { "question_panel@server_form.question_panel": {} },
+      { "random_peep_panel@server_form.random_peep_panel": {} },
 
       { "other_panels@server_form.other_panels": {} }
     ]   
@@ -214,6 +215,23 @@
           ]
         }
       }
+    ]
+  },
+
+  "random_peep_panel": {
+    "type": "panel",
+    "size": [ "100%", "100%" ],
+    "layer": 2,
+    "bindings": [
+      {
+        "binding_type": "view",
+        "binding_name": "#title_text",
+        "source_property_name": "(#title_text = 'random_peep_panel')",
+        "target_property_name": "#visible"
+      }
+    ],
+    "controls": [
+      { "conversation_panel@random_peep_panel.conversation_panel": {} }
     ]
   },
 

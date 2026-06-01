@@ -1,0 +1,41 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "game:random_peep",
+
+      "materials": {
+        "default": "entity_alphatest",
+        "bottle": "entity_alphablend"
+      },
+
+      "textures": {
+        "default": "textures/entity/game/random_peep",
+        "bottle": "textures/entity/game/bottle"
+      },
+
+      "geometry": {
+        "default": "geometry.random_peep"
+      },
+
+      "animations": {
+        "random_peep_controller": "controller.animation.random_peep",
+        "is_sick_idle": "animation.random_peep.is_sick",
+        "is_drinking_medicine": "animation.random_peep.is_drinking_medicine",
+        "is_healed_idle": "animation.random_peep.is_healed_idle"
+      },
+
+      "scripts": {
+        "scale": "0.9375",
+        "initialize": [ "variable.is_drinking_medicine = 0.0;" ],
+        "pre_animation": [ "variable.is_drinking_medicine = query.mark_variant == 1;" ],
+        "animate": [ "random_peep_controller" ]
+      },
+
+      "render_controllers": [
+        "controller.render.random_peep",
+        { "controller.render.bottle": "variable.is_drinking_medicine" }
+      ]
+    }
+  }
+}

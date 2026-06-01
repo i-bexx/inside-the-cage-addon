@@ -4,16 +4,16 @@
     "description": {
       "identifier": "game:bottle",
       "materials": {
-        "default": "armor_stand"
+        "bottle": "entity_alphablend"
       },
       "textures": {
-        "default": "textures/entity/game/bottle"
+        "bottle": "textures/entity/game/bottle"
       },
       "geometry": {
-        "default": "geometry.bottle_on_ground"
+        "default": "geometry.bottle"
       },
       "render_controllers": [
-         "controller.render.bottle_on_ground"
+         "controller.render.bottle"
          ]
       }
     }

@@ -1,0 +1,33 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.random_peep": {
+        "states": {
+          "default": {
+            "animations": [ "is_sick_idle" ],
+            "transitions": [
+              {
+                "is_drinking": "variable.is_drinking_medicine"
+              }
+            ]
+          },
+          "is_drinking": {
+            "animations": [ "is_drinking_medicine" ],
+            "transitions": [
+              {
+                "is_healed": "query.all_animations_finished"
+              }
+            ]
+          },
+          "is_healed": {
+            "animations": [ "is_healed_idle" ],
+            "transitions": [
+              {
+                "default": "query.mark_variant == 0"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }

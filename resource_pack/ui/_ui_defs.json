@@ -31,6 +31,7 @@
     "ui/server_form_panels/action_form/shop_panel.json",
     "ui/server_form_panels/action_form/vote_panel.json",
     "ui/server_form_panels/action_form/question_panel.json",
+    "ui/server_form_panels/action_form/random_peep_panel.json",
     "ui/server_form_panels/modal_form/password_panel.json",
     
 
