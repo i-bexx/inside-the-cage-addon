@@ -12,6 +12,8 @@ const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_
 
 let timeoutId = undefined;
 
+// --- PASSWORD PANEL ---
+
 function customPanel(player) {
     new ModalFormData()
     .title("PASSWORD PANEL")
@@ -46,6 +48,8 @@ function customPanel(player) {
             }
     })
 }
+
+// --- MAIN PANELS ---
 
 function mainPanel(player) {
  	new ActionFormData()
@@ -118,20 +122,6 @@ function shopPanel(player) {
     });
 }
 
-function randomPeepPanel(player) {
-    new ActionFormData()
-    .title("random_peep_panel")
-    .button("Next")
-    .button("Wow thank you so much for helping me!")
-    .button("Now I do seek to help you. So, here: a few coins and a useful device!")
-    .show(player).then(({ cancelationReason, canceled, selection }) => {
-            if (cancelationReason === FormCancelationReason.UserBusy) {
-                return randomPeepPanel(player);
-            }
-            if (canceled) return;
-    })
-}
-
 function upgradeBattery(player) {
     const coinAmount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity);
     const hasUpgraded = player.getDynamicProperty("batteryIsUpgraded");
@@ -178,6 +168,54 @@ function increaseStaminaLimit(player) {
     player.runCommand(`xp -7 @s`);
 	player.runCommand(`scoreboard players remove @s coin_amount 7`);
     return;
+}
+
+// --- RANDOM PEEP PANELS ---
+
+function randomPeepPanel(player) {
+    new ActionFormData()
+    .title("random_peep_panel")
+    .button("Next")
+    .button("Pl... please... help me-!")
+    .show(player).then(({ cancelationReason, canceled }) => {
+        if (cancelationReason === FormCancelationReason.UserBusy) {
+                return randomPeepPanel(player);
+            }
+            if (canceled) return;
+
+            randomPeepHelpPanel(player);
+    })
+}
+
+function randomPeepHelpPanel(player) {
+    new ActionFormData()
+    .title("random_peep_panel")
+    .body("Will you help him?")
+    .button("Yes")
+    .button("No")
+    .button("Will you help him?")
+    .show(player).then(({ cancelationReason, canceled, selection }) => {
+        if (cancelationReason === FormCancelationReason.UserBusy) {
+                return randomPeepPanel(player);
+            }
+            if (canceled) return;
+
+            if (selection == 0) randomPeepHelpedPanel(player);
+    })
+}
+
+function randomPeepHelpedPanel(player) {
+    new ActionFormData()
+    .title("random_peep_panel")
+    .button("Next")
+    .button("Wow thank you so much for helping me!")
+    .button("Now I do seek to help you. So, here: a few coins and a useful device!")
+    .show(player).then(({ cancelationReason, canceled }) => {
+            if (cancelationReason === FormCancelationReason.UserBusy) {
+                return randomPeepHelpedPanel(player);
+            }
+            if (canceled) return;
+    })  
 }
 
 

@@ -1,22 +1,22 @@
 {
   "namespace": "random_peep_panel",
 
-  "conversation_panel": {
+  // --- Main Elements ---
+
+  "conversation_container": {
     "type": "panel",
-    "size": [ "100%", "20%" ],
-    "anchor_from": "bottom_middle",
-    "anchor_to": "bottom_middle",
-    "offset": [ 0, -20 ],
-    "controls": [
+    "size": [ "100%", "100%" ],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "bindings": [
       {
-        "background": {
-          "type": "image",
-          "size": [ "100%", "100%" ],
-          "texture": "textures/ui/hud_tip_text_background",
-          "alpha": 0.5,
-          "layer": 5
-        }
-      },
+        "binding_type": "view",
+        "binding_name": "#form_text",
+        "source_property_name": "(#form_text = '')",
+        "target_property_name": "#visible"
+      }
+    ],
+    "controls": [
       {
         "close_button_container@server_form_main_templates.close_button_container_detailed": {
           "offset": [ -7, -7 ],
@@ -77,8 +77,98 @@
     ]
   },
 
-  "conversation_text_panel": {
+  "question_container": {
     "type": "panel",
+    "size": [ "100%", "100%" ],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "bindings": [
+      {
+        "binding_type": "view",
+        "binding_name": "#form_text",
+        "source_property_name": "(not (#form_text = ''))",
+        "target_property_name": "#visible"
+      }
+    ],
+    "controls": [
+      {
+        "yes_button_container": {
+          "type": "collection_panel",
+          "size": [ 50, 20 ],
+          "anchor_from": "top_right",
+          "anchor_to": "top_right",
+          "offset": [ -5, -10 ],
+          "layer": 7,
+          "collection_name": "form_buttons",
+          "controls": [
+            {
+              "yes_button_container_control@action_form_panels.button_panel": {
+                "type": "collection_panel",
+                "collection_index": 0,
+                "$button_control_path": "random_peep_panel.yes_button",
+                "$button_control_name": "yes_button",
+                "$padding_size": [ "100%", "100%" ],
+                "$button_size": [ "100%", "100%" ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "no_button_container": {
+          "type": "collection_panel",
+          "size": [ 50, 20 ],
+          "anchor_from": "bottom_right",
+          "anchor_to": "bottom_right",
+          "offset": [ -5, 10 ],
+          "layer": 7,
+          "collection_name": "form_buttons",
+          "controls": [
+            {
+              "no_button_container_control@action_form_panels.button_panel": {
+                "type": "collection_panel",
+                "collection_index": 1,
+                "$button_control_path": "random_peep_panel.no_button",
+                "$button_control_name": "no_button",
+                "$padding_size": [ "100%", "100%" ],
+                "$button_size": [ "100%", "100%" ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "question_text_creator": {
+          "type": "collection_panel",
+          "size": [ "100%", "100%c" ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "collection_name": "form_buttons",
+          "controls": [
+            {
+              "question_text@random_peep_panel.conversation_text_panel": {
+                "collection_index": 2,
+                "$anim_duration": 0.7
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "background": {
+    "type": "image",
+    "size": [ "100%", "100%" ],
+    "texture": "textures/ui/hud_tip_text_background",
+    "alpha": 0.5,
+    "layer": 5
+  },
+
+    // --- Text Creator ---
+
+  "conversation_text_panel": {
+    "type": "collection_panel",
     "size": [ "100%", 30 ],
     "anchor_from": "center",
     "anchor_to": "center",
@@ -122,6 +212,7 @@
           "clip_ratio": 0.0,
           "clip_direction": "right",
           "clip_pixelperfect": false,
+          "$anim_duration|default": 5,
           "anims": [ "@random_peep_panel.wait_anim" ],
           "bindings": [
             {
@@ -137,6 +228,22 @@
     ]
   },
 
+    // --- Question Buttons ---
+
+  "yes_button@action_form_buttons.buttons_template": {
+    "$button_text_anchors": "center",
+    "$focus_identifier": "random_peep_panel_yes_button_focus_id",
+    "$default_focus_precedence": 2
+  },
+
+  "no_button@action_form_buttons.buttons_template": {
+    "$button_text_anchors": "center",
+    "$focus_identifier": "random_peep_panel_no_button_focus_id",
+    "$default_focus_precedence": 2
+  },
+
+    // --- Animations ---
+
   "wait_anim": {
     "anim_type": "wait",
     "duration": 0.5,
@@ -146,7 +253,7 @@
   "anim_clipout": {
     "anim_type": "clip",
     "easing": "linear",
-    "duration": 5,
+    "duration": "$anim_duration",
     "from": 0.0,
     "to": 1.0
   }
