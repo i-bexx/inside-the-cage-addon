@@ -231,7 +231,20 @@
       }
     ],
     "controls": [
-      { "conversation_panel@random_peep_panel.conversation_panel": {} }
+      {
+        "indent_panel": {
+          "type": "panel",
+          "size": [ "100%", "20%" ],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [ 0, -20 ],
+          "controls": [
+            { "background@random_peep_panel.background": {} },
+            { "conversation_container@random_peep_panel.conversation_container": {} },
+            { "question_container@random_peep_panel.question_container": {} }
+          ]
+        }
+      }
     ]
   },
 
