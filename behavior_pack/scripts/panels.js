@@ -170,54 +170,6 @@ function increaseStaminaLimit(player) {
     return;
 }
 
-// --- RANDOM PEEP PANELS ---
-
-function randomPeepPanel(player) {
-    new ActionFormData()
-    .title("random_peep_panel")
-    .button("Next")
-    .button("Pl... please... help me-!")
-    .show(player).then(({ cancelationReason, canceled }) => {
-        if (cancelationReason === FormCancelationReason.UserBusy) {
-                return randomPeepPanel(player);
-            }
-            if (canceled) return;
-
-            randomPeepHelpPanel(player);
-    })
-}
-
-function randomPeepHelpPanel(player) {
-    new ActionFormData()
-    .title("random_peep_panel")
-    .body("Will you help him?")
-    .button("Yes")
-    .button("No")
-    .button("Will you help him?")
-    .show(player).then(({ cancelationReason, canceled, selection }) => {
-        if (cancelationReason === FormCancelationReason.UserBusy) {
-                return randomPeepPanel(player);
-            }
-            if (canceled) return;
-
-            if (selection == 0) randomPeepHelpedPanel(player);
-    })
-}
-
-function randomPeepHelpedPanel(player) {
-    new ActionFormData()
-    .title("random_peep_panel")
-    .button("Next")
-    .button("Wow thank you so much for helping me!")
-    .button("Now I do seek to help you. So, here: a few coins and a useful device!")
-    .show(player).then(({ cancelationReason, canceled }) => {
-            if (cancelationReason === FormCancelationReason.UserBusy) {
-                return randomPeepHelpedPanel(player);
-            }
-            if (canceled) return;
-    })  
-}
-
 
 export function givePanelItem() {
     if (timeoutId !== undefined) return;
@@ -233,10 +185,6 @@ world.afterEvents.itemUse.subscribe((eventData) => {
       
       if (itemStack.typeId == "minecraft:compass") mainPanel(source);
       else if (itemStack.typeId == "minecraft:gold_ingot") customPanel(source);
-})
-
-world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
-    if (target.typeId == "game:random_peep") randomPeepPanel(player);
 })
 
 export function stopGivePanelItem() {
