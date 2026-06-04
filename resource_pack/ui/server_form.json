@@ -240,8 +240,9 @@
           "offset": [ 0, -20 ],
           "controls": [
             { "background@random_peep_panel.background": {} },
-            { "conversation_container@random_peep_panel.conversation_container": {} },
-            { "question_container@random_peep_panel.question_container": {} }
+            { "conversation_part_container@random_peep_panel.conversation_part_container": {} },
+            { "question_part_container@random_peep_panel.question_part_container": {} },
+            { "farewell_part_container@random_peep_panel.farewell_part_container": {} }
           ]
         }
       }

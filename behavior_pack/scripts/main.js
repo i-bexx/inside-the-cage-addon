@@ -16,6 +16,7 @@ import "./RoundBegin/Buy";
 import "./RoundBegin/cageController";
 import "./RoundBegin/coinSpawner";
 import "./RoundBegin/playerLooking";
+import "./RoundBegin/randomPeep";
 
 import "./RoundBegin/Null/nullTeleport";
 
