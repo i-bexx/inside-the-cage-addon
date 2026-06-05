@@ -234,7 +234,7 @@
       {
         "indent_panel": {
           "type": "panel",
-          "size": [ "100%", "20%" ],
+          "size": [ "100%", 100 ],
           "anchor_from": "bottom_middle",
           "anchor_to": "bottom_middle",
           "offset": [ 0, -20 ],

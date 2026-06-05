@@ -71,6 +71,7 @@
     
     "events": {
       "minecraft:entity_spawned": { "add": { "component_groups": [ "is_sick" ] } },
+      "is_sick_event": { "add": { "component_groups": [ "is_sick" ] } },
       "is_drinking_medicine_event": { "add": { "component_groups": [ "is_drinking_medicine" ] } },
       "is_healed_event": { "add": { "component_groups": [ "is_healed" ] } }
     }

@@ -139,7 +139,7 @@
             {
               "question_text@random_peep_panel.conversation_text_panel": {
                 "collection_index": 2,
-                "$anim_duration": 0.7
+                "$anim_duration": 0.2
               }
             }
           ]
@@ -198,7 +198,7 @@
           "anchor_from": "top_middle",
           "anchor_to": "top_middle",
           "offset": [ 0, 5 ],
-          "$anim_duration": 0.7,
+          "$anim_duration": 0.4,
           "maximum_grid_items": 2,
           "grid_dimensions": [ 1, 2 ],
           "grid_item_template": "random_peep_panel.conversation_text_panel",
@@ -260,7 +260,7 @@
           "clip_ratio": 0.0,
           "clip_direction": "right",
           "clip_pixelperfect": false,
-          "$anim_duration|default": 5,
+          "$anim_duration|default": 2.0,
           "anims": [ "@random_peep_panel.wait_anim" ],
           "bindings": [
             {

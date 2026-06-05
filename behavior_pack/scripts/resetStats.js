@@ -133,6 +133,40 @@ export function resetPlayerDynamicPropertyData(player) {
   player.setDynamicProperty("acceptedHelpingPeep", false);
 }
 
+export function resetEntitiesData(ownerJoined = false) {
+  const dimension = world.getDimension("overworld");
+
+  const resetRandomPeep = (randomPeep) => {
+    randomPeep.triggerEvent("is_sick_event");
+
+    randomPeep.setDynamicProperty("conversationIsConcluded", false);
+    randomPeep.setDynamicProperty("conversationIsGoing", false);
+    randomPeep.setDynamicProperty("isHealed", false);
+    world.sendMessage(`${randomPeep.getComponent("minecraft:mark_variant").value}`)
+  }
+
+  // ------------------------------------
+  
+  if (ownerJoined) {
+    const intervalId = system.runInterval(() => {
+      const randomPeep = dimension.getEntities({ type: "game:random_peep" })[0];
+      const entities = [ randomPeep ];
+      const allFound = entities.every(entity => entity != undefined);
+
+      if (!allFound) return;
+
+      resetRandomPeep(randomPeep);
+      system.clearRun(intervalId);
+  }, 5);
+    return;
+  }
+
+  // ------------------------------------
+  
+  const randomPeep = dimension.getEntities({ type: "game:random_peep" })[0];
+  resetRandomPeep(randomPeep);
+}
+
 export function clearPlayerMaps(playerId) { // Clears maps of player
   getCompassStates().delete(playerId);
   
