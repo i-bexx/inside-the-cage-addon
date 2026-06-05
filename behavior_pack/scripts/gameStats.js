@@ -4,7 +4,7 @@ import { world, system } from "@minecraft/server";
 // SYSTEM: MODULE IMPORTS
 // ==========================================
 
-import { resetWorldDynamicPropertyData, resetPlayerDynamicPropertyData, commandsToResetTheGame, resetMaps, clearPlayerMaps, stopFunctionsInMaps, commandsToResetPlayerData } from "./resetStats";
+import { resetWorldDynamicPropertyData, resetPlayerDynamicPropertyData, resetEntitiesData, commandsToResetTheGame, resetMaps, clearPlayerMaps, stopFunctionsInMaps, commandsToResetPlayerData } from "./resetStats";
 import { gameStarter, checkIfPositionClear } from "./gameStarter";
 import { getGameStartedObjective, getGameRestartedObjective, getGameEndedObjective, getPlayersInRoundObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 import { getPlayersInRound } from "./getPlayersArray"; 
@@ -80,9 +80,10 @@ const FUNCTIONS_TO_START = {
 };
 
 const FUNCTIONS_TO_END_ROUND = {
-		stopTheFunctions,
+	stopTheFunctions,
     resetMaps,
     resetWorldDynamicPropertyData,
+    resetEntitiesData,
     gameStarter
 };
 
