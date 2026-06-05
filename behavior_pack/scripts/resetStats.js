@@ -142,7 +142,6 @@ export function resetEntitiesData(ownerJoined = false) {
     randomPeep.setDynamicProperty("conversationIsConcluded", false);
     randomPeep.setDynamicProperty("conversationIsGoing", false);
     randomPeep.setDynamicProperty("isHealed", false);
-    world.sendMessage(`${randomPeep.getComponent("minecraft:mark_variant").value}`)
   }
 
   // ------------------------------------

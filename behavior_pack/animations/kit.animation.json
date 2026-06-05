@@ -23,7 +23,7 @@
 				],
 				"2.2": [
 					"/execute at @s run particle game:kit_used ~ ~ ~",
-					"/clear @s game:kit",
+					"/clear @s game:kit 0 1",
 					"/playsound kit_used @s",
 					"/scoreboard players set @s Sanity 100",
 					"/tag @s add updateSanityUI"
