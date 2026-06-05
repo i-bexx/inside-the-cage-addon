@@ -5,7 +5,7 @@
 			"timeline": {
 				"0.5": [
 					"/scoreboard players set @s used_toxic_bomb 1",
-					"/clear @s game:toxic_bomb",
+					"/clear @s game:toxic_bomb 0 1",
 					"/execute at @s run playsound toxic_bomb @a[r=15]"
 				],
 				"0.95": [

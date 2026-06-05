@@ -93,7 +93,7 @@
 				],
 				"2.2": [
 					"/scoreboard players set @s ammo 20",
-					"/clear @s game:ammo",
+					"/clear @s game:ammo 0 1",
 					"/event entity @s ammo_reloaded_event"
 				]
 			},
