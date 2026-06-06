@@ -12,7 +12,7 @@ const STARTER_RANGE_STATES = new Map();
 let dimension;
 
 const TELEPORT_BACK_COMMANDS = {
-	toOut: "tp @a[tag=waiting_for_start] -183 68 -97",
+	tpOut: "tp @a[tag=waiting_for_start] -183 68 -97",
 	removeStarterTag: "tag @a remove starter",
 	removeWaitingForStartTag: "tag @a remove waiting_for_start",
 	eventDoor: `event entity @e[type=game:door] "0"`
