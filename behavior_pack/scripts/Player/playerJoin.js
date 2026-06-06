@@ -11,11 +11,10 @@ import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetWorldDynam
 const CONFIG = {
     DIMENSION: "overworld",
     TAGS: {
-        OWNER: "owner",
-        IN_MENU: "in_menu", 
+        HOST: "host",
         IN_LOBBY: "in_lobby", 
-        MENU: "menu",
-        TO_REMOVE: ["in_game", "in_lobby", "waiting_for_start", "starting", "starter", "menu", "eliminated", "stalker_matched", "hasNotification", "show_in_round_personal_ui"]
+        MENU: "in_menu",
+        TO_REMOVE: ["in_game", "in_lobby", "waiting_for_start", "starting", "starter", "menu", "eliminated", "stalker_matched", "hasNotification", "requester", "accepted_request", "refused_request", "show_in_round_personal_ui"]
     },
     DYN_PROPS: { 
         IN_MENU: "in_menu",
@@ -96,7 +95,7 @@ world.afterEvents.playerSpawn.subscribe(async ({ player }) => {
     preparePlayerStats(player);
 
     // Teleportation Logic
-    const isOwner = player.hasTag(CONFIG.TAGS.OWNER);
+    const isOwner = player.hasTag(CONFIG.TAGS.HOST);
     let targetCoords;
 
     if (isOwner) {

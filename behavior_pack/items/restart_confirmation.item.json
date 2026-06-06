@@ -2,7 +2,7 @@
 	"format_version": "1.21.30",
 	"minecraft:item": {
 		"description": {
-			"identifier": "notification:restartConfirmation",
+			"identifier": "notification:restart_confirmation",
 			"menu_category": {
 				"category": "equipment"
 			}

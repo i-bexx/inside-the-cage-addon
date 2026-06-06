@@ -11,8 +11,8 @@ let dimension;
 
 const CONFIG = {
     TAGS: {
-        OWNER: "owner",
-        MENU: "menu",
+        HOST: "host",
+        MENU: "in_menu",
         CUTSCENE: "cutscene"
     },
     IDS: {
@@ -128,7 +128,7 @@ function runCommandList(list) {
 
 system.run(() => {
     const finder = system.runInterval(() => {
-        ownerPlayer = world.getPlayers({ tags: [CONFIG.TAGS.OWNER] })[0];
+        ownerPlayer = world.getPlayers({ tags: [CONFIG.TAGS.HOST] })[0];
 				
         MENU_ENTITIES.newGame = dimension.getEntities({ type: CONFIG.IDS.NEW_GAME })[0];
         MENU_ENTITIES.continue = dimension.getEntities({ type: CONFIG.IDS.CONTINUE })[0];

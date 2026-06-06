@@ -7,5 +7,5 @@ item.game:kit=Kit
 item.game:ammo=Ammo 20X
 item.menu:skip_cutscene=Skip cutscene
 
-item.notification:restartconfirmation=§aNotification Panel
-item.notification:endroundconfirmation=§cNotification Panel
+item.notification:restart_confirmation=§aNotification Panel
+item.notification:end_round_confirmation=§cNotification Panel

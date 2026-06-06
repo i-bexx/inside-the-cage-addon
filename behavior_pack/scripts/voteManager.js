@@ -8,14 +8,14 @@ let dimension;
 // ======= CONFIGURATION =======
 
 const VOTE_TYPES = {
-    RESTART: "restartConfirmation",
-    END_ROUND: "endRoundConfirmation"
+    RESTART: "restart_confirmation",
+    END_ROUND: "end_round_confirmation"
 };
 
 const TAGS = {
     REQUESTER: "requester",
-    ACCEPTED: "accepted",
-    REFUSED: "requestRefused",
+    ACCEPTED: "accepted_request",
+    REFUSED: "refused_request",
     HAS_NOTIFICATION: "hasNotification"
 };
 
