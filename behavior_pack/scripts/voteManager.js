@@ -95,7 +95,7 @@ function startRequest(player, type) {
             players.filter(p => p.id !== player.id)
                 .forEach(p => {
                   p.addTag(TAGS.HAS_NOTIFICATION);
-                  p.runCommand(`give @s ${ITEMS.NOTIFICATION_PREFIX}${type}`);
+                  p.runCommand(`give @s ${ITEMS.NOTIFICATION_PREFIX}${type} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
             });
 
             voteTimeout = system.runTimeout(() => {

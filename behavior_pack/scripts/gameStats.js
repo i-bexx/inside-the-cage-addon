@@ -9,7 +9,7 @@ import { gameStarter, checkIfPositionClear } from "./gameStarter";
 import { getGameStartedObjective, getGameRestartedObjective, getGameEndedObjective, getPlayersInRoundObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 import { getPlayersInRound } from "./getPlayersArray"; 
 
-import { stopTheFunctions } from "./resetStats";
+import { resetFunctions } from "./resetStats";
 import { initiateCam } from "./cameraUsage";
 import { teleportStalker } from "./stalkerEntity";
 import { givePanelItem } from "./panels";
@@ -74,13 +74,13 @@ const FUNCTIONS_TO_START = {
     Sanity_control,
     Battery_control,
     spawnCages,
-    startCoinSpawner,
+    //startCoinSpawner,
     decidePasswords,
     updateGlobalUi
 };
 
 const FUNCTIONS_TO_END_ROUND = {
-	stopTheFunctions,
+	resetFunctions,
     resetMaps,
     resetWorldDynamicPropertyData,
     resetEntitiesData,

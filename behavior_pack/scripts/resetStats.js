@@ -20,6 +20,8 @@ import { stopBatteryControl } from "./RoundBegin/batteryController";
 import { stopWarnPlayerAboutCam } from "./RoundBegin/cameraController";
 import { stopCoinSpawner } from "./RoundBegin/coinSpawner";
 
+import { despawnCages } from "./RoundBegin/cageController";
+
 
 // ==========================================
 // SYSTEM: MAP IMPORTS
@@ -218,7 +220,8 @@ export function resetWorldDynamicPropertyData() {
   world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", false);
 }
 
-export function stopTheFunctions() {
+export function resetFunctions() {
+  // -- Loop Stop --
   stopPlayerLookingControl();
   stopStaminaControl();
   stopGivePanelItem();
@@ -242,6 +245,9 @@ export function stopTheFunctions() {
   stopCoinSpawner();
 
   resetPasswords();
+
+  // -- Entity Cleanup --
+  despawnCages();
 }
 
 export async function commandsToResetTheGame(dimension) {

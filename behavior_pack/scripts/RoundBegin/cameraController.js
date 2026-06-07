@@ -8,7 +8,7 @@ import { getPlayersInRound } from "../getPlayersArray";
 
 const CONFIG = {
     COMMANDS: {
-        TURN_OFF_WARNING: "replaceitem entity @s slot.armor.chest 1 game:turnoffcamwarning"
+        TURN_OFF_WARNING: `replaceitem entity @s slot.armor.chest 1 game:turnoffcamwarning 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`
     },
     PROPERTIES: {
         CAM_USING: "camUsing",

@@ -11,9 +11,12 @@ import "./stalkerEntity";
 import "./Teleporter";
 import "./voteManager";
 
+import "./utils";
+
 import "./RoundBegin/batteryController";
 import "./RoundBegin/Buy";
 import "./RoundBegin/cageController";
+import "./RoundBegin/cageDetector";
 import "./RoundBegin/coinSpawner";
 import "./RoundBegin/playerLooking";
 import "./RoundBegin/randomPeep";
@@ -28,5 +31,3 @@ import "./Player/resetPlayerData";
 import "./UI/fastUiTick";
 import "./UI/slowUiTick";
 import "./UI/globalUi";
-
-import "./Test/learning";

@@ -1,13 +1,15 @@
 import { world, system } from "@minecraft/server";
 
-import { getAllPlayers } from "../getPlayersArray";
 import { updateGlobalUi } from "../UI/globalUi";
+import { loadTickingArea, removeTickingArea, sleep } from "../utils";
 
 // ==========================================
 // CONFIGURATION & VARIABLES
 // ==========================================
 
 let dimension;
+let tickingAreaLocations = [];
+
 const CONFIG = {
     CAGE_ID: "game:cage",
     PROPERTY_NAME: "cageBroken",
@@ -16,8 +18,6 @@ const CONFIG = {
     UPDATE_SCORE: "scoreboard players add value souls_freed 1",
     PLAYSOUND: "playsound break_cage @s"
 };
-
-let UNLOADED_LOCATIONS = [];
 
 const CAGE_GROUPS = [
     // Group 1
@@ -40,79 +40,54 @@ const CAGE_GROUPS = [
 // CAGE SPAWN LOGIC
 // ==========================================
 
-export function spawnCages() {
-    UNLOADED_LOCATIONS = [];
-
-    CAGE_GROUPS.forEach((group, index) => {
+export async function spawnCages() {
+    for (let i = 0; i < CAGE_GROUPS.length; i++) {
+        const group = CAGE_GROUPS[i];
         const randomIndex = Math.floor(Math.random() * group.length);
-        const location = group[randomIndex];
+        const locationObject = group[randomIndex];
+        const areaName = `loader_cage_group_${i + 1}`;
+
+        removeTickingArea(dimension, areaName);
+
+        await sleep(40);
+
+        loadTickingArea(dimension, locationObject, areaName);
+
+        await sleep(40);
 
         try {
-            dimension.spawnEntity(CONFIG.CAGE_ID, location);
-            dimension.runCommand(`say @a "Cage ${index + 1} spawned at ${JSON.stringify(location)}"`);
+            dimension.spawnEntity(CONFIG.CAGE_ID, locationObject);
+            tickingAreaLocations.push({ locationObject, areaName });
+            dimension.runCommand(`say @a "Cage ${i + 1} spawned at ${JSON.stringify(locationObject)}"`);
         } catch (error) {
-            UNLOADED_LOCATIONS.push({
-                location: location, 
-                cageNumber: index + 1 
-            });
+            console.error(`Failed to spawn: ${error}`);
         }
-    });
 
-    if (UNLOADED_LOCATIONS.length > 0) {
-        spawnInUnloadedChunks();
+        removeTickingArea(dimension, areaName);
     }
 }
 
-function spawnInUnloadedChunks() {
-    UNLOADED_LOCATIONS.forEach((data) => {
-        attemptSpawnWithRetry(data, 0);
-    });
+export async function despawnCages() {
+    for (const value of tickingAreaLocations) {
+        removeTickingArea(dimension, value.areaName);
 
-    UNLOADED_LOCATIONS = [];
-}
+        await sleep(40);
 
-function attemptSpawnWithRetry(data, attempt) {
-    if (attempt > 5) {
-        const owner = getAllPlayers().find(p => p.hasTag("host"));
-        owner.sendMessage(`§4[SYSTEM FAILURE] §cCage ${data.cageNumber} could NOT be spawned after 5 attempts.`);
-        owner.playSound("note.bass", { pitch: 0.5, volume: 0.8 });
+        loadTickingArea(dimension, value.locationObject, value.areaName);
 
-        return;
+        await sleep(40);
+
+        try {
+            const cages = dimension.getEntities({ type: "game:cage", location: value.locationObject, maxDistance: 10 });
+            for (const cage of cages) cage.remove();
+        } catch (e) {
+            console.error("Could not despawn cages"); 
+        }
+        
+        removeTickingArea(dimension, value.areaName);
     }
-
-    const { location, cageNumber } = data;
-    const areaName = getAreaName(cageNumber);
-    const addTickingArea = getTickingArea(location, areaName);
-    const removeTickingArea = getRemoveTickingArea(areaName);
-
-    try {
-        dimension.runCommand(addTickingArea);
-
-        system.runTimeout(() => {
-            try {
-                dimension.spawnEntity(CONFIG.CAGE_ID, location);
-                dimension.runCommand(`say @a "Cage ${cageNumber} (Recovered) spawned at ${JSON.stringify(location)}"`);
-                dimension.runCommand(removeTickingArea);
-            } catch (err) {
-                dimension.runCommand(removeTickingArea);
-                system.runTimeout(() => attemptSpawnWithRetry(data, attempt + 1), 40);
-            }
-        }, 20);
-
-    } catch (err) {
-        dimension.runCommand(removeTickingArea);
-        system.runTimeout(() => attemptSpawnWithRetry(data, attempt + 1), 40);
-    }
-}
-
-function getAreaName(cageNumber) {
-    return `loader_cage_${cageNumber}`;
-}
-function getTickingArea(location, areaName) {
-    return `tickingarea add circle ${location.x} ${location.y} ${location.z} 2 ${areaName}`;
-}
-function getRemoveTickingArea(areaName) {
-    return `tickingarea remove ${areaName}`;
+    
+    tickingAreaLocations = []; 
 }
 
 // ==========================================
