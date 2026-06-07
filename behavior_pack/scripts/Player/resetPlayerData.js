@@ -1,5 +1,6 @@
 import { world, system } from "@minecraft/server";
 
+import { sleep } from "../utils";
 import { resetPlayerDynamicPropertyData, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
 // ==========================================
@@ -71,8 +72,4 @@ function staticSoundLoop(player) {
         player.playSound(CONFIG.SOUNDS.PLAYSOUND_STATIC, {volume: 0.3});
     }, 100);
     return soundLoop;
-}
-
-function sleep(ticks) {
-  return new Promise((resolve) => system.runTimeout(resolve, ticks));
 }

@@ -1,8 +1,9 @@
 import { world, system } from "@minecraft/server";
 
+import { sleep } from "../utils";
 import { startProcesses, startProcessesAfterMenuReady } from "../startProcesses";
 import { getNewGamedObjective, getStalkerMatchIdObjective, getWorldParticipant, getObjectiveScore } from "../scoreboards";
-import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, stopTheFunctions, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
+import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
 // =============================================================
 // CONFIGURATION 
@@ -168,7 +169,7 @@ async function handleOwnerJoinLogic(player) {
     player.setDynamicProperty(CONFIG.DYN_PROPS.MENU_READY, false);
     player.runCommand(CONFIG.COMMANDS.GAME_NOT_STARTED);
     
-    stopTheFunctions();
+    resetFunctions();
     resetMaps();
     resetWorldDynamicPropertyData();
     resetEntitiesData(true);
@@ -251,10 +252,6 @@ function ensureEntitiesAreReset() {
         // Initiate first run
         attemptReset();
     });
-}
-
-function sleep(ticks) {
-    return new Promise((resolve) => system.runTimeout(resolve, ticks));
 }
 
 export function setGlobalVariables() {

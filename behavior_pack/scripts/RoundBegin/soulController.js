@@ -115,7 +115,7 @@ function canTurnOffCam() {
 const players = getPlayersInRound();
     for (const player of players) {
         player.setDynamicProperty("canTurnOffCam", true);
-        player.runCommand("replaceitem entity @s slot.hotbar 8 game:camera_turn_off 1");
+        player.runCommand(`replaceitem entity @s slot.hotbar 8 game:camera_turn_off 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
     }
 }
 

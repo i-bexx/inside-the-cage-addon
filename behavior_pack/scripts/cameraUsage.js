@@ -24,7 +24,7 @@ const CONFIG = {
     },
     COMMANDS: {
         CLEAR_CAM: "clear @s game:camera",
-        REPLACE_OFF: "replaceitem entity @s slot.hotbar 8 game:camera_turn_off 1",
+        REPLACE_OFF: `replaceitem entity @s slot.hotbar 8 game:camera_turn_off 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`,
         STOP_SHUTTER: "stopsound @s camera_shutter",
         STOP_STATIC: "stopsound @s static_low_sanity",
         PLAY_INIT_SOUND: "playsound initializationBeforeLockingTheCam @s",
@@ -145,7 +145,7 @@ function cameraDeactivated(player) {
     // Using explicit commands here to ensure clarity
     const turnOffCommands = [
         CONFIG.COMMANDS.CLEAR_CAM, // Just in case
-        `replaceitem entity @s slot.hotbar 8 ${CONFIG.ITEMS.CAMERA} 1`, // Give camera back
+        `replaceitem entity @s slot.hotbar 8 ${CONFIG.ITEMS.CAMERA} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`, // Give camera back
         CONFIG.COMMANDS.STOP_SHUTTER,
         CONFIG.COMMANDS.STOP_STATIC
     ];

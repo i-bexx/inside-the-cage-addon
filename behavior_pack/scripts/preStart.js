@@ -97,7 +97,7 @@ const COMMANDS = {
     SCENE_TRUCK: [
         `event entity @a[tag=${CONFIG.TAGS.CUTSCENE}] new_game_started_text`,
         `tp @a[tag=${CONFIG.TAGS.CUTSCENE}] ${CONFIG.COORDS.TRUCK_INTERIOR}`,
-        `give @a[tag=${CONFIG.TAGS.CUTSCENE}] ${CONFIG.IDS.SKIP_ITEM}`
+        `give @a[tag=${CONFIG.TAGS.CUTSCENE}] ${CONFIG.IDS.SKIP_ITEM} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`
     ],
     SCENE_ARRIVAL: [
         `tp @a[tag=${CONFIG.TAGS.CUTSCENE}] ${CONFIG.COORDS.SPAWN_POINT}`,

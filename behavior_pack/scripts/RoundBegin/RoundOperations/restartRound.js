@@ -1,7 +1,8 @@
 import { world, system } from "@minecraft/server";
 
-import { getPlayersInRound } from "../../getPlayersArray";
+import { sleep } from "../../utils";
 import { startFunction } from "../../gameStarter";
+import { getPlayersInRound } from "../../getPlayersArray";
 
 // ======= CONFIGURATION =======
 
@@ -38,9 +39,5 @@ export async function restartRound() {
 }
 
 // ======= HELPER FUNCTION =======
-
-function sleep(ticks) {
-  return new Promise((resolve) => system.runTimeout(resolve, ticks));
-}
 
 export function setGlobalVariables() { dimension = world.getDimension("overworld"); }

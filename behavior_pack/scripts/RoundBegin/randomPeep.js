@@ -99,7 +99,7 @@ function randomPeepHelpPanel(player, target) {
 }
 
 function randomPeepPanel_4(player, target) {
-    player.runCommand("give @s game:kit 4");
+    player.runCommand(`give @s game:kit 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
 
     new ActionFormData()
     .title("random_peep_panel")

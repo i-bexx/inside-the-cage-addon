@@ -156,7 +156,7 @@ function updateEquipment(player, slotName, targetItemId) {
     else return;
 
     if (targetItemId) {
-        player.runCommand(`replaceitem entity @s ${commandSlot} 1 ${targetItemId}`);
+        player.runCommand(`replaceitem entity @s ${commandSlot} 1 ${targetItemId} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
     } 
     else if (currentItem && (currentItem.startsWith("p:") || slotName === "Offhand")) {
         player.runCommand(`replaceitem entity @s ${commandSlot} 1 air`);

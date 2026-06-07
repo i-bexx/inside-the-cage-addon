@@ -196,7 +196,7 @@ function pickupBattery(player) {
     }
 
     const textureId = BATTERY_CONFIG.ITEMS.TEXTURE_OFFSET - decidedBatteryLevel;
-    const itemCommand = `replaceitem entity @s ${BATTERY_CONFIG.ITEMS.HUD_SLOT} 1 ${BATTERY_CONFIG.ITEMS.PREFIX_INCREASE}${textureId}`;
+    const itemCommand = `replaceitem entity @s ${BATTERY_CONFIG.ITEMS.HUD_SLOT} 1 ${BATTERY_CONFIG.ITEMS.PREFIX_INCREASE}${textureId} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`;
     const clearCommand = `clear @s ${BATTERY_CONFIG.ITEMS.PREFIX_INCREASE}${textureId}`;
 
     player.runCommand(itemCommand);
