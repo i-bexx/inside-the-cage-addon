@@ -58,6 +58,7 @@ export async function spawnCages() {
         try {
             dimension.spawnEntity(CONFIG.CAGE_ID, locationObject);
             tickingAreaLocations.push({ locationObject, areaName });
+            world.setDynamicProperty("active_cage_locations", JSON.stringify(tickingAreaLocations));
             dimension.runCommand(`say @a "Cage ${i + 1} spawned at ${JSON.stringify(locationObject)}"`);
         } catch (error) {
             console.error(`Failed to spawn: ${error}`);
@@ -68,7 +69,9 @@ export async function spawnCages() {
 }
 
 export async function despawnCages() {
-    for (const value of tickingAreaLocations) {
+    const rawData = world.getDynamicProperty("active_cage_locations");
+    const cageLocations = JSON.parse(rawData || "[]");
+    for (const value of cageLocations) {
         removeTickingArea(dimension, value.areaName);
 
         await sleep(40);
@@ -87,7 +90,8 @@ export async function despawnCages() {
         removeTickingArea(dimension, value.areaName);
     }
     
-    tickingAreaLocations = []; 
+    tickingAreaLocations = [];
+    world.setDynamicProperty("active_cage_locations", JSON.stringify(tickingAreaLocations));
 }
 
 // ==========================================

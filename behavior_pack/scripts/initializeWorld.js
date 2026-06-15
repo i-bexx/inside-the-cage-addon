@@ -7,7 +7,7 @@ import { setGlobalVariables as nullTeleportSetGlobalVariables } from "./RoundBeg
 import { setGlobalVariables as finishRoundEarlySetGlobalVariables } from "./RoundBegin/RoundOperations/finishRoundEarly";
 import { setGlobalVariables as restartRoundSetGlobalVariables } from "./RoundBegin/RoundOperations/restartRound";
 import { setGlobalVariables as cageControllerSetGlobalVariables } from "./RoundBegin/cageController";
-import { setGlobalVariables as coinSpawnerSetGlobalVariables } from "./RoundBegin/coinSpawner";
+import { setGlobalVariables as coinControllerSetGlobalVariables } from "./RoundBegin/coinController";
 import { setGlobalVariables as playerLookingSetGlobalVariables } from "./RoundBegin/playerLooking";
 
 import { setGlobalVariables as gameStarterSetGlobalVariables } from "./gameStarter";
@@ -29,7 +29,7 @@ world.afterEvents.worldLoad.subscribe(() => {
   finishRoundEarlySetGlobalVariables();
   restartRoundSetGlobalVariables();
   cageControllerSetGlobalVariables();
-  coinSpawnerSetGlobalVariables();
+  coinControllerSetGlobalVariables();
   playerLookingSetGlobalVariables();
 
   gameStarterSetGlobalVariables();
