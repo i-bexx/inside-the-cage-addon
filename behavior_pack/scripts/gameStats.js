@@ -20,7 +20,7 @@ import { Stamina_control } from "./RoundBegin/Stamina";
 import { Sanity_control } from "./RoundBegin/Sanity";
 import { Battery_control } from "./RoundBegin/batteryController";
 import { spawnCages } from "./RoundBegin/cageController";
-import { startCoinSpawner } from "./RoundBegin/coinSpawner";
+import { startcoinController } from "./RoundBegin/coinController";
 import { soulsAmountCheck } from "./RoundBegin/soulController";
 import { decidePasswords } from "./RoundBegin/passwordManager";
 
@@ -74,7 +74,7 @@ const FUNCTIONS_TO_START = {
     Sanity_control,
     Battery_control,
     spawnCages,
-    //startCoinSpawner,
+    startcoinController,
     decidePasswords,
     updateGlobalUi
 };

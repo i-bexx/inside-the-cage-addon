@@ -18,9 +18,10 @@ import { resetPasswords } from "./RoundBegin/passwordManager";
 import { stopAmbiance } from "./RoundBegin/ambianceController";
 import { stopBatteryControl } from "./RoundBegin/batteryController";
 import { stopWarnPlayerAboutCam } from "./RoundBegin/cameraController";
-import { stopCoinSpawner } from "./RoundBegin/coinSpawner";
+import { stopcoinController } from "./RoundBegin/coinController";
 
 import { despawnCages } from "./RoundBegin/cageController";
+import { despawnCoins } from "./RoundBegin/coinController";
 
 
 // ==========================================
@@ -242,12 +243,13 @@ export function resetFunctions() {
   stopAmbiance();
   stopBatteryControl();
   stopWarnPlayerAboutCam();
-  stopCoinSpawner();
+  stopcoinController();
 
   resetPasswords();
 
   // -- Entity Cleanup --
   despawnCages();
+  despawnCoins();
 }
 
 export async function commandsToResetTheGame(dimension) {
