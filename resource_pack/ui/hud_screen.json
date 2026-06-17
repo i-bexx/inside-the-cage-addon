@@ -225,11 +225,6 @@
       },
       {
         "array_name": "controls",
-        "operation": "remove",
-        "control_name": "curor_rend" // This child element renders itself if the binding values are NOT met
-      },
-      {
-        "array_name": "controls",
         "operation": "insert_front",
         "value": [
             { 
@@ -253,12 +248,7 @@
               }
             },
             {
-              "@cursors.cursor_main": {
-                "layer": 600
-              }
-            },
-            {
-              "@cursors.gun_cursor_states": {
+              "@hud_crosshair.cursor_container": {
                 "layer": 600
               }
             }
