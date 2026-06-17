@@ -1,7 +1,36 @@
 {
-  "namespace": "cursors",
+  "namespace": "hud_crosshair",
 
-  "cursor_main": {
+  // Note: The cursor definitions are stored here, but they are actually rendered in the hud_screen.
+  // This is necessary because binding variable values of cursors in the native crosshair screen do not update dynamically when their values change.
+  // This causes one cursor to bind always even when the binding conditions are NOT met
+
+  "hud_crosshair_screen": {
+    "type": "screen",
+    "render_game_behind": true,
+    "render_only_when_topmost": false,
+    "should_steal_mouse": false,
+    "is_showing_menu": false,
+    "is_modal": false,
+    "absorbs_input": false,
+    "low_frequency_rendering": false,
+    "controls": []
+  },
+
+  
+
+  "cursor_container": {
+    "type": "panel",
+    "size": [ "100%cm", "100%cm" ],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "controls": [
+      { "cursor_renderer@hud_crosshair.cursor_renderer": {} },
+      { "gun_cursor_states@hud_crosshair.gun_cursor_states": {} }
+    ]
+  },
+
+  "cursor_renderer": {
     "type": "custom",
     "size": [ 16, 16 ],
     "renderer": "cursor_renderer",
@@ -24,14 +53,14 @@
     "alpha": 0.5,
     "propagate_alpha": true,
     "controls": [
-      { "math_core@cursors.math_core": {} },
+      { "math_core@hud_crosshair.math_core": {} },
 
-      { "cursor_normal@cursors.cursor_normal": {} },
-      { "cursor_green@cursors.cursor_green": {} },
-      { "cursor_blue@cursors.cursor_blue": {} },
-      { "cursor_red@cursors.cursor_red": {} },
+      { "cursor_normal@hud_crosshair.cursor_normal": {} },
+      { "cursor_green@hud_crosshair.cursor_green": {} },
+      { "cursor_blue@hud_crosshair.cursor_blue": {} },
+      { "cursor_red@hud_crosshair.cursor_red": {} },
 
-      { "shoot_panel@cursors.shoot_panel": {} }
+      { "shoot_panel@hud_crosshair.shoot_panel": {} }
     ]
   },
 
@@ -143,7 +172,7 @@
           "type": "collection_panel",
           "factory": {
             "name": "hitmarker",
-            "control_name": "cursors.hitmarker"
+            "control_name": "hud_crosshair.hitmarker"
           },
           "bindings": [
             {
@@ -167,8 +196,10 @@
     "texture": "textures/ui/gun_cursors/hitmarker",
     "uv": [ 0, 0 ],
     "uv_size": [ 256, 256 ],
-    "anims": [ "@cursors.hitmarker_flipbook_anim" ]
+    "anims": [ "@hud_crosshair.hitmarker_flipbook_anim" ]
   },
+
+  
 
   "hitmarker_flipbook_anim": {
     "anim_type": "flip_book",
@@ -176,7 +207,7 @@
     "frame_step": 256,
     "fps": 60,
     "reversible": false,
-    "next": "@cursors.hitmarker_fade_out_anim"
+    "next": "@hud_crosshair.hitmarker_fade_out_anim"
   },
 
   "hitmarker_fade_out_anim": {
