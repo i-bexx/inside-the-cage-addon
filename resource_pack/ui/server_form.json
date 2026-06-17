@@ -50,6 +50,7 @@
       { "vote_panel@server_form.vote_panel": {} },
       { "question_panel@server_form.question_panel": {} },
       { "random_peep_panel@server_form.random_peep_panel": {} },
+      { "cage_detector_panel@server_form.cage_detector_panel": {} },
 
       { "other_panels@server_form.other_panels": {} }
     ]   
@@ -171,9 +172,7 @@
               }
             },
             {
-              "close_button_container@server_form_main_templates.close_button_container": {
-                "$focus_identifier": "vote_panel_button_focus_id"
-              }
+              "close_button_container@server_form_main_templates.close_button_container": {}
             }
           ]
         }
@@ -208,9 +207,7 @@
               }
             },
             {
-              "close_button_container@server_form_main_templates.close_button_container": {
-                "$focus_identifier": "question_panel_button_focus_id"
-              }
+              "close_button_container@server_form_main_templates.close_button_container": {}
             }
           ]
         }
@@ -243,6 +240,40 @@
             { "conversation_part_container@random_peep_panel.conversation_part_container": {} },
             { "question_part_container@random_peep_panel.question_part_container": {} },
             { "farewell_part_container@random_peep_panel.farewell_part_container": {} }
+          ]
+        }
+      }
+    ]
+  },
+
+  "cage_detector_panel": {
+    "type": "panel",
+    "size": [ 284, 190 ],
+    "layer": 2,
+    "bindings": [
+      {
+        "binding_type": "view",
+        "binding_name": "#title_text",
+        "source_property_name": "(#title_text = 'cage_detector_panel')",
+        "target_property_name": "#visible"
+      }
+    ],
+    "controls": [
+      {
+        "indent_panel": {
+          "type": "panel",
+          "size": [ "100%", "100%" ],
+          "controls": [
+            { "background_image@server_form_main_templates.background_image": {} },
+            {
+              "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
+                "$container_name": "cage_detector_panel_container",
+                "$container_reference": "cage_detector_panel.cage_detector_panel_container"
+              }
+            },
+            {
+              "close_button_container@server_form_main_templates.close_button_container": {}
+            }
           ]
         }
       }
