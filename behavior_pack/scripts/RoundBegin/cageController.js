@@ -1,5 +1,6 @@
 import { world, system } from "@minecraft/server";
 
+import { InitializeCageDetector } from "./cageDetector";
 import { updateGlobalUi } from "../UI/globalUi";
 import { loadTickingArea, removeTickingArea, sleep } from "../utils";
 
@@ -65,6 +66,8 @@ export async function spawnCages() {
         }
 
         removeTickingArea(dimension, areaName);
+
+        if (tickingAreaLocations.length == 7) InitializeCageDetector();
     }
 }
 
