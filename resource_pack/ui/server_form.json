@@ -6,7 +6,18 @@
 {
   "namespace": "server_form",
 
+  // --- SCREENS ---
+
   "third_party_server_screen@common.base_screen": {
+    "$screen_content": "server_form.first_screen",
+    "$additional_screen_content": "server_form.second_screen",
+    "$screen_animations": [],
+    "$background_animations": []
+  },
+
+  "first_screen@common.base_screen": {
+    "$screen_content": "server_form.main_screen_content",
+    "$additional_screen_content": "common.base_screen_empty_panel",
     "$screen_animations": [
       "@server_form_anims.screen_exit_animation_push_offset",
       "@server_form_anims.screen_exit_animation_pop_offset",
@@ -22,12 +33,49 @@
       "@server_form_anims.screen_exit_animation_pop_alpha",
       "@server_form_anims.screen_entrance_animation_push_alpha",
       "@server_form_anims.screen_entrance_animation_pop_alpha"
+    ],
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_cancel",
+        "to_button_id": "button.menu_exit",
+        "mapping_type": "global"
+      }
     ]
   },
 
+  "second_screen@common.base_screen": {
+    "$screen_content": "server_form.secondary_screen_content",
+    "$additional_screen_content": "common.base_screen_empty_panel",
+    "$screen_animations": [
+      "@server_form_anims.second_screen_exit_animation_push_offset",
+      "@server_form_anims.second_screen_exit_animation_pop_offset",
+      "@server_form_anims.second_screen_entrance_animation_push_offset",
+      "@server_form_anims.second_screen_entrance_animation_pop_offset",
+      "@server_form_anims.screen_exit_animation_push_fade",
+      "@server_form_anims.screen_exit_animation_pop_fade",
+      "@server_form_anims.screen_entrance_animation_push_fade",
+      "@server_form_anims.screen_entrance_animation_pop_fade"
+    ],
+    "$background_animations": [
+      "@server_form_anims.screen_exit_animation_push_alpha",
+      "@server_form_anims.screen_exit_animation_pop_alpha",
+      "@server_form_anims.screen_entrance_animation_push_alpha",
+      "@server_form_anims.screen_entrance_animation_pop_alpha"
+    ],
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_cancel",
+        "to_button_id": "button.menu_exit",
+        "mapping_type": "global"
+      }
+    ]
+  },
+
+  // --- CONTENT FACTORIES ---
+
   "main_screen_content": {
     "type": "panel",
-    "size": ["100%", "100%"],
+    "size": [ "100%", "100%" ],
     "controls": [
         {
           "server_form_factory": {
@@ -41,16 +89,32 @@
     ]
   },
 
+  "secondary_screen_content": {
+    "type": "panel",
+    "size": [ "100%", "100%" ],
+    "controls": [
+        {
+          "server_form_factory": {
+              "type": "factory",
+              "control_ids": {
+              "long_form": "@server_form.second_long_form"
+          }
+        }
+      }
+    ]
+  },
+
+  // --- PANEL CONTAINERS ---
+
   "long_form": {
     "type": "panel",
-    "size": ["100%", "100%"],
+    "size": [ "100%", "100%" ],
     "controls": [
       { "main_panel@server_form.main_panel": {} },
       { "shop_panel@server_form.shop_panel": {} },
       { "vote_panel@server_form.vote_panel": {} },
       { "question_panel@server_form.question_panel": {} },
       { "random_peep_panel@server_form.random_peep_panel": {} },
-      { "cage_detector_panel@server_form.cage_detector_panel": {} },
 
       { "other_panels@server_form.other_panels": {} }
     ]   
@@ -58,11 +122,19 @@
 
   "custom_form": {
     "type": "panel",
-    "size": ["100%", "100%"],
+    "size": [ "100%", "100%" ],
     "$text_name": "custom_text",
     "$text_name_reference": "server_form_main_templates.custom_text",
     "controls": [
       { "password_panel@server_form.password_panel": {} }
+    ]   
+  },
+
+  "second_long_form": {
+    "type": "panel",
+    "size": [ "100%", "100%" ],
+    "controls": [
+      { "cage_detector_panel@server_form.cage_detector_panel": {} }
     ]   
   },
 
@@ -249,6 +321,9 @@
   "cage_detector_panel": {
     "type": "panel",
     "size": [ 284, 190 ],
+    "anchor_from": "right_middle",
+    "anchor_to": "right_middle",
+    "offset": [ -40, 0 ],
     "layer": 2,
     "bindings": [
       {
