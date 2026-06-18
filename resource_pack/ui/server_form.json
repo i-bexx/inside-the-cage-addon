@@ -323,7 +323,7 @@
     "size": [ 284, 190 ],
     "anchor_from": "right_middle",
     "anchor_to": "right_middle",
-    "offset": [ -40, 0 ],
+    "offset": [ "-10%", 0 ],
     "layer": 2,
     "bindings": [
       {
