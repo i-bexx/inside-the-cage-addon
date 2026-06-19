@@ -24,7 +24,7 @@ export function InitializeCageDetector() {
 }
 
 async function openCageDetector(player) {
-  const { direction, cageDistance, errorInteger } = await getCageInfo(player);
+  const { direction, cageDistance, errorInteger, signalImage } = await getCageInfo(player);
 
 
   new ActionFormData()
@@ -32,8 +32,9 @@ async function openCageDetector(player) {
   .body(`${direction}`)
   .button(`${cageDistance}`)
   .button(`${errorInteger}`)
-  .button("button3")
+  .button("", `${signalImage}`)
   .button("button4")
+  .button("button5")
   .show(player).then(({ cancelationReason, canceled }) => {
     if (cancelationReason === FormCancelationReason.UserBusy || canceled) {
             return;
@@ -62,7 +63,12 @@ async function getCageInfo(player) {
   const angle = Math.atan2(-dx, dz) * (180 / Math.PI);
   const direction = getDirection(angle);
 
-  return { direction, cageDistance, errorInteger };
+  let signalImage;
+  if (cageDistance >= 100) signalImage = "textures/ui/panels/cage_detector/low";
+  else if (cageDistance < 100 && cageDistance > 25) signalImage = "textures/ui/panels/cage_detector/normal";
+  else signalImage = "textures/ui/panels/cage_detector/high";
+
+  return { direction, cageDistance, errorInteger, signalImage };
 }
 
 
