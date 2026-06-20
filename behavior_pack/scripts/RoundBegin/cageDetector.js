@@ -67,11 +67,11 @@ async function getCageInfo(player) {
   const direction = getDirection(angle);
 
   let signalImage;
-  if (cageDistance >= 375) signalImage = "textures/ui/panels/cage_detector/low";
-  else if (cageDistance < 375 && cageDistance > 100) signalImage = "textures/ui/panels/cage_detector/normal";
-  else signalImage = "textures/ui/panels/cage_detector/high";
+  if (cageDistance >= 375) signalImage = "textures/ui/panels/cage_detector/signal/low";
+  else if (cageDistance < 375 && cageDistance > 100) signalImage = "textures/ui/panels/cage_detector/signal/normal";
+  else signalImage = "textures/ui/panels/cage_detector/signal/high";
 
-  const elevation = cageData.y - player.location.y;
+  const elevation = Math.round(cageData.y - player.location.y);
 
   const eta = Math.ceil((cageDistance / 2.5) / 60).toString() + "m";
 

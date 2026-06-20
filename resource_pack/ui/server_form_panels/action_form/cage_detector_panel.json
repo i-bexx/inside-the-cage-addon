@@ -215,5 +215,64 @@
         }
       }
     ]
+  },
+
+  "static_phase1_show": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 0.06,
+    "from": 1,
+    "to": 1,
+    "next": "@cage_detector_panel.static_phase1_hide"
+  },
+  "static_phase1_hide": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 0.12,
+    "from": 0,
+    "to": 0,
+    "next": "@cage_detector_panel.static_phase1_show"
+  },
+
+  "static_phase2_hide1": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 0.06,
+    "from": 0,
+    "to": 0,
+    "next": "@cage_detector_panel.static_phase2_show"
+  },
+  "static_phase2_show": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 0.06,
+    "from": 1,
+    "to": 1,
+    "next": "@cage_detector_panel.static_phase2_hide2"
+  },
+  "static_phase2_hide2": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 0.06,
+    "from": 0,
+    "to": 0,
+    "next": "@cage_detector_panel.static_phase2_hide1"
+  },
+
+  "static_phase3_hide": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 0.12,
+    "from": 0,
+    "to": 0,
+    "next": "@cage_detector_panel.static_phase3_show"
+  },
+  "static_phase3_show": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 0.06,
+    "from": 1,
+    "to": 1,
+    "next": "@cage_detector_panel.static_phase3_hide"
   }
 }
