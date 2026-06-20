@@ -89,16 +89,17 @@
           "size": [ "100%cm", "100%" ],
           "anchor_from": "left_middle",
           "anchor_to": "left_middle",
+          "offset": [ 5, 0 ],
           "collection_name": "form_buttons",
           "controls": [
             {
               "signal_info_container": {
                 "type": "stack_panel",
                 "orientation": "horizontal",
-                "size": [ "100%cm", 24 ],
-                "anchor_from": "top_middle",
-                "anchor_to": "top_middle",
-                "offset": [ 5, 5 ],
+                "size": [ "100%c", 24 ],
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "offset": [ 0, 5 ],
                 "collection_index": 2,
                 "controls": [
                   {
@@ -109,7 +110,7 @@
                         {
                           "signal_info_label": {
                             "type": "label",
-                            "text": "Signal: ",
+                            "text": "§8Signal: ",
                             "size": [ "default", "default" ],
                             "anchor_from": "left_middle",
                             "anchor_to": "left_middle",
@@ -148,26 +149,29 @@
               }
             },
             {
-              "idk2_container": {
+              "elevation_container": {
                 "type": "collection_panel",
                 "size": [ "100%c", "100%c" ],
-                "anchor_from": "center",
-                "anchor_to": "center",
-                "offset": [ 5, 0 ],
+                "anchor_from": "left_middle",
+                "anchor_to": "left_middle",
                 "collection_index": 3,
                 "controls": [
                   {
-                    "idk2_label": {
+                    "elevation_label": {
                       "type": "label",
-                      "text": "#form_button_text",
+                      "text": "#text",
                       "size": [ "default", "default" ],
-                      "color": [ 0.2, 0.8, 1.0 ],
                       "shadow": true,
                       "bindings": [
                         {
                           "binding_type": "collection",
                           "binding_collection_name": "form_buttons",
                           "binding_name": "#form_button_text"
+                        },
+                        {
+                          "binding_type": "view",
+                          "source_property_name": "('§8' + 'Elevation: ' + '§b' + #form_button_text)",
+                          "target_property_name": "#text"
                         }
                       ]
                     }
@@ -176,26 +180,30 @@
               }
             },
             {
-              "idk3_container": {
+              "eta_container": {
                 "type": "collection_panel",
                 "size": [ "100%c", "100%c" ],
-                "anchor_from": "bottom_middle",
-                "anchor_to": "bottom_middle",
-                "offset": [ 5, -8 ],
+                "anchor_from": "bottom_left",
+                "anchor_to": "bottom_left",
+                "offset": [ 0, -8 ],
                 "collection_index": 4,
                 "controls": [
                   {
-                    "idk3_label": {
+                    "eta_label": {
                       "type": "label",
-                      "text": "#form_button_text",
+                      "text": "#text",
                       "size": [ "default", "default" ],
-                      "color": [ 0.2, 0.8, 1.0 ],
                       "shadow": true,
                       "bindings": [
                         {
                           "binding_type": "collection",
                           "binding_collection_name": "form_buttons",
                           "binding_name": "#form_button_text"
+                        },
+                        {
+                          "binding_type": "view",
+                          "source_property_name": "('§8' + 'ETA: ' + '§e' + #form_button_text)",
+                          "target_property_name": "#text"
                         }
                       ]
                     }
