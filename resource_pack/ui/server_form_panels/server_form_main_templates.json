@@ -17,9 +17,11 @@
       {
         "close_button": {
           "type": "button",
-          "size": [14, 14],
-          "anchor_from": "top_right",
-          "anchor_to": "top_right",
+          "$close_button_size|default": [14, 14],
+          "$close_button_anchor|default": "top_right",
+          "size": "$close_button_size",
+          "anchor_from": "$close_button_anchor",
+          "anchor_to": "$close_button_anchor",
           "sound_name": "random.click",
 
           "default_control": "default_state",
@@ -33,8 +35,8 @@
           "$default_texture|default": "textures/ui/panels/main_panel/close_button",
           "$hover_texture|default": "textures/ui/panels/main_panel/close_button_hover",
           
-          "$alpha": 1,
-          "$size": [16, 16],
+          "$alpha|default": 1,
+          "$size|default": [16, 16],
           "button_mappings": [
             {
               "mapping_type": "pressed",

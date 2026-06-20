@@ -320,10 +320,10 @@
 
   "cage_detector_panel": {
     "type": "panel",
-    "size": [ "150%y", "30%" ],
-    "anchor_from": "right_middle",
-    "anchor_to": "right_middle",
-    "offset": [ "-10%", 0 ],
+    "size": [ 284, 150 ],
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": [ 0, -10 ],
     "layer": 2,
     "bindings": [
       {
@@ -386,7 +386,11 @@
             },
             {
               "close_button_container@server_form_main_templates.close_button_container": {
-                "$texture": "textures/ui/panels/cage_detector/close_button/close_panel_bg",
+                "offset": [ 0, -5 ],
+                "$close_button_size": [ 32, 16 ],
+                "$size": [ 32, 16 ],
+                "$close_button_anchor": "bottom_middle",
+                "$texture": "",
                 "$default_texture": "textures/ui/panels/cage_detector/close_button/close_button",
                 "$hover_texture": "textures/ui/panels/cage_detector/close_button/close_button_hover"
               }

@@ -3,7 +3,7 @@
 
   "cage_detector_panel_container": {
     "type": "panel",
-    "size": [ "100%", "fill" ],
+    "size": [ "100%", 90 ],
     "controls": [
       {
         "right_side": {
@@ -28,8 +28,7 @@
                       "text": "#text",
                       "size": [ "default", "default" ],
                       "shadow": true,
-                      "font_type": "smooth",
-                      "font_scale_factor": 1.2,
+                      "font_scale_factor": 1.4,
                       "bindings": [
                         {
                           "binding_type": "collection",
@@ -48,7 +47,7 @@
               }
             },
             {
-              "error_integer_container": {
+              "deviation_integer_container": {
                 "type": "collection_panel",
                 "size": [ "100%c", "100%c" ],
                 "anchor_from": "bottom_middle",
@@ -57,12 +56,11 @@
                 "collection_index": 1,
                 "controls": [
                   {
-                    "error_integer_label": {
+                    "deviation_integer_label": {
                       "type": "label",
                       "text": "#text",
                       "size": [ "default", "default" ],
                       "shadow": true,
-                      "font_type": "smooth",
                       "bindings": [
                         {
                           "binding_type": "collection",
@@ -71,7 +69,7 @@
                         },
                         {
                           "binding_type": "view",
-                          "source_property_name": "('Error integer: ' + '§6' + #form_button_text)",
+                          "source_property_name": "('Deviation integer: ' + '§6' + #form_button_text)",
                           "target_property_name": "#text"
                         }
                       ]
