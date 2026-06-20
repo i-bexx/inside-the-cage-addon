@@ -339,15 +339,57 @@
           "type": "panel",
           "size": [ "100%", "100%" ],
           "controls": [
-            { "background_image@server_form_main_templates.background_image": {} },
             {
-              "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
-                "$container_name": "cage_detector_panel_container",
-                "$container_reference": "cage_detector_panel.cage_detector_panel_container"
+              "background_image@server_form_main_templates.background_image": {
+                "$texture": "textures/ui/panels/cage_detector/panel_bg"
               }
             },
             {
-              "close_button_container@server_form_main_templates.close_button_container": {}
+              "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
+                "$container_name": "cage_detector_panel_container",
+                "$container_reference": "cage_detector_panel.cage_detector_panel_container",
+                "$texture": "textures/ui/panels/cage_detector/panel_bg"
+              }
+            },
+            {
+              "static_layer_1": {
+                "type": "image",
+                "size": [ "100%", "100%" ],
+                "texture": "textures/ui/panels/cage_detector/static/static_noise_1",
+                "alpha": 0.3,
+                "tiled": true,
+                "layer": 60,
+                "anims": [ "@cage_detector_panel.static_phase1_show" ]
+              }
+            },
+            {
+              "static_layer_2": {
+                "type": "image",
+                "size": [ "100%", "100%" ],
+                "texture": "textures/ui/panels/cage_detector/static/static_noise_2",
+                "alpha": 0.3,
+                "tiled": true,
+                "layer": 60,
+                "anims": [ "@cage_detector_panel.static_phase2_hide1" ]
+              }
+            },
+            {
+              "static_layer_3": {
+                "type": "image",
+                "size": [ "100%", "100%" ],
+                "texture": "textures/ui/panels/cage_detector/static/static_noise_3",
+                "alpha": 0.3,
+                "tiled": true,
+                "layer": 60,
+                "anims": [ "@cage_detector_panel.static_phase3_hide" ]
+              }
+            },
+            {
+              "close_button_container@server_form_main_templates.close_button_container": {
+                "$texture": "textures/ui/panels/cage_detector/close_button/close_panel_bg",
+                "$default_texture": "textures/ui/panels/cage_detector/close_button/close_button",
+                "$hover_texture": "textures/ui/panels/cage_detector/close_button/close_button_hover"
+              }
             }
           ]
         }

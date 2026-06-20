@@ -30,8 +30,8 @@
           "default_focus_precedence": 1,
           "focus_identifier": "$focus_identifier",
 
-          "$default_texture": "textures/ui/panels/main_panel/close_button",
-          "$hover_texture": "textures/ui/panels/main_panel/close_button_hover",
+          "$default_texture|default": "textures/ui/panels/main_panel/close_button",
+          "$hover_texture|default": "textures/ui/panels/main_panel/close_button_hover",
           
           "$alpha": 1,
           "$size": [16, 16],
@@ -142,7 +142,8 @@
   "background_image": {
     "type": "image",
     "size": ["100% + 5px", "100% + 5px"],
-    "texture": "textures/ui/panels/main_panel/background",
+    "$texture|default": "textures/ui/panels/main_panel/background",
+    "texture": "$texture",
     "alpha": 0.8
   },
 
