@@ -4,7 +4,7 @@ import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 import { loadTickingArea, removeTickingArea, sleep } from "../utils";
 
 let cageLocations = [];
-let errorIntegers = [ 5, 7, 3, -2, -4, -1, 1 ];
+let deviationIntegers = [ 5, 7, 3, -2, -4, -1, 1 ];
 
 // --- LISTENER ---
 
@@ -20,19 +20,19 @@ export function InitializeCageDetector() {
   cageLocations = JSON.parse(world.getDynamicProperty("active_cage_locations"));
   cageLocations.sort(() => 0.5 - Math.random());
 
-  errorIntegers.sort(() => 0.5 - Math.random());
+  deviationIntegers.sort(() => 0.5 - Math.random());
 }
 
 async function openCageDetector(player) {
   player.onScreenDisplay.setActionBar("§eCage Detector: Signal processing...");
 
-  const { direction, cageDistance, errorInteger, signalImage, elevation, eta } = await getCageInfo(player);
+  const { direction, cageDistance, deviationInteger, signalImage, elevation, eta } = await getCageInfo(player);
 
   new ActionFormData()
   .title("cage_detector_panel")
   .body(`${direction}`)
   .button(`${cageDistance}`)
-  .button(`${errorInteger}`)
+  .button(`${deviationInteger}`)
   .button("", `${signalImage}`)
   .button(`${elevation}`)
   .button(`${eta}`)
@@ -47,14 +47,14 @@ async function openCageDetector(player) {
 
 async function getCageInfo(player) {
   const cageData = await getCage();
-  if (!cageData) return { direction: "None", cageDistance: 0, errorInteger: 0 };
+  if (!cageData) return { direction: "None", cageDistance: 0, deviationInteger: 0 };
 
-  const errorInteger = cageData.errorInteger;
+  const deviationInteger = cageData.deviationInteger;
 
   const cageLocations = {
-    x: cageData.x + cageData.errorInteger,
-    y: cageData.y + cageData.errorInteger,
-    z: cageData.z + cageData.errorInteger
+    x: cageData.x + cageData.deviationInteger,
+    y: cageData.y + cageData.deviationInteger,
+    z: cageData.z + cageData.deviationInteger
   }
 
   const dx = cageLocations.x - player.location.x;
@@ -75,7 +75,7 @@ async function getCageInfo(player) {
 
   const eta = Math.ceil((cageDistance / 2.5) / 60).toString() + "m";
 
-  return { direction, cageDistance, errorInteger, signalImage, elevation, eta };
+  return { direction, cageDistance, deviationInteger, signalImage, elevation, eta };
 }
 
 
@@ -105,7 +105,7 @@ async function getCage() {
         x: cageLocation.locationObject.x,
         y: cageLocation.locationObject.y,
         z: cageLocation.locationObject.z,
-        errorInteger: errorIntegers[cageNumber]
+        deviationInteger: deviationIntegers[cageNumber]
       }
       return cageData;
     }
