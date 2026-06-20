@@ -320,7 +320,7 @@
 
   "cage_detector_panel": {
     "type": "panel",
-    "size": [ 284, 190 ],
+    "size": [ "150%y", "30%" ],
     "anchor_from": "right_middle",
     "anchor_to": "right_middle",
     "offset": [ "-10%", 0 ],
