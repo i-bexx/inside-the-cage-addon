@@ -127,41 +127,41 @@
   },
 
   "second_screen_exit_animation_push_offset": {
-    "anim_type": "offset",
-    "easing": "in_out_expo",
-    "duration": "$transition_time_push",
-    "from": [ 0, 0 ],
-    "to": [ "5%", 0 ],
+    "anim_type": "alpha",
+    "easing": "in_expo",
+    "duration": 0.1,
+    "from": 1.0,
+    "to": 0.0,
     "play_event": "screen.exit_push",
     "end_event": "screen.exit_end"
   },
 
   "second_screen_exit_animation_pop_offset": {
-    "anim_type": "offset",
-    "easing": "in_out_expo",
-    "duration": "$transition_time_pop",
-    "from": [ 0, 0 ],
-    "to": [ "5%", 0 ],
+    "anim_type": "alpha",
+    "easing": "in_expo",
+    "duration": 0.1,
+    "from": 1.0,
+    "to": 0.0,
     "play_event": "screen.exit_pop",
     "end_event": "screen.exit_end"
   },
 
   "second_screen_entrance_animation_push_offset": {
-    "anim_type": "offset",
-    "easing": "in_out_expo",
-    "duration": "$transition_time_push",
-    "from": [ "5%", 0 ],
-    "to": [ 0, 0 ],
+    "anim_type": "alpha",
+    "easing": "out_expo",
+    "duration": 0.15,
+    "from": 0.0,
+    "to": 1.0,
     "play_event": "screen.entrance_push",
     "end_event": "screen.entrance_end"
   },
 
   "second_screen_entrance_animation_pop_offset": {
-    "anim_type": "offset",
-    "easing": "in_out_expo",
-    "duration": "$transition_time_pop",
-    "from": [ "5%", 0 ],
-    "to": [ 0, 0 ],
+    "anim_type": "alpha",
+    "easing": "out_expo",
+    "duration": 0.15,
+    "from": 0.0,
+    "to": 1.0,
     "play_event": "screen.entrance_pop",
     "end_event": "screen.entrance_end"
   }
