@@ -50,11 +50,7 @@
       "@server_form_anims.second_screen_exit_animation_push_offset",
       "@server_form_anims.second_screen_exit_animation_pop_offset",
       "@server_form_anims.second_screen_entrance_animation_push_offset",
-      "@server_form_anims.second_screen_entrance_animation_pop_offset",
-      "@server_form_anims.screen_exit_animation_push_fade",
-      "@server_form_anims.screen_exit_animation_pop_fade",
-      "@server_form_anims.screen_entrance_animation_push_fade",
-      "@server_form_anims.screen_entrance_animation_pop_fade"
+      "@server_form_anims.second_screen_entrance_animation_pop_offset"
     ],
     "$background_animations": [
       "@server_form_anims.screen_exit_animation_push_alpha",
@@ -387,8 +383,8 @@
             {
               "close_button_container@server_form_main_templates.close_button_container": {
                 "offset": [ 0, -5 ],
-                "$close_button_size": [ 32, 16 ],
-                "$size": [ 32, 16 ],
+                "$close_button_size": [ "100% - 10px", 32 ],
+                "$size": [ 64, 32 ],
                 "$close_button_anchor": "bottom_middle",
                 "$texture": "",
                 "$default_texture": "textures/ui/panels/cage_detector/close_button/close_button",

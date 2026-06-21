@@ -11,6 +11,7 @@
           "size": [ "100%cm", "100%" ],
           "anchor_from": "right_middle",
           "anchor_to": "right_middle",
+          "offset": [ -5, 0 ],
           "collection_name": "form_buttons",
           "controls": [
             {
@@ -19,7 +20,7 @@
                 "size": [ "100%c", "100%c" ],
                 "anchor_from": "top_middle",
                 "anchor_to": "top_middle",
-                "offset": [ -5, 5 ],
+                "offset": [ 0, 5 ],
                 "collection_index": 0,
                 "controls": [
                   {
@@ -27,6 +28,7 @@
                       "type": "label",
                       "text": "#text",
                       "size": [ "default", "default" ],
+                      "offset": [ 0, 5 ],
                       "shadow": true,
                       "font_scale_factor": 1.4,
                       "bindings": [
@@ -37,7 +39,7 @@
                         },
                         {
                           "binding_type": "view",
-                          "source_property_name": "('Cage distance: ' + '§a' + #form_button_text)",
+                          "source_property_name": "('§8' + 'Distance: ' + '§a' + #form_button_text)",
                           "target_property_name": "#text"
                         }
                       ]
@@ -69,7 +71,7 @@
                         },
                         {
                           "binding_type": "view",
-                          "source_property_name": "('Deviation integer: ' + '§6' + #form_button_text)",
+                          "source_property_name": "('§8' + 'Deviation integer: ' + '§6' + #form_button_text)",
                           "target_property_name": "#text"
                         }
                       ]
