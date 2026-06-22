@@ -1,4 +1,4 @@
-import { world, system } from "@minecraft/server";
+import { world, system, EntityComponentTypes } from "@minecraft/server";
 import { ActionFormData, ModalFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 import { votePanel } from "./voteManager";
@@ -8,7 +8,7 @@ import { getPasswords } from "./RoundBegin/passwordManager";
 let dimension;
 
 const MAIN_PANELS = [ shopPanel, votePanel, upgradeBattery, increaseStaminaLimit ];
-const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_bomb": 6, "game:ammo": 1, "battery": 3 };
+const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_bomb": 6, "game:ammo": 1, "game:battery": 3, "game:cage_detector": 10 };
 
 let timeoutId = undefined;
 
@@ -77,15 +77,23 @@ function mainPanel(player) {
 }
 
 function shopPanel(player) {
+    const itemsObject = { ...SHOP_ITEMS };
+    hasItem(itemsObject, "checkAllNecessaryItems", player);
+
+    const getText = (val) => (itemsObject[val] === "§l§7Not Sale") ? itemsObject[val] : itemsObject[val] + " Coins";
+
 	new ActionFormData()
     .title("SHOP")
     .body("") 
-    .button("Gun", "textures/ui/panels/shop/gun")
-    .button("Knife", "textures/ui/panels/shop/knife")
-    .button("Kit", "textures/ui/panels/shop/kit")
-    .button("toxic_bomb", "textures/ui/panels/shop/toxic_bomb")
-    .button("Ammo", "textures/ui/panels/shop/ammo")
-    .button("Battery", "textures/ui/panels/shop/battery")
+    .button(`Gun-${getText("game:gun")}`, "textures/ui/panels/shop/gun")
+    .button(`Knife-${getText("game:knife")}`, "textures/ui/panels/shop/knife")
+    .button(`Kit-${itemsObject["game:kit"]} Coins`, "textures/ui/panels/shop/kit")
+    .button(`toxic_bomb-${itemsObject["game:toxic_bomb"]} Coins`, "textures/ui/panels/shop/toxic_bomb")
+    .button(`Ammo-${itemsObject["game:ammo"]} Coins`, "textures/ui/panels/shop/ammo")
+    .button(`Battery-${itemsObject["game:battery"]} Coins`, "textures/ui/panels/shop/battery")
+    .button(`Detector-${getText("game:cage_detector")}`, "")
+    .button(`...`, "")
+    .button(`...`, "")
 		.show(player).then(({ cancelationReason, canceled, selection }) => {
             if (cancelationReason === FormCancelationReason.UserBusy) {
                 return shopPanel(player);
@@ -94,7 +102,14 @@ function shopPanel(player) {
 
             const coinAmount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity);
 
-						const [itemName, itemCost] = Object.entries(SHOP_ITEMS)[selection] || [];
+						const [itemName, itemCost] = Object.entries(itemsObject)[selection] || [];
+                        const isAlreadyOwned = hasItem(itemsObject, itemName, player);
+
+                        if (isAlreadyOwned) {
+                            player.sendMessage(" §6[§e!§6] §cYou can't buy this item twice");
+                            player.playSound("note.bass");
+                            return;
+                        }
 
 						if (coinAmount >= itemCost) {
 							let transactionSuccessful = false;
@@ -170,13 +185,20 @@ function increaseStaminaLimit(player) {
     return;
 }
 
+function hasItem(itemsObject, itemTypeId, player) {
+    if (itemTypeId == "checkAllNecessaryItems") {
+        const container = player.getComponent(EntityComponentTypes.Inventory).container;
+        const itemsToCheck = ["game:gun", "game:knife", "game:cage_detector"];
 
-export function givePanelItem() {
-    if (timeoutId !== undefined) return;
-    
-    timeoutId = system.runTimeout(() => {
-        dimension.runCommand(`replaceitem entity @a[tag=in_game] slot.inventory 0 minecraft:compass 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
-    }, 2400)
+        for (let i = 0; i < container.size; i++) {
+            const item = container.getItem(i);
+
+            if (item && itemsToCheck.includes(item.typeId)) itemsObject[item.typeId] = "§l§7Not Sale";
+        }
+        return;
+    }
+    if (itemsObject[itemTypeId] == "§l§7Not Sale") return true;
+    else return false;
 }
 
     
@@ -185,7 +207,23 @@ world.afterEvents.itemUse.subscribe((eventData) => {
       
       if (itemStack.typeId == "minecraft:compass") mainPanel(source);
       else if (itemStack.typeId == "minecraft:gold_ingot") customPanel(source);
+
+      else if (itemStack.typeId == "game:discount_ticket") {
+        for (const [key, value] of Object.entries(SHOP_ITEMS)) {
+            const newCost = Math.max(1, Math.ceil(value / 2));
+            SHOP_ITEMS[key] = newCost;
+        }
+        source.runCommand("clear @s game:discount_ticket");
+      }
 })
+
+export function givePanelItem() {
+    if (timeoutId !== undefined) return;
+    
+    timeoutId = system.runTimeout(() => {
+        dimension.runCommand(`replaceitem entity @a[tag=in_game] slot.inventory 0 minecraft:compass 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
+    }, 2400)
+}
 
 export function stopGivePanelItem() {
     if (timeoutId === undefined) return;
