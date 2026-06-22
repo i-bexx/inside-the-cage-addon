@@ -1,4 +1,6 @@
 resource_pack/sounds/
 resource_pack/textures/
 
-behavior_pack/scripts/Test/
+behavior_pack/scripts/node_modules/
+behavior_pack/scripts/package.json
+behavior_pack/scripts/package-lock.json
