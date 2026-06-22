@@ -50,13 +50,17 @@
       "@server_form_anims.second_screen_exit_animation_push_offset",
       "@server_form_anims.second_screen_exit_animation_pop_offset",
       "@server_form_anims.second_screen_entrance_animation_push_offset",
-      "@server_form_anims.second_screen_entrance_animation_pop_offset"
+      "@server_form_anims.second_screen_entrance_animation_pop_offset",
+      "@server_form_anims.second_screen_exit_animation_push_fade",
+      "@server_form_anims.second_screen_exit_animation_pop_fade",
+      "@server_form_anims.second_screen_entrance_animation_push_fade",
+      "@server_form_anims.second_screen_entrance_animation_pop_fade"
     ],
     "$background_animations": [
-      "@server_form_anims.screen_exit_animation_push_alpha",
-      "@server_form_anims.screen_exit_animation_pop_alpha",
-      "@server_form_anims.screen_entrance_animation_push_alpha",
-      "@server_form_anims.screen_entrance_animation_pop_alpha"
+      "@server_form_anims.second_screen_exit_animation_push_alpha",
+      "@server_form_anims.second_screen_exit_animation_pop_alpha",
+      "@server_form_anims.second_screen_entrance_animation_push_alpha",
+      "@server_form_anims.second_screen_entrance_animation_pop_alpha"
     ],
     "button_mappings": [
       {
