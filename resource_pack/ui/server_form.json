@@ -9,30 +9,48 @@
   // --- SCREENS ---
 
   "third_party_server_screen@common.base_screen": {
-    "$screen_content": "server_form.first_screen",
-    "$additional_screen_content": "server_form.second_screen",
+    "$screen_content": "server_form.screens_container_1",
+    "$additional_screen_content": "server_form.screens_container_2",
     "$screen_animations": [],
     "$background_animations": []
   },
 
-  "first_screen@common.base_screen": {
+  // - SCREEN CONTAINERS -
+
+  "screens_container_1@common.base_screen": {
+    "$screen_content": "server_form.main_screen",
+    "$additional_screen_content": "server_form.static_alpha_screen",
+    "$screen_animations": [],
+    "$background_animations": []
+  },
+
+  "screens_container_2@common.base_screen": {
+    "$screen_content": "server_form.isolated_screen",
+    "$additional_screen_content": "common.base_screen_empty_panel",
+    "$screen_animations": [],
+    "$background_animations": []
+  },
+
+  // - SCREEN CONTROLS -
+
+  "main_screen@common.base_screen": {
     "$screen_content": "server_form.main_screen_content",
     "$additional_screen_content": "common.base_screen_empty_panel",
     "$screen_animations": [
-      "@server_form_anims.screen_exit_animation_push_offset",
-      "@server_form_anims.screen_exit_animation_pop_offset",
-      "@server_form_anims.screen_entrance_animation_push_offset",
-      "@server_form_anims.screen_entrance_animation_pop_offset",
-      "@server_form_anims.screen_exit_animation_push_fade",
-      "@server_form_anims.screen_exit_animation_pop_fade",
-      "@server_form_anims.screen_entrance_animation_push_fade",
-      "@server_form_anims.screen_entrance_animation_pop_fade"
+      "@server_form_anims.main_screen_exit_animation_push_offset",
+      "@server_form_anims.main_screen_exit_animation_pop_offset",
+      "@server_form_anims.main_screen_entrance_animation_push_offset",
+      "@server_form_anims.main_screen_entrance_animation_pop_offset",
+      "@server_form_anims.main_screen_exit_animation_push_fade",
+      "@server_form_anims.main_screen_exit_animation_pop_fade",
+      "@server_form_anims.main_screen_entrance_animation_push_fade",
+      "@server_form_anims.main_screen_entrance_animation_pop_fade"
     ],
     "$background_animations": [
-      "@server_form_anims.screen_exit_animation_push_alpha",
-      "@server_form_anims.screen_exit_animation_pop_alpha",
-      "@server_form_anims.screen_entrance_animation_push_alpha",
-      "@server_form_anims.screen_entrance_animation_pop_alpha"
+      "@server_form_anims.main_screen_exit_animation_push_alpha",
+      "@server_form_anims.main_screen_exit_animation_pop_alpha",
+      "@server_form_anims.main_screen_entrance_animation_push_alpha",
+      "@server_form_anims.main_screen_entrance_animation_pop_alpha"
     ],
     "button_mappings": [
       {
@@ -43,24 +61,52 @@
     ]
   },
 
-  "second_screen@common.base_screen": {
-    "$screen_content": "server_form.secondary_screen_content",
+  "static_alpha_screen@common.base_screen": {
+    "$screen_content": "server_form.static_alpha_screen_content",
     "$additional_screen_content": "common.base_screen_empty_panel",
     "$screen_animations": [
-      "@server_form_anims.second_screen_exit_animation_push_offset",
-      "@server_form_anims.second_screen_exit_animation_pop_offset",
-      "@server_form_anims.second_screen_entrance_animation_push_offset",
-      "@server_form_anims.second_screen_entrance_animation_pop_offset",
-      "@server_form_anims.second_screen_exit_animation_push_fade",
-      "@server_form_anims.second_screen_exit_animation_pop_fade",
-      "@server_form_anims.second_screen_entrance_animation_push_fade",
-      "@server_form_anims.second_screen_entrance_animation_pop_fade"
+      "@server_form_anims.static_alpha_screen_exit_animation_push_offset",
+      "@server_form_anims.static_alpha_screen_exit_animation_pop_offset",
+      "@server_form_anims.static_alpha_screen_entrance_animation_push_offset",
+      "@server_form_anims.static_alpha_screen_entrance_animation_pop_offset",
+      "@server_form_anims.static_alpha_screen_exit_animation_push_fade",
+      "@server_form_anims.static_alpha_screen_exit_animation_pop_fade",
+      "@server_form_anims.static_alpha_screen_entrance_animation_push_fade",
+      "@server_form_anims.static_alpha_screen_entrance_animation_pop_fade"
     ],
     "$background_animations": [
-      "@server_form_anims.second_screen_exit_animation_push_alpha",
-      "@server_form_anims.second_screen_exit_animation_pop_alpha",
-      "@server_form_anims.second_screen_entrance_animation_push_alpha",
-      "@server_form_anims.second_screen_entrance_animation_pop_alpha"
+      "@server_form_anims.static_alpha_screen_exit_animation_push_alpha",
+      "@server_form_anims.static_alpha_screen_exit_animation_pop_alpha",
+      "@server_form_anims.static_alpha_screen_entrance_animation_push_alpha",
+      "@server_form_anims.static_alpha_screen_entrance_animation_pop_alpha"
+    ],
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_cancel",
+        "to_button_id": "button.menu_exit",
+        "mapping_type": "global"
+      }
+    ]
+  },
+
+  "isolated_screen@common.base_screen": {
+    "$screen_content": "server_form.isolated_screen_content",
+    "$additional_screen_content": "common.base_screen_empty_panel",
+    "$screen_animations": [
+      "@common.screen_exit_animation_push_offset",
+      "@common.screen_exit_animation_pop_offset",
+      "@common.screen_entrance_animation_push_offset",
+      "@common.screen_entrance_animation_pop_offset",
+      "@common.screen_exit_animation_push_fade",
+      "@common.screen_exit_animation_pop_fade",
+      "@common.screen_entrance_animation_push_fade",
+      "@common.screen_entrance_animation_pop_fade"
+    ],
+    "$background_animations": [
+      "@common.screen_exit_animation_push_alpha",
+      "@common.screen_exit_animation_pop_alpha",
+      "@common.screen_entrance_animation_push_alpha",
+      "@common.screen_entrance_animation_pop_alpha"
     ],
     "button_mappings": [
       {
@@ -81,15 +127,15 @@
           "server_form_factory": {
               "type": "factory",
               "control_ids": {
-              "long_form": "@server_form.long_form",
-              "custom_form": "@server_form.custom_form"
+              "long_form": "@server_form.main_screen_long_form",
+              "custom_form": "@server_form.main_screen_custom_form"
           }
         }
       }
     ]
   },
 
-  "secondary_screen_content": {
+  "static_alpha_screen_content": {
     "type": "panel",
     "size": [ "100%", "100%" ],
     "controls": [
@@ -97,7 +143,22 @@
           "server_form_factory": {
               "type": "factory",
               "control_ids": {
-              "long_form": "@server_form.second_long_form"
+              "long_form": "@server_form.static_alpha_long_form"
+          }
+        }
+      }
+    ]
+  },
+
+  "isolated_screen_content": {
+    "type": "panel",
+    "size": [ "100%", "100%" ],
+    "controls": [
+        {
+          "server_form_factory": {
+              "type": "factory",
+              "control_ids": {
+              "long_form": "@server_form.isolated_long_form"
           }
         }
       }
@@ -106,21 +167,18 @@
 
   // --- PANEL CONTAINERS ---
 
-  "long_form": {
+  "main_screen_long_form": {
     "type": "panel",
     "size": [ "100%", "100%" ],
     "controls": [
       { "main_panel@server_form.main_panel": {} },
       { "shop_panel@server_form.shop_panel": {} },
       { "vote_panel@server_form.vote_panel": {} },
-      { "question_panel@server_form.question_panel": {} },
-      { "random_peep_panel@server_form.random_peep_panel": {} },
-
-      { "other_panels@server_form.other_panels": {} }
+      { "random_peep_panel@server_form.random_peep_panel": {} }
     ]   
   },
 
-  "custom_form": {
+  "main_screen_custom_form": {
     "type": "panel",
     "size": [ "100%", "100%" ],
     "$text_name": "custom_text",
@@ -130,11 +188,20 @@
     ]   
   },
 
-  "second_long_form": {
+  "static_alpha_long_form": {
     "type": "panel",
     "size": [ "100%", "100%" ],
     "controls": [
       { "cage_detector_panel@server_form.cage_detector_panel": {} }
+    ]   
+  },
+
+  "isolated_long_form": {
+    "type": "panel",
+    "size": [ "100%", "100%" ],
+    "controls": [
+      { "question_panel@server_form.question_panel": {} },
+      { "other_panels@server_form.other_panels": {} }
     ]   
   },
 
@@ -164,7 +231,8 @@
             {
               "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
                 "$container_name": "main_panel_container",
-                "$container_reference": "main_panel.main_panel_container"
+                "$container_reference": "main_panel.main_panel_container",
+                "$hide_form_body": true
               }
             },
             {
@@ -202,7 +270,8 @@
             {
               "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
                 "$container_name": "shop_panel_container",
-                "$container_reference": "shop_panel.shop_panel_container"
+                "$container_reference": "shop_panel.shop_panel_container",
+                "$hide_form_body": true
               }
             },
             {
@@ -236,15 +305,17 @@
           "size": ["100%", "100%"],
           "controls": [
             { "label_text@server_form_main_templates.label_text": {} },
-            { "background_image@server_form_main_templates.background_image": {} },
             {
-              "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
-                "$container_name": "vote_panel_container",
-                "$container_reference": "vote_panel.vote_panel_container"
+              "background_image@server_form_main_templates.background_image": {
+                "$texture": "textures/ui/panels/vote-question_panel/background"
               }
             },
             {
-              "close_button_container@server_form_main_templates.close_button_container": {}
+              "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
+                "$container_name": "vote_panel_container",
+                "$container_reference": "vote_panel.vote_panel_container",
+                "$hide_form_body": true
+              }
             }
           ]
         }
@@ -271,15 +342,17 @@
           "type": "panel",
           "size": ["100%", "100%"],
           "controls": [
-            { "background_image@server_form_main_templates.background_image": {} },
             {
-              "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
-                "$container_name": "question_panel_container",
-                "$container_reference": "question_panel.question_panel_container"
+              "background_image@server_form_main_templates.background_image": {
+                "$texture": "textures/ui/panels/vote-question_panel/background"
               }
             },
             {
-              "close_button_container@server_form_main_templates.close_button_container": {}
+              "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
+                "$container_name": "question_panel_container",
+                "$container_reference": "question_panel.question_panel_container",
+                "$texture": "textures/ui/panels/vote-question_panel/form_background"
+              }
             }
           ]
         }
