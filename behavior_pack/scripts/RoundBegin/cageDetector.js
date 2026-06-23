@@ -10,6 +10,7 @@ let deviationIntegers = [ 5, 7, 3, -2, -4, -1, 1 ];
 
 world.afterEvents.itemUse.subscribe(({itemStack, source}) => {
   if (itemStack.typeId != "game:cage_detector") return;
+  if (source.getItemCooldown("cage_detector") < 195) return;
 
   openCageDetector(source);
 })
