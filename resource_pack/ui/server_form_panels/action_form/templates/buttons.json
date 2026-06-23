@@ -19,10 +19,14 @@
     "$focus_identifier|default": "",
     "$default_focus_precedence|default": 0,
 
-    "$default_button_texture|default": "textures/ui/panels/main_panel/background",
-    "$hover_button_texture|default": "textures/ui/panels/main_panel/background_hover",
-    "$pressed_button_texture|default": "textures/ui/panels/main_panel/background_pressed",
+    "$default_button_texture|default": "textures/ui/panels/main_panel/button_background_default",
+    "$hover_button_texture|default": "textures/ui/panels/main_panel/button_background_hover",
+    "$pressed_button_texture|default": "textures/ui/panels/main_panel/button_background_pressed",
     "$button_light_borders|default": "textures/ui/focus_border_white",
+
+    "$default_text_color|default": [ 1.0, 1.0, 1.0 ],
+    "$hover_text_color|default": [ 1.0, 1.0, 1.0 ],
+    "$hide_light_borders|default": false,
     
     "focus_enabled": true,
     "focus_identifier": "$focus_identifier",
@@ -59,6 +63,7 @@
               "default_text": {
                 "type": "label",
                 "text": "$default_text",
+                "color": "$default_text_color",
                 "anchor_from": "$button_text_anchors",
                 "anchor_to": "$button_text_anchors",
                 "offset": "$offset",
@@ -90,13 +95,15 @@
               "hover_border_image": {
                 "type": "image",
                 "texture": "$button_light_borders",
-                "layer": 32
+                "layer": 32,
+                "ignored": "$hide_light_borders"
               }
             },
             {
               "hover_text": {
                 "type": "label",
                 "text": "$hover_text",
+                "color": "$hover_text_color",
                 "anchor_from": "$button_text_anchors",
                 "anchor_to": "$button_text_anchors",
                 "offset": "$offset",
@@ -129,13 +136,15 @@
               "pressed_border_image": {
                 "type": "image",
                 "texture": "$button_light_borders",
-                "layer": 32
+                "layer": 32,
+                "ignored": "$hide_light_borders"
               }
             },
             {
               "pressed_text": {
                 "type": "label",
                 "text": "$hover_text",
+                "color": "$hover_text_color",
                 "anchor_from": "$button_text_anchors",
                 "anchor_to": "$button_text_anchors",
                 "offset": "$offset",

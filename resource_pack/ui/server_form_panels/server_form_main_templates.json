@@ -105,6 +105,7 @@
     "size": ["100%", "100%"],
     "$container_name|default": "button_panel",
     "$container_reference|default": "action_form_panels.button_panel",
+    "$hide_form_body|default": false,
     "controls": [
       {
         "padding": {
@@ -112,7 +113,11 @@
           "size": ["100%", 8]
         }
       },
-      { "form_body@server_form_main_templates.form_body": {} },
+      {
+        "form_body@server_form_main_templates.form_body": {
+          "ignored": "$hide_form_body"
+        }
+      },
       {
         "padding_2": {
           "type": "panel",

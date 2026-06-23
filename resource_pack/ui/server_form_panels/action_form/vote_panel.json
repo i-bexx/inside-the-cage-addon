@@ -20,6 +20,13 @@
 
     "$focus_wrap_enabled": true,
 
+    "$default_button_texture": "textures/ui/panels/vote-question_panel/button_background_default",
+    "$hover_button_texture": "textures/ui/panels/vote-question_panel/button_background_hover",
+    "$pressed_button_texture": "textures/ui/panels/vote-question_panel/button_background_hover",
+    "$hide_light_borders": true,
+
+    "$hover_text_color": [ 0.0, 0.0, 0.0 ],
+
     "focus_container": true,
     "focus_navigation_mode_left": "stop",
     "focus_navigation_mode_right": "stop",

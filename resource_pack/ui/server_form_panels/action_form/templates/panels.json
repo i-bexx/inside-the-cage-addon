@@ -62,11 +62,6 @@
     "$padding_size|default": [248, 52],
     "$button_size|default": ["100% - 10px", "100% - 10px"],
 
-    "$default_button_texture": "textures/ui/panels/main_panel/background",
-    "$hover_button_texture": "textures/ui/panels/main_panel/background_hover",
-    "$pressed_button_texture": "textures/ui/panels/main_panel/background_pressed",
-    "$button_light_borders": "textures/ui/focus_border_white",
-
     "$focus_wrap_enabled|default": false,
     
     "controls": [

@@ -1,7 +1,7 @@
 {
   "namespace": "server_form_anims",
 
-  "screen_exit_animation_push_offset": {
+  "main_screen_exit_animation_push_offset": {
     "anim_type": "offset",
     "easing": "in_out_expo",
     "duration": "$transition_time_push",
@@ -11,7 +11,7 @@
     "end_event": "screen.exit_end"
   },
 
-  "screen_exit_animation_pop_offset": {
+  "main_screen_exit_animation_pop_offset": {
     "anim_type": "offset",
     "easing": "in_out_expo",
     "duration": "$transition_time_pop",
@@ -21,7 +21,7 @@
     "end_event": "screen.exit_end"
   },
 
-  "screen_entrance_animation_push_offset": {
+  "main_screen_entrance_animation_push_offset": {
     "anim_type": "offset",
     "easing": "in_out_expo",
     "duration": "$transition_time_push",
@@ -31,7 +31,7 @@
     "end_event": "screen.entrance_end"
   },
 
-  "screen_entrance_animation_pop_offset": {
+  "main_screen_entrance_animation_pop_offset": {
     "anim_type": "offset",
     "easing": "in_out_expo",
     "duration": "$transition_time_pop",
@@ -41,7 +41,7 @@
     "end_event": "screen.entrance_end"
   },
 
-  "screen_exit_animation_push_fade": {
+  "main_screen_exit_animation_push_fade": {
     "anim_type": "alpha",
     "easing": "in_out_sine",
     "duration": "$transition_time_push",
@@ -51,7 +51,7 @@
     "end_event": "screen.exit_end"
   },
 
-  "screen_exit_animation_pop_fade": {
+  "main_screen_exit_animation_pop_fade": {
     "anim_type": "alpha",
     "easing": "in_out_sine",
     "duration": "$transition_time_pop",
@@ -61,7 +61,7 @@
     "end_event": "screen.exit_end"
   },
 
-  "screen_entrance_animation_push_fade": {
+  "main_screen_entrance_animation_push_fade": {
     "anim_type": "alpha",
     "easing": "in_out_sine",
     "duration": "$transition_time_push",
@@ -71,7 +71,7 @@
     "end_event": "screen.entrance_end"
   },
 
-  "screen_entrance_animation_pop_fade": {
+  "main_screen_entrance_animation_pop_fade": {
     "anim_type": "alpha",
     "easing": "in_out_sine",
     "duration": "$transition_time_pop",
@@ -82,7 +82,7 @@
   },
 
 
-  "screen_exit_animation_push_alpha": {
+  "main_screen_exit_animation_push_alpha": {
     "anim_type": "alpha",
     "scale_from_starting_alpha": true,
     "easing": "linear",
@@ -93,7 +93,7 @@
     "end_event": "screen.exit_end"
   },
 
-  "screen_exit_animation_pop_alpha": {
+  "main_screen_exit_animation_pop_alpha": {
     "anim_type": "alpha",
     "scale_from_starting_alpha": true,
     "easing": "linear",
@@ -104,7 +104,7 @@
     "end_event": "screen.exit_end"
   },
 
-  "screen_entrance_animation_push_alpha": {
+  "main_screen_entrance_animation_push_alpha": {
     "anim_type": "alpha",
     "scale_from_starting_alpha": true,
     "easing": "linear",
@@ -115,7 +115,7 @@
     "end_event": "screen.entrance_end"
   },
 
-  "screen_entrance_animation_pop_alpha": {
+  "main_screen_entrance_animation_pop_alpha": {
     "anim_type": "alpha",
     "scale_from_starting_alpha": true,
     "easing": "linear",
@@ -126,7 +126,7 @@
     "end_event": "screen.entrance_end"
   },
 
-  "second_screen_exit_animation_push_offset": {
+  "static_alpha_screen_exit_animation_push_offset": {
     "anim_type": "alpha",
     "easing": "in_expo",
     "duration": 0.1,
@@ -136,7 +136,7 @@
     "end_event": "screen.exit_end"
   },
 
-  "second_screen_exit_animation_pop_offset": {
+  "static_alpha_screen_exit_animation_pop_offset": {
     "anim_type": "alpha",
     "easing": "in_expo",
     "duration": 0.1,
@@ -146,7 +146,7 @@
     "end_event": "screen.exit_end"
   },
 
-  "second_screen_entrance_animation_push_offset": {
+  "static_alpha_screen_entrance_animation_push_offset": {
     "anim_type": "alpha",
     "easing": "out_expo",
     "duration": 0.15,
@@ -156,7 +156,7 @@
     "end_event": "screen.entrance_end"
   },
 
-  "second_screen_entrance_animation_pop_offset": {
+  "static_alpha_screen_entrance_animation_pop_offset": {
     "anim_type": "alpha",
     "easing": "out_expo",
     "duration": 0.15,
@@ -165,7 +165,7 @@
     "play_event": "screen.entrance_pop",
     "end_event": "screen.entrance_end"
   },
-  "second_screen_exit_animation_push_fade": {
+  "static_alpha_screen_exit_animation_push_fade": {
     "anim_type": "alpha",
     "easing": "in_out_sine",
     "duration": "$transition_time_push",
@@ -174,7 +174,7 @@
     "play_event": "screen.exit_push",
     "end_event": "screen.exit_end"
   },
-  "second_screen_exit_animation_pop_fade": {
+  "static_alpha_screen_exit_animation_pop_fade": {
     "anim_type": "alpha",
     "easing": "in_out_sine",
     "duration": "$transition_time_pop",
@@ -183,7 +183,7 @@
     "play_event": "screen.exit_pop",
     "end_event": "screen.exit_end"
   },
-  "second_screen_entrance_animation_push_fade": {
+  "static_alpha_screen_entrance_animation_push_fade": {
     "anim_type": "alpha",
     "easing": "in_out_sine",
     "duration": "$transition_time_push",
@@ -192,7 +192,7 @@
     "play_event": "screen.entrance_push",
     "end_event": "screen.entrance_end"
   },
-  "second_screen_entrance_animation_pop_fade": {
+  "static_alpha_screen_entrance_animation_pop_fade": {
     "anim_type": "alpha",
     "easing": "in_out_sine",
     "duration": "$transition_time_pop",
@@ -201,7 +201,7 @@
     "play_event": "screen.entrance_pop",
     "end_event": "screen.entrance_end"
   },
-  "second_screen_exit_animation_push_alpha": {
+  "static_alpha_screen_exit_animation_push_alpha": {
     "anim_type": "alpha",
     "scale_from_starting_alpha": true,
     "easing": "linear",
@@ -211,7 +211,7 @@
     "play_event": "screen.exit_push",
     "end_event": "screen.exit_end"
   },
-  "second_screen_exit_animation_pop_alpha": {
+  "static_alpha_screen_exit_animation_pop_alpha": {
     "anim_type": "alpha",
     "scale_from_starting_alpha": true,
     "easing": "linear",
@@ -221,7 +221,7 @@
     "play_event": "screen.exit_pop",
     "end_event": "screen.exit_end"
   },
-  "second_screen_entrance_animation_push_alpha": {
+  "static_alpha_screen_entrance_animation_push_alpha": {
     "anim_type": "alpha",
     "scale_from_starting_alpha": true,
     "easing": "linear",
@@ -231,7 +231,7 @@
     "play_event": "screen.entrance_push",
     "end_event": "screen.entrance_end"
   },
-  "second_screen_entrance_animation_pop_alpha": {
+  "static_alpha_screen_entrance_animation_pop_alpha": {
     "anim_type": "alpha",
     "scale_from_starting_alpha": true,
     "easing": "linear",
