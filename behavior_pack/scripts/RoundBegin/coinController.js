@@ -35,6 +35,7 @@ const CONFIG = {
 let dimension;
 let tickingAreaLocations = [];
 
+let isCoinSpawnerActive = false;
 let intervalId = undefined;
 
 // ==========================================
@@ -44,10 +45,13 @@ let intervalId = undefined;
 export function startcoinController() {
     if (intervalId !== undefined) return;
 
+    isCoinSpawnerActive = true;
     intervalId = system.runInterval(spawnCoin, CONFIG.SPAWN_INTERVAL);
 }
 
 async function spawnCoin() {
+    if (!isCoinSpawnerActive) return;
+
     const randomIndex = Math.floor(Math.random() * CONFIG.LOCATIONS.length);
     const locationObject = CONFIG.LOCATIONS[randomIndex];
     const areaName = `loader_coin_${randomIndex + 1}`;
@@ -68,19 +72,26 @@ async function spawnCoin() {
         return;
     }
 
-    try {
-        dimension.spawnEntity(CONFIG.ENTITY_TYPE, locationObject);
-        tickingAreaLocations.push({ locationObject, areaName });
-        world.setDynamicProperty("active_coin_locations", JSON.stringify(tickingAreaLocations));
-        world.sendMessage(`Coin location: ${locationObject.x} ${locationObject.y} ${locationObject.z}`);
-    } catch (error) {
-        console.error(`Failed to spawn coin: ${error}`);
+    let spawned = false;
+    while (!spawned) {
+        if (!isCoinSpawnerActive) break;
+        try {
+            dimension.spawnEntity(CONFIG.ENTITY_TYPE, locationObject);
+            tickingAreaLocations.push({ locationObject, areaName });
+            world.setDynamicProperty("active_coin_locations", JSON.stringify(tickingAreaLocations));
+            world.sendMessage(`Coin location: ${locationObject.x} ${locationObject.y} ${locationObject.z}`);
+
+            spawned = true;
+        } catch (error) {
+            await sleep(10);
+        }
     }
 
     removeTickingArea(dimension, areaName);
 }
 
 export async function despawnCoins() {
+    isCoinSpawnerActive = false;
     const rawData = world.getDynamicProperty("active_coin_locations");
     const coinLocations = JSON.parse(rawData || "[]");
     for (const value of coinLocations) {

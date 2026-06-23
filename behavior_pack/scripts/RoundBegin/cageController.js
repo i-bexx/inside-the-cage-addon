@@ -10,6 +10,7 @@ import { loadTickingArea, removeTickingArea, sleep } from "../utils";
 
 let dimension;
 let tickingAreaLocations = [];
+let isCageSpawnerActive = false;
 
 const CONFIG = {
     CAGE_ID: "game:cage",
@@ -42,7 +43,9 @@ const CAGE_GROUPS = [
 // ==========================================
 
 export async function spawnCages() {
+    isCageSpawnerActive = true;
     for (let i = 0; i < CAGE_GROUPS.length; i++) {
+        if (!isCageSpawnerActive) break;
         const group = CAGE_GROUPS[i];
         const randomIndex = Math.floor(Math.random() * group.length);
         const locationObject = group[randomIndex];
@@ -56,13 +59,19 @@ export async function spawnCages() {
 
         await sleep(40);
 
-        try {
-            dimension.spawnEntity(CONFIG.CAGE_ID, locationObject);
-            tickingAreaLocations.push({ locationObject, areaName });
-            world.setDynamicProperty("active_cage_locations", JSON.stringify(tickingAreaLocations));
-            dimension.runCommand(`say @a "Cage ${i + 1} spawned at ${JSON.stringify(locationObject)}"`);
-        } catch (error) {
-            console.error(`Failed to spawn: ${error}`);
+        let spawned = false;
+        while (!spawned) {
+            if (!isCageSpawnerActive) break;
+            try {
+                dimension.spawnEntity(CONFIG.CAGE_ID, locationObject);
+                tickingAreaLocations.push({ locationObject, areaName });
+                world.setDynamicProperty("active_cage_locations", JSON.stringify(tickingAreaLocations));
+                dimension.runCommand(`say @a "Cage ${i + 1} spawned at ${JSON.stringify(locationObject)}"`);
+                
+                spawned = true;
+            } catch (error) {
+                await sleep(10);
+            }
         }
 
         removeTickingArea(dimension, areaName);
@@ -72,6 +81,7 @@ export async function spawnCages() {
 }
 
 export async function despawnCages() {
+    isCageSpawnerActive = false;
     const rawData = world.getDynamicProperty("active_cage_locations");
     const cageLocations = JSON.parse(rawData || "[]");
     for (const value of cageLocations) {
