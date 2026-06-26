@@ -520,6 +520,7 @@
         "form_panel_drawer@server_form_main_templates.form_panel_drawer": {
           "$container_name": "password_panel_container",
           "$container_reference": "password_panel.password_panel_container",
+          "$hide_form_body": true,
 
           "$text_name": "custom_text",
           "$text_name_reference": "server_form_main_templates.custom_text"
