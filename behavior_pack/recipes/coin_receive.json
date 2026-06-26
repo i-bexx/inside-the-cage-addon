@@ -1,0 +1,18 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "game:coin_receive_recipe"
+    },
+    "tags": [ "crafting_table" ],
+    "ingredients": [
+      {
+        "item": "minecraft:dirt"
+      }
+    ],
+    "result": {
+      "item": "game:coin_receive_recipe"
+    },
+    "unlock": [ "game:coin_receive_recipe" ]
+  }
+}

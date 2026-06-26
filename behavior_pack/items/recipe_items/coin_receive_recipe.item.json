@@ -1,0 +1,14 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:item": {
+    "description": {
+      "identifier": "game:coin_receive_recipe",
+      "menu_category": {
+        "category": "none"
+      }
+    },
+    "components": {
+      "minecraft:icon": "notification_toast"
+    }
+  }
+}

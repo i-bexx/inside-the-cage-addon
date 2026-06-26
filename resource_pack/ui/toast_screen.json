@@ -1,0 +1,246 @@
+{
+  "namespace": "toast_screen",
+
+  "recipe_unlocked_popup": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "input_panel"
+      },
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": {
+          "item_renderer@toast_screen.item_renderer": {
+            "size": [ 0, 0 ],
+            "property_bag": {
+              "#item_id_aux": 3801088
+            },
+            "bindings": [
+              {
+                "binding_name": "#recipe_unlocked",
+                "binding_name_override": "#item_id_aux"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": {
+          "coin_receive_panel@coin_receive_panel": {}
+        }
+      },
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": {
+          "default_panel@default_panel": {}
+        }
+      }
+    ]
+  },
+
+  "recipe_unlocked_pocket_popup": {
+    "modifications": [
+      {
+        "array_name": "controls",
+        "operation": "remove",
+        "control_name": "input_panel"
+      },
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": {
+          "item_renderer@toast_screen.item_renderer": {
+            "size": [ 0, 0 ],
+            "property_bag": {
+              "#item_id_aux": 3801088
+            },
+            "bindings": [
+              {
+                "binding_name": "#recipe_unlocked",
+                "binding_name_override": "#item_id_aux"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": {
+          "coin_receive_panel@coin_receive_panel": {}
+        }
+      },
+      {
+        "array_name": "controls",
+        "operation": "insert_front",
+        "value": {
+          "default_panel@default_panel": {}
+        }
+      }
+    ]
+  },
+
+  // --- Panel Templates ---
+
+  "coin_receive_panel": {
+    "type": "panel",
+    "size": [ "100%c", "100%c" ],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "bindings": [
+      {
+        "binding_type": "view",
+        "resolve_sibling_scope": true,
+        "source_control_name": "item_renderer",
+        "source_property_name": "(#item_id_aux = 18022400)",
+        "target_property_name": "#visible"
+      }
+    ],
+    "controls": [
+      {
+        "coin_receive_label_panel@label_panel": {
+          "$label_text": "Notification",
+          "$second_label_text": "Survival Bonus: +1 Coin!",
+          "$title_color": [ 1.0, 0.85, 0.0 ]
+        }
+      }
+    ]
+  },
+
+  "default_panel": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": [ "100%c", "100%c" ],
+    "bindings": [
+      {
+        "binding_type": "view",
+        "resolve_sibling_scope": true,
+        "source_control_name": "coin_receive_panel",
+        "source_property_name": "(not (#visible))",
+        "target_property_name": "#visible"
+      }
+    ],
+    "controls": [
+      { "default_recipe_panel@label_panel": {} }
+    ]
+  },
+
+  // --- Label Template ---
+  
+  "label_panel": {
+    "type": "stack_panel",
+    "orientation": "horizontal",
+    "size": [ "100%c", "100%cm" ],
+    "controls": [
+      {
+        "horizontal_padding_1": {
+          "type": "panel",
+          "size": [ 9, 0 ]
+        }
+      },
+      {
+        "recipe_unlocked_icon@toast_screen.recipe_unlocked_icon": {
+          "$icon_padding": [ 0, 7 ]
+        }
+      },
+      {
+        "horizontal_padding_2": {
+          "type": "panel",
+          "size": [ 6, 0 ]
+        }
+      },
+      {
+        "panel" : {
+          "type": "panel",
+          "size": [ "100%cm", "100%cm" ],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "controls": [
+            {
+              "extender": {
+                "type": "label",
+                "layer": 3,
+                "text_alignment": "left",
+                "size": [ "default", "default" ],
+                "min_size": [ "default", "default" ],
+                "max_size": [ 200, 10 ],
+                "alpha": 0,
+                "$debug_text_color|default": [ 1.0, 0.0, 0.0],
+                "color": "$debug_text_color",
+                "$longest_text|default": "#longest_text",
+                "text": "$longest_text",
+                "line_padding": 1,
+                "bindings": [
+                  {
+                    "binding_name": "#longest_text",
+                    "binding_name_override": "#longest_text"
+                  }
+                ]
+              }
+            },
+            {
+              "label_panel": {
+                "type": "stack_panel",
+                "orientation": "vertical",
+                "size": [ "100%cm", "100%c" ],
+                "anchor_from": "top_left",
+                "anchor_to": "top_left",
+                "controls": [
+                  {
+                    "padding_vertical_1": {
+                      "type": "panel",
+                      "size": [ 0, 7 ]
+                    }
+                  },
+                  {
+                    "label@toast_screen.game_tip_label": {
+                      "$max_label_size": [ 200, 10 ],
+                      "line_padding": 1
+                    }
+                  },
+                  {
+                    "title": {
+                      "type": "label",
+                      "layer": 3,
+                      "text_alignment": "left",
+                      "$title_color|default": [ 0.77, 0.77, 0.77],
+                      "color": "$title_color",
+                      "size": [ "default", "default" ],
+                      "min_size": [ "default", "default" ],
+                      "max_size": [ 200, 10 ],
+                      "$second_label_text|default": "#toast_second_line",
+                      "text": "$second_label_text",
+                      "bindings": [
+                        {
+                          "binding_name": "#toast_second_line",
+                          "binding_name_override": "#toast_second_line"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "padding_vertical_2": {
+                      "type": "panel",
+                      "size": [ 0, 7 ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "horizontal_padding_3": {
+          "type": "panel",
+          "size": [ 9, 0 ]
+        }
+      }
+    ]
+  }
+}
