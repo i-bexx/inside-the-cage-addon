@@ -4,6 +4,7 @@
     "ui/hud_crosshair_overlay.json",
     "ui/pause_screen.json",
     "ui/server_form.json",
+    "ui/toast_screen.json",
 
     "ui/pause_screen_panel/social.json",
     
