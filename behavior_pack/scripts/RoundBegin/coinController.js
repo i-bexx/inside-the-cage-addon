@@ -23,7 +23,8 @@ const CONFIG = {
         COLLECTED_TAG   	: "collected",
         COLLECTED_EVENT 	: "collected_event",
         WARNING_SOUND   	: "mob.villager.no",
-        WARNING_TEXT    	: "§c§lYou cannot carry any more coins!"
+        WARNING_TEXT    	: "§c§lYou cannot carry any more coins!",
+        NOTIFICATION_SOUND  : "notification"
     },
     LOCATIONS: [
         { x: 27,  y: 65, z: -316 }, { x: 152, y: 70, z: -295 },
@@ -183,6 +184,7 @@ async function notifyMaxCoins(player, coinAmount) {
         player.runCommand(CONFIG.MAGIC_STRINGS.RECIPE_MESSAGE_GIVE);
         await sleep(1);
         player.runCommand(CONFIG.MAGIC_STRINGS.RECIPE_MESSAGE_TAKE);
+        player.playSound(CONFIG.MAGIC_STRINGS.NOTIFICATION_SOUND, { volume: 1.0, pitch: 1.0 });
 
         lastRecipeToastTime.set(player.id, ~~(Date.now() / 1000));
     }
