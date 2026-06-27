@@ -30,7 +30,7 @@
         "array_name": "controls",
         "operation": "insert_front",
         "value": {
-          "coin_receive_panel@coin_receive_panel": {}
+          "coin_capacity_full_panel@coin_capacity_full_panel": {}
         }
       },
       {
@@ -72,7 +72,7 @@
         "array_name": "controls",
         "operation": "insert_front",
         "value": {
-          "coin_receive_panel@coin_receive_panel": {}
+          "coin_capacity_full_panel@coin_capacity_full_panel": {}
         }
       },
       {
@@ -87,7 +87,7 @@
 
   // --- Panel Templates ---
 
-  "coin_receive_panel": {
+  "coin_capacity_full_panel": {
     "type": "panel",
     "size": [ "100%c", "100%c" ],
     "anchor_from": "center",
@@ -103,9 +103,9 @@
     ],
     "controls": [
       {
-        "coin_receive_label_panel@label_panel": {
+        "coin_capacity_full_label_panel@label_panel": {
           "$label_text": "Notification",
-          "$second_label_text": "Survival Bonus: +1 Coin!",
+          "$second_label_text": "Coin bag is now full!",
           "$title_color": [ 1.0, 0.85, 0.0 ]
         }
       }
@@ -120,7 +120,7 @@
       {
         "binding_type": "view",
         "resolve_sibling_scope": true,
-        "source_control_name": "coin_receive_panel",
+        "source_control_name": "coin_capacity_full_panel",
         "source_property_name": "(not (#visible))",
         "target_property_name": "#visible"
       }

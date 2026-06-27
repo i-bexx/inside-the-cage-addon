@@ -2,7 +2,7 @@
   "format_version": "1.20.10",
   "minecraft:item": {
     "description": {
-      "identifier": "game:coin_receive_recipe",
+      "identifier": "game:coin_max_recipe",
       "menu_category": {
         "category": "none"
       }
