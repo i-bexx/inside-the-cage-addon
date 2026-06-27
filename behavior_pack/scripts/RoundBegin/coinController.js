@@ -12,11 +12,13 @@ const CONFIG = {
     ENTITY_TYPE               : "game:coin",
     MAX_COINS_PLAYER          : 9,
     SPAWN_INTERVAL            : 120,
+    RECEIVE_INTERVAL          : 60,
     ANIMATION_DURATION_TICKS  : 2,
-		MIN_PLAYER_DISTANCE				: 10,
-		MAX_SPAWN_ATTEMPTS				: 10,
+	MIN_PLAYER_DISTANCE		  : 10,
     MAGIC_STRINGS: {
         SCOREBOARD      	: "scoreboard players add @s coin_amount 1",
+        RECIPE_MESSAGE_GIVE : "recipe give @s game:coin_max_recipe",
+        RECIPE_MESSAGE_TAKE : "recipe take @s game:coin_max_recipe",
         COLLECTED_SOUND		: "coin_collect",
         COLLECTED_TAG   	: "collected",
         COLLECTED_EVENT 	: "collected_event",
@@ -35,22 +37,29 @@ const CONFIG = {
 let dimension;
 let tickingAreaLocations = [];
 
-let isCoinSpawnerActive = false;
-let intervalId = undefined;
+let isSpawnIntervalActive = false;
+let isReceiveIntervalActive = false;
+let coinSpawnIntervalId = undefined;
+let coinReceiveIntervalId = undefined;
+
+let lastRecipeToastTime = new Map();
 
 // ==========================================
 // FUNCTIONS
 // ==========================================
 
 export function startcoinController() {
-    if (intervalId !== undefined) return;
+    if (coinSpawnIntervalId !== undefined) return;
 
-    isCoinSpawnerActive = true;
-    intervalId = system.runInterval(spawnCoin, CONFIG.SPAWN_INTERVAL);
+    isSpawnIntervalActive = true;
+    isReceiveIntervalActive = true;
+
+    coinSpawnIntervalId = system.runInterval(spawnCoin, CONFIG.SPAWN_INTERVAL);
+    coinReceiveIntervalId = system.runInterval(playerReceiveCoin, CONFIG.RECEIVE_INTERVAL);
 }
 
 async function spawnCoin() {
-    if (!isCoinSpawnerActive) return;
+    if (!isSpawnIntervalActive) return;
 
     const randomIndex = Math.floor(Math.random() * CONFIG.LOCATIONS.length);
     const locationObject = CONFIG.LOCATIONS[randomIndex];
@@ -74,7 +83,7 @@ async function spawnCoin() {
 
     let spawned = false;
     while (!spawned) {
-        if (!isCoinSpawnerActive) break;
+        if (!isSpawnIntervalActive) break;
         try {
             dimension.spawnEntity(CONFIG.ENTITY_TYPE, locationObject);
             tickingAreaLocations.push({ locationObject, areaName });
@@ -91,7 +100,6 @@ async function spawnCoin() {
 }
 
 export async function despawnCoins() {
-    isCoinSpawnerActive = false;
     const rawData = world.getDynamicProperty("active_coin_locations");
     const coinLocations = JSON.parse(rawData || "[]");
     for (const value of coinLocations) {
@@ -117,12 +125,33 @@ export async function despawnCoins() {
     world.setDynamicProperty("active_coin_locations", JSON.stringify(tickingAreaLocations));
 }
 
+async function playerReceiveCoin() {
+    if (!isReceiveIntervalActive) return;
 
+    const players = world.getPlayers()
+        .filter(p => p.hasTag("in_game"));
+
+    for (const player of players) {
+        const preCoinAmount = player.addLevels(0);
+        if (preCoinAmount >= CONFIG.MAX_COINS_PLAYER) continue;
+
+        player.addExperience(1);
+        const coinAmount = player.addLevels(0);
+
+        if (preCoinAmount !== coinAmount) {
+            player.runCommand(CONFIG.MAGIC_STRINGS.SCOREBOARD);
+            await notifyMaxCoins(player, coinAmount);
+        }
+    }
+}
 
 async function collectCoin(player, target) {
     player.runCommand(CONFIG.MAGIC_STRINGS.SCOREBOARD);
     player.addLevels(1);
     player.playSound(CONFIG.MAGIC_STRINGS.COLLECTED_SOUND);
+
+    const coinAmount = player.addLevels(0);
+    await notifyMaxCoins(player, coinAmount);
 
     target.addTag(CONFIG.MAGIC_STRINGS.COLLECTED_TAG);
     target.triggerEvent(CONFIG.MAGIC_STRINGS.COLLECTED_EVENT);
@@ -136,9 +165,33 @@ async function collectCoin(player, target) {
 }
 
 export function stopcoinController() {
-    if (intervalId === undefined) return;
-    system.clearRun(intervalId);
-    intervalId = undefined;
+    if (coinSpawnIntervalId !== undefined) system.clearRun(coinSpawnIntervalId);
+    isSpawnIntervalActive = false;
+    coinSpawnIntervalId = undefined;
+
+    if (coinReceiveIntervalId !== undefined) system.clearRun(coinReceiveIntervalId);
+    isReceiveIntervalActive = false;
+    coinReceiveIntervalId = undefined;
+}
+
+// -- Helper Functions --
+
+async function notifyMaxCoins(player, coinAmount) {
+    const currentTime = ~~(Date.now() / 1000);
+    const playerLastToastTime = lastRecipeToastTime.get(player.id);
+    if (coinAmount >= CONFIG.MAX_COINS_PLAYER && (playerLastToastTime === undefined || currentTime - playerLastToastTime > 180)) {
+        player.runCommand(CONFIG.MAGIC_STRINGS.RECIPE_MESSAGE_GIVE);
+        await sleep(1);
+        player.runCommand(CONFIG.MAGIC_STRINGS.RECIPE_MESSAGE_TAKE);
+
+        lastRecipeToastTime.set(player.id, ~~(Date.now() / 1000));
+    }
+}
+
+export function getToastTimeMap() { return lastRecipeToastTime; }
+
+export function setGlobalVariables() {
+    dimension = world.getDimension(CONFIG.DIMENSION_ID);
 }
 
 // ==========================================
@@ -162,7 +215,3 @@ world.afterEvents.playerInteractWithEntity.subscribe((event) => {
 
     collectCoin(player, target);
 });
-
-export function setGlobalVariables() {
-    dimension = world.getDimension(CONFIG.DIMENSION_ID);
-}

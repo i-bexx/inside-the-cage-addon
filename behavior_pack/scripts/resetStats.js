@@ -32,6 +32,8 @@ import { listOfPlayersLookingMap, playerStatesOfPlayerLookingMap, listOfPlayersP
 
 import { playerStatesOfBatteryMap, playerDrainingBatteryCountdownMap, playerIsBatteryCriticalCountdownMap } from "./RoundBegin/batteryController";
 
+import { getToastTimeMap } from "./RoundBegin/coinController";
+
 import { playerResetStaminaCooldownMap } from "./RoundBegin/Stamina";
 
 import { getPlaysoundHeartMap, getSanityLowStaticSoundMap, getSanityLowStaticEventMap } from "./RoundBegin/Sanity";
@@ -113,6 +115,7 @@ export function commandsToResetPlayerData(player, playerJoined = false) {
   
   player.runCommand("event entity @s battery_is_full_event");
   player.runCommand("fog @s remove default_fog");
+  player.runCommand(`recipe take @s "*"`);
   player.runCommand("scoreboard players set @s Stamina 10");
   player.runCommand("scoreboard players set @s stamina_limit 10");
   player.runCommand("scoreboard players set @s Sanity 100");
@@ -188,6 +191,8 @@ export function clearPlayerMaps(playerId) { // Clears maps of player
   playerStatesOfBatteryMap().delete(playerId);
   playerDrainingBatteryCountdownMap().delete(playerId);
   playerIsBatteryCriticalCountdownMap().delete(playerId);
+
+  getToastTimeMap().delete(playerId);
 
   getPlaysoundHeartMap().delete(playerId);
   getSanityLowStaticSoundMap().delete(playerId);
