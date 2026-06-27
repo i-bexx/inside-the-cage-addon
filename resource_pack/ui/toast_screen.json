@@ -32,13 +32,6 @@
         "value": {
           "coin_capacity_full_panel@coin_capacity_full_panel": {}
         }
-      },
-      {
-        "array_name": "controls",
-        "operation": "insert_front",
-        "value": {
-          "default_panel@default_panel": {}
-        }
       }
     ]
   },
@@ -74,18 +67,11 @@
         "value": {
           "coin_capacity_full_panel@coin_capacity_full_panel": {}
         }
-      },
-      {
-        "array_name": "controls",
-        "operation": "insert_front",
-        "value": {
-          "default_panel@default_panel": {}
-        }
       }
     ]
   },
 
-  // --- Panel Templates ---
+  // --- Templates ---
 
   "coin_capacity_full_panel": {
     "type": "panel",
@@ -112,26 +98,6 @@
     ]
   },
 
-  "default_panel": {
-    "type": "stack_panel",
-    "orientation": "horizontal",
-    "size": [ "100%c", "100%c" ],
-    "bindings": [
-      {
-        "binding_type": "view",
-        "resolve_sibling_scope": true,
-        "source_control_name": "coin_capacity_full_panel",
-        "source_property_name": "(not (#visible))",
-        "target_property_name": "#visible"
-      }
-    ],
-    "controls": [
-      { "default_recipe_panel@label_panel": {} }
-    ]
-  },
-
-  // --- Label Template ---
-  
   "label_panel": {
     "type": "stack_panel",
     "orientation": "horizontal",
