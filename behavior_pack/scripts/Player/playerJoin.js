@@ -2,7 +2,7 @@ import { world, system } from "@minecraft/server";
 
 import { sleep } from "../utils";
 import { startProcesses, startProcessesAfterMenuReady } from "../startProcesses";
-import { getNewGamedObjective, getStalkerMatchIdObjective, getWorldParticipant, getObjectiveScore } from "../scoreboards";
+import { getNewGameObjective, getStalkerMatchIdObjective, getWorldParticipant, getObjectiveScore } from "../scoreboards";
 import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
 // =============================================================
@@ -257,7 +257,7 @@ function ensureEntitiesAreReset() {
 export function setGlobalVariables() {
     dimension = world.getDimension(CONFIG.DIMENSION);
 
-    newGameObjective = getNewGamedObjective();
+    newGameObjective = getNewGameObjective();
     stalkerMatchIdObjective = getStalkerMatchIdObjective();
     worldParticipant = getWorldParticipant();
 }
