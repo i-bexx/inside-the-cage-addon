@@ -66,7 +66,7 @@ export function getStalkerMatchIdObjective() {
 }
 
 // Global-Player Objectives
-export function getNewGamedObjective() {
+export function getNewGameObjective() {
   return world.scoreboard.getObjective(OBJECTIVE_IDS.NEW_GAME);
 }
 
@@ -82,5 +82,14 @@ export function getWorldParticipant() {
 
 // Scores
 export function getObjectiveScore(Objective, Participant) {
-  return Objective.getScore(Participant);
+  if (!Objective || !Participant) return undefined;
+  
+  try {
+    if (Objective.hasParticipant(Participant)) {
+      return Objective.getScore(Participant);
+    }
+  } catch (e) {
+    return undefined;
+  }
+  return undefined;
 }
