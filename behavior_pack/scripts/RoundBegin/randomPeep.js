@@ -87,7 +87,7 @@ function randomPeepHelpPanel(player, target) {
 
             if (selection == 0) {
                 target.setDynamicProperty("isHealed", true);
-                target.triggerEvent("is_drinking_medicine_event");
+                target.triggerEvent("is_standing_up_event");
                 randomPeepPanel_4(player, target);
             }
             else {
