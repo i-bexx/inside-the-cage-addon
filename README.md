@@ -2,16 +2,16 @@
 
 > *Developed by i-bexx — Bedrock Add-On Developer & Software Engineering Student*
 
-An advanced, server-side Minecraft Bedrock Add-on that introduces complex survival, psychological horror mechanics, and highly customized JSON UI systems using the **Minecraft Script API**.
+An advanced, server-side Minecraft Bedrock Add-On featuring complex survival mechanics, psychological horror systems, and highly customized JSON UI — built with the **Minecraft Script API (`@minecraft/server`)**.
 
-🚧 **Status: In Active Development — Core systems complete**
-🛑 **Project Scope:** This is a *World-Specific Addon* designed exclusively for a custom-built adventure map. It heavily modifies core engine rules and is not intended for standard procedural survival generation.
+🚧 **Status:** In Active Development — Core systems complete  
+🛑 **Project Scope:** World-Specific Adventure Map Addon — heavily modifies core engine rules and vanilla UI.
 
 ---
 
 ## 🛠️ Tech Stack
 
-`Minecraft Script API` · `JSON UI` · `JavaScript` · `Bedrock Add-On` · `Custom Geo Models` · `Frame Animation`
+`Minecraft Script API` · `JSON UI` · `JavaScript (ES6+)` · `Molang` · `Bedrock Entity System` · `Custom Geo Models` · `Blockbench` · `Animation Controllers` · `Render Controllers` · `Particle Effects`
 
 ---
 
@@ -19,9 +19,32 @@ An advanced, server-side Minecraft Bedrock Add-on that introduces complex surviv
 
 ```
 inside-the-cage-addon/
-├── behavior_pack/      # Entity behaviors, scripts, game logic
-├── resource_pack/      # UI, textures, geo models, animations
-├── assets/gifs/        # README preview GIFs
+├── behavior_pack/
+│   ├── scripts/              # 30+ modular JS files (Script API)
+│   │   ├── Player/           # Join/leave logic, per-player state
+│   │   ├── RoundBegin/       # Sanity, stamina, battery, cage, coin systems
+│   │   ├── RoundOperations/  # Round lifecycle management
+│   │   └── UI/               # HUD tick controllers (fast/slow)
+│   ├── entities/             # 13 custom entity definitions
+│   ├── items/                # Custom weapons, tools, battery items
+│   ├── animation_controllers/# Gun, hostile, player state machines
+│   ├── animations/           # Entity & item behavior animations
+│   └── recipes/              # Crafting recipes
+│
+├── resource_pack/
+│   ├── ui/                   # 47 custom JSON UI files
+│   │   ├── server_form_panels/  # Factory-pattern server form system
+│   │   ├── main_screen/         # HUD components (sanity, stamina, compass)
+│   │   └── navigation/          # Compass & coordinate displays
+│   ├── entity/               # 16 client-side entity definitions
+│   ├── models/               # Custom geo models (Blockbench)
+│   ├── animations/           # Client-side animations
+│   ├── animation_controllers/# Client-side animation controllers
+│   ├── render_controllers/   # 3 conditional render controllers
+│   ├── particles/            # 8 custom particle effects
+│   ├── attachables/          # 5 attachables (gun, knife, kit, ammo, toxic bomb)
+│   └── materials/            # Custom entity materials
+│
 ├── .gitignore
 ├── LICENSE
 └── README.md
@@ -29,65 +52,163 @@ inside-the-cage-addon/
 
 ---
 
-## 💡 Technical Highlights (Under the Hood)
-This project bypasses standard engine limitations by heavily utilizing advanced Bedrock JSON UI scripting and server-side logic:
+## 🔧 Entity Logic & Molang
 
-* **Live 3D UI Rendering:** Implementation of the `live_player_renderer` component to display a real-time, interactive 3D model of the player directly inside a 2D HUD frame.
-* **Scope Resolution & Reactive UI:** Custom implementation of sibling scope targeting (`resolve_sibling_scope`) to create reactive UI elements without redundant server-side scoreboard queries.
-* **Dual-State UI Synchronization:** Utilizing baseline engine globals (e.g., `#hud_title_text_string`) as data carriers to seamlessly synchronize multiple UI components—such as the dynamic Eye texture and Sanity text.
-* **Custom Animations:** Frame-by-frame UI animations and VHS-style glitch effects integrated directly into the HUD panels.
+This project relies heavily on **custom entity definitions** and **Molang expressions** to drive gameplay:
+
+### Custom Entities (13 BP + 16 RP Definitions)
+| Entity | Description | Key Components |
+|--------|-------------|----------------|
+| `minecraft:player` (modified) | 20+ component groups, 30+ events for cursor state, shooting, static effects, battery, movement control | `mark_variant`, `skin_id`, `variant`, `type_family`, `movement` |
+| `game:stalker_cursor` | Per-player invisible tracker entity — follows player's line-of-sight via Script API raycast | Scoreboard-based hash matching for multiplayer sync |
+| `game:hostile` | Dynamic enemy with hunt/patrol AI, death animation states | `navigation.walk`, `behavior.nearest_attackable_target`, conditional animations |
+| `game:cage` | Interactable cage entity with open/closed states | `mark_variant` state switching via events |
+| `game:coin` / `game:battery` / `game:bottle` | Collectible items with pickup detection | `interact` component + Script API event handlers |
+| `game:door` | State-driven door with host-waiting and open states | Multi-state `mark_variant` event system |
+| `game:null` | Invisible anchor entity for spatial calculations | Used as reference point for distance-based Molang queries |
+| `game:password_label` / `game:random_peep` | Story-driven interactive NPCs | `interact` → Script API panel routing |
+| `menu:new_game` / `menu:continue` | Menu system entities with visual state feedback | Animation-driven state indicators |
+| `game:teleporter` | Multi-destination teleport pads | Scoreboard-indexed destination mapping |
+
+### Molang Usage
+- **Conditional rendering:** `q.variant`, `q.mark_variant`, and `q.skin_id` used across render controllers to dynamically switch textures based on game state.
+- **Animation conditions:** `q.is_item_equipped`, `q.get_equipped_item_name` for weapon-specific animation triggers.
+- **Math expressions:** `math.floor`, `math.mod` for frame-based UI animations.
+
+---
+
+## 🎬 Animations & Animation Controllers
+
+### Behavior Pack Animation Controllers (State Machines)
+Complex state machines drive player and entity behaviors:
+
+- **Gun System** (`controller.animation.gun`): Multi-state weapon logic — `idle → draw → aim → shoot → not_shooting` with Molang-driven transitions based on `q.variant` and `q.mark_variant`.
+- **Ammo System** (`controller.animation.gun_no_ammo`, `controller.animation.ammo_reload`): Handles empty magazine detection, reload animations, and HUD feedback.
+- **Toxic Bomb** (`controller.animation.toxic_bomb`): Use-once throwable with `q.is_item_equipped` gating.
+- **Kit System** (`controller.animation.kit`): Consumable healing item with cooldown enforcement.
+- **Camera Static Effects** (`controller.animation.camera_no_signal`, `controller.animation.used_cam_when_could`): Sanity-driven VHS noise and signal loss effects.
+- **Hostile AI** (`controller.animation.hostile`): Patrol → chase → attack state transitions.
+
+### Behavior Pack Animations
+Animations executed server-side through `/execute`, `playsound`, `camerashake`, and `particle` commands — tightly synchronized with Script API state changes.
+
+### Resource Pack Animations
+- Frame-by-frame sprite sheet animations for UI elements (stamina bar fill/deplete, compass rotation).
+- Entity bone animations for weapon draw/aim/shoot cycles.
+- VHS glitch and static noise screen effects.
+
+---
+
+## 🖌️ Render Controllers
+
+Three custom render controllers handle **conditional texture switching** based on entity state:
+
+| Controller | Purpose | Molang Logic |
+|-----------|---------|------|
+| `controller.render.hostile` | Switches hostile entity textures between alive/dead states | `q.variant` conditional array |
+| `controller.render.stalker_cursor` | Per-player cursor color system (normal/green/blue/red) | `q.skin_id` index mapping |
+| `controller.render.player_custom` | Player static/glitch overlay based on sanity level | `q.mark_variant` threshold checks |
+
+---
+
+## 🖥️ Script API Architecture (`@minecraft/server`)
+
+### Modular Codebase — 30+ Files
+The entire game loop is driven by a **modular JavaScript architecture** with clean separation of concerns:
+
+- **Reactive State Management:** `Proxy`-based state objects that automatically trigger game events when properties change (used in battery, cursor, stalker, and game state systems).
+- **Per-Player Memory Tracking:** `Map()` objects for individual player states — stamina cooldowns, sanity thresholds, shooting states, compass directions — with proper cleanup on disconnect.
+- **Timer/Interval Management:** All `system.runInterval` and `system.runTimeout` IDs are tracked in Maps and properly cleaned via `system.clearRun()` to prevent memory leaks.
+- **Centralized Scoreboard API:** Abstracted scoreboard access through `scoreboards.js` module with null-safe getters.
+- **Entity-Script Bridge:** Script API controls entity states via `triggerEvent()`, while entity animation controllers execute commands that feed data back to scripts — creating a seamless two-way communication layer.
+
+### Key Systems
+| System | File(s) | Description |
+|--------|---------|-------------|
+| Game Loop | `gameStats.js` | Round management, win/lose conditions, player tracking |
+| Sanity | `Sanity.js`, `playerLooking.js` | Line-of-sight detection → sanity drain → heart/static effects |
+| Stamina | `Stamina.js`, `fastUiTick.js` | Sprint detection → stamina drain → movement penalty |
+| Battery | `batteryController.js` | 5-level battery drain with upgrade system and critical warnings |
+| Stalker | `stalkerEntity.js`, `cursorController.js` | Per-player entity spawning with hash-based scoreboard matching |
+| Camera | `cameraUsage.js`, `cameraController.js` | Custom camera overlay with state machine integration |
+| Economy | `coinController.js`, `Buy.js`, `panels.js` | Coin collection, shop system with discount tickets |
+| Voting | `voteManager.js` | Multiplayer consensus system for cutscene skipping |
+| UI Sync | `fastUiTick.js`, `slowUiTick.js` | Dual-speed HUD update system via `onScreenDisplay.updateSubtitle()` |
+
+---
+
+## 🎨 JSON UI System (47 Custom Files)
+
+A completely custom UI layer built on top of Minecraft's vanilla JSON UI engine:
+
+- **Server Form Factory Pattern:** Modified `server_form.json` with `control_ids` routing to dynamically switch between `long_form` and `custom_form` panels based on `#title_text` data.
+- **Dual-State HUD Synchronization:** Engine globals (`#hud_title_text_string`) used as data carriers to synchronize multiple UI components (Eye texture + Sanity text) without redundant scoreboard queries.
+- **Live 3D Player Renderer:** `live_player_renderer` component embedded inside a custom wooden frame HUD element.
+- **Scope Resolution:** Custom `resolve_sibling_scope` implementation for reactive UI updates.
+- **Custom Animations:** Frame-by-frame VHS glitch, static noise, compass rotation, and stamina bar animations — all driven through JSON UI.
+- **Vanilla UI Override:** Complete inventory and interaction menu overhaul via `ui_common.json`.
 
 ---
 
 ## 🎮 Core Gameplay Mechanics
 
-### 🏃 Custom Stamina & Movement
-A fully server-side stamina system to enhance survival tension:
-* Running for extended periods drains stamina.
-* Exhaustion triggers a severe movement speed penalty.
-* Players must actively manage their pacing, stopping to rest and recover stamina.
+### 🏃 Stamina & Movement
+* Server-side stamina with sprint detection and movement speed penalties.
+* Upgradeable stamina capacity through the shop system.
 
-### 📸 Camera Overlay & Sanity System (Line-of-Sight)
-A mysterious entity roams the map, governed by custom Line-of-Sight (LoS) detection and dynamic teleportation.
-* **Camera Mechanics:** Players utilize a custom camera item that opens a realistic overlay (built via custom `geo.json` models).
-* **Sanity Drain:** Looking directly at the stalker entity drains Sanity rapidly.
-* **Psychological Effects:** Approaching danger triggers screen shaking and static UI effects. Reaching 0 Sanity teleports the player to a dark dimension featuring a custom animated "Game Over" screen.
+### 📸 Camera & Sanity (Line-of-Sight)
+* Custom camera item with geo model overlay.
+* Stalker entity with per-player raycast tracking.
+* Sanity drain triggers progressive VHS static, screen shake, and heart pounding effects.
+* 0 Sanity = animated "Game Over" sequence.
 
 ![static_normal](./assets/gifs/static_normal.gif)
 ![static_glitch](./assets/gifs/static_glitch.gif)
 
-### 🖥️ Custom HUD Implementation
-A fully responsive user interface:
-* **Top Left (Sanity & Player Model):** A custom wooden frame housing a live 3D player model. Features a Dual-Feedback Sanity System.
+### 🖥️ Custom HUD
+* **Top Left:** Live 3D player model in wooden frame + dual-feedback sanity display.
 
 ![mini_player](./assets/gifs/mini_player.gif)
 
-* **Bottom Middle:** Fully animated Stamina Bar.
+* **Bottom Middle:** Animated stamina bar with fill/deplete transitions.
 
 ![stamina_bar_deplate](./assets/gifs/stamina_bar_deplate.gif)
 ![stamina_bar_fill](./assets/gifs/stamina_bar_fill.gif)
 
-* **Top Right:** Dynamic compass and coordinates. *(Survival Twist: Coordinates are forcefully disabled mid-round, triggering VHS-style "position lost" visual glitches).*
+* **Top Right:** 32-frame compass + VHS "position lost" glitch effect.
 
 ![compass](./assets/gifs/compass.gif)
 ![position_lost](./assets/gifs/position_lost.gif)
 
-* **Bottom Right:** Real-time coin balance.
-
-### 💰 Economy & Objectives
-* **Shop System:** Coins spawn across the map. Players can use the Compass Item to spend these coins to upgrade their stamina and battery capacity, or to purchase goods such as a survival kit or weapons and ammo (Pistol, Knife, Toxic Bomb).
+### 💰 Economy & Combat
+* Coin collection with compass-based shop (upgrades, weapons, consumables).
+* Combat with pistol, knife, and toxic bomb — each with custom attachable models and animations.
+* 7 cage entities to find and break to win.
 
 ![main_panel](./assets/gifs/main_panel.gif)
 
-* **Win Condition:** 7 custom lantern entities spawn at predefined locations. Players must find and break them to release the trapped blue souls to secure a win.
-* **Combat:** As rounds progress, hostile entities dynamically spawn and hunt the player, requiring active use of the purchased arsenal.
+---
+
+## 🌟 Custom Assets Summary
+
+| Category | Count | Details |
+|----------|-------|---------|
+| Entities (BP) | 13 | Player override + 12 custom game entities |
+| Entities (RP) | 16 | Full client definitions with geo, textures, animations |
+| JSON UI Files | 47 | Complete custom HUD, menus, and server form system |
+| Particles | 8 | Soul, toxic, ambient, and feedback effects |
+| Attachables | 5 | Gun, knife, kit, toxic bomb, ammo |
+| Render Controllers | 3 | Conditional texture switching |
+| Geo Models | Custom | Player camera overlay, entity models |
+| Animations (BP) | 15+ | Server-side command animations |
+| Animation Controllers (BP) | 8+ | Multi-state behavior state machines |
 
 ---
 
 ## 📥 Downloads & Support
 Once a stable playable build is finalized, I will be providing:
 * Free Downloads for the public Bedrock community.
-* Patreon Early Access for supporters to test new mechanics and updates before public release.
+* Patreon Early Access for supporters.
 
 *Stay tuned for updates!*
 
