@@ -5,7 +5,7 @@
 An advanced, server-side Minecraft Bedrock Add-On featuring complex survival mechanics, psychological horror systems, and highly customized JSON UI — built with the **Minecraft Script API (`@minecraft/server`)**.
 
 🚧 **Status:** In Active Development — Core systems complete  
-🛑 **Project Scope:** World-Specific Adventure Map Addon — heavily modifies core engine rules and vanilla UI.
+🛑 **Project Scope:** World-Specific Adventure Map Addon — introduces custom survival mechanics and heavily modifies vanilla UI.
 
 ---
 
@@ -56,18 +56,19 @@ inside-the-cage-addon/
 
 This project relies heavily on **custom entity definitions** and **Molang expressions** to drive gameplay:
 
-### Custom Entities (13 BP + 16 RP Definitions)
+### Custom Entities
 | Entity | Description | Key Components |
 |--------|-------------|----------------|
 | `minecraft:player` (modified) | 20+ component groups, 30+ events for cursor state, shooting, static effects, battery, movement control | `mark_variant`, `skin_id`, `variant`, `type_family`, `movement` |
 | `game:stalker_cursor` | Per-player invisible tracker entity — follows player's line-of-sight via Script API raycast | Scoreboard-based hash matching for multiplayer sync |
 | `game:hostile` | Dynamic enemy with hunt/patrol AI, death animation states | `navigation.walk`, `behavior.nearest_attackable_target`, conditional animations |
-| `game:cage` | Interactable cage entity with open/closed states | `mark_variant` state switching via events |
+| `game:cage` | Interactable cage entity with broken/unbroken states | `mark_variant` state switching via events |
 | `game:coin` / `game:battery` / `game:bottle` | Collectible items with pickup detection | `interact` component + Script API event handlers |
 | `game:door` | State-driven door with host-waiting and open states | Multi-state `mark_variant` event system |
-| `game:null` | Invisible anchor entity for spatial calculations | Used as reference point for distance-based Molang queries |
-| `game:password_label` / `game:random_peep` | Story-driven interactive NPCs | `interact` → Script API panel routing |
-| `menu:new_game` / `menu:continue` | Menu system entities with visual state feedback | Animation-driven state indicators |
+| `game:null` | Slenderman-style stalker entity — constantly follows player and triggers rapid sanity drain when looked at | Line-of-sight detection & proximity tracking |
+| `game:password_label` | Static visual text entity | Displays the password to the player |
+| `game:random_peep` | Story-driven interactive NPC | `interact` → Script API panel routing |
+| `menu:new_game` / `menu:continue` | Interactive menu system entities | Used for main menu state routing |
 | `game:teleporter` | Multi-destination teleport pads | Scoreboard-indexed destination mapping |
 
 ### Molang Usage
@@ -84,8 +85,8 @@ Complex state machines drive player and entity behaviors:
 
 - **Gun System** (`controller.animation.gun`): Multi-state weapon logic — `idle → draw → aim → shoot → not_shooting` with Molang-driven transitions based on `q.variant` and `q.mark_variant`.
 - **Ammo System** (`controller.animation.gun_no_ammo`, `controller.animation.ammo_reload`): Handles empty magazine detection, reload animations, and HUD feedback.
-- **Toxic Bomb** (`controller.animation.toxic_bomb`): Use-once throwable with `q.is_item_equipped` gating.
-- **Kit System** (`controller.animation.kit`): Consumable healing item with cooldown enforcement.
+- **Toxic Bomb** (`controller.animation.toxic_bomb`): Deployable area-of-effect weapon with `q.is_item_equipped` gating.
+- **Kit System** (`controller.animation.kit`): Item-use detection via `query.is_using_item` to trigger behavior-pack animations.
 - **Camera Static Effects** (`controller.animation.camera_no_signal`, `controller.animation.used_cam_when_could`): Sanity-driven VHS noise and signal loss effects.
 - **Hostile AI** (`controller.animation.hostile`): Patrol → chase → attack state transitions.
 
@@ -93,8 +94,8 @@ Complex state machines drive player and entity behaviors:
 Animations executed server-side through `/execute`, `playsound`, `camerashake`, and `particle` commands — tightly synchronized with Script API state changes.
 
 ### Resource Pack Animations
-- Frame-by-frame sprite sheet animations for UI elements (stamina bar fill/deplete, compass rotation).
-- Entity bone animations for weapon draw/aim/shoot cycles.
+- Frame-by-frame flipbook animations for UI elements (weapon hitmarkers on hostile entities).
+- Player bone animations for weapon draw/aim/shoot cycles.
 - VHS glitch and static noise screen effects.
 
 ---
@@ -105,9 +106,8 @@ Three custom render controllers handle **conditional texture switching** based o
 
 | Controller | Purpose | Molang Logic |
 |-----------|---------|------|
-| `controller.render.hostile` | Switches hostile entity textures between alive/dead states | `q.variant` conditional array |
+| `controller.render.hostile` | Core render controller for hostile entity | Binds geometry and default materials/textures |
 | `controller.render.stalker_cursor` | Per-player cursor color system (normal/green/blue/red) | `q.skin_id` index mapping |
-| `controller.render.player_custom` | Player static/glitch overlay based on sanity level | `q.mark_variant` threshold checks |
 
 ---
 
@@ -118,7 +118,7 @@ The entire game loop is driven by a **modular JavaScript architecture** with cle
 
 - **Reactive State Management:** `Proxy`-based state objects that automatically trigger game events when properties change (used in battery, cursor, stalker, and game state systems).
 - **Per-Player Memory Tracking:** `Map()` objects for individual player states — stamina cooldowns, sanity thresholds, shooting states, compass directions — with proper cleanup on disconnect.
-- **Timer/Interval Management:** All `system.runInterval` and `system.runTimeout` IDs are tracked in Maps and properly cleaned via `system.clearRun()` to prevent memory leaks.
+- **Timer/Interval Management:** `system.runInterval` and `system.runTimeout` IDs are tracked and properly cleaned via `system.clearRun()` to prevent memory leaks.
 - **Centralized Scoreboard API:** Abstracted scoreboard access through `scoreboards.js` module with null-safe getters.
 - **Entity-Script Bridge:** Script API controls entity states via `triggerEvent()`, while entity animation controllers execute commands that feed data back to scripts — creating a seamless two-way communication layer.
 
@@ -131,9 +131,9 @@ The entire game loop is driven by a **modular JavaScript architecture** with cle
 | Battery | `batteryController.js` | 5-level battery drain with upgrade system and critical warnings |
 | Stalker | `stalkerEntity.js`, `cursorController.js` | Per-player entity spawning with hash-based scoreboard matching |
 | Camera | `cameraUsage.js`, `cameraController.js` | Custom camera overlay with state machine integration |
-| Economy | `coinController.js`, `Buy.js`, `panels.js` | Coin collection, shop system with discount tickets |
+| Economy | `coinController.js`, `Buy.js`, `panels.js` | Coin collection, shop system with discount ticket |
 | Voting | `voteManager.js` | Multiplayer consensus system for cutscene skipping |
-| UI Sync | `fastUiTick.js`, `slowUiTick.js` | Dual-speed HUD update system via `onScreenDisplay.updateSubtitle()` |
+| UI Sync | `fastUiTick.js`, `slowUiTick.js` | Dual-speed HUD update system |
 
 ---
 
@@ -142,10 +142,10 @@ The entire game loop is driven by a **modular JavaScript architecture** with cle
 A completely custom UI layer built on top of Minecraft's vanilla JSON UI engine:
 
 - **Server Form Factory Pattern:** Modified `server_form.json` with `control_ids` routing to dynamically switch between `long_form` and `custom_form` panels based on `#title_text` data.
-- **Dual-State HUD Synchronization:** Engine globals (`#hud_title_text_string`) used as data carriers to synchronize multiple UI components (Eye texture + Sanity text) without redundant scoreboard queries.
+- **Dual-State HUD Synchronization:** Engine globals (`#hud_title_text_string`) used as data carriers to synchronize custom UI components without redundant scoreboard queries.
 - **Live 3D Player Renderer:** `live_player_renderer` component embedded inside a custom wooden frame HUD element.
 - **Scope Resolution:** Custom `resolve_sibling_scope` implementation for reactive UI updates.
-- **Custom Animations:** Frame-by-frame VHS glitch, static noise, compass rotation, and stamina bar animations — all driven through JSON UI.
+- **Custom Animations:** VHS glitch, compass rotation, and stamina bar animations — all driven through JSON UI.
 - **Vanilla UI Override:** Complete inventory and interaction menu overhaul via `ui_common.json`.
 
 ---
@@ -160,7 +160,7 @@ A completely custom UI layer built on top of Minecraft's vanilla JSON UI engine:
 * Custom camera item with geo model overlay.
 * Stalker entity with per-player raycast tracking.
 * Sanity drain triggers progressive VHS static, screen shake, and heart pounding effects.
-* 0 Sanity = animated "Game Over" sequence.
+* 0 Sanity = animated "Game Over" title.
 
 ![static_normal](./assets/gifs/static_normal.gif)
 ![static_glitch](./assets/gifs/static_glitch.gif)
@@ -186,22 +186,6 @@ A completely custom UI layer built on top of Minecraft's vanilla JSON UI engine:
 * 7 cage entities to find and break to win.
 
 ![main_panel](./assets/gifs/main_panel.gif)
-
----
-
-## 🌟 Custom Assets Summary
-
-| Category | Count | Details |
-|----------|-------|---------|
-| Entities (BP) | 13 | Player override + 12 custom game entities |
-| Entities (RP) | 16 | Full client definitions with geo, textures, animations |
-| JSON UI Files | 47 | Complete custom HUD, menus, and server form system |
-| Particles | 8 | Soul, toxic, ambient, and feedback effects |
-| Attachables | 5 | Gun, knife, kit, toxic bomb, ammo |
-| Render Controllers | 3 | Conditional texture switching |
-| Geo Models | Custom | Player camera overlay, entity models |
-| Animations (BP) | 15+ | Server-side command animations |
-| Animation Controllers (BP) | 8+ | Multi-state behavior state machines |
 
 ---
 
