@@ -13,13 +13,13 @@
 
       "animations": {
         "random_peep_controller": "controller.animation.random_peep_BP",
-        "waiting_to_finish_drinking": "animation.waiting_to_finish_drinking"
+        "is_standing_up": "animation.is_standing_up"
       }
     },
 
     "component_groups": {
       "is_sick": { "minecraft:mark_variant": { "value": 0 } },
-      "is_drinking_medicine": { "minecraft:mark_variant": { "value": 1 } },
+      "is_standing_up": { "minecraft:mark_variant": { "value": 1 } },
       "is_healed": { "minecraft:mark_variant": { "value": 2 } }
     },
 
@@ -72,7 +72,7 @@
     "events": {
       "minecraft:entity_spawned": { "add": { "component_groups": [ "is_sick" ] } },
       "is_sick_event": { "add": { "component_groups": [ "is_sick" ] } },
-      "is_drinking_medicine_event": { "add": { "component_groups": [ "is_drinking_medicine" ] } },
+      "is_standing_up_event": { "add": { "component_groups": [ "is_standing_up" ] } },
       "is_healed_event": { "add": { "component_groups": [ "is_healed" ] } }
     }
   }

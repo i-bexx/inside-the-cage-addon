@@ -4,10 +4,10 @@
     "controller.animation.random_peep_BP": {
       "states": {
         "default": {
-          "transitions": [ { "is_drinking": "query.mark_variant == 1" } ]
+          "transitions": [ { "is_standing_up": "query.mark_variant == 1" } ]
         },
-        "is_drinking": {
-          "animations": [ "waiting_to_finish_drinking" ],
+        "is_standing_up": {
+          "animations": [ "is_standing_up" ],
           "transitions": [ { "is_healed": "query.all_animations_finished" } ]
         },
         "is_healed": {

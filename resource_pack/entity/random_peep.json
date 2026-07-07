@@ -21,20 +21,19 @@
       "animations": {
         "random_peep_controller": "controller.animation.random_peep",
         "is_sick_idle": "animation.random_peep.is_sick",
-        "is_drinking_medicine": "animation.random_peep.is_drinking_medicine",
+        "is_standing_up": "animation.random_peep.is_standing_up",
         "is_healed_idle": "animation.random_peep.is_healed_idle"
       },
 
       "scripts": {
         "scale": "0.9375",
-        "initialize": [ "variable.is_drinking_medicine = 0.0;" ],
-        "pre_animation": [ "variable.is_drinking_medicine = query.mark_variant == 1;" ],
+        "initialize": [ "variable.is_standing_up = 0.0;" ],
+        "pre_animation": [ "variable.is_standing_up = query.mark_variant == 1;" ],
         "animate": [ "random_peep_controller" ]
       },
 
       "render_controllers": [
-        "controller.render.random_peep",
-        { "controller.render.bottle": "variable.is_drinking_medicine" }
+        "controller.render.random_peep"
       ]
     }
   }
