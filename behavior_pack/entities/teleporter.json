@@ -5,12 +5,20 @@
       "identifier": "game:teleporter",
       "is_spawnable": false,
       "is_summonable": true,
-      "is_experimental": false
+      "is_experimental": false,
+
+      "scripts": {
+        "animate": [ "particle" ]
+      },
+
+      "animations": {
+        "particle": "animation.teleporter.particle"
+      }
     },
 
 		"components": {
       "minecraft:collision_box": {
-        "width": 0.4,
+        "width": 2,
         "height": 3
       },
       "minecraft:health": {
@@ -18,7 +26,7 @@
         "max": 6
       },
       "minecraft:scale": {
-        "value": 1.5
+        "value": 1.0
       },
       "minecraft:knockback_resistance": {
         "value": 100,
