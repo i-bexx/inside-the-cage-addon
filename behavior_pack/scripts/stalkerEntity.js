@@ -56,7 +56,7 @@ function stalkerMatchLogic(player) {
                 ]
             };
 
-            const matchedEntity = dimension.getEntities(stalkerFilter);
+            const matchedEntity = dimension.getEntities(stalkerFilter)[0];
 
             STALKER_ENTITY_MATCHED.set(player.id, matchedEntity);
 
@@ -82,20 +82,6 @@ function teleportStalkerLoop() {
 
             const linkedEntity = STALKER_ENTITY_MATCHED.get(player.id);
 
-            if (!linkedEntity || linkedEntity.length === 0 || !linkedEntity[0].isValid) { // Creates another stalker if it is stuck in an unloaded chunk
-                stalkerMatchLogic(player);
-                continue;
-            }
-
-            const stalker = linkedEntity[0];
-
-            if (linkedEntity.length > 1) {
-                for (let i = 1; i < linkedEntity.length; i++) {
-                    try { linkedEntity[i].remove(); } catch (e) {}
-                }
-                STALKER_ENTITY_MATCHED.set(player.id, [stalker]);
-            }
-
             const viewDir = player.getViewDirection();
             const headLoc = player.getHeadLocation();
 
@@ -107,7 +93,7 @@ function teleportStalkerLoop() {
 
             try {
                 // Safe Teleport
-                stalker.tryTeleport(targetPos);
+                linkedEntity.tryTeleport(targetPos);
             } catch (e) {}
         }
 }
