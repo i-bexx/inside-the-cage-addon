@@ -173,7 +173,6 @@ function roundStarted() {
 
 async function roundOver() {
     world.setDynamicProperty("reseting_round", true);
-    const players = world.getPlayers().filter(p => !p.hasTag("in_lobby"));
 
     // Reset data for world overall
     for (const func of Object.values(FUNCTIONS_TO_END_ROUND)) {
@@ -181,6 +180,13 @@ async function roundOver() {
     }
     await commandsToResetTheGame(dimension);
     await despawnEntities();
+
+    const players = world.getPlayers().filter(p => p.hasTag("in_lobby"));
+
+    for (const player of players) {
+        player.playSound("random.orb");
+        player.onScreenDisplay.setActionBar("§a§lSystem Ready!");
+    }
     world.setDynamicProperty("reseting_round", false);
 }
 
