@@ -65,8 +65,6 @@ const COMMANDS_TO_RESET_GAME = [
     "tag @a remove refused_request",
     "tag @a remove show_in_round_personal_ui",
     "kill @e[type=game:stalker_cursor]",
-    "kill @e[type=game:cage]",
-    "kill @e[type=game:coin]",
     "kill @e[type=game:hostile]",
     "setblock -54 75 -152 air",
     "setblock -61 76 -153 air",
@@ -227,7 +225,6 @@ export function resetWorldDynamicPropertyData() {
 }
 
 export function resetFunctions() {
-  // -- Loop Stop --
   stopPlayerLookingControl();
   stopStaminaControl();
   stopGivePanelItem();
@@ -251,10 +248,11 @@ export function resetFunctions() {
   stopcoinController();
 
   resetPasswords();
+}
 
-  // -- Entity Cleanup --
-  despawnCages();
-  despawnCoins();
+export async function despawnEntities() {
+  await despawnCages();
+  await despawnCoins();
 }
 
 export async function commandsToResetTheGame(dimension) {

@@ -91,6 +91,12 @@ export function gameStarter() {
 }
 
 async function playerInRange(player) {
+	const isResetingRound = world.getDynamicProperty("reseting_round");
+	if (isResetingRound) {
+		player.onScreenDisplay.setActionBar("§c§lSystem Resetting... Please Wait");
+		return;
+	}
+
 	const doesStarterExist = world.getDynamicProperty("starter");
 
   await player.addTag("waiting_for_start");

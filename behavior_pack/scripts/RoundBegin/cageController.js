@@ -44,37 +44,26 @@ const CAGE_GROUPS = [
 
 export async function spawnCages() {
     isCageSpawnerActive = true;
+
     for (let i = 0; i < CAGE_GROUPS.length; i++) {
         if (!isCageSpawnerActive) break;
+
         const group = CAGE_GROUPS[i];
         const randomIndex = Math.floor(Math.random() * group.length);
         const locationObject = group[randomIndex];
         const areaName = `loader_cage_group_${i + 1}`;
 
-        removeTickingArea(dimension, areaName);
+        removeTickingArea(areaName);
+        await loadTickingArea(dimension, locationObject, areaName);
 
-        await sleep(40);
+        try {
+            dimension.spawnEntity(CONFIG.CAGE_ID, locationObject);
+            tickingAreaLocations.push({ locationObject, areaName });
+            world.setDynamicProperty("active_cage_locations", JSON.stringify(tickingAreaLocations));
+            dimension.runCommand(`say @a "Cage ${i + 1} spawned at ${JSON.stringify(locationObject)}"`);
+        } catch (error) {}
 
-        loadTickingArea(dimension, locationObject, areaName);
-
-        await sleep(40);
-
-        let spawned = false;
-        while (!spawned) {
-            if (!isCageSpawnerActive) break;
-            try {
-                dimension.spawnEntity(CONFIG.CAGE_ID, locationObject);
-                tickingAreaLocations.push({ locationObject, areaName });
-                world.setDynamicProperty("active_cage_locations", JSON.stringify(tickingAreaLocations));
-                dimension.runCommand(`say @a "Cage ${i + 1} spawned at ${JSON.stringify(locationObject)}"`);
-                
-                spawned = true;
-            } catch (error) {
-                await sleep(10);
-            }
-        }
-
-        removeTickingArea(dimension, areaName);
+        removeTickingArea(areaName);
 
         if (tickingAreaLocations.length == 7) InitializeCageDetector();
     }
@@ -82,36 +71,23 @@ export async function spawnCages() {
 
 export async function despawnCages() {
     isCageSpawnerActive = false;
+
     const rawData = world.getDynamicProperty("active_cage_locations");
     const cageLocations = JSON.parse(rawData || "[]");
+
     for (const value of cageLocations) {
-        removeTickingArea(dimension, value.areaName);
+        removeTickingArea(value.areaName);
+        await loadTickingArea(dimension, value.locationObject, value.areaName);
 
-        await sleep(40);
-
-        loadTickingArea(dimension, value.locationObject, value.areaName);
-
-        await sleep(40);
-
-        let despawned = false;
-        while (!despawned) {
-            try {
-                const cages = dimension.getEntities({ type: "game:cage", location: value.locationObject, maxDistance: 10 });
-                if (cages.length === 0) {
-                    await sleep(10);
-                    continue;
-                }
-                for (const cage of cages) cage.remove();
-                despawned = true;
-            } catch (e) {
-                await sleep(10);
-                continue;
+        try {
+            const cages = dimension.getEntities({ type: "game:cage", location: value.locationObject, maxDistance: 10 });
+            for (const cage of cages) {
+                try { cage.remove(); } catch(err) {}
             }
-        }
+        } catch (e) {}
 
-        removeTickingArea(dimension, value.areaName);
+        removeTickingArea(value.areaName);
     }
-    
     tickingAreaLocations = [];
     world.setDynamicProperty("active_cage_locations", JSON.stringify(tickingAreaLocations));
 }

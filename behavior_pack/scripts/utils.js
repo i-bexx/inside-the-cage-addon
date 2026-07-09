@@ -1,18 +1,29 @@
 import { world, system } from "@minecraft/server";
 
-export function loadTickingArea(dimension, locationObject, areaName) {
+export async function loadTickingArea(dimension, locationObject, areaName) {
     try {
-        dimension.runCommand(`tickingarea add circle ${locationObject.x} ${locationObject.y} ${locationObject.z} 2 ${areaName}`);
+        // Checking if it already exists to avoid errors
+        if (world.tickingAreaManager.hasTickingArea(areaName)) {
+            return;
+        }
+
+        await world.tickingAreaManager.createTickingArea(areaName, {
+            dimension: dimension,
+            from: { x: locationObject.x - 16, y: locationObject.y, z: locationObject.z - 16 },
+            to: { x: locationObject.x + 16, y: locationObject.y, z: locationObject.z + 16 }
+        });
     } catch (err) {
-        console.error("Could not load tickingarea")
+        console.error("Could not load tickingarea: " + err);
     }
 }
 
-export function removeTickingArea(dimension, areaName) {
+export function removeTickingArea(areaName) {
   try {
-    dimension.runCommand(`tickingarea remove ${areaName}`);
+      if (world.tickingAreaManager.hasTickingArea(areaName)) {
+          world.tickingAreaManager.removeTickingArea(areaName);
+      }
   } catch (e) {
-    console.error("Could not delete tickingarea")
+      console.error("Could not delete tickingarea: " + e);
   }
 }
 

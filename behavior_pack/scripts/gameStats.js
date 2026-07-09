@@ -9,7 +9,7 @@ import { gameStarter, checkIfPositionClear } from "./gameStarter";
 import { getGameStartedObjective, getGameRestartedObjective, getGameEndedObjective, getPlayersInRoundObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 import { getPlayersInRound } from "./getPlayersArray"; 
 
-import { resetFunctions } from "./resetStats";
+import { resetFunctions, despawnEntities } from "./resetStats";
 import { initiateCam } from "./cameraUsage";
 import { teleportStalker } from "./stalkerEntity";
 import { givePanelItem } from "./panels";
@@ -103,11 +103,9 @@ const state = new Proxy({ ...INITIAL_GAME_STATE }, {
 
         const gameActive = (target[key] == 1);
 
-        if (gameActive) {
-            roundStarted();
-        } else {
-            roundOver();
-        }
+        if (gameActive) roundStarted();
+        else roundOver();
+        
         return true;
     }
 });
@@ -169,28 +167,21 @@ export function startMainGameLoop() {
 // ==========================================
 
 function roundStarted() {
-    for (const func of Object.values(FUNCTIONS_TO_START)) {
-        func();
-    }
+    for (const func of Object.values(FUNCTIONS_TO_START)) func();
     checkIfPositionClear().clear();
 }
 
-function roundOver() {
+async function roundOver() {
+    world.setDynamicProperty("reseting_round", true);
     const players = world.getPlayers().filter(p => !p.hasTag("in_lobby"));
 
     // Reset data for world overall
     for (const func of Object.values(FUNCTIONS_TO_END_ROUND)) {
         func();
     }
-    commandsToResetTheGame(dimension);
-    
-    // Reset data for each player
-    for (const player of players) {
-		stopFunctionsInMaps(player.id);
-        clearPlayerMaps(player.id);
-        resetPlayerDynamicPropertyData(player);
-        commandsToResetPlayerData(player);
-    }
+    await commandsToResetTheGame(dimension);
+    await despawnEntities();
+    world.setDynamicProperty("reseting_round", false);
 }
 
 export function setGlobalVariables() { dimension = world.getDimension("overworld"); }
