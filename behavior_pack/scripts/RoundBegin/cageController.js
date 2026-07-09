@@ -93,13 +93,22 @@ export async function despawnCages() {
 
         await sleep(40);
 
-        try {
-            const cages = dimension.getEntities({ type: "game:cage", location: value.locationObject, maxDistance: 10 });
-            for (const cage of cages) cage.remove();
-        } catch (e) {
-            console.error("Could not despawn cages"); 
+        let despawned = false;
+        while (!despawned) {
+            try {
+                const cages = dimension.getEntities({ type: "game:cage", location: value.locationObject, maxDistance: 10 });
+                if (cages.length === 0) {
+                    await sleep(10);
+                    continue;
+                }
+                for (const cage of cages) cage.remove();
+                despawned = true;
+            } catch (e) {
+                await sleep(10);
+                continue;
+            }
         }
-        
+
         removeTickingArea(dimension, value.areaName);
     }
     
