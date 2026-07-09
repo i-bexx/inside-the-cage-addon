@@ -23,6 +23,7 @@ const CONFIG = {
         COLLECTED_SOUND		: "coin_collect",
         COLLECTED_TAG   	: "collected",
         COLLECTED_EVENT 	: "collected_event",
+        DISAPPEAR_EVENT     : "disappear_event",
         WARNING_SOUND   	: "mob.villager.no",
         WARNING_TEXT    	: "§c§lYou cannot carry any more coins!",
         NOTIFICATION_SOUND  : "notification"
@@ -129,6 +130,7 @@ export async function despawnCoins() {
                 despawned = true;
             } catch (e) {
                 await sleep(10);
+                continue;
             }
         }
         
@@ -164,18 +166,18 @@ async function collectCoin(player, target) {
     player.addLevels(1);
     player.playSound(CONFIG.MAGIC_STRINGS.COLLECTED_SOUND);
 
-    const coinAmount = player.addLevels(0);
-    await notifyMaxCoins(player, coinAmount);
-
     target.addTag(CONFIG.MAGIC_STRINGS.COLLECTED_TAG);
     target.triggerEvent(CONFIG.MAGIC_STRINGS.COLLECTED_EVENT);
+
+    const coinAmount = player.addLevels(0);
+    await notifyMaxCoins(player, coinAmount);
 
     tickingAreaLocations = tickingAreaLocations.filter(coin => Math.floor(coin.locationObject.x) !== Math.floor(target.location.x) || Math.floor(coin.locationObject.z) !== Math.floor(target.location.z));
     world.setDynamicProperty("active_coin_locations", JSON.stringify(tickingAreaLocations));
 
     await sleep(CONFIG.ANIMATION_DURATION_TICKS);
 
-    if (target.isValid) target.remove();
+    if (target.isValid) target.triggerEvent(CONFIG.MAGIC_STRINGS.DISAPPEAR_EVENT);
 }
 
 export function stopcoinController() {
