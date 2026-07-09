@@ -68,75 +68,40 @@ async function spawnCoin() {
     const locationObject = CONFIG.LOCATIONS[randomIndex];
     const areaName = `loader_coin_${randomIndex + 1}`;
 
-    removeTickingArea(dimension, areaName);
-
-    await sleep(40);
-
-    loadTickingArea(dimension, locationObject, areaName);
-
-    await sleep(40);
+    removeTickingArea(areaName);
+    await loadTickingArea(dimension, locationObject, areaName);
 
     const alreadyExists = tickingAreaLocations.some(coin => coin.locationObject.x === locationObject.x && coin.locationObject.z === locationObject.z);
-    if (alreadyExists) { removeTickingArea(dimension, areaName); return; }
+    if (alreadyExists) { removeTickingArea(areaName); return; }
 
     const nearbyPlayers = dimension.getPlayers({ location: locationObject, maxDistance: CONFIG.MAX_PLAYER_DISTANCE, closest: 1 });
-    if (nearbyPlayers.length > 0) { removeTickingArea(dimension, areaName); return; }
+    if (nearbyPlayers.length > 0) { removeTickingArea(areaName); return; }
 
-    let spawned = false;
-    while (!spawned) {
-        if (!isSpawnIntervalActive) break;
-        
-        try {
-            dimension.spawnEntity(CONFIG.ENTITY_TYPE, { x: locationObject.x + 0.5, y: locationObject.y, z: locationObject.z + 0.5 });
-            tickingAreaLocations.push({ locationObject, areaName });
-            world.setDynamicProperty("active_coin_locations", JSON.stringify(tickingAreaLocations));
-            world.sendMessage(`Coin location: ${locationObject.x} ${locationObject.y} ${locationObject.z}`);
+    try {
+        dimension.spawnEntity(CONFIG.ENTITY_TYPE, { x: locationObject.x + 0.5, y: locationObject.y, z: locationObject.z + 0.5 });
+        tickingAreaLocations.push({ locationObject, areaName });
+        world.setDynamicProperty("active_coin_locations", JSON.stringify(tickingAreaLocations));
+        world.sendMessage(`Coin location: ${locationObject.x} ${locationObject.y} ${locationObject.z}`);
+    } catch (error) {}
 
-            spawned = true;
-        } catch (error) { await sleep(10); }
-    }
-
-    removeTickingArea(dimension, areaName);
+    removeTickingArea(areaName);
 }
 
 export async function despawnCoins() {
     const rawData = world.getDynamicProperty("active_coin_locations");
     const coinLocations = JSON.parse(rawData || "[]");
+
     for (const value of coinLocations) {
-        removeTickingArea(dimension, value.areaName);
+        removeTickingArea(value.areaName);
+        await loadTickingArea(dimension, value.locationObject, value.areaName);
 
-        await sleep(40);
-
-        loadTickingArea(dimension, value.locationObject, value.areaName);
-
-        await sleep(40);
-
-        let despawned = false;
-        while (!despawned) {
-            // Checks if coin is collected after 80 ticks
-            const stillExists = tickingAreaLocations.some(
-                c => Math.floor(c.locationObject.x) === Math.floor(value.locationObject.x) && 
-                     Math.floor(c.locationObject.z) === Math.floor(value.locationObject.z)
-            );
-            if (!stillExists) break;
-
-            try {
-                const coins = dimension.getEntities({ type: CONFIG.ENTITY_TYPE, location: value.locationObject, maxDistance: CONFIG.MAX_COIN_DISTANCE });
-                if (coins.length === 0) {
-                    await sleep(10);
-                    continue;
-                }
-                for (const coin of coins) coin.remove();
-                despawned = true;
-            } catch (e) {
-                await sleep(10);
-                continue;
-            }
-        }
+        try {
+            const coins = dimension.getEntities({ type: CONFIG.ENTITY_TYPE, location: value.locationObject, maxDistance: CONFIG.MAX_COIN_DISTANCE });
+            for (const coin of coins) coin.remove();
+        } catch (e) {}
         
-        removeTickingArea(dimension, value.areaName);
+        removeTickingArea(value.areaName);
     }
-    
     tickingAreaLocations = [];
     world.setDynamicProperty("active_coin_locations", JSON.stringify(tickingAreaLocations));
 }

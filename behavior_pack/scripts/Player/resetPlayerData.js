@@ -41,9 +41,9 @@ export async function game_over(player) {
         player.removeTag(tag);
     }
 
-    resetPlayerDynamicPropertyData(player);
-    clearPlayerMaps(player.id);
     stopFunctionsInMaps(player.id);
+    clearPlayerMaps(player.id);
+    resetPlayerDynamicPropertyData(player);
 
     for (const cmd of Object.values(CONFIG.COMMANDS)) {
         await player.runCommand(cmd);
@@ -58,7 +58,7 @@ export async function game_over(player) {
     player.triggerEvent(CONFIG.EVENTS.GAME_OVER);
     await sleep(400);
 
-    await system.clearRun(soundLoop);
+    system.clearRun(soundLoop);
     await player.removeTag(CONFIG.TAG_ELIMINATED);
 
     commandsToResetPlayerData(player);

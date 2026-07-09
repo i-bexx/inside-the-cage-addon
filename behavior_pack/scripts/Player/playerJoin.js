@@ -1,9 +1,9 @@
 import { world, system } from "@minecraft/server";
 
 import { sleep } from "../utils";
-import { startProcesses, startProcessesAfterMenuReady } from "../startProcesses";
+import { isLookingAtMenuEntity } from "../preStart";
 import { getNewGameObjective, getStalkerMatchIdObjective, getWorldParticipant, getObjectiveScore } from "../scoreboards";
-import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
+import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, despawnEntities, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
 // =============================================================
 // CONFIGURATION 
@@ -112,7 +112,7 @@ world.afterEvents.playerSpawn.subscribe(async ({ player }) => {
         }
     }
 
-    await player.runCommand(`tp @s ${targetCoords.x} ${targetCoords.y} ${targetCoords.z} 0`);
+    player.runCommand(`tp @s ${targetCoords.x} ${targetCoords.y} ${targetCoords.z} 0`);
 
     // Check Game Data
     const worldValue = getObjectiveScore(newGameObjective, worldParticipant);
@@ -168,18 +168,21 @@ async function handleOwnerJoinLogic(player) {
     
     player.setDynamicProperty(CONFIG.DYN_PROPS.MENU_READY, false);
     player.runCommand(CONFIG.COMMANDS.GAME_NOT_STARTED);
+
+    world.setDynamicProperty("reseting_round", true);
     
     resetFunctions();
     resetMaps();
     resetWorldDynamicPropertyData();
     resetEntitiesData(true);
 
+    await despawnEntities();
 	await commandsToResetTheGame(dimension);
     await ensureEntitiesAreReset();
+
+    world.setDynamicProperty("reseting_round", false);
     
     dimension.runCommand("fill -180 68 -92 -180 71 -84 barrier");
-
-    startProcesses();
 
     await sleep(320);
 
@@ -192,7 +195,7 @@ async function handleOwnerJoinLogic(player) {
         player.runCommand(`title @s actionbar ${CONFIG.MESSAGES.MENU_ACTIONBAR}`);
     }
 
-		startProcessesAfterMenuReady();
+	isLookingAtMenuEntity();
 }
 
 function killConnectedStalker(player) {
