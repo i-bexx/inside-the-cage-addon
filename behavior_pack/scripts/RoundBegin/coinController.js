@@ -14,7 +14,8 @@ const CONFIG = {
     SPAWN_INTERVAL            : 120,
     RECEIVE_INTERVAL          : 60,
     ANIMATION_DURATION_TICKS  : 2,
-	MIN_PLAYER_DISTANCE		  : 10,
+	MAX_PLAYER_DISTANCE		  : 10,
+    MAX_COIN_DISTANCE         : 5,
     MAGIC_STRINGS: {
         SCOREBOARD      	: "scoreboard players add @s coin_amount 1",
         RECIPE_MESSAGE_GIVE : "recipe give @s game:coin_max_recipe",
@@ -74,27 +75,24 @@ async function spawnCoin() {
 
     await sleep(40);
 
-    const nearbyPlayers = dimension.getPlayers({ location: locationObject, maxDistance: CONFIG.MIN_PLAYER_DISTANCE, closest: 1 });
-    const existingCoins = dimension.getEntities({ type: CONFIG.ENTITY_TYPE, location: locationObject, maxDistance: 1, closest: 1 });
+    const alreadyExists = tickingAreaLocations.some(coin => coin.locationObject.x === locationObject.x && coin.locationObject.z === locationObject.z);
+    if (alreadyExists) { removeTickingArea(dimension, areaName); return; }
 
-	if (nearbyPlayers.length > 0 || existingCoins.length > 0) {
-        removeTickingArea(dimension, areaName);
-        return;
-    }
+    const nearbyPlayers = dimension.getPlayers({ location: locationObject, maxDistance: CONFIG.MAX_PLAYER_DISTANCE, closest: 1 });
+    if (nearbyPlayers.length > 0) { removeTickingArea(dimension, areaName); return; }
 
     let spawned = false;
     while (!spawned) {
         if (!isSpawnIntervalActive) break;
+        
         try {
-            dimension.spawnEntity(CONFIG.ENTITY_TYPE, locationObject);
+            dimension.spawnEntity(CONFIG.ENTITY_TYPE, { x: locationObject.x + 0.5, y: locationObject.y, z: locationObject.z + 0.5 });
             tickingAreaLocations.push({ locationObject, areaName });
             world.setDynamicProperty("active_coin_locations", JSON.stringify(tickingAreaLocations));
             world.sendMessage(`Coin location: ${locationObject.x} ${locationObject.y} ${locationObject.z}`);
 
             spawned = true;
-        } catch (error) {
-            await sleep(10);
-        }
+        } catch (error) { await sleep(10); }
     }
 
     removeTickingArea(dimension, areaName);
@@ -112,11 +110,26 @@ export async function despawnCoins() {
 
         await sleep(40);
 
-        try {
-            const coins = dimension.getEntities({ type: CONFIG.ENTITY_TYPE, location: value.locationObject, maxDistance: 1, closest: 1 });
-            for (const coin of coins) coin.remove();
-        } catch (e) {
-            console.error("Could not despawn coins"); 
+        let despawned = false;
+        while (!despawned) {
+            // Checks if coin is collected after 80 ticks
+            const stillExists = tickingAreaLocations.some(
+                c => Math.floor(c.locationObject.x) === Math.floor(value.locationObject.x) && 
+                     Math.floor(c.locationObject.z) === Math.floor(value.locationObject.z)
+            );
+            if (!stillExists) break;
+
+            try {
+                const coins = dimension.getEntities({ type: CONFIG.ENTITY_TYPE, location: value.locationObject, maxDistance: CONFIG.MAX_COIN_DISTANCE });
+                if (coins.length === 0) {
+                    await sleep(10);
+                    continue;
+                }
+                for (const coin of coins) coin.remove();
+                despawned = true;
+            } catch (e) {
+                await sleep(10);
+            }
         }
         
         removeTickingArea(dimension, value.areaName);
@@ -157,7 +170,7 @@ async function collectCoin(player, target) {
     target.addTag(CONFIG.MAGIC_STRINGS.COLLECTED_TAG);
     target.triggerEvent(CONFIG.MAGIC_STRINGS.COLLECTED_EVENT);
 
-    tickingAreaLocations = tickingAreaLocations.filter(coin => coin.locationObject.x !== target.location.x || coin.locationObject.z !== target.location.z);
+    tickingAreaLocations = tickingAreaLocations.filter(coin => Math.floor(coin.locationObject.x) !== Math.floor(target.location.x) || Math.floor(coin.locationObject.z) !== Math.floor(target.location.z));
     world.setDynamicProperty("active_coin_locations", JSON.stringify(tickingAreaLocations));
 
     await sleep(CONFIG.ANIMATION_DURATION_TICKS);
@@ -194,6 +207,8 @@ export function getToastTimeMap() { return lastRecipeToastTime; }
 
 export function setGlobalVariables() {
     dimension = world.getDimension(CONFIG.DIMENSION_ID);
+    const rawData = world.getDynamicProperty("active_coin_locations");
+    tickingAreaLocations = JSON.parse(rawData || "[]");
 }
 
 // ==========================================
