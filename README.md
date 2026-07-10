@@ -146,6 +146,8 @@ A completely custom UI layer built on top of Minecraft's vanilla JSON UI engine:
 - **Live 3D Player Renderer:** `live_player_renderer` component embedded inside a custom wooden frame HUD element.
 - **Scope Resolution:** Custom `resolve_sibling_scope` implementation for reactive UI updates.
 - **Custom Animations:** VHS glitch, compass rotation, and stamina bar animations — all driven through JSON UI.
+- **Vanilla Toast Hijacking:** Repurposed Minecraft's hardcoded recipe-unlock notifications to display custom in-game alerts.
+- **Interactive Action Forms:** State-driven NPC dialogue panels and real-time radar displays built on top of `ActionFormData`.
 - **Vanilla UI Override:** Complete inventory and interaction menu overhaul via `ui_common.json`.
 
 ---
@@ -183,9 +185,11 @@ A completely custom UI layer built on top of Minecraft's vanilla JSON UI engine:
 ### 💰 Economy & Combat
 * Coin collection with compass-based shop (upgrades, weapons, consumables).
 * Combat with pistol, knife, and toxic bomb — each with custom attachable models and animations.
-* 7 cage entities to find and break to win.
+* 7 cage entities to find and break to win, aided by a custom Cage Detector tool with real-time distance, signal, and ETA display.
 
 ![main_panel](./assets/gifs/main_panel.gif)
+
+> 🔬 **Want to see more?** This README only scratches the surface. See how I reverse-engineered Minecraft's hardcoded UI to build a [real-time radar system, interactive dialogue engine, and custom notification framework →](./docs/ADVANCED_UI.md)
 
 ---
 
