@@ -174,7 +174,7 @@ A completely custom UI layer built on top of Minecraft's vanilla JSON UI engine:
 
 * **Bottom Middle:** Animated stamina bar with fill/deplete transitions.
 
-![stamina_bar_deplate](./assets/gifs/stamina_bar_deplate.gif)
+![stamina_bar_deplete](./assets/gifs/stamina_bar_deplete.gif)
 ![stamina_bar_fill](./assets/gifs/stamina_bar_fill.gif)
 
 * **Top Right:** 32-frame compass + VHS "position lost" glitch effect.
