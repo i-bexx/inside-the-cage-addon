@@ -8,6 +8,7 @@ import { stopGivePanelItem } from "./panels";
 import { stopInitiateCam } from "./cameraUsage";
 import { stopCrosshairTracker, stopPlayerShootTracker } from "./cursorController";
 import { stopTeleportStalker } from "./stalkerEntity";
+import { resetSessionPlayers } from "./gameStarter";
 
 import { stopTeleportNull, stopNullTeleportTimeSetter } from "./RoundBegin/Null/nullTeleport";
 import { stopSanityControl } from "./RoundBegin/Sanity";
@@ -241,6 +242,8 @@ export function resetFunctions() {
   stopInitiateCam();
 
   stopTeleportStalker();
+
+  resetSessionPlayers();
 
   stopAmbiance();
   stopBatteryControl();
