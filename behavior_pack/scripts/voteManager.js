@@ -1,7 +1,7 @@
 import { world, system } from "@minecraft/server";
 import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 
-import { getPlayersInRound } from "./getPlayersArray";
+import { getPlayersInRound } from "./utils";
 
 let dimension;
 

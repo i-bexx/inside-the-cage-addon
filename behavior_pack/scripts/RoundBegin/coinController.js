@@ -109,7 +109,7 @@ export async function despawnCoins() {
 async function playerReceiveCoin() {
     if (!isReceiveIntervalActive) return;
 
-    const players = world.getPlayers()
+    const players = world.getAllPlayers()
         .filter(p => p.hasTag("in_game"));
 
     for (const player of players) {

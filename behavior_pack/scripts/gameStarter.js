@@ -2,7 +2,6 @@ import { world, system } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 
 import { stalkerMatch } from "./stalkerEntity";
-import { getAllPlayers } from "./getPlayersArray";
 
 // ==========================================
 // CONSTANTS
@@ -65,7 +64,7 @@ export function gameStarter() {
 	if (intervalId !== undefined) return;
 	
 	intervalId = system.runInterval(() => {
-		const players = world.getPlayers()
+		const players = world.getAllPlayers()
 											.filter(p => !p.hasTag("starting"));
 			
 		for (const player of players) {
@@ -156,7 +155,7 @@ function ActionForm(player) {
 
 export function startFunction() {
 	const isTheRoundRestarted = world.getDynamicProperty("gameRestart");
-	const players = getAllPlayers().filter(p => p.hasTag("waiting_for_start"));
+	const players = world.getAllPlayers().filter(p => p.hasTag("waiting_for_start"));
 
 	system.clearRun(intervalId); // Stops the main loop of this file
 	intervalId = undefined;

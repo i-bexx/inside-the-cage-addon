@@ -11,7 +11,7 @@ let staminaTickTimerActive = false;
 // ----- MAIN FUNCTION -----
 
 function fastUiTick() {
-  const players = world.getPlayers();
+  const players = world.getAllPlayers();
 
   for (const player of players) {
     let uiString = "";

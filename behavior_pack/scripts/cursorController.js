@@ -131,7 +131,7 @@ export function startCrosshairTracker() {
 	if (crosshairTrackerIntervalId !== undefined) return;
 
 	crosshairTrackerIntervalId = system.runInterval(() => {
-        for (const player of world.getPlayers()) {
+        for (const player of world.getAllPlayers()) {
             const isLooking = crosshairTracker(player);
             const raycastResult = player.getEntitiesFromViewDirection(ENTITY_DISTANCE)
             
@@ -188,7 +188,7 @@ export function startPlayerShootTracker() {
     shootingIntervalId = system.runInterval(() => {
         if (!getIsShootingObjective()) return;
 
-        const players = world.getPlayers();
+        const players = world.getAllPlayers();
 
         for (const player of players) {
             let isPlayerShooting = playerShootTracker(player);

@@ -1,7 +1,6 @@
 import { world, system } from "@minecraft/server";
 
 import { getAmmoObjective, getUsedToxicBombObjective, getObjectiveScore } from "../scoreboards";
-import { getAllPlayers } from "../getPlayersArray";
 
 // =============================================================================
 // CONFIGURATION AND CONSTANTS
@@ -101,7 +100,7 @@ function handleCombatLogic(player) {
 // =============================================================================
 
 system.runInterval(() => {
-    const players = getAllPlayers();
+    const players = world.getAllPlayers();
     for (const player of players) {
         handleStrafeAnimation(player);
         handleCombatLogic(player);

@@ -1,6 +1,6 @@
 import { world, system } from "@minecraft/server";
 
-import { getPlayersInRound } from "../getPlayersArray";
+import { getPlayersInRound } from "../utils";
 import { getStalkerMatchIdObjective, getSanityObjective, getStaminaObjective, getObjectiveScore } from "../scoreboards";
 
 // --- CONSTANTS ---

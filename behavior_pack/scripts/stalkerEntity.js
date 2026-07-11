@@ -1,6 +1,6 @@
 import { world, system } from "@minecraft/server";
 
-import { getAllPlayers, getPlayersInRound } from "./getPlayersArray";
+import { getPlayersInRound } from "./utils";
 import { getStalkerMatchIdObjective } from "./scoreboards";
 
 // =============================================================================
@@ -29,7 +29,7 @@ let intervalId = undefined;
 // --- Matching Stalker Logic ---
 
 export function stalkerMatch() {
-    const players = getAllPlayers()
+    const players = world.getAllPlayers()
                     .filter(player => !player.hasTag(CONFIG.MATCH_TAG));
 
     for (const player of players) {

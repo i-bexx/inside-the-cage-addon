@@ -4,7 +4,6 @@ import "./cameraUsage";
 import "./cursorController";
 import "./gameStarter";
 import "./gameStats";
-import "./getPlayersArray";
 import "./panels";
 import "./preStart";
 import "./stalkerEntity";

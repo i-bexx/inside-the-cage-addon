@@ -1,6 +1,6 @@
 import { system } from "@minecraft/server";
 
-import { getPlayersInRound } from "../getPlayersArray";
+import { getPlayersInRound } from "../utils";
 import { game_over } from "../Player/resetPlayerData";
 import { getSanityObjective, getObjectiveScore } from "../scoreboards";
 
