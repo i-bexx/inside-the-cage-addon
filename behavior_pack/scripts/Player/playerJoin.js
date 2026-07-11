@@ -176,8 +176,8 @@ async function handleOwnerJoinLogic(player) {
     resetWorldDynamicPropertyData();
     resetEntitiesData(true);
 
+	commandsToResetTheGame(dimension);
     await despawnEntities();
-	await commandsToResetTheGame(dimension);
     await ensureEntitiesAreReset();
 
     world.setDynamicProperty("reseting_round", false);

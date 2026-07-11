@@ -51,7 +51,16 @@ state = new Proxy({ ...initialPlayerLoc }, {
         if (target.isPlayerInRange) {
             playerInRange(player);
         } else {
-					playersWaitingToStart.splice(playersWaitingToStart.indexOf(player), 1);
+					const idx = playersWaitingToStart.findIndex(p => p.id === player.id);
+					if (idx !== -1) playersWaitingToStart.splice(idx, 1); // If player were not kicked out due to capacity, then this line will run
+					player.removeTag("waiting_for_start");
+
+					if (player.hasTag("starter")) {
+						player.removeTag("starter");
+						world.setDynamicProperty("starter", false);
+				}
+
+					updateDoorEvent();
 				}
         return true;
     }
@@ -99,19 +108,17 @@ async function playerInRange(player) {
 
 	const doesStarterExist = world.getDynamicProperty("starter");
 
-  await player.addTag("waiting_for_start");
-  playersWaitingToStart = world.getPlayers({ tags: ["waiting_for_start"] });
+  player.addTag("waiting_for_start");
+  playersWaitingToStart.push(player);
   
 	// Check if the player capacity is reached
   if (playersWaitingToStart.length > 3) {
     const kickedPlayers = playersWaitingToStart.slice(3);
 		
-    for (const player of kickedPlayers) {
-      kickOut(player);
-    }
+    for (const player of kickedPlayers)
+			kickOut(player);
 		playersWaitingToStart.splice(3);
 		
-		updateDoorEvent();
 		return;
 }
 
@@ -125,11 +132,9 @@ async function playerInRange(player) {
 	return;
 }
 
-function kickOut(check) {
-	for (const command of Object.values(REJECT_PLAYER_COMMANDS)) {
-			check.runCommand(command);
-	}
-	playersWaitingToStart = world.getPlayers({ tags: ["waiting_for_start"] });
+function kickOut(player) {
+	for (const command of Object.values(REJECT_PLAYER_COMMANDS)) player.runCommand(command);
+	playersWaitingToStart = playersWaitingToStart.filter(p => p.id !== player.id);
 }
 
 function ActionForm(player) {
@@ -139,6 +144,8 @@ function ActionForm(player) {
 		.button("Start")
 		.button("Cancel")
 		.show(player).then(({ selection }) => {
+
+		playersWaitingToStart = [];
 
 		if (selection == 0) {
 			startFunction();
@@ -156,7 +163,7 @@ function ActionForm(player) {
 
 export function startFunction() {
 	const isTheRoundRestarted = world.getDynamicProperty("gameRestart");
-	const lobbyPlayers = world.getAllPlayers().filter(p => p.hasTag("waiting_for_start"));
+	const lobbyPlayers = world.getPlayers({ tags: ["waiting_for_start"] });
 
 	if (!isTheRoundRestarted) sessionPlayers = lobbyPlayers;
 
@@ -188,9 +195,11 @@ export function startFunction() {
 function updateDoorEvent() {
 	try {
 		const door = dimension.getEntities({ type: "game:door" })[0];
-		const event = playersWaitingToStart.length.toString();
+		const eventNumber = playersWaitingToStart.length;
+		if (eventNumber > 3) return;
+		const eventString = eventNumber.toString();
 
-		door.triggerEvent(event);
+		door.triggerEvent(eventString);
 	} catch(e) { }
 }
 
@@ -203,3 +212,20 @@ export function getSessionPlayers() {
 export function resetSessionPlayers() { sessionPlayers = []; }
 
 export function setGlobalVariables() { dimension = world.getDimension("overworld"); }
+
+world.afterEvents.playerLeave.subscribe(({ playerId }) => {
+	if (intervalId === undefined) return; 
+
+    const remainingStarters = world.getPlayers({ tags: ["starter"] });
+    if (remainingStarters.length === 0) {
+        world.setDynamicProperty("starter", false);
+        
+        for (const command of Object.values(TELEPORT_BACK_COMMANDS))
+            dimension.runCommand(command);
+				playersWaitingToStart = [];
+    }
+		const idx = playersWaitingToStart.findIndex(p => p.id === playerId);
+		if (idx !== -1) playersWaitingToStart.splice(idx, 1);
+
+    updateDoorEvent();
+});

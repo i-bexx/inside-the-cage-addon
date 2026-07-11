@@ -258,11 +258,11 @@ export async function despawnEntities() {
   await despawnCoins();
 }
 
-export async function commandsToResetTheGame(dimension) {
+export function commandsToResetTheGame(dimension) {
   const gameRestarted = world.getDynamicProperty("gameRestart");
   const gameEndedEarly = world.getDynamicProperty("roundEndedEarly");
   for (const cmd of COMMANDS_TO_RESET_GAME) {
-        await dimension.runCommand(cmd);
+        dimension.runCommand(cmd);
     }
 
     //If game restarted, the door shall remain closed
