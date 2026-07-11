@@ -48,6 +48,7 @@ async function openCageDetector(player) {
 
 async function getCageInfo(player) {
   const cageData = await getCage();
+  if (player.hasTag("eliminated")) return;
   if (!cageData) return { direction: "None", cageDistance: 0, deviationInteger: 0 };
 
   const deviationInteger = cageData.deviationInteger;
@@ -84,23 +85,23 @@ async function getCageInfo(player) {
 async function getCage() {
   let cageNumber = 0;
   for (const cageLocation of cageLocations) {
-    removeTickingArea(world.getDimension("overworld"), cageLocation.areaName);
+    removeTickingArea(cageLocation.areaName);
 
     await sleep(40);
 
-    loadTickingArea(world.getDimension("overworld"), cageLocation.locationObject, cageLocation.areaName);
+    await loadTickingArea(world.getDimension("overworld"), cageLocation.locationObject, cageLocation.areaName);
 
     await sleep(40);
 
     const cage = world.getDimension("overworld").getEntities({ type: "game:cage", location: cageLocation.locationObject, maxDistance: 20 })[0];
 
-    if (cage.getComponent("minecraft:mark_variant")?.value === 1) {
-      removeTickingArea(world.getDimension("overworld"), cageLocation.areaName);
+    if (cage?.getComponent("minecraft:mark_variant")?.value === 1) {
+      removeTickingArea(cageLocation.areaName);
       cageNumber++;
       continue;
     }
     else {
-      removeTickingArea(world.getDimension("overworld"), cageLocation.areaName);
+      removeTickingArea(cageLocation.areaName);
 
       const cageData = {
         x: cageLocation.locationObject.x,
