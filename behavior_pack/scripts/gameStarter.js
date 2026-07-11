@@ -32,6 +32,7 @@ const initialPlayerLoc = {
 
 let intervalId = undefined;
 let playersWaitingToStart = [];
+let sessionPlayers = [];
 
 // ==========================================
 // FUNCTIONS
@@ -155,12 +156,16 @@ function ActionForm(player) {
 
 export function startFunction() {
 	const isTheRoundRestarted = world.getDynamicProperty("gameRestart");
-	const players = world.getAllPlayers().filter(p => p.hasTag("waiting_for_start"));
+	const lobbyPlayers = world.getAllPlayers().filter(p => p.hasTag("waiting_for_start"));
+
+	if (!isTheRoundRestarted) sessionPlayers = lobbyPlayers;
 
 	system.clearRun(intervalId); // Stops the main loop of this file
 	intervalId = undefined;
 	
-	for (const player of players) {
+	const playersToStart = getSessionPlayers();
+	
+	for (const player of playersToStart) {
 		player.addTag("starting");
 		player.removeTag("in_lobby");
 
@@ -190,5 +195,11 @@ function updateDoorEvent() {
 }
 
 export function checkIfPositionClear() { return STARTER_RANGE_STATES; }
+
+export function getSessionPlayers() {
+	sessionPlayers = sessionPlayers.filter(p => p?.isValid);
+	return sessionPlayers;
+}
+export function resetSessionPlayers() { sessionPlayers = []; }
 
 export function setGlobalVariables() { dimension = world.getDimension("overworld"); }

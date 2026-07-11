@@ -1,8 +1,7 @@
 import { world, system } from "@minecraft/server";
 
+import { startFunction, getSessionPlayers } from "../../gameStarter";
 import { sleep } from "../../utils";
-import { startFunction } from "../../gameStarter";
-import { getPlayersInRound } from "../../utils";
 
 // ======= CONFIGURATION =======
 
@@ -19,7 +18,7 @@ const CONFIG = {
 // ======= LOGIC =======
 
 export async function restartRound() {
-  const players = getPlayersInRound();
+  const players = getSessionPlayers();
   
   for (const player of players) {
       player.removeTag(CONFIG.REMOVE_TAG);
