@@ -83,8 +83,7 @@ const FUNCTIONS_TO_END_ROUND = {
 	resetFunctions,
     resetMaps,
     resetWorldDynamicPropertyData,
-    resetEntitiesData,
-    gameStarter
+    resetEntitiesData
 };
 
 
@@ -178,7 +177,8 @@ async function roundOver() {
     for (const func of Object.values(FUNCTIONS_TO_END_ROUND)) {
         func();
     }
-    await commandsToResetTheGame(dimension);
+    commandsToResetTheGame(dimension);
+    gameStarter();
     await despawnEntities();
 
     const players = world.getAllPlayers().filter(p => p.hasTag("in_lobby"));
