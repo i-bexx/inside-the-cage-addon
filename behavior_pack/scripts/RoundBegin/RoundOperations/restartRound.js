@@ -2,7 +2,7 @@ import { world, system } from "@minecraft/server";
 
 import { sleep } from "../../utils";
 import { startFunction } from "../../gameStarter";
-import { getPlayersInRound } from "../../getPlayersArray";
+import { getPlayersInRound } from "../../utils";
 
 // ======= CONFIGURATION =======
 

@@ -1,5 +1,5 @@
 import { system } from "@minecraft/server";
-import { getPlayersInRound } from "../getPlayersArray";
+import { getPlayersInRound } from "../utils";
 
 // =============================================================
 // VARIABLES

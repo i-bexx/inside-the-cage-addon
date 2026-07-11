@@ -1,6 +1,5 @@
 import { world, system } from "@minecraft/server";
 
-import { getAllPlayers } from "../../getPlayersArray";
 import { getSoulsFreedObjective, getValueParticipant, getObjectiveScore } from "../../scoreboards";
 
 const TELEPORT_STAGES = [
@@ -59,7 +58,7 @@ function teleportNull(ticks) {
     if (teleportCountdown !== undefined) return;
 
     teleportCountdown = system.runTimeout(() => {
-        const players = getAllPlayers();
+        const players = world.getAllPlayers();
         const chosenPlayer = getRandomPlayer(players);
 
         const nullEntities = dimension.getEntities({ type: "game:null" });

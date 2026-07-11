@@ -1,6 +1,6 @@
 import { world, system } from "@minecraft/server";
 
-import { getPlayersInRound } from "./getPlayersArray";
+import { getPlayersInRound } from "./utils";
 import { getSoulsFreedObjective, getSanityObjective, getStaminaObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 
 // =============================================================

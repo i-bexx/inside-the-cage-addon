@@ -1,7 +1,7 @@
 import { world, system } from "@minecraft/server";
 
 import { cameraUsed } from "../cameraUsage";
-import { getPlayersInRound } from "../getPlayersArray";
+import { getPlayersInRound } from "../utils";
 import { teleportStalker, stopTeleportStalker } from "../stalkerEntity";
 import { warnPlayerAboutCam, stopWarnPlayerAboutCam } from "./cameraController";
 import { startCrosshairTracker, startPlayerShootTracker, stopCrosshairTracker, stopPlayerShootTracker } from "../cursorController";

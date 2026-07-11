@@ -7,7 +7,7 @@ import { world, system } from "@minecraft/server";
 import { resetWorldDynamicPropertyData, resetPlayerDynamicPropertyData, resetEntitiesData, commandsToResetTheGame, resetMaps, clearPlayerMaps, stopFunctionsInMaps, commandsToResetPlayerData } from "./resetStats";
 import { gameStarter, checkIfPositionClear } from "./gameStarter";
 import { getGameStartedObjective, getGameRestartedObjective, getGameEndedObjective, getPlayersInRoundObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
-import { getPlayersInRound } from "./getPlayersArray"; 
+import { getPlayersInRound } from "./utils"; 
 
 import { resetFunctions, despawnEntities } from "./resetStats";
 import { initiateCam } from "./cameraUsage";
@@ -181,7 +181,7 @@ async function roundOver() {
     await commandsToResetTheGame(dimension);
     await despawnEntities();
 
-    const players = world.getPlayers().filter(p => p.hasTag("in_lobby"));
+    const players = world.getAllPlayers().filter(p => p.hasTag("in_lobby"));
 
     for (const player of players) {
         player.playSound("random.orb");
