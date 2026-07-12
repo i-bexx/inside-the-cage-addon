@@ -9,7 +9,7 @@ The game utilizes a custom server-side stamina system. It detects when players s
 
 <table>
   <tr>
-    <td align="center"><b>Stamina Depletion</b><br><img src="../assets/gifs/stamina_bar_deplate.gif" alt="Stamina Deplete" width="300"/></td>
+    <td align="center"><b>Stamina Depletion</b><br><img src="../assets/gifs/stamina_bar_deplete.gif" alt="Stamina Deplete" width="300"/></td>
     <td align="center"><b>Stamina Regeneration</b><br><img src="../assets/gifs/stamina_bar_fill.gif" alt="Stamina Fill" width="300"/></td>
   </tr>
 </table>
