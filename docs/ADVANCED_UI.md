@@ -1,6 +1,6 @@
 # 🔬 Advanced UI Systems — Deep Dive
 
-> Beyond the HUD elements shown in the main README, this project includes several advanced UI systems that push Bedrock's JSON UI engine to its limits.
+> Beyond the HUD elements shown in the main README, this project includes several advanced UI systems.
 
 *← Back to [Main README](../README.md)*
 
