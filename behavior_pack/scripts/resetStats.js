@@ -269,7 +269,7 @@ export function commandsToResetTheGame(dimension) {
     //If game ended early, a different file will open the door
     if (gameRestarted || gameEndedEarly) return;
 
-    dimension.runCommand(`event entity @e[type=game:door] "0"`);
+    dimension.runCommand(`event entity @e[type=game:door] "door_0_event"`);
     dimension.runCommand("fill -180 68 -92 -180 71 -84 air");
 }
 

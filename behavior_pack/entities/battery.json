@@ -26,7 +26,7 @@
 									}
 								]
 							},
-							"event": "dieEvent",
+							"event": "die_event",
 							"target": "self"
 						}
 					},
@@ -43,7 +43,7 @@
 									}
 								]
 							},
-							"event": "battery_is_fullErrorEvent",
+							"event": "battery_is_full_error_event",
 							"target": "other"
 						}
 					}
@@ -59,10 +59,6 @@
 			},
 			"minecraft:scale": {
 				"value": 1.0
-			},
-			"minecraft:knockback_resistance": {
-				"value": 100,
-				"max": 100
 			},
 			"minecraft:type_family": {
 			"family": [ "game" ]
@@ -83,15 +79,10 @@
 
 			"minecraft:nameable": {},
 			"minecraft:fire_immune": false,
-
-			"minecraft:behavior.hurt_by_target": {
-				"priority": 1
-			},
-			
 			"minecraft:physics": {}
 		},
 
-		"events": { "dieEvent": { "sequence": [ { "add": { "component_groups": [ "die" ] } } ] } }
+		"events": { "die_event": { "sequence": [ { "add": { "component_groups": [ "die" ] } } ] } }
 	}
 }
 

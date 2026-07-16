@@ -31,11 +31,49 @@
         "minecraft:behavior.random_look_around": {
           "priority": 9,
           "probability": 0.2
+        },
+        "minecraft:attack": {
+          "damage": 3
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 3
+        },
+        "minecraft:behavior.random_stroll": {
+          "priority": 7,
+          "speed_multiplier": 1
+        },
+        "minecraft:behavior.hurt_by_target": {
+          "priority": 1
+        },
+        "minecraft:ignore_cannot_be_attacked": {},
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": 2,
+          "must_see": true,
+          "reselect_targets": true,
+          "within_radius": 25.0,
+          "must_see_forget_duration": 17.0,
+          "entity_types": [
+            {
+              "filters": {
+                "any_of": [
+                  { "test": "is_family", "subject": "other", "value": "player" }
+                ]
+              },
+              "max_dist": 35
+            }
+          ]
         }
       },
       "hostile_dead": {
-        "minecraft:instant_despawn": {
-          "remove_child_entities": true
+        "minecraft:transformation": {
+          "add": {},
+          "drop_equipment": false,
+          "drop_inventory": false,
+          "into": "game:hostile_dead",
+          "keep_level": false,
+          "keep_owner": false,
+          "preserve_equipment": false,
+          "delay": 0
         }
       }
     },
@@ -45,27 +83,23 @@
         "triggers": [
           {
             "on_damage": {
-              "filters": {
-                "all_of": [
-                  {
-                    "test": "is_family",
-                    "subject": "other",
-                    "value": "player"
-                  },
-                  {
-                    "test": "is_family",
-                    "subject": "self",
-                    "value": "monster"
-                  }
-                ]
-              },
+              "filters": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "player"
+                }
+              ],
               "event": "bad_luck",
               "target": "other"
             }
+          },
+          {
+            "cause": "lava",
+            "deals_damage": "no"
           }
         ]
       },
-           
       "minecraft:collision_box": {
         "width": 0.6,
         "height": 1.9
@@ -101,46 +135,6 @@
 
       "minecraft:jump.static": {},
       "minecraft:can_climb": {},
-      
-      "minecraft:attack": {
-        "damage": 3
-      },
-      "minecraft:behavior.melee_attack": {
-        "priority": 3
-      },
-      "minecraft:behavior.random_stroll": {
-        "priority": 7,
-        "speed_multiplier": 1
-      },
-      "minecraft:behavior.look_at_player": {
-        "priority": 8,
-        "look_distance": 6,
-        "probability": 0.0
-      },
-      "minecraft:behavior.random_look_around": {
-        "priority": 9,
-        "probability": 0.0
-      },
-      "minecraft:behavior.hurt_by_target": {
-        "priority": 1
-      },
-      "minecraft:behavior.nearest_attackable_target": {
-        "priority": 2,
-        "must_see": true,
-        "reselect_targets": true,
-        "within_radius": 25.0,
-        "must_see_forget_duration": 17.0,
-        "entity_types": [
-          {
-            "filters": {
-              "any_of": [
-                { "test": "is_family", "subject": "other", "value": "player" }
-              ]
-            },
-            "max_dist": 35
-          }
-        ]
-      },
       "minecraft:conditional_bandwidth_optimization": {},
 			"minecraft:physics": {}
 		},

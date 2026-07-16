@@ -14,7 +14,7 @@ const TELEPORT_BACK_COMMANDS = {
 	tpOut: "tp @a[tag=waiting_for_start] -183 68 -97",
 	removeStarterTag: "tag @a remove starter",
 	removeWaitingForStartTag: "tag @a remove waiting_for_start",
-	eventDoor: `event entity @e[type=game:door] "0"`
+	eventDoor: `event entity @e[type=game:door] "door_0_event"`
 };
 const REJECT_PLAYER_COMMANDS = {
 	tpOut: "tp @s -183 68 -97",
@@ -184,7 +184,7 @@ export function startFunction() {
 	}
 
 		dimension.runCommand("setblock -54 75 -152 redstone_block");
-		dimension.runCommand("event entity @e[type=game:door] game_started");
+		dimension.runCommand("event entity @e[type=game:door] door_game_started_event");
 		dimension.runCommand("fill -180 68 -92 -180 71 -84 barrier");
 		
 		stalkerMatch();
@@ -197,7 +197,7 @@ function updateDoorEvent() {
 		const door = dimension.getEntities({ type: "game:door" })[0];
 		const eventNumber = playersWaitingToStart.length;
 		if (eventNumber > 3) return;
-		const eventString = eventNumber.toString();
+		const eventString = "door_" + eventNumber.toString() + "_event";
 
 		door.triggerEvent(eventString);
 	} catch(e) { }

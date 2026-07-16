@@ -22,8 +22,7 @@
         },
         "dead": {
           "on_entry": [
-            "@s hostile_dead_event",
-            "/execute at @s run summon game:hostile_dead ~ ~ ~"
+            "@s hostile_dead_event"
           ]
         }
       }
