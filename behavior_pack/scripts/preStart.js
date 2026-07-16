@@ -104,7 +104,7 @@ const COMMANDS = {
         `event entity @a[tag=${CONFIG.TAGS.CUTSCENE}] normal_event`,
         `tag @a remove ${CONFIG.TAGS.CUTSCENE}`,
         `fill ${CONFIG.COORDS.AIR_FILL_AREA} air`,
-        `event entity @e[type=${CONFIG.IDS.DOOR}] "0"`
+        `event entity @e[type=${CONFIG.IDS.DOOR}] "door_0_event"`
     ],
     SKIP_CLEANUP: [
         `tp @a[tag=${CONFIG.TAGS.CUTSCENE}] ${CONFIG.COORDS.SPAWN_POINT}`,
@@ -113,7 +113,7 @@ const COMMANDS = {
         `playsound menu_exit @a[tag=${CONFIG.TAGS.CUTSCENE}]`,
         `tag @a remove ${CONFIG.TAGS.CUTSCENE}`,
         `fill ${CONFIG.COORDS.AIR_FILL_AREA} air`,
-        `event entity @e[type=${CONFIG.IDS.DOOR}] "0"`,
+        `event entity @e[type=${CONFIG.IDS.DOOR}] "door_0_event"`,
         `clear @a ${CONFIG.IDS.SKIP_ITEM}`
     ]
 };
@@ -210,7 +210,7 @@ world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
     } else if (isContinue) {
         dimension.runCommand(`tp @a ${CONFIG.COORDS.SPAWN_POINT}`);
         dimension.runCommand(`fill ${CONFIG.COORDS.AIR_FILL_AREA} air`);
-        dimension.runCommand(`event entity @e[type=${CONFIG.IDS.DOOR}] "0"`);
+        dimension.runCommand(`event entity @e[type=${CONFIG.IDS.DOOR}] "door_0_event"`);
 
         startMainGameLoop();
         gameStarter();

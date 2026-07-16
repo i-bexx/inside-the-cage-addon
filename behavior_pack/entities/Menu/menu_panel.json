@@ -20,10 +20,6 @@
       "minecraft:scale": {
         "value": 3
       },
-      "minecraft:knockback_resistance": {
-        "value": 100,
-        "max": 100
-      },
 
       "minecraft:damage_sensor": {
         "triggers": [
@@ -44,10 +40,6 @@
 
       "minecraft:nameable": {},
 			"minecraft:fire_immune": false,
-			"minecraft:behavior.hurt_by_target": {
-				"priority": 1
-			},
-      
 			"minecraft:physics": {}
 		}
   }

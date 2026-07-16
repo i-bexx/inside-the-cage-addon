@@ -59,7 +59,7 @@ const CONFIG = {
     },
     ENTITY_EVENTS: {
         RESET_DEFAULT: "default",
-        WAITING_HOST: "waiting_for_host"
+        WAITING_HOST: "door_waiting_for_host_event"
     },
     COORDS: {
         MENU_SPAWN: { x: -181, y: 52, z: -91 },

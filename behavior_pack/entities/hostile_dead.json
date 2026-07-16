@@ -34,10 +34,6 @@
         "value": 60,
         "max": 60
       },
-      "minecraft:knockback_resistance": {
-        "value": 100,
-        "max": 100
-      },
 			"minecraft:type_family": {
 				"family": [ "game" ]
 			},
@@ -58,11 +54,6 @@
 
       "minecraft:nameable": {},
 			"minecraft:fire_immune": {},
-
-			"minecraft:behavior.hurt_by_target": {
-				"priority": 1
-			},
-
 			"minecraft:physics": {}
 		},
 
