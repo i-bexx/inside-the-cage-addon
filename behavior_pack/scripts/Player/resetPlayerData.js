@@ -1,4 +1,4 @@
-import { world, system } from "@minecraft/server";
+import { system } from "@minecraft/server";
 
 import { sleep } from "../utils";
 import { resetPlayerDynamicPropertyData, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
@@ -35,38 +35,35 @@ const CONFIG = {
 
 export async function game_over(player) {
     if (player == undefined) return;
-		player.addTag(CONFIG.TAG_ELIMINATED);
 
-    for (const tag of Object.values(CONFIG.TAGS_TO_REMOVE)) {
-        player.removeTag(tag);
-    }
+	player.addTag(CONFIG.TAG_ELIMINATED);
+    for (const tag of Object.values(CONFIG.TAGS_TO_REMOVE)) player.removeTag(tag);
 
     stopFunctionsInMaps(player.id);
     clearPlayerMaps(player.id);
     resetPlayerDynamicPropertyData(player);
 
-    for (const cmd of Object.values(CONFIG.COMMANDS)) {
-        await player.runCommand(cmd);
-    }
+    for (const cmd of Object.values(CONFIG.COMMANDS)) await player.runCommand(cmd);
     const soundLoop = staticSoundLoop(player);
 
     player.triggerEvent(CONFIG.EVENTS.STATIC);
-		await sleep(1);
-		player.playSound(CONFIG.SOUNDS.PLAYSOUND_GAME_OVER, {volume: 0.8});
+    await sleep(1);
+
+    player.playSound(CONFIG.SOUNDS.PLAYSOUND_STATIC, {volume: 0.3});
+    player.playSound(CONFIG.SOUNDS.PLAYSOUND_GAME_OVER, {volume: 0.8});
+
     await sleep(40);
 
     player.triggerEvent(CONFIG.EVENTS.GAME_OVER);
     await sleep(400);
 
     system.clearRun(soundLoop);
-    await player.removeTag(CONFIG.TAG_ELIMINATED);
+    player.removeTag(CONFIG.TAG_ELIMINATED);
 
     commandsToResetPlayerData(player);
 }
 
 function staticSoundLoop(player) {
-    player.playSound(CONFIG.SOUNDS.PLAYSOUND_STATIC, {volume: 0.3});
-
     const soundLoop = system.runInterval(() => {
         player.playSound(CONFIG.SOUNDS.PLAYSOUND_GAME_OVER, {volume: 0.8});
         player.playSound(CONFIG.SOUNDS.PLAYSOUND_STATIC, {volume: 0.3});
