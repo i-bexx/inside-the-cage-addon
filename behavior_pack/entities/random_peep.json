@@ -5,22 +5,12 @@
       "identifier": "game:random_peep",
       "is_spawnable": false,
       "is_summonable": true,
-      "is_experimental": false,
-
-      "scripts": {
-        "animate": [ "random_peep_controller" ]
-      },
-
-      "animations": {
-        "random_peep_controller": "controller.animation.random_peep_BP",
-        "is_standing_up": "animation.is_standing_up"
-      }
+      "is_experimental": false
     },
 
     "component_groups": {
       "is_sick": { "minecraft:mark_variant": { "value": 0 } },
-      "is_standing_up": { "minecraft:mark_variant": { "value": 1 } },
-      "is_healed": { "minecraft:mark_variant": { "value": 2 } }
+      "is_healed": { "minecraft:mark_variant": { "value": 1 } }
     },
 
     "components": {
@@ -72,7 +62,6 @@
     "events": {
       "minecraft:entity_spawned": { "add": { "component_groups": [ "is_sick" ] } },
       "is_sick_event": { "add": { "component_groups": [ "is_sick" ] } },
-      "is_standing_up_event": { "add": { "component_groups": [ "is_standing_up" ] } },
       "is_healed_event": { "add": { "component_groups": [ "is_healed" ] } }
     }
   }
