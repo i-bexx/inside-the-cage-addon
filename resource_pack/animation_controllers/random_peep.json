@@ -7,15 +7,7 @@
             "animations": [ "is_sick_idle" ],
             "transitions": [
               {
-                "is_standing_up": "variable.is_standing_up == 1"
-              }
-            ]
-          },
-          "is_standing_up": {
-            "animations": [ "is_standing_up" ],
-            "transitions": [
-              {
-                "is_healed": "query.all_animations_finished"
+                "is_healed": "query.mark_variant == 1"
               }
             ]
           },

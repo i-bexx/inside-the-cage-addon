@@ -7,8 +7,8 @@
 				"texture_width": 64,
 				"texture_height": 64,
 				"visible_bounds_width": 5,
-				"visible_bounds_height": 4,
-				"visible_bounds_offset": [0, 1, 0]
+				"visible_bounds_height": 5,
+				"visible_bounds_offset": [0, 1.5, 0]
 			},
 			"bones": [
 				{
@@ -23,9 +23,22 @@
 				{
 					"name": "body",
 					"parent": "waist",
-					"pivot": [0, 24, 0],
+					"pivot": [0, 24, 0]
+				},
+				{
+					"name": "chest",
+					"parent": "body",
+					"pivot": [0, 21, 2],
 					"cubes": [
-						{"origin": [-4, 12, -2], "size": [8, 12, 4], "uv": [16, 16]}
+						{"origin": [-4, 18, -2], "size": [8, 6, 4], "uv": [16, 16]}
+					]
+				},
+				{
+					"name": "stomach",
+					"parent": "body",
+					"pivot": [0, 15, 2],
+					"cubes": [
+						{"origin": [-4, 12, -2], "size": [8, 6, 4], "uv": [16, 22]}
 					]
 				},
 				{
