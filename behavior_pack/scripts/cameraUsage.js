@@ -137,20 +137,21 @@ export function cameraUsed(player, sanityValue, staminaValue) {
  * Logic for turning the camera off.
  * Clears effects and restores the original camera item.
  */
-function cameraDeactivated(player) {
+export function cameraDeactivated(player, turnedoffAutomatically = false) {
     const stamina = getObjectiveScore(getStaminaObjective(), player.scoreboardIdentity);
     let isStaminaEmpty = stamina === 0;
 
-    // Execute all turn-off commands defined in CONFIG
-    // Using explicit commands here to ensure clarity
     const turnOffCommands = [
-        CONFIG.COMMANDS.CLEAR_CAM, // Just in case
-        `replaceitem entity @s slot.hotbar 8 ${CONFIG.ITEMS.CAMERA} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`, // Give camera back
+        CONFIG.COMMANDS.CLEAR_CAM,
+        `replaceitem entity @s slot.hotbar 8 ${CONFIG.ITEMS.CAMERA} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}` // Give camera back
+    ];
+    const stopCameraEffects = [
         CONFIG.COMMANDS.STOP_SHUTTER,
         CONFIG.COMMANDS.STOP_STATIC
-    ];
+    ]
 
-    turnOffCommands.forEach(cmd => player.runCommand(cmd));
+    if (!turnedoffAutomatically) turnOffCommands.forEach(cmd => player.runCommand(cmd));
+    stopCameraEffects.forEach(cmd => player.runCommand(cmd));
 
     // Reset player state
     player.triggerEvent(CONFIG.EVENTS.NORMAL);
@@ -161,7 +162,7 @@ function cameraDeactivated(player) {
     // Handle warning flags
     let didPlayerGetWarning = player.getDynamicProperty(CONFIG.PROPERTIES.TOLD_WARNING);
 
-    if (didPlayerGetWarning) {
+    if (didPlayerGetWarning && !turnedoffAutomatically) {
         player.runCommand(CONFIG.COMMANDS.CLEAR_WARNING);
         player.setDynamicProperty(CONFIG.PROPERTIES.WILL_GET_NO_SIGNAL, true);
     }
@@ -178,6 +179,7 @@ world.afterEvents.itemUse.subscribe(({source, itemStack}) => {
         const staminaValue = getObjectiveScore(getStaminaObjective(), source.scoreboardIdentity);
 
         cameraUsed(source, sanityValue, staminaValue);
+        stopInitiateCam();
 
     } else if (itemStack.typeId === CONFIG.ITEMS.CAMERA_OFF) {
         cameraDeactivated(source);
@@ -187,4 +189,5 @@ world.afterEvents.itemUse.subscribe(({source, itemStack}) => {
 export function stopInitiateCam() {
     if (timeoutId == undefined) return;
     system.clearRun(timeoutId);
+    timeoutId == undefined;
 }

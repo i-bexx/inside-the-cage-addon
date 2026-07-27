@@ -133,9 +133,6 @@
 			"curtain_close": {
 				"minecraft:mark_variant": {
 					"value": 554
-				},
-				"minecraft:movement": {
-					"value": 0.0
 				}
     	},
 			"static": {
@@ -196,6 +193,11 @@
 			"slowness": {
 				"minecraft:movement": {
 					"value": 0.03
+				}
+			},
+			"cannot_move": {
+				"minecraft:movement": {
+					"value": 0.0
 				}
 			}
 		},
@@ -351,11 +353,15 @@
 			},
 			"curtain_close_event": {
 				"add": { "component_groups": [ "curtain_close" ] },
-				"queue_command": { "command": [ "inputpermission set @s jump disabled" ] }
+				"queue_command": { "command": [ "inputpermission set @s jump disabled" ] },
+				"trigger": "cannot_move_event"
 			},
 			"curtain_open_event": {
         "add": { "component_groups": [ "curtain_open" ] },
 				"queue_command": { "command": [ "inputpermission set @s jump enabled" ] }
+			},
+			"cannot_move_event": {
+				"add": { "component_groups": [ "cannot_move" ] }
 			},
 			"static_event": {
         "add": { "component_groups": [ "static" ] }

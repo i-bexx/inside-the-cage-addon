@@ -13,6 +13,7 @@
     "ui/main_screen/mini_player.json",
     "ui/main_screen/notification.json",
     "ui/main_screen/souls_freed_counter.json",
+    "ui/main_screen/round_complete_curtain.json",
 
     "ui/main_screen/sanity/sanity.json",
     "ui/main_screen/sanity/sanity_frame.json",

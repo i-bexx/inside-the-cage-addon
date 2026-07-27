@@ -81,7 +81,8 @@ const COMMANDS_TO_RESET_GAME = [
     "scoreboard players set value global_ui 91",
     "fog @a remove b",
     "clear @a",
-    "camerashake stop @a"
+    "camerashake stop @a",
+    "inputpermission set @a movement enabled"
 ];
 
 // ==========================================
@@ -223,6 +224,7 @@ export function resetWorldDynamicPropertyData() {
   world.setDynamicProperty("cages4Activated", false);
   world.setDynamicProperty("cages5Activated", false);
   world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", false);
+  world.setDynamicProperty("roundCompleted", false);
 }
 
 export function resetFunctions() {

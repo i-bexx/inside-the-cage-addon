@@ -38,10 +38,12 @@ function fastUiTick() {
     
 
     // Stamina state
-    const staminaState = staminaString(player);
+    uiString += staminaString(player);
 
-    // Set UI string for stamina state
-    uiString += staminaState;
+
+    // Round complete state
+    if (world.getDynamicProperty("roundCompleted")) uiString += "\nround_completed_x";
+    else uiString += "\nround_completed_y";
 
 
     // When kit is used, sanity info updates right away

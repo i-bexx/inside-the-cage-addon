@@ -1,0 +1,70 @@
+{
+  "namespace": "round_complete_curtain",
+
+  "black_curtain_host": {
+    "type": "panel",
+    "size": [ "100%", "100%" ],
+    "property_bag": {
+      "#live_val_string": "",
+      "#hardcoded_condition": "round_completed_x",
+      "#conclusion": 0
+    },
+    "bindings": [
+      {
+        "binding_name": "#hud_subtitle_text_string",
+        "binding_condition": "always"
+      },
+      {
+        "binding_type": "view",
+        "binding_condition": "always",
+        "source_property_name": "(%.58s * #hud_subtitle_text_string - (%.41s * #hud_subtitle_text_string))",
+        "target_property_name": "#live_val_string"
+      },
+      {
+        "binding_type": "view",
+        "binding_condition": "always",
+        "source_property_name": "((#live_val_string = #hardcoded_condition) * 1)",
+        "target_property_name": "#conclusion"
+      }
+    ],
+    "controls": [
+      {
+        "black_curtain_collection": {
+          "type": "collection_panel",
+          "size": [ "100%", "100%" ],
+          "factory": {
+            "name": "black_curtain_factory",
+            "control_name": "round_complete_curtain.black_curtain"
+          },
+          "bindings": [
+            {
+              "binding_type": "view",
+              "binding_condition": "always",
+              "source_control_name": "black_curtain_host",
+              "source_property_name": "#conclusion",
+              "target_property_name": "#collection_length"
+            }
+          ]
+        }
+      }
+    ]
+  },
+
+  "black_curtain": {
+    "type": "image",
+    "size": [ "100%", "100%" ],
+    "texture": "textures/ui/Black",
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "alpha": 0.0,
+    "anims": [ "@round_complete_curtain.curtain_fade_in" ]
+  },
+
+  "curtain_fade_in": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 1.5,
+    "from": 0.0,
+    "to": 1.0
+  }
+}

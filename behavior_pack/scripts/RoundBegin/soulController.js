@@ -2,6 +2,7 @@ import { world, system } from "@minecraft/server";
 
 import { cameraUsed } from "../cameraUsage";
 import { getPlayersInRound } from "../utils";
+import { roundCompleted } from "./roundCompleted";
 import { teleportStalker, stopTeleportStalker } from "../stalkerEntity";
 import { warnPlayerAboutCam, stopWarnPlayerAboutCam } from "./cameraController";
 import { startCrosshairTracker, startPlayerShootTracker, stopCrosshairTracker, stopPlayerShootTracker } from "../cursorController";
@@ -17,7 +18,8 @@ const initialState = {
 	isSoulsFreedValueSufficient: false,
 	isSoulsFreedValue4: false,
 	isSoulsFreedValue5: false,
-	doesSoulsFreedValueExceed: false
+	doesSoulsFreedValueExceed: false,
+	areAllCagesCollected: false
 }
 
 const state = new Proxy({ ...initialState }, {
@@ -26,10 +28,11 @@ const state = new Proxy({ ...initialState }, {
 		
 		target[key] = value
 
-		let isSoulsFreedValueSufficient = target["isSoulsFreedValueSufficient"]
-		let isSoulsFreedValue4 = target["isSoulsFreedValue4"]
-		let isSoulsFreedValue5 = target["isSoulsFreedValue5"]
-		let doesSoulsFreedValueExceed = target["doesSoulsFreedValueExceed"]
+		let isSoulsFreedValueSufficient = target["isSoulsFreedValueSufficient"];
+		let isSoulsFreedValue4 = target["isSoulsFreedValue4"];
+		let isSoulsFreedValue5 = target["isSoulsFreedValue5"];
+		let doesSoulsFreedValueExceed = target["doesSoulsFreedValueExceed"];
+		let areAllCagesCollected = target["areAllCagesCollected"];
 
 		const players = getPlayersInRound();
 
@@ -42,6 +45,8 @@ const state = new Proxy({ ...initialState }, {
 			soulsFreedValue5();
 	} else if (doesSoulsFreedValueExceed) {
 			soulsFreedValueExceeded(players);
+	} else if (areAllCagesCollected) {
+			roundCompleted();
 	}
 	return true;
 }
@@ -53,10 +58,11 @@ export function soulsAmountCheck() {
 	intervalId = system.runInterval(() => {
 	let soulsFreedValue = getObjectiveScore(getSoulsFreedObjective(), getValueParticipant());
 
-	state.isSoulsFreedValueSufficient = [4, 5].includes(soulsFreedValue) && !world.getDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam")
-	state.isSoulsFreedValue4 = soulsFreedValue == 4 && world.getDynamicProperty("cages4Activated") == false
-	state.isSoulsFreedValue5 = soulsFreedValue == 5 && world.getDynamicProperty("cages5Activated") == false
-	state.doesSoulsFreedValueExceed = soulsFreedValue > 5
+	state.isSoulsFreedValueSufficient = [4, 5].includes(soulsFreedValue) && !world.getDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam");
+	state.isSoulsFreedValue4 = soulsFreedValue == 4 && world.getDynamicProperty("cages4Activated") == false;
+	state.isSoulsFreedValue5 = soulsFreedValue == 5 && world.getDynamicProperty("cages5Activated") == false;
+	state.doesSoulsFreedValueExceed = soulsFreedValue == 6;
+	state.areAllCagesCollected = soulsFreedValue == 7;
 	}, 100)
 }
 
@@ -89,7 +95,6 @@ async function soulsFreedValueExceeded(players) {
 	stopCrosshairTracker();
 	stopPlayerShootTracker();
 	teleportStalker();
-	system.clearRun(intervalId);
 
 	stopWarnPlayerAboutCam();
 	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", false);
