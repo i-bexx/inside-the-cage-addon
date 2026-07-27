@@ -227,31 +227,36 @@
         "array_name": "controls",
         "operation": "insert_front",
         "value": [
-            { 
-              "@coin.coin_panel": {
-                "layer": 10
-              } 
-            },
-            {
-            "@navigation_panel.navigation_panel_parent": {
-                "layer": 20
-              }
-            },
-            {
-              "@hud.screen_middle_left_stack": {
-                "layer": 30
-              } 
-            },
-            {
-              "@notification.notification_text": {
-                "layer": 50
-              }
-            },
-            {
-              "@hud_crosshair.cursor_container": {
-                "layer": 600
-              }
+          {
+            "black_curtain_host@round_complete_curtain.black_curtain_host": {
+              "layer": 1
             }
+          },
+          { 
+            "@coin.coin_panel": {
+              "layer": 10
+            } 
+          },
+          {
+          "@navigation_panel.navigation_panel_parent": {
+              "layer": 20
+            }
+          },
+          {
+            "@hud.screen_middle_left_stack": {
+              "layer": 30
+            } 
+          },
+          {
+            "@notification.notification_text": {
+              "layer": 50
+            }
+          },
+          {
+            "@hud_crosshair.cursor_container": {
+              "layer": 600
+            }
+          }
         ]
       }
     ]
