@@ -79,7 +79,7 @@ const COMMANDS_TO_RESET_GAME = [
     "scoreboard players set value game_ended_early 0",
     "scoreboard players set value show_position 1",
     "scoreboard players set value global_ui 91",
-    "fog @a remove b",
+    "fog @a remove in_round_fog",
     "clear @a",
     "camerashake stop @a",
     "inputpermission set @a movement enabled"
@@ -114,7 +114,7 @@ export function commandsToResetPlayerData(player, playerJoined = false) {
     player.runCommand("tp @s -183 68 -97");
   
   player.runCommand("event entity @s battery_is_full_event");
-  player.runCommand("fog @s remove default_fog");
+  player.runCommand("fog @s remove in_round_fog");
   player.runCommand(`recipe take @s "*"`);
   player.runCommand("scoreboard players set @s Stamina 10");
   player.runCommand("scoreboard players set @s stamina_limit 10");
