@@ -2,7 +2,7 @@
 	"format_version": "1.16.100",
 	"minecraft:fog_settings": {
 		"description": {
-			"identifier": "game:default"
+			"identifier": "game:in_round_default"
 		},
 		"distance": {
 			"air": {
