@@ -2,6 +2,7 @@ import { world } from "@minecraft/server";
 
 import { sleep } from "../utils";
 import { cameraDeactivated } from "../cameraUsage";
+import { slowUiTick } from "../UI/slowUiTick";
 import { resetPlayerDynamicPropertyData, clearPlayerMaps, stopFunctionsInMaps, commandsToResetPlayerData } from "../resetStats";
 import { resetFunctions, resetMaps, resetWorldDynamicPropertyData, resetEntitiesData } from "../resetStats";
 
@@ -13,16 +14,19 @@ export async function roundCompleted() {
 
 		player.runCommand("inputpermission set @s movement disabled");
     player.triggerEvent("cannot_move_event");
+    player.removeTag("show_in_round_personal_ui");
 
     stopFunctionsInMaps(player.id);
     clearPlayerMaps(player.id);
     resetPlayerDynamicPropertyData(player);
 	}
-  
+
+  slowUiTick();
+
   resetFunctions();
   resetMaps();
   resetWorldDynamicPropertyData();
-  resetWorldDynamicPropertyData();
+  resetEntitiesData();
 
 	world.setDynamicProperty("roundCompleted", true);
 
