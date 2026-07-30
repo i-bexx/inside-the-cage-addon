@@ -77,6 +77,18 @@
         { "punctuation": false },
         { "capitals": false }
       ]
+    },
+
+    "controller.render.round_completed_dialog": {
+      "geometry": "geometry.round_completed_dialog",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Texture.white_font" ],
+      "part_visibility": [
+        { "*": true },
+        { "alphabet": false },
+        { "punctuation": false },
+        { "capitals": false }
+      ]
     }
   }
 }

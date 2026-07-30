@@ -37,6 +37,7 @@
         "battery": "geometry.battery_player",
         "curtain": "geometry.curtain",
         "new_game_Started": "geometry.new_game_Started",
+        "round_completed_dialog": "geometry.round_completed_dialog",
         "game_over": "geometry.game_over",
         "turnOffCamWarning": "geometry.turnOffCamWarning"
       },
@@ -80,6 +81,7 @@
 
           "new_game_controller",
           "curtain",
+          "round_completed_dialog_controller",
           "game_over",
           
           "batteryhud1",
@@ -117,6 +119,9 @@
         "new_game_text_anim": "animation.new_game_Started.text",
         "new_game_spin_anim": "animation.new_game_Started",
         "new_game_controller": "controller.animation.new_game_started",
+
+        "round_completed_dialog_controller": "controller.animation.round_completed_dialog",
+        "round_completed_dialog_anim": "animation.round_completed_dialog",
 
         "turnOffCamWarning": "controller.animation.turnOffCamWarning",
         "turnOffCamWarningAnim": "animation.turnOffCamWarning",
@@ -217,6 +222,7 @@
         { "controller.render.turnOffCamWarning": "variable.is_first_person && query.mark_variant >= 555 && query.is_item_name_any('slot.armor.chest', 0, 'game:turnoffcamwarning')"},
         { "controller.render.battery.first_person": "variable.is_first_person && (query.mark_variant >= 555 || query.mark_variant == 20)" },
         { "controller.render.new_game_Started": "variable.is_first_person && (query.mark_variant == 1 || query.mark_variant == 2)" },
+        { "controller.render.round_completed_dialog": "variable.is_first_person && query.mark_variant == 3" },
         { "controller.render.curtain.first_person": "variable.is_first_person && (query.mark_variant >= 553 && query.mark_variant <= 562)" },
         { "controller.render.game_over": "variable.is_first_person && query.mark_variant == 20" }
       ],
