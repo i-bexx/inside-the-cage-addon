@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.round_completed_dialog": {
+      "states": {
+        "default": {
+          "transitions": [
+            { "dialog_initiate": "q.is_alive && query.mark_variant == 3" }
+          ]
+        },
+        "dialog_initiate": {
+          "animations": [ "round_completed_dialog_anim" ],
+          "transitions": [
+            { "default": "query.mark_variant != 3" }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -114,6 +114,11 @@
 					"value": 2
 				}
     	},
+			"round_completed_dialog": {
+				"minecraft:mark_variant": {
+					"value": 3
+				}
+			},
 			"game_over": {
 				"minecraft:mark_variant": {
 					"value": 20
@@ -348,6 +353,15 @@
 			"is_not_shooting_event": {
 				"add": { "component_groups": [ "is_not_shooting" ] }
 			},
+			"new_game_Started": {
+				"add": { "component_groups": [ "new_game_Started" ] }
+			},
+			"new_game_started_text": {
+				"add": { "component_groups": [ "new_game_started_text" ] }
+			},
+			"round_completed_dialog_event": {
+				"add": { "component_groups": [ "round_completed_dialog" ] }
+			},
 			"game_over_event": {
 				"add": { "component_groups": [ "game_over" ] }
 			},
@@ -389,12 +403,6 @@
 			},
 			"slowness_event": {
 				"add": { "component_groups": [ "slowness" ] }
-			},
-			"new_game_Started": {
-				"add": { "component_groups": [ "new_game_Started" ] }
-			},
-			"new_game_started_text": {
-				"add": { "component_groups": [ "new_game_started_text" ] }
 			},
 			"battery_is_full_event": {
 				"filters": {
