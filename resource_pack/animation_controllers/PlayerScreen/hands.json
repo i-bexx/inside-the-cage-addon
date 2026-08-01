@@ -8,7 +8,7 @@
                   "hands"
               ],
               "transitions": [
-                { "attack": "q.is_alive && (variable.attack_time > 0 && variable.item_use_normalized <= 0) && query.get_equipped_item_name != 'map'" },
+                { "attack": "q.is_alive && (variable.attack_time > 0 && variable.item_use_normalized <= 0)" },
                 { "swim": "q.is_alive && q.is_swimming" },
                 { "walk": "q.is_alive && query.is_moving && query.ground_speed > 4 && query.is_on_ground && !(query.ground_speed > 5) && variable.not_holding_special_items && !(q.is_item_name_any('slot.armor.legs', 'p:move_right')) && !(q.is_item_name_any('slot.armor.legs', 'p:move_left'))"},
                 { "move_right": "q.is_alive && q.is_item_name_any('slot.armor.legs', 'p:move_right') && query.is_on_ground"},
@@ -38,9 +38,9 @@
               ],
               "transitions": [
                 { "default": "!(q.is_swimming)" },
-                { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0) && query.get_equipped_item_name != 'map'" }
+                { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0)" }
               ],
-              "blend_transition": 0.3
+              "blend_transition": 0.9
           },
           "walk": {
               "animations": [
@@ -52,7 +52,7 @@
                 { "move_right": "q.is_item_name_any('slot.armor.legs', 'p:move_right') && query.is_on_ground"},
                 { "move_left": "q.is_item_name_any('slot.armor.legs', 'p:move_left') && query.is_on_ground"},
                 { "run": "query.ground_speed > 5 && query.is_on_ground && !(query.is_in_water) && !(query.is_in_lava)" },
-                { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0) && query.get_equipped_item_name != 'map'" },
+                { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0)" },
                 { "despawn_right_but_left_empty": "(!(query.is_item_name_any('slot.weapon.mainhand', 0, '')) && query.is_item_name_any('slot.weapon.offhand', 0, '')) && variable.not_holding_special_items" },
                 { "despawn_left_but_right_empty": "(query.is_item_name_any('slot.weapon.mainhand', 0, '') && !(query.is_item_name_any('slot.weapon.offhand', 0, ''))) && variable.not_holding_special_items" },
                 { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
@@ -72,7 +72,7 @@
                 { "walk": "query.is_moving && query.ground_speed > 4 && query.is_on_ground && !(query.ground_speed > 5) && !(q.is_item_name_any('slot.armor.legs', 'p:move_right')) && !(q.is_item_name_any('slot.armor.legs', 'p:move_left'))"},
                 { "move_left": "q.is_item_name_any('slot.armor.legs', 'p:move_left') && query.is_on_ground"},
                 { "run": "query.ground_speed > 5 && query.is_on_ground && !(query.is_in_water) && !(query.is_in_lava)" },
-                { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0) && query.get_equipped_item_name != 'map'" },
+                { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0)" },
                 { "despawn_right_but_left_empty": "(!(query.is_item_name_any('slot.weapon.mainhand', 0, '')) && query.is_item_name_any('slot.weapon.offhand', 0, '')) && variable.not_holding_special_items" },
                 { "despawn_left_but_right_empty": "(query.is_item_name_any('slot.weapon.mainhand', 0, '') && !(query.is_item_name_any('slot.weapon.offhand', 0, ''))) && variable.not_holding_special_items" },
                 { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
@@ -92,7 +92,7 @@
                 { "walk": "query.is_moving && query.ground_speed > 4 && query.is_on_ground && !(query.ground_speed > 5) && !(q.is_item_name_any('slot.armor.legs', 'p:move_right')) && !(q.is_item_name_any('slot.armor.legs', 'p:move_left'))"},
                 { "move_right": "q.is_item_name_any('slot.armor.legs', 'p:move_right') && query.is_on_ground"},
                 { "run": "query.ground_speed > 5 && query.is_on_ground && !(query.is_in_water) && !(query.is_in_lava)" },
-                { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0) && query.get_equipped_item_name != 'map'" },
+                { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0)" },
                 { "despawn_right_but_left_empty": "(!(query.is_item_name_any('slot.weapon.mainhand', 0, '')) && query.is_item_name_any('slot.weapon.offhand', 0, '')) && variable.not_holding_special_items" },
                 { "despawn_left_but_right_empty": "(query.is_item_name_any('slot.weapon.mainhand', 0, '') && !(query.is_item_name_any('slot.weapon.offhand', 0, ''))) && variable.not_holding_special_items" },
                 { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
@@ -109,7 +109,7 @@
               "transitions": [
                 { "default": "!(query.is_moving && query.is_on_ground && query.ground_speed > 5) || query.is_in_water" },
                 { "swim": "q.is_swimming" },
-                { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0) && query.get_equipped_item_name != 'map'" },
+                { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0)" },
                 { "despawn_right_but_left_empty": "(!(query.is_item_name_any('slot.weapon.mainhand', 0, '')) && query.is_item_name_any('slot.weapon.offhand', 0, '')) && variable.not_holding_special_items" },
                 { "despawn_left_but_right_empty": "(query.is_item_name_any('slot.weapon.mainhand', 0, '') && !(query.is_item_name_any('slot.weapon.offhand', 0, ''))) && variable.not_holding_special_items" },
                 { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },

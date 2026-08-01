@@ -24,5 +24,5 @@ This document details the specific entities and Molang logic driving the gamepla
 Molang is heavily utilized across the project for state-driven rendering and animation triggers:
 
 - **Conditional rendering:** `q.variant`, `q.mark_variant`, and `q.skin_id` are used across render controllers to dynamically switch textures based on the game state (e.g., swapping crosshair colors when aiming at different targets).
-- **Animation conditions:** `q.is_item_equipped` and `q.get_equipped_item_name` gate weapon-specific animation triggers, preventing invalid state transitions.
+- **Animation conditions:** `q.is_item_equipped` gate weapon-specific animation triggers, preventing invalid state transitions.
 - **Math expressions:** Expressions like `math.floor` and `math.mod` are injected into animation files to control frame-based UI animations.
