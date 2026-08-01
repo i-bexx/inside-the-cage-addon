@@ -1,4 +1,4 @@
-# 🔬 Advanced UI Systems — Deep Dive
+# 🔬 Advanced UI Systems
 
 > Beyond the HUD elements shown in the main README, this project includes several advanced UI systems.
 
@@ -10,7 +10,7 @@
 
 A custom handheld scanning tool that locates hidden cage entities and displays live tracking data through a fully custom UI panel.
 
-- Calculates **3D Euclidean distance**, compass direction, elevation difference, and estimated walking time (ETA) to the nearest unbroken cage
+- Calculates **3D Euclidean distance**, compass direction, elevation difference, and estimated walking time (ETA) to an unbroken cage
 - Renders a **dynamic signal strength icon** (low/normal/high) based on distance thresholds
 - Adds a **deviation integer** to coordinates — the readings are intentionally imprecise, adding gameplay tension
 - Background features a **3-phase static noise animation** — three noise textures flickering at different intervals, creating a "scanning radar" aesthetic
@@ -40,14 +40,14 @@ A multi-scene NPC conversation system with branching choices and persistent stat
 <details>
 <summary>⚙️ How it works under the hood</summary>
 <br>
-The JSON UI panel switches between 3 container modes (<code>conversation_part</code>, <code>question_part</code>, <code>farewell_part</code>) using <code>#form_text</code> body data as a visibility toggle. Each mode has its own layout — grids for dialogue lines, split buttons for yes/no choices.
+The JSON UI panel switches between 3 container elements (<code>conversation_part</code>, <code>question_part</code>, <code>farewell_part</code>) using <code>#form_text</code> body data as a visibility toggle. Each mode has its own layout — grids for dialogue lines, split buttons for yes/no choices.
 </details>
 
 ---
 
 ## 🔔 Toast Screen — Vanilla Notification Hijacking
 
-A technique that repurposes Minecraft's **hardcoded recipe-unlock toast** to display custom in-game alerts — something Bedrock provides no official API for.
+A technique that repurposes Minecraft's **hardcoded recipe-unlock toast** to display custom in-game alerts.
 
 - Displays a custom "Coin bag is now full!" notification using the vanilla toast popup system
 - Works on both Classic (desktop) and Pocket (mobile) UI modes

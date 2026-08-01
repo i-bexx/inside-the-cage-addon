@@ -18,14 +18,17 @@ The game utilizes a custom server-side stamina system. It detects when players s
 Players are equipped with a custom camera item that applies a geo-model overlay to the screen. 
 
 <div align="center">
-  <img src="../assets/gifs/position_lost.gif" alt="Position Lost" width="600"/>
+  <img src="../assets/gifs/static_normal.gif" alt="Camera Static Normal" width="600"/>
 </div>
 
-- **Stalker Entity:** A custom entity that utilizes per-player raycast tracking to determine if the player is looking at it.
 - **Sanity Drain:** Looking at the stalker triggers a progressive sanity drain. This is visually represented by VHS static overlays, screen shake, and heart-pounding audio effects.
 - Reaching 0 Sanity results in an animated "Game Over" sequence.
 
+<div align="center">
+  <img src="../assets/gifs/static_glitch.gif" alt="Glitch Static" width="600"/>
+</div>
+
 ## 💰 Economy & Combat
-- **Economy:** Players collect coins which can be used in a compass-based shop system to purchase upgrades, weapons, and consumables.
+- **Economy:** Players collect coins which can be used in shop system to purchase upgrades, weapons, and consumables.
 - **Combat:** Features a fully animated combat system with a pistol, combat knife, and toxic bombs—each utilizing custom attachable models and bone animations.
-- **Objective:** The core objective requires players to locate 7 cage entities and break them. This is facilitated by a custom "Cage Detector" tool that calculates and displays real-time 3D distance, signal strength, and ETA to the nearest cage.
+- **Objective:** The core objective requires players to locate 7 cage entities and break them.
