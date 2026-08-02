@@ -4,32 +4,26 @@
     "controller.animation.battery_static": {
       "states": {
           "default": {
-            "animations": [
-              "batteryStaticStopAnim"
-            ],
+            "animations": [ "battery_static_stop_anim" ],
             "transitions": [
-              { "batteryStaticAnim": "q.is_alive && (query.mark_variant == 557 || query.mark_variant == 560 || query.mark_variant == 561 || query.mark_variant == 562 || query.mark_variant == 20)" },
-              { "batteryIsCritical": "q.is_alive && query.is_item_name_any('slot.armor.head', 'battery:isCritical')" }
+              { "battery_static": "q.is_alive && (query.mark_variant == 557 || query.mark_variant == 560 || query.mark_variant == 561 || query.mark_variant == 562 || query.mark_variant == 20)" },
+              { "battery_is_critical": "q.is_alive && query.is_item_name_any('slot.armor.head', 'battery:isCritical')" }
             ]
         },
-        "batteryStaticAnim": {
-          "animations": [
-              "batteryStaticAnim"
-            ],
-            "transitions": [
+        "battery_static": {
+          "animations": [ "battery_static_anim" ],
+          "transitions": [
             { "default": "query.mark_variant == 555 || query.mark_variant == 0" }
           ]
         },
-        "batteryIsCritical": {
-          "animations": [
-            "batteryIsCriticalAnim"
-          ],
+        "battery_is_critical": {
+          "animations": [ "battery_is_critical_anim" ],
           "transitions": [
-            { "batteryStaticAnim": "(query.mark_variant == 557 || query.mark_variant == 560 || query.mark_variant == 561 || query.mark_variant == 562 || query.mark_variant == 20)" },
+            { "battery_static": "(query.mark_variant == 557 || query.mark_variant == 560 || query.mark_variant == 561 || query.mark_variant == 562 || query.mark_variant == 20)" },
             { "default": "(query.mark_variant == 0 || query.mark_variant == 555) && !query.is_item_name_any('slot.armor.head', 'battery:isCritical')" }
           ]
         }
       }
-  }
+    }
   }
 }

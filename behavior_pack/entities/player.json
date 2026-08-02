@@ -405,22 +405,6 @@
 				"add": { "component_groups": [ "slowness" ] }
 			},
 			"battery_is_full_event": {
-				"filters": {
-					"all_of": [
-						{
-							"test": "is_family",
-							"subject": "self",
-							"operator": "==",
-							"value": "battery_is_not_full"
-						},
-						{
-							"test": "is_family",
-							"subject": "self",
-							"operator": "!=",
-							"value": "battery_is_full"
-						}
-					]
-				},
 				"remove": { "component_groups": [ "battery_is_not_full" ] },
 				"add": { "component_groups": [ "battery_is_full" ] }
 			},

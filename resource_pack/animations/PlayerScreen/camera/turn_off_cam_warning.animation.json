@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.turnOffCamWarning": {
+		"animation.camera.turn_off_cam_warning": {
 			"loop": true,
 			"animation_length": 1,
 			"bones": {
@@ -24,7 +24,7 @@
 				}
 			}
 		},
-		"animation.turnOffCamWarningStop": {
+		"animation.camera.turn_off_cam_warning_stop": {
 			"loop": "hold_on_last_frame"
 		}
 	}
