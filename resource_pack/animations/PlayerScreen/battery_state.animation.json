@@ -1,120 +1,103 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.battery.decrease1": {
+		"animation.battery.decrease_1": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 0.0417,
 			"bones": {
 				"battery_1": {
-					"position": {
-						"0.0": [0, 0, 0],
-						"0.0417": {
-							"pre": [0, 0, 0],
-							"post": [0, 18, 5]
-						}
-					}
+					"position": [0, 18, 5]
 				}
 			}
 		},
-		"animation.battery.decrease2": {
+		"animation.battery.decrease_2": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 0.0417,
 			"bones": {
 				"battery_2": {
-					"position": {
-						"0.0": [0, 0, 0],
-						"0.0417": {
-							"pre": [0, 0, 0],
-							"post": [0, 18, 5]
-						}
-					}
+					"position": [0, 18, 5]
+				},
+				"battery_1": {
+					"position": [0, 18, 5]
 				}
 			}
 		},
-		"animation.battery.decrease3": {
+		"animation.battery.decrease_3": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 0.0417,
 			"bones": {
 				"battery_3": {
-					"position": {
-						"0.0": [0, 0, 0],
-						"0.0417": {
-							"pre": [0, 0, 0],
-							"post": [0, 18, 5]
-						}
-					}
+					"position": [0, 18, 5]
+				},
+				"battery_2": {
+					"position": [0, 18, 5]
+				},
+				"battery_1": {
+					"position": [0, 18, 5]
 				}
 			}
 		},
-		"animation.battery.decrease4": {
+		"animation.battery.decrease_4": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 0.0417,
 			"bones": {
 				"battery_4": {
-					"position": {
-						"0.0": [0, 0, 0],
-						"0.0417": {
-							"pre": [0, 0, 0],
-							"post": [0, 18, 5]
-						}
-					}
+					"position": [0, 18, 5]
+				},
+				"battery_3": {
+					"position": [0, 18, 5]
+				},
+				"battery_2": {
+					"position": [0, 18, 5]
+				},
+				"battery_1": {
+					"position": [0, 18, 5]
 				}
 			}
 		},
-		"animation.battery.increase1": {
+		"animation.battery.increase_1": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 0.0417,
 			"bones": {
 				"battery_1": {
-					"position": {
-						"0.0": [0, 18, 5],
-						"0.0417": {
-							"pre": [0, 18, 5],
-							"post": [0, 0, 0]
-						}
-					}
+					"position": [0, 0, 0]
 				}
 			}
 		},
-		"animation.battery.increase2": {
+		"animation.battery.increase_2": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 0.0417,
 			"bones": {
 				"battery_2": {
-					"position": {
-						"0.0": [0, 18, 5],
-						"0.0417": {
-							"pre": [0, 18, 5],
-							"post": [0, 0, 0]
-						}
-					}
+					"position": [0, 0, 0]
+				},
+				"battery_1": {
+					"position": [0, 18, 5]
 				}
 			}
 		},
-		"animation.battery.increase3": {
+		"animation.battery.increase_3": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 0.0417,
 			"bones": {
 				"battery_3": {
-					"position": {
-						"0.0": [0, 18, 5],
-						"0.0417": {
-							"pre": [0, 18, 5],
-							"post": [0, 0, 0]
-						}
-					}
+					"position": [0, 0, 0]
+				},
+				"battery_2": {
+					"position": [0, 18, 5]
+				},
+				"battery_1": {
+					"position": [0, 18, 5]
 				}
 			}
 		},
-		"animation.battery.increase4": {
+		"animation.battery.increase_4": {
 			"loop": "hold_on_last_frame",
-			"animation_length": 0.0417,
 			"bones": {
 				"battery_4": {
-					"position": {
-						"0.0": [0, 18, 5],
-						"0.0417": {"pre": [0, 18, 5], "post": [0, 0, 0]}
-					}
+					"position": [0, 0, 0]
+				},
+				"battery_3": {
+					"position": [0, 18, 5]
+				},
+				"battery_2": {
+					"position": [0, 18, 5]
+				},
+				"battery_1": {
+					"position": [0, 18, 5]
 				}
 			}
 		},
@@ -154,7 +137,7 @@
 				}
 			}
 		},
-		"animation.battery_player.staticStop": {
+		"animation.battery_player.static_stop": {
 			"loop": "hold_on_last_frame",
 			"bones": {
 				"battery": {
@@ -162,7 +145,7 @@
 				}
 			}
 		},
-		"animation.battery_player.isCritical": {
+		"animation.battery_player.is_critical": {
 			"loop": true,
 			"animation_length": 1.5,
 			"bones": {

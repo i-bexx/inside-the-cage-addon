@@ -7,8 +7,8 @@
           "transitions": [
             { "static_true": "q.is_alive && (query.mark_variant == 560 || query.mark_variant == 561 || query.mark_variant == 562 || query.mark_variant == 20)" },
             { "static_low_sanity": "q.is_alive && q.mark_variant == 556" },
-            { "staticNoSignal": "q.is_alive && q.mark_variant == 557" },
-            { "initializationBeforeLockingTheCam": "q.is_alive && q.mark_variant == 558" }
+            { "no_signal": "q.is_alive && q.mark_variant == 557" },
+            { "initialization_before_locking_the_cam": "q.is_alive && q.mark_variant == 558" }
           ]
         },
         "static_true": {
@@ -18,7 +18,7 @@
           "transitions": [
             { "static_back_to_normal": "q.mark_variant == 555" },
             { "static_low_sanity": "q.mark_variant == 556" },
-            { "staticNoSignal": "q.mark_variant == 557" },
+            { "no_signal": "q.mark_variant == 557" },
             { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
           ]
         },
@@ -29,7 +29,7 @@
           "transitions": [
             { "static_true": "q.mark_variant >= 560" },
             { "static_low_sanity": "q.mark_variant == 556" },
-            { "staticNoSignal": "q.mark_variant == 557" },
+            { "no_signal": "q.mark_variant == 557" },
             { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
           ]
         },
@@ -40,13 +40,13 @@
           "transitions": [
             { "static_true": "q.mark_variant >= 560" },
             { "static_back_to_normal": "q.mark_variant == 555" },
-            { "staticNoSignal": "q.mark_variant == 557" },
+            { "no_signal": "q.mark_variant == 557" },
             { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
           ]
         },
-        "staticNoSignal": {
+        "no_signal": {
           "animations": [
-            "staticNoSignal"
+            "no_signal_anim"
           ],
           "transitions": [
             { "static_true": "q.mark_variant >= 560" },
@@ -55,9 +55,9 @@
             { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
           ]
         },
-        "initializationBeforeLockingTheCam": {
+        "initialization_before_locking_the_cam": {
           "animations": [
-            "initializationBeforeLockingTheCamAnim"
+            "initialization_before_locking_the_cam_anim"
           ],
           "transitions": [
             { "default": "query.mark_variant == 0 || query.all_animations_finished" }

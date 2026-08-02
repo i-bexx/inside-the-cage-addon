@@ -1,16 +1,16 @@
 {
   "format_version": "1.10.0",
   "animation_controllers": {
-    "controller.animation.static_line": {
+    "controller.animation.camera_line": {
       "states": {
         "default": {
           "transitions": [
-            { "static_line": "q.is_alive && query.mark_variant >= 555" }
+            { "camera_line": "q.is_alive && query.mark_variant >= 555" }
           ]
         },
-        "static_line": {
+        "camera_line": {
           "animations": [
-            "static_line_anim"
+            "camera_line_anim"
           ],
           "transitions": [
             { "default": "query.mark_variant < 555 && query.mark_variant != 20" }

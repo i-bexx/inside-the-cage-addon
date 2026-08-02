@@ -1,0 +1,33 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.camera_rec": {
+      "states": {
+        "default": {
+          "transitions": [
+            { "camera_rec_normal": "q.is_alive && query.mark_variant == 555 || query.mark_variant == 556" },
+            { "camera_rec_static": "q.is_alive && (query.mark_variant == 557 || query.mark_variant == 560 || query.mark_variant == 561 || query.mark_variant == 562 || query.mark_variant == 20)" }
+          ]
+        },
+        "camera_rec_normal": {
+          "animations": [
+            "camera_rec_normal"
+          ],
+          "transitions": [
+            { "camera_rec_static": "(query.mark_variant == 557 || query.mark_variant == 560 || query.mark_variant == 561 || query.mark_variant == 562 || query.mark_variant == 20)" },
+            { "default": "query.mark_variant < 555" }
+          ]
+        },
+        "camera_rec_static": {
+          "animations": [
+            "camera_rec_static"
+          ],
+          "transitions": [
+            { "camera_rec_normal": "query.mark_variant == 555 || query.mark_variant == 556" },
+            { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
+          ]
+        }
+      }
+    }
+  }
+}

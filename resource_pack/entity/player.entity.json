@@ -19,11 +19,11 @@
         "default": "textures/entity/steve",
         "cape": "textures/entity/cape_invisible",
 
-        "static": "textures/entity/game/Static/static1",
-        "static1": "textures/entity/game/Static/static1",
-        "static2": "textures/entity/game/Static/static2",
-        "static3": "textures/entity/game/Static/static3",
-        "cameraNoSignal": "textures/entity/game/Static/cameraNoSignal",
+        "static_normal": "textures/entity/game/Static/static_1",
+        "static_1": "textures/entity/game/Static/static_1",
+        "static_2": "textures/entity/game/Static/static_2",
+        "static_3": "textures/entity/game/Static/static_3",
+        "camera_no_signal": "textures/entity/game/Static/camera_no_signal",
 
         "battery": "textures/entity/game/battery_player",
         "white_font": "textures/entity/game/Fonts/white_font",
@@ -35,11 +35,11 @@
         "cape": "geometry.cape",
         "static": "geometry.static",
         "battery": "geometry.battery_player",
-        "curtain": "geometry.curtain",
-        "new_game_Started": "geometry.new_game_Started",
+        "game_start_curtain": "geometry.game_start_curtain",
+        "new_game_started_dialog": "geometry.new_game_started_dialog",
         "round_completed_dialog": "geometry.round_completed_dialog",
-        "game_over": "geometry.game_over",
-        "turnOffCamWarning": "geometry.turnOffCamWarning"
+        "game_over_scene": "geometry.game_over_scene",
+        "turn_off_cam_warning": "geometry.turn_off_cam_warning"
       },
 
       "scripts": {
@@ -74,21 +74,18 @@
           { "hands_controller": "variable.is_first_person && (query.mark_variant == 0 || query.mark_variant == 553)" },
           { "hands_controller_3rd_person": "!variable.is_first_person && !variable.not_holding_special_items" },
           
-          "static",
-          "static_normal",
-          "static_line",
-          "turnOffCamWarning",
+          "camera_rec_controller",
+          "camera_line_controller",
+          "static_controller",
+          "turn_off_cam_warning_controller",
 
-          "new_game_controller",
-          "curtain",
+          "new_game_started_controller",
+          "game_start_curtain",
           "round_completed_dialog_controller",
-          "game_over",
+          "game_over_scene",
           
-          "batteryhud1",
-          "batteryhud2",
-          "batteryhud3",
-          "batteryhud4",
-          "batteryStatic"
+          "batteryhud",
+          "battery_static"
 
         ]
       },
@@ -96,57 +93,54 @@
       "animations": {
         "root": "controller.animation.player.root",
 
-        "static_normal": "controller.animation.static_normal",
-        "static_line": "controller.animation.static_line",
-        "static": "controller.animation.static",
-        "camera_start_anim": "animation.static.cameraStart",
-        "cameraNormalRecText": "animation.static.cameraNormalRecText",
-        "cameraStaticRecText": "animation.static.cameraStaticRecText",
-        "static_line_anim": "animation.static.line",
-        "static_anim": "animation.static.static",
-        "static_low_sanity_anim": "animation.static.sanity_low",
-        "static_back_to_normal_anim": "animation.static.back_to_normal",
-        "staticNoSignal": "animation.static.noSignal",
-        "initializationBeforeLockingTheCamAnim": "animation.static.initializationBeforeLockingTheCam",
+        "camera_rec_controller": "controller.animation.camera_rec",
+        "camera_line_controller": "controller.animation.camera_line",
+        "static_controller": "controller.animation.static",
+        "camera_start_anim": "animation.camera.start",
+        "camera_rec_normal": "animation.camera.rec_normal",
+        "camera_rec_static": "animation.camera.rec_static",
+        "camera_line_anim": "animation.camera.line",
+        "static_anim": "animation.camera.static",
+        "static_low_sanity_anim": "animation.camera.sanity_low_static",
+        "static_back_to_normal_anim": "animation.camera.back_to_normal",
+        "no_signal_anim": "animation.camera.no_signal",
+        "initialization_before_locking_the_cam_anim": "animation.camera.initialization_before_locking_the_cam",
 
-        "curtain": "controller.animation.curtain",
-        "curtain_close_anim": "animation.curtain_close",
-        "curtain_open_anim": "animation.curtain_open",
+        "game_start_curtain": "controller.animation.game_start_curtain",
+        "game_start_curtain_close_anim": "animation.curtain_close",
+        "game_start_curtain_open_anim": "animation.curtain_open",
 
         "game_over_anim": "animation.game_over",
-        "game_over": "controller.animation.game_over",
+        "game_over_scene": "controller.animation.game_over",
 
-        "new_game_text_anim": "animation.new_game_Started.text",
-        "new_game_spin_anim": "animation.new_game_Started",
-        "new_game_controller": "controller.animation.new_game_started",
+        "new_game_started_dialog_anim": "animation.new_game_started.text",
+        "new_game_started_spin_anim": "animation.new_game_started.spin",
+        "new_game_started_controller": "controller.animation.new_game_started",
 
         "round_completed_dialog_controller": "controller.animation.round_completed_dialog",
         "round_completed_dialog_anim": "animation.round_completed_dialog",
 
-        "turnOffCamWarning": "controller.animation.turnOffCamWarning",
-        "turnOffCamWarningAnim": "animation.turnOffCamWarning",
-        "turnOffCamWarningStopAnim": "animation.turnOffCamWarningStop",
+        "turn_off_cam_warning_controller": "controller.animation.turn_off_cam_warning",
+        "turn_off_cam_warning_anim": "animation.camera.turn_off_cam_warning",
+        "turn_off_cam_warning_stop_anim": "animation.camera.turn_off_cam_warning_stop",
 
-        "battery_decrease1": "animation.battery.decrease1",
-        "battery_decrease2": "animation.battery.decrease2",
-        "battery_decrease3": "animation.battery.decrease3",
-        "battery_decrease4": "animation.battery.decrease4",
+        "battery_decrease_1": "animation.battery.decrease_1",
+        "battery_decrease_2": "animation.battery.decrease_2",
+        "battery_decrease_3": "animation.battery.decrease_3",
+        "battery_decrease_4": "animation.battery.decrease_4",
 
-        "battery_increase1": "animation.battery.increase1",
-        "battery_increase2": "animation.battery.increase2",
-        "battery_increase3": "animation.battery.increase3",
-        "battery_increase4": "animation.battery.increase4",
+        "battery_increase_1": "animation.battery.increase_1",
+        "battery_increase_2": "animation.battery.increase_2",
+        "battery_increase_3": "animation.battery.increase_3",
+        "battery_increase_4": "animation.battery.increase_4",
 
-        "batteryStaticAnim": "animation.battery_player.static",
-        "batteryStaticStopAnim": "animation.battery_player.staticStop",
+        "battery_static_anim": "animation.battery_player.static",
+        "battery_static_stop_anim": "animation.battery_player.static_stop",
 
-        "batteryIsCriticalAnim": "animation.battery_player.isCritical",
+        "battery_is_critical_anim": "animation.battery_player.is_critical",
 
-        "batteryhud1": "controller.animation.battery1",
-        "batteryhud2": "controller.animation.battery2",
-        "batteryhud3": "controller.animation.battery3",
-        "batteryhud4": "controller.animation.battery4",
-        "batteryStatic": "controller.animation.battery_static",
+        "batteryhud": "controller.animation.battery",
+        "battery_static": "controller.animation.battery_static",
         
         "hands_controller": "controller.animation.hand",
         "hands": "animation.hands.still",
@@ -215,16 +209,14 @@
 
         { "controller.render.player.first_person_spectator": "variable.is_first_person && query.is_spectator" },
         { "controller.render.player.third_person_spectator": "!variable.is_first_person && !variable.map_face_icon && query.is_spectator" },
-        
-        { "controller.render.player.map": "variable.map_face_icon" },
 
-        { "controller.render.static.first_person": "variable.is_first_person && (query.mark_variant >= 555 || query.mark_variant == 20)" },
-        { "controller.render.turnOffCamWarning": "variable.is_first_person && query.mark_variant >= 555 && query.is_item_name_any('slot.armor.chest', 0, 'game:turnoffcamwarning')"},
-        { "controller.render.battery.first_person": "variable.is_first_person && (query.mark_variant >= 555 || query.mark_variant == 20)" },
-        { "controller.render.new_game_Started": "variable.is_first_person && (query.mark_variant == 1 || query.mark_variant == 2)" },
+        { "controller.render.static": "variable.is_first_person && (query.mark_variant >= 555 || query.mark_variant == 20)" },
+        { "controller.render.turn_off_cam_warning": "variable.is_first_person && query.mark_variant >= 555 && query.is_item_name_any('slot.armor.chest', 0, 'game:turnoffcamwarning')"},
+        { "controller.render.player_battery": "variable.is_first_person && (query.mark_variant >= 555 || query.mark_variant == 20)" },
+        { "controller.render.new_game_started_dialog": "variable.is_first_person && (query.mark_variant == 1 || query.mark_variant == 2)" },
         { "controller.render.round_completed_dialog": "variable.is_first_person && query.mark_variant == 3" },
-        { "controller.render.curtain.first_person": "variable.is_first_person && (query.mark_variant >= 553 && query.mark_variant <= 562)" },
-        { "controller.render.game_over": "variable.is_first_person && query.mark_variant == 20" }
+        { "controller.render.game_start_curtain": "variable.is_first_person && (query.mark_variant >= 553 && query.mark_variant <= 562)" },
+        { "controller.render.game_over_scene": "variable.is_first_person && query.mark_variant == 20" }
       ],
       
       "enable_attachables": true

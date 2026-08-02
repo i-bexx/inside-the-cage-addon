@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.new_game_Started": {
+		"animation.new_game_started.spin": {
 			"animation_length": 48,
 			"bones": {
 				"loading": {
@@ -18,7 +18,7 @@
 				}
 			}
 		},
-		"animation.new_game_Started.text": {
+		"animation.new_game_started.text": {
 			"animation_length": 58.0417,
 			"bones": {
 				"bone9": {

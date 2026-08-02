@@ -15,15 +15,15 @@
       ]
     },
 
-    "controller.render.static.first_person": {
+    "controller.render.static": {
       "arrays": {
         "textures": {
           "Array.StaticTextures": [
-            "Texture.static",
-            "Texture.cameraNoSignal",
-            "Texture.static1",
-            "Texture.static2",
-            "Texture.static3"
+            "Texture.static_normal",
+            "Texture.camera_no_signal",
+            "Texture.static_1",
+            "Texture.static_2",
+            "Texture.static_3"
           ]
         }
       },
@@ -34,29 +34,8 @@
       ]
     },
 
-    "controller.render.turnOffCamWarning": {
-      "geometry": "Geometry.turnOffCamWarning",
-      "materials": [ { "*": "Material.alphatest" } ],
-      "textures": [ "Texture.red_font" ]
-    },
-
-    "controller.render.battery.first_person": {
-      "geometry": "Geometry.battery",
-      "materials": [ { "*": "Material.alphatest" } ],
-      "textures": [ "Texture.battery" ]
-    },
-
-    "controller.render.curtain.first_person": {
-      "geometry": "Geometry.curtain",
-      "materials": [ { "*": "Material.alphatest" } ],
-      "textures": [ "Texture.white_font" ],
-      "part_visibility": [
-        { "*": "(query.mark_variant >= 553 && query.mark_variant <= 562)" }
-      ]
-    },
-
-    "controller.render.game_over": {
-      "geometry": "Geometry.game_over",
+    "controller.render.turn_off_cam_warning": {
+      "geometry": "Geometry.turn_off_cam_warning",
       "materials": [ { "*": "Material.alphatest" } ],
       "textures": [ "Texture.red_font" ],
       "part_visibility": [
@@ -67,8 +46,35 @@
       ]
     },
 
-    "controller.render.new_game_Started": {
-      "geometry": "Geometry.new_game_Started",
+    "controller.render.player_battery": {
+      "geometry": "Geometry.battery",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Texture.battery" ]
+    },
+
+    "controller.render.game_start_curtain": {
+      "geometry": "Geometry.game_start_curtain",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Texture.white_font" ],
+      "part_visibility": [
+        { "*": "(query.mark_variant >= 553 && query.mark_variant <= 562)" }
+      ]
+    },
+
+    "controller.render.game_over_scene": {
+      "geometry": "Geometry.game_over_scene",
+      "materials": [ { "*": "Material.alphatest" } ],
+      "textures": [ "Texture.red_font" ],
+      "part_visibility": [
+        { "*": true },
+        { "alphabet": false },
+        { "punctuation": false },
+        { "capitals": false }
+      ]
+    },
+
+    "controller.render.new_game_started_dialog": {
+      "geometry": "Geometry.new_game_started_dialog",
       "materials": [ { "*": "Material.alphatest" } ],
       "textures": [ "Texture.white_font" ],
       "part_visibility": [
