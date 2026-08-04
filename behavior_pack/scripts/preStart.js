@@ -325,9 +325,6 @@ function playSceneArrival() {
         startMainGameLoop();
         gameStarter();
         resetTimerVariables();
-        
-        system.clearRun(ACTIVE_TIMERS.skipLoop);
-        ACTIVE_TIMERS.skipLoop = undefined;
     }, CONFIG.TIMESTAMPS.ARRIVAL);
 }
 
