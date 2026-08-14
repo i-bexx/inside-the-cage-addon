@@ -136,6 +136,7 @@
       "minecraft:jump.static": {},
       "minecraft:can_climb": {},
       "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:transient": {},
 			"minecraft:physics": {}
 		},
 
