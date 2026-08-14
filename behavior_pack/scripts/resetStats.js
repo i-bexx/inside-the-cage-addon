@@ -10,7 +10,8 @@ import { stopCrosshairTracker, stopPlayerShootTracker } from "./cursorController
 import { stopTeleportStalker } from "./stalkerEntity";
 import { resetSessionPlayers } from "./gameStarter";
 
-import { stopTeleportNull, stopNullTeleportTimeSetter } from "./RoundBegin/Null/nullTeleport";
+import { stopNullTeleportTimeSetter } from "./RoundBegin/Null/nullController";
+import { stopTeleportNull } from "./RoundBegin/Null/nullTeleport";
 import { stopSanityControl } from "./RoundBegin/Sanity";
 import { stopPlayerLookingControl } from "./RoundBegin/playerLooking";
 import { stopStaminaControl } from "./RoundBegin/Stamina";
@@ -79,6 +80,7 @@ const COMMANDS_TO_RESET_GAME = [
     "scoreboard players set value game_ended_early 0",
     "scoreboard players set value show_position 1",
     "scoreboard players set value global_ui 91",
+    "tp @e[type=game:null] -65 75 -150",
     "fog @a remove in_round_fog",
     "clear @a",
     "camerashake stop @a",
@@ -263,9 +265,9 @@ export async function despawnEntities() {
 export function commandsToResetTheGame(dimension) {
   const gameRestarted = world.getDynamicProperty("gameRestart");
   const gameEndedEarly = world.getDynamicProperty("roundEndedEarly");
-  for (const cmd of COMMANDS_TO_RESET_GAME) {
-        dimension.runCommand(cmd);
-    }
+
+  for (const cmd of COMMANDS_TO_RESET_GAME) 
+    dimension.runCommand(cmd);
 
     //If game restarted, the door shall remain closed
     //If game ended early, a different file will open the door
@@ -273,6 +275,14 @@ export function commandsToResetTheGame(dimension) {
 
     dimension.runCommand(`event entity @e[type=game:door] "door_0_event"`);
     dimension.runCommand("fill -180 68 -92 -180 71 -84 air");
+}
+
+export function initNullEntity(dimension) {
+  const isNullSet = dimension.getEntities({ type: "game:null" });
+    if (isNullSet.length == 0) dimension.spawnEntity("game:null", { x: -65, y: 75, z: -150 });
+    else if (isNullSet.length > 1)
+        for ( let i = 0; i < isNullSet.length - 1; i++ )
+            isNullSet[i].remove();
 }
 
 // ==========================================

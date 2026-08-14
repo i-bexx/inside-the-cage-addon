@@ -24,7 +24,7 @@ import { startcoinController } from "./RoundBegin/coinController";
 import { soulsAmountCheck } from "./RoundBegin/soulController";
 import { decidePasswords } from "./RoundBegin/passwordManager";
 
-import { nullTeleportTimeSetter } from "./RoundBegin/Null/nullTeleport";
+import { nullTeleportTimeSetter } from "./RoundBegin/Null/nullController";
 
 import { restartRound } from "./RoundBegin/RoundOperations/restartRound";
 import { finishRoundEarly } from "./RoundBegin/RoundOperations/finishRoundEarly";
@@ -146,18 +146,16 @@ export function startMainGameLoop() {
     system.runInterval(() => {
         state.isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
         gameRestartState.isGameRestarted = getObjectiveScore(getGameRestartedObjective(), getValueParticipant());
-				gameEndedState.isGameEnded = getObjectiveScore(getGameEndedObjective(), getValueParticipant());
+		gameEndedState.isGameEnded = getObjectiveScore(getGameEndedObjective(), getValueParticipant());
 
         isGameStarted = state.isGameStarted;
 
-        if (isGameStarted == 0) { // Run commands if the game has NOT started
-          dimension.runCommand(GAME_COMMANDS.LOBBY_MAINTENANCE.NULL_TELEPORT);
-        } else { // If game started and no people left, the game shall reset
-					const inGamePlayers = getPlayersInRound();
+        if (isGameStarted == 1) {
+          const inGamePlayers = getPlayersInRound();
 
-					if (inGamePlayers.length == 0) world.setDynamicProperty("roundOver", true);
-					if (world.getDynamicProperty("roundOver")) dimension.runCommand(GAME_COMMANDS.GAME_OVER.RESET_SCOREBOARD);
-				}
+          if (inGamePlayers.length == 0) world.setDynamicProperty("roundOver", true);
+          if (world.getDynamicProperty("roundOver")) dimension.runCommand(GAME_COMMANDS.GAME_OVER.RESET_SCOREBOARD);
+        }
     }, 5);
 }
 

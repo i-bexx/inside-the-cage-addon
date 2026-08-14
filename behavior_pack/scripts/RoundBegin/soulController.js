@@ -8,8 +8,8 @@ import { warnPlayerAboutCam, stopWarnPlayerAboutCam } from "./cameraController";
 import { startCrosshairTracker, startPlayerShootTracker, stopCrosshairTracker, stopPlayerShootTracker } from "../cursorController";
 import { getSoulsFreedObjective, getSanityObjective, getStaminaObjective, getValueParticipant, getObjectiveScore } from "../scoreboards";
 
-import { nullTeleportTimeSetter } from "./Null/nullTeleport";
-import { stopTeleportNull, stopNullTeleportTimeSetter } from "./Null/nullTeleport";
+import { nullTeleportTimeSetter, stopNullTeleportTimeSetter } from "./Null/nullController";
+import { stopTeleportNull } from "./Null/nullTeleport";
 
 
 let intervalId = undefined;
