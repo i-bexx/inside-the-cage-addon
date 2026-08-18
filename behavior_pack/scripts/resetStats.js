@@ -277,14 +277,6 @@ export function commandsToResetTheGame(dimension) {
     dimension.runCommand("fill -180 68 -92 -180 71 -84 air");
 }
 
-export function initNullEntity(dimension) {
-  const isNullSet = dimension.getEntities({ type: "game:null" });
-    if (isNullSet.length == 0) dimension.spawnEntity("game:null", { x: -65, y: 75, z: -150 });
-    else if (isNullSet.length > 1)
-        for ( let i = 0; i < isNullSet.length - 1; i++ )
-            isNullSet[i].remove();
-}
-
 // ==========================================
 // RESET MAPS
 // ==========================================
