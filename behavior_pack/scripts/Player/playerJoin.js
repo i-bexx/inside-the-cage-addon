@@ -3,7 +3,7 @@ import { world, system } from "@minecraft/server";
 import { sleep } from "../utils";
 import { isLookingAtMenuEntity } from "../preStart";
 import { getNewGameObjective, getStalkerMatchIdObjective, getWorldParticipant, getObjectiveScore } from "../scoreboards";
-import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, despawnEntities, initNullEntity, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
+import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, despawnEntities, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
 // =============================================================
 // CONFIGURATION 
@@ -179,8 +179,6 @@ async function handleOwnerJoinLogic(player) {
 	commandsToResetTheGame(dimension);
     await despawnEntities();
     await ensureEntitiesAreReset();
-
-    initNullEntity(dimension);
 
     world.setDynamicProperty("reseting_round", false);
     

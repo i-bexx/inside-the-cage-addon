@@ -23,6 +23,7 @@
       "minecraft:type_family": {
         "family": [ "game" ]
       },
+
       "minecraft:damage_sensor": {
         "triggers": [
           {
@@ -31,13 +32,15 @@
           }
         ]
       },
-      
+      "minecraft:tick_world": {
+        "never_despawn": true,
+        "radius": 2
+      },
       "minecraft:pushable": {
         "is_pushable": false,
         "is_pushable_by_piston": false
       },
-      
-      "minecraft:transient": {},
+      "minecraft:persistent": {},
       "minecraft:nameable": {},
       "minecraft:fire_immune": false,
       "minecraft:physics": {}
