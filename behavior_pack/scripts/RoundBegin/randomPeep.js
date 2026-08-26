@@ -101,6 +101,8 @@ function randomPeepHelpPanel(player, target) {
 function randomPeepPanel_4(player, target) {
     player.runCommand(`give @s game:kit 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
     player.runCommand(`give @s game:discount_ticket 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
+    world.getDimension("overworld").playSound("kit_used", target.location);
+    world.getDimension("overworld").spawnParticle("game:kit_used", target.location);
 
     new ActionFormData()
     .title("random_peep_panel")

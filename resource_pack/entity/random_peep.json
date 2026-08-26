@@ -10,8 +10,7 @@
       },
 
       "textures": {
-        "default": "textures/entity/game/random_peep",
-        "bottle": "textures/entity/game/bottle"
+        "default": "textures/entity/steve"
       },
 
       "geometry": {
