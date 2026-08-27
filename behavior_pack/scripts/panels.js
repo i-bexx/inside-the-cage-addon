@@ -8,7 +8,7 @@ import { getPasswords } from "./RoundBegin/passwordManager";
 let dimension;
 
 const MAIN_PANELS = [ shopPanel, votePanel, upgradeBattery, increaseStaminaLimit ];
-const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_bomb": 6, "game:ammo": 1, "game:battery": 3, "game:cage_detector": 10 };
+const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_bomb": 6, "game:ammo": 1, "game:battery": 3, "game:cage_detector": 9 };
 
 let timeoutId = undefined;
 
@@ -91,7 +91,7 @@ function shopPanel(player) {
     .button(`toxic_bomb-${itemsObject["game:toxic_bomb"]} Coins`, "textures/ui/panels/shop/toxic_bomb")
     .button(`Ammo-${itemsObject["game:ammo"]} Coins`, "textures/ui/panels/shop/ammo")
     .button(`Battery-${itemsObject["game:battery"]} Coins`, "textures/ui/panels/shop/battery")
-    .button(`Detector-${getText("game:cage_detector")}`, "")
+    .button(`Detector-${getText("game:cage_detector")}`, "textures/ui/panels/shop/cage_detector")
     .button(`...`, "")
     .button(`...`, "")
 		.show(player).then(({ cancelationReason, canceled, selection }) => {

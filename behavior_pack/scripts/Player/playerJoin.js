@@ -67,7 +67,7 @@ const CONFIG = {
     },
     MESSAGES: {
         RESET_WARNING: "§l§4The game has been reset so your assets are now gone",
-        MENU_ACTIONBAR: "§a§l✔ MENU SYSTEM ONLINE"
+        MENU_ACTIONBAR: "§a§lMENU SYSTEM ONLINE"
     }
 };
 
