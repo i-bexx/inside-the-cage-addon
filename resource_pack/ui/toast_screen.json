@@ -103,7 +103,7 @@
         "binding_type": "view",
         "resolve_sibling_scope": true,
         "source_control_name": "item_renderer",
-        "source_property_name": "(#item_id_aux = 18022400)",
+        "source_property_name": "(#item_id_aux = 56885248)",
         "target_property_name": "#visible"
       }
     ],
