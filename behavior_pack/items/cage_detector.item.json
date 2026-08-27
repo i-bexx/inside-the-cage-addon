@@ -13,7 +13,7 @@
       "minecraft:hand_equipped": false,
       "minecraft:allow_off_hand": false,
       "minecraft:can_destroy_in_creative": false,
-      "minecraft:icon": "notification",
+      "minecraft:icon": "cage_detector",
       "minecraft:use_animation": "none",
       "minecraft:interact_button": "Open Detector",
 

@@ -4,7 +4,7 @@ import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 import { loadTickingArea, removeTickingArea, sleep } from "../utils";
 
 let cageLocations = [];
-let deviationIntegers = [ 5, 7, 3, -2, -4, -1, 1 ];
+let deviationIntegers = [ 15, 17, 13, -12, -14, -11, 9 ];
 
 // --- LISTENER ---
 

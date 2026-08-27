@@ -158,7 +158,7 @@ export function isLookingAtMenuEntity() {
 }
 
 world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
-    if (!ownerPlayer) {
+    if (!(ownerPlayer && player.hasTag("host"))) {
 			 player.runCommand("playsound note.bass @s");
 			return; 
 		}
@@ -168,7 +168,7 @@ world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
 			const isMenuButton = [CONFIG.IDS.NEW_GAME, CONFIG.IDS.CONTINUE].includes(target.typeId);
 
 			if (isMenuButton) {
-					player.runCommand(`title @s actionbar §c§l⚠ §6Menu Loading...`);
+					player.runCommand(`title @s actionbar §c§l§6Menu Loading...`);
 					player.runCommand("playsound note.bass @s");
 			}
 			return;
