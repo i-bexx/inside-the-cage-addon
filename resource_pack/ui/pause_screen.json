@@ -31,7 +31,8 @@
   },
 
   "quit_button@pause.pause_button_template": {
-    "focus_change_left": "social_media_focus_id"
+    "focus_change_left": "social_media_focus_id",
+    "focus_change_right": "social_media_focus_id"
   },
 
   "friendsdrawer_button_panel/friendsdrawer_button": {
