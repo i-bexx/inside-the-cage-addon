@@ -277,7 +277,7 @@
             {
               "close_button_container_detailed@server_form_main_templates.close_button_container_detailed": {
                 "$focus_identifier": "shop_panel_close_button_focus_id",
-                "$other_focus_container_name": "shop_button_container_1"
+                "$other_focus_container_name": "gun_button"
               }
             }
           ]
