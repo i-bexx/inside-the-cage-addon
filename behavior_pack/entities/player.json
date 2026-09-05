@@ -7,6 +7,15 @@
 			"is_summonable": false,
 			"is_experimental": false,
 
+			"properties": {
+				"property:cursor_state": {
+					"type": "enum",
+					"default": "normal",
+					"values": [ "normal", "green", "blue", "red" ],
+					"client_sync": false
+				}
+			},
+
 			"scripts": {
 				"animate": [
 					"camera_no_signal",
@@ -46,7 +55,6 @@
 				"kit_use": "animation.kit.use"
 			}
 		},
-
 
 		"component_groups": {
 			"normal_component": {
@@ -324,16 +332,20 @@
 				"add": { "component_groups": [ "normal_movement" ] }
 			},
 			"cursor_normal_event": {
-				"add": { "component_groups": [ "cursor_normal" ] }
+				"add": { "component_groups": [ "cursor_normal" ] },
+				"set_property": { "property:cursor_state": "normal" }
 			},
 			"cursor_green_event": {
-				"add": { "component_groups": [ "cursor_green" ] }
+				"add": { "component_groups": [ "cursor_green" ] },
+				"set_property": { "property:cursor_state": "green" }
 			},
 			"cursor_blue_event": {
-				"add": { "component_groups": [ "cursor_blue" ] }
+				"add": { "component_groups": [ "cursor_blue" ] },
+				"set_property": { "property:cursor_state": "blue" }
 			},
 			"cursor_red_event": {
-				"add": { "component_groups": [ "cursor_red" ] }
+				"add": { "component_groups": [ "cursor_red" ] },
+				"set_property": { "property:cursor_state": "red" }
 			},
 			"is_shooting_event": {
 				"add": { "component_groups": [ "is_shooting" ] }
