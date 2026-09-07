@@ -70,7 +70,6 @@ const COMMANDS_TO_RESET_GAME = [
     "kill @e[type=game:hostile]",
     "setblock -54 75 -152 air",
     "setblock -61 76 -153 air",
-    "setblock -49 75 -154 air",
     "fill 148 56 -323 136 56 -323 air",
     "fill 148 56 -316 142 56 -316 air",
     "scoreboard players set value souls_freed 0",
