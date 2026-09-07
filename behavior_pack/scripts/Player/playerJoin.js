@@ -112,7 +112,7 @@ world.afterEvents.playerSpawn.subscribe(async ({ player }) => {
         }
     }
 
-    player.runCommand(`tp @s ${targetCoords.x} ${targetCoords.y} ${targetCoords.z} 0`);
+    player.runCommand(`tp @s ${targetCoords.x} ${targetCoords.y} ${targetCoords.z} 0 0`);
 
     // Check Game Data
     const worldValue = getObjectiveScore(newGameObjective, worldParticipant);
