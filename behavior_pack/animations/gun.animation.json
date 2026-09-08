@@ -14,8 +14,8 @@
 					"/scoreboard players set @s is_shooting 0"
 				]
 			},
-			"animation_length": 0.3333,
-			"loop": true
+			"animation_length": 0.4,
+			"loop": false
 		},
 		"animation.gun.aim": {
 			"timeline": {

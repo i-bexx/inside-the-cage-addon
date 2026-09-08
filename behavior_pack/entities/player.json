@@ -13,6 +13,11 @@
 					"default": "normal",
 					"values": [ "normal", "green", "blue", "red" ],
 					"client_sync": false
+				},
+				"property:is_shooting": {
+					"type": "bool",
+					"default": false,
+					"client_sync": true
 				}
 			},
 
@@ -110,6 +115,14 @@
 			"is_shooting": {
 				"minecraft:variant": {
 					"value": 5
+				},
+				"minecraft:timer": {
+					"time": 0.4,
+					"looping": true,
+					"time_down_event": {
+						"event": "is_not_shooting_event",
+						"target": "self"
+					}
 				}
 			},
 			"new_game_Started": {
@@ -363,7 +376,8 @@
 				"add": { "component_groups": [ "shooting_the_entity" ] }
 			},
 			"is_not_shooting_event": {
-				"add": { "component_groups": [ "is_not_shooting" ] }
+				"add": { "component_groups": [ "is_not_shooting" ] },
+				"set_property": { "property:is_shooting": false }
 			},
 			"new_game_Started": {
 				"add": { "component_groups": [ "new_game_Started" ] }

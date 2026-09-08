@@ -1,0 +1,21 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:item": {
+		"description": {
+			"identifier": "game:ammo_shoot",
+			"menu_category": {
+				"category": "equipment"
+			}
+		},
+		"components": {
+			"minecraft:max_stack_size": 20,
+			"minecraft:icon": "ammo_shoot",
+			"minecraft:hand_equipped": {
+				"value": true
+			},
+			"minecraft:projectile": {
+				"projectile_entity": "game:ammo_shoot"
+			}
+		}
+	}
+}

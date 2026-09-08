@@ -95,6 +95,12 @@
       "textures": [ "Texture.default" ]
     },
 
+    "controller.render.ammo_shoot": {
+      "geometry": "Geometry.default",
+      "materials": [ { "*": "Material.default" } ],
+      "textures": [ "Texture.default" ]
+    },
+
     "controller.render.password_label": {
       "arrays": {
         "textures": {

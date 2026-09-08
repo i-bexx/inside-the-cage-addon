@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "game:ammo_shoot",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/game/ammo_shoot"
+      },
+      "geometry": {
+        "default": "geometry.ammo_shoot"
+      },
+      "render_controllers": [
+        "controller.render.ammo_shoot"
+      ]
+    }
+  }
+}

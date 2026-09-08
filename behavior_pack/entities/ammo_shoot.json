@@ -1,0 +1,95 @@
+{
+  "format_version": "1.16.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "game:ammo_shoot",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "runtime_identifier": "minecraft:snowball"
+    },
+    "components": {
+      "minecraft:projectile": {
+        "on_hit": {
+          "impact_damage": {
+            "damage": 6,
+            "knockback": true,
+            "semi_random_diff_damage": false,
+            "destroy_on_hit": false
+          },
+          "stick_in_ground": {
+            "shake_time": 0.35
+          },
+          "definition_event": {
+            "affect_splash_area": true,
+            "event_trigger": {
+              "event": "ammo_hit_despawn_countdown",
+              "target": "self"
+            },
+            "splash_area": 0.0
+          }
+        },
+        "power": 8,
+        "gravity": 0,
+        "inertia": 1,
+        "anchor": 2,
+        "angle_offset": 0,
+        "offset": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "minecraft:timer": {
+        "time": 10,
+        "looping": false,
+        "time_down_event": {
+          "event": "ammo_hit_despawn_countdown",
+          "target": "self"
+        }
+      },
+      "minecraft:collision_box": {
+        "width": 0.1,
+        "height": 0.1
+      },
+      "minecraft:physics": {
+        "has_collision": false,
+        "has_gravity": false
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+        "default_values": {
+          "max_optimized_distance": 40,
+          "max_dropped_ticks": 10,
+          "use_motion_prediction_hints": true
+        }
+      }
+    },
+    "events": {
+      "ammo_hit_despawn_countdown": {
+        "add": {
+          "component_groups": [ "ammo_despawning_component" ]
+        }
+      },
+      "ammo_despawn": {
+        "add": {
+          "component_groups": [ "ammo_despawned_component" ]
+        }
+      }
+    },
+    "component_groups": {
+      "ammo_despawning_component": {
+        "minecraft:timer": {
+          "time": 3,
+          "looping": false,
+          "time_down_event": {
+            "event": "ammo_despawn",
+            "target": "self"
+          }
+        }
+      },
+      "ammo_despawned_component": {
+        "minecraft:instant_despawn": {}
+      }
+    }
+  }
+}

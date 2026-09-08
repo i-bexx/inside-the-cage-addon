@@ -10,19 +10,29 @@
 		"components": {
 			"minecraft:max_stack_size": 1,
 			"minecraft:icon": "gun",
-			"minecraft:enchantable": {
-				"slot": "sword",
-				"value": 14
-			},
 			"minecraft:hand_equipped": {
-        		"value": true
-      		},
+				"value": true
+			},
 			"minecraft:use_modifiers": {
-        		"use_duration": 3200.0
-      		},
-			"minecraft:food": {
-        		"can_always_eat": true
-      		}
+				"use_duration": 3200.0
+			},
+			"minecraft:shooter": {
+				"ammunition": [
+					{
+						"item": "game:ammo_shoot",
+						"use_offhand": true,
+						"search_inventory": true,
+						"use_in_creative": true
+					}
+				],
+				"max_draw_duration": 0,
+				"scale_power_by_draw_duration": false,
+				"charge_on_draw": false
+			},
+			"minecraft:cooldown": {
+				"category": "gun",
+				"duration": 0.6
+			}
 		}
 	}
 }
