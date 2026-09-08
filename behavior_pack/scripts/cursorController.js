@@ -148,10 +148,6 @@ function playerShootTracker(player) {
     let state = SHOOTING_STATES.get(player.id);
     if (state) return state;
 
-    const damageOptions = {
-        cause: "entityAttack"
-    };
-
     state = new Proxy({ ...INITIAL_SHOOTING_STATE }, {
         set(target, key, value) {
             if (target[key] === value) return true;
@@ -169,10 +165,8 @@ function playerShootTracker(player) {
 			if (!result) return true;
 						
 			const entity = result.entity;
-			if (entity.isValid) {
+			if (entity.isValid)
 				player.triggerEvent(CONFIG.EVENTS.SHOOTING_ENTITY);
-            	entity.applyDamage(CONFIG.DAMAGE, damageOptions);
-			}
             return true;
         }
     });

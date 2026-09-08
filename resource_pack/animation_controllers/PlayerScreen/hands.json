@@ -255,7 +255,7 @@
               { "starting_gun": "query.variant == 3" },
               { "walking_gun": "query.is_moving && query.ground_speed > 4 && query.is_on_ground && !(query.ground_speed > 5)" },
               { "running_gun": "query.ground_speed > 5 && query.is_on_ground && !(query.is_in_water) && !(query.is_in_lava) && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
-              { "shooting_gun": "q.is_using_item && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.variant != 2" },
+              { "shooting_gun": "q.property('property:is_shooting') && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.variant != 2" },
               { "aiming_gun": "query.is_sneaking" },
               { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
             ],
@@ -270,7 +270,7 @@
               { "holding_gun": "!(query.is_moving && query.is_on_ground && query.ground_speed > 4) || query.is_in_water" },
               { "running_gun": "query.ground_speed > 5 && query.is_on_ground && !(query.is_in_water) && !(query.is_in_lava) && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
               { "aiming_gun": "query.is_sneaking" },
-              { "shooting_gun": "q.is_using_item && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.variant != 2" },
+              { "shooting_gun": "q.property('property:is_shooting') && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.variant != 2" },
               { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
             ],
             "blend_transition": 0.3
@@ -282,7 +282,7 @@
             "transitions": [
               { "starting_gun": "query.variant == 3" },
               { "holding_gun": "!(query.is_moving && query.is_on_ground && query.ground_speed > 5) || query.is_in_water" },
-              { "shooting_gun": "q.is_using_item && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.variant != 2" },
+              { "shooting_gun": "q.property('property:is_shooting') && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.variant != 2" },
               { "aiming_gun": "query.is_sneaking" },
               { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
             ],
@@ -293,8 +293,8 @@
               "shooting_gun"
             ],
             "transitions": [
-              { "holding_gun": "!(q.is_using_item) || q.variant == 2" },
-              { "shoot_aiming": "query.is_using_item && query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.variant != 2" },
+              { "holding_gun": "!(q.property('property:is_shooting')) || q.variant == 2" },
+              { "shoot_aiming": "q.property('property:is_shooting') && query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.variant != 2" },
               { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
             ],
             "blend_transition": 0.3
@@ -305,7 +305,7 @@
             ],
             "transitions": [
               { "holding_gun": "!(query.is_sneaking)" },
-              { "shoot_aiming": "query.is_sneaking && q.is_using_item && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.variant != 2" },
+              { "shoot_aiming": "query.is_sneaking && q.property('property:is_shooting') && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.variant != 2" },
               { "aiming_gun_still": "query.is_sneaking && query.all_animations_finished" },
               { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
             ],
@@ -317,7 +317,7 @@
             ],
             "transitions": [
               { "holding_gun": "!(query.is_sneaking)" },
-              { "shoot_aiming": "query.is_sneaking && q.is_using_item && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.variant != 2" },
+              { "shoot_aiming": "query.is_sneaking && q.property('property:is_shooting') && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.variant != 2" },
               { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
             ],
             "blend_transition": 0.3
@@ -328,7 +328,7 @@
             ],
             "transitions": [
               { "holding_gun": "!(query.is_sneaking)" },
-              { "aiming_gun": "(!(q.is_using_item) && query.is_sneaking) || q.variant == 2" },
+              { "aiming_gun": "(!(q.property('property:is_shooting')) && query.is_sneaking) || q.variant == 2" },
               { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
             ],
             "blend_transition": 0.3

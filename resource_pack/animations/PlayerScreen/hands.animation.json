@@ -3150,7 +3150,7 @@
 			}
 		},
 		"animation.hands.gun.shoot": {
-			"loop": true,
+			"loop": "hold_on_last_frame",
 			"animation_length": 0.3333,
 			"bones": {
 				"waist": {
@@ -3259,7 +3259,7 @@
 			}
 		},
 		"animation.hands.gun.shoot_aiming": {
-			"loop": true,
+			"loop": "hold_on_last_frame",
 			"animation_length": 0.3333,
 			"bones": {
 				"waist": {
