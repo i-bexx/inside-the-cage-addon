@@ -65,8 +65,7 @@
           "variable.item_use_normalized = query.main_hand_item_use_duration / query.main_hand_item_max_duration;",
 
           "variable.knife_attack_index = math.random(0, 1);",
-          "variable.gun_shoot = query.get_equipped_item_name('main_hand') == 'game:gun' && query.property('property:has_ammo') && query.property('property:is_shooting') && query.is_alive;",
-          "variable.not_holding_special_items = query.get_equipped_item_name('main_hand') != 'game:gun' && query.get_equipped_item_name('main_hand') != 'game:knife' && query.get_equipped_item_name('main_hand') != 'knife' && query.is_alive;"
+          "variable.not_holding_special_items = query.is_alive && !query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun', 'game:knife', 'game:toxic_bomb', 'game:kit', 'game:ammo');"
         ],
 
         "animate": [

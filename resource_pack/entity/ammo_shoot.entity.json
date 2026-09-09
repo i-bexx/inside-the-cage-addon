@@ -12,6 +12,14 @@
       "geometry": {
         "default": "geometry.ammo_shoot"
       },
+      "scripts": {
+        "animate": [
+          "shoot"
+        ]
+      },
+      "animations": {
+        "shoot": "animation.ammo_shoot"
+      },
       "render_controllers": [
         "controller.render.ammo_shoot"
       ]
