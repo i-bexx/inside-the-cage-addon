@@ -14,6 +14,11 @@
 					"values": [ "normal", "green", "blue", "red" ],
 					"client_sync": false
 				},
+				"property:has_ammo": {
+					"type": "bool",
+					"default": true,
+					"client_sync": true
+				},
 				"property:is_shooting": {
 					"type": "bool",
 					"default": false,
@@ -367,10 +372,12 @@
 				"add": { "component_groups": [ "ammo_reloaded_after" ] }
 			},
 			"ammo_reloaded_event": {
-				"add": { "component_groups": [ "ammo_reloaded" ] }
+				"add": { "component_groups": [ "ammo_reloaded" ] },
+				"set_property": { "property:has_ammo": true }
 			},
 			"no_ammo_event": {
-				"add": { "component_groups": [ "no_ammo" ] }
+				"add": { "component_groups": [ "no_ammo" ] },
+				"set_property": { "property:has_ammo": false }
 			},
 			"shooting_the_entity_event": {
 				"add": { "component_groups": [ "shooting_the_entity" ] }
