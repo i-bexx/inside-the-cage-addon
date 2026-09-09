@@ -144,6 +144,12 @@ export function resetPlayerDynamicPropertyData(player) {
   player.setDynamicProperty("acceptedHelpingPeep", false);
 }
 
+export function resetPlayerProperties(player) {
+  player.setProperty("property:cursor_state", "normal");
+  player.setProperty("property:has_ammo", true);
+  player.setProperty("property:is_shooting", false);
+}
+
 export function resetEntitiesData(ownerJoined = false) {
   const dimension = world.getDimension("overworld");
 

@@ -1,7 +1,7 @@
 import { system } from "@minecraft/server";
 
 import { sleep } from "../utils";
-import { resetPlayerDynamicPropertyData, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
+import { resetPlayerDynamicPropertyData, resetPlayerProperties, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
 // ==========================================
 // CONFIGURATION
@@ -42,6 +42,7 @@ export async function game_over(player) {
     stopFunctionsInMaps(player.id);
     clearPlayerMaps(player.id);
     resetPlayerDynamicPropertyData(player);
+    resetPlayerProperties(player);
 
     for (const cmd of Object.values(CONFIG.COMMANDS)) await player.runCommand(cmd);
     const soundLoop = staticSoundLoop(player);

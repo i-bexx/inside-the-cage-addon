@@ -3,7 +3,7 @@ import { world, system } from "@minecraft/server";
 import { sleep } from "../utils";
 import { isLookingAtMenuEntity } from "../preStart";
 import { getNewGameObjective, getStalkerMatchIdObjective, getWorldParticipant, getObjectiveScore } from "../scoreboards";
-import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, despawnEntities, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
+import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetPlayerProperties, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, despawnEntities, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
 // =============================================================
 // CONFIGURATION 
@@ -91,6 +91,7 @@ world.afterEvents.playerSpawn.subscribe(async ({ player }) => {
     clearPlayerMaps(player.id);
     commandsToResetPlayerData(player, true);
     resetPlayerDynamicPropertyData(player);
+    resetPlayerProperties(player);
 
     killConnectedStalker(player);
     preparePlayerStats(player);
