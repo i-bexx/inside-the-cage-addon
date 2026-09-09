@@ -4,7 +4,7 @@ import { world, system } from "@minecraft/server";
 // SYSTEM: MODULE IMPORTS
 // ==========================================
 
-import { resetWorldDynamicPropertyData, resetPlayerDynamicPropertyData, resetEntitiesData, commandsToResetTheGame, resetMaps } from "./resetStats";
+import { resetWorldDynamicPropertyData, resetEntitiesData, commandsToResetTheGame, resetMaps } from "./resetStats";
 import { gameStarter, checkIfPositionClear } from "./gameStarter";
 import { getGameStartedObjective, getGameRestartedObjective, getGameEndedObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 import { getPlayersInRound } from "./utils"; 
