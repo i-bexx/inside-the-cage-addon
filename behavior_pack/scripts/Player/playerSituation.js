@@ -131,7 +131,8 @@ world.afterEvents.entityHitEntity.subscribe((event) => {
 });
 
 world.afterEvents.itemUse.subscribe(({itemStack, source}) => {
-    if (itemStack.typeId != "game:gun" || source.getItemCooldown("gun") < 11) return;
+    if (itemStack.typeId != "game:gun" || (source.getItemCooldown("gun") < 11 && getObjectiveScore(objectives.ammo, source.scoreboardIdentity) > 0))
+        return;
     source.setProperty("property:is_shooting", true);
 })
 

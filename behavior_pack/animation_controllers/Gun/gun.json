@@ -40,6 +40,7 @@
           ]
         },
         "shooting_gun": {
+          "on_entry": [ "@s is_shooting_event "],
           "animations": [ "shooting_gun" ],
           "transitions": [
             { "no_ammo": "q.property('property:is_shooting') == 1 && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') == 0" },
