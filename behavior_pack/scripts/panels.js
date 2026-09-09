@@ -116,6 +116,8 @@ function shopPanel(player) {
 
 							if (itemName !== "battery") {
 									player.runCommand(`give @s ${itemName} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
+                                    if (itemName == "game:gun")
+                                        player.runCommand("give @s game:ammo_shoot 10");
 									transactionSuccessful = true;
 							} else if (player.getDynamicProperty("batteryLevel") < 4) {
 									player.setDynamicProperty("batteryIsCollected", true);

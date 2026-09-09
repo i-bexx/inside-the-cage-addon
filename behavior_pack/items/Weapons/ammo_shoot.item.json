@@ -8,10 +8,13 @@
 			}
 		},
 		"components": {
+			"minecraft:display_name": {
+				"value": "Ammo"
+			},
 			"minecraft:max_stack_size": 20,
 			"minecraft:icon": "ammo_shoot",
 			"minecraft:hand_equipped": {
-				"value": true
+				"value": false
 			},
 			"minecraft:projectile": {
 				"projectile_entity": "game:ammo_shoot"
