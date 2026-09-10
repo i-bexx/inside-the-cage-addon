@@ -5,15 +5,13 @@
       "states": {
           "default": {
             "transitions": [
-              { "chamber": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.variant == 3" }
+              { "chamber": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" }
             ]
           },
           "chamber": {
-            "animations": [
-              "chamber_anim"
-            ],
+            "animations": [ "chamber_anim" ],
             "transitions": [
-              { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')) && (query.variant != 3 || query.all_animations_finished)" }
+              { "default": "(!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') || !query.property('property:start_gun')) && query.all_animations_finished" }
             ],
             "blend_transition": 0.3
           }

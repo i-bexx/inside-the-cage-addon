@@ -23,6 +23,11 @@
 					"type": "bool",
 					"default": false,
 					"client_sync": true
+				},
+				"property:start_gun": {
+					"type": "bool",
+					"default": true,
+					"client_sync": true
 				}
 			},
 
@@ -44,12 +49,12 @@
 				"camera_no_signal_playsound": "animation.static.camera_no_signal_playsound",
 
 				"gun": "controller.animation.gun",
-				"drawing_gun": "animation.gun.draw",
+				"starting_gun": "animation.gun.start",
 				"aiming_gun": "animation.gun.aim",
 				"shooting_gun": "animation.gun.shoot",
 				"not_shooting": "animation.gun.not_shooting",
 				"no_ammo": "animation.gun.no_ammo",
-				"ammo_reloaded": "animation.gun.ammo_reloaded",
+				"ammo_must_reload": "animation.gun.ammo_must_reload",
 
 				"no_ammo_controller": "controller.animation.gun_no_ammo",
 				"no_ammo_subtitle": "animation.gun.no_ammo_subtitle",
@@ -107,7 +112,7 @@
 					"value": 2
 				}
 			},
-			"ammo_reloaded": {
+			"ammo_must_reload": {
 				"minecraft:variant": {
 					"value": 3
 				}
@@ -369,11 +374,12 @@
 				"add": { "component_groups": [ "is_shooting" ] }
 			},
 			"ammo_reloaded_after_event": {
-				"add": { "component_groups": [ "ammo_reloaded_after" ] }
+				"add": { "component_groups": [ "ammo_reloaded_after" ] },
+				"set_property": { "property:start_gun": false }
 			},
-			"ammo_reloaded_event": {
-				"add": { "component_groups": [ "ammo_reloaded" ] },
-				"set_property": { "property:has_ammo": true }
+			"ammo_must_reload_event": {
+				"add": { "component_groups": [ "ammo_must_reload" ] },
+				"set_property": { "property:has_ammo": true, "property:start_gun": true }
 			},
 			"no_ammo_event": {
 				"add": { "component_groups": [ "no_ammo" ] },

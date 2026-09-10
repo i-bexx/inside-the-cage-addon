@@ -36,7 +36,6 @@
 			}
 		},
 		"animation.gun.fire": {
-			"loop": true,
 			"animation_length": 0.3333,
 			"bones": {
 				"ust": {
