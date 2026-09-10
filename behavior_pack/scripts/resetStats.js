@@ -148,6 +148,7 @@ export function resetPlayerProperties(player) {
   player.setProperty("property:cursor_state", "normal");
   player.setProperty("property:has_ammo", true);
   player.setProperty("property:is_shooting", false);
+  player.setProperty("property:start_gun", true);
 }
 
 export function resetEntitiesData(ownerJoined = false) {

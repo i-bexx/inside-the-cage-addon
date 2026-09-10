@@ -26,7 +26,7 @@
 			},
 			"animation_length": 0.4
 		},
-		"animation.gun.draw": {
+		"animation.gun.start": {
 			"timeline": {
 				"0.0": [
 					"/playsound gun_drawing @s"
@@ -68,7 +68,10 @@
 			},
 			"animation_length": 2.5
 		},
-		"animation.gun.ammo_reloaded": {
+		"animation.gun.ammo_must_reload": {
+			"timeline": {
+				"0.0": [ "/event entity @s ammo_reloaded_after_event" ]
+			},
 			"animation_length": 1
 		},
 		"animation.gun.ammo_reloading": {
@@ -93,9 +96,9 @@
 				],
 				"2.2": [
 					"/scoreboard players set @s ammo 20",
-					"/give @s game:ammo_shoot 20",
+					"/give @s game:ammo_shoot 20 0 {\"minecraft:item_lock\": {\"mode\": \"lock_in_inventory\"}}",
 					"/clear @s game:ammo 0 1",
-					"/event entity @s ammo_reloaded_event"
+					"/event entity @s ammo_must_reload_event"
 				]
 			},
 			"animation_length": 2.5

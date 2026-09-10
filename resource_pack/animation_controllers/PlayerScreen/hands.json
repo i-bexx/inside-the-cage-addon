@@ -16,7 +16,8 @@
                 { "run": "q.is_alive && query.ground_speed > 5 && query.is_on_ground && !(query.is_in_water) && !(query.is_in_lava)" },
                 { "despawn_right_but_left_empty": "q.is_alive && (!(query.is_item_name_any('slot.weapon.mainhand', 0, '')) && query.is_item_name_any('slot.weapon.offhand', 0, '')) && variable.not_holding_special_items" },
                 { "despawn_left_but_right_empty": "q.is_alive && (query.is_item_name_any('slot.weapon.mainhand', 0, '') && !(query.is_item_name_any('slot.weapon.offhand', 0, ''))) && variable.not_holding_special_items" },
-                { "holding_gun": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+                { "starting_gun": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" },
+                { "holding_gun": "query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun')" },
                 { "starting_knife": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
                 { "toxic_bomb_pick_up": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
                 { "kit_pick_up": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
@@ -55,7 +56,8 @@
                 { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0)" },
                 { "despawn_right_but_left_empty": "(!(query.is_item_name_any('slot.weapon.mainhand', 0, '')) && query.is_item_name_any('slot.weapon.offhand', 0, '')) && variable.not_holding_special_items" },
                 { "despawn_left_but_right_empty": "(query.is_item_name_any('slot.weapon.mainhand', 0, '') && !(query.is_item_name_any('slot.weapon.offhand', 0, ''))) && variable.not_holding_special_items" },
-                { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+                { "starting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" },
+                { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun')" },
                 { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
                 { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
                 { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
@@ -75,7 +77,8 @@
                 { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0)" },
                 { "despawn_right_but_left_empty": "(!(query.is_item_name_any('slot.weapon.mainhand', 0, '')) && query.is_item_name_any('slot.weapon.offhand', 0, '')) && variable.not_holding_special_items" },
                 { "despawn_left_but_right_empty": "(query.is_item_name_any('slot.weapon.mainhand', 0, '') && !(query.is_item_name_any('slot.weapon.offhand', 0, ''))) && variable.not_holding_special_items" },
-                { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+                { "starting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" },
+                { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun')" },
                 { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
                 { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
                 { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
@@ -95,7 +98,8 @@
                 { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0)" },
                 { "despawn_right_but_left_empty": "(!(query.is_item_name_any('slot.weapon.mainhand', 0, '')) && query.is_item_name_any('slot.weapon.offhand', 0, '')) && variable.not_holding_special_items" },
                 { "despawn_left_but_right_empty": "(query.is_item_name_any('slot.weapon.mainhand', 0, '') && !(query.is_item_name_any('slot.weapon.offhand', 0, ''))) && variable.not_holding_special_items" },
-                { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+                { "starting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" },
+                { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun')" },
                 { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
                 { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
                 { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
@@ -112,7 +116,8 @@
                 { "attack": "(variable.attack_time > 0 && variable.item_use_normalized <= 0)" },
                 { "despawn_right_but_left_empty": "(!(query.is_item_name_any('slot.weapon.mainhand', 0, '')) && query.is_item_name_any('slot.weapon.offhand', 0, '')) && variable.not_holding_special_items" },
                 { "despawn_left_but_right_empty": "(query.is_item_name_any('slot.weapon.mainhand', 0, '') && !(query.is_item_name_any('slot.weapon.offhand', 0, ''))) && variable.not_holding_special_items" },
-                { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+                { "starting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" },
+                { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun')" },
                 { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
                 { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
                 { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
@@ -145,7 +150,8 @@
             ],
             "transitions": [
               { "still_right_arm": "query.all_animations_finished" },
-              { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+              { "starting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" },
+              { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun')" },
               { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
               { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
               { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" },
@@ -160,7 +166,8 @@
             ],
             "transitions": [
               { "still_left_arm": "query.all_animations_finished" },
-              { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+              { "starting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" },
+              { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun')" },
               { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
               { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
               { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" },
@@ -174,7 +181,8 @@
               "despawn_right_but_left_not_empty"
             ],
             "transitions": [
-              { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+              { "starting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" },
+              { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun')" },
               { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
               { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
               { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" },
@@ -188,7 +196,8 @@
               "despawn_left_but_right_not_empty"
             ],
             "transitions": [
-              { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
+              { "starting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" },
+              { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun')" },
               { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
               { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
               { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" },
@@ -242,8 +251,8 @@
               "starting_gun"
             ],
             "transitions": [
-              { "holding_gun": "query.all_animations_finished" },
-              { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
+              { "holding_gun": "!query.property('property:start_gun') && query.all_animations_finished" },
+              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
             ],
             "blend_transition": 0.3
           },
@@ -252,10 +261,10 @@
               "holding_gun"
             ],
             "transitions": [
-              { "starting_gun": "query.variant == 3" },
+              { "starting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" },
               { "walking_gun": "query.is_moving && query.ground_speed > 4 && query.is_on_ground && !(query.ground_speed > 5)" },
               { "running_gun": "query.ground_speed > 5 && query.is_on_ground && !(query.is_in_water) && !(query.is_in_lava) && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
-              { "shooting_gun": " query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.property('property:has_ammo') && q.property('property:is_shooting') && q.variant != 2" },
+              { "shooting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.property('property:has_ammo') && q.property('property:is_shooting') && q.variant != 2" },
               { "aiming_gun": "query.is_sneaking" },
               { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
             ],
@@ -266,11 +275,11 @@
               "walking_gun"
             ],
             "transitions": [
-              { "starting_gun": "query.variant == 3" },
+              { "starting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" },
               { "holding_gun": "!(query.is_moving && query.is_on_ground && query.ground_speed > 4) || query.is_in_water" },
               { "running_gun": "query.ground_speed > 5 && query.is_on_ground && !(query.is_in_water) && !(query.is_in_lava) && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
               { "aiming_gun": "query.is_sneaking" },
-              { "shooting_gun": " query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.property('property:has_ammo') && q.property('property:is_shooting') && q.variant != 2" },
+              { "shooting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.property('property:has_ammo') && q.property('property:is_shooting') && q.variant != 2" },
               { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
             ],
             "blend_transition": 0.3
@@ -280,9 +289,9 @@
               "running_gun"
             ],
             "transitions": [
-              { "starting_gun": "query.variant == 3" },
+              { "starting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" },
               { "holding_gun": "!(query.is_moving && query.is_on_ground && query.ground_speed > 5) || query.is_in_water" },
-              { "shooting_gun": " query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.property('property:has_ammo') && q.property('property:is_shooting') && q.variant != 2" },
+              { "shooting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.property('property:has_ammo') && q.property('property:is_shooting') && q.variant != 2" },
               { "aiming_gun": "query.is_sneaking" },
               { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
             ],
@@ -293,7 +302,7 @@
               "shooting_gun"
             ],
             "transitions": [
-              { "holding_gun": "!(q.property('property:is_shooting')) || !q.property('property:has_ammo')" },
+              { "holding_gun": "!q.property('property:is_shooting') || !q.property('property:has_ammo')" },
               { "shoot_aiming": "query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.property('property:has_ammo') && q.property('property:is_shooting') && q.variant != 2" },
               { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
             ],
@@ -328,7 +337,7 @@
             ],
             "transitions": [
               { "holding_gun": "!(query.is_sneaking)" },
-              { "aiming_gun": "(!(q.property('property:is_shooting')) && query.is_sneaking) || !q.property('property:has_ammo')" },
+              { "aiming_gun": "(!q.property('property:is_shooting') && query.is_sneaking) || !q.property('property:has_ammo')" },
               { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
             ],
             "blend_transition": 0.3
