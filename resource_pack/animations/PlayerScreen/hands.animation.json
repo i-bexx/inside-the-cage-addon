@@ -3527,7 +3527,7 @@
 				}
 			}
 		},
-		"animation.hands.knife.attack": {
+		"animation.hands.knife.attack_first": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.4,
 			"bones": {
@@ -3559,7 +3559,7 @@
 				}
 			}
 		},
-		"animation.hands.knife.attack2": {
+		"animation.hands.knife.attack_second": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.4,
 			"bones": {

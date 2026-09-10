@@ -52,7 +52,7 @@
         ],
 
         "pre_animation": [
-          "variable.helmet_layer_visible = 1.0;",
+          "variable.helmet_layer_visible = !query.has_head_gear;",
           "variable.leg_layer_visible = 1.0;",
           "variable.boot_layer_visible = 1.0;",
           "variable.chest_layer_visible = 1.0;",
@@ -60,11 +60,30 @@
           "variable.tcos0 = (math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / variable.gliding_speed_value) * 57.3;",
           "variable.first_person_rotation_factor = math.sin((1 - variable.attack_time) * 180.0);",
           "variable.hand_bob = query.life_time < 0.01 ? 0.0 : variable.hand_bob + ((query.is_on_ground && query.is_alive ? math.clamp(math.sqrt(math.pow(query.position_delta(0), 2.0) + math.pow(query.position_delta(2), 2.0)), 0.0, 0.1) : 0.0) - variable.hand_bob) * 0.02;",
-
           "variable.map_angle = math.clamp(1 - variable.player_x_rotation / 45.1, 0.0, 1.0);",
           "variable.item_use_normalized = query.main_hand_item_use_duration / query.main_hand_item_max_duration;",
+          "variable.riding_y_offset = query.is_riding_any_entity_of_type('minecraft:minecart', 'minecraft:boat', 'minecraft:chest_boat', 'minecraft:strider') ? -3.0 : 0.0;",
+
+          "variable.player_walk = query.is_alive && query.is_moving && query.is_on_ground && query.ground_speed > 4 && query.ground_speed <= 5 && !query.is_item_name_any('slot.armor.legs', 0, 'p:move_right', 'p:move_left') && variable.not_holding_special_items;",
+          "variable.player_attack = query.is_alive && variable.attack_time > 0 && variable.item_use_normalized <= 0;",
+          "variable.player_move_right = query.is_alive && query.is_item_name_any('slot.armor.legs', 0, 'p:move_right') && query.is_on_ground;",
+          "variable.player_move_left = query.is_alive && query.is_item_name_any('slot.armor.legs', 0, 'p:move_left') && query.is_on_ground;",
+          "variable.player_run = query.is_alive && query.ground_speed > 5 && query.is_on_ground && !query.is_in_water && !query.is_in_lava;",
+
+          "variable.despawn_right_but_left_empty = query.is_alive && !query.is_item_name_any('slot.weapon.mainhand', 0, '') && query.is_item_name_any('slot.weapon.offhand', 0, '') && variable.not_holding_special_items;",
+          "variable.despawn_left_but_right_empty = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, '') && !query.is_item_name_any('slot.weapon.offhand', 0, '') && variable.not_holding_special_items;",
+          "variable.gun_starting = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun');",
+          "variable.gun_holding = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun');",
+          "variable.gun_walking = query.is_alive && query.is_moving && query.is_on_ground && query.ground_speed > 4 && query.ground_speed <= 5;",
+          "variable.gun_running = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.is_on_ground && query.ground_speed > 5 && !query.is_in_water && !query.is_in_lava;",
+          "variable.gun_shooting = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.property('property:has_ammo') && q.property('property:is_shooting') && q.variant != 2;",
 
           "variable.knife_attack_index = math.random(0, 1);",
+          "variable.knife_attack_first = query.is_alive && (variable.attack_time > 0 && variable.item_use_normalized <= 0) && v.knife_attack_index <= 0.5 && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife');",
+          "variable.knife_attack_second = query.is_alive && (variable.attack_time > 0 && variable.item_use_normalized <= 0) && v.knife_attack_index > 0.5 && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife');",
+          
+          "variable.toxic_bomb_hold = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') && query.all_animations_finished && !query.is_using_item;",
+          "variable.toxic_bomb_use = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') && query.is_using_item;",
           "variable.not_holding_special_items = query.is_alive && !query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun', 'game:knife', 'game:toxic_bomb', 'game:kit', 'game:ammo');"
         ],
 
@@ -87,7 +106,16 @@
           "batteryhud",
           "battery_static"
 
-        ]
+        ],
+        "variables": {
+          "variable.fp_melee_spear_use_attachable_rotation_z": "public",
+          "variable.tp_melee_spear_use_attachable_rotation_z": "public",
+          "variable.fp_melee_spear_attack_attachable_rotation_z": "public",
+          "variable.tp_melee_spear_attack_attachable_position_z": "public",
+          "variable.attack_time": "public",
+          "variable.item_use_normalized": "public"
+        },
+        "should_update_effects_offscreen": "1.0"
       },
 
       "animations": {
@@ -172,8 +200,8 @@
 
         "starting_knife": "animation.hands.knife.start",
         "holding_knife": "animation.hands.knife.hold",
-        "attacking_knife": "animation.hands.knife.attack",
-        "attacking_knife2": "animation.hands.knife.attack2",
+        "attacking_knife_first": "animation.hands.knife.attack_first",
+        "attacking_knife_second": "animation.hands.knife.attack_second",
         "attack_finishing_knife": "animation.hands.knife.attack_finishing",
 
         "toxic_bomb_pick_up": "animation.hands.toxic_bomb_pick_up",
@@ -188,7 +216,6 @@
         "3rd_person_knife": "animation.hands.3rd_person.knife",
         "3rd_person_toxic_bomb": "animation.hands.3rd_person.toxic_bomb",
         "3rd_person_kit": "animation.hands.3rd_person.kit"
-
       },
 
       "sound_effects": {
@@ -218,7 +245,6 @@
         { "controller.render.game_start_curtain": "variable.is_first_person && (query.mark_variant >= 553 && query.mark_variant <= 562)" },
         { "controller.render.game_over_scene": "variable.is_first_person && query.mark_variant == 20" }
       ],
-      
       "enable_attachables": true
     }
   }
