@@ -76,7 +76,7 @@
           "variable.gun_holding = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun');",
           "variable.gun_walking = query.is_alive && query.is_moving && query.is_on_ground && query.ground_speed > 4 && query.ground_speed <= 5;",
           "variable.gun_running = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.is_on_ground && query.ground_speed > 5 && !query.is_in_water && !query.is_in_lava;",
-          "variable.gun_shooting = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.property('property:has_ammo') && q.property('property:is_shooting') && q.variant != 2;",
+          "variable.gun_shooting = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && q.property('property:has_ammo') && q.property('property:is_shooting') && !query.property('property:start_gun');",
 
           "variable.knife_attack_index = math.random(0, 1);",
           "variable.knife_attack_first = query.is_alive && (variable.attack_time > 0 && variable.item_use_normalized <= 0) && v.knife_attack_index <= 0.5 && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife');",
