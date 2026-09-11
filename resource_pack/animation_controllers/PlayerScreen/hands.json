@@ -258,7 +258,7 @@
           "shooting_gun": {
             "animations": [ "shooting_gun" ],
             "transitions": [
-              { "holding_gun": "query.all_animations_finished" },
+              { "holding_gun": "!q.property('property:has_ammo') || !q.property('property:is_shooting') || q.variant != 5" },
               { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
             ],
             "blend_transition": 0.3
@@ -285,10 +285,10 @@
           "shoot_aiming": {
             "animations": [ "shoot_aiming" ],
             "transitions": [
-              { "aiming_gun": "(query.is_sneaking || q.variant != 5) || !q.property('property:has_ammo')" },
+              { "aiming_gun": "query.is_sneaking || !q.property('property:has_ammo') || !q.property('property:is_shooting') || q.variant != 5" },
               { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
             ],
-            "blend_transition": 0.3
+            "blend_transition": 0.1
           },
           "starting_knife": {
             "animations": [ "starting_knife" ],
