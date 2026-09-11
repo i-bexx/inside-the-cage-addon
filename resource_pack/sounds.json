@@ -10,5 +10,14 @@
 				}
 			}
 		}
+	},
+	"individual_event_sounds": {
+		"events": {
+			"bow" : {
+				"pitch" : [ 0.830, 1.250 ],
+				"sound" : "random.bow",
+				"volume" : 0.0
+			}
+		}
 	}
 }
