@@ -96,8 +96,9 @@
 				],
 				"2.2": [
 					"/scoreboard players set @s ammo 20",
-					"/give @s game:ammo_shoot 20 0 {\"minecraft:item_lock\": {\"mode\": \"lock_in_inventory\"}}",
 					"/clear @s game:ammo 0 1",
+					"/clear @s game:ammo_shoot",
+					"/give @s game:ammo_shoot 20 0 {\"minecraft:item_lock\": {\"mode\": \"lock_in_inventory\"}}",
 					"/event entity @s ammo_must_reload_event"
 				]
 			},
