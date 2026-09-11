@@ -47,8 +47,7 @@
             { "holding_gun": "q.property('property:is_shooting') == 0 && !(query.is_sneaking) && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
             { "aiming_gun": "q.property('property:is_shooting') == 0 && query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
             { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
-          ],
-          "on_exit": [ "/event entity @s is_not_shooting_event" ]
+          ]
         },
         "no_ammo": {
           "on_entry": [
