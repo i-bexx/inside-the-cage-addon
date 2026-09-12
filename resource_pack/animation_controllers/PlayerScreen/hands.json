@@ -237,7 +237,7 @@
           "walking_gun": {
             "animations": [ "walking_gun" ],
             "transitions": [
-              { "starting_gun": "variable.gun_starting" },
+              { "starting_gun": "variable.gun_starting && !variable.gun_start_completed" },
               { "holding_gun": "!query.is_moving || !query.is_on_ground || query.is_in_water || query.ground_speed <= 4" },
               { "running_gun": "variable.gun_running" },
               { "aiming_gun": "query.is_sneaking" },
@@ -249,7 +249,7 @@
           "running_gun": {
             "animations": [ "running_gun" ],
             "transitions": [
-              { "starting_gun": "variable.gun_starting" },
+              { "starting_gun": "variable.gun_starting && !variable.gun_start_completed" },
               { "holding_gun": "!query.is_moving || !query.is_on_ground || query.is_in_water || query.ground_speed <= 5" },
               { "shooting_gun": "variable.gun_shooting" },
               { "aiming_gun": "query.is_sneaking" },
