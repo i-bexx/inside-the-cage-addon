@@ -213,17 +213,19 @@
             "blend_transition": 0.3
           },
           "starting_gun": {
+            "on_entry": [ "variable.gun_start_completed = 0;" ],
             "animations": [ "starting_gun" ],
             "transitions": [
-              { "holding_gun": "!query.property('property:start_gun') && query.all_animations_finished" },
+              { "holding_gun": "query.state_time >= 0.9" },
               { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
             ],
+            "on_exit": [ "variable.gun_start_completed = 1;" ],
             "blend_transition": 0.3
           },
           "holding_gun": {
             "animations": [ "holding_gun" ],
             "transitions": [
-              { "starting_gun": "variable.gun_starting" },
+              { "starting_gun": "variable.gun_starting && !variable.gun_start_completed" },
               { "walking_gun": "variable.gun_walking" },
               { "running_gun": "variable.gun_running" },
               { "shooting_gun": "variable.gun_shooting" },

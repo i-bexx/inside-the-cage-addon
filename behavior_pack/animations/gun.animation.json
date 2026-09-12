@@ -85,7 +85,7 @@
 			"animation_length": 2.5
 		},
 		"animation.gun.ammo_reloaded": {
-			"animation_length": 1
+			"animation_length": 0.9
 		}
 	}
 }
