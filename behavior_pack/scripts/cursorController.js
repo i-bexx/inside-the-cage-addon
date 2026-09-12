@@ -201,7 +201,7 @@ export function startPlayerShootTracker() {
 				isPlayerShooting.ammoValue = 0;
             }
         }
-    }, 4); 
+    }, 1); 
 }
 
 export function stopCrosshairTracker() {

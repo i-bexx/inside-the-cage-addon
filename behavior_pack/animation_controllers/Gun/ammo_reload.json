@@ -13,7 +13,7 @@
             "ammo_reloading_anim"
           ],
           "transitions": [
-            { "default": "(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo') && !(query.is_using_item)) || !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo')) " }
+            { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo') || !query.is_using_item" }
           ]
         }
       }

@@ -258,7 +258,7 @@
           "shooting_gun": {
             "animations": [ "shooting_gun" ],
             "transitions": [
-              { "holding_gun": "!q.property('property:has_ammo') || !q.property('property:is_shooting') || q.variant != 5" },
+              { "holding_gun": "(!q.property('property:has_ammo') || !q.property('property:is_shooting') || q.variant != 1) && query.all_animations_finished" },
               { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
             ],
             "blend_transition": 0.3
@@ -267,7 +267,7 @@
             "animations": [ "aiming_gun" ],
             "transitions": [
               { "holding_gun": "!query.is_sneaking" },
-              { "shoot_aiming": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.is_sneaking && q.property('property:has_ammo') && q.property('property:is_shooting') && q.variant == 5 && q.variant != 2" },
+              { "shoot_aiming": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.is_sneaking && q.property('property:has_ammo') && q.property('property:is_shooting') && q.variant == 1" },
               { "aiming_gun_still": "query.is_sneaking && query.all_animations_finished" },
               { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
             ],
@@ -285,7 +285,7 @@
           "shoot_aiming": {
             "animations": [ "shoot_aiming" ],
             "transitions": [
-              { "aiming_gun": "query.is_sneaking || !q.property('property:has_ammo') || !q.property('property:is_shooting') || q.variant != 5" },
+              { "aiming_gun": "!q.property('property:has_ammo') || !q.property('property:is_shooting') || q.variant != 1" },
               { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
             ],
             "blend_transition": 0.1

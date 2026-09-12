@@ -77,10 +77,11 @@ function getCursorState(player) {
   cursorState.isHoldingGun = mainHandItem?.typeId === "game:gun";
 
   // Check if player is shooting
-  const isShooting = player.getComponent("variant").value == 5;
+  const isShooting = player.getComponent("minecraft:variant").value == 1;
+  world.sendMessage(`${isShooting}`)
 
   // Set the string
-  if (isShooting || player.getDynamicProperty("isShooting")) cursorState.cursorString = shootingCursorString(player);
+  if (isShooting) cursorState.cursorString = shootingCursorString(player);
   else cursorState.cursorString = cursorString(player);
 
   return cursorState;
@@ -104,13 +105,7 @@ function getCompassState(player) {
 function cursorString(player) { return "cursorState_0" + player.getComponent("skin_id").value.toString(); }
 
 function shootingCursorString(player) {
-  if (!player.getDynamicProperty("isShooting")) shootingCursorCountdown(player);
   return "cursorState_x" + player.getComponent("skin_id").value.toString();
-}
-
-function shootingCursorCountdown(player) {
-  player.setDynamicProperty("isShooting", true);
-  system.runTimeout(() => player.setDynamicProperty("isShooting", false), 2);
 }
 
 function compassString(player) {
@@ -151,4 +146,4 @@ export function getCompassStates() { return playerCompassStates; }
 
 // ----- RUN MAIN FUNCTION -----
 
-system.runInterval(fastUiTick, 2);
+system.runInterval(fastUiTick, 1);
