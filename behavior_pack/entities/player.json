@@ -356,31 +356,31 @@
 				"add": { "component_groups": [ "cursor_red" ] },
 				"set_property": { "property:cursor_state": "red" }
 			},
+			"is_not_shooting_event": {
+				"remove": { "component_groups": [ "is_shooting", "no_ammo", "ammo_reloaded", "ammo_reloaded_after" ] },
+				"add": { "component_groups": [ "is_not_shooting" ] },
+				"set_property": { "property:is_shooting": false }
+			},
 			"is_shooting_event": {
 				"remove": { "component_groups": [ "is_not_shooting", "no_ammo", "ammo_reloaded", "ammo_reloaded_after" ] },
 				"add": { "component_groups": [ "is_shooting" ] }
-			},
-			"ammo_reloaded_after_event": {
-				"remove": { "component_groups": [ "is_shooting", "is_not_shooting", "no_ammo", "ammo_reloaded" ] },
-				"add": { "component_groups": [ "ammo_reloaded_after" ] },
-				"set_property": { "property:start_gun": false }
-			},
-			"ammo_reloaded_event": {
-				"remove": { "component_groups": [ "is_shooting", "is_not_shooting", "no_ammo", "ammo_reloaded_after" ] },
-				"add": { "component_groups": [ "ammo_reloaded" ] },
-				"set_property": { "property:has_ammo": true, "property:start_gun": true }
 			},
 			"no_ammo_event": {
 				"remove": { "component_groups": [ "is_shooting", "is_not_shooting", "ammo_reloaded", "ammo_reloaded_after" ] },
 				"add": { "component_groups": [ "no_ammo" ] },
 				"set_property": { "property:has_ammo": false }
 			},
-			"shooting_the_entity_event": {},
-			"is_not_shooting_event": {
-				"remove": { "component_groups": [ "is_shooting", "no_ammo", "ammo_reloaded", "ammo_reloaded_after" ] },
-				"add": { "component_groups": [ "is_not_shooting" ] },
-				"set_property": { "property:is_shooting": false }
+			"ammo_reloaded_event": {
+				"remove": { "component_groups": [ "is_shooting", "is_not_shooting", "no_ammo", "ammo_reloaded_after" ] },
+				"add": { "component_groups": [ "ammo_reloaded" ] },
+				"set_property": { "property:has_ammo": true, "property:start_gun": true }
 			},
+			"ammo_reloaded_after_event": {
+				"remove": { "component_groups": [ "is_shooting", "is_not_shooting", "no_ammo", "ammo_reloaded" ] },
+				"add": { "component_groups": [ "ammo_reloaded_after" ] },
+				"set_property": { "property:start_gun": false }
+			},
+			"shooting_the_entity_event": {},
 			"new_game_Started": {
 				"add": { "component_groups": [ "new_game_Started" ] }
 			},

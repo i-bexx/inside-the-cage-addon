@@ -78,7 +78,6 @@ function getCursorState(player) {
 
   // Check if player is shooting
   const isShooting = player.getComponent("minecraft:variant").value == 1;
-  world.sendMessage(`${isShooting}`)
 
   // Set the string
   if (isShooting) cursorState.cursorString = shootingCursorString(player);

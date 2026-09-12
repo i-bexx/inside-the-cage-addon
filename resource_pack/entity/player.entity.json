@@ -72,6 +72,8 @@
 
           "variable.despawn_right_but_left_empty = query.is_alive && !query.is_item_name_any('slot.weapon.mainhand', 0, '') && query.is_item_name_any('slot.weapon.offhand', 0, '') && variable.not_holding_special_items;",
           "variable.despawn_left_but_right_empty = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, '') && !query.is_item_name_any('slot.weapon.offhand', 0, '') && variable.not_holding_special_items;",
+          
+          "variable.gun_start_completed = query.is_alive && (query.property('property:start_gun') ? variable.gun_start_completed : 0);",
           "variable.gun_starting = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun');",
           "variable.gun_holding = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun');",
           "variable.gun_walking = query.is_alive && query.is_moving && query.is_on_ground && query.ground_speed > 4 && query.ground_speed <= 5;",
