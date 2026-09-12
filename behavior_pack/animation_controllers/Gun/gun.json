@@ -10,44 +10,46 @@
           ]
         },
         "starting_gun": {
-          "on_entry": [ "/scoreboard players set @s can_play_aiming_sound 1", "@s ammo_reloaded_after_event" ],
+          "on_entry": [ "/scoreboard players set @s can_play_aiming_sound 1" ],
           "animations": [ "starting_gun" ],
           "transitions": [
-            { "holding_gun": "query.all_animations_finished && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
-            { "aiming_gun": "query.all_animations_finished && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.is_sneaking" },
-            { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
-          ]
+            { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.all_animations_finished" },
+            { "aiming_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.is_sneaking && query.all_animations_finished" },
+            { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
+          ],
+          "on_exit": [ "@s is_not_shooting_event" ]
         },
         "holding_gun": {
           "on_entry": [ "/scoreboard players set @s can_play_aiming_sound 1" ],
           "animations": [ "not_shooting" ],
           "transitions": [
-            { "no_ammo": "q.property('property:is_shooting') == 1 && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') == 0 && !query.property('property:start_gun')" },
-            { "shooting_gun": "q.property('property:is_shooting') == 1 && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') > 0 && !query.property('property:start_gun')" },
-            { "aiming_gun": "query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun')" },
-            { "ammo_must_reload": "query.property('property:start_gun')" },
-            { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
+            { "no_ammo": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun') && q.property('property:is_shooting') && query.scoreboard('ammo') == 0" },
+            { "shooting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun') && q.property('property:is_shooting') && query.scoreboard('ammo') > 0" },
+            { "aiming_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun') && query.is_sneaking" },
+            { "ammo_reloaded": "query.property('property:start_gun')" },
+            { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
           ]
         },
         "aiming_gun": {
           "animations": [ "aiming_gun" ],
           "transitions": [
-            { "no_ammo": "q.property('property:is_shooting') == 1 && query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') == 0 && !query.property('property:start_gun')" },
-            { "shooting_gun": "q.property('property:is_shooting') == 1 && query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') > 0 && !query.property('property:start_gun')" },
-            { "holding_gun": "!(query.is_sneaking) && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun')" },
-            { "ammo_must_reload": "query.property('property:start_gun')" },
-            { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
+            { "no_ammo": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun') && q.property('property:is_shooting') && query.is_sneaking && query.scoreboard('ammo') == 0" },
+            { "shooting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.property('property:start_gun') && q.property('property:is_shooting') && query.is_sneaking && query.scoreboard('ammo') > 0" },
+            { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.is_sneaking && !query.property('property:start_gun')" },
+            { "ammo_reloaded": "query.property('property:start_gun')" },
+            { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
           ]
         },
         "shooting_gun": {
-          "on_entry": [ "@s is_shooting_event "],
+          "on_entry": [ "@s is_shooting_event"],
           "animations": [ "shooting_gun" ],
           "transitions": [
-            { "no_ammo": "q.property('property:is_shooting') == 1 && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') == 0" },
-            { "holding_gun": "q.property('property:is_shooting') == 0 && !(query.is_sneaking) && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
-            { "aiming_gun": "q.property('property:is_shooting') == 0 && query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
-            { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
-          ]
+            { "no_ammo": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') == 0 && query.all_animations_finished" },
+            { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.is_sneaking && query.all_animations_finished" },
+            { "aiming_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.is_sneaking && query.all_animations_finished" },
+            { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.all_animations_finished" }
+          ],
+          "on_exit": [ "@s is_not_shooting_event" ]
         },
         "no_ammo": {
           "on_entry": [
@@ -56,15 +58,17 @@
           ],
             "animations": [ "no_ammo" ],
             "transitions": [
-              { "holding_gun": "q.property('property:is_shooting') == 0 && !(query.is_sneaking) && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
-              { "aiming_gun": "q.property('property:is_shooting') == 0 && query.is_sneaking && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
-              { "default": "!(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun'))" }
-            ]
+              { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !q.property('property:is_shooting') && !query.is_sneaking && query.all_animations_finished" },
+              { "aiming_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !q.property('property:is_shooting') && query.is_sneaking && query.all_animations_finished" },
+              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
+            ],
+            "on_exit": [ "@s is_not_shooting_event" ]
         },
-        "ammo_must_reload": {
-          "animations": [ "ammo_must_reload" ],
+        "ammo_reloaded": {
+          "on_entry": [ "@s ammo_reloaded_after_event" ],
+          "animations": [ "ammo_reloaded" ],
           "transitions": [
-            { "starting_gun": "query.all_animations_finished" }
+            { "holding_gun": "query.all_animations_finished" }
           ]
         }
       }

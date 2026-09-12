@@ -1,21 +1,11 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.gun.shoot": {
+		"animation.gun.start": {
 			"timeline": {
-				"0.0": [
-					"/camerashake add @s 0.05 0.3 rotational",
-					"/playsound gun_shoot @s",
-					"/scoreboard players set @s is_shooting 1",
-					"/scoreboard players remove @s ammo 1",
-					"/execute if score @s is_looking_at_hostile matches 1 run playsound shot_entity @s"
-				],
-				"0.3": [
-					"/scoreboard players set @s is_shooting 0"
-				]
+				"0.0": [ "/playsound gun_drawing @s" ]
 			},
-			"animation_length": 0.4,
-			"loop": false
+			"animation_length": 1.0
 		},
 		"animation.gun.aim": {
 			"timeline": {
@@ -26,13 +16,20 @@
 			},
 			"animation_length": 0.4
 		},
-		"animation.gun.start": {
+		"animation.gun.shoot": {
 			"timeline": {
 				"0.0": [
-					"/playsound gun_drawing @s"
+					"/camerashake add @s 0.05 0.3 rotational",
+					"/playsound gun_shoot @s",
+					"/scoreboard players set @s is_shooting 1",
+					"/scoreboard players remove @s ammo 1",
+					"/execute if score @s is_looking_at_hostile matches 1 run playsound shot_entity @s"
+				],
+				"0.3333": [
+					"/scoreboard players set @s is_shooting 0"
 				]
 			},
-			"animation_length": 0.4
+			"animation_length": 0.3333
 		},
 		"animation.gun.not_shooting": {
 			"timeline": {
@@ -44,36 +41,19 @@
 		},
 		"animation.gun.no_ammo": {
 			"timeline": {
-				"0.0": [
-					"/playsound no_ammo @s"
-				]
+				"0.0": [ "/playsound no_ammo @s" ]
 			},
-			"animation_length": 0.4,
-			"loop": false
+			"animation_length": 0.4
 		},
 		"animation.gun.no_ammo_subtitle": {
 			"timeline": {
-				"0.0": [
-					"/title @s actionbar §4NO AMMO LEFT!!"
-				]
+				"0.0": [ "/title @s actionbar §4NO AMMO LEFT!!" ]
 			},
 			"animation_length": 2.5,
 			"loop": true
 		},
-		"animation.gun.no_ammo_confirmation_when_dropping_gun": {
-			"timeline": {
-				"0.0": [
-					"/execute if score @s ammo matches !0 run event entity @s is_not_shooting_event"
-				]
-			},
-			"animation_length": 2.5
-		},
-		"animation.gun.ammo_must_reload": {
-			"timeline": {
-				"0.0": [ "/event entity @s ammo_reloaded_after_event" ]
-			},
-			"animation_length": 1
-		},
+		
+
 		"animation.gun.ammo_reloading": {
 			"timeline": {
 				"0.0": [
@@ -95,14 +75,17 @@
 					"/title @s actionbar §4|  |  |  |  |"
 				],
 				"2.2": [
+					"/event entity @s ammo_reloaded_event",
 					"/scoreboard players set @s ammo 20",
 					"/clear @s game:ammo 0 1",
 					"/clear @s game:ammo_shoot",
-					"/give @s game:ammo_shoot 20 0 {\"minecraft:item_lock\": {\"mode\": \"lock_in_inventory\"}}",
-					"/event entity @s ammo_must_reload_event"
+					"/give @s game:ammo_shoot 20 0 {\"minecraft:item_lock\": {\"mode\": \"lock_in_inventory\"}}"
 				]
 			},
 			"animation_length": 2.5
+		},
+		"animation.gun.ammo_reloaded": {
+			"animation_length": 1
 		}
 	}
 }

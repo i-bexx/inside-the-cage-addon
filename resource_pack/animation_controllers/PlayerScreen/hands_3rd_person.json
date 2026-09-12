@@ -17,10 +17,7 @@
               "3rd_person_gun"
             ],
             "transitions": [
-              { "default": "variable.not_holding_special_items" },
-              { "3rd_person_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
-              { "3rd_person_toxic_bomb": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
-              { "3rd_person_kit": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
+              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
             ]
           },
           "3rd_person_knife": {
@@ -28,10 +25,7 @@
               "3rd_person_knife"
             ],
             "transitions": [
-              { "default": "variable.not_holding_special_items" },
-              { "3rd_person_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
-              { "3rd_person_toxic_bomb": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
-              { "3rd_person_kit": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
+              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" }
             ]
           },
           "3rd_person_toxic_bomb": {
@@ -39,10 +33,7 @@
               "3rd_person_toxic_bomb"
             ],
             "transitions": [
-              { "default": "variable.not_holding_special_items" },
-              { "3rd_person_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
-              { "3rd_person_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
-              { "3rd_person_kit": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
+              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" }
             ]
           },
           "3rd_person_kit": {
@@ -50,10 +41,7 @@
               "3rd_person_kit"
             ],
             "transitions": [
-              { "default": "variable.not_holding_special_items" },
-              { "3rd_person_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
-              { "3rd_person_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
-              { "3rd_person_toxic_bomb": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" }
+              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
             ]
           }
       }
