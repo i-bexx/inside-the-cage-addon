@@ -13,6 +13,7 @@
           "on_entry": [ "/scoreboard players set @s can_play_aiming_sound 1" ],
           "animations": [ "starting_gun" ],
           "transitions": [
+            { "shooting_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:is_shooting') && query.scoreboard('ammo') > 0" },
             { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.all_animations_finished" },
             { "aiming_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.is_sneaking && query.all_animations_finished" },
             { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
@@ -41,7 +42,7 @@
           ]
         },
         "shooting_gun": {
-          "on_entry": [ "@s is_shooting_event"],
+          "on_entry": [ "@s is_shooting_event" ],
           "animations": [ "shooting_gun" ],
           "transitions": [
             { "no_ammo": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.scoreboard('ammo') == 0 && query.all_animations_finished" },
@@ -58,8 +59,8 @@
           ],
             "animations": [ "no_ammo" ],
             "transitions": [
-              { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !q.property('property:is_shooting') && !query.is_sneaking && query.all_animations_finished" },
-              { "aiming_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !q.property('property:is_shooting') && query.is_sneaking && query.all_animations_finished" },
+              { "holding_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && !query.is_sneaking && query.all_animations_finished" },
+              { "aiming_gun": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.is_sneaking && query.all_animations_finished" },
               { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
             ],
             "on_exit": [ "@s is_not_shooting_event" ]
@@ -68,6 +69,7 @@
           "on_entry": [ "@s ammo_reloaded_after_event" ],
           "animations": [ "ammo_reloaded" ],
           "transitions": [
+            { "shooting_gun": "query.property('property:is_shooting')" },
             { "holding_gun": "query.all_animations_finished" }
           ]
         }
