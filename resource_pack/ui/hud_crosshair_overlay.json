@@ -179,7 +179,7 @@
               "binding_type": "view",
               "binding_condition": "always",
               "source_control_name": "math_core",
-              "source_property_name": "((#cursor_string = 'cursorState_03') * 1)",
+              "source_property_name": "((#cursor_string = 'cursorState_x3') * 1)",
               "target_property_name": "#collection_length"
             }
           ]
@@ -203,8 +203,9 @@
 
   "hitmarker_flipbook_anim": {
     "anim_type": "flip_book",
-    "frame_count": 12,
+    "frame_count": 24,
     "frame_step": 256,
+    "looping": false,
     "fps": 60,
     "reversible": false,
     "next": "@hud_crosshair.hitmarker_fade_out_anim"
