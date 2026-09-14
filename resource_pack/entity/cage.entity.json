@@ -18,13 +18,17 @@
       },
       "scripts": {
         "animate": [
-          { "soul_controllers": "query.mark_variant == 0" }
+          { "soul_anim": "query.mark_variant == 0" },
+          { "base_particle": "query.mark_variant == 0" }
         ]
       },
       "animations": {
-          "soul": "animation.cage.soul",
-          "soul_controllers": "controller.animation.cage"
-        },
+        "soul_anim": "animation.cage.soul",
+        "base_particle": "animation.cage.base_particle"
+      },
+      "particle_effects": {
+        "cage_particle": "game:cage_particle"
+      },
       "render_controllers": [
          { "controller.render.cage_opaque": "query.mark_variant == 0"},
          { "controller.render.cage_glass": "query.mark_variant == 0"},
