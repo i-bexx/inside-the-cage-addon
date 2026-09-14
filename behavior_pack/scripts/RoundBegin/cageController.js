@@ -16,7 +16,7 @@ const CONFIG = {
     CAGE_ID: "game:cage",
     PROPERTY_NAME: "cageBroken",
     EVENT_NAME: "broke_event",
-    PARTICLE: "game:soulFree_particle",
+    PARTICLE: "game:soul_freed_particle",
     UPDATE_SCORE: "scoreboard players add value souls_freed 1",
     PLAYSOUND: "playsound break_cage @s"
 };

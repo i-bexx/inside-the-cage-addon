@@ -9,9 +9,14 @@
     },
 
     "component_groups": {
+      "not_broken": {
+        "minecraft:mark_variant": {
+          "value": 0
+        }
+      },
       "broke": {
         "minecraft:mark_variant": {
-            "value": 1
+          "value": 1
         }
       }
     },
@@ -24,9 +29,6 @@
             "deals_damage": "no"
           }
         ]
-      },
-      "minecraft:mark_variant": {
-        "value": 0
       },
       "minecraft:collision_box": {
         "width": 0.6,
@@ -54,8 +56,14 @@
 			"minecraft:physics": {}
 		},
 
-   "events": {
-      "broke_event": { "add": { "component_groups": [ "broke" ] } } }
+    "events": {
+      "minecraft:entity_spawned": { "add": { "component_groups": [ "not_broken" ] } },
+      "broke_event": {
+        "remove": { "component_groups": [ "not_broken" ] },
+        "add": { "component_groups": [ "broke" ]
+        }
+      }
+    }
   }
 }
 

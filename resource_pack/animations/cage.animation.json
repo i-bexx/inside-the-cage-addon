@@ -1,6 +1,16 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
+		"animation.cage.base_particle": {
+			"loop": true,
+			"animation_length": 3,
+			"particle_effects": {
+				"0.0": {
+					"effect": "cage_particle",
+					"locator": "base_particle"
+				}
+			}
+		},
 		"animation.cage.soul": {
 			"loop": true,
 			"animation_length": 6,
