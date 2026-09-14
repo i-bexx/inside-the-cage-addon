@@ -47,16 +47,6 @@
       "textures": [ "Array.DoorTextures[query.mark_variant]" ]
     },
 
-    "controller.render.menu_panel": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.default" ],
-      "uv_anim": {
-				"scale": [1, "1 / 2"],
-				"offset": [0, "Math.mod(Math.floor(query.life_time * 15), 2) / 2"]
-			}
-    },
-
     "controller.render.teleporter": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
