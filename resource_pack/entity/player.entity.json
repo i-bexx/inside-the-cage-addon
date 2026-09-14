@@ -48,7 +48,10 @@
           "variable.is_holding_right = 0.0;",
           "variable.is_blinking = 0.0;",
           "variable.last_blink_time = 0.0;",
-          "variable.hand_bob = 0.0;"
+          "variable.hand_bob = 0.0;",
+
+          "variable.gun_start_completed = 0;",
+          "variable.aiming_shot_completed = 0;"
         ],
 
         "pre_animation": [
@@ -64,6 +67,7 @@
           "variable.item_use_normalized = query.main_hand_item_use_duration / query.main_hand_item_max_duration;",
           "variable.riding_y_offset = query.is_riding_any_entity_of_type('minecraft:minecart', 'minecraft:boat', 'minecraft:chest_boat', 'minecraft:strider') ? -3.0 : 0.0;",
 
+          "variable.not_holding_special_items = query.is_alive && !query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun', 'game:knife', 'game:toxic_bomb', 'game:kit', 'game:ammo');",
           "variable.player_walk = query.is_alive && query.is_moving && query.is_on_ground && query.ground_speed > 4 && query.ground_speed <= 5 && !query.is_item_name_any('slot.armor.legs', 0, 'p:move_right', 'p:move_left') && variable.not_holding_special_items;",
           "variable.player_attack = query.is_alive && variable.attack_time > 0 && variable.item_use_normalized <= 0;",
           "variable.player_move_right = query.is_alive && query.is_item_name_any('slot.armor.legs', 0, 'p:move_right') && query.is_on_ground;",
@@ -86,8 +90,7 @@
           "variable.knife_attack_second = query.is_alive && (variable.attack_time > 0 && variable.item_use_normalized <= 0) && v.knife_attack_index > 0.5 && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife');",
           
           "variable.toxic_bomb_hold = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') && query.all_animations_finished && !query.is_using_item;",
-          "variable.toxic_bomb_use = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') && query.is_using_item;",
-          "variable.not_holding_special_items = query.is_alive && !query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun', 'game:knife', 'game:toxic_bomb', 'game:kit', 'game:ammo');"
+          "variable.toxic_bomb_use = query.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb') && query.is_using_item;"
         ],
 
         "animate": [
