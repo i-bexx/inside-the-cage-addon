@@ -5,7 +5,7 @@ import { getPlayersInRound } from "../utils";
 import { roundCompleted } from "./roundCompleted";
 import { teleportStalker, stopTeleportStalker } from "../stalkerEntity";
 import { warnPlayerAboutCam, stopWarnPlayerAboutCam } from "./cameraController";
-import { startCrosshairTracker, startPlayerShootTracker, stopCrosshairTracker, stopPlayerShootTracker } from "../cursorController";
+import { startCrosshairTracker, stopCrosshairTracker, stopPlayerShootTracker } from "../cursorController";
 import { getSoulsFreedObjective, getSanityObjective, getStaminaObjective, getValueParticipant, getObjectiveScore } from "../scoreboards";
 
 import { nullTeleportTimeSetter, stopNullTeleportTimeSetter } from "./Null/nullController";
@@ -70,7 +70,6 @@ function soulsFreedValueSufficient() {
 	warnPlayerAboutCam();
 	canTurnOffCam();
 	startCrosshairTracker();
-	startPlayerShootTracker();
 	stopTeleportStalker();
 
 	stopTeleportNull();

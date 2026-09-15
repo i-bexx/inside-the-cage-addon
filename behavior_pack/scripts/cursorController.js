@@ -1,5 +1,4 @@
 import { world, system } from "@minecraft/server";
-import { getIsShootingObjective, getAmmoObjective, getObjectiveScore } from "./scoreboards";
 
 // ==========================================
 // CONFIGURATION
@@ -51,12 +50,6 @@ const PLAYER_FILTER = {
 // Initial State Objects
 const INITIAL_LOOKING_STATE = {
     lookingAtEntity: 0
-};
-
-const INITIAL_SHOOTING_STATE = {
-    isShootingValue: 0,
-		isLooking: 0,
-		ammoValue: 0
 };
 
 const ENTITY_DISTANCE = {
@@ -138,70 +131,6 @@ export function startCrosshairTracker() {
             isLooking.lookingAtEntity = (raycastResult.length > 0) ? 1 : 0;
         }
 }, 4);
-}
-
-// ==========================================
-// SYSTEM B: SHOOTING
-// ==========================================
-
-function playerShootTracker(player) {
-    let state = SHOOTING_STATES.get(player.id);
-    if (state) return state;
-
-    state = new Proxy({ ...INITIAL_SHOOTING_STATE }, {
-        set(target, key, value) {
-            if (target[key] === value) return true;
-
-            target[key] = value;
-
-			const isLooking = target.isLooking === 1;
-            const isShooting = target.isShootingValue === 1;
-			const ammoValue = target.ammoValue > 0;
-
-			if (!isLooking || !isShooting || !ammoValue) return true;
-
-			const result = player.getEntitiesFromViewDirection(MONSTER_FILTER)[0];
-
-			if (!result) return true;
-						
-			const entity = result.entity;
-			if (entity.isValid)
-				player.triggerEvent(CONFIG.EVENTS.SHOOTING_ENTITY);
-            return true;
-        }
-    });
-
-    SHOOTING_STATES.set(player.id, state);
-    return state;
-}
-
-// Function to start the shooting loop
-export function startPlayerShootTracker() {
-    if (shootingIntervalId !== undefined) return;
-
-    shootingIntervalId = system.runInterval(() => {
-        if (!getIsShootingObjective()) return;
-
-        const players = world.getAllPlayers();
-
-        for (const player of players) {
-            let isPlayerShooting = playerShootTracker(player);
-
-            // Raycast only for monsters
-            const raycastResult = player.getEntitiesFromViewDirection(MONSTER_FILTER);
-						
-			isPlayerShooting.isLooking = (raycastResult.length > 0) ? 1 : 0;
-
-            // Safe scoreboard reading
-            try {
-				isPlayerShooting.ammoValue = getObjectiveScore(getAmmoObjective(), player.scoreboardIdentity);
-                isPlayerShooting.isShootingValue = getObjectiveScore(getIsShootingObjective(), player.scoreboardIdentity);
-            } catch (e) {
-                isPlayerShooting.isShootingValue = 0;
-				isPlayerShooting.ammoValue = 0;
-            }
-        }
-    }, 1); 
 }
 
 export function stopCrosshairTracker() {

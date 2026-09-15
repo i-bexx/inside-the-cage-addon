@@ -52,6 +52,12 @@
 						"0.1667": [0, 0, 0]
 					}
 				}
+			},
+			"particle_effects": {
+				"0.0": {
+					"effect": "gun_fire",
+					"locator": "lead_hold"
+				}
 			}
 		}
 	}
