@@ -54,6 +54,7 @@
 
       "minecraft:nameable": {},
 			"minecraft:fire_immune": {},
+      "minecraft:transient": {},
 			"minecraft:physics": {}
 		},
 
