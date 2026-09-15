@@ -6,19 +6,19 @@
 				"identifier": "geometry.gun",
 				"texture_width": 64,
 				"texture_height": 64,
-				"visible_bounds_width": 4,
+				"visible_bounds_width": 5,
 				"visible_bounds_height": 4.5,
 				"visible_bounds_offset": [0, 1.75, 0]
 			},
 			"bones": [
 				{
-					"name": "root_item",
+					"name": "root",
 					"pivot": [1, 13, -3],
 					"binding": "q.item_slot_to_bone_name(c.item_slot)"
 				},
 				{
 					"name": "ust",
-					"parent": "root_item",
+					"parent": "root",
 					"pivot": [0, 0, 0],
 					"cubes": [
 						{
@@ -250,7 +250,7 @@
 				},
 				{
 					"name": "tetik",
-					"parent": "root_item",
+					"parent": "root",
 					"pivot": [0.5, 10.9, 1.3],
 					"cubes": [
 						{
@@ -341,7 +341,7 @@
 				},
 				{
 					"name": "namlu1",
-					"parent": "root_item",
+					"parent": "root",
 					"pivot": [0.3, 15.2, -21],
 					"cubes": [
 						{
@@ -400,7 +400,7 @@
 				},
 				{
 					"name": "namlu2",
-					"parent": "root_item",
+					"parent": "root",
 					"pivot": [1.2, 13.2, -15.9],
 					"cubes": [
 						{
@@ -459,7 +459,7 @@
 				},
 				{
 					"name": "kabza",
-					"parent": "root_item",
+					"parent": "root",
 					"pivot": [0, 0, 0],
 					"cubes": [
 						{
@@ -532,7 +532,7 @@
 				},
 				{
 					"name": "alt",
-					"parent": "root_item",
+					"parent": "root",
 					"pivot": [0, 0, 0],
 					"cubes": [
 						{
@@ -696,6 +696,14 @@
 							}
 						}
 					]
+				},
+				{
+					"name": "rightItem",
+					"parent": "root",
+					"pivot": [1, 15, -12],
+					"locators": {
+						"lead_hold": [1, 15, -12]
+					}
 				}
 			]
 		}

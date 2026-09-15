@@ -30,9 +30,6 @@
 					"chamber_controller",
 					"fire_controller"
 				]
-			},
-			"particle_effects": {
-				"gun_fire_particle": "game:gun_fire_particle"
 			}
 		}
 	}

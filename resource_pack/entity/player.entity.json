@@ -237,7 +237,7 @@
       },
            
       "render_controllers": [
-        { "controller.render.player.first_person": "variable.is_first_person && !query.is_spectator && (query.mark_variant == 0 || query.mark_variant == 553 || !!variable.not_holding_special_items)" },
+        { "controller.render.player.first_person": "variable.is_first_person && !query.is_spectator && (query.mark_variant == 0 || query.mark_variant == 553)" },
         { "controller.render.player.third_person": "!variable.is_first_person && !variable.map_face_icon && !query.is_spectator" },
 
         { "controller.render.player.first_person_spectator": "variable.is_first_person && query.is_spectator" },
