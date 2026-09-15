@@ -2981,13 +2981,18 @@
 			}
 		},
 		"animation.hands.3rd_person.gun": {
-			"loop": true,
+			"loop": "hold_on_last_frame",
 			"bones": {
 				"leftArm": {
-					"rotation": [-85.61466, 29.04288, 7.77698]
+					"rotation": [-78.11466, 29.04288, 7.77698]
 				},
 				"rightArm": {
-					"rotation": [-92.81797, -27.47162, 1.30078]
+					"rotation": [-70.31797, -27.47162, 1.30078]
+				},
+				"rightItem": {
+					"rotation": [-0.11, 0.8165, 24.3933],
+					"position": [0, 0, -2],
+					"scale": 0.7
 				}
 			}
 		},

@@ -5,7 +5,7 @@
       "states": {
           "default": {
             "transitions": [
-              { "chamber": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" }
+              { "chamber": "context.is_first_person && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun') && query.property('property:start_gun')" }
             ]
           },
           "chamber": {
@@ -19,5 +19,3 @@
   }
   }
 }
-
-
