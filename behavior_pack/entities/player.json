@@ -8,6 +8,11 @@
 			"is_experimental": false,
 
 			"properties": {
+				"property:has_slowness": {
+					"type": "bool",
+					"default": false,
+					"client_sync": true
+				},
 				"property:cursor_state": {
 					"type": "enum",
 					"default": "normal",
@@ -139,17 +144,11 @@
 			"game_over": {
 				"minecraft:mark_variant": {
 					"value": 20
-				},
-				"minecraft:movement": {
-					"value": 0.1
 				}
     	},
 			"curtain_open": {
 				"minecraft:mark_variant": {
 					"value": 553
-				},
-				"minecraft:movement": {
-					"value": 0.1
 				}
     	},
 			"curtain_close": {
@@ -335,10 +334,12 @@
 		},
 		"events": {
 			"normal_event": {
-				"add": { "component_groups": [ "normal_component", "normal_movement" ] }
+				"add": { "component_groups": [ "normal_component", "normal_movement" ] },
+				"set_property": { "property:has_slowness": false }
 			},
 			"normal_movement_event": {
-				"add": { "component_groups": [ "normal_movement" ] }
+				"add": { "component_groups": [ "normal_movement" ] },
+				"set_property": { "property:has_slowness": false }
 			},
 			"cursor_normal_event": {
 				"add": { "component_groups": [ "cursor_normal" ] },
@@ -391,7 +392,8 @@
 				"add": { "component_groups": [ "round_completed_dialog" ] }
 			},
 			"game_over_event": {
-				"add": { "component_groups": [ "game_over" ] }
+				"add": { "component_groups": [ "game_over" ] },
+				"trigger": "normal_movement_event"
 			},
 			"curtain_close_event": {
 				"add": { "component_groups": [ "curtain_close" ] },
@@ -400,7 +402,8 @@
 			},
 			"curtain_open_event": {
         "add": { "component_groups": [ "curtain_open" ] },
-				"queue_command": { "command": [ "inputpermission set @s jump enabled" ] }
+				"queue_command": { "command": [ "inputpermission set @s jump enabled" ] },
+				"trigger": "normal_movement_event"
 			},
 			"cannot_move_event": {
 				"add": { "component_groups": [ "cannot_move" ] }
@@ -409,7 +412,8 @@
         "add": { "component_groups": [ "static" ] }
 			},
 			"static_movement_event": {
-        "add": { "component_groups": [ "static_movement" ] }
+        "add": { "component_groups": [ "static_movement" ] },
+				"set_property": { "property:has_slowness": false }
 			},
 			"static_low_sanity_event": {
 				"add": { "component_groups": [ "static_low_sanity" ] }
@@ -430,7 +434,8 @@
         "add": { "component_groups": [ "initializationBeforeLockingTheCam" ] }
 			},
 			"slowness_event": {
-				"add": { "component_groups": [ "slowness" ] }
+				"add": { "component_groups": [ "slowness" ] },
+				"set_property": { "property:has_slowness": true }
 			},
 			"battery_is_full_event": {
 				"remove": { "component_groups": [ "battery_is_not_full" ] },
