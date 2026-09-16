@@ -25,7 +25,7 @@
           "attack": {
             "animations": [ "attack" ],
             "transitions": [
-              { "default": "q.all_animations_finished" }
+              { "default": "variable.attack_time == 0" }
             ],
             "blend_transition": 0.3
           },
@@ -40,7 +40,7 @@
           "walk": {
             "animations": [ "walk" ],
             "transitions": [
-              { "default": "!(query.is_moving && query.is_on_ground && query.ground_speed > 4)" },
+              { "default": "!(query.is_moving && query.is_on_ground) || query.property('property:has_slowness')" },
               { "swim": "q.is_swimming" },
               { "move_right": "variable.player_move_right" },
               { "move_left": "variable.player_move_left" },
@@ -97,7 +97,7 @@
           "run": {
             "animations": [ "run" ],
             "transitions": [
-              { "default": "!(query.is_moving && query.is_on_ground && query.ground_speed > 5) || query.is_in_water" },
+              { "default": "!(query.is_moving && query.is_on_ground && query.is_sprinting) || query.is_in_water || query.property('property:has_slowness')" },
               { "swim": "q.is_swimming" },
               { "attack": "variable.player_attack" },
               { "despawn_right_but_left_empty": "variable.despawn_right_but_left_empty" },
@@ -240,7 +240,7 @@
             "animations": [ "walking_gun" ],
             "transitions": [
               { "starting_gun": "variable.gun_starting && !variable.gun_start_completed" },
-              { "holding_gun": "!query.is_moving || !query.is_on_ground || query.is_in_water || query.ground_speed <= 4" },
+              { "holding_gun": "!query.is_moving || !query.is_on_ground || query.is_in_water || query.property('property:has_slowness')" },
               { "running_gun": "variable.gun_running" },
               { "aiming_gun": "query.is_sneaking" },
               { "shooting_gun": "variable.gun_shooting" },
@@ -252,7 +252,7 @@
             "animations": [ "running_gun" ],
             "transitions": [
               { "starting_gun": "variable.gun_starting && !variable.gun_start_completed" },
-              { "holding_gun": "!query.is_moving || !query.is_on_ground || query.is_in_water || query.ground_speed <= 5" },
+              { "holding_gun": "!query.is_moving || !query.is_on_ground || !query.is_sprinting || query.is_in_water || query.property('property:has_slowness')" },
               { "shooting_gun": "variable.gun_shooting" },
               { "aiming_gun": "query.is_sneaking" },
               { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }

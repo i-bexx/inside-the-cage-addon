@@ -10,23 +10,13 @@
     "controller.render.random_peep": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.default" ],
-      "part_visibility": [
-        { "*": true },
-        { "bottle": false },
-        { "lid": false }
-      ]
+      "textures": [ "Texture.default" ]
     },
 
     "controller.render.bottle": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.bottle" } ],
-      "textures": [ "Texture.bottle" ],
-      "part_visibility": [
-        { "*": false },
-        { "bottle": true },
-        { "lid": true }
-      ]
+      "textures": [ "Texture.bottle" ]
     },
 
     "controller.render.stalker_cursor": {
