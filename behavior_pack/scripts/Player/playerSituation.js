@@ -18,7 +18,7 @@ const CONFIG = {
         STRAFE_RIGHT: "p:move_right",
         BLOOD_PARTICLE: "game:blood",
         TOXIC_PARTICLE: "game:toxic",
-        DEAD_ENTITY: "game:hostile_dead",
+        DEAD_ENTITY: "game:ghost_dead",
     },
     BLOCKS: {
         WATER: "minecraft:water",
@@ -80,7 +80,7 @@ function handleCombatLogic(player) {
     const bombScore = getObjectiveScore(objectives.toxic, player.scoreboardIdentity);
     if (bombScore === 1) {
         player.runCommand(`execute at @s run particle ${CONFIG.ITEMS.TOXIC_PARTICLE} ~ ~ ~`);
-        player.runCommand("execute at @s run kill @e[type=game:hostile,r=15]");
+        player.runCommand("execute at @s run kill @e[type=game:ghost,r=15]");
     }
 
     // --- Ammo UI Logic ---

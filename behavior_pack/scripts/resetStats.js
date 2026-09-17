@@ -67,7 +67,7 @@ const COMMANDS_TO_RESET_GAME = [
     "tag @a remove refused_request",
     "tag @a remove show_in_round_personal_ui",
     "kill @e[type=game:stalker_cursor]",
-    "kill @e[type=game:hostile]",
+    "kill @e[type=game:ghost]",
     "setblock -54 75 -152 air",
     "setblock -61 76 -153 air",
     "fill 148 56 -323 136 56 -323 air",

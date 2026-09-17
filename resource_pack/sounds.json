@@ -1,7 +1,7 @@
 {
 	"entity_sounds": {
 		"entities": {
-			"game:hostile": {
+			"game:ghost": {
 				"volume": 1,
 				"pitch": [0.9, 1.0],
 				"events": {
