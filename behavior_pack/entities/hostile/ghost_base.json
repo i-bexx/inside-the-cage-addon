@@ -2,7 +2,7 @@
   "format_version": "1.21.50",
   "minecraft:entity": {
     "description": {
-      "identifier": "game:hostile",
+      "identifier": "game:ghost",
       "is_spawnable": false,
       "is_summonable": true,
       "is_experimental": false,
@@ -69,7 +69,7 @@
           "add": {},
           "drop_equipment": false,
           "drop_inventory": false,
-          "into": "game:hostile_dead",
+          "into": "game:ghost_dead",
           "keep_level": false,
           "keep_owner": false,
           "preserve_equipment": false,
@@ -142,6 +142,9 @@
 
    "events": {
     "minecraft:entity_spawned": {
+      "trigger": "spawn_event"
+    },
+    "minecraft:entity_transformed": {
       "trigger": "spawn_event"
     },
     "spawn_event": {

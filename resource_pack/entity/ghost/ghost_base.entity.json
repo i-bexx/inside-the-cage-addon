@@ -2,7 +2,7 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
-      "identifier": "game:hostile",
+      "identifier": "game:ghost",
       "materials": {
         "default": "entity_beam_additive"
       },

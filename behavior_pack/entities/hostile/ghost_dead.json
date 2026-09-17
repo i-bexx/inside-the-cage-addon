@@ -2,7 +2,7 @@
   "format_version": "1.21.50",
   "minecraft:entity": {
     "description": {
-      "identifier": "game:hostile_dead",
+      "identifier": "game:ghost_dead",
       "is_spawnable": false,
       "is_summonable": true,
       "is_experimental": false,

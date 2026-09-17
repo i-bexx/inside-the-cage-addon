@@ -1,0 +1,83 @@
+{
+  "format_version": "1.21.50",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "game:ghost_born_check",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+
+    "component_groups": {
+      "despawn": {
+        "minecraft:instant_despawn": {
+          "remove_child_entities": true
+        }
+      },
+      "hostile_born_permission_granted": {
+        "minecraft:transformation": {
+          "into": "game:ghost"
+        }
+      }
+    },
+    
+		"components": {
+      "minecraft:collision_box": {
+        "width": 0.0,
+        "height": 0.0
+      },
+      "minecraft:health": {
+        "value": 60,
+        "max": 60
+      },
+			"minecraft:type_family": {
+				"family": [ "game" ]
+			},
+
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "cause": "all",
+            "deals_damage": "no"
+          }
+        ]
+      },
+
+			"minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+
+			"minecraft:fire_immune": {},
+      "minecraft:transient": {}
+		},
+
+   "events": {
+			"minecraft:entity_born": {
+        "queue_command": {
+          "command": [
+            "execute unless score value souls_freed matches 4..5 run event entity @s despawn_event",
+            "execute if score value souls_freed matches 4..5 run event entity @s hostile_born_permission_granted_event",
+            "title @a actionbar dd"
+          ]
+        }
+      },
+      "minecraft:entity_spawned": {
+        "queue_command": {
+          "command": [
+            "execute unless score value souls_freed matches 4..5 run event entity @s despawn_event",
+            "execute if score value souls_freed matches 4..5 run event entity @s hostile_born_permission_granted_event",
+            "title @a actionbar dd"
+          ]
+        }
+      },
+      "hostile_born_permission_granted_event": {
+        "add": { "component_groups": [ "hostile_born_permission_granted" ] }
+      },
+      "despawn_event": {
+        "add": { "component_groups": [ "despawn" ] }
+      }
+    }
+  }
+}
+
