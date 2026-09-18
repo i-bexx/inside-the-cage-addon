@@ -1,4 +1,4 @@
-import { world } from "@minecraft/server";
+import { world, Difficulty } from "@minecraft/server";
 
 import { setGlobalVariables as playerJoinSetGlobalVariables } from "./Player/playerJoin";
 import { setGlobalVariables as playerSituationSetGlobalVariables } from "./Player/playerSituation";
@@ -44,4 +44,6 @@ world.afterEvents.worldLoad.subscribe(() => {
 
   world.setDynamicProperty("in_menu", true);
   world.setDynamicProperty("skip_cutscene_limit", 0);
+  
+  world.setDifficulty(Difficulty.Peaceful);
 })
