@@ -7,6 +7,8 @@
       "is_summonable": true,
       "is_experimental": false,
 
+      "spawn_category": "monster",
+      
       "scripts": {
         "animate": [ "ghost_controller" ]
       },
@@ -75,6 +77,11 @@
           "preserve_equipment": false,
           "delay": 0
         }
+      },
+      "despawn": {
+        "minecraft:instant_despawn": {
+          "remove_child_entities": true
+        }
       }
     },
 
@@ -99,6 +106,15 @@
             "deals_damage": "no"
           }
         ]
+      },
+      "minecraft:environment_sensor": {
+        "triggers": {
+          "filters": {
+            "test": "is_difficulty",
+            "value": "peaceful"
+          },
+          "event": "despawn_event"
+        }
       },
       "minecraft:collision_box": {
         "width": 0.6,
@@ -159,6 +175,9 @@
         "add": {
           "component_groups": [ "ghost_dead" ]
         }
+      },
+      "despawn_event": {
+        "add": { "component_groups": [ "despawn" ] }
       }
     }
   }

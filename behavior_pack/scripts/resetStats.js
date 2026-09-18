@@ -21,6 +21,7 @@ import { stopAmbiance } from "./RoundBegin/ambianceController";
 import { stopBatteryControl } from "./RoundBegin/batteryController";
 import { stopWarnPlayerAboutCam } from "./RoundBegin/cameraController";
 import { stopcoinController } from "./RoundBegin/coinController";
+import { stopDifficultyMonitor } from "./RoundBegin/ghostController";
 
 import { despawnCages } from "./RoundBegin/cageController";
 import { despawnCoins } from "./RoundBegin/coinController";
@@ -258,6 +259,7 @@ export function resetFunctions() {
   stopBatteryControl();
   stopWarnPlayerAboutCam();
   stopcoinController();
+  stopDifficultyMonitor();
 
   resetPasswords();
 }

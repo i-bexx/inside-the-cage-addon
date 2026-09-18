@@ -3,6 +3,7 @@ import { world, system } from "@minecraft/server";
 import { cameraUsed } from "../cameraUsage";
 import { getPlayersInRound } from "../utils";
 import { roundCompleted } from "./roundCompleted";
+import { startDifficultyMonitor, stopDifficultyMonitor } from "./ghostController";
 import { teleportStalker, stopTeleportStalker } from "../stalkerEntity";
 import { warnPlayerAboutCam, stopWarnPlayerAboutCam } from "./cameraController";
 import { startCrosshairTracker, stopCrosshairTracker, stopPlayerShootTracker } from "../cursorController";
@@ -70,6 +71,7 @@ function soulsFreedValueSufficient() {
 	warnPlayerAboutCam();
 	canTurnOffCam();
 	startCrosshairTracker();
+	startDifficultyMonitor();
 	stopTeleportStalker();
 
 	stopTeleportNull();
@@ -94,6 +96,7 @@ async function soulsFreedValueExceeded(players) {
 	stopCrosshairTracker();
 	stopPlayerShootTracker();
 	teleportStalker();
+	stopDifficultyMonitor();
 
 	stopWarnPlayerAboutCam();
 	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", false);

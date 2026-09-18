@@ -5,8 +5,7 @@ import { world, system } from "@minecraft/server";
 // ==========================================
 
 const CONFIG = {
-    DAMAGE: 18,
-    DISTANCE: 15,
+    DISTANCE: 30,
     EVENTS: {
         RED: "cursor_red_event",
         BLUE: "cursor_blue_event",

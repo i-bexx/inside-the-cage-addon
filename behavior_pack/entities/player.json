@@ -279,19 +279,7 @@
 			"minecraft:damage_sensor": {
 				"triggers": [
 					{
-						"cause": "drowning",
-						"deals_damage": "no"
-					},
-					{
-						"cause": "lava",
-						"deals_damage": "no"
-					},
-					{
-						"cause": "suffocation",
-						"deals_damage": "no"
-					},
-					{
-						"cause": "fire",
+						"cause": "all",
 						"deals_damage": "no"
 					}
 				]
