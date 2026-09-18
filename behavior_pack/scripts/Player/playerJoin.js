@@ -34,7 +34,7 @@ const CONFIG = {
             stalker_match_id: 0,
             is_shooting: 0,
             used_toxic_bomb: 0,
-            is_looking_at_hostile: 0,
+            is_looking_at_ghost: 0,
             ammo: 10
         }
     },

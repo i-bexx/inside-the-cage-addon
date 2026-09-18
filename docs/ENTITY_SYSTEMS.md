@@ -10,7 +10,7 @@ This document details the specific entities and Molang logic driving the gamepla
 |--------|-------------|----------------|
 | `minecraft:player` (modified) | 20+ component groups, 30+ events for cursor state, shooting, static effects, battery, movement control | `mark_variant`, `skin_id`, `variant`, `type_family`, `movement` |
 | `game:stalker_cursor` | Per-player invisible tracker entity — follows player's line-of-sight via Script API raycast | Scoreboard-based hash matching for multiplayer sync |
-| `game:hostile` | Dynamic enemy with hunt/patrol system, death animation states | `navigation.walk`, `behavior.nearest_attackable_target`, conditional animations |
+| `game:ghost` | Dynamic enemy with hunt/patrol system, death animation states | `navigation.walk`, `behavior.nearest_attackable_target`, conditional animations |
 | `game:cage` | Interactable cage entity with broken/unbroken states | `mark_variant` state switching via events |
 | `game:coin` / `game:battery` / `game:bottle` | Collectible items with pickup detection | `interact` component + Script API event handlers |
 | `game:door` | State-driven door with host-waiting and open states | Multi-state `mark_variant` event system |

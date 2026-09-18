@@ -8,13 +8,13 @@
       "is_experimental": false,
 
       "scripts": {
-        "animate": [ "hostile_controller" ]
+        "animate": [ "ghost_controller" ]
       },
 
       "animations": {
-        "hostile_controller": "controller.animation.hostile",
-        "hostile_just_spawned": "animation.hostile_just_spawned",
-        "hostile_can_move": "animation.hostile_can_move"
+        "ghost_controller": "controller.animation.ghost",
+        "ghost_just_spawned": "animation.ghost_just_spawned",
+        "ghost_can_move": "animation.ghost_can_move"
       }
     },
 
@@ -64,7 +64,7 @@
           ]
         }
       },
-      "hostile_dead": {
+      "ghost_dead": {
         "minecraft:transformation": {
           "add": {},
           "drop_equipment": false,
@@ -148,31 +148,16 @@
       "trigger": "spawn_event"
     },
     "spawn_event": {
-      "sequence": [
-        {
-          "queue_command": {
-            "command": [ "execute at @s run particle spawn:hostile ~ ~ ~", "execute at @s run playsound hostile_spawn @a[r=15] ~ ~ ~" ]
-          }
-        }
-      ]
+      "queue_command": {
+        "command": [ "execute at @s run particle spawn:ghost ~ ~ ~", "execute at @s run playsound ghost_spawn @a[r=15] ~ ~ ~" ]
+      }
     },
       "can_move_event": {
-        "randomize": [
-          {
-            "weight": 100,
-            "sequence": [
-              {
-                "add": {
-                  "component_groups": [ "can_move" ]
-                }
-              }
-            ]
-          }
-        ]
+        "add": { "component_groups": [ "can_move" ] }
       },
-      "hostile_dead_event": {
+      "ghost_dead_event": {
         "add": {
-          "component_groups": [ "hostile_dead" ]
+          "component_groups": [ "ghost_dead" ]
         }
       }
     }

@@ -8,17 +8,16 @@
       "is_experimental": false,
 
       "scripts": {
-        "animate": [ "hostile_dead_controller" ]
+        "animate": [ "ghost_dead" ]
       },
 
       "animations": {
-        "hostile_dead_controller": "controller.animation.hostile_dead",
-        "hostile_dead": "animation.hostile.die"
+        "ghost_dead": "animation.ghost.die"
       }
     },
 
     "component_groups": {
-      "hostile_dead": {
+      "ghost_disappear": {
         "minecraft:instant_despawn": {
           "remove_child_entities": true
         }
@@ -59,7 +58,7 @@
 		},
 
    "events": {
-			"hostile_dead_event": { "add": { "component_groups": [ "hostile_dead" ] } }
+			"ghost_disappear_event": { "add": { "component_groups": [ "ghost_disappear" ] } }
     }
   }
 }

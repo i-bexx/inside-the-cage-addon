@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.hostile.spawn": {
+		"animation.ghost.spawn": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 4,
 			"bones": {
@@ -101,7 +101,7 @@
 				}
 			}
 		},
-		"animation.hostile.move": {
+		"animation.ghost.move": {
 			"loop": true,
 			"animation_length": 1.25,
 			"bones": {
@@ -199,7 +199,7 @@
 				}
 			}
 		},
-		"animation.hostile.idle": {
+		"animation.ghost.idle": {
 			"loop": true,
 			"animation_length": 3,
 			"bones": {
@@ -253,7 +253,7 @@
 				}
 			}
 		},
-		"animation.hostile.attack": {
+		"animation.ghost.attack": {
 			"animation_length": 0.25,
 			"bones": {
 				"body": {
@@ -279,7 +279,7 @@
 				}
 			}
 		},
-		"animation.hostile.die": {
+		"animation.ghost.die": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 2,
 			"bones": {
@@ -327,7 +327,7 @@
 			},
 			"particle_effects": {
 				"0.0": {
-					"effect": "hostile",
+					"effect": "ghost",
 					"locator": "locator "
 				}
 			}
