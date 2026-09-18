@@ -7,24 +7,22 @@
         "default": "entity_beam_additive"
       },
       "textures": {
-        "default": "textures/entity/game/hostile"
+        "default": "textures/entity/game/ghost"
       },
       "geometry": {
-        "default": "geometry.hostile"
+        "default": "geometry.ghost"
       },
       "scripts": {
-        "animate": [
-          "die"
-        ]
+        "animate": [ "die" ]
       },
       "animations": {
-        "die": "animation.hostile.die"
+        "die": "animation.ghost.die"
       },
       "particle_effects": {
-        "hostile": "spawn:hostile"
+        "ghost": "spawn:ghost"
       },
       "render_controllers": [
-         "controller.render.hostile"
+         "controller.render.ghost"
          ]
       }
     }

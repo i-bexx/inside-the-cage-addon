@@ -25,7 +25,7 @@
       "textures": [ "Texture.default" ]
     },
     
-    "controller.render.hostile": {
+    "controller.render.ghost": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]

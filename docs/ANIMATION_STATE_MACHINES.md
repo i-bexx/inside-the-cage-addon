@@ -11,7 +11,7 @@ Complex state machines drive player and entity behaviors on the server side:
 - **Toxic Bomb** (`controller.animation.toxic_bomb`): Deployable area-of-effect weapon logic, utilizing `q.is_item_equipped` gating to ensure proper deployment states.
 - **Kit System** (`controller.animation.kit`): Item-use detection utilizing `query.is_using_item` to trigger specific behavior-pack animations and server events.
 - **Camera Static Effects** (`controller.animation.camera_no_signal`, `controller.animation.used_cam_when_could`): Sanity-driven state machine that applies VHS noise, screen shake, and signal loss effects based on player stats.
-- **Hostile System** (`controller.animation.hostile`): Manages entity behavior transitions like Patrol → Chase → Attack.
+- **Ghost System** (`controller.animation.ghost`): Manages entity behavior transitions like Patrol → Chase → Attack.
 
 ## Animations
 

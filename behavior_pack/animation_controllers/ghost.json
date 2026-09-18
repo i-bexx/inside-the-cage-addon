@@ -1,29 +1,27 @@
 {
   "format_version": "1.10.0",
   "animation_controllers": {
-    "controller.animation.hostile": {
+    "controller.animation.ghost": {
       "states": {
         "default": {
           "animations": [
-            "hostile_just_spawned"
+            "ghost_just_spawned"
           ],
           "transitions": [
             { "can_move": "query.all_animations_finished" },
-            { "dead": "!(query.is_alive)" }
+            { "dead": "!query.is_alive" }
           ]
         },
         "can_move": {
           "animations": [
-            "hostile_can_move"
+            "ghost_can_move"
           ],
           "transitions": [
-            { "dead": "!(query.is_alive)" }
+            { "dead": "!query.is_alive" }
           ]
         },
         "dead": {
-          "on_entry": [
-            "@s hostile_dead_event"
-          ]
+          "on_entry": [ "@s ghost_dead_event" ]
         }
       }
   }

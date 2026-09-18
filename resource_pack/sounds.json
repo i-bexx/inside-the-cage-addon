@@ -5,8 +5,8 @@
 				"volume": 1,
 				"pitch": [0.9, 1.0],
 				"events": {
-					"ambient": "hostile_whisper",
-          "hurt": "hostile_hurt"
+					"ambient": "ghost_whisper",
+          "hurt": "ghost_hurt"
 				}
 			}
 		}

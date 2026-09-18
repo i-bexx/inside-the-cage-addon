@@ -16,7 +16,7 @@ const CONFIG = {
         SHOOTING_ENTITY: "shooting_the_entity_event"
     },
     SCOREBOARD: {
-        HOSTILE: "is_looking_at_hostile"
+        GHOST: "is_looking_at_ghost"
     }
 };
 
@@ -82,7 +82,7 @@ function crosshairTracker(player) {
     let state = CURSOR_STATES.get(player.id);
     if (state) return state;
 
-    const setScore = (val) => player.runCommand(`scoreboard players set @s ${CONFIG.SCOREBOARD.HOSTILE} ${val}`);
+    const setScore = (val) => player.runCommand(`scoreboard players set @s ${CONFIG.SCOREBOARD.GHOST} ${val}`);
 
     state = new Proxy({ ...INITIAL_LOOKING_STATE }, {
         set(target, key, value) {

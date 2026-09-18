@@ -7,28 +7,23 @@
         "default": "entity_beam_additive"
       },
       "textures": {
-        "default": "textures/entity/game/hostile"
+        "default": "textures/entity/game/ghost"
       },
       "geometry": {
-        "default": "geometry.hostile"
+        "default": "geometry.ghost"
       },
       "scripts": {
-        "animate": [
-          "controller",
-
-          { "die": "!(query.is_alive)"}
-        ]
+        "animate": [ "controller" ]
       },
       "animations": {
-        "controller": "controller.animation.hostile",
-        "spawn": "animation.hostile.spawn",
-        "move": "animation.hostile.move",
-        "idle": "animation.hostile.idle",
-        "attack": "animation.hostile.attack",
-        "die": "animation.hostile.die"
+        "controller": "controller.animation.ghost",
+        "spawn": "animation.ghost.spawn",
+        "move": "animation.ghost.move",
+        "idle": "animation.ghost.idle",
+        "attack": "animation.ghost.attack"
       },
       "render_controllers": [
-         "controller.render.hostile"
+         "controller.render.ghost"
          ]
       }
     }

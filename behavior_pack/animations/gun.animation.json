@@ -21,7 +21,7 @@
 					"/camerashake add @s 0.05 0.3 rotational",
 					"/playsound gun_shoot @s",
 					"/scoreboard players remove @s ammo 1",
-					"/execute if score @s is_looking_at_hostile matches 1 run playsound shot_entity @s"
+					"/execute if score @s is_looking_at_ghost matches 1 run playsound shot_ghost @s"
 				]
 			},
 			"animation_length": 0.3333
