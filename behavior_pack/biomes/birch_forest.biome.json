@@ -33,7 +33,7 @@
       },
 
       "minecraft:tags": {
-        "tags": []
+        "tags": [ "ghost" ]
       }
     }
   }
