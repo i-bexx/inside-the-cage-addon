@@ -28,3 +28,9 @@ export function stopDifficultyMonitor() {
 
     world.setDifficulty(Difficulty.Peaceful);
 }
+
+world.afterEvents.entityHitEntity.subscribe(({ damagingEntity, hitEntity }) => {
+  if (damagingEntity.typeId != "game:ghost") return;
+
+  hitEntity.runCommand("scoreboard players remove @s Sanity 1");
+})
