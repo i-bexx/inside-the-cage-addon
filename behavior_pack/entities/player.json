@@ -203,12 +203,12 @@
 			},
 			"battery_is_full": {
 				"minecraft:type_family": {
-					"family": [ "battery_is_full" ]
+					"family": [ "player", "battery_is_full" ]
 				}
 			},
 			"battery_is_not_full": {
 				"minecraft:type_family": {
-					"family": [ "battery_is_not_full" ]
+					"family": [ "player", "battery_is_not_full" ]
 				}
 			},
 			"slowness": {
@@ -279,7 +279,39 @@
 			"minecraft:damage_sensor": {
 				"triggers": [
 					{
-						"cause": "all",
+						"cause": "drowning",
+						"deals_damage": "no"
+					},
+					{
+						"cause": "lava",
+						"deals_damage": "no"
+					},
+					{
+						"cause": "starve",
+						"deals_damage": "no"
+					},
+					{
+						"cause": "suffocation",
+						"deals_damage": "no"
+					},
+					{
+						"cause": "fire",
+						"deals_damage": "no"
+					},
+					{
+						"cause": "campfire",
+						"deals_damage": "no"
+					},
+					{
+						"cause": "freezing",
+						"deals_damage": "no"
+					},
+					{
+						"cause": "soul_campfire",
+						"deals_damage": "no"
+					},
+					{
+						"cause": "temperature",
 						"deals_damage": "no"
 					}
 				]
