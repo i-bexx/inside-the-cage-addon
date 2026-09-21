@@ -299,19 +299,16 @@
             "animations": [ "starting_knife" ],
             "transitions": [
               { "holding_knife": "query.all_animations_finished" },
-              { "attacking_knife_first": "variable.knife_attack_first" },
-              { "attacking_knife_second": "variable.knife_attack_second" },
+              { "attacking_knife_first": "variable.attack_time > 0" },
               { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" }
             ]
           },
           "holding_knife": {
             "animations": [ "holding_knife" ],
             "transitions": [
-              { "attacking_knife_first": "variable.knife_attack_first" },
-              { "attacking_knife_second": "variable.knife_attack_second" },
+              { "attacking_knife_first": "variable.attack_time > 0" },
               { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" }
-            ],
-            "blend_transition": 0.3
+            ]
           },
           "attacking_knife_first": {
             "animations": [ "attacking_knife_first" ],
