@@ -11,9 +11,9 @@
 |--------|------:|
 | Script API Modules | 30+ |
 | JSON UI Files | 40 |
-| Custom Entities | 13 |
+| Custom Entities | 12 |
 | Animation Controllers | 10+ |
-| Custom Particle Effects | 8 |
+| Custom Particle Effects | 7 |
 
 <div align="center">
   <img src="./assets/images/full_hud.png" alt="Full Gameplay HUD" width="800"/>
