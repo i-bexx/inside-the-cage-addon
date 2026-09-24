@@ -15,7 +15,7 @@
           "transitions": [
             { "battery_increase_3": "q.is_item_name_any('slot.armor.head', 'battery:increase3')" },
             { "battery_decrease_4": "q.is_item_name_any('slot.armor.head', 'battery:decrease4')" },
-            { "default": "query.mark_variant < 555" }
+            { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
           ]
         },
         "battery_increase_3": {
@@ -23,7 +23,7 @@
           "transitions": [
             { "battery_increase_2": "q.is_item_name_any('slot.armor.head', 'battery:increase2')" },
             { "battery_decrease_3": "q.is_item_name_any('slot.armor.head', 'battery:decrease3')" },
-            { "default": "query.mark_variant < 555" }
+            { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
           ]
         },
         "battery_increase_2": {
@@ -31,14 +31,14 @@
           "transitions": [
             { "battery_increase_1": "q.is_item_name_any('slot.armor.head', 'battery:increase1')" },
             { "battery_decrease_2": "q.is_item_name_any('slot.armor.head', 'battery:decrease2')" },
-            { "default": "query.mark_variant < 555" }
+            { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
           ]
         },
         "battery_increase_1": {
           "animations": ["battery_increase_1"],
           "transitions": [
             { "battery_decrease_1": "q.is_item_name_any('slot.armor.head', 'battery:decrease1')" },
-            { "default": "query.mark_variant < 555" }
+            { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
           ]
         },
 
@@ -47,7 +47,7 @@
           "transitions": [
             { "battery_decrease_2": "q.is_item_name_any('slot.armor.head', 'battery:decrease2')" },
             { "battery_increase_1": "q.is_item_name_any('slot.armor.head', 'battery:increase1')" },
-            { "default": "query.mark_variant < 555" }
+            { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
           ]
         },
         "battery_decrease_2": {
@@ -55,7 +55,7 @@
           "transitions": [
             { "battery_decrease_3": "q.is_item_name_any('slot.armor.head', 'battery:decrease3')" },
             { "battery_increase_2": "q.is_item_name_any('slot.armor.head', 'battery:increase2')" },
-            { "default": "query.mark_variant < 555" }
+            { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
           ]
         },
         "battery_decrease_3": {
@@ -63,14 +63,14 @@
           "transitions": [
             { "battery_decrease_4": "q.is_item_name_any('slot.armor.head', 'battery:decrease4')" },
             { "battery_increase_3": "q.is_item_name_any('slot.armor.head', 'battery:increase3')" },
-            { "default": "query.mark_variant < 555" }
+            { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
           ]
         },
         "battery_decrease_4": {
           "animations": ["battery_decrease_4"],
           "transitions": [
             { "battery_increase_4": "q.is_item_name_any('slot.armor.head', 'battery:increase4')" },
-            { "default": "query.mark_variant < 555" }
+            { "default": "query.mark_variant < 555 && query.mark_variant != 20" }
           ]
         }
       }
