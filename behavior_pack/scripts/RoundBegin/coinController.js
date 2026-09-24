@@ -88,20 +88,8 @@ async function spawnCoin() {
 }
 
 export async function despawnCoins() {
-    const rawData = world.getDynamicProperty("active_coin_locations");
-    const coinLocations = JSON.parse(rawData || "[]");
+    world.getDimension("overworld").runCommand("kill @e[type=game:coin]");
 
-    for (const value of coinLocations) {
-        removeTickingArea(value.areaName);
-        await loadTickingArea(dimension, value.locationObject, value.areaName);
-
-        try {
-            const coins = dimension.getEntities({ type: CONFIG.ENTITY_TYPE, location: value.locationObject, maxDistance: CONFIG.MAX_COIN_DISTANCE });
-            for (const coin of coins) coin.remove();
-        } catch (e) {}
-        
-        removeTickingArea(value.areaName);
-    }
     tickingAreaLocations = [];
     world.setDynamicProperty("active_coin_locations", JSON.stringify(tickingAreaLocations));
 }
