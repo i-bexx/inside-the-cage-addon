@@ -60,6 +60,10 @@
         "is_pushable": false,
         "is_pushable_by_piston": false
       },
+      "minecraft:tick_world": {
+        "never_despawn": true,
+        "radius": 2
+      },
 
       "minecraft:nameable": {},
       "minecraft:fire_immune": false,

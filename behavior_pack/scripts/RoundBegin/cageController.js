@@ -72,22 +72,8 @@ export async function spawnCages() {
 export async function despawnCages() {
     isCageSpawnerActive = false;
 
-    const rawData = world.getDynamicProperty("active_cage_locations");
-    const cageLocations = JSON.parse(rawData || "[]");
+    world.getDimension("overworld").runCommand("kill @e[type=game:cage]");
 
-    for (const value of cageLocations) {
-        removeTickingArea(value.areaName);
-        await loadTickingArea(dimension, value.locationObject, value.areaName);
-
-        try {
-            const cages = dimension.getEntities({ type: "game:cage", location: value.locationObject, maxDistance: 10 });
-            for (const cage of cages) {
-                try { cage.remove(); } catch(err) {}
-            }
-        } catch (e) {}
-
-        removeTickingArea(value.areaName);
-    }
     tickingAreaLocations = [];
     world.setDynamicProperty("active_cage_locations", JSON.stringify(tickingAreaLocations));
 }
