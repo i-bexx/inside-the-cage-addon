@@ -114,7 +114,7 @@ system.runInterval(() => {
 world.afterEvents.entityHitEntity.subscribe((event) => {
     const { damagingEntity, hitEntity } = event;
     
-    if (damagingEntity.typeId !== "minecraft:player") return;
+    if (damagingEntity.typeId !== "minecraft:player" || damagingEntity.getItemCooldown("knife") < 7) return;
 
     const mainHand = getEquipment(damagingEntity, "Mainhand");
 
