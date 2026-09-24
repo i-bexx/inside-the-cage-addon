@@ -152,6 +152,7 @@ function batteryDrain(player) {
         }
         if (decidedBatteryLevel === BATTERY_CONFIG.LEVELS.MIN) {
             player.setDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_FULLY_DRAINED, true);
+            world.scoreboard.getObjective("Sanity").setScore(player.scoreboardIdentity, 0);
         }
 
         player.setDynamicProperty(BATTERY_CONFIG.PROPERTIES.LEVEL, decidedBatteryLevel);
@@ -171,13 +172,6 @@ function pickupBattery(player) {
         system.clearRun(playerIsBatteryCritical.get(player.id));
         playerIsBatteryCritical.delete(player.id);
         player.runCommand(`clear @s ${BATTERY_CONFIG.ITEMS.PREFIX_CRITICAL}`);
-    }
-    
-    const isBatteryFullyDrained = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_FULLY_DRAINED);
-    if (isBatteryFullyDrained) {
-        player.setDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_FULLY_DRAINED, false);
-        player.triggerEvent(BATTERY_CONFIG.EVENTS.STATIC_START);
-        player.triggerEvent(BATTERY_CONFIG.EVENTS.STATIC_MOVEMENT);
     }
     
     player.setDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_COLLECTED, false);
