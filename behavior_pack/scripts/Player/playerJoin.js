@@ -15,7 +15,7 @@ const CONFIG = {
         HOST: "host",
         IN_LOBBY: "in_lobby", 
         MENU: "in_menu",
-        TO_REMOVE: ["in_game", "in_lobby", "waiting_for_start", "starting", "starter", "menu", "eliminated", "stalker_matched", "hasNotification", "requester", "accepted_request", "refused_request", "show_in_round_personal_ui"]
+        TO_REMOVE: ["in_game", "in_lobby", "waiting_for_start", "starter", "menu", "eliminated", "stalker_matched", "hasNotification", "requester", "accepted_request", "refused_request", "show_in_round_personal_ui"]
     },
     DYN_PROPS: { 
         IN_MENU: "in_menu",
@@ -42,8 +42,7 @@ const CONFIG = {
         RESET_COIN_UI: "xp -10L @s",
         RESET_COIN: "scoreboard players set @s coin_amount 0", 
         MENU_READY_SOUND: "playsound random.levelup @s", 
-        GAME_NOT_STARTED: "scoreboard players set value game_started 0",
-        REMOVE_REDSTONE_BLOCK: "setblock -54 75 -152 air"
+        GAME_NOT_STARTED: "scoreboard players set value game_started 0"
     },
     ENTITIES: {
         STALKER: "game:stalker_cursor",
@@ -191,7 +190,6 @@ async function handleOwnerJoinLogic(player) {
         player.setDynamicProperty(CONFIG.DYN_PROPS.MENU_READY, true);
         player.runCommand(`tag @s add ${CONFIG.TAGS.MENU}`);
         
-        player.runCommand(CONFIG.COMMANDS.REMOVE_REDSTONE_BLOCK);
         player.runCommand(CONFIG.COMMANDS.MENU_READY_SOUND);
         player.runCommand(`title @s actionbar ${CONFIG.MESSAGES.MENU_ACTIONBAR}`);
     }

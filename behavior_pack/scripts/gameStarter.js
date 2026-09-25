@@ -2,6 +2,7 @@ import { world, system } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 
 import { stalkerMatch } from "./stalkerEntity";
+import { sleep } from "./utils";
 
 // ==========================================
 // CONSTANTS
@@ -38,6 +39,8 @@ let sessionPlayers = [];
 // FUNCTIONS
 // ==========================================
 
+// -- State loop --
+
 function locationState(player) {
 	let state = STARTER_RANGE_STATES.get(player.id)
 	if (state) return state;
@@ -69,13 +72,15 @@ STARTER_RANGE_STATES.set(player.id, state);
 return state;
 }
 
-// Checks for players in range to start the game
+
+// -- Range Checker --
+
 export function gameStarter() {
 	if (intervalId !== undefined) return;
 	
 	intervalId = system.runInterval(() => {
 		const players = world.getAllPlayers()
-											.filter(p => !p.hasTag("starting"));
+											.filter(p => !p.hasTag("waiting_for_start"));
 			
 		for (const player of players) {
 			player.isInRange = {
@@ -99,6 +104,8 @@ export function gameStarter() {
 	},30)
 }
 
+// -- In Range Logic --
+
 async function playerInRange(player) {
 	const isResetingRound = world.getDynamicProperty("reseting_round");
 	if (isResetingRound) {
@@ -111,7 +118,6 @@ async function playerInRange(player) {
   player.addTag("waiting_for_start");
   playersWaitingToStart.push(player);
   
-	// Check if the player capacity is reached
   if (playersWaitingToStart.length > 3) {
     const kickedPlayers = playersWaitingToStart.slice(3);
 		
@@ -132,10 +138,13 @@ async function playerInRange(player) {
 	return;
 }
 
+
 function kickOut(player) {
 	for (const command of Object.values(REJECT_PLAYER_COMMANDS)) player.runCommand(command);
 	playersWaitingToStart = playersWaitingToStart.filter(p => p.id !== player.id);
 }
+
+// -- Game Starter Panel --
 
 function ActionForm(player) {
 	new ActionFormData()
@@ -161,6 +170,8 @@ function ActionForm(player) {
 		})
 }
 
+// -- Game Start Logic --
+
 export function startFunction() {
 	const isTheRoundRestarted = world.getDynamicProperty("gameRestart");
 	const lobbyPlayers = world.getPlayers({ tags: ["waiting_for_start"] });
@@ -173,7 +184,7 @@ export function startFunction() {
 	const playersToStart = getSessionPlayers();
 	
 	for (const player of playersToStart) {
-		player.addTag("starting");
+		player.addTag("waiting_for_start");
 		player.removeTag("in_lobby");
 
 		player.setDynamicProperty("batteryLevel", 4);
@@ -183,13 +194,54 @@ export function startFunction() {
 		if (!isTheRoundRestarted) player.triggerEvent("curtain_close_event");
 	}
 
-		dimension.runCommand("setblock -54 75 -152 redstone_block");
+		startCommands();
 		dimension.runCommand("event entity @e[type=game:door] door_game_started_event");
 		dimension.runCommand("fill -180 68 -92 -180 71 -84 barrier");
-		
 		stalkerMatch();
 
 		playersWaitingToStart = [];
+}
+
+async function startCommands() {
+	await sleep(60);
+	runCountdownActionbar("Loading...", false);
+	dimension.runCommand("execute if entity @a[tag=!waiting_for_start] run title @a[tag=!waiting_for_start] actionbar §4Waiting room closed");
+	await sleep(310);
+	runCountdownActionbar("§h< 5 >");
+	await sleep(20);
+	runCountdownActionbar("§h< 4 >");
+	await sleep(20);
+	runCountdownActionbar("§a< 3 >");
+	await sleep(20);
+	runCountdownActionbar("§p< 2 >");
+	await sleep(20);
+	runCountdownActionbar("§4< 1 >");
+	await sleep(5);
+	dimension.runCommand("fog @a[tag=waiting_for_start] push game:in_round_default in_round_fog");
+	dimension.runCommand("tp @a[tag=waiting_for_start] 120 65 -260");
+	await sleep(15);
+	dimension.runCommand("playsound tractor_door @a[tag=waiting_for_start]");
+	dimension.runCommand("tag @a remove starter");
+	await sleep(35);
+	dimension.runCommand("tag @a[tag=waiting_for_start] add in_game");
+	dimension.runCommand("tag @a remove waiting_for_start");
+	dimension.runCommand("scoreboard players set @a[tag=in_game] Sanity 100");
+	await sleep(170);
+	dimension.runCommand("event entity @a[tag=in_game] curtain_open_event");
+	await sleep(70);
+	dimension.runCommand("give @a[tag=in_game] game:camera");
+	dimension.runCommand("tag @a[tag=in_game] add show_in_round_personal_ui");
+	dimension.runCommand("scoreboard players set value game_started 1");
+}
+
+// -- Helper Functions --
+
+function runCountdownActionbar(actionbar, playSound = true) {
+	const players = world.getPlayers({ tags: ["waiting_for_start"] });
+	for (const player of players) {
+		player.onScreenDisplay.setActionBar(actionbar);
+		if (playSound) player.playSound("block.click");
+	}
 }
 
 function updateDoorEvent() {
@@ -203,15 +255,20 @@ function updateDoorEvent() {
 	} catch(e) { }
 }
 
-export function checkIfPositionClear() { return STARTER_RANGE_STATES; }
-
 export function getSessionPlayers() {
 	sessionPlayers = sessionPlayers.filter(p => p?.isValid);
 	return sessionPlayers;
 }
-export function resetSessionPlayers() { sessionPlayers = []; }
 
+export function checkIfPositionClear() { return STARTER_RANGE_STATES; }
+export function resetSessionPlayers() { sessionPlayers = []; }
 export function setGlobalVariables() { dimension = world.getDimension("overworld"); }
+
+
+// ==========================================
+// EVENT LISTENER
+// ==========================================
+
 
 world.afterEvents.playerLeave.subscribe(({ playerId }) => {
 	if (intervalId === undefined) return; 
