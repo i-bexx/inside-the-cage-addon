@@ -79,7 +79,3 @@ For deeper technical discussions, refer to the following documentation:
 This project is currently in **active development** and is published primarily as a portfolio and technical showcase.
 
 A compiled, playable `.mcpack` release will be made publicly available once development reaches a stable milestone.
-
----
-
-**⚖️ Legal Disclaimer:** *This project is an independent community creation for Minecraft Bedrock Edition and contains modified versions of original game UI code structures (e.g., `server_form.json`). © Mojang AB and © Microsoft Corporation. All rights reserved for the original game assets and baseline code structures. It is not an official Minecraft product and is not approved by or associated with Mojang or Microsoft.*
