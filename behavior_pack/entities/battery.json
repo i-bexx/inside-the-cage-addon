@@ -5,7 +5,9 @@
       "identifier": "game:battery",
       "is_spawnable": false,
       "is_summonable": true,
-      "is_experimental": false
+      "is_experimental": false,
+
+			"spawn_category": "misc"
     },
 
     "component_groups": { "die": { "minecraft:instant_despawn": {} } },
