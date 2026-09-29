@@ -19,15 +19,15 @@
         "default": "textures/entity/steve",
         "cape": "textures/entity/cape_invisible",
 
-        "static_normal": "textures/entity/game/Static/static_1",
-        "static_1": "textures/entity/game/Static/static_1",
-        "static_2": "textures/entity/game/Static/static_2",
-        "static_3": "textures/entity/game/Static/static_3",
-        "camera_no_signal": "textures/entity/game/Static/camera_no_signal",
+        "static_normal": "textures/entity/game/static/static_1",
+        "static_1": "textures/entity/game/static/static_1",
+        "static_2": "textures/entity/game/static/static_2",
+        "static_3": "textures/entity/game/static/static_3",
+        "camera_no_signal": "textures/entity/game/static/camera_no_signal",
 
         "battery": "textures/entity/game/battery_player",
-        "white_font": "textures/entity/game/Fonts/white_font",
-        "red_font": "textures/entity/game/Fonts/red_font"
+        "white_font": "textures/entity/game/fonts/white_font",
+        "red_font": "textures/entity/game/fonts/red_font"
       },
 
       "geometry": {
@@ -228,7 +228,6 @@
         "keyboard": "keyboard",
         "camera_shutter": "camera_shutter",
         "pick_up": "pick_up",
-        "tractor_door": "tractor_door",
         "pistol_loading_chamber": "pistol_loading_chamber",
         "gun_shoot": "gun_shoot",
         "knife_draw": "knife_draw",

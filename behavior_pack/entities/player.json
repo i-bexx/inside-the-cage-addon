@@ -123,7 +123,7 @@
 					"value": 4
 				}
 			},
-			"new_game_Started": {
+			"new_game_started": {
 				"minecraft:mark_variant": {
 					"value": 1
 				}
@@ -399,8 +399,8 @@
 				"set_property": { "property:start_gun": false }
 			},
 			"shooting_the_entity_event": {},
-			"new_game_Started": {
-				"add": { "component_groups": [ "new_game_Started" ] }
+			"new_game_started": {
+				"add": { "component_groups": [ "new_game_started" ] }
 			},
 			"new_game_started_text": {
 				"add": { "component_groups": [ "new_game_started_text" ] }

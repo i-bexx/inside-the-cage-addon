@@ -7,8 +7,8 @@
         "default": "entity_alphatest"
       },
       "textures": {
-        "texture_default": "textures/entity/game/Menu/continue",
-        "texture_selected": "textures/entity/game/Menu/continue selected"
+        "texture_default": "textures/entity/game/menu/continue",
+        "texture_selected": "textures/entity/game/menu/continue selected"
       },
       "geometry": {
         "default": "geometry.continue"
