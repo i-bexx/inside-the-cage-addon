@@ -162,7 +162,18 @@ function batteryDrain(player) {
     playerDrainingBattery.set(player.id, timeoutId);
 }
 
-function pickupBattery(player) {
+export function pickupBattery(player, target) {
+    if (target?.typeId !== BATTERY_CONFIG.ITEMS.ENTITY_ID && !player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_COLLECTED)) return;
+    
+    let batteryLevel = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.LEVEL) ?? BATTERY_CONFIG.LEVELS.MAX;
+    
+    if (batteryLevel < BATTERY_CONFIG.LEVELS.MAX) {
+        // If battery is fully drained (-1), start from 0 so adding +1 makes it 1.
+        if (batteryLevel === BATTERY_CONFIG.LEVELS.MIN) {
+            player.setDynamicProperty(BATTERY_CONFIG.PROPERTIES.LEVEL, 0);
+        }
+    }
+
     // Cleanup Operations
     if (playerDrainingBattery.has(player.id)) {
         system.clearRun(playerDrainingBattery.get(player.id));
@@ -173,7 +184,7 @@ function pickupBattery(player) {
         playerIsBatteryCritical.delete(player.id);
         player.runCommand(`clear @s ${BATTERY_CONFIG.ITEMS.PREFIX_CRITICAL}`);
     }
-    
+
     player.setDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_COLLECTED, false);
     player.setDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_DRAINING, false);
 
@@ -233,19 +244,7 @@ function batteryIsCritical(player) {
 // INTERACTION AND EXPORTS
 // =============================================================
 
-world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
-    if (target.typeId === BATTERY_CONFIG.ITEMS.ENTITY_ID) {
-        let batteryLevel = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.LEVEL) ?? BATTERY_CONFIG.LEVELS.MAX;
-        
-        if (batteryLevel < BATTERY_CONFIG.LEVELS.MAX) {
-            // If battery is fully drained (-1), start from 0 so adding +1 makes it 1.
-            if (batteryLevel === BATTERY_CONFIG.LEVELS.MIN) {
-                player.setDynamicProperty(BATTERY_CONFIG.PROPERTIES.LEVEL, 0);
-            }
-            pickupBattery(player);
-        }
-    }
-});
+world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => pickupBattery(player, target));
 
 export function stopBatteryControl() {
     if (intervalId === undefined) return;
