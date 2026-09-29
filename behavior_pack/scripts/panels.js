@@ -1,9 +1,10 @@
 import { world, system, EntityComponentTypes } from "@minecraft/server";
 import { ActionFormData, ModalFormData, FormCancelationReason } from "@minecraft/server-ui";
 
-import { votePanel } from "./voteManager";
 import { getGameStartedObjective, getCoinAmountObjective, getStaminaLimitObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
+import { pickupBattery } from "./RoundBegin/batteryController";
 import { getPasswords } from "./RoundBegin/passwordManager";
+import { votePanel } from "./voteManager";
 
 let dimension;
 
@@ -114,13 +115,14 @@ function shopPanel(player) {
 						if (coinAmount >= itemCost) {
 							let transactionSuccessful = false;
 
-							if (itemName !== "battery") {
+							if (itemName !== "game:battery") {
 									player.runCommand(`give @s ${itemName} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
                                     if (itemName == "game:gun")
                                         player.runCommand(`give @s game:ammo_shoot 10 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
 									transactionSuccessful = true;
 							} else if (player.getDynamicProperty("batteryLevel") < 4) {
-									player.setDynamicProperty("batteryIsCollected", true);
+                                    player.setDynamicProperty("batteryIsCollected", true);
+                                    pickupBattery(player, undefined);
 									transactionSuccessful = true;
 							} else {
 									player.sendMessage(" §6[§e!§6] §cYour battery is already full");
