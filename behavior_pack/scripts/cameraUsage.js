@@ -189,5 +189,5 @@ world.afterEvents.itemUse.subscribe(({source, itemStack}) => {
 export function stopInitiateCam() {
     if (timeoutId == undefined) return;
     system.clearRun(timeoutId);
-    timeoutId == undefined;
+    timeoutId = undefined;
 }

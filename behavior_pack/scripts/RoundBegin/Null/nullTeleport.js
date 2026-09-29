@@ -23,12 +23,12 @@ export function teleportNull(ticks) {
         const nullEntities = dimension.getEntities({ type: "game:null" });
         const nullEntity = nullEntities[0];
 
+        world.setDynamicProperty("nullTeleportChecking", false);
+        teleportCountdown = undefined;
+
         if (!nullEntity) return; 
 
         attemptNullTeleport(chosenPlayer.location, nullEntity);
-
-        world.setDynamicProperty("nullTeleportChecking", false);
-        teleportCountdown = undefined;
     }, ticks);
 }
 
