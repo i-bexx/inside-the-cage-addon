@@ -220,7 +220,7 @@ async function startCommands() {
 	dimension.runCommand("fog @a[tag=waiting_for_start] push game:in_round_default in_round_fog");
 	dimension.runCommand("tp @a[tag=waiting_for_start] 120 65 -260");
 	await sleep(15);
-	dimension.runCommand("playsound tractor_door @a[tag=waiting_for_start]");
+	dimension.runCommand("playsound truck_door @a[tag=waiting_for_start]");
 	dimension.runCommand("tag @a remove starter");
 	await sleep(35);
 	dimension.runCommand("tag @a[tag=waiting_for_start] add in_game");

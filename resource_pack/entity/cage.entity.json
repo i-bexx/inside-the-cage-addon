@@ -9,8 +9,8 @@
         "transparent": "entity_alphablend"
       },
       "textures": {
-        "cage": "textures/entity/game/Cage/cage",
-        "cage_broken": "textures/entity/game/Cage/cage_broken"
+        "cage": "textures/entity/game/cage/cage",
+        "cage_broken": "textures/entity/game/cage/cage_broken"
       },
       "geometry": {
         "default": "geometry.cage",

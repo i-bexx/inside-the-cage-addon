@@ -91,8 +91,8 @@ const COMMANDS = {
         "scoreboard players add world new_game 1"
     ],
     SCENE_INTRO: [
-        `event entity @a[tag=${CONFIG.TAGS.CUTSCENE}] new_game_Started`,
-        `playsound new_game_Started @a[tag=${CONFIG.TAGS.CUTSCENE}]`
+        `event entity @a[tag=${CONFIG.TAGS.CUTSCENE}] new_game_started`,
+        `playsound new_game_started @a[tag=${CONFIG.TAGS.CUTSCENE}]`
     ],
     SCENE_TRUCK: [
         `event entity @a[tag=${CONFIG.TAGS.CUTSCENE}] new_game_started_text`,
@@ -110,7 +110,6 @@ const COMMANDS = {
         `tp @a[tag=${CONFIG.TAGS.CUTSCENE}] ${CONFIG.COORDS.SPAWN_POINT}`,
         `event entity @a[tag=${CONFIG.TAGS.CUTSCENE}] normal_event`,
         `stopsound @a[tag=${CONFIG.TAGS.CUTSCENE}]`,
-        `playsound menu_exit @a[tag=${CONFIG.TAGS.CUTSCENE}]`,
         `tag @a remove ${CONFIG.TAGS.CUTSCENE}`,
         `fill ${CONFIG.COORDS.AIR_FILL_AREA} air`,
         `event entity @e[type=${CONFIG.IDS.DOOR}] "door_0_event"`,
