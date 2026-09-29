@@ -61,9 +61,7 @@ export function votePanel(source) {
     mainPanel.show(source).then((response) => {
       const { cancelationReason, canceled, selection } = response;
 
-      if (cancelationReason === FormCancelationReason.UserBusy) {
-        return votePanel(source);
-      } 
+      if (cancelationReason === FormCancelationReason.UserBusy) return;
       if (canceled) return;
 
       const types = [VOTE_TYPES.RESTART, VOTE_TYPES.END_ROUND];
@@ -77,10 +75,7 @@ function startRequest(player, type) {
     confirmPanels[type].show(player).then((response) => {
       const { cancelationReason, canceled, selection } = response;
 
-        if (cancelationReason === FormCancelationReason.UserBusy) {
-          startRequest(player, type);
-          return;
-        } 
+        if (cancelationReason === FormCancelationReason.UserBusy) return;
         if (canceled) return;
         if (selection == 1) return;
 
@@ -111,10 +106,7 @@ function startRequest(player, type) {
 function handleVote(player, type) {
     confirmPanels[type].show(player).then((response) => {
       const { cancelationReason, canceled, selection } = response;
-        if (cancelationReason === FormCancelationReason.UserBusy) {
-          handleVote(player, type);
-          return;
-        }
+        if (cancelationReason === FormCancelationReason.UserBusy) return;
         if (canceled) return;
 
         const requester = getPlayersInRound().find(p => p.hasTag(TAGS.REQUESTER));
