@@ -9,14 +9,6 @@
 			},
 			"animation_length": 3.2,
 			"loop": true
-		},
-		"animation.static.used_cam_when_could": {
-			"timeline": {
-				"0.0": [
-					"/playsound turnedOnCamNowCanNot @s"
-				]
-			},
-			"animation_length": 0.125
 		}
 	}
 }

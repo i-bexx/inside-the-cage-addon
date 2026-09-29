@@ -39,7 +39,6 @@
 			"scripts": {
 				"animate": [
 					"camera_no_signal",
-					"used_cam_when_could",
 					"gun",
 					"no_ammo_controller",
 					"ammo_reload_controller",
@@ -48,8 +47,6 @@
 				]
 			},
 			"animations": {
-				"used_cam_when_could": "controller.animation.used_cam_when_could",
-				"used_cam_when_could_anim": "animation.static.used_cam_when_could",
 				"camera_no_signal": "controller.animation.camera_no_signal",
 				"camera_no_signal_playsound": "animation.static.camera_no_signal_playsound",
 

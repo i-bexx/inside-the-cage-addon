@@ -10,6 +10,7 @@ let dimension;
 
 const MAIN_PANELS = [ shopPanel, votePanel, upgradeBattery, increaseStaminaLimit ];
 const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_bomb": 6, "game:ammo": 1, "game:battery": 3, "game:cage_detector": 9 };
+const ORIGINAL_PRICES = [ 4, 2, 7, 6, 1, 3, 9 ];
 
 let timeoutId = undefined;
 
@@ -22,9 +23,7 @@ function customPanel(player) {
     .textField("Second Password", "Type here...")
     .submitButton("Submit")
         .show(player).then(({ cancelationReason, canceled, formValues }) => {
-            if (cancelationReason === FormCancelationReason.UserBusy) {
-                return customPanel(player);
-            }
+            if (cancelationReason === FormCancelationReason.UserBusy) return;
             if (canceled) return;
 
            const isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
@@ -61,9 +60,7 @@ function mainPanel(player) {
     .button("Upgrade Battery", "textures/ui/panels/main_panel/icons/battery_upgrade")
     .button("Upgrade Stamina", "textures/ui/panels/main_panel/icons/stamina_limit_increase")
         .show(player).then(({ cancelationReason, canceled, selection }) => {
-            if (cancelationReason === FormCancelationReason.UserBusy) {
-                return mainPanel(player);
-            }
+            if (cancelationReason === FormCancelationReason.UserBusy) return;
             if (canceled) return;
 
             const isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
@@ -96,10 +93,8 @@ function shopPanel(player) {
     .button(`...`, "")
     .button(`...`, "")
 		.show(player).then(({ cancelationReason, canceled, selection }) => {
-            if (cancelationReason === FormCancelationReason.UserBusy) {
-                return shopPanel(player);
-            }
-            if (canceled) return;
+            if (cancelationReason === FormCancelationReason.UserBusy) return;
+            if (canceled || [7, 8].includes(selection)) return;
 
             const coinAmount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity);
 
@@ -233,6 +228,13 @@ export function stopGivePanelItem() {
     if (timeoutId === undefined) return;
     system.clearRun(timeoutId);
     timeoutId = undefined;
+}
+
+export function resetPrices() {
+    const keys = Object.keys(SHOP_ITEMS);
+    for (let i = 0; i < keys.length; i++) {
+        SHOP_ITEMS[keys[i]] = ORIGINAL_PRICES[i];
+    }
 }
 
 export function setGlobalVariables() { dimension = world.getDimension("overworld"); }

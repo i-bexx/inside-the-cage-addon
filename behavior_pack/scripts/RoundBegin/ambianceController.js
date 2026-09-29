@@ -6,7 +6,6 @@ import { getPlayersInRound } from "../utils";
 // =============================================================
 
 const TICKS = [ 4950, 5260, 7210, 3250, 4210 ];
-const COMMAND = "playsound ambiance @s";
 
 let timeoutId = undefined;
 let isRunning = false;
@@ -33,20 +32,16 @@ function playAmbiance() {
 
         const players = getPlayersInRound();
 
-        for (const player of players) {
-            if (player.isValid) {
-                player.runCommand(COMMAND); 
-            }
-        }
+        for (const player of players)
+            if (player.isValid)
+                player.playSound("ambiance");
         
-        playAmbiance();
         timeoutId = undefined;
+        playAmbiance();
     }, chosenTick);
 }
 
-function getIndex() {
-    return Math.floor(Math.random() * TICKS.length);
-}
+function getIndex() { return Math.floor(Math.random() * TICKS.length); }
 
 export function stopAmbiance() {
     if (timeoutId !== undefined) {

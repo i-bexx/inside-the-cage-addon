@@ -16,7 +16,6 @@ import { stopSanityControl } from "./RoundBegin/Sanity";
 import { stopPlayerLookingControl } from "./RoundBegin/playerLooking";
 import { stopStaminaControl } from "./RoundBegin/Stamina";
 import { stopSoulsAmountCheck } from "./RoundBegin/soulController";
-import { resetPasswords } from "./RoundBegin/passwordManager";
 import { stopAmbiance } from "./RoundBegin/ambianceController";
 import { stopBatteryControl } from "./RoundBegin/batteryController";
 import { stopWarnPlayerAboutCam } from "./RoundBegin/cameraController";
@@ -25,6 +24,9 @@ import { stopDifficultyMonitor } from "./RoundBegin/ghostController";
 
 import { despawnCages } from "./RoundBegin/cageController";
 import { despawnCoins } from "./RoundBegin/coinController";
+
+import { resetPasswords } from "./RoundBegin/passwordManager";
+import { resetPrices } from "./panels";
 
 
 // ==========================================
@@ -260,6 +262,7 @@ export function resetFunctions() {
   stopDifficultyMonitor();
 
   resetPasswords();
+  resetPrices();
 }
 
 export async function despawnEntities() {
