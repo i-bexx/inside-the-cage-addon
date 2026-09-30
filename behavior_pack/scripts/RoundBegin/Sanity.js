@@ -16,22 +16,25 @@ export function Sanity_control() {
 	if (intervalId !== undefined) return;
 
 	intervalId = system.runInterval(() => {
-		players = getPlayersInRound()
+		players = getPlayersInRound();
 
-		checkPlayerLookingState(players)
-		checkPlayerHeartPoundingState(players)
-		checkPlayerSanityLowStaticSound(players)
-		lowSanityStatic(players)
-	},5)
+		for (const player of players) {
+			let sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
+
+			checkPlayerLookingState(player, sanityValue);
+			checkPlayerHeartPoundingState(player, sanityValue);
+			checkPlayerSanityLowStaticSound(player, sanityValue);
+			lowSanityStatic(player, sanityValue);
+		}
+	}, 5)
 }
 
 //SANITY DECREASE LOGIC
-async function checkPlayerLookingState(players) {
-	for (const player of players) {
+async function checkPlayerLookingState(player, sanityValue) {
 		let isPlayerLooking = player.getDynamicProperty("is_looking")
 		let playerIsNotLookingCooldown = player.getDynamicProperty("notLookingCooldown")
 		let playerIsLookingCooldown = player.getDynamicProperty("lookingCooldown")
-		let isSanityZero = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity) == 0
+		let isSanityZero = sanityValue == 0
 		
 		let decreaseSanityWhenNotLooking = !isPlayerLooking && !playerIsNotLookingCooldown && !isSanityZero
 		let decreaseSanityWhenLooking = isPlayerLooking && !playerIsLookingCooldown && !isSanityZero
@@ -44,7 +47,6 @@ async function checkPlayerLookingState(players) {
 		if (isSanityZero) {
 				game_over(player)
 		}
-	}
 }
 function playerIsNotLooking(player) {
 	player.setDynamicProperty("notLookingCooldown", true)
@@ -63,10 +65,8 @@ function playerIsLooking(player) {
 	},30)
 }
 
-function lowSanityStatic(players) {
-	for (const player of players) {
-		let sanityScore = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
-		let isSanityLow = sanityScore <= 33
+function lowSanityStatic(player, sanityValue) {
+		let isSanityLow = sanityValue <= 33
 
 		let isUsingCam = player.getDynamicProperty("camUsing")
 		let willPlayerGetNoSignalNow = player.getDynamicProperty("nowPlayerWillGetNoSignal")
@@ -84,17 +84,14 @@ function lowSanityStatic(players) {
 
 			if (!isPlayerLooking) player.triggerEvent("static_event")
 		}
-	}
 }
 
 //HEART POUNDING SOUND EFFECT
-function checkPlayerHeartPoundingState(players) {
-	for (const player of players) {
+function checkPlayerHeartPoundingState(player, sanityValue) {
 			const isPlayersHeartPounding = playsoundHeart.has(player.id);
 			const component = player.getComponent("minecraft:mark_variant");
 
-			let sanityScore = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
-			let shouldHeartPound = sanityScore <= 33 && component.value === 556;
+			let shouldHeartPound = sanityValue <= 33 && component.value === 556;
 
 			if (shouldHeartPound && !isPlayersHeartPounding) {
 				player.runCommand("playsound heart @s");
@@ -109,7 +106,6 @@ function checkPlayerHeartPoundingState(players) {
 						player.runCommand("stopsound @s heart");
 					}
 			}
-	}
 }
 function playerHeartPounding(player) {
 	if (playsoundHeart.has(player.id)) return;
@@ -123,13 +119,11 @@ function playerHeartPounding(player) {
 }
 
 //SANITY LOW STATIC SOUND EFFECT
-function checkPlayerSanityLowStaticSound(players) {
-    for (const player of players) {
+function checkPlayerSanityLowStaticSound(player, sanityValue) {
         const isPlayingStaticSound = sanityLowStaticSoundId.has(player.id);
         const component = player.getComponent("minecraft:mark_variant");
 
-        let sanityScore = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
-        let shouldPlayStatic = sanityScore <= 33 && component.value === 556;
+        let shouldPlayStatic = sanityValue <= 33 && component.value === 556;
 
         if (shouldPlayStatic && !isPlayingStaticSound) {
 					player.runCommand("playsound static_low_sanity @s");
@@ -144,7 +138,6 @@ function checkPlayerSanityLowStaticSound(players) {
               player.runCommand("stopsound @s static_low_sanity");
             }
         }
-    }
 }
 function sanityLowStaticSound(player) {
 	if (sanityLowStaticSoundId.has(player.id)) return;
