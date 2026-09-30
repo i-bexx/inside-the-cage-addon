@@ -1,5 +1,7 @@
 import { world, Difficulty } from "@minecraft/server";
 
+import { setScoreboardCache } from "./scoreboards";
+
 import { setGlobalVariables as playerJoinSetGlobalVariables } from "./Player/playerJoin";
 import { setGlobalVariables as playerSituationSetGlobalVariables } from "./Player/playerSituation";
 
@@ -22,6 +24,8 @@ import { setForms as voteManagerSetForms } from "./voteManager";
 
 
 world.afterEvents.worldLoad.subscribe(() => {
+  setScoreboardCache();
+  
   playerJoinSetGlobalVariables();
   playerSituationSetGlobalVariables();
 

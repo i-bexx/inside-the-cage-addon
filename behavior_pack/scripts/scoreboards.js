@@ -1,91 +1,83 @@
 import { world } from "@minecraft/server";
 
-const OBJECTIVE_IDS = {
-  GAMESTARTED: "game_started",
-  GAME_RESTARTED: "game_restarted",
-  GAME_ENDED_EARLY: "game_ended_early",
-  PLAYERS_IN_ROUND: "players_in_round",
-  SOULS_FREED: "souls_freed",
-  SANITY: "Sanity",
-  STAMINA: "Stamina",
-  STAMINA_LIMIT: "stamina_limit",
-  AMMO: "ammo",
-  USED_TOXIC_BOMB: "used_toxic_bomb",
-  COIN_AMOUNT: "coin_amount",
-  STALKER_MATCH_ID: "stalker_match_id",
-  NEW_GAME: "new_game"
+const OBJECTIVE_IDS = [
+  "game_started",
+  "game_restarted",
+  "game_ended_early",
+  "players_in_round",
+  "souls_freed",
+  "Sanity",
+  "Stamina",
+  "stamina_limit",
+  "ammo",
+  "used_toxic_bomb",
+  "coin_amount",
+  "stalker_match_id",
+  "new_game"
+];
+
+const PARTICIPANT_IDS = [
+  "value",
+  "world"
+];
+
+const ScoreboardCache = {
+  objectives: {
+    GAME_STARTED:     undefined,
+    GAME_RESTARTED:   undefined,
+    GAME_ENDED_EARLY: undefined,
+    PLAYERS_IN_ROUND: undefined,
+    SOULS_FREED:      undefined,
+    SANITY:           undefined,
+    STAMINA:          undefined,
+    STAMINA_LIMIT:    undefined,
+    AMMO:             undefined,
+    USED_TOXIC_BOMB:  undefined,
+    COIN_AMOUNT:      undefined,
+    STALKER_MATCH_ID: undefined,
+    NEW_GAME:         undefined
+  },
+  participants: {
+    VALUE: undefined,
+    WORLD: undefined
+  }
 };
 
-const PARTICIPANT_IDS = {
-  LEVEL: "value",
-  WORLD: "world"
-};
+export function setScoreboardCache() {
+  for (const [ index, element ] of Object.keys(ScoreboardCache.objectives).entries())
+    ScoreboardCache.objectives[element] = world.scoreboard.getObjective(OBJECTIVE_IDS[index]);
+
+  const allParticipants = world.scoreboard.getParticipants();
+  
+  for (const [ index, element ] of Object.keys(ScoreboardCache.participants).entries())
+    ScoreboardCache.participants[element] = allParticipants.find(p => p.displayName === PARTICIPANT_IDS[index]);
+}
 
 // Global Objectives
-export function getGameStartedObjective() {
-  return world.scoreboard.getObjective(OBJECTIVE_IDS.GAMESTARTED);
-}
-export function getGameRestartedObjective() {
-  return world.scoreboard.getObjective(OBJECTIVE_IDS.GAME_RESTARTED);
-}
-export function getGameEndedObjective() {
-  return world.scoreboard.getObjective(OBJECTIVE_IDS.GAME_ENDED_EARLY);
-}
-export function getPlayersInRoundObjective() {
-  return world.scoreboard.getObjective(OBJECTIVE_IDS.PLAYERS_IN_ROUND);
-}
-export function getSoulsFreedObjective() {
-  return world.scoreboard.getObjective(OBJECTIVE_IDS.SOULS_FREED);
-}
+export function getGameStartedObjective() { return ScoreboardCache.objectives.GAME_STARTED; }
+export function getGameRestartedObjective() { return ScoreboardCache.objectives.GAME_RESTARTED; }
+export function getGameEndedObjective() { return ScoreboardCache.objectives.GAME_ENDED_EARLY; }
+export function getPlayersInRoundObjective() { return ScoreboardCache.objectives.PLAYERS_IN_ROUND; }
+export function getSoulsFreedObjective() { return ScoreboardCache.objectives.SOULS_FREED; }
 
 // Player Objectives
-export function getSanityObjective() {
-  return world.scoreboard.getObjective(OBJECTIVE_IDS.SANITY);
-}
-export function getStaminaObjective() {
-  return world.scoreboard.getObjective(OBJECTIVE_IDS.STAMINA);
-}
-export function getStaminaLimitObjective() {
-  return world.scoreboard.getObjective(OBJECTIVE_IDS.STAMINA_LIMIT);
-}
-export function getAmmoObjective() {
-  return world.scoreboard.getObjective(OBJECTIVE_IDS.AMMO);
-}
-export function getUsedToxicBombObjective() {
-  return world.scoreboard.getObjective(OBJECTIVE_IDS.USED_TOXIC_BOMB);
-}
-export function getCoinAmountObjective() {
-  return world.scoreboard.getObjective(OBJECTIVE_IDS.COIN_AMOUNT);
-}
-export function getStalkerMatchIdObjective() {
-  return world.scoreboard.getObjective(OBJECTIVE_IDS.STALKER_MATCH_ID);
-}
+export function getSanityObjective() { return ScoreboardCache.objectives.SANITY; }
+export function getStaminaObjective() { return ScoreboardCache.objectives.STAMINA; }
+export function getStaminaLimitObjective() { return ScoreboardCache.objectives.STAMINA_LIMIT; }
+export function getAmmoObjective() { return ScoreboardCache.objectives.AMMO; }
+export function getUsedToxicBombObjective() { return ScoreboardCache.objectives.USED_TOXIC_BOMB; }
+export function getCoinAmountObjective() { return ScoreboardCache.objectives.COIN_AMOUNT; }
+export function getStalkerMatchIdObjective() { return ScoreboardCache.objectives.STALKER_MATCH_ID; }
 
 // Global-Player Objectives
-export function getNewGameObjective() {
-  return world.scoreboard.getObjective(OBJECTIVE_IDS.NEW_GAME);
-}
+export function getNewGameObjective() { return ScoreboardCache.objectives.NEW_GAME; }
 
 // Participants
-export function getValueParticipant() {
-  return world.scoreboard.getParticipants()
-    .find(p => p.displayName === PARTICIPANT_IDS.LEVEL);
-}
-export function getWorldParticipant() {
-  return world.scoreboard.getParticipants()
-    .find(p => p.displayName === PARTICIPANT_IDS.WORLD);
-}
+export function getValueParticipant() { return ScoreboardCache.participants.VALUE; }
+export function getWorldParticipant() { return ScoreboardCache.participants.WORLD; }
 
 // Scores
 export function getObjectiveScore(Objective, Participant) {
   if (!Objective || !Participant) return undefined;
-  
-  try {
-    if (Objective.hasParticipant(Participant)) {
-      return Objective.getScore(Participant);
-    }
-  } catch (e) {
-    return undefined;
-  }
-  return undefined;
+  return Objective.getScore(Participant);
 }
