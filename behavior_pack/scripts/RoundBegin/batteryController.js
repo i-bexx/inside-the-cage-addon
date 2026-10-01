@@ -102,11 +102,12 @@ function getBatteryState(player) {
 // MAIN CONTROL LOOP
 // =============================================================
 
-export function Battery_control() {
+// IN ROUND (WHEN ROUND STARTED)
+export function Battery_control() { // tick loop was 10
     if (intervalId !== undefined) return;
   
-    intervalId = system.runInterval(() => {
-        const players = getPlayersInRound();
+    // ---- LOOP ----
+    const players = getPlayersInRound();
 
         for (const player of players) {
             if (!player || !player.isValid) continue;
@@ -116,7 +117,7 @@ export function Battery_control() {
             batteryState.batteryIsFullyDrainedOfPlayer = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_FULLY_DRAINED);
             batteryState.batteryIsDrainingOfPlayer = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_DRAINING);
         }
-    }, BATTERY_CONFIG.TIME.UPDATE_INTERVAL);
+        // ---- LOOP ----
 }
 
 // =============================================================

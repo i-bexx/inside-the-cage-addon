@@ -10,13 +10,14 @@ let intervalId = undefined;
 let players = [];
 
 
-export function Stamina_control () {
+// IN ROUND (WHEN ROUND STARTED)
+export function Stamina_control () { // tick loop was 20
 	if (intervalId !== undefined) return;
 
-	intervalId = system.runInterval(() => {
-		players = getPlayersInRound();
-		checkPlayerRunningState(players);
-	},20)
+	// ---- LOOP ----
+	players = getPlayersInRound();
+	checkPlayerRunningState(players);
+	// ---- LOOP ----
 }
 
 function checkPlayerRunningState(players) {

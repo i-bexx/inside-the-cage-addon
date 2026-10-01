@@ -11,22 +11,22 @@ let playsoundHeart = new Map();
 let sanityLowStaticSoundId = new Map();
 let sanityLowStaticEventId = new Map();
 
-//SANITY CONTROL INTERVAL
-export function Sanity_control() {
+// IN ROUND (WHEN ROUND STARTED)
+export function Sanity_control() { // tick loop was 5
 	if (intervalId !== undefined) return;
 
-	intervalId = system.runInterval(() => {
-		players = getPlayersInRound();
+	// ---- LOOP ----
+	players = getPlayersInRound();
 
-		for (const player of players) {
-			let sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
+	for (const player of players) {
+		let sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
 
-			checkPlayerLookingState(player, sanityValue);
-			checkPlayerHeartPoundingState(player, sanityValue);
-			checkPlayerSanityLowStaticSound(player, sanityValue);
-			lowSanityStatic(player, sanityValue);
-		}
-	}, 5)
+		checkPlayerLookingState(player, sanityValue);
+		checkPlayerHeartPoundingState(player, sanityValue);
+		checkPlayerSanityLowStaticSound(player, sanityValue);
+		lowSanityStatic(player, sanityValue);
+	}
+	// ---- LOOP ----
 }
 
 //SANITY DECREASE LOGIC

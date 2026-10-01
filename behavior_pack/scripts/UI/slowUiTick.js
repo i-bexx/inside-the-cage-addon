@@ -2,7 +2,8 @@ import { world, system } from "@minecraft/server";
 
 // ----- MAIN FUNCTION -----
 
-export function slowUiTick() {
+// ALWAYS
+export function slowUiTick() { // tick loop was 80
     const players = world.getAllPlayers();
 
     for (const player of players) {
@@ -43,7 +44,3 @@ function sanityString(player) {
 
         return `sanityUI${stage}`;
 }
-
-// ----- RUN MAIN FUNCTION -----
-
-system.runInterval(slowUiTick, 80);

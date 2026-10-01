@@ -4,7 +4,7 @@ import { cameraUsed } from "../cameraUsage";
 import { getPlayersInRound } from "../utils";
 import { roundCompleted } from "./roundCompleted";
 import { startDifficultyMonitor, stopDifficultyMonitor } from "./ghostController";
-import { teleportStalker, stopTeleportStalker } from "../stalkerEntity";
+import { teleportStalkerLoop, stopTeleportStalker } from "../stalkerEntity";
 import { warnPlayerAboutCam, stopWarnPlayerAboutCam } from "./cameraController";
 import { startCrosshairTracker, stopCrosshairTracker, stopPlayerShootTracker } from "../cursorController";
 import { getSoulsFreedObjective, getSanityObjective, getStaminaObjective, getValueParticipant, getObjectiveScore } from "../scoreboards";
@@ -53,10 +53,11 @@ const state = new Proxy({ ...initialState }, {
 }
 })
 
-export function soulsAmountCheck() {
+// IN ROUND (WHEN ROUND STARTED)
+export function soulsAmountCheck() { // tick loop was 100
 	if (intervalId !== undefined) return;
 	
-	intervalId = system.runInterval(() => {
+	// ---- LOOP ----
 	let soulsFreedValue = getObjectiveScore(getSoulsFreedObjective(), getValueParticipant());
 
 	state.isSoulsFreedValueSufficient = [4, 5].includes(soulsFreedValue) && !world.getDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam");
@@ -64,7 +65,7 @@ export function soulsAmountCheck() {
 	state.isSoulsFreedValue5 = soulsFreedValue == 5 && world.getDynamicProperty("cages5Activated") == false;
 	state.doesSoulsFreedValueExceed = soulsFreedValue == 6;
 	state.areAllCagesCollected = soulsFreedValue == 7;
-	}, 100)
+	// ---- LOOP ----
 }
 
 function soulsFreedValueSufficient() {
@@ -95,7 +96,7 @@ function soulsFreedValue5() {
 async function soulsFreedValueExceeded(players) {
 	stopCrosshairTracker();
 	stopPlayerShootTracker();
-	teleportStalker();
+	teleportStalkerLoop();
 	stopDifficultyMonitor();
 
 	stopWarnPlayerAboutCam();

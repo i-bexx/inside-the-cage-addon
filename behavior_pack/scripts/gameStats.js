@@ -11,7 +11,7 @@ import { getPlayersInRound } from "./utils";
 
 import { resetFunctions, despawnEntities } from "./resetStats";
 import { initiateCam } from "./cameraUsage";
-import { teleportStalker } from "./stalkerEntity";
+import { teleportStalkerLoop } from "./stalkerEntity";
 import { givePanelItem } from "./panels";
 
 import { playerLookingControl } from "./RoundBegin/playerLooking";
@@ -63,20 +63,20 @@ const GAME_COMMANDS = {
 // ==========================================
 
 const FUNCTIONS_TO_START = {
-    initiateCam,
-    nullTeleportTimeSetter,
-    playerLookingControl,
-    teleportStalker,
-    givePanelItem,
-    soulsAmountCheck,
-    Ambiance_control,
-    Stamina_control,
-    Sanity_control,
-    Battery_control,
-    spawnCages,
-    startcoinController,
-    decidePasswords,
-    updateGlobalUi
+    initiateCam, // STAY
+    nullTeleportTimeSetter, // GONE
+    playerLookingControl, // GONE
+    teleportStalkerLoop, // GONE
+    givePanelItem, // STAY
+    soulsAmountCheck, // GONE
+    Ambiance_control, // STAY
+    Stamina_control, // GONE
+    Sanity_control, // GONE
+    Battery_control, // GONE
+    spawnCages, // STAY
+    startcoinController, // STAY
+    decidePasswords, // STAY
+    updateGlobalUi // STAY
 };
 
 const FUNCTIONS_TO_END_ROUND = {
@@ -141,22 +141,22 @@ const gameEndedState = new Proxy({ ...INITIAL_ENDED_GAME_STATE }, {
 // SYSTEM: MAIN GAME LOOP
 // ==========================================
 
-// Only called after the players no longer in menu
-export function startMainGameLoop() {
-    system.runInterval(() => {
-        state.isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
-        gameRestartState.isGameRestarted = getObjectiveScore(getGameRestartedObjective(), getValueParticipant());
-		gameEndedState.isGameEnded = getObjectiveScore(getGameEndedObjective(), getValueParticipant());
+// IN LOBBY
+export function startMainGameLoop() { // tick loop was 5
+    // ---- LOOP ----
+    state.isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
+    gameRestartState.isGameRestarted = getObjectiveScore(getGameRestartedObjective(), getValueParticipant());
+    gameEndedState.isGameEnded = getObjectiveScore(getGameEndedObjective(), getValueParticipant());
 
-        isGameStarted = state.isGameStarted;
+    isGameStarted = state.isGameStarted;
 
-        if (isGameStarted == 1) {
-          const inGamePlayers = getPlayersInRound();
+    if (isGameStarted == 1) {
+        const inGamePlayers = getPlayersInRound();
 
-          if (inGamePlayers.length == 0) world.setDynamicProperty("roundOver", true);
-          if (world.getDynamicProperty("roundOver")) dimension.runCommand(GAME_COMMANDS.GAME_OVER.RESET_SCOREBOARD);
-        }
-    }, 5);
+        if (inGamePlayers.length == 0) world.setDynamicProperty("roundOver", true);
+        if (world.getDynamicProperty("roundOver")) dimension.runCommand(GAME_COMMANDS.GAME_OVER.RESET_SCOREBOARD);
+    }
+    // ---- LOOP ----
 }
 
 // ==========================================
