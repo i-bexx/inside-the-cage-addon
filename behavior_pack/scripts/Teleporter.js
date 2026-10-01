@@ -20,7 +20,9 @@ const COOLDOWNS = new Map();
 // MAIN SYSTEM
 // ==========================================
 
-system.runInterval(() => {
+// ALWAYS
+export function formerIntervalTeleporter() { // tick loop was 20
+    // ---- LOOP ----
     try {
         const unlinkedEntities = getUnlinkedEntities();
 
@@ -44,7 +46,8 @@ system.runInterval(() => {
     } catch (e) {
         console.warn("Teleporter matching error:", e);
     }
-}, CONFIG.checkInterval);
+    // ---- LOOP ----
+}
 
 function teleportPlayer(player, targetEntity) {
     const now = Date.now();

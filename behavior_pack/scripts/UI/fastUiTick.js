@@ -10,7 +10,8 @@ let staminaTickTimerActive = false;
 
 // ----- MAIN FUNCTION -----
 
-function fastUiTick() {
+// ALWAYS
+function fastUiTick() { // tick loop was 1
   const players = world.getAllPlayers();
 
   for (const player of players) {
@@ -142,7 +143,3 @@ function staminaTickTimer() {
 
 
 export function getCompassStates() { return playerCompassStates; }
-
-// ----- RUN MAIN FUNCTION -----
-
-system.runInterval(fastUiTick, 1);

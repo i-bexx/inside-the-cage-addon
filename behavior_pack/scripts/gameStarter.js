@@ -75,11 +75,12 @@ return state;
 
 // -- Range Checker --
 
-export function gameStarter() {
+// IN LOBBY
+export function gameStarter() { // tick loop was 30
 	if (intervalId !== undefined) return;
 	
-	intervalId = system.runInterval(() => {
-		const players = world.getAllPlayers()
+	// ---- LOOP ----
+	const players = world.getAllPlayers()
 											.filter(p => !p.hasTag("waiting_for_start"));
 			
 		for (const player of players) {
@@ -101,7 +102,7 @@ export function gameStarter() {
 
 		checker.isPlayerInRange = player.isInRange.isInRangeX && player.isInRange.isInRangeY && player.isInRange.isInRangeZ;
 		}
-	},30)
+	// ---- LOOP ----
 }
 
 // -- In Range Logic --

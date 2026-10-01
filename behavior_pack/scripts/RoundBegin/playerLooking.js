@@ -70,57 +70,58 @@ function isPlayerLookingAtEntity(player) {
     return state;
 }
 
-export function playerLookingControl() {
+// IN ROUND (WHEN ROUND STARTED WHEN souls_freed IS NOT 4 OR 5)
+export function playerLookingControl() { // tick loop was 2
     if (intervalId !== undefined) return;
     nullEntity = dimension.getEntities({ type: GAME_ENTITIES.NULL })[0];
 
-    intervalId = system.runInterval(() => {
-        const players = getPlayersInRound();
-        const stalkers = dimension.getEntities({ type: GAME_ENTITIES.STALKER_CURSOR });
+    // ---- LOOP ----
+    const players = getPlayersInRound();
+    const stalkers = dimension.getEntities({ type: GAME_ENTITIES.STALKER_CURSOR });
 
-        if (stalkers.length === 0) return;
+    if (stalkers.length === 0) return;
 
-        // Track players actively looking RIGHT NOW
-        const playersLookingNow = new Set();
+    // Track players actively looking RIGHT NOW
+    const playersLookingNow = new Set();
 
-        for (const stalker of stalkers) {
-            const matchedPlayer = getMatchingPlayer(players, stalker, getStalkerMatchIdObjective());
+    for (const stalker of stalkers) {
+        const matchedPlayer = getMatchingPlayer(players, stalker, getStalkerMatchIdObjective());
 
-            const dx = stalker.location.x - nullEntity.location.x;
-            const dy = stalker.location.y - nullEntity.location.y;
-            const dz = stalker.location.z - nullEntity.location.z;
+        const dx = stalker.location.x - nullEntity.location.x;
+        const dy = stalker.location.y - nullEntity.location.y;
+        const dz = stalker.location.z - nullEntity.location.z;
+        
+        const distance = Math.hypot(dx, dy, dz);
+
+        if (!matchedPlayer?.isValid) continue;
+
+        const state = isPlayerLookingAtEntity(matchedPlayer);
+
+        if (matchedPlayer?.isValid && state && distance <= 10) {
+            state.isLooking = true;
+            playersLookingNow.add(matchedPlayer.id);
+        }
+    }
+
+    // Force-stop anyone who was looking before, but isn't anymore
+    for (const [playerId, state] of playerStates.entries()) {
+        if (state.isLooking && !playersLookingNow.has(playerId)) {
+            const player = players.find(p => p.id === playerId);
             
-            const distance = Math.hypot(dx, dy, dz);
-
-            if (!matchedPlayer?.isValid) continue;
-
-            const state = isPlayerLookingAtEntity(matchedPlayer);
-
-            if (matchedPlayer?.isValid && state && distance <= 10) {
-                state.isLooking = true;
-                playersLookingNow.add(matchedPlayer.id);
-            }
-        }
-
-        // Force-stop anyone who was looking before, but isn't anymore
-        for (const [playerId, state] of playerStates.entries()) {
-            if (state.isLooking && !playersLookingNow.has(playerId)) {
-                const player = players.find(p => p.id === playerId);
+            if (player && player.isValid) {
+                // Triggers playerStoppedLooking via Proxy
+                state.isLooking = false; 
+            } else {
+                // EMERGENCY CLEANUP: Player disconnected mid-stare!
+                const interval = listOfPlayersPlayingStatic.get(playerId);
+                if (interval !== undefined) system.clearRun(interval);
                 
-                if (player && player.isValid) {
-                    // Triggers playerStoppedLooking via Proxy
-                    state.isLooking = false; 
-                } else {
-                    // EMERGENCY CLEANUP: Player disconnected mid-stare!
-                    const interval = listOfPlayersPlayingStatic.get(playerId);
-                    if (interval !== undefined) system.clearRun(interval);
-                    
-                    listOfPlayersPlayingStatic.delete(playerId);
-                    listOfPlayersLooking.delete(playerId); // Clean up the state to avoid memory leaks
-                }
+                listOfPlayersPlayingStatic.delete(playerId);
+                listOfPlayersLooking.delete(playerId); // Clean up the state to avoid memory leaks
             }
         }
-    }, 2);
+    }
+    // ---- LOOP ----
 }
 
 function handleStaticEffect(player) {

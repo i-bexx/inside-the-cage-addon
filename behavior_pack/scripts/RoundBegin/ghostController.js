@@ -2,13 +2,14 @@ import { world, system, Difficulty } from "@minecraft/server";
 
 let intervalId = undefined;
 
-export function startDifficultyMonitor() {
+// IN ROUND (WHEN souls_freed is 4 or 5)
+export function startDifficultyMonitor() { // tick loop was 40
   if (intervalId !== undefined) return;
   
   world.setDifficulty(Difficulty.Normal);
 
-  intervalId = system.runInterval(() => {
-    const difficulty = world.getDifficulty();
+  // ---- LOOP ----
+  const difficulty = world.getDifficulty();
 
     if (difficulty != Difficulty.Peaceful) return;
 
@@ -16,8 +17,7 @@ export function startDifficultyMonitor() {
 
     for (const player of players)
       player.onScreenDisplay.setActionBar("The difficulty has been set to peaceful; you may yet continue, but no ghost shall spawn.");
-    system.clearRun(intervalId);
-  }, 40);
+  // ---- LOOP ----
 }
 
 export function stopDifficultyMonitor() {

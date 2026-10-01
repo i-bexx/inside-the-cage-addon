@@ -6,7 +6,7 @@ import { world, system } from "@minecraft/server";
 
 import { stopGivePanelItem } from "./panels";
 import { stopInitiateCam } from "./cameraUsage";
-import { stopCrosshairTracker, stopPlayerShootTracker } from "./cursorController";
+import { stopCrosshairTracker } from "./cursorController";
 import { stopTeleportStalker } from "./stalkerEntity";
 import { resetSessionPlayers } from "./gameStarter";
 
@@ -236,30 +236,29 @@ export function resetWorldDynamicPropertyData() {
 }
 
 export function resetFunctions() {
-  stopPlayerLookingControl();
-  stopStaminaControl();
+  stopPlayerLookingControl(); // DELETE
+  stopStaminaControl(); // DELETE
   stopGivePanelItem();
   
-  stopSoulsAmountCheck();
-  stopSanityControl();
+  stopSoulsAmountCheck(); // DELETE
+  stopSanityControl(); // DELETE
   
   stopTeleportNull();
-  stopNullTeleportTimeSetter();
+  stopNullTeleportTimeSetter(); // DELETE
 
-  stopCrosshairTracker();
-  stopPlayerShootTracker();
+  stopCrosshairTracker(); // DELETE
 
   stopInitiateCam();
 
-  stopTeleportStalker();
+  stopTeleportStalker(); // DELETE
 
   resetSessionPlayers();
 
   stopAmbiance();
-  stopBatteryControl();
-  stopWarnPlayerAboutCam();
+  stopBatteryControl(); // DELETE
+  stopWarnPlayerAboutCam(); // DELETE
   stopcoinController();
-  stopDifficultyMonitor();
+  stopDifficultyMonitor(); // DELETE
 
   resetPasswords();
   resetPrices();

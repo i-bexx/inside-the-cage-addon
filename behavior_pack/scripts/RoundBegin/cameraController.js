@@ -22,17 +22,18 @@ let intervalId = undefined;
 // MAIN AND HELPER FUNCTIONS
 // =============================================================
 
-export function warnPlayerAboutCam() {
+// IN ROUND (WHEN souls_freed is 4 or 5)
+export function warnPlayerAboutCam() { // tick loop was 1
     if (intervalId !== undefined) return;
 
-    intervalId = system.runInterval(() => {
-        const players = filterPlayers();
+    // ---- LOOP ----
+    const players = filterPlayers();
 
-        for (const player of players) {
-						player.setDynamicProperty(CONFIG.PROPERTIES.TURN_OFF_WARNING, true);
-						player.runCommand(CONFIG.COMMANDS.TURN_OFF_WARNING);
-        }
-    })
+    for (const player of players) {
+        player.setDynamicProperty(CONFIG.PROPERTIES.TURN_OFF_WARNING, true);
+        player.runCommand(CONFIG.COMMANDS.TURN_OFF_WARNING);
+    }
+    // ---- LOOP ----
 }
 
 function filterPlayers() {

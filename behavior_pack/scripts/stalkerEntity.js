@@ -67,13 +67,9 @@ function stalkerMatchLogic(player) {
 
 // --- Teleporting Stalker Logic ---
 
-export function teleportStalker() {
-    if (intervalId !== undefined) return;
-    
-    intervalId = system.runInterval(teleportStalkerLoop, 1);
-}
-
-function teleportStalkerLoop() {
+// IN ROUND (WHEN ROUND STARTED)
+export function teleportStalkerLoop() { // tick loop was 1
+    // ---- LOOP ----
         const players = getPlayersInRound();
 
         for (const player of players) {
@@ -96,6 +92,7 @@ function teleportStalkerLoop() {
                 linkedEntity.tryTeleport(targetPos);
             } catch (e) {}
         }
+        // ---- LOOP ----
 }
 
 // =============================================================================

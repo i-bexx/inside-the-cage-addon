@@ -16,17 +16,18 @@ const TELEPORT_STAGES = [
 
 let intervalId = undefined;
 
-export function nullTeleportTimeSetter() {
+// IN ROUND (WHEN ROUND STARTED)
+export function nullTeleportTimeSetter() { // tick loop was 60
     if (intervalId !== undefined) return;
     
-	intervalId = system.runInterval(() => {
-		const isChecking = world.getDynamicProperty("nullTeleportChecking");
-		let soulsFreedAmount = getCurrentSouls();
-		
-		if (!isChecking && soulsFreedAmount >= 0 && soulsFreedAmount <= 7) {	
-			runTeleporter(soulsFreedAmount);
-		}
-	}, 60);
+    // ---- LOOP ----
+	const isChecking = world.getDynamicProperty("nullTeleportChecking");
+    let soulsFreedAmount = getCurrentSouls();
+    
+    if (!isChecking && soulsFreedAmount >= 0 && soulsFreedAmount <= 7) {	
+        runTeleporter(soulsFreedAmount);
+    }
+    // ---- LOOP ----
 }
 
 /**

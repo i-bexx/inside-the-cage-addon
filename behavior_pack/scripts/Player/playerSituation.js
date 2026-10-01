@@ -99,13 +99,14 @@ function handleCombatLogic(player) {
 // 5. MAIN LOOP
 // =============================================================================
 
-system.runInterval(() => {
+// ALWAYS
+export function formerIntervalPlayerSituation() { // tick loop was 1
     const players = world.getAllPlayers();
     for (const player of players) {
         handleStrafeAnimation(player);
         handleCombatLogic(player);
     }
-});
+}
 
 // =============================================================================
 // 6. EVENT LISTENERS

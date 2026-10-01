@@ -119,17 +119,19 @@ function crosshairTracker(player) {
 }
 
 // Global Loop for Cursor Tracker
-export function startCrosshairTracker() {
+
+// IN ROUND (WHEN souls_freed is 4 or 5)
+export function startCrosshairTracker() { // tick loop was 4
 	if (crosshairTrackerIntervalId !== undefined) return;
 
-	crosshairTrackerIntervalId = system.runInterval(() => {
-        for (const player of world.getAllPlayers()) {
-            const isLooking = crosshairTracker(player);
-            const raycastResult = player.getEntitiesFromViewDirection(ENTITY_DISTANCE)
-            
-            isLooking.lookingAtEntity = (raycastResult.length > 0) ? 1 : 0;
-        }
-}, 4);
+    // ---- LOOP ----
+	for (const player of world.getAllPlayers()) {
+        const isLooking = crosshairTracker(player);
+        const raycastResult = player.getEntitiesFromViewDirection(ENTITY_DISTANCE)
+        
+        isLooking.lookingAtEntity = (raycastResult.length > 0) ? 1 : 0;
+    }
+    // ---- LOOP ----
 }
 
 export function stopCrosshairTracker() {
@@ -137,13 +139,6 @@ export function stopCrosshairTracker() {
 
     system.clearRun(crosshairTrackerIntervalId);
     crosshairTrackerIntervalId = undefined;
-}
-
-export function stopPlayerShootTracker() {
-    if (shootingIntervalId == undefined) return;
-
-    system.clearRun(shootingIntervalId);
-    shootingIntervalId = undefined;
 }
 
 export function getCursorStates() { return CURSOR_STATES; }
