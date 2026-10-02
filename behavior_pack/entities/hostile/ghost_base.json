@@ -102,6 +102,19 @@
             }
           },
           {
+            "on_damage": {
+              "filters": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "player"
+                }
+              ],
+              "event": "blood_effect_event",
+              "target": "self"
+            }
+          },
+          {
             "cause": "lava",
             "deals_damage": "no"
           }
@@ -157,19 +170,24 @@
 		},
 
    "events": {
-    "minecraft:entity_spawned": {
-      "trigger": "spawn_event"
-    },
-    "minecraft:entity_transformed": {
-      "trigger": "spawn_event"
-    },
-    "spawn_event": {
-      "queue_command": {
-        "command": [ "execute at @s run particle spawn:ghost ~ ~ ~", "execute at @s run playsound ghost_spawn @a[r=15] ~ ~ ~" ]
-      }
-    },
+      "minecraft:entity_spawned": {
+        "trigger": "spawn_event"
+      },
+      "minecraft:entity_transformed": {
+        "trigger": "spawn_event"
+      },
+      "spawn_event": {
+        "queue_command": {
+          "command": [ "execute at @s run particle spawn:ghost ~ ~ ~", "execute at @s run playsound ghost_spawn @a[r=15] ~ ~ ~" ]
+        }
+      },
       "can_move_event": {
         "add": { "component_groups": [ "can_move" ] }
+      },
+      "blood_effect_event": {
+        "queue_command": {
+          "command": [ "execute at @s run particle game:blood ~ ~1 ~" ]
+        }
       },
       "ghost_dead_event": {
         "add": {
