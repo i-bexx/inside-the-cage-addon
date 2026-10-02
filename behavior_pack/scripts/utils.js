@@ -1,8 +1,7 @@
 import { world, system } from "@minecraft/server";
 
 export function getPlayersInRound() {
-    return world.getAllPlayers()
-            .filter(p => p.hasTag("in_game"));
+    return world.getPlayers({tags: ["in_game"]});
 }
 
 export async function loadTickingArea(dimension, locationObject, areaName) {

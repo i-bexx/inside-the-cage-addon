@@ -1,6 +1,6 @@
-import { world, system } from "@minecraft/server";
+import { world } from "@minecraft/server";
 
-import { getAmmoObjective, getUsedToxicBombObjective, getObjectiveScore } from "../scoreboards";
+import { getAmmoObjective, getObjectiveScore } from "../scoreboards";
 
 // =============================================================================
 // CONFIGURATION AND CONSTANTS
@@ -16,8 +16,6 @@ const CONFIG = {
         WATER_ARMOR: "p:in_water",
         STRAFE_LEFT: "p:move_left",
         STRAFE_RIGHT: "p:move_right",
-        BLOOD_PARTICLE: "game:blood",
-        TOXIC_PARTICLE: "game:toxic",
         DEAD_ENTITY: "game:ghost_dead",
     },
     BLOCKS: {
@@ -37,20 +35,19 @@ let dimension;
 // =============================================================================
 
 let objectives = {
-    ammo: null,
-    toxic: null
+    ammo: null
 };
 
 // =============================================================================
 // LOGIC HANDLERS
 // =============================================================================
 
-function handleStrafeAnimation(player) {
+function handleStrafeAnimation(player, playerState) {
     // --------- GUARD CLAUSE ---------
-    if (player.getDynamicProperty("camUsing")) return;
+    if (playerState.camUsing) return;
 
-    const rotation = player.getRotation().y * (Math.PI / 180);
-    const v = player.getVelocity();
+    const rotation = playerState.rotation.y * (Math.PI / 180);
+    const v = playerState.velocity;
     
     const strafeSpeed = v.x * Math.cos(rotation) + v.z * Math.sin(rotation);
     
@@ -64,32 +61,21 @@ function handleStrafeAnimation(player) {
     updateEquipment(player, "Legs", targetItem);
 }
 
-function handleCombatLogic(player) {
-    // --------- GUARD CLAUSE ---------
-    if (!player.scoreboardIdentity) return;
-
-    const mainHand = getEquipment(player, "Mainhand");
+function handleCombatLogic(player, playerState) {
+    const mainHand = playerState.mainHand;
     
     // --- Clear Offhand ---
     const isHoldingWeapon = mainHand?.typeId === CONFIG.ITEMS.KNIFE || mainHand?.typeId === CONFIG.ITEMS.GUN;
 
     if (isHoldingWeapon) updateEquipment(player, "Offhand", null);
-    
-
-    // --- Toxic Bomb Logic ---
-    const bombScore = getObjectiveScore(objectives.toxic, player.scoreboardIdentity);
-    if (bombScore === 1) {
-        player.runCommand(`execute at @s run particle ${CONFIG.ITEMS.TOXIC_PARTICLE} ~ ~ ~`);
-        player.runCommand("execute at @s run kill @e[type=game:ghost,r=15]");
-    }
 
     // --- Ammo UI Logic ---
     if (mainHand?.typeId === CONFIG.ITEMS.GUN) {
         const ammo = getObjectiveScore(objectives.ammo, player.scoreboardIdentity);
         
         if (ammo > 0) {
-					const color = ammo > CONFIG.THRESHOLDS.AMMO_LOW ? "§h" : "§c"; 
-					player.runCommand(`title @s actionbar §lAmmo: > ${color}${ammo} §f<`);    
+            const color = ammo > CONFIG.THRESHOLDS.AMMO_LOW ? "§h" : "§c"; 
+            player.runCommand(`title @s actionbar §lAmmo: > ${color}${ammo} §f<`);    
         }
         
     }
@@ -99,37 +85,14 @@ function handleCombatLogic(player) {
 // 5. MAIN LOOP
 // =============================================================================
 
-// ALWAYS
-export function formerIntervalPlayerSituation() { // tick loop was 1
-    const players = world.getAllPlayers();
-    for (const player of players) {
-        handleStrafeAnimation(player);
-        handleCombatLogic(player);
-    }
+export function formerIntervalPlayerSituation(player, playerState) {
+    handleStrafeAnimation(player, playerState);
+    handleCombatLogic(player, playerState);
 }
 
 // =============================================================================
 // 6. EVENT LISTENERS
 // =============================================================================
-
-world.afterEvents.entityHitEntity.subscribe((event) => {
-    const { damagingEntity, hitEntity } = event;
-    
-    if (damagingEntity.typeId !== "minecraft:player" || damagingEntity.getItemCooldown("knife") < 7) return;
-
-    const mainHand = getEquipment(damagingEntity, "Mainhand");
-
-    if (mainHand?.typeId === CONFIG.ITEMS.KNIFE && hitEntity.typeId !== CONFIG.ITEMS.DEAD_ENTITY) {
-        const particleLoc = { 
-            x: hitEntity.location.x, 
-            y: hitEntity.location.y + 1, 
-            z: hitEntity.location.z 
-        };
-
-        damagingEntity.runCommand("playsound knife_slice @s");
-        dimension.spawnParticle(CONFIG.ITEMS.BLOOD_PARTICLE, particleLoc);
-    }
-});
 
 world.afterEvents.itemUse.subscribe(({itemStack, source}) => {
     if (itemStack.typeId != "game:gun" || (source.getItemCooldown("gun") < 11 && getObjectiveScore(objectives.ammo, source.scoreboardIdentity) > 0))
@@ -142,35 +105,45 @@ world.afterEvents.itemUse.subscribe(({itemStack, source}) => {
 // HELPER FUNCTIONS
 // =============================================================================
 
-function getEquipment(player, slotName) {
-    const component = player.getComponent("minecraft:equippable");
-    return component?.getEquipment(slotName);
-}
-
+const equipmentCache = new Map();
 
 function updateEquipment(player, slotName, targetItemId) {
-    const currentItem = getEquipment(player, slotName)?.typeId;
+    let cache = equipmentCache.get(player.id);
+    if (!cache) {
+        cache = {};
+        equipmentCache.set(player.id, cache);
+    }
 
-    // Optimization: Exit if the player already has the correct item
-    if (currentItem === targetItemId) return;
+    let currentItem = cache[slotName];
 
-    // Convert simple slot name to command format
+    if (currentItem === undefined) {
+        const comp = player.getComponent("minecraft:equippable");
+        currentItem = comp?.getEquipment(slotName)?.typeId || null;
+        cache[slotName] = currentItem;
+    }
+
+    const target = targetItemId || null;
+
+    if (currentItem === target) return;
+
     let commandSlot = "";
     if (slotName === "Chest") commandSlot = "slot.armor.chest";
     else if (slotName === "Legs") commandSlot = "slot.armor.legs";
     else if (slotName === "Offhand") commandSlot = "slot.weapon.offhand";
     else return;
 
-    if (targetItemId) {
-        player.runCommand(`replaceitem entity @s ${commandSlot} 1 ${targetItemId} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
+    if (target) {
+        player.runCommand(`replaceitem entity @s ${commandSlot} 1 ${target} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
     } 
     else if (currentItem && (currentItem.startsWith("p:") || slotName === "Offhand")) {
         player.runCommand(`replaceitem entity @s ${commandSlot} 1 air`);
     }
+
+    // Yeni durumu RAM'e kaydet
+    cache[slotName] = target;
 }
 
 export function setGlobalVariables() {
     dimension = world.getDimension(CONFIG.DIMENSION);
     objectives.ammo = getAmmoObjective();
-    objectives.toxic = getUsedToxicBombObjective();
 }

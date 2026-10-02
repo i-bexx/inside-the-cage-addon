@@ -1,7 +1,6 @@
-import { world, system, EquipmentSlot } from "@minecraft/server";
+import { system } from "@minecraft/server";
 
 import { slowUiTick } from "./slowUiTick";
-import { getStaminaObjective, getStaminaLimitObjective, getObjectiveScore } from "../scoreboards";
 
 const playerCompassStates = new Map();
 
@@ -10,16 +9,11 @@ let staminaTickTimerActive = false;
 
 // ----- MAIN FUNCTION -----
 
-// ALWAYS
-function fastUiTick() { // tick loop was 1
-  const players = world.getAllPlayers();
-
-  for (const player of players) {
+export function fastUiTick(player, playerState, isRoundCompleted, allPlayers) {
     let uiString = "";
 
-
     // Cursor state
-    const cursorState = getCursorState(player);
+    const cursorState = getCursorState(playerState);
 
     // Set UI string for cursor state
     if (cursorState.isHoldingGun) uiString = `${cursorState.cursorString}`;
@@ -27,7 +21,7 @@ function fastUiTick() { // tick loop was 1
 
 
     // Compass state
-    const compassState = getCompassState(player);
+    const compassState = getCompassState(player, playerState);
     
     // Set UI string for compass state
     if (compassState.shouldCompassShown) {
@@ -39,24 +33,23 @@ function fastUiTick() { // tick loop was 1
     
 
     // Stamina state
-    uiString += staminaString(player);
+    uiString += staminaString(playerState);
 
 
     // Round complete state
-    if (world.getDynamicProperty("roundCompleted")) uiString += "\nround_completed_x";
+    if (isRoundCompleted) uiString += "\nround_completed_x";
     else uiString += "\nround_completed_y";
 
 
     // When kit is used, sanity info updates right away
     if (player.hasTag("updateSanityUI")) {
-      slowUiTick();
+      slowUiTick(allPlayers);
       player.removeTag("updateSanityUI");
     }
 
-
     // Set the subtitle
     player.onScreenDisplay.updateSubtitle(uiString);
-  }
+
   if (!staminaTickTimerActive) {
     staminaTickTimerActive = true;
     system.runTimeout(staminaTickTimer, 40);
@@ -66,35 +59,34 @@ function fastUiTick() { // tick loop was 1
 
 // -----  MAIN HELPER FUNCTIONS -----
 
-function getCursorState(player) {
+function getCursorState(playerState) {
   const cursorState = {
     cursorString: "",
     isHoldingGun: false
   };
 
   // Check if player is holding the gun
-  const equippable = player.getComponent("minecraft:equippable");
-  const mainHandItem = equippable.getEquipment(EquipmentSlot.Mainhand);
+  const mainHandItem = playerState.mainHand;
   cursorState.isHoldingGun = mainHandItem?.typeId === "game:gun";
 
   // Check if player is shooting
-  const isShooting = player.getComponent("minecraft:variant").value == 1;
+  const isShooting = playerState.variant == 1;
 
   // Set the string
-  if (isShooting) cursorState.cursorString = shootingCursorString(player);
-  else cursorState.cursorString = cursorString(player);
+  if (isShooting) cursorState.cursorString = shootingCursorString(playerState);
+  else cursorState.cursorString = cursorString(playerState);
 
   return cursorState;
 }
 
-function getCompassState(player) {
+function getCompassState(player, playerState) {
   const compassState = {
     compassString: "",
     shouldCompassShown: true
   };
 
-  compassState.compassString = compassString(player);
-  compassState.shouldCompassShown = Boolean(playerCompassStates.get(player.id) !== compassState.compassString || player.getDynamicProperty("compassShowing"));
+  compassState.compassString = compassString(playerState);
+  compassState.shouldCompassShown = Boolean(playerCompassStates.get(player.id) !== compassState.compassString || playerState.compassShowing);
 
   return compassState;
 }
@@ -102,14 +94,14 @@ function getCompassState(player) {
 
 // -----  OTHER HELPER FUNCTIONS -----
 
-function cursorString(player) { return "cursorState_0" + player.getComponent("skin_id").value.toString(); }
+function cursorString(playerState) { return "cursorState_0" + playerState.skinId; }
 
-function shootingCursorString(player) {
-  return "cursorState_x" + player.getComponent("skin_id").value.toString();
+function shootingCursorString(playerState) {
+  return "cursorState_x" + playerState.skinId;
 }
 
-function compassString(player) {
-  const rotation = player.getRotation().y;
+function compassString(playerState) {
+  const rotation = playerState.rotation.y;
   const currentFrame = Math.floor(((rotation + 180) / 360) * 32) % 32;
 
   const paddedFrame = String(currentFrame).padStart(2, '0');
@@ -118,11 +110,9 @@ function compassString(player) {
   return newCompassString;
 }
 
-function staminaString(player) {
-  const staminaObjective = getStaminaObjective();
-  const staminaLimitObjective = getStaminaLimitObjective();
-  const playerStaminaLimit = getObjectiveScore(staminaLimitObjective, player.scoreboardIdentity) ?? 10;
-  let playerStamina = getObjectiveScore(staminaObjective, player.scoreboardIdentity) ?? 10;
+function staminaString(playerState) {
+  const playerStaminaLimit = playerState.staminaLimit ?? 10;
+  let playerStamina = playerState.stamina ?? 10;
 
   let staminaTickString = "";
   if (staminaTick % 2 == 0) staminaTickString = "§z";

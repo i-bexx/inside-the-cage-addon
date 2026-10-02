@@ -12,5 +12,7 @@ export function updateGlobalUi() {
   const showPosition = showPositionObjective.getScore(valueParticipant);
 
   dimension.runCommand(`scoreboard players set value global_ui ${soulsFreedNumber}${showPosition}`);
-  slowUiTick(); // Force an immediate update for sanity stats and notifications without waiting for the next loop tick.
+  
+  const allPlayers = world.getAllPlayers();
+  slowUiTick(allPlayers); // Force an immediate update for sanity stats and notifications without waiting for the next loop tick.
 }

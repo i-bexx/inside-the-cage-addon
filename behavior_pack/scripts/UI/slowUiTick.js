@@ -1,12 +1,9 @@
-import { world, system } from "@minecraft/server";
+import { getSanityObjective, getObjectiveScore } from "../scoreboards";
 
 // ----- MAIN FUNCTION -----
 
-// ALWAYS
-export function slowUiTick() { // tick loop was 80
-    const players = world.getAllPlayers();
-
-    for (const player of players) {
+export function slowUiTick(allPlayers) {
+    for (const player of allPlayers) {
         let sanityState;
         let uiString;
         if (player.hasTag("show_in_round_personal_ui")) {
@@ -26,21 +23,16 @@ export function slowUiTick() { // tick loop was 80
 // ----- HELPER FUNCTION -----
 
 function sanityString(player) {
-    let score;
-    let sanityObjective = world.scoreboard.getObjective("Sanity");
-        try {
-            score = sanityObjective.getScore(player);
-        } catch (e) {
-            return;
-        }
+    const score = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
+    if (score === undefined) return;
 
-        let stage = 1;
-        if (score <= 82 && score >= 66) stage = 2;
-        else if (score <= 65 && score >= 49) stage = 3;
-        else if (score <= 48 && score >= 32) stage = 4;
-        else if (score <= 31 && score >= 15) stage = 5;
-        else if (score <= 14 && score >= 1) stage = 6;
-        else if (score === 0) stage = 7;
+    let stage = 1;
+    if (score <= 82 && score >= 66) stage = 2;
+    else if (score <= 65 && score >= 49) stage = 3;
+    else if (score <= 48 && score >= 32) stage = 4;
+    else if (score <= 31 && score >= 15) stage = 5;
+    else if (score <= 14 && score >= 1) stage = 6;
+    else if (score === 0) stage = 7;
 
-        return `sanityUI${stage}`;
+    return `sanityUI${stage}`;
 }

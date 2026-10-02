@@ -1,6 +1,5 @@
-import { world, system } from "@minecraft/server";
+import { world } from "@minecraft/server";
 
-import { getPlayersInRound } from "./utils";
 import { getStalkerMatchIdObjective } from "./scoreboards";
 
 // =============================================================================
@@ -20,7 +19,6 @@ let dimension;
 const STALKER_ENTITY_MATCHED = new Map();
 
 let stalkerMatchIdObjective = undefined;
-let intervalId = undefined;
 
 // =============================================================================
 // Main Functions
@@ -67,32 +65,23 @@ function stalkerMatchLogic(player) {
 
 // --- Teleporting Stalker Logic ---
 
-// IN ROUND (WHEN ROUND STARTED)
-export function teleportStalkerLoop() { // tick loop was 1
-    // ---- LOOP ----
-        const players = getPlayersInRound();
+export function teleportStalkerLoop(player, playerState) {
+        if (!player.hasTag(CONFIG.MATCH_TAG)) return;
 
-        for (const player of players) {
-            // Skip if player is not a participant in the scoreboard
-            if (!stalkerMatchIdObjective.hasParticipant(player)) continue;
+        const linkedEntity = STALKER_ENTITY_MATCHED.get(player.id);
 
-            const linkedEntity = STALKER_ENTITY_MATCHED.get(player.id);
+        const viewDir = playerState.viewDirection;
+        const headLoc = playerState.headLocation;
 
-            const viewDir = player.getViewDirection();
-            const headLoc = player.getHeadLocation();
+        const targetPos = {
+            x: headLoc.x + (viewDir.x * CONFIG.STALKER_DISTANCE),
+            y: headLoc.y + (viewDir.y * CONFIG.STALKER_DISTANCE),
+            z: headLoc.z + (viewDir.z * CONFIG.STALKER_DISTANCE)
+        };
 
-            const targetPos = {
-                x: headLoc.x + (viewDir.x * CONFIG.STALKER_DISTANCE),
-                y: headLoc.y + (viewDir.y * CONFIG.STALKER_DISTANCE),
-                z: headLoc.z + (viewDir.z * CONFIG.STALKER_DISTANCE)
-            };
-
-            try {
-                // Safe Teleport
-                linkedEntity.tryTeleport(targetPos);
-            } catch (e) {}
-        }
-        // ---- LOOP ----
+        try {
+            linkedEntity.teleport(targetPos);
+        } catch (e) {}
 }
 
 // =============================================================================
@@ -112,12 +101,6 @@ function getLinkID(player) {
 }
 
 export function getStalkerEntityMatchedMap() { return STALKER_ENTITY_MATCHED; }
-
-export function stopTeleportStalker() {
-    if (intervalId == undefined) return;
-    system.clearRun(intervalId);
-    intervalId = undefined;
-}
 
 export function setGlobalVariables() {
     dimension = world.getDimension("overworld");

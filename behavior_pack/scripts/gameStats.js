@@ -1,4 +1,4 @@
-import { world, system } from "@minecraft/server";
+import { world } from "@minecraft/server";
 
 // ==========================================
 // SYSTEM: MODULE IMPORTS
@@ -7,24 +7,15 @@ import { world, system } from "@minecraft/server";
 import { resetWorldDynamicPropertyData, resetEntitiesData, commandsToResetTheGame, resetMaps } from "./resetStats";
 import { gameStarter, checkIfPositionClear } from "./gameStarter";
 import { getGameStartedObjective, getGameRestartedObjective, getGameEndedObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
-import { getPlayersInRound } from "./utils"; 
 
 import { resetFunctions, despawnEntities } from "./resetStats";
 import { initiateCam } from "./cameraUsage";
-import { teleportStalkerLoop } from "./stalkerEntity";
 import { givePanelItem } from "./panels";
 
-import { playerLookingControl } from "./RoundBegin/playerLooking";
 import { Ambiance_control } from "./RoundBegin/ambianceController";
-import { Stamina_control } from "./RoundBegin/Stamina";
-import { Sanity_control } from "./RoundBegin/Sanity";
-import { Battery_control } from "./RoundBegin/batteryController";
 import { spawnCages } from "./RoundBegin/cageController";
 import { startcoinController } from "./RoundBegin/coinController";
-import { soulsAmountCheck } from "./RoundBegin/soulController";
 import { decidePasswords } from "./RoundBegin/passwordManager";
-
-import { nullTeleportTimeSetter } from "./RoundBegin/Null/nullController";
 
 import { restartRound } from "./RoundBegin/RoundOperations/restartRound";
 import { finishRoundEarly } from "./RoundBegin/RoundOperations/finishRoundEarly";
@@ -63,20 +54,13 @@ const GAME_COMMANDS = {
 // ==========================================
 
 const FUNCTIONS_TO_START = {
-    initiateCam, // STAY
-    nullTeleportTimeSetter, // GONE
-    playerLookingControl, // GONE
-    teleportStalkerLoop, // GONE
-    givePanelItem, // STAY
-    soulsAmountCheck, // GONE
-    Ambiance_control, // STAY
-    Stamina_control, // GONE
-    Sanity_control, // GONE
-    Battery_control, // GONE
-    spawnCages, // STAY
-    startcoinController, // STAY
-    decidePasswords, // STAY
-    updateGlobalUi // STAY
+    initiateCam,
+    givePanelItem,
+    Ambiance_control,
+    spawnCages,
+    startcoinController,
+    decidePasswords,
+    updateGlobalUi
 };
 
 const FUNCTIONS_TO_END_ROUND = {
@@ -141,22 +125,15 @@ const gameEndedState = new Proxy({ ...INITIAL_ENDED_GAME_STATE }, {
 // SYSTEM: MAIN GAME LOOP
 // ==========================================
 
-// IN LOBBY
-export function startMainGameLoop() { // tick loop was 5
-    // ---- LOOP ----
+export function checkGameStatus(inGamePlayers) {
     state.isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
     gameRestartState.isGameRestarted = getObjectiveScore(getGameRestartedObjective(), getValueParticipant());
     gameEndedState.isGameEnded = getObjectiveScore(getGameEndedObjective(), getValueParticipant());
 
     isGameStarted = state.isGameStarted;
 
-    if (isGameStarted == 1) {
-        const inGamePlayers = getPlayersInRound();
-
-        if (inGamePlayers.length == 0) world.setDynamicProperty("roundOver", true);
-        if (world.getDynamicProperty("roundOver")) dimension.runCommand(GAME_COMMANDS.GAME_OVER.RESET_SCOREBOARD);
-    }
-    // ---- LOOP ----
+    if (isGameStarted == 1)
+        if (inGamePlayers.length == 0) dimension.runCommand(GAME_COMMANDS.GAME_OVER.RESET_SCOREBOARD);
 }
 
 // ==========================================
@@ -176,7 +153,6 @@ async function roundOver() {
         func();
     }
     commandsToResetTheGame(dimension);
-    gameStarter();
     await despawnEntities();
 
     const players = world.getAllPlayers().filter(p => p.hasTag("in_lobby"));

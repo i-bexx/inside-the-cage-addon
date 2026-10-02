@@ -1,5 +1,4 @@
 import { world, system } from "@minecraft/server";
-import { getPlayersInRound } from "../utils";
 
 // =============================================================
 // CONFIGURATION AND CONSTANTS
@@ -50,12 +49,6 @@ const BATTERY_CONFIG = {
     }
 };
 
-// =============================================================
-// VARIABLES AND MAPS
-// =============================================================
-
-let intervalId = undefined;
-
 // Maps
 const playerStates = new Map();
 const playerDrainingBattery = new Map();
@@ -102,22 +95,12 @@ function getBatteryState(player) {
 // MAIN CONTROL LOOP
 // =============================================================
 
-// IN ROUND (WHEN ROUND STARTED)
-export function Battery_control() { // tick loop was 10
-    if (intervalId !== undefined) return;
-  
-    // ---- LOOP ----
-    const players = getPlayersInRound();
+export function Battery_control(player) {
+    if (!player || !player.isValid) return;
 
-        for (const player of players) {
-            if (!player || !player.isValid) continue;
-
-            let batteryState = getBatteryState(player);
-            // Reading Dynamic Properties (Coming from Config)
-            batteryState.batteryIsFullyDrainedOfPlayer = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_FULLY_DRAINED);
-            batteryState.batteryIsDrainingOfPlayer = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_DRAINING);
-        }
-        // ---- LOOP ----
+    let batteryState = getBatteryState(player);
+    batteryState.batteryIsFullyDrainedOfPlayer = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_FULLY_DRAINED);
+    batteryState.batteryIsDrainingOfPlayer = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_DRAINING);
 }
 
 // =============================================================
@@ -246,12 +229,6 @@ function batteryIsCritical(player) {
 // =============================================================
 
 world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => pickupBattery(player, target));
-
-export function stopBatteryControl() {
-    if (intervalId === undefined) return;
-    system.clearRun(intervalId);
-    intervalId = undefined;
-}
 
 export function playerStatesOfBatteryMap() { return playerStates; }
 export function playerDrainingBatteryCountdownMap() { return playerDrainingBattery; }

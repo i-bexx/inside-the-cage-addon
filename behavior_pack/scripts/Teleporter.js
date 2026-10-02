@@ -1,4 +1,4 @@
-import { world, system } from "@minecraft/server";
+import { world } from "@minecraft/server";
 import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 
@@ -20,9 +20,7 @@ const COOLDOWNS = new Map();
 // MAIN SYSTEM
 // ==========================================
 
-// ALWAYS
-export function formerIntervalTeleporter() { // tick loop was 20
-    // ---- LOOP ----
+export function formerIntervalTeleporter() {
     try {
         const unlinkedEntities = getUnlinkedEntities();
 
@@ -46,7 +44,6 @@ export function formerIntervalTeleporter() { // tick loop was 20
     } catch (e) {
         console.warn("Teleporter matching error:", e);
     }
-    // ---- LOOP ----
 }
 
 function teleportPlayer(player, targetEntity) {

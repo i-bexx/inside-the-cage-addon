@@ -1,7 +1,7 @@
 import { world, system } from "@minecraft/server";
 
-import { getPlayersInRound } from "../utils";
-import { getStalkerMatchIdObjective, getSanityObjective, getStaminaObjective, getObjectiveScore } from "../scoreboards";
+import { getStalkerEntityMatchedMap } from "../stalkerEntity";
+import { getSanityObjective, getStaminaObjective, getObjectiveScore } from "../scoreboards";
 
 // --- CONSTANTS ---
 const GAME_ENTITIES = {
@@ -33,13 +33,11 @@ const SOUNDS = {
 };
 
 let dimension;
-let nullEntity;
+
 
 let playerStates = new Map();
 let listOfPlayersLooking = new Map();
 let listOfPlayersPlayingStatic = new Map();
-
-let intervalId = undefined;
 
 function isPlayerLookingAtEntity(player) {
 
@@ -70,58 +68,19 @@ function isPlayerLookingAtEntity(player) {
     return state;
 }
 
-// IN ROUND (WHEN ROUND STARTED WHEN souls_freed IS NOT 4 OR 5)
-export function playerLookingControl() { // tick loop was 2
-    if (intervalId !== undefined) return;
-    nullEntity = dimension.getEntities({ type: GAME_ENTITIES.NULL })[0];
+export function playerLookingControl(player, nullEntity) {
+    if (!nullEntity) return;
 
-    // ---- LOOP ----
-    const players = getPlayersInRound();
-    const stalkers = dimension.getEntities({ type: GAME_ENTITIES.STALKER_CURSOR });
+    const linkedStalker = getStalkerEntityMatchedMap().get(player.id);
+    if (!linkedStalker || !linkedStalker.isValid) return;
 
-    if (stalkers.length === 0) return;
+    const dx = linkedStalker.location.x - nullEntity.location.x;
+    const dy = linkedStalker.location.y - nullEntity.location.y;
+    const dz = linkedStalker.location.z - nullEntity.location.z;
+    const distance = Math.hypot(dx, dy, dz);
 
-    // Track players actively looking RIGHT NOW
-    const playersLookingNow = new Set();
-
-    for (const stalker of stalkers) {
-        const matchedPlayer = getMatchingPlayer(players, stalker, getStalkerMatchIdObjective());
-
-        const dx = stalker.location.x - nullEntity.location.x;
-        const dy = stalker.location.y - nullEntity.location.y;
-        const dz = stalker.location.z - nullEntity.location.z;
-        
-        const distance = Math.hypot(dx, dy, dz);
-
-        if (!matchedPlayer?.isValid) continue;
-
-        const state = isPlayerLookingAtEntity(matchedPlayer);
-
-        if (matchedPlayer?.isValid && state && distance <= 10) {
-            state.isLooking = true;
-            playersLookingNow.add(matchedPlayer.id);
-        }
-    }
-
-    // Force-stop anyone who was looking before, but isn't anymore
-    for (const [playerId, state] of playerStates.entries()) {
-        if (state.isLooking && !playersLookingNow.has(playerId)) {
-            const player = players.find(p => p.id === playerId);
-            
-            if (player && player.isValid) {
-                // Triggers playerStoppedLooking via Proxy
-                state.isLooking = false; 
-            } else {
-                // EMERGENCY CLEANUP: Player disconnected mid-stare!
-                const interval = listOfPlayersPlayingStatic.get(playerId);
-                if (interval !== undefined) system.clearRun(interval);
-                
-                listOfPlayersPlayingStatic.delete(playerId);
-                listOfPlayersLooking.delete(playerId); // Clean up the state to avoid memory leaks
-            }
-        }
-    }
-    // ---- LOOP ----
+    const state = isPlayerLookingAtEntity(player);
+    state.isLooking = (distance <= 10);
 }
 
 function handleStaticEffect(player) {
@@ -135,18 +94,11 @@ function handleStaticEffect(player) {
         playerStats.sanity = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
         const sanityValue = playerStats.sanity;
 
-        // Switched to triggerEvent for consistency and better performance
-        if (sanityValue <= 100 && sanityValue > 66) {
-            player.triggerEvent(EVENTS.STATIC_TRUE_1);
-        } else if (sanityValue <= 66 && sanityValue > 33) {
-            player.triggerEvent(EVENTS.STATIC_TRUE_2);
-        } else if (sanityValue <= 33 && sanityValue >= 0) {
-            player.triggerEvent(EVENTS.STATIC_TRUE_3);
-        }
+        if (sanityValue <= 100 && sanityValue > 66) player.triggerEvent(EVENTS.STATIC_TRUE_1);
+        else if (sanityValue <= 66 && sanityValue > 33) player.triggerEvent(EVENTS.STATIC_TRUE_2);
+        else if (sanityValue <= 33 && sanityValue >= 0) player.triggerEvent(EVENTS.STATIC_TRUE_3);
         
-        if (listOfPlayersLooking.get(player.id) == undefined) {
-            playerIsLooking(player, sanityValue);
-        }
+        if (listOfPlayersLooking.get(player.id) == undefined) playerIsLooking(player, sanityValue);
     }
 }
 
@@ -163,7 +115,6 @@ function playerStoppedLooking(player) {
     listOfPlayersLooking.delete(player.id);
 
     try {
-        // 2. EXECUTE VOLATILE LOGIC
         player.setDynamicProperty(DYNAMIC_PROPS.IS_LOOKING, false);
         
         const playerStats = getPlayerStats();
@@ -174,18 +125,15 @@ function playerStoppedLooking(player) {
         const sanity = playerStats.sanity;
         const isUsingCam = player.getDynamicProperty(DYNAMIC_PROPS.CAM_USING);
 
-        if (stamina <= 0) {
-						player.triggerEvent(EVENTS.SLOWNESS);
-				} else if (isUsingCam) {
-						player.triggerEvent(EVENTS.STATIC_MOVEMENT);
-				}
+        if (stamina <= 0) player.triggerEvent(EVENTS.SLOWNESS);
+        else if (isUsingCam) player.triggerEvent(EVENTS.STATIC_MOVEMENT);
 
-				if (isUsingCam) {
-						if (sanity <= 33) player.triggerEvent(EVENTS.STATIC_LOW_SANITY);
-						else player.triggerEvent(EVENTS.STATIC);
-				} else {
-						player.triggerEvent(EVENTS.NORMAL);
-				}
+		if (isUsingCam) {
+            if (sanity <= 33) player.triggerEvent(EVENTS.STATIC_LOW_SANITY);
+            else player.triggerEvent(EVENTS.STATIC);
+        } else {
+            player.triggerEvent(EVENTS.NORMAL);
+        }
 
         player.runCommand(`stopsound @s ${SOUNDS.STATIC_1}`);
         player.runCommand(`stopsound @s ${SOUNDS.STATIC_2}`);
@@ -256,26 +204,12 @@ function sanityPoor(player) {
     player.runCommand("camerashake add @s[tag=in_game] 0.3 8 rotational");
 }
 
-function getMatchingPlayer(players, stalkerEntity, stalkerMatchIdObjective) {
-    return players.find(p => {
-        if (!p.isValid || !p.scoreboardIdentity || !stalkerEntity.scoreboardIdentity) return false;
-        const playerScore = getObjectiveScore(stalkerMatchIdObjective, p.scoreboardIdentity);
-        const stalkerScore = getObjectiveScore(stalkerMatchIdObjective, stalkerEntity.scoreboardIdentity);
-        return playerScore === stalkerScore;
-    });
-}
 
 function getPlayerStats() {
     return {
         stamina: 10,
         sanity: 100
     };
-}
-
-export function stopPlayerLookingControl() {
-    if (intervalId === undefined) return;
-    system.clearRun(intervalId);
-    intervalId = undefined;
 }
 
 export function listOfPlayersLookingMap() { return listOfPlayersLooking; }

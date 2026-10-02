@@ -2,6 +2,7 @@ import { world, system } from "@minecraft/server";
 
 import { sleep } from "../utils";
 import { isLookingAtMenuEntity } from "../preStart";
+import { startCentralTickManager } from "../tickManager";
 import { getNewGameObjective, getStalkerMatchIdObjective, getWorldParticipant, getObjectiveScore } from "../scoreboards";
 import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetPlayerProperties, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, despawnEntities, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
@@ -183,6 +184,8 @@ async function handleOwnerJoinLogic(player) {
     world.setDynamicProperty("reseting_round", false);
     
     dimension.runCommand("fill -180 68 -92 -180 71 -84 barrier");
+
+    startCentralTickManager();
 
     await sleep(320);
 

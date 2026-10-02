@@ -1,4 +1,5 @@
 import "./initializeWorld";
+import "./tickManager";
 
 import "./cameraUsage";
 import "./cursorController";

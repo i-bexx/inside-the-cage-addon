@@ -6,21 +6,11 @@ import { world, system } from "@minecraft/server";
 
 import { stopGivePanelItem } from "./panels";
 import { stopInitiateCam } from "./cameraUsage";
-import { stopCrosshairTracker } from "./cursorController";
-import { stopTeleportStalker } from "./stalkerEntity";
-import { resetSessionPlayers } from "./gameStarter";
+import { resetGameStarterSession } from "./gameStarter";
 
-import { stopNullTeleportTimeSetter } from "./RoundBegin/Null/nullController";
 import { stopTeleportNull } from "./RoundBegin/Null/nullTeleport";
-import { stopSanityControl } from "./RoundBegin/Sanity";
-import { stopPlayerLookingControl } from "./RoundBegin/playerLooking";
-import { stopStaminaControl } from "./RoundBegin/Stamina";
-import { stopSoulsAmountCheck } from "./RoundBegin/soulController";
 import { stopAmbiance } from "./RoundBegin/ambianceController";
-import { stopBatteryControl } from "./RoundBegin/batteryController";
-import { stopWarnPlayerAboutCam } from "./RoundBegin/cameraController";
 import { stopcoinController } from "./RoundBegin/coinController";
-import { stopDifficultyMonitor } from "./RoundBegin/ghostController";
 
 import { despawnCages } from "./RoundBegin/cageController";
 import { despawnCoins } from "./RoundBegin/coinController";
@@ -226,7 +216,6 @@ export function stopFunctionsInMaps(playerId) { // Stops the loops or countdown 
 // ======= WORLD INFORMATION =======
 
 export function resetWorldDynamicPropertyData() {
-  world.setDynamicProperty("roundOver", false);
   world.setDynamicProperty("starter", false);
   world.setDynamicProperty("nullTeleportChecking", false);
   world.setDynamicProperty("cages4Activated", false);
@@ -236,30 +225,14 @@ export function resetWorldDynamicPropertyData() {
 }
 
 export function resetFunctions() {
-  stopPlayerLookingControl(); // DELETE
-  stopStaminaControl(); // DELETE
   stopGivePanelItem();
-  
-  stopSoulsAmountCheck(); // DELETE
-  stopSanityControl(); // DELETE
-  
-  stopTeleportNull();
-  stopNullTeleportTimeSetter(); // DELETE
-
-  stopCrosshairTracker(); // DELETE
-
   stopInitiateCam();
-
-  stopTeleportStalker(); // DELETE
-
-  resetSessionPlayers();
-
-  stopAmbiance();
-  stopBatteryControl(); // DELETE
-  stopWarnPlayerAboutCam(); // DELETE
+  
   stopcoinController();
-  stopDifficultyMonitor(); // DELETE
-
+  stopTeleportNull();
+  stopAmbiance();
+  
+  resetGameStarterSession();
   resetPasswords();
   resetPrices();
 }

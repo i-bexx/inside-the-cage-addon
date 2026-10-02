@@ -1,32 +1,18 @@
 import { system } from "@minecraft/server";
 
-import { getPlayersInRound } from "../utils";
 import { game_over } from "../Player/resetPlayerData";
-import { getSanityObjective, getObjectiveScore } from "../scoreboards";
-
-let players = [];
-let intervalId = undefined;
 
 let playsoundHeart = new Map();
 let sanityLowStaticSoundId = new Map();
 let sanityLowStaticEventId = new Map();
 
-// IN ROUND (WHEN ROUND STARTED)
-export function Sanity_control() { // tick loop was 5
-	if (intervalId !== undefined) return;
+export function Sanity_control(player, playerState) {
+	let sanityValue = playerState.sanity;
 
-	// ---- LOOP ----
-	players = getPlayersInRound();
-
-	for (const player of players) {
-		let sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
-
-		checkPlayerLookingState(player, sanityValue);
-		checkPlayerHeartPoundingState(player, sanityValue);
-		checkPlayerSanityLowStaticSound(player, sanityValue);
-		lowSanityStatic(player, sanityValue);
-	}
-	// ---- LOOP ----
+	checkPlayerLookingState(player, sanityValue);
+	checkPlayerHeartPoundingState(player, sanityValue);
+	checkPlayerSanityLowStaticSound(player, sanityValue);
+	lowSanityStatic(player, sanityValue);
 }
 
 //SANITY DECREASE LOGIC
@@ -147,12 +133,6 @@ function sanityLowStaticSound(player) {
 			if (shouldPlayingStaticSound) player.runCommand("playsound static_low_sanity @s") //When player joins, the map clears so the sound will not play
 		}, 60)
 		sanityLowStaticSoundId.set(player.id, func)
-}
-
-export function stopSanityControl() {
-		if (intervalId === undefined) return;
-    system.clearRun(intervalId);
-    intervalId = undefined;
 }
 
 export function getPlaysoundHeartMap() { return playsoundHeart; }

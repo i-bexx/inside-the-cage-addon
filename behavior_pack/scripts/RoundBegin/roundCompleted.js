@@ -22,7 +22,7 @@ export async function roundCompleted() {
     resetPlayerProperties(player);
 	}
 
-  slowUiTick();
+  slowUiTick(world.getAllPlayers());
 
   resetFunctions();
   resetMaps();

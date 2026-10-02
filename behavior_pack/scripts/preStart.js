@@ -1,8 +1,5 @@
 import { world, system } from "@minecraft/server";
 
-import { startMainGameLoop } from "./gameStats";
-import { gameStarter } from "./gameStarter";
-
 // =============================================================================
 // CONFIGURATION
 // =============================================================================
@@ -184,7 +181,6 @@ world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
     player.runCommand("playsound click_chose @s");
     player.runCommand(`tag @s remove ${CONFIG.TAGS.MENU}`);
     
-    world.setDynamicProperty("in_menu", false);
     dimension.runCommand("tag @a add in_lobby");
 
     if (ACTIVE_TIMERS.menuLoop == undefined) return;
@@ -211,8 +207,7 @@ world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
         dimension.runCommand(`fill ${CONFIG.COORDS.AIR_FILL_AREA} air`);
         dimension.runCommand(`event entity @e[type=${CONFIG.IDS.DOOR}] "door_0_event"`);
 
-        startMainGameLoop();
-        gameStarter();
+        world.setDynamicProperty("in_menu", false);
     }
 });
 
@@ -245,8 +240,7 @@ function startSkipSystem(playersInCutscene) {
             }
             runCommandList(COMMANDS.SKIP_CLEANUP);
 
-            startMainGameLoop();
-            gameStarter();
+            world.setDynamicProperty("in_menu", false);
             resetTimerVariables();
 
             if (ACTIVE_TIMERS.skipLoop == undefined) return;
@@ -321,8 +315,7 @@ function playSceneArrival() {
     ACTIVE_TIMERS.sceneArrival = system.runTimeout(() => {
         runCommandList(COMMANDS.SCENE_ARRIVAL);
 
-        startMainGameLoop();
-        gameStarter();
+        world.setDynamicProperty("in_menu", false);
         resetTimerVariables();
     }, CONFIG.TIMESTAMPS.ARRIVAL);
 }

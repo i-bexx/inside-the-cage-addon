@@ -1,40 +1,17 @@
-import { world, system } from "@minecraft/server";
-
-import { getPlayersInRound } from "../utils";
-import { getStaminaObjective, getStaminaLimitObjective, getObjectiveScore } from "../scoreboards";
-
 const COOLDOWNS = new Map();
-const DURATION_TIME = 3000
-
-let intervalId = undefined;
-let players = [];
+const DURATION_TIME = 3000;
 
 
-// IN ROUND (WHEN ROUND STARTED)
-export function Stamina_control () { // tick loop was 20
-	if (intervalId !== undefined) return;
-
-	// ---- LOOP ----
-	players = getPlayersInRound();
-	checkPlayerRunningState(players);
-	// ---- LOOP ----
-}
-
-function checkPlayerRunningState(players) {
-	for (const player of players) {
-		const staminaValue = getObjectiveScore(getStaminaObjective(), player.scoreboardIdentity) ?? 10;
-		const staminaLimit = getObjectiveScore(getStaminaLimitObjective(), player.scoreboardIdentity) ?? 10;
-		
-		let isPlayerRunning = player.isSprinting;
-		let isStaminaFull = staminaValue == staminaLimit;
-		let isStaminaEmpty = staminaValue == 0;
-		
-		if (isPlayerRunning) {
-			playerIsRunning(player, isStaminaEmpty);
-		} else {
-			playerIsNotRunning(player, isStaminaFull, isStaminaEmpty);
-			}
-	}
+export function Stamina_control(player, playerState) {
+	const staminaValue = playerState.stamina ?? 10;
+	const staminaLimit = playerState.staminaLimit ?? 10;
+	
+	let isPlayerRunning = player.isSprinting;
+	let isStaminaFull = staminaValue == staminaLimit;
+	let isStaminaEmpty = staminaValue == 0;
+	
+	if (isPlayerRunning) playerIsRunning(player, isStaminaEmpty); 
+	else playerIsNotRunning(player, isStaminaFull, isStaminaEmpty);
 }
 
 function playerIsRunning(player, isStaminaEmpty) {
@@ -73,12 +50,6 @@ function playerIsNotRunning(player, isStaminaFull, isStaminaEmpty) {
 				player.runCommand("scoreboard players add @s Stamina 1");
 		} else return; 
 		}
-}
-
-export function stopStaminaControl() {
-	if (intervalId === undefined) return;
-  system.clearRun(intervalId);
-  intervalId = undefined;
 }
 
 export function playerResetStaminaCooldownMap() { return COOLDOWNS; }

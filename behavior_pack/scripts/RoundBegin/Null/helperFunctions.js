@@ -1,9 +1,3 @@
-import { getSoulsFreedObjective, getValueParticipant, getObjectiveScore } from "../../scoreboards";
-
-export function getCurrentSouls() {
-	return getObjectiveScore(getSoulsFreedObjective(), getValueParticipant());
-}
-
 export function getRandomPlayer(playersArray) {
 	let index = Math.floor(Math.random() * playersArray.length);
     return playersArray[index];
