@@ -1,19 +1,16 @@
-import { world, system } from "@minecraft/server";
+import { world, Difficulty } from "@minecraft/server";
 
 import { cameraUsed } from "../cameraUsage";
 import { getPlayersInRound } from "../utils";
 import { roundCompleted } from "./roundCompleted";
-import { startDifficultyMonitor, stopDifficultyMonitor } from "./ghostController";
-import { teleportStalkerLoop, stopTeleportStalker } from "../stalkerEntity";
-import { warnPlayerAboutCam, stopWarnPlayerAboutCam } from "./cameraController";
-import { startCrosshairTracker, stopCrosshairTracker, stopPlayerShootTracker } from "../cursorController";
-import { getSoulsFreedObjective, getSanityObjective, getStaminaObjective, getValueParticipant, getObjectiveScore } from "../scoreboards";
+import { stopDifficultyMonitor } from "./ghostController";
+import { warnPlayerAboutCam } from "./cameraController";
+import { updateGlobalUi } from "../UI/globalUi";
 
-import { nullTeleportTimeSetter, stopNullTeleportTimeSetter } from "./Null/nullController";
+import { getSanityObjective, getStaminaObjective, getObjectiveScore } from "../scoreboards";
+
+
 import { stopTeleportNull } from "./Null/nullTeleport";
-
-
-let intervalId = undefined;
 
 const initialState = {
 	isSoulsFreedValueSufficient: false,
@@ -37,46 +34,33 @@ const state = new Proxy({ ...initialState }, {
 
 		const players = getPlayersInRound();
 
-		if (isSoulsFreedValueSufficient) {
-			soulsFreedValueSufficient();
+		if (isSoulsFreedValueSufficient) soulsFreedValueSufficient();
+		if (isSoulsFreedValue4) soulsFreedValue4();
+		else if (isSoulsFreedValue5) soulsFreedValue5();
+	 	else if (doesSoulsFreedValueExceed) soulsFreedValueExceeded(players);
+	 	else if (areAllCagesCollected) roundCompleted();
+	
+		return true;
 	}
-		if (isSoulsFreedValue4) { //Will initiate only once when souls freed become 4
-			soulsFreedValue4();
-	} else if (isSoulsFreedValue5) { //Will initiate only once when souls freed become 5
-			soulsFreedValue5();
-	} else if (doesSoulsFreedValueExceed) {
-			soulsFreedValueExceeded(players);
-	} else if (areAllCagesCollected) {
-			roundCompleted();
-	}
-	return true;
-}
 })
 
-// IN ROUND (WHEN ROUND STARTED)
-export function soulsAmountCheck() { // tick loop was 100
-	if (intervalId !== undefined) return;
-	
-	// ---- LOOP ----
-	let soulsFreedValue = getObjectiveScore(getSoulsFreedObjective(), getValueParticipant());
-
+export function soulsAmountCheck(soulsFreedValue) {
 	state.isSoulsFreedValueSufficient = [4, 5].includes(soulsFreedValue) && !world.getDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam");
 	state.isSoulsFreedValue4 = soulsFreedValue == 4 && world.getDynamicProperty("cages4Activated") == false;
 	state.isSoulsFreedValue5 = soulsFreedValue == 5 && world.getDynamicProperty("cages5Activated") == false;
 	state.doesSoulsFreedValueExceed = soulsFreedValue == 6;
 	state.areAllCagesCollected = soulsFreedValue == 7;
-	// ---- LOOP ----
+
+	updateGlobalUi();
 }
 
 function soulsFreedValueSufficient() {
+	world.setDifficulty(Difficulty.Normal);
+
 	warnPlayerAboutCam();
 	canTurnOffCam();
-	startCrosshairTracker();
-	startDifficultyMonitor();
-	stopTeleportStalker();
 
 	stopTeleportNull();
-	stopNullTeleportTimeSetter();
 
 	world.getDimension("overworld").runCommand("tp @e[type=game:null] -65 75 -150");
 	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", true);
@@ -94,12 +78,8 @@ function soulsFreedValue5() {
 }
 
 async function soulsFreedValueExceeded(players) {
-	stopCrosshairTracker();
-	stopPlayerShootTracker();
-	teleportStalkerLoop();
 	stopDifficultyMonitor();
 
-	stopWarnPlayerAboutCam();
 	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", false);
 	
   for (const player of players) {
@@ -116,7 +96,7 @@ async function soulsFreedValueExceeded(players) {
 		cameraUsed(player, sanityValue, staminaValue);
 		
   }
-    nullTeleportTimeSetter();
+
 }
 
 function canTurnOffCam() {
@@ -125,10 +105,4 @@ const players = getPlayersInRound();
         player.setDynamicProperty("canTurnOffCam", true);
         player.runCommand(`replaceitem entity @s slot.hotbar 8 game:camera_turn_off 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
     }
-}
-
-export function stopSoulsAmountCheck() {
-	if (intervalId === undefined) return;
-    system.clearRun(intervalId);
-    intervalId = undefined;
 }

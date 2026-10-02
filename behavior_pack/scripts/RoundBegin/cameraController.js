@@ -1,5 +1,3 @@
-import { world, system } from "@minecraft/server";
-
 import { getPlayersInRound } from "../utils";
 
 // =============================================================
@@ -16,16 +14,11 @@ const CONFIG = {
     }
 };
 
-let intervalId = undefined;
-
 // =============================================================
 // MAIN AND HELPER FUNCTIONS
 // =============================================================
 
-// IN ROUND (WHEN souls_freed is 4 or 5)
-export function warnPlayerAboutCam() { // tick loop was 1
-    if (intervalId !== undefined) return;
-
+export function warnPlayerAboutCam() {
     // ---- LOOP ----
     const players = filterPlayers();
 
@@ -43,10 +36,4 @@ function filterPlayers() {
 
         return isCamUsing && !isWarned;
     });
-}
-
-export function stopWarnPlayerAboutCam() {
-    if (intervalId === undefined) return;
-    system.clearRun(intervalId);
-	intervalId = undefined;
 }

@@ -1,4 +1,4 @@
-import { world, system } from "@minecraft/server";
+import { world } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 
 import { stalkerMatch } from "./stalkerEntity";
@@ -31,7 +31,7 @@ const initialPlayerLoc = {
 };
 
 
-let intervalId = undefined;
+let isStarting = false;
 let playersWaitingToStart = [];
 let sessionPlayers = [];
 
@@ -73,15 +73,8 @@ return state;
 }
 
 
-// -- Range Checker --
-
-// IN LOBBY
-export function gameStarter() { // tick loop was 30
-	if (intervalId !== undefined) return;
-	
-	// ---- LOOP ----
-	const players = world.getAllPlayers()
-											.filter(p => !p.hasTag("waiting_for_start"));
+export function gameStarter(allPlayers) {
+	const players = allPlayers.filter(p => !p.hasTag("waiting_for_start"));
 			
 		for (const player of players) {
 			player.isInRange = {
@@ -102,10 +95,7 @@ export function gameStarter() { // tick loop was 30
 
 		checker.isPlayerInRange = player.isInRange.isInRangeX && player.isInRange.isInRangeY && player.isInRange.isInRangeZ;
 		}
-	// ---- LOOP ----
 }
-
-// -- In Range Logic --
 
 async function playerInRange(player) {
 	const isResetingRound = world.getDynamicProperty("reseting_round");
@@ -179,8 +169,7 @@ export function startFunction() {
 
 	if (!isTheRoundRestarted) sessionPlayers = lobbyPlayers;
 
-	system.clearRun(intervalId); // Stops the main loop of this file
-	intervalId = undefined;
+	isStarting = true;
 	
 	const playersToStart = getSessionPlayers();
 	
@@ -262,7 +251,11 @@ export function getSessionPlayers() {
 }
 
 export function checkIfPositionClear() { return STARTER_RANGE_STATES; }
-export function resetSessionPlayers() { sessionPlayers = []; }
+export function resetGameStarterSession() {
+    sessionPlayers = []; 
+    isStarting = false;
+}
+export function isGameStarting() { return isStarting; }
 export function setGlobalVariables() { dimension = world.getDimension("overworld"); }
 
 
@@ -272,7 +265,7 @@ export function setGlobalVariables() { dimension = world.getDimension("overworld
 
 
 world.afterEvents.playerLeave.subscribe(({ playerId }) => {
-	if (intervalId === undefined) return; 
+	if (isStarting) return; 
 
     const remainingStarters = world.getPlayers({ tags: ["starter"] });
     if (remainingStarters.length === 0) {

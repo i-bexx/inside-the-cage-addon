@@ -1,5 +1,3 @@
-import { world, system } from "@minecraft/server";
-
 // ==========================================
 // CONFIGURATION
 // ==========================================
@@ -22,9 +20,6 @@ const CONFIG = {
 // ==========================================
 // FILTERS & VARIABLES
 // ==========================================
-
-let crosshairTrackerIntervalId = undefined;
-let shootingIntervalId = undefined;
 
 const CURSOR_STATES = new Map();
 const SHOOTING_STATES = new Map();
@@ -73,10 +68,6 @@ const ENTITY_RULES = [
     }
 ];
 
-// ==========================================
-// SYSTEM A: LOOKING
-// ==========================================
-
 function crosshairTracker(player) {
     let state = CURSOR_STATES.get(player.id);
     if (state) return state;
@@ -119,26 +110,11 @@ function crosshairTracker(player) {
 }
 
 // Global Loop for Cursor Tracker
-
-// IN ROUND (WHEN souls_freed is 4 or 5)
-export function startCrosshairTracker() { // tick loop was 4
-	if (crosshairTrackerIntervalId !== undefined) return;
-
-    // ---- LOOP ----
-	for (const player of world.getAllPlayers()) {
-        const isLooking = crosshairTracker(player);
-        const raycastResult = player.getEntitiesFromViewDirection(ENTITY_DISTANCE)
-        
-        isLooking.lookingAtEntity = (raycastResult.length > 0) ? 1 : 0;
-    }
-    // ---- LOOP ----
-}
-
-export function stopCrosshairTracker() {
-    if (crosshairTrackerIntervalId == undefined) return;
-
-    system.clearRun(crosshairTrackerIntervalId);
-    crosshairTrackerIntervalId = undefined;
+export function startCrosshairTracker(player) {
+    const isLooking = crosshairTracker(player);
+    const raycastResult = player.getEntitiesFromViewDirection(ENTITY_DISTANCE)
+    
+    isLooking.lookingAtEntity = (raycastResult.length > 0) ? 1 : 0;
 }
 
 export function getCursorStates() { return CURSOR_STATES; }

@@ -1,6 +1,5 @@
-import { world, system } from "@minecraft/server";
+import { world } from "@minecraft/server";
 
-import { getCurrentSouls } from "./helperFunctions";
 import { teleportNull } from "./nullTeleport";
 
 const TELEPORT_STAGES = [
@@ -14,20 +13,11 @@ const TELEPORT_STAGES = [
     [280, 310, 340]
 ];
 
-let intervalId = undefined;
-
-// IN ROUND (WHEN ROUND STARTED)
-export function nullTeleportTimeSetter() { // tick loop was 60
-    if (intervalId !== undefined) return;
-    
-    // ---- LOOP ----
+export function nullTeleportTimeSetter(soulsFreedValue) {
 	const isChecking = world.getDynamicProperty("nullTeleportChecking");
-    let soulsFreedAmount = getCurrentSouls();
     
-    if (!isChecking && soulsFreedAmount >= 0 && soulsFreedAmount <= 7) {	
-        runTeleporter(soulsFreedAmount);
-    }
-    // ---- LOOP ----
+    if (!isChecking && soulsFreedValue >= 0 && soulsFreedValue <= 7)
+        runTeleporter(soulsFreedValue);
 }
 
 /**
@@ -41,11 +31,4 @@ function runTeleporter(stageIndex) {
 	teleportNull(randomTickValue);
 
 	world.setDynamicProperty("nullTeleportChecking", true);
-}
-
-
-export function stopNullTeleportTimeSetter() {
-    if (intervalId === undefined) return;
-    system.clearRun(intervalId);
-    intervalId = undefined;
 }

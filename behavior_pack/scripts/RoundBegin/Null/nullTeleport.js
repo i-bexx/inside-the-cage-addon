@@ -1,6 +1,8 @@
 import { world, system } from "@minecraft/server";
 
 import { getRandomPlayer, isValidLocation } from "./helperFunctions";
+import { getPlayersInRound } from "../../utils";
+import { getNullEntity } from "./nullCache";
 
 const MAX_TELEPORT_ATTEMPTS = 10;
 const TELEPORT_OFFSETS = [
@@ -17,11 +19,10 @@ export function teleportNull(ticks) {
     if (teleportCountdown !== undefined) return;
 
     teleportCountdown = system.runTimeout(() => {
-        const players = world.getAllPlayers();
+        const players = getPlayersInRound();
         const chosenPlayer = getRandomPlayer(players);
 
-        const nullEntities = dimension.getEntities({ type: "game:null" });
-        const nullEntity = nullEntities[0];
+        const nullEntity = getNullEntity();
 
         world.setDynamicProperty("nullTeleportChecking", false);
         teleportCountdown = undefined;
