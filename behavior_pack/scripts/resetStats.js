@@ -7,6 +7,7 @@ import { world, system } from "@minecraft/server";
 import { stopGivePanelItem } from "./panels";
 import { stopInitiateCam } from "./cameraUsage";
 import { resetGameStarterSession } from "./gameStarter";
+import { ROUND_STATE_MAP } from "./gameStats";
 
 import { stopTeleportNull } from "./RoundBegin/Null/nullTeleport";
 import { stopAmbiance } from "./RoundBegin/ambianceController";
@@ -65,9 +66,6 @@ const COMMANDS_TO_RESET_GAME = [
     "fill 148 56 -316 142 56 -316 air",
     "scoreboard players set value souls_freed 0",
     "scoreboard players set @a stalker_match_id 0",
-    "scoreboard players set value game_started 0",
-    "scoreboard players set value game_restarted 0",
-    "scoreboard players set value game_ended_early 0",
     "scoreboard players set value show_position 1",
     "scoreboard players set value global_ui 91",
     "tp @e[type=game:null] -65 75 -150",
@@ -84,8 +82,8 @@ const COMMANDS_TO_RESET_GAME = [
 // ======= PLAYER INFORMATION =======
 
 export function commandsToResetPlayerData(player, playerJoined = false) {
-  const isTheRoundRestarted = world.getDynamicProperty("gameRestart");
-  const isTheRoundEndedEarly = world.getDynamicProperty("roundEndedEarly");
+  const isTheRoundRestarted = ROUND_STATE_MAP.get("ROUND_RESTARTED");
+  const isTheRoundEndedEarly = ROUND_STATE_MAP.get("ROUND_ENDED_EARLY");
 
   const gameEndedOnTime = !isTheRoundRestarted && !isTheRoundEndedEarly;
   const isEliminated = player.hasTag("eliminated");
@@ -243,18 +241,18 @@ export async function despawnEntities() {
 }
 
 export function commandsToResetTheGame(dimension) {
-  const gameRestarted = world.getDynamicProperty("gameRestart");
-  const gameEndedEarly = world.getDynamicProperty("roundEndedEarly");
+  const gameRestarted = ROUND_STATE_MAP.get("ROUND_RESTARTED");
+  const gameEndedEarly = ROUND_STATE_MAP.get("ROUND_ENDED_EARLY");
 
   for (const cmd of COMMANDS_TO_RESET_GAME) 
     dimension.runCommand(cmd);
 
-    //If game restarted, the door shall remain closed
-    //If game ended early, a different file will open the door
-    if (gameRestarted || gameEndedEarly) return;
+  //If game restarted, the door shall remain closed
+  //If game ended early, a different file will open the door
+  if (gameRestarted || gameEndedEarly) return;
 
-    dimension.runCommand(`event entity @e[type=game:door] "door_0_event"`);
-    dimension.runCommand("fill -180 68 -92 -180 71 -84 air");
+  dimension.runCommand(`event entity @e[type=game:door] "door_0_event"`);
+  dimension.runCommand("fill -180 68 -92 -180 71 -84 air");
 }
 
 // ==========================================

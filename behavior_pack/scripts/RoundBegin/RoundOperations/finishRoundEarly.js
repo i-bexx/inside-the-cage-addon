@@ -1,7 +1,7 @@
-import { world, system } from "@minecraft/server";
+import { world } from "@minecraft/server";
 
-import { sleep } from "../../utils";
-import { getPlayersInRound } from "../../utils";
+import { getPlayersInRound, sleep } from "../../utils";
+import { ROUND_STATE_MAP } from "../../gameStats";
 
 // ======= CONFIGURATION =======
 
@@ -16,7 +16,6 @@ const CONFIG = {
   TP_TO_LOBBBY: "tp @a[tag=!in_lobby] -183 68 -97",
   OPEN_DOOR_EVENT: `event entity @e[type=game:door] "door_0_event"`,
   REMOVE_DOOR_BARRIERS: "fill -180 68 -92 -180 71 -84 air",
-  SET_SCOREBOARD: "scoreboard players set value game_started 0",
   NORMAL_EVENT_CMD: "event entity @a[tag=!in_lobby] normal_event"
 };
 
@@ -30,7 +29,7 @@ export async function finishRoundEarly() {
     player.triggerEvent(CONFIG.CURTAIN_CLOSE);
     player.runCommand(CONFIG.STOPSOUND);
   }
-  await dimension.runCommand(CONFIG.SET_SCOREBOARD);
+  ROUND_STATE_MAP.set("ROUND_STARTED", false);
 
   await sleep(10);
   await dimension.runCommand(CONFIG.TP_ELSEWHERE);
@@ -41,8 +40,7 @@ export async function finishRoundEarly() {
   await dimension.runCommand(CONFIG.NORMAL_EVENT_CMD);
   await dimension.runCommand(CONFIG.ADD_TAG_CMD);
 
-  // 'roundEndedEarly' dynamic property must reset only here
-  world.setDynamicProperty("roundEndedEarly", false);
+  ROUND_STATE_MAP.set("ROUND_ENDED_EARLY", false);
 
   await sleep(30);
   await dimension.runCommand(CONFIG.OPEN_DOOR_EVENT);

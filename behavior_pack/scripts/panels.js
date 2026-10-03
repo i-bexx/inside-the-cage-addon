@@ -1,10 +1,11 @@
 import { world, system, EntityComponentTypes } from "@minecraft/server";
 import { ActionFormData, ModalFormData, FormCancelationReason } from "@minecraft/server-ui";
 
-import { getGameStartedObjective, getCoinAmountObjective, getStaminaLimitObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
+import { getCoinAmountObjective, getStaminaLimitObjective, getObjectiveScore } from "./scoreboards";
 import { pickupBattery } from "./RoundBegin/batteryController";
 import { getPasswords } from "./RoundBegin/passwordManager";
 import { votePanel } from "./voteManager";
+import { ROUND_STATE_MAP } from "./gameStats";
 
 let dimension;
 
@@ -26,7 +27,7 @@ function customPanel(player) {
             if (cancelationReason === FormCancelationReason.UserBusy) return;
             if (canceled) return;
 
-           const isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
+           const isGameStarted = ROUND_STATE_MAP.get("ROUND_STARTED");
             if (isGameStarted == 0) {
                 player.sendMessage(" §6[§e!§6] §c§lPanel is currently locked!");
                 player.playSound("note.bass");
@@ -63,7 +64,7 @@ function mainPanel(player) {
             if (cancelationReason === FormCancelationReason.UserBusy) return;
             if (canceled) return;
 
-            const isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
+            const isGameStarted = ROUND_STATE_MAP.get("ROUND_STARTED");
             if (isGameStarted == 0) {
                 player.sendMessage(" §6[§e!§6] §c§lPanel is currently locked!");
                 player.playSound("note.bass");
