@@ -21,9 +21,9 @@ export async function roundCompleted() {
     setPlayerMaps(player.id);
     resetPlayerDynamicPropertyData(player);
     resetPlayerProperties(player);
-	}
 
-  slowUiTick(world.getAllPlayers());
+    slowUiTick(player);
+	}
 
   resetFunctions();
   resetMaps();

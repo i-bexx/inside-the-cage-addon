@@ -1,8 +1,7 @@
 import { system } from "@minecraft/server";
 
-import { slowUiTick } from "./slowUiTick";
-
 const playerCompassStates = new Map();
+const LAST_SUBTITLE_MAP = new Map();
 
 let staminaTick = 0;
 let staminaTickTimerActive = false;
@@ -40,15 +39,11 @@ export function fastUiTick(player, playerState, isRoundCompleted, allPlayers) {
     if (isRoundCompleted) uiString += "\nround_completed_x";
     else uiString += "\nround_completed_y";
 
-
-    // When kit is used, sanity info updates right away
-    if (player.hasTag("updateSanityUI")) {
-      slowUiTick(allPlayers);
-      player.removeTag("updateSanityUI");
+    // Set the subtitle only if it has changed
+    if (LAST_SUBTITLE_MAP.get(player.id) !== uiString) {
+        LAST_SUBTITLE_MAP.set(player.id, uiString);
+        player.onScreenDisplay.updateSubtitle(uiString);
     }
-
-    // Set the subtitle
-    player.onScreenDisplay.updateSubtitle(uiString);
 
   if (!staminaTickTimerActive) {
     staminaTickTimerActive = true;
@@ -66,8 +61,7 @@ function getCursorState(playerState) {
   };
 
   // Check if player is holding the gun
-  const mainHandItem = playerState.mainHand;
-  cursorState.isHoldingGun = mainHandItem?.typeId === "game:gun";
+  cursorState.isHoldingGun = playerState.mainHandTypeId === "game:gun";
 
   // Check if player is shooting
   const isShooting = playerState.variant == 1;

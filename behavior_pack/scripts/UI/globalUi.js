@@ -14,5 +14,5 @@ export function updateGlobalUi() {
   dimension.runCommand(`scoreboard players set value global_ui ${soulsFreedNumber}${showPosition}`);
   
   const allPlayers = world.getAllPlayers();
-  slowUiTick(allPlayers); // Force an immediate update for sanity stats and notifications without waiting for the next loop tick.
+  allPlayers.forEach(p => slowUiTick(p)) // Force an immediate update for sanity stats and notifications without waiting for the next loop tick.
 }

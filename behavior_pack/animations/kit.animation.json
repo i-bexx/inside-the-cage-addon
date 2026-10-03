@@ -26,7 +26,7 @@
 					"/clear @s game:kit 0 1",
 					"/playsound kit_used @s",
 					"/scoreboard players set @s Sanity 100",
-					"/tag @s add updateSanityUI"
+					"/scriptevent game:update_sanity"
 				]
 			},
 			"animation_length": 2.5,

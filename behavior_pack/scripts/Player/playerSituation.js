@@ -34,6 +34,12 @@ let dimension;
 // STATE MANAGEMENT
 // =============================================================================
 
+export const MAIN_HAND_CACHE = new Map();
+world.afterEvents.playerHotbarSelectedSlotChange.subscribe((event) => {
+        const item = event.itemStack;
+        MAIN_HAND_CACHE.set(event.player.id, item ? item.typeId : null);
+});
+
 let objectives = {
     ammo: null
 };
@@ -62,15 +68,15 @@ function handleStrafeAnimation(player, playerState) {
 }
 
 function handleCombatLogic(player, playerState) {
-    const mainHand = playerState.mainHand;
+    const mainHandTypeId = playerState.mainHandTypeId;
     
     // --- Clear Offhand ---
-    const isHoldingWeapon = mainHand?.typeId === CONFIG.ITEMS.KNIFE || mainHand?.typeId === CONFIG.ITEMS.GUN;
+    const isHoldingWeapon = mainHandTypeId === CONFIG.ITEMS.KNIFE || mainHandTypeId === CONFIG.ITEMS.GUN;
 
     if (isHoldingWeapon) updateEquipment(player, "Offhand", null);
 
     // --- Ammo UI Logic ---
-    if (mainHand?.typeId === CONFIG.ITEMS.GUN) {
+    if (mainHandTypeId === CONFIG.ITEMS.GUN) {
         const ammo = getObjectiveScore(objectives.ammo, player.scoreboardIdentity);
         
         if (ammo > 0) {
