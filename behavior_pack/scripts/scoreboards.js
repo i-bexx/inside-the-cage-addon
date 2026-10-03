@@ -4,10 +4,7 @@ const OBJECTIVE_IDS = [
   "players_in_round",
   "souls_freed",
   "Sanity",
-  "Stamina",
-  "stamina_limit",
   "ammo",
-  "used_toxic_bomb",
   "coin_amount",
   "stalker_match_id",
   "new_game"
@@ -23,10 +20,7 @@ const ScoreboardCache = {
     PLAYERS_IN_ROUND: undefined,
     SOULS_FREED:      undefined,
     SANITY:           undefined,
-    STAMINA:          undefined,
-    STAMINA_LIMIT:    undefined,
     AMMO:             undefined,
-    USED_TOXIC_BOMB:  undefined,
     COIN_AMOUNT:      undefined,
     STALKER_MATCH_ID: undefined,
     NEW_GAME:         undefined
@@ -53,8 +47,6 @@ export function getSoulsFreedObjective() { return ScoreboardCache.objectives.SOU
 
 // Player Objectives
 export function getSanityObjective() { return ScoreboardCache.objectives.SANITY; }
-export function getStaminaObjective() { return ScoreboardCache.objectives.STAMINA; }
-export function getStaminaLimitObjective() { return ScoreboardCache.objectives.STAMINA_LIMIT; }
 export function getAmmoObjective() { return ScoreboardCache.objectives.AMMO; }
 export function getUsedToxicBombObjective() { return ScoreboardCache.objectives.USED_TOXIC_BOMB; }
 export function getCoinAmountObjective() { return ScoreboardCache.objectives.COIN_AMOUNT; }

@@ -1,7 +1,7 @@
 import { world, system, EquipmentSlot } from "@minecraft/server";
 
 import { getPlayersInRound } from "./utils";
-import { getSoulsFreedObjective, getStaminaObjective, getStaminaLimitObjective, getSanityObjective } from "./scoreboards";
+import { getSoulsFreedObjective, getSanityObjective } from "./scoreboards";
 import { getObjectiveScore, getValueParticipant } from "./scoreboards";
 
 // Imports
@@ -21,7 +21,7 @@ import { teleportStalkerLoop } from "./stalkerEntity";
 import { Battery_control } from "./RoundBegin/batteryController";
 import { Sanity_control } from "./RoundBegin/Sanity";
 import { soulsAmountCheck } from "./RoundBegin/soulController";
-import { Stamina_control } from "./RoundBegin/Stamina";
+import { Stamina_control, STAMINA_MAP, STAMINA_LIMIT_MAP } from "./RoundBegin/Stamina";
 import { getNullEntity } from "./RoundBegin/Null/nullCache";
 
 let currentTick = 0;
@@ -121,9 +121,10 @@ export function startCentralTickManager() {
                 velocity: player.getVelocity(),
                 camUsing: player.getDynamicProperty("camUsing"),
                 compassShowing: player.getDynamicProperty("compassShowing"),
-                stamina: getObjectiveScore(getStaminaObjective(), player.scoreboardIdentity),
-                staminaLimit: getObjectiveScore(getStaminaLimitObjective(), player.scoreboardIdentity)
+                stamina: STAMINA_MAP.get(player.id),
+                staminaLimit: STAMINA_LIMIT_MAP.get(player.id)
             };
+            world.sendMessage(`${STAMINA_MAP.get(player.id)}`)
 
             fastUiTick(player, playerState, isRoundCompleted, allPlayers);
             formerIntervalPlayerSituation(player, playerState);
@@ -155,7 +156,7 @@ export function startCentralTickManager() {
                 if (currentTick % 10 === 0) Battery_control(player, playerState);
 
                 // 20 TICK
-                if (currentTick % 20 === 0) Stamina_control(player, playerState);
+                if (currentTick % 20 === 0) Stamina_control(player);
             }
         }
     }, 1);

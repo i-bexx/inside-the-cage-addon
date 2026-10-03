@@ -30,7 +30,7 @@ import { playerStatesOfBatteryMap, playerDrainingBatteryCountdownMap, playerIsBa
 
 import { getToastTimeMap } from "./RoundBegin/coinController";
 
-import { playerResetStaminaCooldownMap } from "./RoundBegin/Stamina";
+import { playerResetStaminaCooldownMap, STAMINA_LIMIT_MAP, STAMINA_MAP } from "./RoundBegin/Stamina";
 
 import { getPlaysoundHeartMap, getSanityLowStaticSoundMap, getSanityLowStaticEventMap } from "./RoundBegin/Sanity";
 
@@ -106,8 +106,6 @@ export function commandsToResetPlayerData(player, playerJoined = false) {
   player.runCommand("event entity @s battery_is_full_event");
   player.runCommand("fog @s remove in_round_fog");
   player.runCommand(`recipe take @s "*"`);
-  player.runCommand("scoreboard players set @s Stamina 10");
-  player.runCommand("scoreboard players set @s stamina_limit 10");
   player.runCommand("scoreboard players set @s Sanity 100");
   player.runCommand("scoreboard players set @s stalker_match_id 0");
 
@@ -172,7 +170,7 @@ export function resetEntitiesData(ownerJoined = false) {
   resetRandomPeep(randomPeep);
 }
 
-export function clearPlayerMaps(playerId) { // Clears maps of player
+export function clearPlayerMaps(playerId) {
   getCompassStates().delete(playerId);
   
   getCursorStates().delete(playerId);
@@ -198,6 +196,10 @@ export function clearPlayerMaps(playerId) { // Clears maps of player
   playerStatesOfPlayerLookingMap().delete(playerId);
 
   playerResetStaminaCooldownMap().delete(playerId);
+}
+export function setPlayerMaps(playerId) {
+  STAMINA_MAP.set(playerId, 10);
+  STAMINA_LIMIT_MAP.set(playerId, 10);
 }
 
 export function stopFunctionsInMaps(playerId) { // Stops the loops or countdown functions determined for one player

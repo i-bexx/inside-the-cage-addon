@@ -4,7 +4,7 @@ import { sleep } from "../utils";
 import { isLookingAtMenuEntity } from "../preStart";
 import { startCentralTickManager } from "../tickManager";
 import { getNewGameObjective, getStalkerMatchIdObjective, getWorldParticipant, getObjectiveScore } from "../scoreboards";
-import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetPlayerProperties, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, despawnEntities, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
+import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetPlayerProperties, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, despawnEntities, commandsToResetPlayerData, clearPlayerMaps, setPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
 // =============================================================
 // CONFIGURATION 
@@ -30,11 +30,9 @@ const CONFIG = {
         STALKER_MATCH_ID: "stalker_match_id",
         COIN: "coin_amount",
         INITIAL_STATS: {
-            Stamina: 10,
             Sanity: 100,
             stalker_match_id: 0,
             is_shooting: 0,
-            used_toxic_bomb: 0,
             is_looking_at_ghost: 0,
             ammo: 10
         }
@@ -89,6 +87,7 @@ world.afterEvents.playerSpawn.subscribe(async ({ player }) => {
     // Prepare Stats
     stopFunctionsInMaps(player.id);
     clearPlayerMaps(player.id);
+    setPlayerMaps(player.id);
     commandsToResetPlayerData(player, true);
     resetPlayerDynamicPropertyData(player);
     resetPlayerProperties(player);

@@ -1,7 +1,8 @@
 import { world, system } from "@minecraft/server";
 
 import { getPlayersInRound } from "./utils";
-import { getSoulsFreedObjective, getSanityObjective, getStaminaObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
+import { STAMINA_MAP } from "./RoundBegin/Stamina";
+import { getSoulsFreedObjective, getSanityObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 
 // =============================================================
 // CONFIGURATION & CONSTANTS
@@ -70,7 +71,7 @@ export function initiateCam() {
             if (isUsingCam) continue;
 
             const sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
-            const staminaValue = getObjectiveScore(getStaminaObjective(), player.scoreboardIdentity);
+            const staminaValue = STAMINA_MAP.get(player.id);
 
             // Force camera usage
             cameraUsed(player, sanityValue, staminaValue);
@@ -138,7 +139,7 @@ export function cameraUsed(player, sanityValue, staminaValue) {
  * Clears effects and restores the original camera item.
  */
 export function cameraDeactivated(player, turnedoffAutomatically = false) {
-    const stamina = getObjectiveScore(getStaminaObjective(), player.scoreboardIdentity);
+    const stamina = STAMINA_MAP.get(player.id);
     let isStaminaEmpty = stamina === 0;
 
     const turnOffCommands = [
@@ -176,7 +177,7 @@ export function cameraDeactivated(player, turnedoffAutomatically = false) {
 world.afterEvents.itemUse.subscribe(({source, itemStack}) => {
     if (itemStack.typeId === CONFIG.ITEMS.CAMERA) {
         const sanityValue = getObjectiveScore(getSanityObjective(), source.scoreboardIdentity);
-        const staminaValue = getObjectiveScore(getStaminaObjective(), source.scoreboardIdentity);
+        const staminaValue = STAMINA_MAP.get(source.id);
 
         cameraUsed(source, sanityValue, staminaValue);
         stopInitiateCam();

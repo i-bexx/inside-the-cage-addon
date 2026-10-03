@@ -1,14 +1,10 @@
 import { world, system } from "@minecraft/server";
 
+import { STAMINA_MAP } from "./Stamina";
 import { getStalkerEntityMatchedMap } from "../stalkerEntity";
-import { getSanityObjective, getStaminaObjective, getObjectiveScore } from "../scoreboards";
+import { getSanityObjective, getObjectiveScore } from "../scoreboards";
 
 // --- CONSTANTS ---
-const GAME_ENTITIES = {
-    NULL: "game:null",
-    STALKER_CURSOR: "game:stalker_cursor"
-};
-
 const DYNAMIC_PROPS = {
     IS_LOOKING: "is_looking",
     CAM_USING: "camUsing",
@@ -118,7 +114,7 @@ function playerStoppedLooking(player) {
         player.setDynamicProperty(DYNAMIC_PROPS.IS_LOOKING, false);
         
         const playerStats = getPlayerStats();
-        playerStats.stamina = getObjectiveScore(getStaminaObjective(), player.scoreboardIdentity);
+        playerStats.stamina = STAMINA_MAP.get(player.id);
         playerStats.sanity = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
 
         const stamina = playerStats.stamina;
@@ -155,13 +151,9 @@ function playerIsLooking(player, sanity) {
     // Determine the right function to call to prevent code duplication
     let effectFunction = undefined;
 
-    if (sanity <= 100 && sanity > 66) {
-        effectFunction = sanityStable;
-    } else if (sanity <= 66 && sanity > 33) {
-        effectFunction = sanityNormal;
-    } else if (sanity <= 33 && sanity >= 0) {
-        effectFunction = sanityPoor;
-    }
+    if (sanity <= 100 && sanity > 66) effectFunction = sanityStable;
+    else if (sanity <= 66 && sanity > 33) effectFunction = sanityNormal;
+    else if (sanity <= 33 && sanity >= 0) effectFunction = sanityPoor;
 
     if (!effectFunction) return;
 
