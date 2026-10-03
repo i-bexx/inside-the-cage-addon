@@ -7,10 +7,11 @@ import { getObjectiveScore, getValueParticipant } from "./scoreboards";
 // Imports
 import { fastUiTick } from "./UI/fastUiTick";
 import { slowUiTick } from "./UI/slowUiTick";
-import { formerIntervalPlayerSituation } from "./Player/playerSituation";
+import { formerIntervalPlayerSituation, MAIN_HAND_CACHE } from "./Player/playerSituation";
 import { formerIntervalTeleporter } from "./Teleporter";
 import { gameStarter, isGameStarting } from "./gameStarter";
 import { ROUND_STATE_MAP, checkGameStatus } from "./gameStats";
+import { COMPONENT_CACHE } from "./Player/playerJoin";
 
 // --- IN ROUND IMPORTS ---
 import { startDifficultyMonitor } from "./RoundBegin/ghostController";
@@ -73,10 +74,6 @@ export function startCentralTickManager() {
         if (currentTick % 20 === 0)
             formerIntervalTeleporter();
 
-        // 80 TICK
-        if (currentTick % 80 === 0)
-            slowUiTick(allPlayers);
-
         // =====================================
         // IN LOBBY RUNNING SYSTEMS
         // =====================================
@@ -113,10 +110,11 @@ export function startCentralTickManager() {
 
         for (const player of allPlayers) {
             
+            const cachedComps = COMPONENT_CACHE.get(player.id);
             let playerState = {
-                skinId: player.getComponent("skin_id")?.value,
-                mainHand: player.getComponent("minecraft:equippable")?.getEquipment(EquipmentSlot.Mainhand),
-                variant: player.getComponent("minecraft:variant")?.value,
+                skinId: cachedComps?.skinIdComp?.value,
+                mainHandTypeId: MAIN_HAND_CACHE.get(player.id),
+                variant: cachedComps?.variantComp?.value,
                 rotation: player.getRotation(),
                 velocity: player.getVelocity(),
                 camUsing: player.getDynamicProperty("camUsing"),
@@ -124,10 +122,13 @@ export function startCentralTickManager() {
                 stamina: STAMINA_MAP.get(player.id),
                 staminaLimit: STAMINA_LIMIT_MAP.get(player.id)
             };
-            world.sendMessage(`${STAMINA_MAP.get(player.id)}`)
 
             fastUiTick(player, playerState, isRoundCompleted, allPlayers);
             formerIntervalPlayerSituation(player, playerState);
+
+            // 80 TICK
+            if (currentTick % 80 === 0)
+                slowUiTick(player);
 
             if (isGameStarted && player.hasTag("in_game")) {
                 // 1 TICK

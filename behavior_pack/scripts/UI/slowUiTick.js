@@ -1,9 +1,15 @@
+import { system } from "@minecraft/server";
 import { getSanityObjective, getObjectiveScore } from "../scoreboards";
+
+system.afterEvents.scriptEventReceive.subscribe((event) => {
+    if (event.id === "game:update_sanity") {
+        slowUiTick(event.sourceEntity);
+    }
+});
 
 // ----- MAIN FUNCTION -----
 
-export function slowUiTick(allPlayers) {
-    for (const player of allPlayers) {
+export function slowUiTick(player) {
         let sanityState;
         let uiString;
         if (player.hasTag("show_in_round_personal_ui")) {
@@ -17,7 +23,6 @@ export function slowUiTick(allPlayers) {
         player.onScreenDisplay.setTitle(uiString);
 
         player.setDynamicProperty("compassShowing", false); // Hides compass when time is out
-    }
 }
 
 // ----- HELPER FUNCTION -----

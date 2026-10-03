@@ -79,6 +79,8 @@ let stalkerMatchIdObjective;
 let newGameObjective;
 let worldParticipant;
 
+export const COMPONENT_CACHE = new Map();
+
 // =============================================================
 // MAIN EVENT LISTENER
 // =============================================================
@@ -95,18 +97,22 @@ world.afterEvents.playerSpawn.subscribe(async ({ player }) => {
     killConnectedStalker(player);
     preparePlayerStats(player);
 
+    COMPONENT_CACHE.set(player.id, {
+        skinIdComp: player.getComponent("skin_id"),
+        variantComp: player.getComponent("minecraft:variant"),
+        equipComp: player.getComponent("minecraft:equippable")
+    });
+
     // Teleportation Logic
     const isOwner = player.hasTag(CONFIG.TAGS.HOST);
     let targetCoords;
 
-    if (isOwner) {
-        targetCoords = CONFIG.COORDS.MENU_SPAWN;
-    } else {
+    if (isOwner) targetCoords = CONFIG.COORDS.MENU_SPAWN;
+    else {
         const isInMenu = world.getDynamicProperty(CONFIG.DYN_PROPS.IN_MENU);
         
-        if (isInMenu) {
-            targetCoords = CONFIG.COORDS.MENU_SPAWN;
-        } else {
+        if (isInMenu) targetCoords = CONFIG.COORDS.MENU_SPAWN;
+        else {
             targetCoords = CONFIG.COORDS.GAME_SPAWN;
             player.addTag(CONFIG.TAGS.IN_LOBBY);
         }
