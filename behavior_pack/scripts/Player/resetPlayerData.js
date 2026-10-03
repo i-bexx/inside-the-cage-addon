@@ -1,7 +1,7 @@
 import { system } from "@minecraft/server";
 
 import { sleep } from "../utils";
-import { resetPlayerDynamicPropertyData, resetPlayerProperties, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
+import { resetPlayerDynamicPropertyData, resetPlayerProperties, commandsToResetPlayerData, clearPlayerMaps, setPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
 // ==========================================
 // CONFIGURATION
@@ -41,6 +41,7 @@ export async function game_over(player) {
 
     stopFunctionsInMaps(player.id);
     clearPlayerMaps(player.id);
+    setPlayerMaps(player.id);
     resetPlayerDynamicPropertyData(player);
     resetPlayerProperties(player);
 

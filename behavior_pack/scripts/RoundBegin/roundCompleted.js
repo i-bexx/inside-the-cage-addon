@@ -3,7 +3,7 @@ import { world } from "@minecraft/server";
 import { sleep } from "../utils";
 import { cameraDeactivated } from "../cameraUsage";
 import { slowUiTick } from "../UI/slowUiTick";
-import { resetPlayerDynamicPropertyData, resetPlayerProperties, clearPlayerMaps, stopFunctionsInMaps, commandsToResetPlayerData } from "../resetStats";
+import { resetPlayerDynamicPropertyData, resetPlayerProperties, clearPlayerMaps, setPlayerMaps, stopFunctionsInMaps, commandsToResetPlayerData } from "../resetStats";
 import { resetFunctions, resetMaps, resetWorldDynamicPropertyData, resetEntitiesData } from "../resetStats";
 
 export async function roundCompleted() {
@@ -18,6 +18,7 @@ export async function roundCompleted() {
 
     stopFunctionsInMaps(player.id);
     clearPlayerMaps(player.id);
+    setPlayerMaps(player.id);
     resetPlayerDynamicPropertyData(player);
     resetPlayerProperties(player);
 	}

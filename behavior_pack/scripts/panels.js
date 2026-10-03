@@ -1,11 +1,12 @@
 import { world, system, EntityComponentTypes } from "@minecraft/server";
 import { ActionFormData, ModalFormData, FormCancelationReason } from "@minecraft/server-ui";
 
-import { getCoinAmountObjective, getStaminaLimitObjective, getObjectiveScore } from "./scoreboards";
+import { getCoinAmountObjective, getObjectiveScore } from "./scoreboards";
 import { pickupBattery } from "./RoundBegin/batteryController";
 import { getPasswords } from "./RoundBegin/passwordManager";
 import { votePanel } from "./voteManager";
 import { ROUND_STATE_MAP } from "./gameStats";
+import { STAMINA_LIMIT_MAP } from "./RoundBegin/Stamina";
 
 let dimension;
 
@@ -163,7 +164,7 @@ function upgradeBattery(player) {
 
 function increaseStaminaLimit(player) {
     const coinAmount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity);
-    const staminaLimit = getObjectiveScore(getStaminaLimitObjective(), player.scoreboardIdentity);
+    const staminaLimit = STAMINA_LIMIT_MAP.get(player.id);
 
     if (staminaLimit > 10) {
         player.sendMessage(" §6[§e!§6] §cYou already have this feat!");
@@ -176,7 +177,7 @@ function increaseStaminaLimit(player) {
 		player.playSound("note.bass");
         return;
     }
-    player.runCommand("scoreboard players set @s stamina_limit 20");
+    STAMINA_LIMIT_MAP.set(player.id, 20);
     player.sendMessage(" §6[§e!§6] §aStamina upgraded!");
     player.playSound("random.levelup");
 
