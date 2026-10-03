@@ -2,6 +2,7 @@ import { world, system } from "@minecraft/server";
 import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 import { getPlayersInRound } from "./utils";
+import { ROUND_STATE_MAP } from "./gameStats";
 
 let dimension;
 
@@ -135,13 +136,8 @@ function handleVote(player, type) {
 }
 
 function runOperation(type) {
-    if (type === VOTE_TYPES.RESTART) {
-        world.setDynamicProperty("gameRestart", true);
-        dimension.runCommand("scoreboard players set value game_restarted 1");
-    } else if (type === VOTE_TYPES.END_ROUND) {
-        world.setDynamicProperty("roundEndedEarly", true);
-        dimension.runCommand("scoreboard players set value game_ended_early 1");
-    }
+    if (type === VOTE_TYPES.RESTART) ROUND_STATE_MAP.set("ROUND_RESTARTED", true);
+    else if (type === VOTE_TYPES.END_ROUND) ROUND_STATE_MAP.set("ROUND_ENDED_EARLY", true);
 }
 
 // ======= EVENTS =======

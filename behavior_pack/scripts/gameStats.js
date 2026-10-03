@@ -5,8 +5,7 @@ import { world } from "@minecraft/server";
 // ==========================================
 
 import { resetWorldDynamicPropertyData, resetEntitiesData, commandsToResetTheGame, resetMaps } from "./resetStats";
-import { gameStarter, checkIfPositionClear } from "./gameStarter";
-import { getGameStartedObjective, getGameRestartedObjective, getGameEndedObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
+import { checkIfPositionClear } from "./gameStarter";
 
 import { resetFunctions, despawnEntities } from "./resetStats";
 import { initiateCam } from "./cameraUsage";
@@ -27,6 +26,10 @@ import { updateGlobalUi } from "./UI/globalUi";
 // ==========================================
 
 let dimension;
+export const ROUND_STATE_MAP = new Map();
+ROUND_STATE_MAP.set("ROUND_STARTED", false);
+ROUND_STATE_MAP.set("ROUND_RESTARTED", false);
+ROUND_STATE_MAP.set("ROUND_ENDED_EARLY", false);
 
 const INITIAL_GAME_STATE = {
     isGameStarted: 0
@@ -38,15 +41,6 @@ const INITIAL_RESTART_GAME_STATE = {
 
 const INITIAL_ENDED_GAME_STATE = {
     isGameEnded: 0
-};
-
-const GAME_COMMANDS = {
-    LOBBY_MAINTENANCE: {
-        NULL_TELEPORT: "tp @e[type=game:null] -65 75 -150"
-    },
-    GAME_OVER: {
-        RESET_SCOREBOARD: "scoreboard players set value game_started 0"
-    }
 };
 
 // ==========================================
@@ -126,14 +120,14 @@ const gameEndedState = new Proxy({ ...INITIAL_ENDED_GAME_STATE }, {
 // ==========================================
 
 export function checkGameStatus(inGamePlayers) {
-    state.isGameStarted = getObjectiveScore(getGameStartedObjective(), getValueParticipant());
-    gameRestartState.isGameRestarted = getObjectiveScore(getGameRestartedObjective(), getValueParticipant());
-    gameEndedState.isGameEnded = getObjectiveScore(getGameEndedObjective(), getValueParticipant());
+    state.isGameStarted = ROUND_STATE_MAP.get("ROUND_STARTED");
+    gameRestartState.isGameRestarted = ROUND_STATE_MAP.get("ROUND_RESTARTED");
+    gameEndedState.isGameEnded = ROUND_STATE_MAP.get("ROUND_ENDED_EARLY");
 
     isGameStarted = state.isGameStarted;
 
     if (isGameStarted == 1)
-        if (inGamePlayers.length == 0) dimension.runCommand(GAME_COMMANDS.GAME_OVER.RESET_SCOREBOARD);
+        if (inGamePlayers.length == 0) ROUND_STATE_MAP.set("ROUND_STARTED", false);
 }
 
 // ==========================================

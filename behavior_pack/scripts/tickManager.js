@@ -1,7 +1,7 @@
 import { world, system, EquipmentSlot } from "@minecraft/server";
 
 import { getPlayersInRound } from "./utils";
-import { getGameStartedObjective, getSoulsFreedObjective, getStaminaObjective, getStaminaLimitObjective, getSanityObjective } from "./scoreboards";
+import { getSoulsFreedObjective, getStaminaObjective, getStaminaLimitObjective, getSanityObjective } from "./scoreboards";
 import { getObjectiveScore, getValueParticipant } from "./scoreboards";
 
 // Imports
@@ -9,8 +9,8 @@ import { fastUiTick } from "./UI/fastUiTick";
 import { slowUiTick } from "./UI/slowUiTick";
 import { formerIntervalPlayerSituation } from "./Player/playerSituation";
 import { formerIntervalTeleporter } from "./Teleporter";
-import { checkGameStatus } from "./gameStats";
 import { gameStarter, isGameStarting } from "./gameStarter";
+import { ROUND_STATE_MAP, checkGameStatus } from "./gameStats";
 
 // --- IN ROUND IMPORTS ---
 import { startDifficultyMonitor } from "./RoundBegin/ghostController";
@@ -52,7 +52,8 @@ export function startCentralTickManager() {
 
         const isInMenu = cachedIsInMenu;
         const isRoundCompleted = cachedIsRoundCompleted;
-        const isGameStarted = (getObjectiveScore(getGameStartedObjective(), getValueParticipant()) === 1);
+        
+        const isGameStarted = (ROUND_STATE_MAP.get("ROUND_STARTED") === true);
         let soulsFreedValue;
         let isPhase4or5;
 

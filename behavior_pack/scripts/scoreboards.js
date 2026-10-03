@@ -1,9 +1,6 @@
 import { world } from "@minecraft/server";
 
 const OBJECTIVE_IDS = [
-  "game_started",
-  "game_restarted",
-  "game_ended_early",
   "players_in_round",
   "souls_freed",
   "Sanity",
@@ -23,9 +20,6 @@ const PARTICIPANT_IDS = [
 
 const ScoreboardCache = {
   objectives: {
-    GAME_STARTED:     undefined,
-    GAME_RESTARTED:   undefined,
-    GAME_ENDED_EARLY: undefined,
     PLAYERS_IN_ROUND: undefined,
     SOULS_FREED:      undefined,
     SANITY:           undefined,
@@ -54,9 +48,6 @@ export function setScoreboardCache() {
 }
 
 // Global Objectives
-export function getGameStartedObjective() { return ScoreboardCache.objectives.GAME_STARTED; }
-export function getGameRestartedObjective() { return ScoreboardCache.objectives.GAME_RESTARTED; }
-export function getGameEndedObjective() { return ScoreboardCache.objectives.GAME_ENDED_EARLY; }
 export function getPlayersInRoundObjective() { return ScoreboardCache.objectives.PLAYERS_IN_ROUND; }
 export function getSoulsFreedObjective() { return ScoreboardCache.objectives.SOULS_FREED; }
 

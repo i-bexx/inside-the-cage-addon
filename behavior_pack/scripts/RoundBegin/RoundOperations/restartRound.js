@@ -1,6 +1,7 @@
 import { world } from "@minecraft/server";
 
 import { startFunction, getSessionPlayers } from "../../gameStarter";
+import { ROUND_STATE_MAP } from "../../gameStats";
 import { sleep } from "../../utils";
 
 // ======= CONFIGURATION =======
@@ -9,7 +10,6 @@ let dimension;
 const CONFIG = {
   CURTAIN_CLOSE: "curtain_close_event",
   STOPSOUND: "stopsound @s",
-  SET_SCOREBOARD: "scoreboard players set value game_started 0",
   TP: "tp @a[tag=!in_lobby] -186 53 -82",
   ADD_TAG: "tag @a[tag=!in_lobby] add waiting_for_start",
   REMOVE_TAG: "in_game"
@@ -25,7 +25,7 @@ export async function restartRound() {
       player.triggerEvent(CONFIG.CURTAIN_CLOSE);
       player.runCommand(CONFIG.STOPSOUND);
   }
-  await dimension.runCommand(CONFIG.SET_SCOREBOARD);
+  ROUND_STATE_MAP.set("ROUND_STARTED", false);
   await sleep(10);
 
   await dimension.runCommand(CONFIG.TP);
@@ -33,8 +33,7 @@ export async function restartRound() {
 
   startFunction();
 
-  // 'gameRestart' dynamic property must reset only here
-  world.setDynamicProperty("gameRestart", false);
+  ROUND_STATE_MAP.set("ROUND_RESTARTED", false);
 }
 
 // ======= HELPER FUNCTION =======

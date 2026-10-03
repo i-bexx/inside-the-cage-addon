@@ -2,6 +2,7 @@ import { world } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 
 import { stalkerMatch } from "./stalkerEntity";
+import { ROUND_STATE_MAP } from "./gameStats";
 import { sleep } from "./utils";
 
 // ==========================================
@@ -164,7 +165,7 @@ function ActionForm(player) {
 // -- Game Start Logic --
 
 export function startFunction() {
-	const isTheRoundRestarted = world.getDynamicProperty("gameRestart");
+	const isTheRoundRestarted = ROUND_STATE_MAP.get("ROUND_RESTARTED");
 	const lobbyPlayers = world.getPlayers({ tags: ["waiting_for_start"] });
 
 	if (!isTheRoundRestarted) sessionPlayers = lobbyPlayers;
@@ -221,7 +222,7 @@ async function startCommands() {
 	await sleep(70);
 	dimension.runCommand("give @a[tag=in_game] game:camera");
 	dimension.runCommand("tag @a[tag=in_game] add show_in_round_personal_ui");
-	dimension.runCommand("scoreboard players set value game_started 1");
+	ROUND_STATE_MAP.set("ROUND_STARTED", true);
 }
 
 // -- Helper Functions --
