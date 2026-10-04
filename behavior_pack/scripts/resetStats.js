@@ -36,13 +36,8 @@ import { getPlaysoundHeartMap, getSanityLowStaticSoundMap, getSanityLowStaticEve
 
 
 import { checkIfPositionClear } from "./gameStarter";
-
 import { getTeleportCooldown } from "./Teleporter";
-
-import { getStalkerEntityMatchedMap } from "./stalkerEntity";
-
 import { getCompassStates, getLastSubtitleMap } from "./UI/fastUiTick";
-
 
 import { PlayerCache } from "./Player/playerCache";
 
@@ -181,8 +176,6 @@ export function clearPlayerMaps(playerId) {
 
   getTeleportCooldown().delete(playerId);
 
-  getStalkerEntityMatchedMap().delete(playerId);
-
   playerStatesOfBatteryMap().delete(playerId);
   playerDrainingBatteryCountdownMap().delete(playerId);
   playerIsBatteryCriticalCountdownMap().delete(playerId);
@@ -204,6 +197,8 @@ export function setPlayerMaps(playerId) {
     cache.camUsing = false;
     cache.stamina = 10;
     cache.staminaLimit = 10;
+    cache.lastLookedEntityId = undefined;
+    cache.stalkerEntity = null;
 }
 
 
