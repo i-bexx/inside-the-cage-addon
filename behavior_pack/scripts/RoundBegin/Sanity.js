@@ -1,6 +1,7 @@
 import { system } from "@minecraft/server";
 
 import { game_over } from "../Player/resetPlayerData";
+import { CAM_USING_SET } from "../cameraUsage";
 
 let playsoundHeart = new Map();
 let sanityLowStaticSoundId = new Map();
@@ -54,7 +55,7 @@ function playerIsLooking(player) {
 function lowSanityStatic(player, sanityValue) {
 		let isSanityLow = sanityValue <= 33
 
-		let isUsingCam = player.getDynamicProperty("camUsing")
+		let isUsingCam = CAM_USING_SET.has(player.id);
 		let willPlayerGetNoSignalNow = player.getDynamicProperty("nowPlayerWillGetNoSignal")
 
 		let isPlayerLooking = player.getDynamicProperty("is_looking")

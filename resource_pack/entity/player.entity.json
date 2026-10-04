@@ -70,8 +70,6 @@
           "variable.not_holding_special_items = query.is_alive && !query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun', 'game:knife', 'game:toxic_bomb', 'game:kit', 'game:ammo');",
           "variable.player_walk = query.is_alive && query.is_moving && query.is_on_ground && !query.is_sprinting && !query.property('property:has_slowness') && !query.is_item_name_any('slot.armor.legs', 0, 'p:move_right', 'p:move_left') && variable.not_holding_special_items;",
           "variable.player_attack = query.is_alive && variable.attack_time > 0 && variable.item_use_normalized <= 0;",
-          "variable.player_move_right = query.is_alive && query.is_item_name_any('slot.armor.legs', 0, 'p:move_right') && query.is_on_ground;",
-          "variable.player_move_left = query.is_alive && query.is_item_name_any('slot.armor.legs', 0, 'p:move_left') && query.is_on_ground;",
           "variable.player_run = query.is_alive && query.is_sprinting && !query.property('property:has_slowness') && query.is_on_ground && !query.is_in_water && !query.is_in_lava;",
 
           "variable.despawn_right_but_left_empty = query.is_alive && !query.is_item_name_any('slot.weapon.mainhand', 0, '') && query.is_item_name_any('slot.weapon.offhand', 0, '') && variable.not_holding_special_items;",
@@ -182,8 +180,6 @@
         "swim": "animation.hands.swim",
         "run": "animation.hands.run",
         "walk": "animation.hands.walk",
-        "move_right": "animation.hands.move_right",
-        "move_left": "animation.hands.move_left",
         "still_left_arm": "animation.hands.still_left_arm",
         "still_right_arm": "animation.hands.still_right_arm",
         "despawn_right_but_left_not_empty": "animation.hands.despawn_right_but_left_not_empty",

@@ -9,8 +9,6 @@
               { "attack": "variable.player_attack" },
               { "swim": "q.is_alive && q.is_swimming" },
               { "walk": "variable.player_walk"},
-              { "move_right": "variable.player_move_right" },
-              { "move_left": "variable.player_move_left" },
               { "run": "variable.player_run" },
               { "despawn_right_but_left_empty": "variable.despawn_right_but_left_empty" },
               { "despawn_left_but_right_empty": "variable.despawn_left_but_right_empty" },
@@ -42,46 +40,6 @@
             "transitions": [
               { "default": "!(query.is_moving && query.is_on_ground) || query.property('property:has_slowness')" },
               { "swim": "q.is_swimming" },
-              { "move_right": "variable.player_move_right" },
-              { "move_left": "variable.player_move_left" },
-              { "run": "variable.player_run" },
-              { "attack": "variable.player_attack" },
-              { "despawn_right_but_left_empty": "variable.despawn_right_but_left_empty" },
-              { "despawn_left_but_right_empty": "variable.despawn_left_but_right_empty" },
-              { "starting_gun": "variable.gun_starting" },
-              { "holding_gun": "variable.gun_holding" },
-              { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
-              { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
-              { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
-            ],
-            "blend_transition": 0.3
-          },
-          "move_right": {
-            "animations": [ "move_right" ],
-            "transitions": [
-              { "default": "!(query.is_moving && query.is_on_ground) && !q.is_item_name_any('slot.armor.legs', 'p:move_right')" },
-              { "swim": "q.is_swimming" },
-              { "walk": "variable.player_walk"},
-              { "move_left": "variable.player_move_left" },
-              { "run": "variable.player_run" },
-              { "attack": "variable.player_attack" },
-              { "despawn_right_but_left_empty": "variable.despawn_right_but_left_empty" },
-              { "despawn_left_but_right_empty": "variable.despawn_left_but_right_empty" },
-              { "starting_gun": "variable.gun_starting" },
-              { "holding_gun": "variable.gun_holding" },
-              { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
-              { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
-              { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
-            ],
-            "blend_transition": 0.3
-          },
-          "move_left": {
-            "animations": [ "move_left" ],
-            "transitions": [
-              { "default": "!(query.is_moving && query.is_on_ground) && !q.is_item_name_any('slot.armor.legs', 0, 'p:move_left')" },
-              { "swim": "q.is_swimming" },
-              { "walk": "variable.player_walk"},
-              { "move_right": "variable.player_move_right" },
               { "run": "variable.player_run" },
               { "attack": "variable.player_attack" },
               { "despawn_right_but_left_empty": "variable.despawn_right_but_left_empty" },

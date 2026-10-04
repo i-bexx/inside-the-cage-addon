@@ -1,5 +1,6 @@
 import { system } from "@minecraft/server";
 import { getSanityObjective, getObjectiveScore } from "../scoreboards";
+import { COMPASS_SHOWING_SET } from "./fastUiTick";
 
 system.afterEvents.scriptEventReceive.subscribe((event) => {
     if (event.id === "game:update_sanity") {
@@ -22,7 +23,7 @@ export function slowUiTick(player) {
         }
         player.onScreenDisplay.setTitle(uiString);
 
-        player.setDynamicProperty("compassShowing", false); // Hides compass when time is out
+        COMPASS_SHOWING_SET.delete(player.id); // Hides compass when time is out
 }
 
 // ----- HELPER FUNCTION -----

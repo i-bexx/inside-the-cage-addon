@@ -5,7 +5,8 @@ import { world, system } from "@minecraft/server";
 // ==========================================
 
 import { stopGivePanelItem } from "./panels";
-import { stopInitiateCam } from "./cameraUsage";
+import { stopInitiateCam, CAM_USING_SET } from "./cameraUsage";
+import { COMPASS_SHOWING_SET } from "./UI/fastUiTick";
 import { resetGameStarterSession } from "./gameStarter";
 import { ROUND_STATE_MAP } from "./gameStats";
 
@@ -113,13 +114,14 @@ export function commandsToResetPlayerData(player, playerJoined = false) {
 }
 
 export function resetPlayerDynamicPropertyData(player) {
+  CAM_USING_SET.delete(player.id);
+  COMPASS_SHOWING_SET.delete(player.id);
   player.setDynamicProperty("batteryLevel", 4);
   player.setDynamicProperty("batteryIsDraining", false);
   player.setDynamicProperty("batteryIsFullyDrained", false);
   player.setDynamicProperty("batteryIsCollected", false);
   player.setDynamicProperty("batteryIsUpgraded", false);
   player.setDynamicProperty("is_looking", false);
-  player.setDynamicProperty("camUsing", false);
   player.setDynamicProperty("canTurnOffCam", false);
   player.setDynamicProperty("toldPlayerTurnOffCam", false);
   player.setDynamicProperty("initializationBeforeLockingTheCam", false);

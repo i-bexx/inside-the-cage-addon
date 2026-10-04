@@ -49,6 +49,8 @@ const CONFIG = {
 // GLOBAL VARIABLES
 // =============================================================
 
+export const CAM_USING_SET = new Set();
+
 let soulsFreedValue = 0;
 let timeoutId = undefined;
 
@@ -65,7 +67,7 @@ export function initiateCam() {
         const players = getPlayersInRound();
 
         for (const player of players) {
-            const isUsingCam = player.getDynamicProperty(CONFIG.PROPERTIES.IS_USING);
+            const isUsingCam = CAM_USING_SET.has(player.id);
 
             // Skip if player is already using the camera
             if (isUsingCam) continue;
@@ -94,7 +96,7 @@ export function cameraUsed(player, sanityValue, staminaValue) {
 
     // Remove the camera item from inventory and mark as using
     player.runCommand(CONFIG.COMMANDS.CLEAR_CAM);
-    player.setDynamicProperty(CONFIG.PROPERTIES.IS_USING, true);
+    CAM_USING_SET.add(player.id);
 
     // --- VISUAL EFFECTS LOGIC ---
     if (!toldPlayerTurnOffCam) { 
@@ -156,7 +158,7 @@ export function cameraDeactivated(player, turnedoffAutomatically = false) {
 
     // Reset player state
     player.triggerEvent(CONFIG.EVENTS.NORMAL);
-    player.setDynamicProperty(CONFIG.PROPERTIES.IS_USING, false);
+    CAM_USING_SET.delete(player.id);
 
     if (isStaminaEmpty) player.triggerEvent(CONFIG.EVENTS.SLOWNESS);
 

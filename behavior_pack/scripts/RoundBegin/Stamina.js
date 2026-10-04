@@ -1,3 +1,5 @@
+import { CAM_USING_SET } from "../cameraUsage";
+
 export const STAMINA_MAP = new Map();
 export const STAMINA_LIMIT_MAP = new Map();
 const COOLDOWNS = new Map();
@@ -34,7 +36,7 @@ function playerIsNotRunning(player, staminaValue, isStaminaFull, isStaminaEmpty)
 	let doesPlayerHaveCooldown = COOLDOWNS.has(player.id);
 	let playerCooldown = COOLDOWNS.get(player.id);
 
-	let isPlayerUsingCamera = player.getDynamicProperty("camUsing")
+	let isPlayerUsingCamera = CAM_USING_SET.has(player.id);
 
 	if (isStaminaFull) {
 		return;
