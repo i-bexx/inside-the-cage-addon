@@ -377,28 +377,32 @@
 			"is_not_shooting_event": {
 				"remove": { "component_groups": [ "is_shooting", "no_ammo", "ammo_reloaded", "ammo_reloaded_after" ] },
 				"add": { "component_groups": [ "is_not_shooting" ] },
+				"queue_command": { "command": "scriptevent game:variant_update 0" },
 				"set_property": { "property:is_shooting": false }
 			},
 			"is_shooting_event": {
 				"remove": { "component_groups": [ "is_not_shooting", "no_ammo", "ammo_reloaded", "ammo_reloaded_after" ] },
-				"add": { "component_groups": [ "is_shooting" ] }
+				"add": { "component_groups": [ "is_shooting" ] },
+				"queue_command": { "command": "scriptevent game:variant_update 1" }
 			},
 			"no_ammo_event": {
 				"remove": { "component_groups": [ "is_shooting", "is_not_shooting", "ammo_reloaded", "ammo_reloaded_after" ] },
 				"add": { "component_groups": [ "no_ammo" ] },
+				"queue_command": { "command": "scriptevent game:variant_update 2" },
 				"set_property": { "property:has_ammo": false }
 			},
 			"ammo_reloaded_event": {
 				"remove": { "component_groups": [ "is_shooting", "is_not_shooting", "no_ammo", "ammo_reloaded_after" ] },
 				"add": { "component_groups": [ "ammo_reloaded" ] },
+				"queue_command": { "command": "scriptevent game:variant_update 3" },
 				"set_property": { "property:has_ammo": true, "property:start_gun": true }
 			},
 			"ammo_reloaded_after_event": {
 				"remove": { "component_groups": [ "is_shooting", "is_not_shooting", "no_ammo", "ammo_reloaded" ] },
 				"add": { "component_groups": [ "ammo_reloaded_after" ] },
+				"queue_command": { "command": "scriptevent game:variant_update 4" },
 				"set_property": { "property:start_gun": false }
 			},
-			"shooting_the_entity_event": {},
 			"new_game_started": {
 				"add": { "component_groups": [ "new_game_started" ] }
 			},

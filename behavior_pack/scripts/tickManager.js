@@ -12,7 +12,7 @@ import { CAM_USING_SET } from "./cameraUsage";
 import { formerIntervalTeleporter } from "./Teleporter";
 import { gameStarter, isGameStarting } from "./gameStarter";
 import { ROUND_STATE_MAP, checkGameStatus } from "./gameStats";
-import { COMPONENT_CACHE } from "./Player/playerJoin";
+import { COMPONENT_CACHE } from "./Player/playerCache";
 
 // --- IN ROUND IMPORTS ---
 import { startDifficultyMonitor } from "./RoundBegin/ghostController";
@@ -111,37 +111,37 @@ export function startCentralTickManager() {
         // =====================================
 
         for (const player of allPlayers) {
+            const pId = player.id;
             
-            const cachedComps = COMPONENT_CACHE.get(player.id);
+            const cachedComps = COMPONENT_CACHE.get(pId);
             let playerState = {
-                skinId: cachedComps?.skinIdComp?.value,
-                mainHandTypeId: MAIN_HAND_CACHE.get(player.id),
-                variant: cachedComps?.variantComp?.value,
-                camUsing: CAM_USING_SET.has(player.id),
-                compassShowing: COMPASS_SHOWING_SET.has(player.id),
-                stamina: STAMINA_MAP.get(player.id),
-                staminaLimit: STAMINA_LIMIT_MAP.get(player.id)
+                skinId: cachedComps?.skinIdVal,
+                variant: cachedComps?.variantVal,
+                mainHandTypeId: MAIN_HAND_CACHE.get(pId),
+                camUsing: CAM_USING_SET.has(pId),
+                compassShowing: COMPASS_SHOWING_SET.has(pId),
+                stamina: STAMINA_MAP.get(pId),
+                staminaLimit: STAMINA_LIMIT_MAP.get(pId)
             };
 
             fastUiTick(player, playerState, isRoundCompleted);
-            handleCombatLogic(player, playerState);
+
+            if (currentTick % 5 === 0)
+                handleCombatLogic(player, playerState);
 
             // 80 TICK
             if (currentTick % 80 === 0)
                 slowUiTick(player);
 
             if (isGameStarted && player.hasTag("in_game")) {
-                // 1 TICK
-                if (!isPhase4or5) {
-                    playerState.viewDirection = player.getViewDirection();
-                    playerState.headLocation = player.getHeadLocation();
-                    teleportStalkerLoop(player, playerState);
-                }
-
                 // 2 TICK
                 if (currentTick % 2 === 0 && !isPhase4or5) {
                     const nullEntity = getNullEntity();
                     playerLookingControl(player, nullEntity);
+
+                    playerState.viewDirection = player.getViewDirection();
+                    playerState.headLocation = player.getHeadLocation();
+                    teleportStalkerLoop(player, playerState);
                 }
 
                 // 4 TICK

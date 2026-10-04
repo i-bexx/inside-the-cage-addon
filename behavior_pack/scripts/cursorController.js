@@ -1,3 +1,5 @@
+import { COMPONENT_CACHE } from "./Player/playerCache";
+
 // ==========================================
 // CONFIGURATION
 // ==========================================
@@ -9,8 +11,7 @@ const CONFIG = {
         BLUE: "cursor_blue_event",
         GREEN: "cursor_green_event",
 
-        NORMAL: "cursor_normal_event",
-        SHOOTING_ENTITY: "shooting_the_entity_event"
+        NORMAL: "cursor_normal_event"
     },
     SCOREBOARD: {
         GHOST: "is_looking_at_ghost"
@@ -90,16 +91,23 @@ function crosshairTracker(player) {
             if (!result) return true;
 
             const entity = result.entity;
-
             const match = ENTITY_RULES.find(rule => entity.matches(rule.filter));
+
+            const cache = COMPONENT_CACHE.get(player.id);
+            let sid = 0;
 
             if (match) {
                 player.triggerEvent(match.event);
+
+                if (match.event === CONFIG.EVENTS.GREEN) sid = 1;
+                if (match.event === CONFIG.EVENTS.BLUE) sid = 2;
+                if (match.event === CONFIG.EVENTS.RED) sid = 3;
                 setScore(match.score);
             } else {
                 player.triggerEvent(CONFIG.EVENTS.NORMAL);
                 setScore(0);
             }
+            cache.skinIdVal = sid;
 
             return true;
         }

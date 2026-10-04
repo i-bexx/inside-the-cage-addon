@@ -68,7 +68,7 @@
           "variable.riding_y_offset = query.is_riding_any_entity_of_type('minecraft:minecart', 'minecraft:boat', 'minecraft:chest_boat', 'minecraft:strider') ? -3.0 : 0.0;",
 
           "variable.not_holding_special_items = query.is_alive && !query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun', 'game:knife', 'game:toxic_bomb', 'game:kit', 'game:ammo');",
-          "variable.player_walk = query.is_alive && query.is_moving && query.is_on_ground && !query.is_sprinting && !query.property('property:has_slowness') && !query.is_item_name_any('slot.armor.legs', 0, 'p:move_right', 'p:move_left') && variable.not_holding_special_items;",
+          "variable.player_walk = query.is_alive && query.is_moving && query.is_on_ground && !query.is_sprinting && !query.property('property:has_slowness') && variable.not_holding_special_items;",
           "variable.player_attack = query.is_alive && variable.attack_time > 0 && variable.item_use_normalized <= 0;",
           "variable.player_run = query.is_alive && query.is_sprinting && !query.property('property:has_slowness') && query.is_on_ground && !query.is_in_water && !query.is_in_lava;",
 
