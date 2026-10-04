@@ -1,8 +1,7 @@
 import { world, system } from "@minecraft/server";
 
-import { getStalkerEntityMatchedMap } from "../stalkerEntity";
-import { getSanityObjective, getObjectiveScore } from "../scoreboards";
 import { PlayerCache } from "../Player/playerCache";
+import { getSanityObjective, getObjectiveScore } from "../scoreboards";
 
 // --- CONSTANTS ---
 const DYNAMIC_PROPS = {
@@ -67,7 +66,8 @@ function isPlayerLookingAtEntity(player) {
 export function playerLookingControl(player, nullEntity) {
     if (!nullEntity) return;
 
-    const linkedStalker = getStalkerEntityMatchedMap().get(player.id);
+    const cache = PlayerCache.get(player.id);
+    const linkedStalker = cache ? cache.stalkerEntity : null;
     if (!linkedStalker || !linkedStalker.isValid) return;
     const linkedStalkerLoc = linkedStalker.location;
     const nullEntityLoc = nullEntity.location

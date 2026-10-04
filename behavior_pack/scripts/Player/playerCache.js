@@ -1,4 +1,4 @@
-import { system, world } from "@minecraft/server";
+import { system } from "@minecraft/server";
 
 class PlayerCache {
     static _map = new Map();
@@ -28,6 +28,7 @@ class PlayerCache {
 
         // Subsystems
         this.lastLookedEntityId = undefined;
+        this.stalkerEntity = null;
     }
 }
 

@@ -1,6 +1,6 @@
 import { world } from "@minecraft/server";
-
 import { getStalkerMatchIdObjective } from "./scoreboards";
+import { PlayerCache } from "./Player/playerCache";
 
 // =============================================================================
 // CONFIGURATION
@@ -10,14 +10,10 @@ const CONFIG = {
     ENTITY_TYPE: "game:stalker_cursor",
     OBJECTIVE_ID: "stalker_match_id",
     MATCH_TAG: "stalker_matched",
-    STALKER_DISTANCE: 10,
-    INIT_RETRY_TICKS: 40
+    STALKER_DISTANCE: 10
 };
 
 let dimension;
-
-const STALKER_ENTITY_MATCHED = new Map();
-
 let stalkerMatchIdObjective = undefined;
 
 // =============================================================================
@@ -56,7 +52,8 @@ function stalkerMatchLogic(player) {
 
             const matchedEntity = dimension.getEntities(stalkerFilter)[0];
 
-            STALKER_ENTITY_MATCHED.set(player.id, matchedEntity);
+            const cache = PlayerCache.get(player.id);
+            if (cache) cache.stalkerEntity = matchedEntity;
 
             player.addTag(CONFIG.MATCH_TAG);
 
@@ -68,7 +65,9 @@ function stalkerMatchLogic(player) {
 export function teleportStalkerLoop(player, playerState) {
         if (!player.hasTag(CONFIG.MATCH_TAG)) return;
 
-        const linkedEntity = STALKER_ENTITY_MATCHED.get(player.id);
+        const cache = PlayerCache.get(player.id);
+        const linkedEntity = cache ? cache.stalkerEntity : null;
+        if (!linkedEntity) return;
 
         const viewDir = playerState.viewDirection;
         const headLoc = playerState.headLocation;
@@ -99,8 +98,6 @@ function getLinkID(player) {
     }
     return Math.abs(hash) % 1000000;
 }
-
-export function getStalkerEntityMatchedMap() { return STALKER_ENTITY_MATCHED; }
 
 export function setGlobalVariables() {
     dimension = world.getDimension("overworld");
