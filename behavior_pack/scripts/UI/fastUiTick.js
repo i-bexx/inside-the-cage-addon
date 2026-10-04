@@ -2,13 +2,14 @@ import { system } from "@minecraft/server";
 
 const playerCompassStates = new Map();
 const LAST_SUBTITLE_MAP = new Map();
+export const COMPASS_SHOWING_SET = new Set();
 
 let staminaTick = 0;
 let staminaTickTimerActive = false;
 
 // ----- MAIN FUNCTION -----
 
-export function fastUiTick(player, playerState, isRoundCompleted, allPlayers) {
+export function fastUiTick(player, playerState, isRoundCompleted) {
     let uiString = "";
 
     // Cursor state
@@ -24,7 +25,7 @@ export function fastUiTick(player, playerState, isRoundCompleted, allPlayers) {
     
     // Set UI string for compass state
     if (compassState.shouldCompassShown) {
-        player.setDynamicProperty("compassShowing", true);
+        COMPASS_SHOWING_SET.add(player.id);
         playerCompassStates.set(player.id, compassState.compassString);
         uiString += `\n${compassState.compassString}`;
     }
@@ -79,7 +80,7 @@ function getCompassState(player, playerState) {
     shouldCompassShown: true
   };
 
-  compassState.compassString = compassString(playerState);
+  compassState.compassString = compassString(player);
   compassState.shouldCompassShown = Boolean(playerCompassStates.get(player.id) !== compassState.compassString || playerState.compassShowing);
 
   return compassState;
@@ -94,8 +95,8 @@ function shootingCursorString(playerState) {
   return "cursorState_x" + playerState.skinId;
 }
 
-function compassString(playerState) {
-  const rotation = playerState.rotation.y;
+function compassString(player) {
+  const rotation = player.getRotation();
   const currentFrame = Math.floor(((rotation + 180) / 360) * 32) % 32;
 
   const paddedFrame = String(currentFrame).padStart(2, '0');

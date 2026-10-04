@@ -1,13 +1,14 @@
-import { world, system, EquipmentSlot } from "@minecraft/server";
+import { world, system } from "@minecraft/server";
 
 import { getPlayersInRound } from "./utils";
 import { getSoulsFreedObjective, getSanityObjective } from "./scoreboards";
 import { getObjectiveScore, getValueParticipant } from "./scoreboards";
 
 // Imports
-import { fastUiTick } from "./UI/fastUiTick";
+import { fastUiTick, COMPASS_SHOWING_SET } from "./UI/fastUiTick";
 import { slowUiTick } from "./UI/slowUiTick";
-import { formerIntervalPlayerSituation, MAIN_HAND_CACHE } from "./Player/playerSituation";
+import { handleCombatLogic, MAIN_HAND_CACHE } from "./Player/playerSituation";
+import { CAM_USING_SET } from "./cameraUsage";
 import { formerIntervalTeleporter } from "./Teleporter";
 import { gameStarter, isGameStarting } from "./gameStarter";
 import { ROUND_STATE_MAP, checkGameStatus } from "./gameStats";
@@ -104,6 +105,7 @@ export function startCentralTickManager() {
             if (currentTick % 60 === 0 && !isPhase4or5) nullTeleportTimeSetter(soulsFreedValue);
         }
 
+
         // =====================================
         // PER-PLAYER TICK SYSTEMS
         // =====================================
@@ -115,16 +117,14 @@ export function startCentralTickManager() {
                 skinId: cachedComps?.skinIdComp?.value,
                 mainHandTypeId: MAIN_HAND_CACHE.get(player.id),
                 variant: cachedComps?.variantComp?.value,
-                rotation: player.getRotation(),
-                velocity: player.getVelocity(),
-                camUsing: player.getDynamicProperty("camUsing"),
-                compassShowing: player.getDynamicProperty("compassShowing"),
+                camUsing: CAM_USING_SET.has(player.id),
+                compassShowing: COMPASS_SHOWING_SET.has(player.id),
                 stamina: STAMINA_MAP.get(player.id),
                 staminaLimit: STAMINA_LIMIT_MAP.get(player.id)
             };
 
-            fastUiTick(player, playerState, isRoundCompleted, allPlayers);
-            formerIntervalPlayerSituation(player, playerState);
+            fastUiTick(player, playerState, isRoundCompleted);
+            handleCombatLogic(player, playerState);
 
             // 80 TICK
             if (currentTick % 80 === 0)

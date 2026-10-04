@@ -13,61 +13,20 @@ const CONFIG = {
     ITEMS: {
         KNIFE: "game:knife",
         GUN: "game:gun",
-        WATER_ARMOR: "p:in_water",
-        STRAFE_LEFT: "p:move_left",
-        STRAFE_RIGHT: "p:move_right",
         DEAD_ENTITY: "game:ghost_dead",
     },
-    BLOCKS: {
-        WATER: "minecraft:water",
-        FLOWING_WATER: "minecraft:flowing_water",
-    },
     THRESHOLDS: {
-        STRAFE_SPEED: 0.2,
         AMMO_LOW: 3,
     }
 };
 
-let dimension;
-
-// =============================================================================
-// STATE MANAGEMENT
-// =============================================================================
 
 export const MAIN_HAND_CACHE = new Map();
-world.afterEvents.playerHotbarSelectedSlotChange.subscribe((event) => {
-        const item = event.itemStack;
-        MAIN_HAND_CACHE.set(event.player.id, item ? item.typeId : null);
-});
+const equipmentCache = new Map();
+let dimension;
 
-let objectives = {
-    ammo: null
-};
 
-// =============================================================================
-// LOGIC HANDLERS
-// =============================================================================
-
-function handleStrafeAnimation(player, playerState) {
-    // --------- GUARD CLAUSE ---------
-    if (playerState.camUsing) return;
-
-    const rotation = playerState.rotation.y * (Math.PI / 180);
-    const v = playerState.velocity;
-    
-    const strafeSpeed = v.x * Math.cos(rotation) + v.z * Math.sin(rotation);
-    
-    let targetItem = undefined;
-    if (strafeSpeed > CONFIG.THRESHOLDS.STRAFE_SPEED) {
-        targetItem = CONFIG.ITEMS.STRAFE_LEFT;
-    } else if (strafeSpeed < -CONFIG.THRESHOLDS.STRAFE_SPEED) {
-        targetItem = CONFIG.ITEMS.STRAFE_RIGHT;
-    }
-
-    updateEquipment(player, "Legs", targetItem);
-}
-
-function handleCombatLogic(player, playerState) {
+export function handleCombatLogic(player, playerState) {
     const mainHandTypeId = playerState.mainHandTypeId;
     
     // --- Clear Offhand ---
@@ -77,7 +36,7 @@ function handleCombatLogic(player, playerState) {
 
     // --- Ammo UI Logic ---
     if (mainHandTypeId === CONFIG.ITEMS.GUN) {
-        const ammo = getObjectiveScore(objectives.ammo, player.scoreboardIdentity);
+        const ammo = getObjectiveScore(getAmmoObjective(), player.scoreboardIdentity);
         
         if (ammo > 0) {
             const color = ammo > CONFIG.THRESHOLDS.AMMO_LOW ? "§h" : "§c"; 
@@ -87,31 +46,19 @@ function handleCombatLogic(player, playerState) {
     }
 }
 
-// =============================================================================
-// 5. MAIN LOOP
-// =============================================================================
-
-export function formerIntervalPlayerSituation(player, playerState) {
-    handleStrafeAnimation(player, playerState);
-    handleCombatLogic(player, playerState);
-}
-
-// =============================================================================
-// 6. EVENT LISTENERS
-// =============================================================================
 
 world.afterEvents.itemUse.subscribe(({itemStack, source}) => {
-    if (itemStack.typeId != "game:gun" || (source.getItemCooldown("gun") < 11 && getObjectiveScore(objectives.ammo, source.scoreboardIdentity) > 0))
+    if (itemStack.typeId != "game:gun" || (source.getItemCooldown("gun") < 11 && getObjectiveScore(getAmmoObjective(), source.scoreboardIdentity) > 0))
         return;
     source.setProperty("property:is_shooting", true);
-})
+});
+
+world.afterEvents.playerHotbarSelectedSlotChange.subscribe((event) => {
+    const item = event.itemStack;
+    MAIN_HAND_CACHE.set(event.player.id, item ? item.typeId : null);
+});
 
 
-// =============================================================================
-// HELPER FUNCTIONS
-// =============================================================================
-
-const equipmentCache = new Map();
 
 function updateEquipment(player, slotName, targetItemId) {
     let cache = equipmentCache.get(player.id);
@@ -149,7 +96,4 @@ function updateEquipment(player, slotName, targetItemId) {
     cache[slotName] = target;
 }
 
-export function setGlobalVariables() {
-    dimension = world.getDimension(CONFIG.DIMENSION);
-    objectives.ammo = getAmmoObjective();
-}
+export function setGlobalVariables() { dimension = world.getDimension(CONFIG.DIMENSION); }
