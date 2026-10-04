@@ -24,6 +24,7 @@ import "./RoundBegin/randomPeep";
 
 import "./RoundBegin/Null/nullTeleport";
 
+import "./Player/playerCache";
 import "./Player/playerJoin";
 import "./Player/playerSituation";
 import "./Player/playerLeave";

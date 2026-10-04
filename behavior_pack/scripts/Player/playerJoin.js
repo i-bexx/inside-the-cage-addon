@@ -3,6 +3,7 @@ import { world, system } from "@minecraft/server";
 import { sleep } from "../utils";
 import { isLookingAtMenuEntity } from "../preStart";
 import { startCentralTickManager } from "../tickManager";
+import { COMPONENT_CACHE } from "./playerCache";
 import { getNewGameObjective, getStalkerMatchIdObjective, getWorldParticipant, getObjectiveScore } from "../scoreboards";
 import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetPlayerProperties, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, despawnEntities, commandsToResetPlayerData, clearPlayerMaps, setPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
@@ -79,8 +80,6 @@ let stalkerMatchIdObjective;
 let newGameObjective;
 let worldParticipant;
 
-export const COMPONENT_CACHE = new Map();
-
 // =============================================================
 // MAIN EVENT LISTENER
 // =============================================================
@@ -98,9 +97,9 @@ world.afterEvents.playerSpawn.subscribe(async ({ player }) => {
     preparePlayerStats(player);
 
     COMPONENT_CACHE.set(player.id, {
-        skinIdComp: player.getComponent("skin_id"),
-        variantComp: player.getComponent("minecraft:variant"),
-        equipComp: player.getComponent("minecraft:equippable")
+        skinIdVal: 0,
+        variantVal: 0,
+        mainHandTypeId: null 
     });
 
     // Teleportation Logic

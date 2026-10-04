@@ -70,10 +70,12 @@ export function playerLookingControl(player, nullEntity) {
 
     const linkedStalker = getStalkerEntityMatchedMap().get(player.id);
     if (!linkedStalker || !linkedStalker.isValid) return;
+    const linkedStalkerLoc = linkedStalker.location;
+    const nullEntityLoc = nullEntity.location
 
-    const dx = linkedStalker.location.x - nullEntity.location.x;
-    const dy = linkedStalker.location.y - nullEntity.location.y;
-    const dz = linkedStalker.location.z - nullEntity.location.z;
+    const dx = linkedStalkerLoc.x - nullEntityLoc.x;
+    const dy = linkedStalkerLoc.y - nullEntityLoc.y;
+    const dz = linkedStalkerLoc.z - nullEntityLoc.z;
     const distance = Math.hypot(dx, dy, dz);
 
     const state = isPlayerLookingAtEntity(player);
