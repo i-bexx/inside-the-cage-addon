@@ -1,4 +1,4 @@
-import { COMPONENT_CACHE } from "./Player/playerCache";
+import { PlayerCache } from "./Player/playerCache";
 
 // ==========================================
 // CONFIGURATION
@@ -22,9 +22,6 @@ const CONFIG = {
 // FILTERS & VARIABLES
 // ==========================================
 
-const CURSOR_STATES = new Map();
-const SHOOTING_STATES = new Map();
-
 // Entity Filters
 const MONSTER_FILTER = {
     families: [ "monster" ],
@@ -42,11 +39,6 @@ const PLAYER_FILTER = {
     maxDistance: CONFIG.DISTANCE
 };
 
-// Initial State Objects
-const INITIAL_LOOKING_STATE = {
-    lookingAtEntity: 0
-};
-
 const ENTITY_DISTANCE = {
 	maxDistance: CONFIG.DISTANCE
 };
@@ -55,75 +47,52 @@ const ENTITY_RULES = [
     { 
         filter: MONSTER_FILTER, 
         event: CONFIG.EVENTS.RED, 
-        score: 1 
+        score: 1,
+        sid: 3
     },
     { 
         filter: PLAYER_FILTER,  
         event: CONFIG.EVENTS.GREEN, 
-        score: 0 
+        score: 0,
+        sid: 1
     },
     { 
         filter: MOB_FILTER,     
         event: CONFIG.EVENTS.BLUE,  
-        score: 0 
+        score: 0,
+        sid: 2
     }
 ];
 
-function crosshairTracker(player) {
-    let state = CURSOR_STATES.get(player.id);
-    if (state) return state;
+export function startCrosshairTracker(player) {
+    const cache = PlayerCache.get(player.id);
+    if (!cache) return;
+
+    const result = player.getEntitiesFromViewDirection(ENTITY_DISTANCE)[0];
+    const currentEntityId = result ? result.entity.id : "none";
+
+    if (cache.lastLookedEntityId === currentEntityId) return;
+    cache.lastLookedEntityId = currentEntityId;
 
     const setScore = (val) => player.runCommand(`scoreboard players set @s ${CONFIG.SCOREBOARD.GHOST} ${val}`);
 
-    state = new Proxy({ ...INITIAL_LOOKING_STATE }, {
-        set(target, key, value) {
-            if (target[key] === value) return true;
+    if (!result) {
+        player.triggerEvent(CONFIG.EVENTS.NORMAL);
+        setScore(0);
+        cache.skinIdVal = 0;
+        return;
+    }
 
-            target[key] = value;
+    const entity = result.entity;
+    const match = ENTITY_RULES.find(rule => entity.matches(rule.filter));
 
-            if (value === 0) {
-                player.triggerEvent(CONFIG.EVENTS.NORMAL);
-                setScore(0);
-                return true;
-            }
-
-            const result = player.getEntitiesFromViewDirection(ENTITY_DISTANCE)[0];
-            if (!result) return true;
-
-            const entity = result.entity;
-            const match = ENTITY_RULES.find(rule => entity.matches(rule.filter));
-
-            const cache = COMPONENT_CACHE.get(player.id);
-            let sid = 0;
-
-            if (match) {
-                player.triggerEvent(match.event);
-
-                if (match.event === CONFIG.EVENTS.GREEN) sid = 1;
-                if (match.event === CONFIG.EVENTS.BLUE) sid = 2;
-                if (match.event === CONFIG.EVENTS.RED) sid = 3;
-                setScore(match.score);
-            } else {
-                player.triggerEvent(CONFIG.EVENTS.NORMAL);
-                setScore(0);
-            }
-            cache.skinIdVal = sid;
-
-            return true;
-        }
-    });
-
-    CURSOR_STATES.set(player.id, state);
-    return state;
+    if (match) {
+        player.triggerEvent(match.event);
+        setScore(match.score);
+        cache.skinIdVal = match.sid;
+    } else {
+        player.triggerEvent(CONFIG.EVENTS.NORMAL);
+        setScore(0);
+        cache.skinIdVal = 0;
+    }
 }
-
-// Global Loop for Cursor Tracker
-export function startCrosshairTracker(player) {
-    const isLooking = crosshairTracker(player);
-    const raycastResult = player.getEntitiesFromViewDirection(ENTITY_DISTANCE)
-    
-    isLooking.lookingAtEntity = (raycastResult.length > 0) ? 1 : 0;
-}
-
-export function getCursorStates() { return CURSOR_STATES; }
-export function getShootingStates() { return SHOOTING_STATES; }

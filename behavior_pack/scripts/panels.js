@@ -6,7 +6,7 @@ import { pickupBattery } from "./RoundBegin/batteryController";
 import { getPasswords } from "./RoundBegin/passwordManager";
 import { votePanel } from "./voteManager";
 import { ROUND_STATE_MAP } from "./gameStats";
-import { STAMINA_LIMIT_MAP } from "./RoundBegin/Stamina";
+import { PlayerCache } from "./Player/playerCache";
 
 let dimension;
 
@@ -164,7 +164,8 @@ function upgradeBattery(player) {
 
 function increaseStaminaLimit(player) {
     const coinAmount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity);
-    const staminaLimit = STAMINA_LIMIT_MAP.get(player.id);
+    const cache = PlayerCache.get(player.id);
+    const staminaLimit = cache ? cache.staminaLimit : 10;
 
     if (staminaLimit > 10) {
         player.sendMessage(" §6[§e!§6] §cYou already have this feat!");
@@ -177,7 +178,7 @@ function increaseStaminaLimit(player) {
 		player.playSound("note.bass");
         return;
     }
-    STAMINA_LIMIT_MAP.set(player.id, 20);
+    if (cache) cache.staminaLimit = 20;
     player.sendMessage(" §6[§e!§6] §aStamina upgraded!");
     player.playSound("random.levelup");
 

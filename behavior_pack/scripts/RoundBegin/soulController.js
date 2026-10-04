@@ -8,7 +8,7 @@ import { warnPlayerAboutCam } from "./cameraController";
 import { updateGlobalUi } from "../UI/globalUi";
 
 import { getSanityObjective, getObjectiveScore } from "../scoreboards";
-import { STAMINA_MAP } from "./Stamina";
+import { PlayerCache } from "../Player/playerCache";
 
 
 import { stopTeleportNull } from "./Null/nullTeleport";
@@ -92,7 +92,7 @@ async function soulsFreedValueExceeded(players) {
 		player.runCommand("clear @s game:camera_turn_off");
 
 		let sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
-		let staminaValue = STAMINA_MAP.get(player.id);
+		let staminaValue = PlayerCache.get(player.id)?.stamina;
 		
 		cameraUsed(player, sanityValue, staminaValue);
 		

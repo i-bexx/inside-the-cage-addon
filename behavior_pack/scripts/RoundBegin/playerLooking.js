@@ -1,9 +1,8 @@
 import { world, system } from "@minecraft/server";
 
-import { STAMINA_MAP } from "./Stamina";
 import { getStalkerEntityMatchedMap } from "../stalkerEntity";
 import { getSanityObjective, getObjectiveScore } from "../scoreboards";
-import { CAM_USING_SET } from "../cameraUsage";
+import { PlayerCache } from "../Player/playerCache";
 
 // --- CONSTANTS ---
 const DYNAMIC_PROPS = {
@@ -86,7 +85,7 @@ function handleStaticEffect(player) {
     if (!player || !player.isValid) return;
 
     const playerStats = getPlayerStats();
-    const isUsingCam = CAM_USING_SET.has(player.id);
+    const isUsingCam = PlayerCache.get(player.id)?.camUsing;
     const initializationBeforeLockingTheCam = player.getDynamicProperty(DYNAMIC_PROPS.CAM_INIT);
 
     if (isUsingCam && !initializationBeforeLockingTheCam) {
@@ -117,12 +116,12 @@ function playerStoppedLooking(player) {
         player.setDynamicProperty(DYNAMIC_PROPS.IS_LOOKING, false);
         
         const playerStats = getPlayerStats();
-        playerStats.stamina = STAMINA_MAP.get(player.id);
+        playerStats.stamina = PlayerCache.get(player.id)?.stamina;
         playerStats.sanity = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
 
         const stamina = playerStats.stamina;
         const sanity = playerStats.sanity;
-        const isUsingCam = CAM_USING_SET.has(player.id);
+        const isUsingCam = PlayerCache.get(player.id)?.camUsing;
 
         if (stamina <= 0) player.triggerEvent(EVENTS.SLOWNESS);
         else if (isUsingCam) player.triggerEvent(EVENTS.STATIC_MOVEMENT);

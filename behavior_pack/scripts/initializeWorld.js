@@ -3,7 +3,6 @@ import { world, Difficulty } from "@minecraft/server";
 import { setScoreboardCache } from "./scoreboards";
 
 import { setGlobalVariables as playerJoinSetGlobalVariables } from "./Player/playerJoin";
-import { setGlobalVariables as playerSituationSetGlobalVariables } from "./Player/playerSituation";
 
 import { setGlobalVariables as nullTeleportSetGlobalVariables } from "./RoundBegin/Null/nullTeleport";
 import { setGlobalVariables as finishRoundEarlySetGlobalVariables } from "./RoundBegin/RoundOperations/finishRoundEarly";
@@ -27,7 +26,6 @@ world.afterEvents.worldLoad.subscribe(() => {
   setScoreboardCache();
   
   playerJoinSetGlobalVariables();
-  playerSituationSetGlobalVariables();
 
   nullTeleportSetGlobalVariables();
   finishRoundEarlySetGlobalVariables();

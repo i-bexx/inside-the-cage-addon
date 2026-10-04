@@ -1,17 +1,15 @@
-import { CAM_USING_SET } from "../cameraUsage";
+import { PlayerCache } from "../Player/playerCache";
 
-export const STAMINA_MAP = new Map();
-export const STAMINA_LIMIT_MAP = new Map();
 const COOLDOWNS = new Map();
 const DURATION_TIME = 3000;
 
 
 export function Stamina_control(player) {
-	const staminaValue = STAMINA_MAP.get(player.id);
-	const staminaLimit = STAMINA_LIMIT_MAP.get(player.id);
-
-	if (staminaValue === undefined) STAMINA_MAP.set(player.id, 10);
-	if (staminaLimit === undefined) STAMINA_LIMIT_MAP.set(player.id, 10);
+	const cache = PlayerCache.get(player.id);
+	if (!cache) return;
+	
+	let staminaValue = cache.stamina;
+	let staminaLimit = cache.staminaLimit;
 	
 	let isPlayerRunning = player.isSprinting;
 	let isStaminaFull = staminaValue == staminaLimit;
@@ -23,7 +21,8 @@ export function Stamina_control(player) {
 
 function playerIsRunning(player, staminaValue, isStaminaEmpty) {
   if (!isStaminaEmpty) {
-		STAMINA_MAP.set(player.id, --staminaValue);
+		const cache = PlayerCache.get(player.id);
+		if (cache) cache.stamina = --staminaValue;
 		COOLDOWNS.delete(player.id) //If running, delete the cooldown timer so it can be set again when stopping
 		} else player.triggerEvent("slowness_event");
 }
@@ -36,7 +35,8 @@ function playerIsNotRunning(player, staminaValue, isStaminaFull, isStaminaEmpty)
 	let doesPlayerHaveCooldown = COOLDOWNS.has(player.id);
 	let playerCooldown = COOLDOWNS.get(player.id);
 
-	let isPlayerUsingCamera = CAM_USING_SET.has(player.id);
+	const cache = PlayerCache.get(player.id);
+	let isPlayerUsingCamera = cache ? cache.camUsing : false;
 
 	if (isStaminaFull) {
 		return;
@@ -52,7 +52,7 @@ function playerIsNotRunning(player, staminaValue, isStaminaFull, isStaminaEmpty)
 					
 					COOLDOWNS.delete(player.id) //Delete cooldown so it can be set again when stopping
 				}
-				STAMINA_MAP.set(player.id, ++staminaValue);
+				if (cache) cache.stamina = ++staminaValue;
 		} else return; 
 		}
 }

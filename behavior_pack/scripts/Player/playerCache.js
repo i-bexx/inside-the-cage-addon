@@ -1,30 +1,41 @@
-import { system } from "@minecraft/server";
+import { system, world } from "@minecraft/server";
 
-export class PlayerCache {
-    static CACHE = new Map();
+class PlayerCache {
+    static _map = new Map();
 
-    static addPlayer(player) {
-        this.CACHE.set(player.id, new PlayerCache(player));
+    static add(player) {
+        this._map.set(player.id, new PlayerCache(player));
     }
-    static removePlayer(playerId) {
-        this.CACHE.delete(playerId);
+
+    static remove(playerId) {
+        this._map.delete(playerId);
     }
+
     static get(playerId) {
-        return this.CACHE.get(playerId);
+        return this._map.get(playerId);
     }
 
     constructor(player) {
-        const equipComp = player.getComponent("minecraft:equippable");
-        const mainHandItem = equipComp?.getEquipment("Mainhand");
         this.skinIdVal = 0;
         this.variantVal = 0;
-        this.mainHandTypeId = mainHandItem ? mainHandItem.typeId : null;
+        this.mainHandTypeId = null;
+
+        // Player State
+        this.camUsing = false;
+        this.compassShowing = false;
+        this.stamina = 10;
+        this.staminaLimit = 10;
+
+        // Subsystems
+        this.lastLookedEntityId = undefined;
     }
 }
 
-export const COMPONENT_CACHE = new Map();
-
 system.afterEvents.scriptEventReceive.subscribe((event) => {
-  if (event.id === "game:variant_update")
-    COMPONENT_CACHE.get(event.sourceEntity.id).variantVal = Number(event.message);
+    if (event.id === "game:variant_update") {
+        const cache = PlayerCache.get(event.sourceEntity.id);
+        if (cache) cache.variantVal = Number(event.message);
+    }
 });
+
+export { PlayerCache };

@@ -5,8 +5,7 @@ import { world, system } from "@minecraft/server";
 // ==========================================
 
 import { stopGivePanelItem } from "./panels";
-import { stopInitiateCam, CAM_USING_SET } from "./cameraUsage";
-import { COMPASS_SHOWING_SET } from "./UI/fastUiTick";
+import { stopInitiateCam } from "./cameraUsage";
 import { resetGameStarterSession } from "./gameStarter";
 import { ROUND_STATE_MAP } from "./gameStats";
 
@@ -31,11 +30,10 @@ import { playerStatesOfBatteryMap, playerDrainingBatteryCountdownMap, playerIsBa
 
 import { getToastTimeMap } from "./RoundBegin/coinController";
 
-import { playerResetStaminaCooldownMap, STAMINA_LIMIT_MAP, STAMINA_MAP } from "./RoundBegin/Stamina";
+import { playerResetStaminaCooldownMap } from "./RoundBegin/staminaController";
 
-import { getPlaysoundHeartMap, getSanityLowStaticSoundMap, getSanityLowStaticEventMap } from "./RoundBegin/Sanity";
+import { getPlaysoundHeartMap, getSanityLowStaticSoundMap, getSanityLowStaticEventMap } from "./RoundBegin/sanityController";
 
-import { getCursorStates, getShootingStates } from "./cursorController";
 
 import { checkIfPositionClear } from "./gameStarter";
 
@@ -43,7 +41,10 @@ import { getTeleportCooldown } from "./Teleporter";
 
 import { getStalkerEntityMatchedMap } from "./stalkerEntity";
 
-import { getCompassStates } from "./UI/fastUiTick";
+import { getCompassStates, getLastSubtitleMap } from "./UI/fastUiTick";
+
+
+import { PlayerCache } from "./Player/playerCache";
 
 // ==========================================
 // CONSTANTS
@@ -114,8 +115,6 @@ export function commandsToResetPlayerData(player, playerJoined = false) {
 }
 
 export function resetPlayerDynamicPropertyData(player) {
-  CAM_USING_SET.delete(player.id);
-  COMPASS_SHOWING_SET.delete(player.id);
   player.setDynamicProperty("batteryLevel", 4);
   player.setDynamicProperty("batteryIsDraining", false);
   player.setDynamicProperty("batteryIsFullyDrained", false);
@@ -174,9 +173,9 @@ export function resetEntitiesData(ownerJoined = false) {
 
 export function clearPlayerMaps(playerId) {
   getCompassStates().delete(playerId);
+  getLastSubtitleMap().delete(playerId);
   
-  getCursorStates().delete(playerId);
-  getShootingStates().delete(playerId);
+  // Cursor states deleted via PlayerCache automatically
 
   checkIfPositionClear().delete(playerId);
 
@@ -199,10 +198,14 @@ export function clearPlayerMaps(playerId) {
 
   playerResetStaminaCooldownMap().delete(playerId);
 }
+
 export function setPlayerMaps(playerId) {
-  STAMINA_MAP.set(playerId, 10);
-  STAMINA_LIMIT_MAP.set(playerId, 10);
+  const cache = PlayerCache.get(playerId);
+    cache.camUsing = false;
+    cache.stamina = 10;
+    cache.staminaLimit = 10;
 }
+
 
 export function stopFunctionsInMaps(playerId) { // Stops the loops or countdown functions determined for one player
   const playerDrainingBattery = playerDrainingBatteryCountdownMap().get(playerId);

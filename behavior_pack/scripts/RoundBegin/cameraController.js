@@ -1,5 +1,5 @@
 import { getPlayersInRound } from "../utils";
-import { CAM_USING_SET } from "../cameraUsage";
+import { PlayerCache } from "../Player/playerCache";
 
 // =============================================================
 // CONFIGURATION
@@ -32,7 +32,8 @@ export function warnPlayerAboutCam() {
 
 function filterPlayers() {
     return getPlayersInRound().filter(player => {
-        const isCamUsing = CAM_USING_SET.has(player.id);
+        const cache = PlayerCache.get(player.id);
+        const isCamUsing = cache ? cache.camUsing : false;
         const isWarned = player.getDynamicProperty(CONFIG.PROPERTIES.TURN_OFF_WARNING);
 
         return isCamUsing && !isWarned;
