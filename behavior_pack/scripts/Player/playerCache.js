@@ -29,6 +29,11 @@ class PlayerCache {
         // Subsystems
         this.lastLookedEntityId = undefined;
         this.stalkerEntity = null;
+
+        // UI Subsystems
+        this.titleString = "";
+        this.subtitleString = "";
+        this.lastRenderedUi = "";
     }
 }
 
