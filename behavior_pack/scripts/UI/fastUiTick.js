@@ -1,8 +1,8 @@
 import { system } from "@minecraft/server";
+import { PlayerCache } from "../Player/playerCache";
 
 const playerCompassStates = new Map();
 const LAST_SUBTITLE_MAP = new Map();
-export const COMPASS_SHOWING_SET = new Set();
 
 let staminaTick = 0;
 let staminaTickTimerActive = false;
@@ -25,7 +25,8 @@ export function fastUiTick(player, playerState, isRoundCompleted) {
     
     // Set UI string for compass state
     if (compassState.shouldCompassShown) {
-        COMPASS_SHOWING_SET.add(player.id);
+        const cache = PlayerCache.get(player.id);
+        if (cache) cache.compassShowing = true;
         playerCompassStates.set(player.id, compassState.compassString);
         uiString += `\n${compassState.compassString}`;
     }
@@ -96,7 +97,7 @@ function shootingCursorString(playerState) {
 }
 
 function compassString(player) {
-  const rotation = player.getRotation();
+  const rotation = player.getRotation().y;
   const currentFrame = Math.floor(((rotation + 180) / 360) * 32) % 32;
 
   const paddedFrame = String(currentFrame).padStart(2, '0');
@@ -128,3 +129,4 @@ function staminaTickTimer() {
 
 
 export function getCompassStates() { return playerCompassStates; }
+export function getLastSubtitleMap() { return LAST_SUBTITLE_MAP; }

@@ -3,9 +3,9 @@ import { world, system } from "@minecraft/server";
 import { sleep } from "../utils";
 import { isLookingAtMenuEntity } from "../preStart";
 import { startCentralTickManager } from "../tickManager";
-import { COMPONENT_CACHE } from "./playerCache";
+import { PlayerCache } from "./playerCache";
 import { getNewGameObjective, getStalkerMatchIdObjective, getWorldParticipant, getObjectiveScore } from "../scoreboards";
-import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetPlayerProperties, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, despawnEntities, commandsToResetPlayerData, clearPlayerMaps, setPlayerMaps, stopFunctionsInMaps } from "../resetStats";
+import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetPlayerProperties, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, despawnEntities, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
 // =============================================================
 // CONFIGURATION 
@@ -85,22 +85,18 @@ let worldParticipant;
 // =============================================================
 
 world.afterEvents.playerSpawn.subscribe(async ({ player }) => {
+    PlayerCache.add(player);
+    
     // Prepare Stats
     stopFunctionsInMaps(player.id);
     clearPlayerMaps(player.id);
-    setPlayerMaps(player.id);
+    
     commandsToResetPlayerData(player, true);
     resetPlayerDynamicPropertyData(player);
     resetPlayerProperties(player);
 
     killConnectedStalker(player);
     preparePlayerStats(player);
-
-    COMPONENT_CACHE.set(player.id, {
-        skinIdVal: 0,
-        variantVal: 0,
-        mainHandTypeId: null 
-    });
 
     // Teleportation Logic
     const isOwner = player.hasTag(CONFIG.TAGS.HOST);

@@ -5,14 +5,13 @@ import { getSoulsFreedObjective, getSanityObjective } from "./scoreboards";
 import { getObjectiveScore, getValueParticipant } from "./scoreboards";
 
 // Imports
-import { fastUiTick, COMPASS_SHOWING_SET } from "./UI/fastUiTick";
+import { fastUiTick } from "./UI/fastUiTick";
 import { slowUiTick } from "./UI/slowUiTick";
-import { handleCombatLogic, MAIN_HAND_CACHE } from "./Player/playerSituation";
-import { CAM_USING_SET } from "./cameraUsage";
+import { weaponController } from "./RoundBegin/weaponController";
 import { formerIntervalTeleporter } from "./Teleporter";
 import { gameStarter, isGameStarting } from "./gameStarter";
 import { ROUND_STATE_MAP, checkGameStatus } from "./gameStats";
-import { COMPONENT_CACHE } from "./Player/playerCache";
+import { PlayerCache } from "./Player/playerCache";
 
 // --- IN ROUND IMPORTS ---
 import { startDifficultyMonitor } from "./RoundBegin/ghostController";
@@ -21,9 +20,9 @@ import { playerLookingControl } from "./RoundBegin/playerLooking";
 import { nullTeleportTimeSetter } from "./RoundBegin/Null/nullController";
 import { teleportStalkerLoop } from "./stalkerEntity";
 import { Battery_control } from "./RoundBegin/batteryController";
-import { Sanity_control } from "./RoundBegin/Sanity";
+import { Sanity_control } from "./RoundBegin/sanityController";
 import { soulsAmountCheck } from "./RoundBegin/soulController";
-import { Stamina_control, STAMINA_MAP, STAMINA_LIMIT_MAP } from "./RoundBegin/Stamina";
+import { Stamina_control } from "./RoundBegin/staminaController";
 import { getNullEntity } from "./RoundBegin/Null/nullCache";
 
 let currentTick = 0;
@@ -113,21 +112,26 @@ export function startCentralTickManager() {
         for (const player of allPlayers) {
             const pId = player.id;
             
-            const cachedComps = COMPONENT_CACHE.get(pId);
+            let cache = PlayerCache.get(pId);
+            if (!cache) {
+                PlayerCache.add(player);
+                cache = PlayerCache.get(pId);
+            }
+
             let playerState = {
-                skinId: cachedComps?.skinIdVal,
-                variant: cachedComps?.variantVal,
-                mainHandTypeId: MAIN_HAND_CACHE.get(pId),
-                camUsing: CAM_USING_SET.has(pId),
-                compassShowing: COMPASS_SHOWING_SET.has(pId),
-                stamina: STAMINA_MAP.get(pId),
-                staminaLimit: STAMINA_LIMIT_MAP.get(pId)
+                skinId: cache?.skinIdVal,
+                variant: cache?.variantVal,
+                mainHandTypeId: cache?.mainHandTypeId,
+                camUsing: cache?.camUsing,
+                compassShowing: cache?.compassShowing,
+                stamina: cache?.stamina,
+                staminaLimit: cache?.staminaLimit
             };
 
             fastUiTick(player, playerState, isRoundCompleted);
 
             if (currentTick % 5 === 0)
-                handleCombatLogic(player, playerState);
+                weaponController(player, playerState);
 
             // 80 TICK
             if (currentTick % 80 === 0)

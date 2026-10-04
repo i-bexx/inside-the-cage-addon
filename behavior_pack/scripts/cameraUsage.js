@@ -1,7 +1,7 @@
 import { world, system } from "@minecraft/server";
 
 import { getPlayersInRound } from "./utils";
-import { STAMINA_MAP } from "./RoundBegin/Stamina";
+import { PlayerCache } from "./Player/playerCache";
 import { getSoulsFreedObjective, getSanityObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 
 // =============================================================
@@ -49,8 +49,6 @@ const CONFIG = {
 // GLOBAL VARIABLES
 // =============================================================
 
-export const CAM_USING_SET = new Set();
-
 let soulsFreedValue = 0;
 let timeoutId = undefined;
 
@@ -67,13 +65,13 @@ export function initiateCam() {
         const players = getPlayersInRound();
 
         for (const player of players) {
-            const isUsingCam = CAM_USING_SET.has(player.id);
+            const isUsingCam = PlayerCache.get(player.id)?.camUsing;
 
             // Skip if player is already using the camera
             if (isUsingCam) continue;
 
             const sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
-            const staminaValue = STAMINA_MAP.get(player.id);
+            const staminaValue = PlayerCache.get(player.id)?.stamina;
 
             // Force camera usage
             cameraUsed(player, sanityValue, staminaValue);
@@ -96,7 +94,8 @@ export function cameraUsed(player, sanityValue, staminaValue) {
 
     // Remove the camera item from inventory and mark as using
     player.runCommand(CONFIG.COMMANDS.CLEAR_CAM);
-    CAM_USING_SET.add(player.id);
+    const cache = PlayerCache.get(player.id);
+    if (cache) cache.camUsing = true;
 
     // --- VISUAL EFFECTS LOGIC ---
     if (!toldPlayerTurnOffCam) { 
@@ -141,7 +140,7 @@ export function cameraUsed(player, sanityValue, staminaValue) {
  * Clears effects and restores the original camera item.
  */
 export function cameraDeactivated(player, turnedoffAutomatically = false) {
-    const stamina = STAMINA_MAP.get(player.id);
+    const stamina = PlayerCache.get(player.id)?.stamina;
     let isStaminaEmpty = stamina === 0;
 
     const turnOffCommands = [
@@ -158,7 +157,8 @@ export function cameraDeactivated(player, turnedoffAutomatically = false) {
 
     // Reset player state
     player.triggerEvent(CONFIG.EVENTS.NORMAL);
-    CAM_USING_SET.delete(player.id);
+    const cache = PlayerCache.get(player.id);
+    if (cache) cache.camUsing = false;
 
     if (isStaminaEmpty) player.triggerEvent(CONFIG.EVENTS.SLOWNESS);
 
@@ -179,7 +179,7 @@ export function cameraDeactivated(player, turnedoffAutomatically = false) {
 world.afterEvents.itemUse.subscribe(({source, itemStack}) => {
     if (itemStack.typeId === CONFIG.ITEMS.CAMERA) {
         const sanityValue = getObjectiveScore(getSanityObjective(), source.scoreboardIdentity);
-        const staminaValue = STAMINA_MAP.get(source.id);
+        const staminaValue = PlayerCache.get(source.id)?.stamina;
 
         cameraUsed(source, sanityValue, staminaValue);
         stopInitiateCam();

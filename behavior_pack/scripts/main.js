@@ -26,7 +26,7 @@ import "./RoundBegin/Null/nullTeleport";
 
 import "./Player/playerCache";
 import "./Player/playerJoin";
-import "./Player/playerSituation";
+import "./RoundBegin/weaponController";
 import "./Player/playerLeave";
 import "./Player/resetPlayerData";
 
