@@ -1,8 +1,8 @@
 import { system } from "@minecraft/server";
 import { PlayerCache } from "../Player/playerCache";
+import { renderUnifiedUi } from "./renderUi";
 
 const playerCompassStates = new Map();
-const LAST_SUBTITLE_MAP = new Map();
 
 let staminaTick = 0;
 let staminaTickTimerActive = false;
@@ -41,10 +41,10 @@ export function fastUiTick(player, playerState, isRoundCompleted) {
     if (isRoundCompleted) uiString += "\nround_completed_x";
     else uiString += "\nround_completed_y";
 
-    // Set the subtitle only if it has changed
-    if (LAST_SUBTITLE_MAP.get(player.id) !== uiString) {
-        LAST_SUBTITLE_MAP.set(player.id, uiString);
-        player.onScreenDisplay.updateSubtitle(uiString);
+    const cache = PlayerCache.get(player.id);
+    if (cache) {
+        cache.subtitleString = uiString;
+        renderUnifiedUi(player, cache);
     }
 
   if (!staminaTickTimerActive) {
@@ -129,4 +129,3 @@ function staminaTickTimer() {
 
 
 export function getCompassStates() { return playerCompassStates; }
-export function getLastSubtitleMap() { return LAST_SUBTITLE_MAP; }

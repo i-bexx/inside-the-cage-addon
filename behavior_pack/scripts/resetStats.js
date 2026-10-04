@@ -37,7 +37,7 @@ import { getPlaysoundHeartMap, getSanityLowStaticSoundMap, getSanityLowStaticEve
 
 import { checkIfPositionClear } from "./gameStarter";
 import { getTeleportCooldown } from "./Teleporter";
-import { getCompassStates, getLastSubtitleMap } from "./UI/fastUiTick";
+import { getCompassStates } from "./UI/fastUiTick";
 
 import { PlayerCache } from "./Player/playerCache";
 
@@ -168,7 +168,6 @@ export function resetEntitiesData(ownerJoined = false) {
 
 export function clearPlayerMaps(playerId) {
   getCompassStates().delete(playerId);
-  getLastSubtitleMap().delete(playerId);
   
   // Cursor states deleted via PlayerCache automatically
 

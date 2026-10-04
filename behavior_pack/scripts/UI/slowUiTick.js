@@ -1,6 +1,7 @@
 import { system } from "@minecraft/server";
 import { getSanityObjective, getObjectiveScore } from "../scoreboards";
 import { PlayerCache } from "../Player/playerCache";
+import { renderUnifiedUi } from "./renderUi";
 
 system.afterEvents.scriptEventReceive.subscribe((event) => {
     if (event.id === "game:update_sanity") {
@@ -21,10 +22,12 @@ export function slowUiTick(player) {
         if (player.hasTag("hasNotification")) {
             uiString += "\nnew_notification";
         }
-        player.onScreenDisplay.setTitle(uiString);
-
         const cache = PlayerCache.get(player.id);
-        if (cache) cache.compassShowing = false; // Hides compass when time is out
+        if (cache) {
+            cache.compassShowing = false; // Hides compass when time is out
+            cache.titleString = uiString;
+            renderUnifiedUi(player, cache);
+        }
 }
 
 // ----- HELPER FUNCTION -----
