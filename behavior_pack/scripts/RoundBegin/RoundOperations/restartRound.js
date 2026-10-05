@@ -1,5 +1,6 @@
 import { world } from "@minecraft/server";
 
+import { stopFunctionsInMaps, clearPlayerMaps, setPlayerMaps, resetPlayerDynamicPropertyData, resetPlayerProperties } from "../../resetStats";
 import { startFunction, getSessionPlayers } from "../../gameStarter";
 import { ROUND_STATE_MAP } from "../../gameStats";
 import { sleep } from "../../utils";
@@ -19,17 +20,24 @@ const CONFIG = {
 
 export async function restartRound() {
   const players = getSessionPlayers();
+  ROUND_STATE_MAP.set("ROUND_STARTED", false);
+  await sleep(6);
   
   for (const player of players) {
       player.removeTag(CONFIG.REMOVE_TAG);
       player.triggerEvent(CONFIG.CURTAIN_CLOSE);
       player.runCommand(CONFIG.STOPSOUND);
+
+      stopFunctionsInMaps(player.id);
+      clearPlayerMaps(player.id);
+      setPlayerMaps(player.id);
+      resetPlayerDynamicPropertyData(player);
+      resetPlayerProperties(player);
   }
-  ROUND_STATE_MAP.set("ROUND_STARTED", false);
   await sleep(10);
 
-  await dimension.runCommand(CONFIG.TP);
-  await dimension.runCommand(CONFIG.ADD_TAG);
+  dimension.runCommand(CONFIG.TP);
+  dimension.runCommand(CONFIG.ADD_TAG);
 
   startFunction();
 

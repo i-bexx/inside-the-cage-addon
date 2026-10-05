@@ -1,5 +1,6 @@
 import { world } from "@minecraft/server";
 
+import { stopFunctionsInMaps, clearPlayerMaps, setPlayerMaps, resetPlayerDynamicPropertyData, resetPlayerProperties } from "../../resetStats";
 import { getPlayersInRound, sleep } from "../../utils";
 import { ROUND_STATE_MAP } from "../../gameStats";
 
@@ -23,28 +24,35 @@ const CONFIG = {
 
 export async function finishRoundEarly() {
   const players = getPlayersInRound();
+  ROUND_STATE_MAP.set("ROUND_STARTED", false);
+  await sleep(6);
 
   for (const player of players) {
     player.removeTag(CONFIG.REMOVE_TAG);
     player.triggerEvent(CONFIG.CURTAIN_CLOSE);
     player.runCommand(CONFIG.STOPSOUND);
+
+    stopFunctionsInMaps(player.id);
+    clearPlayerMaps(player.id);
+    setPlayerMaps(player.id);
+    resetPlayerDynamicPropertyData(player);
+    resetPlayerProperties(player);
   }
-  ROUND_STATE_MAP.set("ROUND_STARTED", false);
 
   await sleep(10);
-  await dimension.runCommand(CONFIG.TP_ELSEWHERE);
+ dimension.runCommand(CONFIG.TP_ELSEWHERE);
 
   await sleep(100);
-  await dimension.runCommand(CONFIG.TP_TO_LOBBBY);
-  await dimension.runCommand(CONFIG.CURTAIN_OPEN_CMD);
-  await dimension.runCommand(CONFIG.NORMAL_EVENT_CMD);
-  await dimension.runCommand(CONFIG.ADD_TAG_CMD);
+  dimension.runCommand(CONFIG.TP_TO_LOBBBY);
+  dimension.runCommand(CONFIG.CURTAIN_OPEN_CMD);
+  dimension.runCommand(CONFIG.NORMAL_EVENT_CMD);
+  dimension.runCommand(CONFIG.ADD_TAG_CMD);
 
   ROUND_STATE_MAP.set("ROUND_ENDED_EARLY", false);
 
   await sleep(30);
-  await dimension.runCommand(CONFIG.OPEN_DOOR_EVENT);
-  await dimension.runCommand(CONFIG.REMOVE_DOOR_BARRIERS);
+  dimension.runCommand(CONFIG.OPEN_DOOR_EVENT);
+  dimension.runCommand(CONFIG.REMOVE_DOOR_BARRIERS);
 }
 
 // ======= HELPER FUNCTION =======

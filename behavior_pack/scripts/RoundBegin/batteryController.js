@@ -49,58 +49,22 @@ const BATTERY_CONFIG = {
     }
 };
 
-// Maps
-const playerStates = new Map();
 const playerDrainingBattery = new Map();
 const playerIsBatteryCritical = new Map();
 
-// =============================================================
-// STATE MANAGEMENT
-// =============================================================
-
-function getBatteryState(player) {
-    let state = playerStates.get(player.id)
-    if (state) return state;
-
-    let batteryState = {
-        batteryIsDrainingOfPlayer: undefined,
-        batteryIsFullyDrainedOfPlayer: false
-    }
-    
-    state = new Proxy({ ...batteryState }, {
-        set(target, key, value) {
-            // Proxy Protection: Do nothing if the value is the same
-            if (target[key] === value) return true;
-            
-            target[key] = value;
-
-            let batteryIsDrainingOfPlayer = target["batteryIsDrainingOfPlayer"];
-            let batteryIsFullyDrainedOfPlayer = target["batteryIsFullyDrainedOfPlayer"];
-
-            if (!batteryIsDrainingOfPlayer && !batteryIsFullyDrainedOfPlayer) {
-                batteryDrain(player);
-                target["batteryIsDrainingOfPlayer"] = true;
-            } else if (batteryIsFullyDrainedOfPlayer) {
-                player.runCommand(`clear @s ${BATTERY_CONFIG.ITEMS.PREFIX_CRITICAL}`);
-                player.triggerEvent(BATTERY_CONFIG.EVENTS.NO_SIGNAL);
-            }
-            return true;
-        }
-    })
-    playerStates.set(player.id, state)
-    return state;
-}
-
-// =============================================================
-// MAIN CONTROL LOOP
-// =============================================================
 
 export function Battery_control(player) {
     if (!player || !player.isValid) return;
 
-    let batteryState = getBatteryState(player);
-    batteryState.batteryIsFullyDrainedOfPlayer = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_FULLY_DRAINED);
-    batteryState.batteryIsDrainingOfPlayer = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_DRAINING);
+    const batteryIsDrainingOfPlayer = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_DRAINING);
+    const batteryIsFullyDrainedOfPlayer = player.getDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_FULLY_DRAINED);
+
+    if (!batteryIsDrainingOfPlayer && !batteryIsFullyDrainedOfPlayer) {
+        batteryDrain(player);
+    } else if (batteryIsFullyDrainedOfPlayer) {
+        player.runCommand(`clear @s ${BATTERY_CONFIG.ITEMS.PREFIX_CRITICAL}`);
+        player.triggerEvent(BATTERY_CONFIG.EVENTS.NO_SIGNAL);
+    }
 }
 
 // =============================================================
@@ -230,6 +194,5 @@ function batteryIsCritical(player) {
 
 world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => pickupBattery(player, target));
 
-export function playerStatesOfBatteryMap() { return playerStates; }
 export function playerDrainingBatteryCountdownMap() { return playerDrainingBattery; }
 export function playerIsBatteryCriticalCountdownMap() { return playerIsBatteryCritical; }

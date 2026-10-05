@@ -30,44 +30,16 @@ const SOUNDS = {
 let dimension;
 
 
-let playerStates = new Map();
 let listOfPlayersLooking = new Map();
 let listOfPlayersPlayingStatic = new Map();
-
-function isPlayerLookingAtEntity(player) {
-
-    let state = playerStates.get(player.id);
-    if (state) return state;
-
-    const isLookingObject = {
-        isLooking: false
-    };
-
-    state = new Proxy({ ...isLookingObject }, {
-        set(target, key, value) {
-            if (target[key] === value) return true;
-
-            target[key] = value;
-
-            if (key === "isLooking") {
-                if (value) {
-                    handleStaticEffect(player);
-                } else {
-                    playerStoppedLooking(player);
-                }
-            }
-            return true;
-        }
-    });
-    playerStates.set(player.id, state);
-    return state;
-}
 
 export function playerLookingControl(player, nullEntity) {
     if (!nullEntity) return;
 
     const cache = PlayerCache.get(player.id);
-    const linkedStalker = cache ? cache.stalkerEntity : null;
+    if (!cache) return;
+    
+    const linkedStalker = cache.stalkerEntity;
     if (!linkedStalker || !linkedStalker.isValid) return;
     const linkedStalkerLoc = linkedStalker.location;
     const nullEntityLoc = nullEntity.location
@@ -77,8 +49,15 @@ export function playerLookingControl(player, nullEntity) {
     const dz = linkedStalkerLoc.z - nullEntityLoc.z;
     const distance = Math.hypot(dx, dy, dz);
 
-    const state = isPlayerLookingAtEntity(player);
-    state.isLooking = (distance <= 10);
+    const newIsLooking = (distance <= 10);
+    const oldIsLooking = cache.isLooking;
+
+    if (oldIsLooking !== newIsLooking) {
+        cache.isLooking = newIsLooking;
+        
+        if (newIsLooking) handleStaticEffect(player);
+        else playerStoppedLooking(player);
+    }
 }
 
 function handleStaticEffect(player) {
@@ -207,8 +186,6 @@ function getPlayerStats() {
 }
 
 export function listOfPlayersLookingMap() { return listOfPlayersLooking; }
-
-export function playerStatesOfPlayerLookingMap() { return playerStates; }
 
 export function listOfPlayersPlayingStaticMap() { return listOfPlayersPlayingStatic; }
 
