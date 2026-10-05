@@ -22,6 +22,7 @@ import "./RoundBegin/ghostController";
 import "./RoundBegin/playerLooking";
 import "./RoundBegin/randomPeep";
 
+import "./RoundBegin/Null/nullCache";
 import "./RoundBegin/Null/nullTeleport";
 
 import "./Player/playerCache";

@@ -10,47 +10,23 @@ import { updateGlobalUi } from "../UI/globalUi";
 import { getSanityObjective, getObjectiveScore } from "../scoreboards";
 import { PlayerCache } from "../Player/playerCache";
 
-
 import { stopTeleportNull } from "./Null/nullTeleport";
 
-const initialState = {
-	isSoulsFreedValueSufficient: false,
-	isSoulsFreedValue4: false,
-	isSoulsFreedValue5: false,
-	doesSoulsFreedValueExceed: false,
-	areAllCagesCollected: false
-}
-
-const state = new Proxy({ ...initialState }, {
-	set(target, key, value) {
-		if (target[key] == value) return true;
-		
-		target[key] = value
-
-		let isSoulsFreedValueSufficient = target["isSoulsFreedValueSufficient"];
-		let isSoulsFreedValue4 = target["isSoulsFreedValue4"];
-		let isSoulsFreedValue5 = target["isSoulsFreedValue5"];
-		let doesSoulsFreedValueExceed = target["doesSoulsFreedValueExceed"];
-		let areAllCagesCollected = target["areAllCagesCollected"];
-
-		const players = getPlayersInRound();
-
-		if (isSoulsFreedValueSufficient) soulsFreedValueSufficient();
-		if (isSoulsFreedValue4) soulsFreedValue4();
-		else if (isSoulsFreedValue5) soulsFreedValue5();
-	 	else if (doesSoulsFreedValueExceed) soulsFreedValueExceeded(players);
-	 	else if (areAllCagesCollected) roundCompleted();
-	
-		return true;
-	}
-})
 
 export function soulsAmountCheck(soulsFreedValue) {
-	state.isSoulsFreedValueSufficient = [4, 5].includes(soulsFreedValue) && !world.getDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam");
-	state.isSoulsFreedValue4 = soulsFreedValue == 4 && world.getDynamicProperty("cages4Activated") == false;
-	state.isSoulsFreedValue5 = soulsFreedValue == 5 && world.getDynamicProperty("cages5Activated") == false;
-	state.doesSoulsFreedValueExceed = soulsFreedValue == 6;
-	state.areAllCagesCollected = soulsFreedValue == 7;
+	const isSoulsFreedValueSufficient = [4, 5].includes(soulsFreedValue) && !world.getDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam");
+	const isSoulsFreedValue4 = soulsFreedValue == 4 && world.getDynamicProperty("cages4Activated") == false;
+	const isSoulsFreedValue5 = soulsFreedValue == 5 && world.getDynamicProperty("cages5Activated") == false;
+	const doesSoulsFreedValueExceed = soulsFreedValue == 6;
+	const areAllCagesCollected = soulsFreedValue == 7;
+
+	const players = getPlayersInRound();
+
+	if (isSoulsFreedValueSufficient) soulsFreedValueSufficient();
+	if (isSoulsFreedValue4) soulsFreedValue4();
+	else if (isSoulsFreedValue5) soulsFreedValue5();
+	else if (doesSoulsFreedValueExceed) soulsFreedValueExceeded(players);
+	else if (areAllCagesCollected) roundCompleted();
 
 	updateGlobalUi();
 }
@@ -84,9 +60,9 @@ async function soulsFreedValueExceeded(players) {
 	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", false);
 	
   for (const player of players) {
-		await player.setDynamicProperty("nowPlayerWillGetNoSignal", false);
-		await player.setDynamicProperty("initializationBeforeLockingTheCam", true);
-		await player.setDynamicProperty("canTurnOffCam", false);
+		player.setDynamicProperty("nowPlayerWillGetNoSignal", false);
+		player.setDynamicProperty("initializationBeforeLockingTheCam", true);
+		player.setDynamicProperty("canTurnOffCam", false);
 		
 		player.runCommand("clear @s game:camera");
 		player.runCommand("clear @s game:camera_turn_off");
@@ -95,9 +71,7 @@ async function soulsFreedValueExceeded(players) {
 		let staminaValue = PlayerCache.get(player.id)?.stamina;
 		
 		cameraUsed(player, sanityValue, staminaValue);
-		
   }
-
 }
 
 function canTurnOffCam() {

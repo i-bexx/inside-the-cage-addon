@@ -24,9 +24,9 @@ import { resetPrices } from "./panels";
 // SYSTEM: MAP IMPORTS
 // ==========================================
 
-import { listOfPlayersLookingMap, playerStatesOfPlayerLookingMap, listOfPlayersPlayingStaticMap } from "./RoundBegin/playerLooking";
+import { listOfPlayersLookingMap, listOfPlayersPlayingStaticMap } from "./RoundBegin/playerLooking";
 
-import { playerStatesOfBatteryMap, playerDrainingBatteryCountdownMap, playerIsBatteryCriticalCountdownMap } from "./RoundBegin/batteryController";
+import { playerDrainingBatteryCountdownMap, playerIsBatteryCriticalCountdownMap } from "./RoundBegin/batteryController";
 
 import { getToastTimeMap } from "./RoundBegin/coinController";
 
@@ -175,7 +175,6 @@ export function clearPlayerMaps(playerId) {
 
   getTeleportCooldown().delete(playerId);
 
-  playerStatesOfBatteryMap().delete(playerId);
   playerDrainingBatteryCountdownMap().delete(playerId);
   playerIsBatteryCriticalCountdownMap().delete(playerId);
 
@@ -186,7 +185,6 @@ export function clearPlayerMaps(playerId) {
   getSanityLowStaticEventMap().delete(playerId);
 
   listOfPlayersLookingMap().delete(playerId);
-  playerStatesOfPlayerLookingMap().delete(playerId);
 
   playerResetStaminaCooldownMap().delete(playerId);
 }
@@ -261,17 +259,15 @@ export function commandsToResetTheGame(dimension) {
 // ==========================================
 
 export function resetMaps() {
-  playerStatesOfPlayerLookingMap().clear(); //playerLooking
-  listOfPlayersLookingMap().clear();
+  listOfPlayersLookingMap().clear(); //playerLooking
   listOfPlayersPlayingStaticMap().clear();
 
-  playerStatesOfBatteryMap().clear(); //batteryController
-  playerDrainingBatteryCountdownMap().clear();
+  playerDrainingBatteryCountdownMap().clear(); //batteryController
   playerIsBatteryCriticalCountdownMap().clear();
 
-  playerResetStaminaCooldownMap().clear(); //Stamina
+  playerResetStaminaCooldownMap().clear(); //staminaController
 
-  getPlaysoundHeartMap().clear(); //Sanity
+  getPlaysoundHeartMap().clear(); //sanityController
   getSanityLowStaticSoundMap().clear();
   getSanityLowStaticEventMap().clear();
 }

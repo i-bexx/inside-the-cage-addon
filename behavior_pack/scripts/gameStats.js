@@ -1,9 +1,5 @@
 import { world } from "@minecraft/server";
 
-// ==========================================
-// SYSTEM: MODULE IMPORTS
-// ==========================================
-
 import { resetWorldDynamicPropertyData, resetEntitiesData, commandsToResetTheGame, resetMaps } from "./resetStats";
 import { checkIfPositionClear } from "./gameStarter";
 
@@ -21,31 +17,11 @@ import { finishRoundEarly } from "./RoundBegin/RoundOperations/finishRoundEarly"
 
 import { updateGlobalUi } from "./UI/globalUi";
 
-// ==========================================
-// SYSTEM: CONFIGURATION & COMMANDS
-// ==========================================
-
 let dimension;
 export const ROUND_STATE_MAP = new Map();
 ROUND_STATE_MAP.set("ROUND_STARTED", false);
 ROUND_STATE_MAP.set("ROUND_RESTARTED", false);
 ROUND_STATE_MAP.set("ROUND_ENDED_EARLY", false);
-
-const INITIAL_GAME_STATE = {
-    isGameStarted: 0
-};
-
-const INITIAL_RESTART_GAME_STATE = {
-    isGameRestarted: 0
-};
-
-const INITIAL_ENDED_GAME_STATE = {
-    isGameEnded: 0
-};
-
-// ==========================================
-// SYSTEM: FUNCTION REGISTRIES
-// ==========================================
 
 const FUNCTIONS_TO_START = {
     initiateCam,
@@ -64,69 +40,40 @@ const FUNCTIONS_TO_END_ROUND = {
     resetEntitiesData
 };
 
-
-let isGameStarted;
-
-// ==========================================
-// SYSTEM: STATE MANAGEMENT
-// ==========================================
-
-const state = new Proxy({ ...INITIAL_GAME_STATE }, {
-    set(target, key, value) {
-        // Optimization: Do not react if the value hasn't changed
-        if (target[key] == value) return true;
-
-        target[key] = value;
-
-        const gameActive = (target[key] == 1);
-
-        if (gameActive) roundStarted();
-        else roundOver();
-        
-        return true;
-    }
-});
-
-const gameRestartState = new Proxy({ ...INITIAL_RESTART_GAME_STATE }, {
-    set(target, key, value) {
-        // Optimization: Do not react if the value hasn't changed
-        if (target[key] == value) return true;
-        
-        target[key] = value;
-
-        const restartingGame = (target[key] == 1);
-        if (restartingGame) restartRound();
-        
-        return true;
-    }
-});
-
-const gameEndedState = new Proxy({ ...INITIAL_ENDED_GAME_STATE }, {
-    set(target, key, value) {
-        // Optimization: Do not react if the value hasn't changed
-        if (target[key] == value) return true;
-        
-        target[key] = value;
-
-        const endingGameEarly = (target[key] == 1);
-        if (endingGameEarly) finishRoundEarly();
-
-        return true;
-    }
-});
+let currentGameState = 0;
+let currentRestartState = 0;
+let currentEndedState = 0;
 
 // ==========================================
 // SYSTEM: MAIN GAME LOOP
 // ==========================================
 
 export function checkGameStatus(inGamePlayers) {
-    state.isGameStarted = ROUND_STATE_MAP.get("ROUND_STARTED");
-    gameRestartState.isGameRestarted = ROUND_STATE_MAP.get("ROUND_RESTARTED");
-    gameEndedState.isGameEnded = ROUND_STATE_MAP.get("ROUND_ENDED_EARLY");
+    const isStarted = ROUND_STATE_MAP.get("ROUND_STARTED");
+    const isRestarted = ROUND_STATE_MAP.get("ROUND_RESTARTED");
+    const isEndedEarly = ROUND_STATE_MAP.get("ROUND_ENDED_EARLY");
 
-    isGameStarted = state.isGameStarted;
+    // 1. GAME STARTED / OVER CHECK
+    if (currentGameState !== isStarted) {
+        currentGameState = isStarted;
+        if (isStarted == 1) roundStarted();
+        else roundOver();
+    }
 
-    if (isGameStarted == 1)
+    // 2. RESTART GAME CHECK
+    if (currentRestartState !== isRestarted) {
+        currentRestartState = isRestarted;
+        if (isRestarted == 1) restartRound();
+    }
+
+    // 3. END GAME EARLY CHECK
+    if (currentEndedState !== isEndedEarly) {
+        currentEndedState = isEndedEarly;
+        if (isEndedEarly == 1) finishRoundEarly();
+    }
+
+    // If game is active but no players, end it
+    if (currentGameState == 1)
         if (inGamePlayers.length == 0) ROUND_STATE_MAP.set("ROUND_STARTED", false);
 }
 
