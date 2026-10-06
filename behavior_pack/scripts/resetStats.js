@@ -1,4 +1,4 @@
-import { world, system } from "@minecraft/server";
+import { world, system, Player } from "@minecraft/server";
 
 // ==========================================
 // SYSTEM: MODULE IMPORTS
@@ -33,6 +33,8 @@ import { getToastTimeMap } from "./RoundBegin/coinController";
 import { playerResetStaminaCooldownMap } from "./RoundBegin/staminaController";
 
 import { getPlaysoundHeartMap, getSanityLowStaticSoundMap, getSanityLowStaticEventMap } from "./RoundBegin/sanityController";
+
+import { getCloseCamTimeout } from "./RoundBegin/cameraController";
 
 
 import { checkIfPositionClear } from "./gameStarter";
@@ -168,8 +170,6 @@ export function resetEntitiesData(ownerJoined = false) {
 
 export function clearPlayerMaps(playerId) {
   getCompassStates().delete(playerId);
-  
-  // Cursor states deleted via PlayerCache automatically
 
   checkIfPositionClear().delete(playerId);
 
@@ -187,6 +187,8 @@ export function clearPlayerMaps(playerId) {
   listOfPlayersLookingMap().delete(playerId);
 
   playerResetStaminaCooldownMap().delete(playerId);
+
+  getCloseCamTimeout().delete(playerId);
 }
 
 export function setPlayerMaps(playerId) {
