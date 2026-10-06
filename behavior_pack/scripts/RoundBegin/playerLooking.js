@@ -79,7 +79,7 @@ function handleStaticEffect(player) {
     }
 }
 
-function playerStoppedLooking(player) {
+export function playerStoppedLooking(player) {
     if (!player || !player.isValid) return;
 
     // 1. GUARANTEE CLEANUP FIRST

@@ -6,6 +6,7 @@ import { roundCompleted } from "./roundCompleted";
 import { stopDifficultyMonitor } from "./ghostController";
 import { warnPlayerAboutCam } from "./cameraController";
 import { updateGlobalUi } from "../UI/globalUi";
+import { playerStoppedLooking } from "./playerLooking";;
 
 import { getSanityObjective, getObjectiveScore } from "../scoreboards";
 import { PlayerCache } from "../Player/playerCache";
@@ -22,7 +23,7 @@ export function soulsAmountCheck(soulsFreedValue) {
 
 	const players = getPlayersInRound();
 
-	if (isSoulsFreedValueSufficient) soulsFreedValueSufficient();
+	if (isSoulsFreedValueSufficient) soulsFreedValueSufficient(players);
 	if (isSoulsFreedValue4) soulsFreedValue4();
 	else if (isSoulsFreedValue5) soulsFreedValue5();
 	else if (doesSoulsFreedValueExceed) soulsFreedValueExceeded(players);
@@ -31,7 +32,7 @@ export function soulsAmountCheck(soulsFreedValue) {
 	updateGlobalUi();
 }
 
-function soulsFreedValueSufficient() {
+function soulsFreedValueSufficient(players) {
 	world.setDifficulty(Difficulty.Normal);
 
 	warnPlayerAboutCam();
@@ -42,6 +43,8 @@ function soulsFreedValueSufficient() {
 	world.getDimension("overworld").runCommand("tp @e[type=game:null] -65 75 -150");
 	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", true);
 	world.setDynamicProperty("nullTeleportChecking", false);
+
+	players.forEach(player => playerStoppedLooking(player));
 }
 
 function soulsFreedValue4() {
@@ -66,6 +69,12 @@ async function soulsFreedValueExceeded(players) {
 		
 		player.runCommand("clear @s game:camera");
 		player.runCommand("clear @s game:camera_turn_off");
+
+		player.runCommand("clear @s game:gun");
+		player.runCommand("clear @s game:knife");
+		player.runCommand("clear @s game:toxic_bomb");
+		player.runCommand("clear @s game:ammo");
+		player.runCommand("clear @a game:ammo_shoot");
 
 		let sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
 		let staminaValue = PlayerCache.get(player.id)?.stamina;

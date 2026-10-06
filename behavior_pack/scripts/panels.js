@@ -1,7 +1,7 @@
 import { world, system, EntityComponentTypes } from "@minecraft/server";
 import { ActionFormData, ModalFormData, FormCancelationReason } from "@minecraft/server-ui";
 
-import { getCoinAmountObjective, getObjectiveScore } from "./scoreboards";
+import { getCoinAmountObjective, getSoulsFreedObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 import { pickupBattery } from "./RoundBegin/batteryController";
 import { getPasswords } from "./RoundBegin/passwordManager";
 import { votePanel } from "./voteManager";
@@ -13,6 +13,8 @@ let dimension;
 const MAIN_PANELS = [ shopPanel, votePanel, upgradeBattery, increaseStaminaLimit ];
 const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_bomb": 6, "game:ammo": 1, "game:battery": 3, "game:cage_detector": 9 };
 const ORIGINAL_PRICES = [ 4, 2, 7, 6, 1, 3, 9 ];
+
+const ITEMS_NOT_ALLOWED_WHEN_CAM_IS_WORKING = new Set(["game:gun", "game:knife", "game:toxic_bomb", "game:ammo"]);
 
 let timeoutId = undefined;
 
@@ -99,8 +101,16 @@ function shopPanel(player) {
             if (canceled || [7, 8].includes(selection)) return;
 
             const coinAmount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity);
+            const soulsFreedValue = getObjectiveScore(getSoulsFreedObjective(), getValueParticipant());
 
 						const [itemName, itemCost] = Object.entries(itemsObject)[selection] || [];
+
+                        if (ITEMS_NOT_ALLOWED_WHEN_CAM_IS_WORKING.has(itemName) && (soulsFreedValue != 4 && soulsFreedValue != 5)) {
+                            player.sendMessage(" §6[§e!§6] §cYou can't buy this item right now");
+                            player.playSound("note.bass");
+                            return;
+                        }
+
                         const isAlreadyOwned = hasItem(itemsObject, itemName, player);
 
                         if (isAlreadyOwned) {

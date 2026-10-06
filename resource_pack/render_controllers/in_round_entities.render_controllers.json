@@ -18,12 +18,6 @@
       "materials": [ { "*": "Material.bottle" } ],
       "textures": [ "Texture.bottle" ]
     },
-
-    "controller.render.stalker_cursor": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.default" ]
-    },
     
     "controller.render.ghost": {
       "geometry": "Geometry.default",
