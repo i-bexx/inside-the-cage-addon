@@ -17,8 +17,8 @@
 				"rotation": true
 			},
 			"minecraft:emitter_rate_steady": {
-				"spawn_rate": 60,
-				"max_particles": 400
+				"spawn_rate": 300,
+				"max_particles": 500
 			},
 			"minecraft:emitter_lifetime_once": {
 				"active_time": 2
