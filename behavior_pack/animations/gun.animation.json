@@ -10,7 +10,7 @@
 		"animation.gun.aim": {
 			"timeline": {
 				"0.0": [
-					"/execute if score @s can_play_aiming_sound matches 1 run playsound gun_aim @s"
+					"/playsound gun_aim @s"
 				]
 			},
 			"animation_length": 0.4
