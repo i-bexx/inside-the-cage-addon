@@ -167,7 +167,7 @@ function upgradeBattery(player) {
     player.sendMessage(" §6[§e!§6] §aBattery efficiency upgraded!");
     player.playSound("random.levelup");
 
-    player.runCommand(`xp -7 @s`);
+    player.runCommand(`xp -7L @s`);
 	player.runCommand(`scoreboard players remove @s coin_amount 7`);
     return;
 }
@@ -192,7 +192,7 @@ function increaseStaminaLimit(player) {
     player.sendMessage(" §6[§e!§6] §aStamina upgraded!");
     player.playSound("random.levelup");
 
-    player.runCommand(`xp -7 @s`);
+    player.runCommand(`xp -7L @s`);
 	player.runCommand(`scoreboard players remove @s coin_amount 7`);
     return;
 }
