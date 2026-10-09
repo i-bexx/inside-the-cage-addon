@@ -42,14 +42,20 @@ export function playerLookingControl(player, nullEntity) {
     const linkedStalker = cache.stalkerEntity;
     if (!linkedStalker || !linkedStalker.isValid) return;
     const linkedStalkerLoc = linkedStalker.location;
-    const nullEntityLoc = nullEntity.location
+    const nullEntityLoc = nullEntity.location;
+    const playerLoc = player.location;
 
     const dx = linkedStalkerLoc.x - nullEntityLoc.x;
     const dy = linkedStalkerLoc.y - nullEntityLoc.y;
     const dz = linkedStalkerLoc.z - nullEntityLoc.z;
     const distance = Math.hypot(dx, dy, dz);
 
-    const newIsLooking = (distance <= 10);
+    const pdx = playerLoc.x - nullEntityLoc.x;
+    const pdy = playerLoc.y - nullEntityLoc.y;
+    const pdz = playerLoc.z - nullEntityLoc.z;
+    const distanceToPlayer = Math.hypot(pdx, pdy, pdz);
+
+    const newIsLooking = (distance <= 20 && distanceToPlayer <= 20);
     const oldIsLooking = cache.isLooking;
 
     if (oldIsLooking !== newIsLooking) {

@@ -10,7 +10,7 @@ const CONFIG = {
     ENTITY_TYPE: "game:stalker_cursor",
     OBJECTIVE_ID: "stalker_match_id",
     MATCH_TAG: "stalker_matched",
-    STALKER_DISTANCE: 10
+    STALKER_DISTANCE: 20
 };
 
 let dimension;
