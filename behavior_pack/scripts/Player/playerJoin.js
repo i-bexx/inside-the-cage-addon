@@ -17,7 +17,7 @@ const CONFIG = {
         HOST: "host",
         IN_LOBBY: "in_lobby", 
         MENU: "in_menu",
-        TO_REMOVE: ["in_game", "in_lobby", "waiting_for_start", "starter", "menu", "eliminated", "stalker_matched", "hasNotification", "requester", "accepted_request", "refused_request", "show_in_round_personal_ui"]
+        TO_REMOVE: ["in_game", "in_lobby", "waiting_for_start", "starter", "menu", "eliminated", "stalker_matched", "hasNotification", "requester", "accepted_request", "refused_request", "show_in_round_personal_ui", "passwordCorrect"]
     },
     DYN_PROPS: { 
         IN_MENU: "in_menu",
