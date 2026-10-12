@@ -10,7 +10,7 @@ import { givePanelItem } from "./panels";
 import { Ambiance_control } from "./RoundBegin/ambianceController";
 import { spawnCages } from "./RoundBegin/cageController";
 import { startcoinController } from "./RoundBegin/coinController";
-import { decidePasswords } from "./RoundBegin/passwordManager";
+import { decidePasswords, passwordManager } from "./RoundBegin/passwordManager";
 
 import { restartRound } from "./RoundBegin/RoundOperations/restartRound";
 import { finishRoundEarly } from "./RoundBegin/RoundOperations/finishRoundEarly";
@@ -29,8 +29,9 @@ const FUNCTIONS_TO_START = {
     Ambiance_control,
     spawnCages,
     startcoinController,
+    updateGlobalUi,
     decidePasswords,
-    updateGlobalUi
+    passwordManager
 };
 
 const FUNCTIONS_TO_END_ROUND = {

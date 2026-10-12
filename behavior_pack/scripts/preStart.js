@@ -1,4 +1,5 @@
 import { world, system } from "@minecraft/server";
+import { decidePasswords } from "./RoundBegin/passwordManager";
 
 // =============================================================================
 // CONFIGURATION
@@ -154,7 +155,12 @@ export function isLookingAtMenuEntity() {
 }
 
 world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
-    if (!(ownerPlayer && player.hasTag("host"))) {
+    const isNewGame = (target.typeId === CONFIG.IDS.NEW_GAME);
+    const isContinue = (target.typeId === CONFIG.IDS.CONTINUE);
+
+    if (!isNewGame && !isContinue) return;
+
+    if (!ownerPlayer || !player.hasTag("host")) {
 			 player.runCommand("playsound note.bass @s");
 			return; 
 		}
@@ -172,11 +178,6 @@ world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
 		const doesHaveTag = player.hasTag(CONFIG.TAGS.MENU);
 		
     if (!doesHaveTag) return;
-
-    const isNewGame = (target.typeId === CONFIG.IDS.NEW_GAME);
-    const isContinue = (target.typeId === CONFIG.IDS.CONTINUE);
-
-    if (!isNewGame && !isContinue) return;
 
     player.runCommand("playsound click_chose @s");
     player.runCommand(`tag @s remove ${CONFIG.TAGS.MENU}`);
@@ -208,6 +209,7 @@ world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
         dimension.runCommand(`event entity @e[type=${CONFIG.IDS.DOOR}] "door_0_event"`);
 
         world.setDynamicProperty("in_menu", false);
+        decidePasswords();
     }
 });
 
@@ -241,6 +243,7 @@ function startSkipSystem(playersInCutscene) {
             runCommandList(COMMANDS.SKIP_CLEANUP);
 
             world.setDynamicProperty("in_menu", false);
+            decidePasswords();
             resetTimerVariables();
 
             if (ACTIVE_TIMERS.skipLoop == undefined) return;
@@ -316,6 +319,7 @@ function playSceneArrival() {
         runCommandList(COMMANDS.SCENE_ARRIVAL);
 
         world.setDynamicProperty("in_menu", false);
+        decidePasswords();
         resetTimerVariables();
     }, CONFIG.TIMESTAMPS.ARRIVAL);
 }

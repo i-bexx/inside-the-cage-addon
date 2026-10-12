@@ -3,7 +3,7 @@ import { ActionFormData, ModalFormData, FormCancelationReason } from "@minecraft
 
 import { getCoinAmountObjective, getSoulsFreedObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
 import { pickupBattery } from "./RoundBegin/batteryController";
-import { getPasswords } from "./RoundBegin/passwordManager";
+import { getPasswords, passwordEnteredCorrect } from "./RoundBegin/passwordManager";
 import { votePanel } from "./voteManager";
 import { ROUND_STATE_MAP } from "./gameStats";
 import { PlayerCache } from "./Player/playerCache";
@@ -30,13 +30,6 @@ function customPanel(player) {
             if (cancelationReason === FormCancelationReason.UserBusy) return;
             if (canceled) return;
 
-           const isGameStarted = ROUND_STATE_MAP.get("ROUND_STARTED");
-            if (isGameStarted == 0) {
-                player.sendMessage(" §6[§e!§6] §c§lPanel is currently locked!");
-                player.playSound("note.bass");
-                return;
-            }
-
             const firstPassword = getPasswords()[0];
             const secondPassword = getPasswords()[1];
 
@@ -44,8 +37,7 @@ function customPanel(player) {
             const secondPasswordInput = formValues[1];
             
             if (firstPasswordInput === firstPassword && secondPasswordInput === secondPassword) {
-                player.playSound("random.orb");
-                // FUNCTION
+                passwordEnteredCorrect(player);
             } else {
                 player.sendMessage(" §c[!] Incorrect Password!");
                 player.playSound("note.bass");

@@ -4,7 +4,7 @@ import { world, system, Player } from "@minecraft/server";
 // SYSTEM: MODULE IMPORTS
 // ==========================================
 
-import { stopGivePanelItem } from "./panels";
+import { stopGivePanelItem, resetPrices } from "./panels";
 import { stopInitiateCam } from "./cameraUsage";
 import { resetGameStarterSession } from "./gameStarter";
 import { ROUND_STATE_MAP } from "./gameStats";
@@ -15,9 +15,6 @@ import { stopcoinController } from "./RoundBegin/coinController";
 
 import { despawnCages } from "./RoundBegin/cageController";
 import { despawnCoins } from "./RoundBegin/coinController";
-
-import { resetPasswords } from "./RoundBegin/passwordManager";
-import { resetPrices } from "./panels";
 
 
 // ==========================================
@@ -232,7 +229,6 @@ export function resetFunctions() {
   stopAmbiance();
   
   resetGameStarterSession();
-  resetPasswords();
   resetPrices();
 }
 
