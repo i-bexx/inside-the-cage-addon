@@ -5,10 +5,11 @@ import { getPlayersInRound } from "../utils";
 import { roundCompleted } from "./roundCompleted";
 import { stopDifficultyMonitor } from "./ghostController";
 import { warnPlayerAboutCam } from "./cameraController";
-import { updateGlobalUi } from "../UI/globalUi";
-import { playerStoppedLooking } from "./playerLooking";;
+import { playerStoppedLooking } from "./playerLooking";
 
 import { getSanityObjective, getObjectiveScore } from "../scoreboards";
+import { stalkerMatch } from "../stalkerEntity";
+import { updateGlobalUi } from "../UI/globalUi";
 import { PlayerCache } from "../Player/playerCache";
 
 import { stopTeleportNull } from "./Null/nullTeleport";
@@ -44,7 +45,12 @@ function soulsFreedValueSufficient(players) {
 	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", true);
 	world.setDynamicProperty("nullTeleportChecking", false);
 
-	players.forEach(player => playerStoppedLooking(player));
+	for (const player of players) {
+    playerStoppedLooking(player);
+    player.removeTag("stalker_matched");
+}
+
+	world.getDimension("overworld").runCommand("kill @e[type=game:stalker_cursor]");
 }
 
 function soulsFreedValue4() {
@@ -80,6 +86,7 @@ async function soulsFreedValueExceeded(players) {
 		let staminaValue = PlayerCache.get(player.id)?.stamina;
 		
 		cameraUsed(player, sanityValue, staminaValue);
+		stalkerMatch();
   }
 }
 

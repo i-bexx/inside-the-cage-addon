@@ -10,6 +10,7 @@ const CONFIG = {
     ENTITY_TYPE: "game:stalker_cursor",
     OBJECTIVE_ID: "stalker_match_id",
     MATCH_TAG: "stalker_matched",
+    IN_GAME: "in_game",
     STALKER_DISTANCE: 20
 };
 
@@ -24,11 +25,10 @@ let stalkerMatchIdObjective = undefined;
 
 export function stalkerMatch() {
     const players = world.getAllPlayers()
-                    .filter(player => !player.hasTag(CONFIG.MATCH_TAG));
+                    .filter(player => !player.hasTag(CONFIG.MATCH_TAG) && player.hasTag(CONFIG.IN_GAME));
 
-    for (const player of players) {
+    for (const player of players)
         stalkerMatchLogic(player);
-    }
 }
 
 function stalkerMatchLogic(player) {
