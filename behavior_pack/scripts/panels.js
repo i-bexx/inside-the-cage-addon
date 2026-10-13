@@ -18,6 +18,27 @@ const ITEMS_NOT_ALLOWED_WHEN_CAM_IS_WORKING = new Set(["game:gun", "game:knife",
 
 let timeoutId = undefined;
 
+// --- EVENTS ---
+
+world.afterEvents.itemUse.subscribe((eventData) => {
+      const { source, itemStack } = eventData
+      
+      if (itemStack.typeId == "minecraft:compass") mainPanel(source);
+
+      else if (itemStack.typeId == "game:discount_ticket") {
+        for (const [key, value] of Object.entries(SHOP_ITEMS)) {
+            const newCost = Math.max(1, Math.ceil(value / 2));
+            SHOP_ITEMS[key] = newCost;
+        }
+        source.runCommand("clear @s game:discount_ticket");
+      }
+});
+
+world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
+    if (target.typeId !== "game:password_desktop") return;
+    customPanel(player);
+});
+
 // --- PASSWORD PANEL ---
 
 function customPanel(player) {
@@ -204,22 +225,6 @@ function hasItem(itemsObject, itemTypeId, player) {
     if (itemsObject[itemTypeId] == "§l§7Not Sale") return true;
     else return false;
 }
-
-    
-world.afterEvents.itemUse.subscribe((eventData) => {
-      const { source, itemStack } = eventData
-      
-      if (itemStack.typeId == "minecraft:compass") mainPanel(source);
-      else if (itemStack.typeId == "minecraft:gold_ingot") customPanel(source);
-
-      else if (itemStack.typeId == "game:discount_ticket") {
-        for (const [key, value] of Object.entries(SHOP_ITEMS)) {
-            const newCost = Math.max(1, Math.ceil(value / 2));
-            SHOP_ITEMS[key] = newCost;
-        }
-        source.runCommand("clear @s game:discount_ticket");
-      }
-})
 
 export function givePanelItem() {
     if (timeoutId !== undefined) return;
