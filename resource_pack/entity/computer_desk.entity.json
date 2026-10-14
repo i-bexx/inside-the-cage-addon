@@ -1,0 +1,24 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "game:computer_desk",
+
+      "materials": {
+        "default": "entity_alphatest"
+      },
+
+      "textures": {
+        "default": "textures/entity/game/computer_desk"
+      },
+
+      "geometry": {
+        "default": "geometry.computer_desk"
+      },
+
+      "render_controllers": [
+        "controller.render.default"
+      ]
+    }
+  }
+}
