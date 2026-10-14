@@ -57,7 +57,11 @@ export async function spawnCages() {
         await loadTickingArea(dimension, locationObject, areaName);
 
         try {
-            dimension.spawnEntity(CONFIG.CAGE_ID, locationObject);
+            dimension.spawnEntity(CONFIG.CAGE_ID, {
+                x: locationObject.x + 0.5,
+                y: locationObject.y,
+                z: locationObject.z + 0.5
+            });
             tickingAreaLocations.push({ locationObject, areaName });
             world.setDynamicProperty("active_cage_locations", JSON.stringify(tickingAreaLocations));
             dimension.runCommand(`say @a "Cage ${i + 1} spawned at ${JSON.stringify(locationObject)}"`);
