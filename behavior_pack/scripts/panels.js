@@ -35,7 +35,7 @@ world.afterEvents.itemUse.subscribe((eventData) => {
 });
 
 world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
-    if (target.typeId !== "game:password_desktop") return;
+    if (target.typeId !== "game:computer_desk") return;
     customPanel(player);
 });
 

@@ -51,12 +51,6 @@
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]
-    },
-
-    "controller.render.password_desktop": {
-      "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
-      "textures": [ "Texture.default" ]
     }
   }
 }
