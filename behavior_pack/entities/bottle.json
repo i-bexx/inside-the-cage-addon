@@ -39,7 +39,6 @@
       },
 
       "minecraft:nameable": {},
-      "minecraft:fire_immune": false,
       "minecraft:physics": {}
 		}
   }
