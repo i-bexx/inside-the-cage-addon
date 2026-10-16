@@ -64,10 +64,6 @@
         "never_despawn": true,
         "radius": 2
       },
-
-      "minecraft:nameable": {},
-      "minecraft:fire_immune": false,
-      "minecraft:transient": {},
       "minecraft:physics": {}
     },
 

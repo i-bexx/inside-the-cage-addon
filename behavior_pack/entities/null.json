@@ -41,8 +41,6 @@
         "is_pushable_by_piston": false
       },
       "minecraft:persistent": {},
-      "minecraft:nameable": {},
-      "minecraft:fire_immune": false,
       "minecraft:physics": {}
 		}
   }

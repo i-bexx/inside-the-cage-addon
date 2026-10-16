@@ -51,8 +51,6 @@
         "is_pushable_by_piston": false
       },
 
-      "minecraft:nameable": {},
-			"minecraft:fire_immune": {},
       "minecraft:transient": {},
 			"minecraft:physics": {}
 		},
