@@ -26,7 +26,6 @@ const CONFIG = {
         GAME_END: "roundEndedEarly"
     },
     SCORES: {
-        GAME_STARTED: "game_started",
         NEW_GAME: "new_game",
         STALKER_MATCH_ID: "stalker_match_id",
         COIN: "coin_amount",
@@ -41,8 +40,7 @@ const CONFIG = {
     COMMANDS: {
         RESET_COIN_UI: "xp -10L @s",
         RESET_COIN: "scoreboard players set @s coin_amount 0", 
-        MENU_READY_SOUND: "playsound random.levelup @s", 
-        GAME_NOT_STARTED: "scoreboard players set value game_started 0"
+        MENU_READY_SOUND: "playsound random.levelup @s"
     },
     ENTITIES: {
         STALKER: "game:stalker_cursor",
@@ -168,7 +166,6 @@ async function handleOwnerJoinLogic(player) {
     world.setDynamicProperty(CONFIG.DYN_PROPS.GAME_END, false); // When owner joins roundEndedEarly dynamic property reset here
     
     player.setDynamicProperty(CONFIG.DYN_PROPS.MENU_READY, false);
-    player.runCommand(CONFIG.COMMANDS.GAME_NOT_STARTED);
 
     world.setDynamicProperty("reseting_round", true);
     

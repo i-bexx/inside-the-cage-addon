@@ -1,10 +1,11 @@
 import { world } from "@minecraft/server";
 
-import { sleep } from "../utils";
-import { cameraDeactivated } from "../cameraUsage";
-import { slowUiTick } from "../UI/slowUiTick";
-import { resetPlayerDynamicPropertyData, resetPlayerProperties, clearPlayerMaps, setPlayerMaps, stopFunctionsInMaps, commandsToResetPlayerData } from "../resetStats";
-import { resetFunctions, resetMaps, resetWorldDynamicPropertyData, resetEntitiesData } from "../resetStats";
+import { sleep } from "../../utils";
+import { ROUND_STATE_MAP } from "../../gameStats";
+import { cameraDeactivated } from "../../cameraUsage";
+import { slowUiTick } from "../../UI/slowUiTick";
+import { resetPlayerDynamicPropertyData, resetPlayerProperties, clearPlayerMaps, setPlayerMaps, stopFunctionsInMaps, commandsToResetPlayerData } from "../../resetStats";
+import { resetFunctions, resetMaps, resetWorldDynamicPropertyData, resetEntitiesData } from "../../resetStats";
 
 export async function roundCompleted() {
   const players = world.getPlayers({tags: ["in_game"]});
@@ -51,5 +52,5 @@ export async function roundCompleted() {
     if (player.isValid) commandsToResetPlayerData(player);
   });
 
-  world.getDimension("overworld").runCommand("scoreboard players set value game_started 0");
+  ROUND_STATE_MAP.set("ROUND_STARTED", false);
 }
