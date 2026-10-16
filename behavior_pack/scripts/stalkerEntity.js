@@ -11,6 +11,7 @@ const CONFIG = {
     OBJECTIVE_ID: "stalker_match_id",
     MATCH_TAG: "stalker_matched",
     IN_GAME: "in_game",
+    WAITING_FOR_START: "waiting_for_start",
     STALKER_DISTANCE: 20
 };
 
@@ -25,7 +26,7 @@ let stalkerMatchIdObjective = undefined;
 
 export function stalkerMatch() {
     const players = world.getAllPlayers()
-                    .filter(player => !player.hasTag(CONFIG.MATCH_TAG) && player.hasTag(CONFIG.IN_GAME));
+                    .filter(player => !player.hasTag(CONFIG.MATCH_TAG) && (player.hasTag(CONFIG.IN_GAME) || player.hasTag(CONFIG.WAITING_FOR_START)));
 
     for (const player of players)
         stalkerMatchLogic(player);

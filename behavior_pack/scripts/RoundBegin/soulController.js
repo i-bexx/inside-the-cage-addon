@@ -2,7 +2,7 @@ import { world, Difficulty } from "@minecraft/server";
 
 import { cameraUsed } from "../cameraUsage";
 import { getPlayersInRound } from "../utils";
-import { roundCompleted } from "./roundCompleted";
+import { roundCompleted } from "./RoundOperations/roundCompleted";
 import { stopDifficultyMonitor } from "./ghostController";
 import { warnPlayerAboutCam } from "./cameraController";
 import { playerStoppedLooking } from "./playerLooking";

@@ -41,9 +41,9 @@ const FUNCTIONS_TO_END_ROUND = {
     resetEntitiesData
 };
 
-let currentGameState = 0;
-let currentRestartState = 0;
-let currentEndedState = 0;
+let currentGameState = false;
+let currentRestartState = false;
+let currentEndedState = false;
 
 // ==========================================
 // SYSTEM: MAIN GAME LOOP
@@ -57,24 +57,24 @@ export function checkGameStatus(inGamePlayers) {
     // 1. GAME STARTED / OVER CHECK
     if (currentGameState !== isStarted) {
         currentGameState = isStarted;
-        if (isStarted == 1) roundStarted();
+        if (isStarted) roundStarted();
         else roundOver();
     }
 
     // 2. RESTART GAME CHECK
     if (currentRestartState !== isRestarted) {
         currentRestartState = isRestarted;
-        if (isRestarted == 1) restartRound();
+        if (isRestarted) restartRound();
     }
 
     // 3. END GAME EARLY CHECK
     if (currentEndedState !== isEndedEarly) {
         currentEndedState = isEndedEarly;
-        if (isEndedEarly == 1) finishRoundEarly();
+        if (isEndedEarly) finishRoundEarly();
     }
 
     // If game is active but no players, end it
-    if (currentGameState == 1)
+    if (currentGameState)
         if (inGamePlayers.length == 0) ROUND_STATE_MAP.set("ROUND_STARTED", false);
 }
 
