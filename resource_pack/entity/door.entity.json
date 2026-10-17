@@ -7,12 +7,12 @@
         "default": "entity_alphablend"
       },
       "textures": {
-        "texture_0": "textures/entity/game/door/0",
-        "texture_1": "textures/entity/game/door/1",
-        "texture_2": "textures/entity/game/door/2",
-        "texture_3": "textures/entity/game/door/3",
-        "game_started": "textures/entity/game/door/started",
-        "waiting_for_host": "textures/entity/game/door/waiting_for_host"
+        "texture_0": "textures/entity/door/0",
+        "texture_1": "textures/entity/door/1",
+        "texture_2": "textures/entity/door/2",
+        "texture_3": "textures/entity/door/3",
+        "game_started": "textures/entity/door/started",
+        "waiting_for_host": "textures/entity/door/waiting_for_host"
       },
       "geometry": {
         "default": "geometry.door"

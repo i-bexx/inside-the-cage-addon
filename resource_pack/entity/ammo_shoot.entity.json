@@ -7,7 +7,7 @@
         "default": "entity_alphatest"
       },
       "textures": {
-        "default": "textures/entity/game/ammo_shoot"
+        "default": "textures/entity/ammo_shoot"
       },
       "geometry": {
         "default": "geometry.ammo_shoot"

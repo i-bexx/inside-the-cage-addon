@@ -9,7 +9,7 @@
       },
 
       "textures": {
-        "default": "textures/entity/steve"
+        "default": "textures/entity/random_peep"
       },
 
       "geometry": {

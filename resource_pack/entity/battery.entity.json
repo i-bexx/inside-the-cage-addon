@@ -7,7 +7,7 @@
         "default": "armor_stand"
       },
       "textures": {
-        "default": "textures/entity/game/battery"
+        "default": "textures/entity/battery"
       },
       "geometry": {
         "default": "geometry.battery"
