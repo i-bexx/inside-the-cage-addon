@@ -14,7 +14,6 @@ import "./voteManager";
 import "./utils";
 
 import "./RoundBegin/batteryController";
-import "./RoundBegin/Buy";
 import "./RoundBegin/cageController";
 import "./RoundBegin/cageDetector";
 import "./RoundBegin/coinController";
