@@ -4,10 +4,10 @@
     "description": {
       "identifier": "game:null",
       "materials": {
-        "default": "armor_stand"
+        "default": "entity_alphablend"
       },
       "textures": {
-        "default": "textures/entity/game/null"
+        "default": "textures/entity/null"
       },
       "geometry": {
         "default": "geometry.null"

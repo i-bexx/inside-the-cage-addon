@@ -9,7 +9,7 @@
       },
 
       "textures": {
-        "default": "textures/entity/game/computer_desk"
+        "default": "textures/entity/computer_desk"
       },
 
       "geometry": {

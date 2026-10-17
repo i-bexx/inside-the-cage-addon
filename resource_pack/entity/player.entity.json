@@ -19,15 +19,15 @@
         "default": "textures/entity/steve",
         "cape": "textures/entity/cape_invisible",
 
-        "static_normal": "textures/entity/game/static/static_1",
-        "static_1": "textures/entity/game/static/static_1",
-        "static_2": "textures/entity/game/static/static_2",
-        "static_3": "textures/entity/game/static/static_3",
-        "camera_no_signal": "textures/entity/game/static/camera_no_signal",
+        "static_normal": "textures/entity/static/static_1",
+        "static_1": "textures/entity/static/static_1",
+        "static_2": "textures/entity/static/static_2",
+        "static_3": "textures/entity/static/static_3",
+        "camera_no_signal": "textures/entity/static/camera_no_signal",
 
-        "battery": "textures/entity/game/battery_player",
-        "white_font": "textures/entity/game/fonts/white_font",
-        "red_font": "textures/entity/game/fonts/red_font"
+        "battery": "textures/entity/battery_player",
+        "white_font": "textures/entity/fonts/white_font",
+        "red_font": "textures/entity/fonts/red_font"
       },
 
       "geometry": {
