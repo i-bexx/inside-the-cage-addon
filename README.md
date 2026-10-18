@@ -70,7 +70,7 @@ For deeper technical discussions, refer to the following documentation:
 - 🔬 **[Advanced UI Systems](./docs/ADVANCED_UI.md):** Interactive dialogue engines, radar logic, and toast hijacking.
 - ⚙️ **[Entity Systems & Molang](./docs/ENTITY_SYSTEMS.md):** Custom entity components, render controllers, and conditional Molang expressions.
 - 🎬 **[Animation State Machines](./docs/ANIMATION_STATE_MACHINES.md):** Weapon systems, transitions, and behavior-pack animation logic.
-- 🎮 **[Gameplay Mechanics](./docs/GAMEPLAY_MECHANICS.md):** Overview of the survival, horror, and progression systems.
+- 🎮 **[Gameplay Mechanics](./docs/GAMEPLAY_MECHANICS.md):** Overview of the survival, and progression systems.
 
 ---
 
