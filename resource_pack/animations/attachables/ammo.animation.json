@@ -5,8 +5,8 @@
 			"loop": true,
 			"bones": {
 				"root_item": {
-					"rotation": [145.59221, 8.27711, 52.36879],
-					"position": [6, 19, 3]
+					"rotation": [0.5407, -77.22876, -100.3926],
+					"position": [5, 20, -5.8]
 				}
 			}
 		},

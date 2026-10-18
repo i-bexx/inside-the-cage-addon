@@ -4,10 +4,11 @@
     "description": {
       "identifier": "game:null",
       "materials": {
-        "default": "entity_alphablend"
+        "default": "entity_alphablend",
+        "halo": "entity_alphatest"
       },
       "textures": {
-        "default": "textures/entity/null"
+        "default": "textures/entity/null/null"
       },
       "geometry": {
         "default": "geometry.null"

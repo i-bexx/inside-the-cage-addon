@@ -100,6 +100,7 @@ export function commandsToResetPlayerData(player, playerJoined = false) {
     player.runCommand("tp @s -183 68 -97");
   
   player.runCommand("event entity @s battery_is_full_event");
+  player.runCommand("effect @s clear");
   player.runCommand("fog @s remove in_round_fog");
   player.runCommand(`recipe take @s "*"`);
   player.runCommand("scoreboard players set @s Sanity 100");

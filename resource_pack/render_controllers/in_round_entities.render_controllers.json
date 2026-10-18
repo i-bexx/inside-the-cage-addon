@@ -3,7 +3,10 @@
   "render_controllers": {
     "controller.render.null": {
       "geometry": "Geometry.default",
-      "materials": [ { "*": "Material.default" } ],
+      "materials": [
+        { "*": "Material.default" },
+        { "halo": "Material.halo" }
+      ],
       "textures": [ "Texture.default" ]
     },
 
