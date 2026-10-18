@@ -6,9 +6,9 @@
 				"identifier": "geometry.cage",
 				"texture_width": 128,
 				"texture_height": 128,
-				"visible_bounds_width": 1.5,
-				"visible_bounds_height": 1.5,
-				"visible_bounds_offset": [0, 0.5, 0]
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 2.25,
+				"visible_bounds_offset": [0, 0.875, 0]
 			},
 			"bones": [
 				{
@@ -62,13 +62,6 @@
 						{"origin": [-3.5, 2, -3], "size": [0, 7, 6], "uv": [64, 10]},
 						{"origin": [3.5, 2, -3], "size": [0, 7, 6], "uv": [64, 10]}
 					]
-				},
-				{
-					"name": "base_particle",
-					"pivot": [0, 5.5, 0],
-					"locators": {
-						"base_particle": [0, 5.5, 0]
-					}
 				}
 			]
 		}

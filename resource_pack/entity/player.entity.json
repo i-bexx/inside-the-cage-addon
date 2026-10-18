@@ -213,11 +213,15 @@
         "kit_pick_up": "animation.hands.kit.pick_up",
         "holding_kit": "animation.hands.kit.hold",
 
+        "ammo_pick_up": "animation.hands.ammo.pick_up",
+        "holding_ammo": "animation.hands.ammo.hold",
+
         "hands_controller_3rd_person": "controller.animation.hands.3rd_person",
         "3rd_person_gun": "animation.hands.3rd_person.gun",
         "3rd_person_knife": "animation.hands.3rd_person.knife",
         "3rd_person_toxic_bomb": "animation.hands.3rd_person.toxic_bomb",
-        "3rd_person_kit": "animation.hands.3rd_person.kit"
+        "3rd_person_kit": "animation.hands.3rd_person.kit",
+        "3rd_person_ammo": "animation.hands.3rd_person.ammo"
       },
 
       "sound_effects": {

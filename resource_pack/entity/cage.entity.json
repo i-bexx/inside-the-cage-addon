@@ -18,16 +18,11 @@
       },
       "scripts": {
         "animate": [
-          { "soul_anim": "query.mark_variant == 0" },
-          { "base_particle": "query.mark_variant == 0" }
+          { "soul_anim": "query.mark_variant == 0" }
         ]
       },
       "animations": {
-        "soul_anim": "animation.cage.soul",
-        "base_particle": "animation.cage.base_particle"
-      },
-      "particle_effects": {
-        "cage_particle": "game:cage_particle"
+        "soul_anim": "animation.cage.soul"
       },
       "render_controllers": [
          { "controller.render.cage_opaque": "query.mark_variant == 0"},

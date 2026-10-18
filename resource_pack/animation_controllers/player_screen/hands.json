@@ -16,7 +16,8 @@
               { "holding_gun": "variable.gun_holding" },
               { "starting_knife": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
               { "toxic_bomb_pick_up": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
-              { "kit_pick_up": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
+              { "kit_pick_up": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" },
+              { "ammo_pick_up": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo')" }
             ],
             "blend_transition": 0.3
           },
@@ -48,7 +49,8 @@
               { "holding_gun": "variable.gun_holding" },
               { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
               { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
-              { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
+              { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" },
+              { "ammo_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo')" }
             ],
             "blend_transition": 0.3
           },
@@ -64,7 +66,8 @@
               { "holding_gun": "variable.gun_holding" },
               { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
               { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
-              { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
+              { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" },
+              { "ammo_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo')" }
             ],
             "blend_transition": 0.3
           },
@@ -93,6 +96,7 @@
               { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
               { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
               { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" },
+              { "ammo_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo')" },
               { "despawn_right_but_left_not_empty": "!query.is_item_name_any('slot.weapon.mainhand', 0, '')" },
               { "respawn_left_but_right_empty": "query.is_item_name_any('slot.weapon.offhand', 0, '')" }
             ],
@@ -107,6 +111,7 @@
               { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
               { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
               { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" },
+              { "ammo_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo')" },
               { "despawn_left_but_right_not_empty": "!query.is_item_name_any('slot.weapon.offhand', 0, '')" },
               { "respawn_right_but_left_empty": "query.is_item_name_any('slot.weapon.mainhand', 0, '')" }
             ],
@@ -120,6 +125,7 @@
               { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
               { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
               { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" },
+              { "ammo_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo')" },
               { "respawn_right_but_left_not_empty": "query.is_item_name_any('slot.weapon.mainhand', 0, '')" },
               { "respawn_left_but_right_not_empty": "query.is_item_name_any('slot.weapon.offhand', 0, '')" }
             ],
@@ -133,6 +139,7 @@
               { "starting_knife": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
               { "toxic_bomb_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
               { "kit_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" },
+              { "ammo_pick_up": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo')" },
               { "respawn_left_but_right_not_empty": "query.is_item_name_any('slot.weapon.offhand', 0, '')" },
               { "respawn_right_but_left_not_empty": "query.is_item_name_any('slot.weapon.mainhand', 0, '')" }
             ],
@@ -329,6 +336,21 @@
             "animations": [ "holding_kit" ],
             "transitions": [
               { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
+            ],
+            "blend_transition": 0.3
+          },
+          "ammo_pick_up": {
+            "animations": [ "ammo_pick_up" ],
+            "transitions": [
+              { "holding_ammo": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo') && query.all_animations_finished" },
+              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo')" }
+            ],
+            "blend_transition": 0.3
+          },
+          "holding_ammo": {
+            "animations": [ "holding_ammo" ],
+            "transitions": [
+              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo')" }
             ],
             "blend_transition": 0.3
           }
