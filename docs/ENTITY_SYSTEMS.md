@@ -14,7 +14,7 @@ This document details the specific entities and Molang logic driving the gamepla
 | `game:cage` | Interactable cage entity with broken/unbroken states | `mark_variant` state switching via events |
 | `game:coin` / `game:battery` / `game:bottle` | Collectible items with pickup detection | `interact` component + Script API event handlers |
 | `game:door` | State-driven door with host-waiting and open states | Multi-state `mark_variant` event system |
-| `game:null` | Slenderman-style stalker entity — constantly follows player and triggers rapid sanity drain when looked at | Line-of-sight detection & proximity tracking |
+| `game:midnight_prayer` | Constantly follows player and triggers rapid sanity drain when looked at | Line-of-sight detection & proximity tracking |
 | `game:random_peep` | Story-driven interactive NPC | `interact` → Script API panel routing |
 | `menu:new_game` / `menu:continue` | Interactive menu system entities | Used for main menu state routing |
 | `game:teleporter` | Multi-destination teleport pads | Scoreboard-indexed destination mapping |
