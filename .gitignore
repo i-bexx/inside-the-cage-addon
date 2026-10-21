@@ -1,4 +1,4 @@
-resource_pack/sounds/
+resource_pack/sounds/**/*.ogg
 
 behavior_pack/scripts/node_modules/
 behavior_pack/scripts/package.json
