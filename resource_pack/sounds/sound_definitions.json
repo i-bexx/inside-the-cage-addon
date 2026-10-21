@@ -1,0 +1,306 @@
+{
+  "format_version": "1.20.20",
+  "sound_definitions": {
+    "ambiance": {
+      "category": "ambient",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/ambiance/ambiance",
+        "sounds/sounds/ambiance/ambiance2",
+        "sounds/sounds/ambiance/ambiance3"
+      ]
+    },
+    "game_over": {
+      "category": "music",
+      "sounds": [
+        "sounds/sounds/static/game_over"
+      ]
+    },
+    "static_game_over": {
+      "category": "music",
+      "sounds": [
+        "sounds/sounds/static/camera/static_game_over"
+      ]
+    },
+    "camera_shutter": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/static/camera/camera_shutter"
+      ]
+    },
+    "coin_collect": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/coin_collect"
+      ]
+    },
+    "heart": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/heart"
+      ]
+    },
+    "pick_up": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/tools/pick_up"
+      ]
+    },
+    "kit_used": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/tools/kit_used"
+      ]
+    },
+    "toxic_bomb": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/tools/toxic_bomb/toxic_bomb"
+      ]
+    },
+    "toxic_bomb_button": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/tools/toxic_bomb/toxic_bomb_button"
+      ]
+    },
+    "pistol_loading_chamber": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/tools/gun/pistol_loading_chamber"
+      ]
+    },
+    "gun_drawing": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/tools/gun/gun_drawing"
+      ]
+    },
+    "gun_aim": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/tools/gun/gun_aim"
+      ]
+    },
+    "gun_shoot": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/tools/gun/gun_shoot"
+      ]
+    },
+    "no_ammo": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/tools/gun/no_ammo"
+      ]
+    },
+    "shot_ghost": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/tools/gun/shot_ghost"
+      ]
+    },
+    "knife_draw": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/tools/knife/knife_draw"
+      ]
+    },
+    "knife_whoosh": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/tools/knife/knife_whoosh"
+      ]
+    },
+    "knife_slice": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/tools/knife/knife_slice"
+      ]
+    },
+    "break_cage": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/break_cage"
+      ]
+    },
+    "bottle_drink": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/bottle_drink"
+      ]
+    },
+    "static_low_sanity": {
+      "category": "ambient",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/static/camera/static_low_sanity"
+      ]
+    },
+    "static1": {
+      "category": "ambient",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/static/camera/static1"
+      ]
+    },
+    "static2": {
+      "category": "ambient",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/static/camera/static2"
+      ]
+    },
+    "static3": {
+      "category": "ambient",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/static/camera/static3"
+      ]
+    },
+    "initializationBeforeLockingTheCam": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/static/camera/initializationBeforeLockingTheCam"
+      ]
+    },
+    "camera_no_signal": {
+      "category": "ambient",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/static/camera/camera_no_signal"
+      ]
+    },
+    "new_game_started": {
+      "category": "ui",
+      "sounds": [
+        "sounds/sounds/menu/new_game_started"
+      ]
+    },
+    "keyboard": {
+      "category": "ui",
+      "sounds": [
+        "sounds/sounds/keyboard"
+      ]
+    },
+    "engine_start": {
+      "category": "neutral",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/menu/truck/truck_engine_start"
+      ]
+    },
+    "driving": {
+      "category": "neutral",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/menu/truck/truck_driving"
+      ]
+    },
+    "truck_container": {
+      "category": "neutral",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/menu/truck/truck_container"
+      ]
+    },
+    "close_lid": {
+      "category": "neutral",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/menu/truck/truck_close_lid"
+      ]
+    },
+    "click_choosing": {
+      "category": "ui",
+      "sounds": [
+        "sounds/sounds/menu/click/choosing"
+      ]
+    },
+    "click_chose": {
+      "category": "ui",
+      "sounds": [
+        "sounds/sounds/menu/click/chose"
+      ]
+    },
+    "notification": {
+      "category": "player",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/notification"
+      ]
+    },
+    "truck_door": {
+      "category": "neutral",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/truck_door"
+      ]
+    },
+    "ghost_spawn": {
+      "category": "hostile",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/ghost/ghost_spawn"
+      ]
+    },
+    "ghost_hurt": {
+      "category": "hostile",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/ghost/ghost_hurt"
+      ]
+    },
+    "ghost_whisper": {
+      "category": "hostile",
+      "min_distance": 1000,
+      "sounds": [
+        "sounds/sounds/ghost/ghost_whisper1",
+        "sounds/sounds/ghost/ghost_whisper2",
+        "sounds/sounds/ghost/ghost_whisper3",
+        "sounds/sounds/ghost/ghost_whisper4"
+      ]
+    },
+    "random.toast_recipe_unlocking_in" : {
+      "category" : "ui",
+      "max_distance" : null,
+      "min_distance" : null,
+      "sounds" : [
+        {
+        "name": "sounds/random/toast_recipe_unlocking_in",
+        "volume": 0
+        }
+      ]
+    },
+    "random.toast_recipe_unlocking_out" : {
+        "category" : "ui",
+        "max_distance" : null,
+        "min_distance" : null,
+        "sounds" : [
+        {
+        "name": "sounds/random/toast_recipe_unlocking_out",
+        "volume": 0
+        }
+      ]
+    }
+  }
+}

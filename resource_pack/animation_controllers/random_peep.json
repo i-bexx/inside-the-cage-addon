@@ -2,24 +2,31 @@
   "format_version": "1.10.0",
   "animation_controllers": {
     "controller.animation.random_peep": {
-        "states": {
-          "default": {
-            "animations": [ "is_sick_idle" ],
-            "transitions": [
-              {
-                "is_healed": "query.mark_variant == 1"
-              }
-            ]
-          },
-          "is_healed": {
-            "animations": [ "is_healed_idle" ],
-            "transitions": [
-              {
-                "default": "query.mark_variant == 0"
-              }
-            ]
-          }
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "animations": [ "is_sick_idle", "sick_tremor" ],
+          "transitions": [
+            { "getting_up": "query.mark_variant == 1" }
+          ],
+          "blend_transition": 0.4
+        },
+        "getting_up": {
+          "animations": [ "get_up" ],
+          "transitions": [
+            { "default": "query.mark_variant == 0" },
+            { "is_healed": "query.all_animations_finished" }
+          ],
+          "blend_transition": 0.3
+        },
+        "is_healed": {
+          "animations": [ "is_healed_idle" ],
+          "transitions": [
+            { "default": "query.mark_variant == 0" }
+          ],
+          "blend_transition": 0.4
         }
       }
     }
   }
+}
