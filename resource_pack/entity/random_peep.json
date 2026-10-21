@@ -19,6 +19,8 @@
       "animations": {
         "random_peep_controller": "controller.animation.random_peep",
         "is_sick_idle": "animation.random_peep.is_sick",
+        "sick_tremor": "animation.random_peep.sick_tremor",
+        "get_up": "animation.random_peep.get_up",
         "is_healed_idle": "animation.random_peep.is_healed_idle"
       },
 
