@@ -22,6 +22,7 @@ export const ROUND_STATE_MAP = new Map();
 ROUND_STATE_MAP.set("ROUND_STARTED", false);
 ROUND_STATE_MAP.set("ROUND_RESTARTED", false);
 ROUND_STATE_MAP.set("ROUND_ENDED_EARLY", false);
+ROUND_STATE_MAP.set("ROUND_COMPLETED", false);
 
 const FUNCTIONS_TO_START = {
     initiateCam,
@@ -74,7 +75,7 @@ export function checkGameStatus(inGamePlayers) {
     }
 
     // If game is active but no players, end it
-    if (currentGameState)
+    if (currentGameState && !ROUND_STATE_MAP.get("ROUND_COMPLETED"))
         if (inGamePlayers.length == 0) ROUND_STATE_MAP.set("ROUND_STARTED", false);
 }
 

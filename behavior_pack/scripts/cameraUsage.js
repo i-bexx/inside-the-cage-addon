@@ -127,11 +127,11 @@ export function cameraUsed(player, sanityValue, staminaValue) {
         player.runCommand(CONFIG.COMMANDS.PLAY_INIT_SOUND);
         
         system.runTimeout(() => {
-            if (player.isValid) {
-								player.triggerEvent(CONFIG.EVENTS.STATIC);
-                player.setDynamicProperty(CONFIG.PROPERTIES.INIT_BEFORE_LOCK, false);
-            }
-        }, 18);
+            if (!player || !player.isValid) return;
+            
+            player.triggerEvent(CONFIG.EVENTS.STATIC);
+            player.setDynamicProperty(CONFIG.PROPERTIES.INIT_BEFORE_LOCK, false);
+        }, 6);
     }
 }
 

@@ -5,7 +5,7 @@ import { PlayerCache } from "../Player/playerCache";
 import { cameraDeactivated } from "../cameraUsage";
 import { getPlayersInRound } from "../utils";
 
-const CLOSE_CAM_TIMEOUT = new Map();
+export const CLOSE_CAM_TIMEOUT = new Map();
 
 export function warnPlayerAboutCam() {
     const players = filterPlayers();

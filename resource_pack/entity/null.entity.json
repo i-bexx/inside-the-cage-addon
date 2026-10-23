@@ -13,6 +13,12 @@
       "geometry": {
         "default": "geometry.null"
       },
+      "scripts": {
+        "animate": [ "look_at_target" ]
+      },
+      "animations": {
+        "look_at_target": "animation.common.look_at_target"
+      },
       "render_controllers": [
          "controller.render.null"
          ]

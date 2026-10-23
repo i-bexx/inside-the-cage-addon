@@ -32,6 +32,13 @@
           }
         ]
       },
+      "minecraft:behavior.look_at_player": {
+        "angle_of_view_vertical": 360,
+        "angle_of_view_horizontal": 360,
+        "look_distance": 20,
+        "probability": 1.0,
+        "target_distance": 20
+      },
       "minecraft:tick_world": {
         "never_despawn": true,
         "radius": 2

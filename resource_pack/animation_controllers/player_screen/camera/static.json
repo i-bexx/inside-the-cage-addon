@@ -60,7 +60,7 @@
             "initialization_before_locking_the_cam_anim"
           ],
           "transitions": [
-            { "default": "query.mark_variant == 0 || query.all_animations_finished" }
+            { "default": "query.all_animations_finished" }
           ]
         }
       }
