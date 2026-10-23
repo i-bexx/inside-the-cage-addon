@@ -3,13 +3,14 @@ import { PlayerCache } from "../Player/playerCache";
 import { renderUnifiedUi } from "./renderUi";
 
 const playerCompassStates = new Map();
+export const playerCurtainMap = new Map();
 
 let staminaTick = 0;
 let staminaTickTimerActive = false;
 
 // ----- MAIN FUNCTION -----
 
-export function fastUiTick(player, playerState, isRoundCompleted) {
+export function fastUiTick(player, playerState) {
     let uiString = "";
 
     // Cursor state
@@ -38,7 +39,7 @@ export function fastUiTick(player, playerState, isRoundCompleted) {
 
 
     // Round complete state
-    if (isRoundCompleted) uiString += "\nround_completed_x";
+    if (playerCurtainMap.has(player.id)) uiString += "\nround_completed_x";
     else uiString += "\nround_completed_y";
 
     const cache = PlayerCache.get(player.id);

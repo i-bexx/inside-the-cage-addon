@@ -29,7 +29,6 @@ let currentTick = 0;
 let previousSoulsFreedValue = -1;
 let cachedAllPlayers = [];
 let cachedIsInMenu = false;
-let cachedIsRoundCompleted = false;
 
 world.afterEvents.playerSpawn.subscribe(() => {
     cachedAllPlayers = world.getAllPlayers();
@@ -41,20 +40,17 @@ world.afterEvents.playerLeave.subscribe(() => {
 export function startCentralTickManager() {
     cachedAllPlayers = world.getAllPlayers();
     cachedIsInMenu = world.getDynamicProperty("in_menu");
-    cachedIsRoundCompleted = world.getDynamicProperty("roundCompleted");
 
     system.runInterval(() => {
         currentTick++;
         const allPlayers = cachedAllPlayers;
-        if (currentTick % 20 === 0) {
+
+        if (currentTick % 20 === 0)
             cachedIsInMenu = world.getDynamicProperty("in_menu");
-            cachedIsRoundCompleted = world.getDynamicProperty("roundCompleted");
-        }
 
         const isInMenu = cachedIsInMenu;
-        const isRoundCompleted = cachedIsRoundCompleted;
         
-        const isGameStarted = (ROUND_STATE_MAP.get("ROUND_STARTED") === true);
+        const isGameStarted = (ROUND_STATE_MAP.get("ROUND_STARTED") === true && !ROUND_STATE_MAP.get("ROUND_COMPLETED"));
         let soulsFreedValue;
         let isPhase4or5;
 
@@ -128,7 +124,7 @@ export function startCentralTickManager() {
                 staminaLimit: cache?.staminaLimit
             };
 
-            fastUiTick(player, playerState, isRoundCompleted);
+            fastUiTick(player, playerState);
 
             if (currentTick % 5 === 0)
                 weaponController(player, playerState);

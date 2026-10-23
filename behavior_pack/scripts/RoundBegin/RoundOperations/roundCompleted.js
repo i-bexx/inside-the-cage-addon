@@ -4,10 +4,12 @@ import { sleep } from "../../utils";
 import { ROUND_STATE_MAP } from "../../gameStats";
 import { cameraDeactivated } from "../../cameraUsage";
 import { slowUiTick } from "../../UI/slowUiTick";
+import { playerCurtainMap } from "../../UI/fastUiTick";
 import { resetPlayerDynamicPropertyData, resetPlayerProperties, clearPlayerMaps, setPlayerMaps, stopFunctionsInMaps, commandsToResetPlayerData } from "../../resetStats";
 import { resetFunctions, resetMaps, resetWorldDynamicPropertyData, resetEntitiesData } from "../../resetStats";
 
 export async function roundCompleted() {
+  ROUND_STATE_MAP.set("ROUND_COMPLETED", true);
   const players = world.getPlayers({tags: ["in_game"]});
 
   for (const player of players) {
@@ -31,7 +33,7 @@ export async function roundCompleted() {
   resetWorldDynamicPropertyData();
   resetEntitiesData();
 
-	world.setDynamicProperty("roundCompleted", true);
+  players.forEach(player => playerCurtainMap.set(player.id, true));
 
   await sleep(40);
 
@@ -41,9 +43,11 @@ export async function roundCompleted() {
 
   await sleep(40);
 
-  world.setDynamicProperty("roundCompleted", false);
   players.forEach(player => {
-    if (player.isValid) player.triggerEvent("round_completed_dialog_event");
+    if (player.isValid) {
+      playerCurtainMap.delete(player.id);
+      player.triggerEvent("round_completed_dialog_event");
+    }
   });
 
   await sleep(400);
@@ -52,5 +56,6 @@ export async function roundCompleted() {
     if (player.isValid) commandsToResetPlayerData(player);
   });
 
+  ROUND_STATE_MAP.set("ROUND_COMPLETED", false);
   ROUND_STATE_MAP.set("ROUND_STARTED", false);
 }

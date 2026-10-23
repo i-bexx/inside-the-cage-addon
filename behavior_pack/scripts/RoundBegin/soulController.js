@@ -7,7 +7,7 @@ import { stopDifficultyMonitor } from "./ghostController";
 import { warnPlayerAboutCam } from "./cameraController";
 import { playerStoppedLooking } from "./playerLooking";
 
-import { getSanityObjective, getObjectiveScore } from "../scoreboards";
+import { getSanityObjective, getObjectiveScore, getValueParticipant } from "../scoreboards";
 import { stalkerMatch } from "../stalkerEntity";
 import { updateGlobalUi } from "../UI/globalUi";
 import { PlayerCache } from "../Player/playerCache";
@@ -87,6 +87,8 @@ async function soulsFreedValueExceeded(players) {
 		
 		cameraUsed(player, sanityValue, staminaValue);
 		stalkerMatch();
+
+		world.scoreboard.getObjective("show_position").setScore(getValueParticipant(), 0);
   }
 }
 

@@ -36,7 +36,7 @@ import { getCloseCamTimeout } from "./RoundBegin/cameraController";
 import { ROUND_STATE_MAP } from "./gameStats";
 import { checkIfPositionClear } from "./gameStarter";
 import { getTeleportCooldown } from "./Teleporter";
-import { getCompassStates } from "./UI/fastUiTick";
+import { getCompassStates, playerCurtainMap } from "./UI/fastUiTick";
 
 import { PlayerCache } from "./Player/playerCache";
 
@@ -183,10 +183,13 @@ export function clearPlayerMaps(playerId) {
   getSanityLowStaticEventMap().delete(playerId);
 
   listOfPlayersLookingMap().delete(playerId);
+  listOfPlayersPlayingStaticMap().delete(playerId);
 
   playerResetStaminaCooldownMap().delete(playerId);
 
   getCloseCamTimeout().delete(playerId);
+
+  playerCurtainMap.delete(playerId);
 }
 
 export function setPlayerMaps(playerId) {
@@ -208,6 +211,15 @@ export function stopFunctionsInMaps(playerId) { // Stops the loops or countdown 
 
   const playerPlayingStatic = listOfPlayersPlayingStaticMap().get(playerId);
   if (playerPlayingStatic != undefined) system.clearRun(playerPlayingStatic);
+
+  const playerCloseCamTimeout = getCloseCamTimeout().get(playerId);
+  if (playerCloseCamTimeout != undefined) system.clearRun(playerCloseCamTimeout);
+
+  const playerPlaysoundHeart = getPlaysoundHeartMap().get(playerId);
+  if (playerPlaysoundHeart != undefined) system.clearRun(playerPlaysoundHeart);
+
+  const playerSanityLowStaticSound = getSanityLowStaticSoundMap().get(playerId);
+  if (playerSanityLowStaticSound != undefined) system.clearRun(playerSanityLowStaticSound);
 }
 
 // ======= WORLD INFORMATION =======
@@ -218,7 +230,6 @@ export function resetWorldDynamicPropertyData() {
   world.setDynamicProperty("cages4Activated", false);
   world.setDynamicProperty("cages5Activated", false);
   world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", false);
-  world.setDynamicProperty("roundCompleted", false);
 }
 
 export function resetFunctions() {
@@ -258,9 +269,6 @@ export function commandsToResetTheGame(dimension) {
 // ==========================================
 
 export function resetMaps() {
-  listOfPlayersLookingMap().clear(); //playerLooking
-  listOfPlayersPlayingStaticMap().clear();
-
   playerDrainingBatteryCountdownMap().clear(); //batteryController
   playerIsBatteryCriticalCountdownMap().clear();
 
