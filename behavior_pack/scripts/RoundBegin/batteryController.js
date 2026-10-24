@@ -39,7 +39,7 @@ const BATTERY_CONFIG = {
     // Item and Command Names
     ITEMS: {
         ENTITY_ID: "game:battery",
-        HUD_SLOT: "slot.armor.head",
+        HUD_SLOT: "slot.armor.legs",
         // Item names
         PREFIX_INCREASE: "battery:increase",
         PREFIX_DECREASE: "battery:decrease",
@@ -149,7 +149,7 @@ export function pickupBattery(player, target) {
     }
 
     const textureId = BATTERY_CONFIG.ITEMS.TEXTURE_OFFSET - decidedBatteryLevel;
-    const itemCommand = `replaceitem entity @s ${BATTERY_CONFIG.ITEMS.HUD_SLOT} 1 ${BATTERY_CONFIG.ITEMS.PREFIX_INCREASE}${textureId} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`;
+    const itemCommand = `replaceitem entity @s ${BATTERY_CONFIG.ITEMS.HUD_SLOT} 1 ${BATTERY_CONFIG.ITEMS.PREFIX_INCREASE}${textureId} 1 0 {"minecraft:item_lock": {"mode": "lock_in_slot"}}`;
     const clearCommand = `clear @s ${BATTERY_CONFIG.ITEMS.PREFIX_INCREASE}${textureId}`;
 
     player.runCommand(itemCommand);
@@ -163,7 +163,7 @@ export function pickupBattery(player, target) {
 
 function decreaseBatteryHud(player, batteryLevel) {
     const textureId = BATTERY_CONFIG.ITEMS.TEXTURE_OFFSET - batteryLevel;
-    const itemCommand = `replaceitem entity @s ${BATTERY_CONFIG.ITEMS.HUD_SLOT} 1 ${BATTERY_CONFIG.ITEMS.PREFIX_DECREASE}${textureId}`;
+    const itemCommand = `replaceitem entity @s ${BATTERY_CONFIG.ITEMS.HUD_SLOT} 1 ${BATTERY_CONFIG.ITEMS.PREFIX_DECREASE}${textureId} 1 0 {"minecraft:item_lock": {"mode": "lock_in_slot"}}`;
     const clearCommand = `clear @s ${BATTERY_CONFIG.ITEMS.PREFIX_DECREASE}${textureId}`;
 
     player.runCommand(itemCommand);
@@ -181,7 +181,7 @@ function batteryIsCritical(player) {
     let batteryCriticalId = system.runTimeout(() => {
         if (!player || !player.isValid) return;
         
-        player.runCommand(`replaceitem entity @s ${BATTERY_CONFIG.ITEMS.HUD_SLOT} 1 ${BATTERY_CONFIG.ITEMS.PREFIX_CRITICAL}`);
+        player.runCommand(`replaceitem entity @s ${BATTERY_CONFIG.ITEMS.HUD_SLOT} 1 ${BATTERY_CONFIG.ITEMS.PREFIX_CRITICAL} 1 0 {"minecraft:item_lock": {"mode": "lock_in_slot"}}`);
         playerIsBatteryCritical.delete(player.id);
     }, BATTERY_CONFIG.TIME.CRITICAL_WARNING);
     
