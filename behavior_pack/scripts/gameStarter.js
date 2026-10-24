@@ -220,7 +220,7 @@ async function startCommands() {
 	await sleep(170);
 	dimension.runCommand("event entity @a[tag=in_game] curtain_open_event");
 	await sleep(70);
-	dimension.runCommand("give @a[tag=in_game] game:camera");
+	dimension.runCommand(`give @a[tag=in_game] game:camera 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
 	dimension.runCommand("tag @a[tag=in_game] add show_in_round_personal_ui");
 	ROUND_STATE_MAP.set("ROUND_STARTED", true);
 }
