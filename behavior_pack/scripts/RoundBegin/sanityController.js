@@ -38,7 +38,6 @@ function playerIsNotLooking(player, sanityValue) {
 	system.runTimeout(() => {
 		if (!player || !player.isValid || !player.hasTag("in_game") || ROUND_STATE_MAP.get("ROUND_COMPLETED")) return;
 
-		world.sendMessage(`${sanityValue} a`)
 		if (sanityValue != 0) player.runCommand("scoreboard players remove @s Sanity 1");
 		player.setDynamicProperty("notLookingCooldown", false);
 	}, 160)
@@ -49,7 +48,6 @@ function playerIsLooking(player, sanityValue) {
 	system.runTimeout(() => {
 		if (!player || !player.isValid || !player.hasTag("in_game") || ROUND_STATE_MAP.get("ROUND_COMPLETED")) return;
 
-		world.sendMessage(`${sanityValue} b`)
 		if (sanityValue != 0) player.runCommand("scoreboard players remove @s Sanity 1");
 		player.setDynamicProperty("lookingCooldown", false);
 	}, 30)
