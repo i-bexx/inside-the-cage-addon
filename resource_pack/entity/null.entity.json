@@ -14,14 +14,18 @@
         "default": "geometry.null"
       },
       "scripts": {
-        "animate": [ "look_at_target" ]
+        "animate": [
+          "idle",
+          "look_at_target"
+        ]
       },
       "animations": {
+        "idle": "animation.null.idle",
         "look_at_target": "animation.common.look_at_target"
       },
       "render_controllers": [
-         "controller.render.null"
-         ]
-      }
+        "controller.render.null"
+      ]
     }
   }
+}
