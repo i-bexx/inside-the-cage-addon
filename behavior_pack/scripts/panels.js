@@ -11,10 +11,10 @@ import { PlayerCache } from "./Player/playerCache";
 let dimension;
 
 const MAIN_PANELS = [ shopPanel, votePanel, upgradeBattery, increaseStaminaLimit ];
-const SHOP_ITEMS = { "game:gun": 4, "game:knife": 2, "game:kit": 7, "game:toxic_bomb": 6, "game:ammo": 1, "game:battery": 3, "game:cage_detector": 9 };
+const SHOP_ITEMS = { "ibexx_itc:gun": 4, "ibexx_itc:knife": 2, "ibexx_itc:kit": 7, "ibexx_itc:toxic_bomb": 6, "ibexx_itc:ammo": 1, "ibexx_itc:battery": 3, "ibexx_itc:cage_detector": 9 };
 const ORIGINAL_PRICES = [ 4, 2, 7, 6, 1, 3, 9 ];
 
-const ITEMS_NOT_ALLOWED_WHEN_CAM_IS_WORKING = new Set(["game:gun", "game:knife", "game:toxic_bomb", "game:ammo"]);
+const ITEMS_NOT_ALLOWED_WHEN_CAM_IS_WORKING = new Set(["ibexx_itc:gun", "ibexx_itc:knife", "ibexx_itc:toxic_bomb", "ibexx_itc:ammo"]);
 
 let timeoutId = undefined;
 
@@ -25,17 +25,17 @@ world.afterEvents.itemUse.subscribe((eventData) => {
       
       if (itemStack.typeId == "minecraft:compass") mainPanel(source);
 
-      else if (itemStack.typeId == "game:discount_ticket") {
+      else if (itemStack.typeId == "ibexx_itc:discount_ticket") {
         for (const [key, value] of Object.entries(SHOP_ITEMS)) {
             const newCost = Math.max(1, Math.ceil(value / 2));
             SHOP_ITEMS[key] = newCost;
         }
-        source.runCommand("clear @s game:discount_ticket");
+        source.runCommand("clear @s ibexx_itc:discount_ticket");
       }
 });
 
 world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
-    if (target.typeId !== "game:computer_desk") return;
+    if (target.typeId !== "ibexx_itc:computer_desk") return;
     customPanel(player);
 });
 
@@ -100,13 +100,13 @@ function shopPanel(player) {
 	new ActionFormData()
     .title("SHOP")
     .body("") 
-    .button(`Gun-${getText("game:gun")}`, "textures/ui/panels/shop/gun")
-    .button(`Knife-${getText("game:knife")}`, "textures/ui/panels/shop/knife")
-    .button(`Kit-${itemsObject["game:kit"]} Coins`, "textures/ui/panels/shop/kit")
-    .button(`toxic_bomb-${itemsObject["game:toxic_bomb"]} Coins`, "textures/ui/panels/shop/toxic_bomb")
-    .button(`Ammo-${itemsObject["game:ammo"]} Coins`, "textures/ui/panels/shop/ammo")
-    .button(`Battery-${itemsObject["game:battery"]} Coins`, "textures/ui/panels/shop/battery")
-    .button(`Detector-${getText("game:cage_detector")}`, "textures/ui/panels/shop/cage_detector")
+    .button(`Gun-${getText("ibexx_itc:gun")}`, "textures/ui/panels/shop/gun")
+    .button(`Knife-${getText("ibexx_itc:knife")}`, "textures/ui/panels/shop/knife")
+    .button(`Kit-${itemsObject["ibexx_itc:kit"]} Coins`, "textures/ui/panels/shop/kit")
+    .button(`toxic_bomb-${itemsObject["ibexx_itc:toxic_bomb"]} Coins`, "textures/ui/panels/shop/toxic_bomb")
+    .button(`Ammo-${itemsObject["ibexx_itc:ammo"]} Coins`, "textures/ui/panels/shop/ammo")
+    .button(`Battery-${itemsObject["ibexx_itc:battery"]} Coins`, "textures/ui/panels/shop/battery")
+    .button(`Detector-${getText("ibexx_itc:cage_detector")}`, "textures/ui/panels/shop/cage_detector")
     .button(`...`, "")
     .button(`...`, "")
 		.show(player).then(({ cancelationReason, canceled, selection }) => {
@@ -135,10 +135,10 @@ function shopPanel(player) {
 						if (coinAmount >= itemCost) {
 							let transactionSuccessful = false;
 
-							if (itemName !== "game:battery") {
+							if (itemName !== "ibexx_itc:battery") {
 									player.runCommand(`give @s ${itemName} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
-                                    if (itemName == "game:gun")
-                                        player.runCommand(`give @s game:ammo_shoot 10 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
+                                    if (itemName == "ibexx_itc:gun")
+                                        player.runCommand(`give @s ibexx_itc:ammo_shoot 10 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
 									transactionSuccessful = true;
 							} else if (player.getDynamicProperty("batteryLevel") < 4) {
                                     player.setDynamicProperty("batteryIsCollected", true);
@@ -146,7 +146,7 @@ function shopPanel(player) {
 									transactionSuccessful = true;
 							} else {
 									player.sendMessage(" §6[§e!§6] §cYour battery is already full");
-									player.runCommand("playsound notification @s");
+									player.runCommand("playsound ibexx_itc:notification @s");
 							}
 
 							if (transactionSuccessful) {
@@ -213,7 +213,7 @@ function increaseStaminaLimit(player) {
 function hasItem(itemsObject, itemTypeId, player) {
     if (itemTypeId == "checkAllNecessaryItems") {
         const container = player.getComponent(EntityComponentTypes.Inventory).container;
-        const itemsToCheck = ["game:gun", "game:knife", "game:cage_detector"];
+        const itemsToCheck = ["ibexx_itc:gun", "ibexx_itc:knife", "ibexx_itc:cage_detector"];
 
         for (let i = 0; i < container.size; i++) {
             const item = container.getItem(i);

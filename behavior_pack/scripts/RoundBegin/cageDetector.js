@@ -9,7 +9,7 @@ let deviationIntegers = [ 15, 17, 13, -12, -14, -11, 9 ];
 // --- LISTENER ---
 
 world.afterEvents.itemUse.subscribe(({itemStack, source}) => {
-  if (itemStack.typeId != "game:cage_detector") return;
+  if (itemStack.typeId != "ibexx_itc:cage_detector") return;
   if (source.getItemCooldown("cage_detector") < 195) return;
 
   openCageDetector(source);
@@ -93,7 +93,7 @@ async function getCage() {
 
     await sleep(40);
 
-    const cage = world.getDimension("overworld").getEntities({ type: "game:cage", location: cageLocation.locationObject, maxDistance: 20 })[0];
+    const cage = world.getDimension("overworld").getEntities({ type: "ibexx_itc:cage", location: cageLocation.locationObject, maxDistance: 20 })[0];
 
     if (cage?.getComponent("minecraft:mark_variant")?.value === 1) {
       removeTickingArea(cageLocation.areaName);

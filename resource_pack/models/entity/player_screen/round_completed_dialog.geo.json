@@ -3,7 +3,7 @@
 	"minecraft:geometry": [
 		{
 			"description": {
-				"identifier": "geometry.round_completed_dialog",
+				"identifier": "geometry.ibexx_itc.round_completed_dialog",
 				"texture_width": 64,
 				"texture_height": 64,
 				"visible_bounds_width": 10,

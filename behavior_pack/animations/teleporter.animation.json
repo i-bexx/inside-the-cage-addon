@@ -1,9 +1,9 @@
 {
   "format_version": "1.8.0",
   "animations": {
-    "animation.teleporter.particle": {
+    "animation.ibexx_itc.teleporter.particle": {
       "timeline": {
-        "0.0": [ "/particle game:teleport_particle ~ ~2 ~" ]
+        "0.0": [ "/particle ibexx_itc:teleport_particle ~ ~2 ~" ]
       },
       "animation_length": 0.25,
       "loop": true

@@ -2,7 +2,7 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
-      "identifier": "menu:new_game",
+      "identifier": "ibexx_itc:new_game",
       "materials": {
         "default": "entity_alphatest"
       },
@@ -11,11 +11,11 @@
         "texture_selected": "textures/entity/menu/New game selected"
       },
       "geometry": {
-        "default": "geometry.new_game"
+        "default": "geometry.ibexx_itc.new_game"
       },
       
       "render_controllers": [
-         "controller.render.new_game"
+         "controller.render.ibexx_itc.new_game"
          ]
       }
     }

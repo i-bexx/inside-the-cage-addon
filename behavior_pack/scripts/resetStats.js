@@ -55,8 +55,8 @@ const COMMANDS_TO_RESET_GAME = [
     "tag @a remove accepted_request",
     "tag @a remove refused_request",
     "tag @a remove show_in_round_personal_ui",
-    "kill @e[type=game:stalker_cursor]",
-    "kill @e[type=game:ghost]",
+    "kill @e[type=ibexx_itc:stalker_cursor]",
+    "kill @e[type=ibexx_itc:ghost]",
     "setblock -61 76 -153 air",
     "fill 148 56 -323 136 56 -323 air",
     "fill 148 56 -316 142 56 -316 air",
@@ -64,7 +64,7 @@ const COMMANDS_TO_RESET_GAME = [
     "scoreboard players set @a stalker_match_id 0",
     "scoreboard players set value show_position 1",
     "scoreboard players set value global_ui 91",
-    "tp @e[type=game:null] -65 75 -150",
+    "tp @e[type=ibexx_itc:null] -65 75 -150",
     "fog @a remove in_round_fog",
     "clear @a",
     "camerashake stop @a",
@@ -127,10 +127,10 @@ export function resetPlayerDynamicPropertyData(player) {
 }
 
 export function resetPlayerProperties(player) {
-  player.setProperty("property:cursor_state", "normal");
-  player.setProperty("property:has_ammo", true);
-  player.setProperty("property:is_shooting", false);
-  player.setProperty("property:start_gun", true);
+  player.setProperty("ibexx_itc:cursor_state", "normal");
+  player.setProperty("ibexx_itc:has_ammo", true);
+  player.setProperty("ibexx_itc:is_shooting", false);
+  player.setProperty("ibexx_itc:start_gun", true);
 }
 
 export function resetEntitiesData(ownerJoined = false) {
@@ -148,7 +148,7 @@ export function resetEntitiesData(ownerJoined = false) {
   
   if (ownerJoined) {
     const intervalId = system.runInterval(() => {
-      const randomPeep = dimension.getEntities({ type: "game:random_peep" })[0];
+      const randomPeep = dimension.getEntities({ type: "ibexx_itc:random_peep" })[0];
       const entities = [ randomPeep ];
       const allFound = entities.every(entity => entity != undefined);
 
@@ -162,7 +162,7 @@ export function resetEntitiesData(ownerJoined = false) {
 
   // ------------------------------------
   
-  const randomPeep = dimension.getEntities({ type: "game:random_peep" })[0];
+  const randomPeep = dimension.getEntities({ type: "ibexx_itc:random_peep" })[0];
   resetRandomPeep(randomPeep);
 }
 
@@ -260,7 +260,7 @@ export function commandsToResetTheGame(dimension) {
   //If game ended early, a different file will open the door
   if (gameRestarted || gameEndedEarly) return;
 
-  dimension.runCommand(`event entity @e[type=game:door] "door_0_event"`);
+  dimension.runCommand(`event entity @e[type=ibexx_itc:door] "door_0_event"`);
   dimension.runCommand("fill -180 68 -92 -180 71 -84 air");
 }
 

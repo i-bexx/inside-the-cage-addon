@@ -1,13 +1,13 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.toxic_bomb.use": {
+		"animation.ibexx_itc.toxic_bomb.use": {
 			"timeline": {
 				"0.5": [
-					"/execute at @s run particle game:toxic ~ ~ ~",
-					"/execute at @s run kill @e[type=game:ghost,r=15]",
-					"/execute at @s run playsound toxic_bomb @a[r=15]",
-					"/clear @s game:toxic_bomb 0 1"
+					"/execute at @s run particle ibexx_itc:toxic ~ ~ ~",
+					"/execute at @s run kill @e[type=ibexx_itc:ghost,r=15]",
+					"/execute at @s run playsound ibexx_itc:toxic_bomb @a[r=15]",
+					"/clear @s ibexx_itc:toxic_bomb 0 1"
 				]
 			},
 			"animation_length": 1,

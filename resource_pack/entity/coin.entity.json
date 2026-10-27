@@ -2,7 +2,7 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
-      "identifier": "game:coin",
+      "identifier": "ibexx_itc:coin",
       "materials": {
         "default": "armor_stand"
       },
@@ -10,7 +10,7 @@
         "default": "textures/entity/coin"
       },
       "geometry": {
-        "default": "geometry.coin"
+        "default": "geometry.ibexx_itc.coin"
       },
       "scripts": {
         "animate": [
@@ -18,13 +18,16 @@
         ]
       },
       "animations": {
-        "coin_controller": "controller.animation.coin",
+        "coin_controller": "controller.animation.ibexx_itc.coin",
 
-        "spin_anim": "animation.coin.spin",
-        "collected_anim": "animation.coin.collect"
+        "spin_anim": "animation.ibexx_itc.coin.spin",
+        "collected_anim": "animation.ibexx_itc.coin.collect"
+      },
+      "sound_effects": {
+        "coin_collect": "ibexx_itc:coin_collect"
       },
       "render_controllers": [
-         "controller.render.coin"
+         "controller.render.ibexx_itc.coin"
          ]
       }
     }

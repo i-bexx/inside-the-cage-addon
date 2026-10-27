@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.camera.start": {
+		"animation.ibexx_itc.camera.start": {
 			"animation_length": 2.75,
 			"bones": {
 				"4": {

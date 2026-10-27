@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.cage.soul": {
+		"animation.ibexx_itc.cage.soul": {
 			"loop": true,
 			"animation_length": 6,
 			"bones": {

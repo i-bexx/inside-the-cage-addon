@@ -2,14 +2,14 @@
   "format_version": "1.26.30",
   "minecraft:item": {
     "description": {
-      "identifier": "game:coin_max_recipe",
+      "identifier": "ibexx_itc:coin_max_recipe",
       "menu_category": {
         "category": "none",
         "is_hidden_in_commands": true
       }
     },
     "components": {
-      "minecraft:icon": "notification_toast"
+      "minecraft:icon": "ibexx_itc:notification_toast"
     }
   }
 }

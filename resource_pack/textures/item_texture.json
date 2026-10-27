@@ -1,44 +1,44 @@
 {
-	"resource_pack_name": "script",
+	"resource_pack_name": "ibexx_itc",
 	"texture_name": "atlas.items",
 	"texture_data": {
-		"invisible": {
+		"ibexx_itc:invisible": {
 			"textures": ["textures/items/invisible"]
 		},
-		"camera": {
+		"ibexx_itc:camera": {
 			"textures": ["textures/items/camera"]
 		},
-		"skip_cutscene": {
+		"ibexx_itc:skip_cutscene": {
 			"textures": ["textures/items/skip_cutscene"]
 		},
-		"gun": {
+		"ibexx_itc:gun": {
 			"textures": ["textures/items/gun"]
 		},
-		"knife": {
+		"ibexx_itc:knife": {
 			"textures": ["textures/items/knife"]
 		},
-		"toxic_bomb": {
+		"ibexx_itc:toxic_bomb": {
 			"textures": ["textures/items/toxic_bomb"]
 		},
-		"kit": {
+		"ibexx_itc:kit": {
 			"textures": ["textures/items/kit"]
 		},
-		"ammo": {
+		"ibexx_itc:ammo": {
 			"textures": ["textures/items/ammo"]
 		},
-		"cage_detector": {
+		"ibexx_itc:cage_detector": {
 			"textures": ["textures/items/cage_detector"]
 		},
-		"notification": {
+		"ibexx_itc:notification": {
 			"textures": ["textures/items/notification"]
 		},
-		"notification_toast": {
+		"ibexx_itc:notification_toast": {
 			"textures": ["textures/items/notification_toast"]
 		},
-		"discount_ticket": {
+		"ibexx_itc:discount_ticket": {
 			"textures": ["textures/items/discount_ticket"]
 		},
-		"ammo_shoot": {
+		"ibexx_itc:ammo_shoot": {
 			"textures": ["textures/items/ammo_shoot"]
 		}
 	}

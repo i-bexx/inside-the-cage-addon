@@ -2,14 +2,14 @@
 	"format_version": "1.21.30",
 	"minecraft:item": {
 		"description": {
-			"identifier": "game:knife",
+			"identifier": "ibexx_itc:knife",
 			"menu_category": {
 				"category": "equipment"
 			}
 		},
 		"components": {
 			"minecraft:max_stack_size": 1,
-			"minecraft:icon": "knife",
+			"minecraft:icon": "ibexx_itc:knife",
 			"minecraft:damage": 7,
 			"minecraft:can_destroy_in_creative": false,
 			"minecraft:durability": {

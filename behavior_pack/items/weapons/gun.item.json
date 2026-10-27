@@ -2,14 +2,14 @@
 	"format_version": "1.21.30",
 	"minecraft:item": {
 		"description": {
-			"identifier": "game:gun",
+			"identifier": "ibexx_itc:gun",
 			"menu_category": {
 				"category": "equipment"
 			}
 		},
 		"components": {
 			"minecraft:max_stack_size": 1,
-			"minecraft:icon": "gun",
+			"minecraft:icon": "ibexx_itc:gun",
 			"minecraft:hand_equipped": {
 				"value": true
 			},
@@ -19,7 +19,7 @@
 			"minecraft:shooter": {
 				"ammunition": [
 					{
-						"item": "game:ammo_shoot",
+						"item": "ibexx_itc:ammo_shoot",
 						"use_offhand": true,
 						"search_inventory": true,
 						"use_in_creative": true

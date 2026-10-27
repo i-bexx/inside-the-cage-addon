@@ -34,7 +34,7 @@ function playAmbiance() {
 
         for (const player of players)
             if (player.isValid)
-                player.playSound("ambiance");
+                player.playSound("ibexx_itc:ambiance");
         
         timeoutId = undefined;
         playAmbiance();

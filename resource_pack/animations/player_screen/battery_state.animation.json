@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.battery.decrease_1": {
+		"animation.ibexx_itc.battery.decrease_1": {
 			"loop": "hold_on_last_frame",
 			"bones": {
 				"battery_1": {
@@ -9,7 +9,7 @@
 				}
 			}
 		},
-		"animation.battery.decrease_2": {
+		"animation.ibexx_itc.battery.decrease_2": {
 			"loop": "hold_on_last_frame",
 			"bones": {
 				"battery_2": {
@@ -20,7 +20,7 @@
 				}
 			}
 		},
-		"animation.battery.decrease_3": {
+		"animation.ibexx_itc.battery.decrease_3": {
 			"loop": "hold_on_last_frame",
 			"bones": {
 				"battery_3": {
@@ -34,7 +34,7 @@
 				}
 			}
 		},
-		"animation.battery.decrease_4": {
+		"animation.ibexx_itc.battery.decrease_4": {
 			"loop": "hold_on_last_frame",
 			"bones": {
 				"battery_4": {
@@ -51,7 +51,7 @@
 				}
 			}
 		},
-		"animation.battery.increase_1": {
+		"animation.ibexx_itc.battery.increase_1": {
 			"loop": "hold_on_last_frame",
 			"bones": {
 				"battery_1": {
@@ -59,7 +59,7 @@
 				}
 			}
 		},
-		"animation.battery.increase_2": {
+		"animation.ibexx_itc.battery.increase_2": {
 			"loop": "hold_on_last_frame",
 			"bones": {
 				"battery_2": {
@@ -70,7 +70,7 @@
 				}
 			}
 		},
-		"animation.battery.increase_3": {
+		"animation.ibexx_itc.battery.increase_3": {
 			"loop": "hold_on_last_frame",
 			"bones": {
 				"battery_3": {
@@ -84,7 +84,7 @@
 				}
 			}
 		},
-		"animation.battery.increase_4": {
+		"animation.ibexx_itc.battery.increase_4": {
 			"loop": "hold_on_last_frame",
 			"bones": {
 				"battery_4": {
@@ -101,7 +101,7 @@
 				}
 			}
 		},
-		"animation.battery_player.static": {
+		"animation.ibexx_itc.battery_player.static": {
 			"loop": true,
 			"animation_length": 0.2917,
 			"bones": {
@@ -137,7 +137,7 @@
 				}
 			}
 		},
-		"animation.battery_player.static_stop": {
+		"animation.ibexx_itc.battery_player.static_stop": {
 			"loop": "hold_on_last_frame",
 			"bones": {
 				"battery": {
@@ -145,7 +145,7 @@
 				}
 			}
 		},
-		"animation.battery_player.is_critical": {
+		"animation.ibexx_itc.battery_player.is_critical": {
 			"loop": true,
 			"animation_length": 1.5,
 			"bones": {

@@ -39,7 +39,7 @@ class PlayerCache {
 }
 
 system.afterEvents.scriptEventReceive.subscribe((event) => {
-    if (event.id === "game:variant_update") {
+    if (event.id === "ibexx_itc:variant_update") {
         const cache = PlayerCache.get(event.sourceEntity.id);
         if (cache) cache.variantVal = Number(event.message);
     }

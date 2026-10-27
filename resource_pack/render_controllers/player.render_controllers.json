@@ -1,7 +1,7 @@
 {
   "format_version": "1.10.0",
   "render_controllers": {
-    "controller.render.player.first_person": {
+    "controller.render.ibexx_itc.player.first_person": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ],
@@ -15,7 +15,7 @@
       ]
     },
 
-    "controller.render.static": {
+    "controller.render.ibexx_itc.static": {
       "arrays": {
         "textures": {
           "Array.StaticTextures": [
@@ -34,7 +34,7 @@
       ]
     },
 
-    "controller.render.turn_off_cam_warning": {
+    "controller.render.ibexx_itc.turn_off_cam_warning": {
       "geometry": "Geometry.turn_off_cam_warning",
       "materials": [ { "*": "Material.alphatest" } ],
       "textures": [ "Texture.red_font" ],
@@ -46,13 +46,13 @@
       ]
     },
 
-    "controller.render.player_battery": {
+    "controller.render.ibexx_itc.player_battery": {
       "geometry": "Geometry.battery",
       "materials": [ { "*": "Material.alphatest" } ],
       "textures": [ "Texture.battery" ]
     },
 
-    "controller.render.game_start_curtain": {
+    "controller.render.ibexx_itc.game_start_curtain": {
       "geometry": "Geometry.game_start_curtain",
       "materials": [ { "*": "Material.alphatest" } ],
       "textures": [ "Texture.white_font" ],
@@ -61,7 +61,7 @@
       ]
     },
 
-    "controller.render.game_over_scene": {
+    "controller.render.ibexx_itc.game_over_scene": {
       "geometry": "Geometry.game_over_scene",
       "materials": [ { "*": "Material.alphatest" } ],
       "textures": [ "Texture.red_font" ],
@@ -73,7 +73,7 @@
       ]
     },
 
-    "controller.render.new_game_started_dialog": {
+    "controller.render.ibexx_itc.new_game_started_dialog": {
       "geometry": "Geometry.new_game_started_dialog",
       "materials": [ { "*": "Material.alphatest" } ],
       "textures": [ "Texture.white_font" ],
@@ -85,8 +85,8 @@
       ]
     },
 
-    "controller.render.round_completed_dialog": {
-      "geometry": "geometry.round_completed_dialog",
+    "controller.render.ibexx_itc.round_completed_dialog": {
+      "geometry": "Geometry.round_completed_dialog",
       "materials": [ { "*": "Material.alphatest" } ],
       "textures": [ "Texture.white_font" ],
       "part_visibility": [

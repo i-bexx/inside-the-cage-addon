@@ -9,7 +9,7 @@ import { getCoinAmountObjective, getObjectiveScore } from "../scoreboards";
 
 const CONFIG = {
     DIMENSION_ID              : "overworld",
-    ENTITY_TYPE               : "game:coin",
+    ENTITY_TYPE               : "ibexx_itc:coin",
     MAX_COINS_PLAYER          : 9,
     SPAWN_INTERVAL            : 120,
     RECEIVE_INTERVAL          : 60,
@@ -18,15 +18,15 @@ const CONFIG = {
     MAX_COIN_DISTANCE         : 5,
     MAGIC_STRINGS: {
         SCOREBOARD      	: "scoreboard players add @s coin_amount 1",
-        RECIPE_MESSAGE_GIVE : "recipe give @s game:coin_max_recipe",
-        RECIPE_MESSAGE_TAKE : "recipe take @s game:coin_max_recipe",
-        COLLECTED_SOUND		: "coin_collect",
+        RECIPE_MESSAGE_GIVE : "recipe give @s ibexx_itc:coin_max_recipe",
+        RECIPE_MESSAGE_TAKE : "recipe take @s ibexx_itc:coin_max_recipe",
+        COLLECTED_SOUND		: "ibexx_itc:coin_collect",
         COLLECTED_TAG   	: "collected",
         COLLECTED_EVENT 	: "collected_event",
         DISAPPEAR_EVENT     : "disappear_event",
         WARNING_SOUND   	: "mob.villager.no",
         WARNING_TEXT    	: "§c§lYou cannot carry any more coins!",
-        NOTIFICATION_SOUND  : "notification"
+        NOTIFICATION_SOUND  : "ibexx_itc:notification"
     },
     LOCATIONS: [
         { x: 27,  y: 65, z: -316 }, { x: 152, y: 70, z: -295 },
@@ -88,7 +88,7 @@ async function spawnCoin() {
 }
 
 export async function despawnCoins() {
-    world.getDimension("overworld").runCommand("kill @e[type=game:coin]");
+    world.getDimension("overworld").runCommand("kill @e[type=ibexx_itc:coin]");
 
     tickingAreaLocations = [];
     world.setDynamicProperty("active_coin_locations", JSON.stringify(tickingAreaLocations));

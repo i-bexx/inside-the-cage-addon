@@ -1,11 +1,11 @@
-item.game:camera=Camera
-item.game:camera_turn_off=Camera turn off
-item.game:gun=Gun
-item.game:knife=Knife
-item.game:toxic_bomb=toxic_bomb
-item.game:kit=Kit
-item.game:ammo=Ammo 20X
-item.menu:skip_cutscene=Skip cutscene
+item.ibexx_itc:camera=Camera
+item.ibexx_itc:camera_turn_off=Camera turn off
+item.ibexx_itc:gun=Gun
+item.ibexx_itc:knife=Knife
+item.ibexx_itc:toxic_bomb=toxic_bomb
+item.ibexx_itc:kit=Kit
+item.ibexx_itc:ammo=Ammo 20X
+item.ibexx_itc:skip_cutscene=Skip cutscene
 
-item.notification:restart_confirmation=§aNotification Panel
-item.notification:end_round_confirmation=§cNotification Panel
+item.ibexx_itc:restart_confirmation=§aNotification Panel
+item.ibexx_itc:end_round_confirmation=§cNotification Panel

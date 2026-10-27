@@ -1,12 +1,12 @@
 {
 	"entity_sounds": {
 		"entities": {
-			"game:ghost": {
+			"ibexx_itc:ghost": {
 				"volume": 1,
 				"pitch": [0.9, 1.0],
 				"events": {
-					"ambient": "ghost_whisper",
-          "hurt": "ghost_hurt"
+					"ambient": "ibexx_itc:ghost_whisper",
+          "hurt": "ibexx_itc:ghost_hurt"
 				}
 			}
 		}

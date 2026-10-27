@@ -43,10 +43,10 @@ const CONFIG = {
         MENU_READY_SOUND: "playsound random.levelup @s"
     },
     ENTITIES: {
-        STALKER: "game:stalker_cursor",
-        MENU_NEW_GAME: "menu:new_game",
-        MENU_CONTINUE: "menu:continue",
-        GAME_DOOR: "game:door"
+        STALKER: "ibexx_itc:stalker_cursor",
+        MENU_NEW_GAME: "ibexx_itc:new_game",
+        MENU_CONTINUE: "ibexx_itc:continue",
+        GAME_DOOR: "ibexx_itc:door"
     },
     PLAYER_EVENTS: {
         NORMAL: "normal_event",
@@ -155,7 +155,7 @@ function checkPlayerGameData(player, worldValue, playerValue) {
         system.runTimeout(() => {
             if (player.isValid) {
                 player.sendMessage(CONFIG.MESSAGES.RESET_WARNING);
-                player.runCommand("playsound notification @s");
+                player.runCommand("playsound ibexx_itc:notification @s");
             }
         }, 40);
     }

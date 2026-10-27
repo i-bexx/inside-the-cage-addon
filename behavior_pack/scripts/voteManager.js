@@ -21,7 +21,7 @@ const TAGS = {
 };
 
 const ITEMS = {
-    NOTIFICATION_PREFIX: "notification:"
+    NOTIFICATION_PREFIX: "ibexx_itc:"
 };
 
 const VOTE_CONFIG = {

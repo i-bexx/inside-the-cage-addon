@@ -2,7 +2,7 @@
   "format_version": "1.20.10",
   "minecraft:recipe_shapeless": {
     "description": {
-      "identifier": "game:coin_max_recipe"
+      "identifier": "ibexx_itc:coin_max_recipe"
     },
     "tags": [ "crafting_table" ],
     "ingredients": [
@@ -11,8 +11,8 @@
       }
     ],
     "result": {
-      "item": "game:coin_max_recipe"
+      "item": "ibexx_itc:coin_max_recipe"
     },
-    "unlock": [ "game:coin_max_recipe" ]
+    "unlock": [ "ibexx_itc:coin_max_recipe" ]
   }
 }

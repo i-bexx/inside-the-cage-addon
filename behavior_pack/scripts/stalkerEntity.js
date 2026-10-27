@@ -7,7 +7,7 @@ import { PlayerCache } from "./Player/playerCache";
 // =============================================================================
 
 const CONFIG = {
-    ENTITY_TYPE: "game:stalker_cursor",
+    ENTITY_TYPE: "ibexx_itc:stalker_cursor",
     OBJECTIVE_ID: "stalker_match_id",
     MATCH_TAG: "stalker_matched",
     IN_GAME: "in_game",

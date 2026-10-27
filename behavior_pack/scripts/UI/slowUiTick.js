@@ -4,7 +4,7 @@ import { PlayerCache } from "../Player/playerCache";
 import { renderUnifiedUi } from "./renderUi";
 
 system.afterEvents.scriptEventReceive.subscribe((event) => {
-    if (event.id === "game:update_sanity") {
+    if (event.id === "ibexx_itc:update_sanity") {
         slowUiTick(event.sourceEntity);
     }
 });

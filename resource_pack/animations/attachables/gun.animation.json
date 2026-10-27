@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.gun.first_person_hold": {
+		"animation.ibexx_itc.gun.first_person_hold": {
 			"loop": true,
 			"bones": {
 				"root_item": {
@@ -11,7 +11,7 @@
 				}
 			}
 		},
-		"animation.gun.third_person_hold": {
+		"animation.ibexx_itc.gun.third_person_hold": {
 			"loop": true,
 			"bones": {
 				"root_item": {
@@ -21,7 +21,7 @@
 				}
 			}
 		},
-		"animation.gun.chamber": {
+		"animation.ibexx_itc.gun.chamber": {
 			"animation_length": 1,
 			"bones": {
 				"chamber": {
@@ -35,7 +35,7 @@
 				}
 			}
 		},
-		"animation.gun.fire": {
+		"animation.ibexx_itc.gun.fire": {
 			"animation_length": 0.1667,
 			"bones": {
 				"ust": {

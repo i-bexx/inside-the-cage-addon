@@ -2,7 +2,7 @@ import { world } from "@minecraft/server";
 import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
-    if (target.typeId !== "game:random_peep") return;
+    if (target.typeId !== "ibexx_itc:random_peep") return;
 
     const conversationIsConcluded = target.getDynamicProperty("conversationIsConcluded");
     const conversationIsGoing = target.getDynamicProperty("conversationIsGoing");
@@ -99,10 +99,10 @@ function randomPeepHelpPanel(player, target) {
 }
 
 function randomPeepPanel_4(player, target) {
-    player.runCommand(`give @s game:kit 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
-    player.runCommand(`give @s game:discount_ticket 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
-    world.getDimension("overworld").playSound("kit_used", target.location);
-    world.getDimension("overworld").spawnParticle("game:kit_used", target.location);
+    player.runCommand(`give @s ibexx_itc:kit 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
+    player.runCommand(`give @s ibexx_itc:discount_ticket 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
+    world.getDimension("overworld").playSound("ibexx_itc:kit_used", target.location);
+    world.getDimension("overworld").spawnParticle("ibexx_itc:kit_used", target.location);
 
     new ActionFormData()
     .title("random_peep_panel")

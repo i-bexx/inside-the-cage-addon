@@ -41,7 +41,7 @@ function soulsFreedValueSufficient(players) {
 
 	stopTeleportNull();
 
-	world.getDimension("overworld").runCommand("tp @e[type=game:null] -65 75 -150");
+	world.getDimension("overworld").runCommand("tp @e[type=ibexx_itc:null] -65 75 -150");
 	world.setDynamicProperty("nowPlayersWillGetNoSignalWhenUseCam", true);
 	world.setDynamicProperty("nullTeleportChecking", false);
 
@@ -50,7 +50,7 @@ function soulsFreedValueSufficient(players) {
     player.removeTag("stalker_matched");
 }
 
-	world.getDimension("overworld").runCommand("kill @e[type=game:stalker_cursor]");
+	world.getDimension("overworld").runCommand("kill @e[type=ibexx_itc:stalker_cursor]");
 }
 
 function soulsFreedValue4() {
@@ -73,14 +73,14 @@ async function soulsFreedValueExceeded(players) {
 		player.setDynamicProperty("initializationBeforeLockingTheCam", true);
 		player.setDynamicProperty("canTurnOffCam", false);
 		
-		player.runCommand("clear @s game:camera");
-		player.runCommand("clear @s game:camera_turn_off");
+		player.runCommand("clear @s ibexx_itc:camera");
+		player.runCommand("clear @s ibexx_itc:camera_turn_off");
 
-		player.runCommand("clear @s game:gun");
-		player.runCommand("clear @s game:knife");
-		player.runCommand("clear @s game:toxic_bomb");
-		player.runCommand("clear @s game:ammo");
-		player.runCommand("clear @a game:ammo_shoot");
+		player.runCommand("clear @s ibexx_itc:gun");
+		player.runCommand("clear @s ibexx_itc:knife");
+		player.runCommand("clear @s ibexx_itc:toxic_bomb");
+		player.runCommand("clear @s ibexx_itc:ammo");
+		player.runCommand("clear @a ibexx_itc:ammo_shoot");
 
 		let sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
 		let staminaValue = PlayerCache.get(player.id)?.stamina;
@@ -96,6 +96,6 @@ function canTurnOffCam() {
 const players = getPlayersInRound();
     for (const player of players) {
         player.setDynamicProperty("canTurnOffCam", true);
-        player.runCommand(`replaceitem entity @s slot.hotbar 8 game:camera_turn_off 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
+        player.runCommand(`replaceitem entity @s slot.hotbar 8 ibexx_itc:camera_turn_off 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
     }
 }

@@ -12,7 +12,7 @@ export function warnPlayerAboutCam() {
 
     for (const player of players) {
         player.setDynamicProperty("toldPlayerTurnOffCam", true);
-        player.runCommand(`replaceitem entity @s slot.armor.chest 1 game:turnoffcamwarning 1 0 {"minecraft:item_lock": {"mode": "lock_in_slot"}}`);
+        player.runCommand(`replaceitem entity @s slot.armor.chest 1 ibexx_itc:turnoffcamwarning 1 0 {"minecraft:item_lock": {"mode": "lock_in_slot"}}`);
 
         closeCamTimeout(player);
     }

@@ -2,7 +2,7 @@
   "format_version": "1.21.30",
   "minecraft:item": {
     "description": {
-      "identifier": "game:discount_ticket",
+      "identifier": "ibexx_itc:discount_ticket",
       "menu_category": {
         "category": "items"
       }
@@ -12,7 +12,7 @@
       "minecraft:hand_equipped": false,
       "minecraft:allow_off_hand": false,
       "minecraft:can_destroy_in_creative": false,
-      "minecraft:icon": "discount_ticket",
+      "minecraft:icon": "ibexx_itc:discount_ticket",
       "minecraft:use_animation": "none",
       "minecraft:interact_button": "Open Detector",
 

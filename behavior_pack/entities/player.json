@@ -8,28 +8,28 @@
 			"is_experimental": false,
 
 			"properties": {
-				"property:has_slowness": {
+				"ibexx_itc:has_slowness": {
 					"type": "bool",
 					"default": false,
 					"client_sync": true
 				},
-				"property:cursor_state": {
+				"ibexx_itc:cursor_state": {
 					"type": "enum",
 					"default": "normal",
 					"values": [ "normal", "green", "blue", "red" ],
 					"client_sync": false
 				},
-				"property:has_ammo": {
+				"ibexx_itc:has_ammo": {
 					"type": "bool",
 					"default": true,
 					"client_sync": true
 				},
-				"property:is_shooting": {
+				"ibexx_itc:is_shooting": {
 					"type": "bool",
 					"default": false,
 					"client_sync": true
 				},
-				"property:start_gun": {
+				"ibexx_itc:start_gun": {
 					"type": "bool",
 					"default": true,
 					"client_sync": true
@@ -47,28 +47,28 @@
 				]
 			},
 			"animations": {
-				"camera_no_signal": "controller.animation.camera_no_signal",
-				"camera_no_signal_playsound": "animation.static.camera_no_signal_playsound",
+				"camera_no_signal": "controller.animation.ibexx_itc.camera_no_signal",
+				"camera_no_signal_playsound": "animation.ibexx_itc.static.camera_no_signal_playsound",
 
-				"gun": "controller.animation.gun",
-				"starting_gun": "animation.gun.start",
-				"aiming_gun": "animation.gun.aim",
-				"shooting_gun": "animation.gun.shoot",
-				"not_shooting": "animation.gun.not_shooting",
-				"no_ammo": "animation.gun.no_ammo",
-				"ammo_reloaded": "animation.gun.ammo_reloaded",
+				"gun": "controller.animation.ibexx_itc.gun",
+				"starting_gun": "animation.ibexx_itc.gun.start",
+				"aiming_gun": "animation.ibexx_itc.gun.aim",
+				"shooting_gun": "animation.ibexx_itc.gun.shoot",
+				"not_shooting": "animation.ibexx_itc.gun.not_shooting",
+				"no_ammo": "animation.ibexx_itc.gun.no_ammo",
+				"ammo_reloaded": "animation.ibexx_itc.gun.ammo_reloaded",
 
-				"no_ammo_controller": "controller.animation.gun_no_ammo",
-				"no_ammo_subtitle": "animation.gun.no_ammo_subtitle",
+				"no_ammo_controller": "controller.animation.ibexx_itc.gun_no_ammo",
+				"no_ammo_subtitle": "animation.ibexx_itc.gun.no_ammo_subtitle",
 
-				"ammo_reload_controller": "controller.animation.ammo_reload",
-				"ammo_reloading_anim": "animation.gun.ammo_reloading",
+				"ammo_reload_controller": "controller.animation.ibexx_itc.ammo_reload",
+				"ammo_reloading_anim": "animation.ibexx_itc.gun.ammo_reloading",
 
-				"toxic_bomb": "controller.animation.toxic_bomb",
-				"toxic_bomb_use": "animation.toxic_bomb.use",
+				"toxic_bomb": "controller.animation.ibexx_itc.toxic_bomb",
+				"toxic_bomb_use": "animation.ibexx_itc.toxic_bomb.use",
 
-				"kit": "controller.animation.kit",
-				"kit_use": "animation.kit.use"
+				"kit": "controller.animation.ibexx_itc.kit",
+				"kit_use": "animation.ibexx_itc.kit.use"
 			}
 		},
 
@@ -352,56 +352,56 @@
 		"events": {
 			"normal_event": {
 				"add": { "component_groups": [ "normal_component", "normal_movement" ] },
-				"set_property": { "property:has_slowness": false }
+				"set_property": { "ibexx_itc:has_slowness": false }
 			},
 			"normal_movement_event": {
 				"add": { "component_groups": [ "normal_movement" ] },
-				"set_property": { "property:has_slowness": false }
+				"set_property": { "ibexx_itc:has_slowness": false }
 			},
 			"cursor_normal_event": {
 				"add": { "component_groups": [ "cursor_normal" ] },
-				"set_property": { "property:cursor_state": "normal" }
+				"set_property": { "ibexx_itc:cursor_state": "normal" }
 			},
 			"cursor_green_event": {
 				"add": { "component_groups": [ "cursor_green" ] },
-				"set_property": { "property:cursor_state": "green" }
+				"set_property": { "ibexx_itc:cursor_state": "green" }
 			},
 			"cursor_blue_event": {
 				"add": { "component_groups": [ "cursor_blue" ] },
-				"set_property": { "property:cursor_state": "blue" }
+				"set_property": { "ibexx_itc:cursor_state": "blue" }
 			},
 			"cursor_red_event": {
 				"add": { "component_groups": [ "cursor_red" ] },
-				"set_property": { "property:cursor_state": "red" }
+				"set_property": { "ibexx_itc:cursor_state": "red" }
 			},
 			"is_not_shooting_event": {
 				"remove": { "component_groups": [ "is_shooting", "no_ammo", "ammo_reloaded", "ammo_reloaded_after" ] },
 				"add": { "component_groups": [ "is_not_shooting" ] },
-				"queue_command": { "command": "scriptevent game:variant_update 0" },
-				"set_property": { "property:is_shooting": false }
+				"queue_command": { "command": "scriptevent ibexx_itc:variant_update 0" },
+				"set_property": { "ibexx_itc:is_shooting": false }
 			},
 			"is_shooting_event": {
 				"remove": { "component_groups": [ "is_not_shooting", "no_ammo", "ammo_reloaded", "ammo_reloaded_after" ] },
 				"add": { "component_groups": [ "is_shooting" ] },
-				"queue_command": { "command": "scriptevent game:variant_update 1" }
+				"queue_command": { "command": "scriptevent ibexx_itc:variant_update 1" }
 			},
 			"no_ammo_event": {
 				"remove": { "component_groups": [ "is_shooting", "is_not_shooting", "ammo_reloaded", "ammo_reloaded_after" ] },
 				"add": { "component_groups": [ "no_ammo" ] },
-				"queue_command": { "command": "scriptevent game:variant_update 2" },
-				"set_property": { "property:has_ammo": false }
+				"queue_command": { "command": "scriptevent ibexx_itc:variant_update 2" },
+				"set_property": { "ibexx_itc:has_ammo": false }
 			},
 			"ammo_reloaded_event": {
 				"remove": { "component_groups": [ "is_shooting", "is_not_shooting", "no_ammo", "ammo_reloaded_after" ] },
 				"add": { "component_groups": [ "ammo_reloaded" ] },
-				"queue_command": { "command": "scriptevent game:variant_update 3" },
-				"set_property": { "property:has_ammo": true, "property:start_gun": true }
+				"queue_command": { "command": "scriptevent ibexx_itc:variant_update 3" },
+				"set_property": { "ibexx_itc:has_ammo": true, "ibexx_itc:start_gun": true }
 			},
 			"ammo_reloaded_after_event": {
 				"remove": { "component_groups": [ "is_shooting", "is_not_shooting", "no_ammo", "ammo_reloaded" ] },
 				"add": { "component_groups": [ "ammo_reloaded_after" ] },
-				"queue_command": { "command": "scriptevent game:variant_update 4" },
-				"set_property": { "property:start_gun": false }
+				"queue_command": { "command": "scriptevent ibexx_itc:variant_update 4" },
+				"set_property": { "ibexx_itc:start_gun": false }
 			},
 			"new_game_started": {
 				"add": { "component_groups": [ "new_game_started" ] }
@@ -434,7 +434,7 @@
 			},
 			"static_movement_event": {
         "add": { "component_groups": [ "static_movement" ] },
-				"set_property": { "property:has_slowness": false }
+				"set_property": { "ibexx_itc:has_slowness": false }
 			},
 			"static_low_sanity_event": {
 				"add": { "component_groups": [ "static_low_sanity" ] }
@@ -456,7 +456,7 @@
 			},
 			"slowness_event": {
 				"add": { "component_groups": [ "slowness" ] },
-				"set_property": { "property:has_slowness": true }
+				"set_property": { "ibexx_itc:has_slowness": true }
 			},
 			"battery_is_full_event": {
 				"remove": { "component_groups": [ "battery_is_not_full" ] },
@@ -496,7 +496,7 @@
 				"queue_command": {
 					"command": [
 						"say @s Your battery is already full",
-						"playsound notification @s"
+						"playsound ibexx_itc:notification @s"
 					]
 				}
 			},

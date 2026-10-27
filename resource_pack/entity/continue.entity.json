@@ -2,7 +2,7 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
-      "identifier": "menu:continue",
+      "identifier": "ibexx_itc:continue",
       "materials": {
         "default": "entity_alphatest"
       },
@@ -11,11 +11,11 @@
         "texture_selected": "textures/entity/menu/continue selected"
       },
       "geometry": {
-        "default": "geometry.continue"
+        "default": "geometry.ibexx_itc.continue"
       },
       
       "render_controllers": [
-         "controller.render.continue"
+         "controller.render.ibexx_itc.continue"
          ]
       }
     }

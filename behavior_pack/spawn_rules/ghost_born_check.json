@@ -2,7 +2,7 @@
   "format_version": "1.8.0",
   "minecraft:spawn_rules": {
     "description": {
-      "identifier": "game:ghost_born_check",
+      "identifier": "ibexx_itc:ghost_born_check",
       "population_control": "monster"
     },
     "conditions": [

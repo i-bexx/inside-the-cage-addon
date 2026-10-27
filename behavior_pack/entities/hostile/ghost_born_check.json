@@ -2,7 +2,7 @@
   "format_version": "1.21.50",
   "minecraft:entity": {
     "description": {
-      "identifier": "game:ghost_born_check",
+      "identifier": "ibexx_itc:ghost_born_check",
       "is_spawnable": false,
       "is_summonable": true,
       "is_experimental": false
@@ -16,7 +16,7 @@
       },
       "ghost_born_permission_granted": {
         "minecraft:transformation": {
-          "into": "game:ghost"
+          "into": "ibexx_itc:ghost"
         }
       }
     },
@@ -55,18 +55,18 @@
 			"minecraft:entity_born": {
         "queue_command": {
           "command": [
-            "execute as @s if entity @e[type=game:ghost,r=20] run event entity @s despawn_event",
-            "execute as @s unless entity @e[type=game:ghost,r=20] unless score value souls_freed matches 4..5 run event entity @s despawn_event",
-            "execute as @s unless entity @e[type=game:ghost,r=20] if score value souls_freed matches 4..5 run event entity @s ghost_born_permission_granted_event"
+            "execute as @s if entity @e[type=ibexx_itc:ghost,r=20] run event entity @s despawn_event",
+            "execute as @s unless entity @e[type=ibexx_itc:ghost,r=20] unless score value souls_freed matches 4..5 run event entity @s despawn_event",
+            "execute as @s unless entity @e[type=ibexx_itc:ghost,r=20] if score value souls_freed matches 4..5 run event entity @s ghost_born_permission_granted_event"
           ]
         }
       },
       "minecraft:entity_spawned": {
         "queue_command": {
           "command": [
-            "execute as @s if entity @e[type=game:ghost,r=20] run event entity @s despawn_event",
-            "execute as @s unless entity @e[type=game:ghost,r=20] unless score value souls_freed matches 4..5 run event entity @s despawn_event",
-            "execute as @s unless entity @e[type=game:ghost,r=20] if score value souls_freed matches 4..5 run event entity @s ghost_born_permission_granted_event"
+            "execute as @s if entity @e[type=ibexx_itc:ghost,r=20] run event entity @s despawn_event",
+            "execute as @s unless entity @e[type=ibexx_itc:ghost,r=20] unless score value souls_freed matches 4..5 run event entity @s despawn_event",
+            "execute as @s unless entity @e[type=ibexx_itc:ghost,r=20] if score value souls_freed matches 4..5 run event entity @s ghost_born_permission_granted_event"
           ]
         }
       },

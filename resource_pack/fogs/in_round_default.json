@@ -2,7 +2,7 @@
 	"format_version": "1.16.100",
 	"minecraft:fog_settings": {
 		"description": {
-			"identifier": "game:in_round_default"
+			"identifier": "ibexx_itc:in_round_default"
 		},
 		"distance": {
 			"air": {

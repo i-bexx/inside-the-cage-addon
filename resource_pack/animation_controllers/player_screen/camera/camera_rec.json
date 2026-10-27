@@ -1,7 +1,7 @@
 {
   "format_version": "1.10.0",
   "animation_controllers": {
-    "controller.animation.camera_rec": {
+    "controller.animation.ibexx_itc.camera_rec": {
       "states": {
         "default": {
           "transitions": [

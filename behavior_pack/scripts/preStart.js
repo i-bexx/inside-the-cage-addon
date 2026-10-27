@@ -14,10 +14,10 @@ const CONFIG = {
         CUTSCENE: "cutscene"
     },
     IDS: {
-        NEW_GAME: "menu:new_game",
-        CONTINUE: "menu:continue",
-        SKIP_ITEM: "menu:skip_cutscene",
-        DOOR: "game:door"
+        NEW_GAME: "ibexx_itc:new_game",
+        CONTINUE: "ibexx_itc:continue",
+        SKIP_ITEM: "ibexx_itc:skip_cutscene",
+        DOOR: "ibexx_itc:door"
     },
     COORDS: {
         SPAWN_POINT: "-183 68 -97",
@@ -70,7 +70,7 @@ const MENU_STATE = new Proxy({ onNewGame: false, onContinue: false }, {
         const entity = (key === "onNewGame") ? MENU_ENTITIES.newGame : MENU_ENTITIES.continue;
         
         if (entity && entity.isValid) {
-            value ? (entity.triggerEvent("selected"), dimension.runCommand("playsound click_choosing @a")) 
+            value ? (entity.triggerEvent("selected"), dimension.runCommand("playsound ibexx_itc:click_choosing @a")) 
                   : entity.triggerEvent("default");
         }
         return true;
@@ -90,7 +90,7 @@ const COMMANDS = {
     ],
     SCENE_INTRO: [
         `event entity @a[tag=${CONFIG.TAGS.CUTSCENE}] new_game_started`,
-        `playsound new_game_started @a[tag=${CONFIG.TAGS.CUTSCENE}]`
+        `playsound ibexx_itc:new_game_started @a[tag=${CONFIG.TAGS.CUTSCENE}]`
     ],
     SCENE_TRUCK: [
         `event entity @a[tag=${CONFIG.TAGS.CUTSCENE}] new_game_started_text`,
@@ -179,7 +179,7 @@ world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
 		
     if (!doesHaveTag) return;
 
-    player.runCommand("playsound click_chose @s");
+    player.runCommand("playsound ibexx_itc:click_chose @s");
     player.runCommand(`tag @s remove ${CONFIG.TAGS.MENU}`);
     
     dimension.runCommand("tag @a add in_lobby");
@@ -283,7 +283,7 @@ function playSceneEngineStart() {
     if (ACTIVE_TIMERS.sceneEngine !== undefined) return;
 
     ACTIVE_TIMERS.sceneEngine = system.runTimeout(() => {
-        dimension.runCommand(`playsound engine_start @a[tag=${CONFIG.TAGS.CUTSCENE}]`);
+        dimension.runCommand(`playsound ibexx_itc:engine_start @a[tag=${CONFIG.TAGS.CUTSCENE}]`);
     }, CONFIG.TIMESTAMPS.ENGINE_START);
 }
 
@@ -291,7 +291,7 @@ function playSceneDriving() {
     if (ACTIVE_TIMERS.sceneDriving !== undefined) return;
 
     ACTIVE_TIMERS.sceneDriving = system.runTimeout(() => {
-        dimension.runCommand(`playsound driving @a[tag=${CONFIG.TAGS.CUTSCENE}]`);
+        dimension.runCommand(`playsound ibexx_itc:driving @a[tag=${CONFIG.TAGS.CUTSCENE}]`);
     }, CONFIG.TIMESTAMPS.DRIVING);
 }
 
@@ -299,7 +299,7 @@ function playSceneContainerNoise() {
     if (ACTIVE_TIMERS.sceneNoise !== undefined) return;
 
     ACTIVE_TIMERS.sceneNoise = system.runTimeout(() => {
-        dimension.runCommand(`playsound truck_container @a[tag=${CONFIG.TAGS.CUTSCENE}]`);
+        dimension.runCommand(`playsound ibexx_itc:truck_container @a[tag=${CONFIG.TAGS.CUTSCENE}]`);
     }, CONFIG.TIMESTAMPS.CONTAINER_NOISE);
 }
 
@@ -307,7 +307,7 @@ function playSceneCloseLid() {
     if (ACTIVE_TIMERS.sceneLid !== undefined) return;
 
     ACTIVE_TIMERS.sceneLid = system.runTimeout(() => {
-        dimension.runCommand(`playsound close_lid @a[tag=${CONFIG.TAGS.CUTSCENE}]`);
+        dimension.runCommand(`playsound ibexx_itc:close_lid @a[tag=${CONFIG.TAGS.CUTSCENE}]`);
         dimension.runCommand(`clear @a[tag=${CONFIG.TAGS.CUTSCENE}] ${CONFIG.IDS.SKIP_ITEM}`);
     }, CONFIG.TIMESTAMPS.CLOSE_LID);
 }

@@ -10,8 +10,8 @@ import { getSoulsFreedObjective, getSanityObjective, getValueParticipant, getObj
 
 const CONFIG = {
     ITEMS: {
-        CAMERA: "game:camera",
-        CAMERA_OFF: "game:camera_turn_off"
+        CAMERA: "ibexx_itc:camera",
+        CAMERA_OFF: "ibexx_itc:camera_turn_off"
     },
     EVENTS: {
         STATIC: "static_event",
@@ -24,12 +24,12 @@ const CONFIG = {
         NORMAL: "normal_event"
     },
     COMMANDS: {
-        CLEAR_CAM: "clear @s game:camera",
-        REPLACE_OFF: `replaceitem entity @s slot.hotbar 8 game:camera_turn_off 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`,
-        STOP_SHUTTER: "stopsound @s camera_shutter",
-        STOP_STATIC: "stopsound @s static_low_sanity",
-        PLAY_INIT_SOUND: "playsound initializationBeforeLockingTheCam @s",
-        CLEAR_WARNING: "clear @s game:turnoffcamwarning"
+        CLEAR_CAM: "clear @s ibexx_itc:camera",
+        REPLACE_OFF: `replaceitem entity @s slot.hotbar 8 ibexx_itc:camera_turn_off 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`,
+        STOP_SHUTTER: "stopsound @s ibexx_itc:camera_shutter",
+        STOP_STATIC: "stopsound @s ibexx_itc:static_low_sanity",
+        PLAY_INIT_SOUND: "playsound ibexx_itc:initializationBeforeLockingTheCam @s",
+        CLEAR_WARNING: "clear @s ibexx_itc:turnoffcamwarning"
     },
     PROPERTIES: {
         IS_USING: "camUsing",

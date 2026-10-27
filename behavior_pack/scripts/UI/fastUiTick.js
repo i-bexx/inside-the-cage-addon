@@ -64,7 +64,7 @@ function getCursorState(playerState) {
   };
 
   // Check if player is holding the gun
-  cursorState.isHoldingGun = playerState.mainHandTypeId === "game:gun";
+  cursorState.isHoldingGun = playerState.mainHandTypeId === "ibexx_itc:gun";
 
   // Check if player is shooting
   const isShooting = playerState.variant == 1;

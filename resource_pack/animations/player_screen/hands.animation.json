@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.hands.still": {
+		"animation.ibexx_itc.hands.still": {
 			"loop": true,
 			"animation_length": 8,
 			"bones": {
@@ -42,7 +42,7 @@
 				}
 			}
 		},
-		"animation.hands.attack": {
+		"animation.ibexx_itc.hands.attack": {
 			"loop": true,
 			"animation_length": 0.5833,
 			"bones": {
@@ -69,7 +69,7 @@
 				}
 			}
 		},
-		"animation.hands.despawn_right_but_left_not_empty": {
+		"animation.ibexx_itc.hands.despawn_right_but_left_not_empty": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.5,
 			"bones": {
@@ -89,7 +89,7 @@
 				}
 			}
 		},
-		"animation.hands.despawn_left_but_right_not_empty": {
+		"animation.ibexx_itc.hands.despawn_left_but_right_not_empty": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.3,
 			"bones": {
@@ -109,7 +109,7 @@
 				}
 			}
 		},
-		"animation.hands.despawn_right_but_left_empty": {
+		"animation.ibexx_itc.hands.despawn_right_but_left_empty": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 8,
 			"bones": {
@@ -141,7 +141,7 @@
 				}
 			}
 		},
-		"animation.hands.despawn_left_but_right_empty": {
+		"animation.ibexx_itc.hands.despawn_left_but_right_empty": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 8,
 			"bones": {
@@ -173,7 +173,7 @@
 				}
 			}
 		},
-		"animation.hands.respawn_right_but_left_empty": {
+		"animation.ibexx_itc.hands.respawn_right_but_left_empty": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 8,
 			"bones": {
@@ -193,7 +193,7 @@
 				}
 			}
 		},
-		"animation.hands.respawn_left_but_right_empty": {
+		"animation.ibexx_itc.hands.respawn_left_but_right_empty": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 8,
 			"bones": {
@@ -213,7 +213,7 @@
 				}
 			}
 		},
-		"animation.hands.respawn_right_but_left_not_empty": {
+		"animation.ibexx_itc.hands.respawn_right_but_left_not_empty": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.5,
 			"bones": {
@@ -233,7 +233,7 @@
 				}
 			}
 		},
-		"animation.hands.respawn_left_but_right_not_empty": {
+		"animation.ibexx_itc.hands.respawn_left_but_right_not_empty": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.5,
 			"bones": {
@@ -253,7 +253,7 @@
 				}
 			}
 		},
-		"animation.hands.still_left_arm": {
+		"animation.ibexx_itc.hands.still_left_arm": {
 			"loop": true,
 			"animation_length": 8,
 			"bones": {
@@ -282,7 +282,7 @@
 				}
 			}
 		},
-		"animation.hands.still_right_arm": {
+		"animation.ibexx_itc.hands.still_right_arm": {
 			"loop": true,
 			"animation_length": 8,
 			"bones": {
@@ -311,7 +311,7 @@
 				}
 			}
 		},
-		"animation.hands.swim": {
+		"animation.ibexx_itc.hands.swim": {
 			"loop": true,
 			"animation_length": 1.3,
 			"bones": {
@@ -338,7 +338,7 @@
 				}
 			}
 		},
-		"animation.hands.run": {
+		"animation.ibexx_itc.hands.run": {
 			"loop": true,
 			"animation_length": 32,
 			"bones": {
@@ -1655,7 +1655,7 @@
 				}
 			}
 		},
-		"animation.hands.walk": {
+		"animation.ibexx_itc.hands.walk": {
 			"loop": true,
 			"animation_length": 30,
 			"bones": {
@@ -2652,7 +2652,7 @@
 				}
 			}
 		},
-		"animation.hands.3rd_person.gun": {
+		"animation.ibexx_itc.hands.3rd_person.gun": {
 			"loop": "hold_on_last_frame",
 			"bones": {
 				"leftArm": {
@@ -2668,7 +2668,7 @@
 				}
 			}
 		},
-		"animation.hands.gun.start": {
+		"animation.ibexx_itc.hands.gun.start": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 1,
 			"bones": {
@@ -2712,7 +2712,7 @@
 				}
 			}
 		},
-		"animation.hands.gun.hold": {
+		"animation.ibexx_itc.hands.gun.hold": {
 			"loop": true,
 			"animation_length": 4,
 			"bones": {
@@ -2745,7 +2745,7 @@
 				}
 			}
 		},
-		"animation.hands.gun.walk": {
+		"animation.ibexx_itc.hands.gun.walk": {
 			"loop": true,
 			"animation_length": 0.8,
 			"bones": {
@@ -2785,7 +2785,7 @@
 				}
 			}
 		},
-		"animation.hands.gun.run": {
+		"animation.ibexx_itc.hands.gun.run": {
 			"loop": true,
 			"animation_length": 0.6667,
 			"bones": {
@@ -2826,7 +2826,7 @@
 				}
 			}
 		},
-		"animation.hands.gun.shoot": {
+		"animation.ibexx_itc.hands.gun.shoot": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.3333,
 			"bones": {
@@ -2868,7 +2868,7 @@
 				}
 			}
 		},
-		"animation.hands.gun.aim": {
+		"animation.ibexx_itc.hands.gun.aim": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.5,
 			"bones": {
@@ -2899,7 +2899,7 @@
 				}
 			}
 		},
-		"animation.hands.gun.aim_still": {
+		"animation.ibexx_itc.hands.gun.aim_still": {
 			"loop": true,
 			"animation_length": 2,
 			"bones": {
@@ -2935,7 +2935,7 @@
 				}
 			}
 		},
-		"animation.hands.gun.shoot_aiming": {
+		"animation.ibexx_itc.hands.gun.shoot_aiming": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.3333,
 			"bones": {
@@ -2980,7 +2980,7 @@
 				}
 			}
 		},
-		"animation.hands.3rd_person.knife": {
+		"animation.ibexx_itc.hands.3rd_person.knife": {
 			"loop": true,
 			"bones": {
 				"leftArm": {
@@ -2996,7 +2996,7 @@
 				}
 			}
 		},
-		"animation.hands.knife.start": {
+		"animation.ibexx_itc.hands.knife.start": {
 			"animation_length": 4,
 			"bones": {
 				"waist": {
@@ -3119,7 +3119,7 @@
 				}
 			}
 		},
-		"animation.hands.knife.hold": {
+		"animation.ibexx_itc.hands.knife.hold": {
 			"loop": true,
 			"animation_length": 8,
 			"bones": {
@@ -3204,7 +3204,7 @@
 				}
 			}
 		},
-		"animation.hands.knife.attack_first": {
+		"animation.ibexx_itc.hands.knife.attack_first": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.4,
 			"bones": {
@@ -3236,7 +3236,7 @@
 				}
 			}
 		},
-		"animation.hands.knife.attack_second": {
+		"animation.ibexx_itc.hands.knife.attack_second": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.4,
 			"bones": {
@@ -3268,7 +3268,7 @@
 				}
 			}
 		},
-		"animation.hands.knife.attack_finishing": {
+		"animation.ibexx_itc.hands.knife.attack_finishing": {
 			"animation_length": 2,
 			"bones": {
 				"waist": {
@@ -3308,7 +3308,7 @@
 				}
 			}
 		},
-		"animation.hands.3rd_person.toxic_bomb": {
+		"animation.ibexx_itc.hands.3rd_person.toxic_bomb": {
 			"loop": true,
 			"bones": {
 				"leftArm": {
@@ -3324,7 +3324,7 @@
 				}
 			}
 		},
-		"animation.hands.toxic_bomb_hold": {
+		"animation.ibexx_itc.hands.toxic_bomb_hold": {
 			"loop": true,
 			"animation_length": 8,
 			"bones": {
@@ -3365,7 +3365,7 @@
 				}
 			}
 		},
-		"animation.hands.toxic_bomb_use": {
+		"animation.ibexx_itc.hands.toxic_bomb_use": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.5,
 			"bones": {
@@ -3393,7 +3393,7 @@
 				}
 			}
 		},
-		"animation.hands.toxic_bomb_pick_up": {
+		"animation.ibexx_itc.hands.toxic_bomb_pick_up": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.9,
 			"bones": {
@@ -3471,7 +3471,7 @@
 				}
 			}
 		},
-		"animation.hands.kit.pick_up": {
+		"animation.ibexx_itc.hands.kit.pick_up": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.9,
 			"bones": {
@@ -3549,7 +3549,7 @@
 				}
 			}
 		},
-		"animation.hands.kit.hold": {
+		"animation.ibexx_itc.hands.kit.hold": {
 			"loop": true,
 			"animation_length": 8,
 			"bones": {
@@ -3618,7 +3618,7 @@
 				}
 			}
 		},
-		"animation.hands.3rd_person.kit": {
+		"animation.ibexx_itc.hands.3rd_person.kit": {
 			"loop": true,
 			"bones": {
 				"leftArm": {
@@ -3633,7 +3633,7 @@
 				}
 			}
 		},
-		"animation.hands.ammo.pick_up": {
+		"animation.ibexx_itc.hands.ammo.pick_up": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.9,
 			"bones": {
@@ -3711,7 +3711,7 @@
 				}
 			}
 		},
-		"animation.hands.ammo.hold": {
+		"animation.ibexx_itc.hands.ammo.hold": {
 			"loop": true,
 			"animation_length": 8,
 			"bones": {
@@ -3780,7 +3780,7 @@
 				}
 			}
 		},
-		"animation.hands.3rd_person.ammo": {
+		"animation.ibexx_itc.hands.3rd_person.ammo": {
 			"loop": true,
 			"bones": {
 				"leftArm": {

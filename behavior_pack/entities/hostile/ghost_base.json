@@ -2,7 +2,7 @@
   "format_version": "1.21.50",
   "minecraft:entity": {
     "description": {
-      "identifier": "game:ghost",
+      "identifier": "ibexx_itc:ghost",
       "is_spawnable": false,
       "is_summonable": true,
       "is_experimental": false,
@@ -14,9 +14,9 @@
       },
 
       "animations": {
-        "ghost_controller": "controller.animation.ghost",
-        "ghost_just_spawned": "animation.ghost_just_spawned",
-        "ghost_can_move": "animation.ghost_can_move"
+        "ghost_controller": "controller.animation.ibexx_itc.ghost",
+        "ghost_just_spawned": "animation.ibexx_itc.ghost_just_spawned",
+        "ghost_can_move": "animation.ibexx_itc.ghost_can_move"
       }
     },
 
@@ -71,7 +71,7 @@
           "add": {},
           "drop_equipment": false,
           "drop_inventory": false,
-          "into": "game:ghost_dead",
+          "into": "ibexx_itc:ghost_dead",
           "keep_level": false,
           "keep_owner": false,
           "preserve_equipment": false,
@@ -178,7 +178,7 @@
       },
       "spawn_event": {
         "queue_command": {
-          "command": [ "execute at @s run particle spawn:ghost ~ ~ ~", "execute at @s run playsound ghost_spawn @a[r=15] ~ ~ ~" ]
+          "command": [ "execute at @s run particle ibexx_itc:ghost_spawn ~ ~ ~", "execute at @s run playsound ibexx_itc:ghost_spawn @a[r=15] ~ ~ ~" ]
         }
       },
       "can_move_event": {
@@ -186,7 +186,7 @@
       },
       "blood_effect_event": {
         "queue_command": {
-          "command": [ "execute at @s run particle game:blood ~ ~1 ~" ]
+          "command": [ "execute at @s run particle ibexx_itc:blood ~ ~1 ~" ]
         }
       },
       "ghost_dead_event": {

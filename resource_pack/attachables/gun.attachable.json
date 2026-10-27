@@ -2,7 +2,7 @@
 	"format_version": "1.10.0",
 	"minecraft:attachable": {
 		"description": {
-			"identifier": "game:gun",
+			"identifier": "ibexx_itc:gun",
 			"render_controllers": ["controller.render.item_default"],
 			"materials": {
 				"default": "entity_alphatest",
@@ -13,16 +13,16 @@
 				"enchanted": "textures/misc/enchanted_item_glint"
 			},
 			"geometry": {
-				"default": "geometry.gun"
+				"default": "geometry.ibexx_itc.gun"
 			},
 			"animations": {
-				"gun_controller": "controller.animation.gun",
-				"chamber_controller": "controller.animation.gun_chamber",
-				"fire_controller": "controller.animation.gun_fire",
-				"first_person_hold": "animation.gun.first_person_hold",
-				"third_person_hold": "animation.gun.third_person_hold",
-				"chamber_anim": "animation.gun.chamber",
-				"fire_anim": "animation.gun.fire"
+				"gun_controller": "controller.animation.ibexx_itc.gun",
+				"chamber_controller": "controller.animation.ibexx_itc.gun_chamber",
+				"fire_controller": "controller.animation.ibexx_itc.gun_fire",
+				"first_person_hold": "animation.ibexx_itc.gun.first_person_hold",
+				"third_person_hold": "animation.ibexx_itc.gun.third_person_hold",
+				"chamber_anim": "animation.ibexx_itc.gun.chamber",
+				"fire_anim": "animation.ibexx_itc.gun.fire"
 			},
 			"scripts": {
 				"animate": [

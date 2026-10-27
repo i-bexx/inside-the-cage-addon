@@ -1,11 +1,11 @@
 {
   "format_version": "1.10.0",
   "animation_controllers": {
-    "controller.animation.kit": {
+    "controller.animation.ibexx_itc.kit": {
       "states": {
         "default": {
           "transitions": [
-            { "kit_use": "query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit') && query.is_using_item" }
+            { "kit_use": "query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:kit') && query.is_using_item" }
           ]
         },
         "kit_use": {
@@ -13,7 +13,7 @@
             "kit_use"
           ],
           "transitions": [
-            { "default": "(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit') && !(query.is_using_item)) || !(query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')) " }
+            { "default": "(query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:kit') && !(query.is_using_item)) || !(query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:kit')) " }
           ]
         }
       }
