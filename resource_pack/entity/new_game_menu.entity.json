@@ -7,8 +7,8 @@
         "default": "entity_alphatest"
       },
       "textures": {
-        "texture_default": "textures/entity/menu/New game",
-        "texture_selected": "textures/entity/menu/New game selected"
+        "texture_default": "textures/entity/menu/new_game",
+        "texture_selected": "textures/entity/menu/new_game_selected"
       },
       "geometry": {
         "default": "geometry.ibexx_itc.new_game"

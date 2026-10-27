@@ -16,7 +16,7 @@ import { setGlobalVariables as gameStatsSetGlobalVariables } from "./gameStats";
 import { setGlobalVariables as panelsSetGlobalVariables } from "./panels";
 import { setGlobalVariables as preStartSetGlobalVariables } from "./preStart";
 import { setGlobalVariables as stalkerEntitySetGlobalVariables } from "./stalkerEntity";
-import { setGlobalVariables as teleporterSetGlobalVariables } from "./Teleporter";
+import { setGlobalVariables as teleporterSetGlobalVariables } from "./teleporter";
 import { setGlobalVariables as voteManagerSetGlobalVariables } from "./voteManager";
 
 import { setForms as voteManagerSetForms } from "./voteManager";

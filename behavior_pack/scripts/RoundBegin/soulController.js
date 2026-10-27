@@ -86,10 +86,10 @@ async function soulsFreedValueExceeded(players) {
 		let staminaValue = PlayerCache.get(player.id)?.stamina;
 		
 		cameraUsed(player, sanityValue, staminaValue);
-		stalkerMatch();
-
-		world.scoreboard.getObjective("show_position").setScore(getValueParticipant(), 0);
   }
+	stalkerMatch();
+
+	world.scoreboard.getObjective("show_position").setScore(getValueParticipant(), 0);
 }
 
 function canTurnOffCam() {

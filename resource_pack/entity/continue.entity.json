@@ -8,7 +8,7 @@
       },
       "textures": {
         "texture_default": "textures/entity/menu/continue",
-        "texture_selected": "textures/entity/menu/continue selected"
+        "texture_selected": "textures/entity/menu/continue_selected"
       },
       "geometry": {
         "default": "geometry.ibexx_itc.continue"

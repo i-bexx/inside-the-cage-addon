@@ -8,7 +8,7 @@ import "./gameStats";
 import "./panels";
 import "./preStart";
 import "./stalkerEntity";
-import "./Teleporter";
+import "./teleporter";
 import "./voteManager";
 
 import "./utils";
