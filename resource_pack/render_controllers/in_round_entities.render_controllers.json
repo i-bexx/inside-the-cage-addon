@@ -1,7 +1,7 @@
 {
   "format_version": "1.10.0",
   "render_controllers": {
-    "controller.render.null": {
+    "controller.render.ibexx_itc.null": {
       "geometry": "Geometry.default",
       "materials": [
         { "*": "Material.default" },
@@ -10,25 +10,25 @@
       "textures": [ "Texture.default" ]
     },
 
-    "controller.render.random_peep": {
+    "controller.render.ibexx_itc.random_peep": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]
     },
 
-    "controller.render.bottle": {
+    "controller.render.ibexx_itc.bottle": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.bottle" } ],
       "textures": [ "Texture.bottle" ]
     },
     
-    "controller.render.ghost": {
+    "controller.render.ibexx_itc.ghost": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]
     },
 
-    "controller.render.cage_opaque": {
+    "controller.render.ibexx_itc.cage_opaque": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.opaque" } ],
       "textures": [ "Texture.cage" ],
@@ -39,7 +39,7 @@
       ]
     },
 
-    "controller.render.cage_glass": {
+    "controller.render.ibexx_itc.cage_glass": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.transparent" } ],
       "textures": [ "Texture.cage" ],
@@ -50,7 +50,7 @@
       ]
     },
 
-    "controller.render.cage_broken_glass": {
+    "controller.render.ibexx_itc.cage_broken_glass": {
       "geometry": "Geometry.cage_broken",
       "materials": [ { "*": "Material.transparent" } ],
       "textures": [ "Texture.cage_broken" ],
@@ -60,7 +60,7 @@
       ]
     },
 
-    "controller.render.cage_broken_opaque": {
+    "controller.render.ibexx_itc.cage_broken_opaque": {
       "geometry": "Geometry.cage_broken",
       "materials": [ { "*": "Material.opaque" } ],
       "textures": [ "Texture.cage_broken" ],
@@ -70,25 +70,25 @@
       ]
     },
 
-    "controller.render.battery": {
+    "controller.render.ibexx_itc.battery": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]
     },
 
-    "controller.render.coin": {
+    "controller.render.ibexx_itc.coin": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]
     },
 
-    "controller.render.ammo_shoot": {
+    "controller.render.ibexx_itc.ammo_shoot": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]
     },
 
-    "controller.render.password_label": {
+    "controller.render.ibexx_itc.password_label": {
       "arrays": {
         "textures": {
           "Array.PasswordTextures": [

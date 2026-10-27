@@ -2,7 +2,7 @@
   "format_version": "1.21.50",
   "minecraft:entity": {
     "description": {
-      "identifier": "game:ghost_dead",
+      "identifier": "ibexx_itc:ghost_dead",
       "is_spawnable": false,
       "is_summonable": true,
       "is_experimental": false,
@@ -12,7 +12,7 @@
       },
 
       "animations": {
-        "ghost_dead": "animation.ghost.die"
+        "ghost_dead": "animation.ibexx_itc.ghost.die"
       }
     },
 

@@ -1,7 +1,7 @@
 import { world, system } from "@minecraft/server";
 
 const GAME_ENTITIES = {
-    NULL: "game:null"
+    NULL: "ibexx_itc:null"
 };
 
 let cachedNullEntity = undefined;
@@ -23,7 +23,7 @@ export function getNullEntity() {
 }
 
 function loadNull(event) {
-    if (event.entity.typeId === "game:null") {
+    if (event.entity.typeId === "ibexx_itc:null") {
         event.entity.teleport({ x: -65, y: 75, z: -150 });
         world.afterEvents.entityLoad.unsubscribe(loadNull);
     }

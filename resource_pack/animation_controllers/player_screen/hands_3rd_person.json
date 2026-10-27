@@ -1,15 +1,15 @@
 {
   "format_version": "1.10.0",
   "animation_controllers": {
-    "controller.animation.hands.3rd_person": {
+    "controller.animation.ibexx_itc.hands.3rd_person": {
       "states": {
           "default": {
               "transitions": [
-              { "3rd_person_gun": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" },
-              { "3rd_person_knife": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" },
-              { "3rd_person_toxic_bomb": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" },
-              { "3rd_person_kit": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" },
-              { "3rd_person_ammo": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo')" }
+              { "3rd_person_gun": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:gun')" },
+              { "3rd_person_knife": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:knife')" },
+              { "3rd_person_toxic_bomb": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:toxic_bomb')" },
+              { "3rd_person_kit": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:kit')" },
+              { "3rd_person_ammo": "q.is_alive && query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:ammo')" }
               ],
               "blend_transition": 0.3
           },
@@ -18,7 +18,7 @@
               "3rd_person_gun"
             ],
             "transitions": [
-              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:gun')" }
+              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:gun')" }
             ]
           },
           "3rd_person_knife": {
@@ -26,7 +26,7 @@
               "3rd_person_knife"
             ],
             "transitions": [
-              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:knife')" }
+              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:knife')" }
             ]
           },
           "3rd_person_toxic_bomb": {
@@ -34,7 +34,7 @@
               "3rd_person_toxic_bomb"
             ],
             "transitions": [
-              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:toxic_bomb')" }
+              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:toxic_bomb')" }
             ]
           },
           "3rd_person_kit": {
@@ -42,7 +42,7 @@
               "3rd_person_kit"
             ],
             "transitions": [
-              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:kit')" }
+              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:kit')" }
             ]
           },
           "3rd_person_ammo": {
@@ -50,7 +50,7 @@
               "3rd_person_ammo"
             ],
             "transitions": [
-              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'game:ammo')" }
+              { "default": "!query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:ammo')" }
             ]
           }
       }

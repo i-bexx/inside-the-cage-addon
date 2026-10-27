@@ -2,7 +2,7 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
-      "identifier": "game:null",
+      "identifier": "ibexx_itc:null",
       "materials": {
         "default": "entity_alphablend",
         "halo": "entity_alphatest"
@@ -11,7 +11,7 @@
         "default": "textures/entity/null/null"
       },
       "geometry": {
-        "default": "geometry.null"
+        "default": "geometry.ibexx_itc.null"
       },
       "scripts": {
         "animate": [
@@ -20,11 +20,11 @@
         ]
       },
       "animations": {
-        "idle": "animation.null.idle",
+        "idle": "animation.ibexx_itc.null.idle",
         "look_at_target": "animation.common.look_at_target"
       },
       "render_controllers": [
-        "controller.render.null"
+        "controller.render.ibexx_itc.null"
       ]
     }
   }

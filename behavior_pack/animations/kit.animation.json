@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.kit.use": {
+		"animation.ibexx_itc.kit.use": {
 			"timeline": {
 				"0.0": [
 					"/title @s actionbar §f|  |  |  |  |"
@@ -22,11 +22,11 @@
 					"/title @s actionbar §4|  |  |  |  |"
 				],
 				"2.2": [
-					"/execute at @s run particle game:kit_used ~ ~ ~",
-					"/clear @s game:kit 0 1",
-					"/playsound kit_used @s",
+					"/execute at @s run particle ibexx_itc:kit_used ~ ~ ~",
+					"/clear @s ibexx_itc:kit 0 1",
+					"/playsound ibexx_itc:kit_used @s",
 					"/scoreboard players set @s Sanity 100",
-					"/scriptevent game:update_sanity"
+					"/scriptevent ibexx_itc:update_sanity"
 				]
 			},
 			"animation_length": 2.5,

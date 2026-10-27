@@ -2,7 +2,7 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
-      "identifier": "game:cage",
+      "identifier": "ibexx_itc:cage",
       "materials": {
         "default": "entity_alphablend",
         "opaque": "entity",
@@ -13,8 +13,8 @@
         "cage_broken": "textures/entity/cage/cage_broken"
       },
       "geometry": {
-        "default": "geometry.cage",
-        "cage_broken": "geometry.cage_broken"
+        "default": "geometry.ibexx_itc.cage",
+        "cage_broken": "geometry.ibexx_itc.cage_broken"
       },
       "scripts": {
         "animate": [
@@ -22,13 +22,13 @@
         ]
       },
       "animations": {
-        "soul_anim": "animation.cage.soul"
+        "soul_anim": "animation.ibexx_itc.cage.soul"
       },
       "render_controllers": [
-         { "controller.render.cage_opaque": "query.mark_variant == 0"},
-         { "controller.render.cage_glass": "query.mark_variant == 0"},
-         { "controller.render.cage_broken_glass": "query.mark_variant == 1"},
-         { "controller.render.cage_broken_opaque": "query.mark_variant == 1"}
+         { "controller.render.ibexx_itc.cage_opaque": "query.mark_variant == 0"},
+         { "controller.render.ibexx_itc.cage_glass": "query.mark_variant == 0"},
+         { "controller.render.ibexx_itc.cage_broken_glass": "query.mark_variant == 1"},
+         { "controller.render.ibexx_itc.cage_broken_opaque": "query.mark_variant == 1"}
          ]
       }
     }

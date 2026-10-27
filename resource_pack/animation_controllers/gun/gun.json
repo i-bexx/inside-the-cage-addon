@@ -1,7 +1,7 @@
 {
   "format_version": "1.10.0",
   "animation_controllers": {
-    "controller.animation.gun": {
+    "controller.animation.ibexx_itc.gun": {
       "states": {
           "default": {
             "animations": [

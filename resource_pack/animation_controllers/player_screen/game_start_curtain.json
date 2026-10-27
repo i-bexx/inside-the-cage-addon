@@ -1,7 +1,7 @@
 {
   "format_version": "1.10.0",
   "animation_controllers": {
-    "controller.animation.game_start_curtain": {
+    "controller.animation.ibexx_itc.game_start_curtain": {
       "states": {
           "default": {
               "transitions": [
@@ -14,7 +14,7 @@
               "game_start_curtain_close_anim"
             ],
             "transitions": [
-              { "game_start_curtain_open": "query.mark_variant != 554 || query.is_item_name_any('slot.weapon.mainhand', 0, 'game:camera')" },
+              { "game_start_curtain_open": "query.mark_variant != 554 || query.is_item_name_any('slot.weapon.mainhand', 0, 'ibexx_itc:camera')" },
               { "default": "query.mark_variant == 0" }
             ]
           },

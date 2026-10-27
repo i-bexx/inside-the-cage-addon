@@ -13,12 +13,12 @@ let tickingAreaLocations = [];
 let isCageSpawnerActive = false;
 
 const CONFIG = {
-    CAGE_ID: "game:cage",
+    CAGE_ID: "ibexx_itc:cage",
     PROPERTY_NAME: "cageBroken",
     EVENT_NAME: "broke_event",
-    PARTICLE: "game:soul_freed_particle",
+    PARTICLE: "ibexx_itc:soul_freed_particle",
     UPDATE_SCORE: "scoreboard players add value souls_freed 1",
-    PLAYSOUND: "playsound break_cage @s"
+    PLAYSOUND: "playsound ibexx_itc:break_cage @s"
 };
 
 const CAGE_GROUPS = [
@@ -76,7 +76,7 @@ export async function spawnCages() {
 export async function despawnCages() {
     isCageSpawnerActive = false;
 
-    world.getDimension("overworld").runCommand("kill @e[type=game:cage]");
+    world.getDimension("overworld").runCommand("kill @e[type=ibexx_itc:cage]");
 
     tickingAreaLocations = [];
     world.setDynamicProperty("active_cage_locations", JSON.stringify(tickingAreaLocations));

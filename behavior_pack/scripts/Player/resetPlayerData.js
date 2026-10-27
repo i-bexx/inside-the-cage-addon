@@ -15,8 +15,8 @@ const CONFIG = {
 			STOP_SHAKING: "camerashake stop @s"
 		},
 		SOUNDS: {
-			PLAYSOUND_GAME_OVER: "game_over",
-            PLAYSOUND_STATIC: "static3"
+			PLAYSOUND_GAME_OVER: "ibexx_itc:game_over",
+            PLAYSOUND_STATIC: "ibexx_itc:static3"
 		},
 		EVENTS: {
 			STATIC: "static_true_event1",

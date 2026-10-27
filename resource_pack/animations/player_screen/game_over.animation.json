@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.game_over": {
+		"animation.ibexx_itc.game_over": {
 			"loop": true,
 			"animation_length": 4.2917,
 			"bones": {

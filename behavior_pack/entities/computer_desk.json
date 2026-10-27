@@ -2,7 +2,7 @@
   "format_version": "1.21.50",
   "minecraft:entity": {
     "description": {
-      "identifier": "game:computer_desk",
+      "identifier": "ibexx_itc:computer_desk",
       "is_summonable": true,
       "is_spawnable": false,
       "is_experimental": false

@@ -1,10 +1,10 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.static.camera_no_signal_playsound": {
+		"animation.ibexx_itc.static.camera_no_signal_playsound": {
 			"timeline": {
 				"0.0": [
-					"/playsound camera_no_signal @s"
+					"/playsound ibexx_itc:camera_no_signal @s"
 				]
 			},
 			"animation_length": 3.2,

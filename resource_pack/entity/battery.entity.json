@@ -2,7 +2,7 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
-      "identifier": "game:battery",
+      "identifier": "ibexx_itc:battery",
       "materials": {
         "default": "armor_stand"
       },
@@ -10,10 +10,10 @@
         "default": "textures/entity/battery"
       },
       "geometry": {
-        "default": "geometry.battery"
+        "default": "geometry.ibexx_itc.battery"
       },
       "render_controllers": [
-         "controller.render.battery"
+         "controller.render.ibexx_itc.battery"
          ]
       }
     }

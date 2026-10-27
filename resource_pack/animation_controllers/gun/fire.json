@@ -1,11 +1,11 @@
 {
   "format_version": "1.10.0",
   "animation_controllers": {
-    "controller.animation.gun_fire": {
+    "controller.animation.ibexx_itc.gun_fire": {
       "states": {
           "default": {
             "transitions": [
-              { "fire": "query.property('property:is_shooting') && !query.property('property:start_gun') && query.property('property:has_ammo')" }
+              { "fire": "query.property('ibexx_itc:is_shooting') && !query.property('ibexx_itc:start_gun') && query.property('ibexx_itc:has_ammo')" }
             ]
           },
           "fire": {
@@ -13,7 +13,7 @@
               "fire_anim"
             ],
             "transitions": [
-              { "default": "!query.property('property:is_shooting') && q.variant != 1" }
+              { "default": "!query.property('ibexx_itc:is_shooting') && q.variant != 1" }
             ],
             "blend_transition": 0.3
           }

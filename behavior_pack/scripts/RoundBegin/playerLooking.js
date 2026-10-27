@@ -22,9 +22,9 @@ const EVENTS = {
 };
 
 const SOUNDS = {
-    STATIC_1: "static1",
-    STATIC_2: "static2",
-    STATIC_3: "static3"
+    STATIC_1: "ibexx_itc:static1",
+    STATIC_2: "ibexx_itc:static2",
+    STATIC_3: "ibexx_itc:static3"
 };
 
 let dimension;

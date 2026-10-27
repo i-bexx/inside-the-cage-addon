@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.knife.first_person_hold": {
+		"animation.ibexx_itc.knife.first_person_hold": {
 			"loop": true,
 			"animation_length": 0.2083,
 			"bones": {
@@ -12,7 +12,7 @@
 				}
 			}
 		},
-		"animation.knife.third_person_hold": {
+		"animation.ibexx_itc.knife.third_person_hold": {
 			"loop": true,
 			"bones": {
 				"root_item": {

@@ -1,7 +1,7 @@
 {
   "format_version": "1.10.0",
   "render_controllers": {
-    "controller.render.new_game": {
+    "controller.render.ibexx_itc.new_game": {
       "arrays": {
         "textures": {
           "Array.MenuNewgameTextures": [
@@ -15,7 +15,7 @@
       "textures": [ "Array.MenuNewgameTextures[query.mark_variant]" ]
     },
 
-    "controller.render.continue": {
+    "controller.render.ibexx_itc.continue": {
       "arrays": {
         "textures": {
           "Array.MenuContinueTextures": [
@@ -29,7 +29,7 @@
       "textures": [ "Array.MenuContinueTextures[query.mark_variant]" ]
     },
 
-    "controller.render.door": {
+    "controller.render.ibexx_itc.door": {
       "arrays": {
         "textures": {
           "Array.DoorTextures": [
@@ -47,7 +47,7 @@
       "textures": [ "Array.DoorTextures[query.mark_variant]" ]
     },
 
-    "controller.render.teleporter": {
+    "controller.render.ibexx_itc.teleporter": {
       "geometry": "Geometry.default",
       "materials": [ { "*": "Material.default" } ],
       "textures": [ "Texture.default" ]

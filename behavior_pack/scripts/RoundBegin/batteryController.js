@@ -38,12 +38,12 @@ const BATTERY_CONFIG = {
     },
     // Item and Command Names
     ITEMS: {
-        ENTITY_ID: "game:battery",
+        ENTITY_ID: "ibexx_itc:battery",
         HUD_SLOT: "slot.armor.legs",
         // Item names
-        PREFIX_INCREASE: "battery:increase",
-        PREFIX_DECREASE: "battery:decrease",
-        PREFIX_CRITICAL: "battery:isCritical",
+        PREFIX_INCREASE: "ibexx_itc:battery_increase",
+        PREFIX_DECREASE: "ibexx_itc:battery_decrease",
+        PREFIX_CRITICAL: "ibexx_itc:battery_is_critical",
         // Offset for texture calculation (5 - battery value)
         TEXTURE_OFFSET: 5 
     }

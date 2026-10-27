@@ -1,7 +1,7 @@
 {
   "format_version": "1.10.0",
   "animation_controllers": {
-    "controller.animation.static": {
+    "controller.animation.ibexx_itc.static": {
       "states": {
         "default": {
           "transitions": [

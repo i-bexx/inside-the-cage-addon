@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.camera.static": {
+		"animation.ibexx_itc.camera.static": {
 			"loop": true,
 			"animation_length": 2.1667,
 			"bones": {
@@ -101,7 +101,7 @@
 				}
 			}
 		},
-		"animation.camera.no_signal": {
+		"animation.ibexx_itc.camera.no_signal": {
 			"loop": true,
 			"animation_length": 1,
 			"bones": {
@@ -266,7 +266,7 @@
 				}
 			}
 		},
-		"animation.camera.initialization_before_locking_the_cam": {
+		"animation.ibexx_itc.camera.initialization_before_locking_the_cam": {
 			"animation_length": 0.2917,
 			"bones": {
 				"3": {
@@ -285,7 +285,7 @@
 				}
 			}
 		},
-		"animation.camera.sanity_low_static": {
+		"animation.ibexx_itc.camera.sanity_low_static": {
 			"loop": true,
 			"animation_length": 0.2917,
 			"bones": {
@@ -306,7 +306,7 @@
 				}
 			}
 		},
-		"animation.camera.back_to_normal": {
+		"animation.ibexx_itc.camera.back_to_normal": {
 			"loop": true,
 			"bones": {
 				"2": {

@@ -2,7 +2,7 @@
   "format_version": "1.21.30",
   "minecraft:item": {
     "description": {
-      "identifier": "game:cage_detector",
+      "identifier": "ibexx_itc:cage_detector",
       "menu_category": {
         "category": "items"
       }
@@ -13,7 +13,7 @@
       "minecraft:hand_equipped": false,
       "minecraft:allow_off_hand": false,
       "minecraft:can_destroy_in_creative": false,
-      "minecraft:icon": "cage_detector",
+      "minecraft:icon": "ibexx_itc:cage_detector",
       "minecraft:use_animation": "none",
       "minecraft:interact_button": "Open Detector",
 

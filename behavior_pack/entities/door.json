@@ -2,7 +2,7 @@
   "format_version": "1.21.50",
   "minecraft:entity": {
     "description": {
-      "identifier": "game:door",
+      "identifier": "ibexx_itc:door",
       "is_spawnable": false,
       "is_summonable": true,
       "is_experimental": false

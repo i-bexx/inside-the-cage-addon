@@ -1,7 +1,7 @@
 {
   "format_version": "1.20.20",
   "sound_definitions": {
-    "ambiance": {
+    "ibexx_itc:ambiance": {
       "category": "ambient",
       "min_distance": 1000,
       "sounds": [
@@ -10,267 +10,267 @@
         "sounds/sounds/ambiance/ambiance3"
       ]
     },
-    "game_over": {
+    "ibexx_itc:game_over": {
       "category": "music",
       "sounds": [
         "sounds/sounds/static/game_over"
       ]
     },
-    "static_game_over": {
+    "ibexx_itc:static_game_over": {
       "category": "music",
       "sounds": [
         "sounds/sounds/static/camera/static_game_over"
       ]
     },
-    "camera_shutter": {
+    "ibexx_itc:camera_shutter": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/static/camera/camera_shutter"
       ]
     },
-    "coin_collect": {
+    "ibexx_itc:coin_collect": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/coin_collect"
       ]
     },
-    "heart": {
+    "ibexx_itc:heart": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/heart"
       ]
     },
-    "pick_up": {
+    "ibexx_itc:pick_up": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/tools/pick_up"
       ]
     },
-    "kit_used": {
+    "ibexx_itc:kit_used": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/tools/kit_used"
       ]
     },
-    "toxic_bomb": {
+    "ibexx_itc:toxic_bomb": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/tools/toxic_bomb/toxic_bomb"
       ]
     },
-    "toxic_bomb_button": {
+    "ibexx_itc:toxic_bomb_button": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/tools/toxic_bomb/toxic_bomb_button"
       ]
     },
-    "pistol_loading_chamber": {
+    "ibexx_itc:pistol_loading_chamber": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/tools/gun/pistol_loading_chamber"
       ]
     },
-    "gun_drawing": {
+    "ibexx_itc:gun_drawing": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/tools/gun/gun_drawing"
       ]
     },
-    "gun_aim": {
+    "ibexx_itc:gun_aim": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/tools/gun/gun_aim"
       ]
     },
-    "gun_shoot": {
+    "ibexx_itc:gun_shoot": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/tools/gun/gun_shoot"
       ]
     },
-    "no_ammo": {
+    "ibexx_itc:no_ammo": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/tools/gun/no_ammo"
       ]
     },
-    "shot_ghost": {
+    "ibexx_itc:shot_ghost": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/tools/gun/shot_ghost"
       ]
     },
-    "knife_draw": {
+    "ibexx_itc:knife_draw": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/tools/knife/knife_draw"
       ]
     },
-    "knife_whoosh": {
+    "ibexx_itc:knife_whoosh": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/tools/knife/knife_whoosh"
       ]
     },
-    "knife_slice": {
+    "ibexx_itc:knife_slice": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/tools/knife/knife_slice"
       ]
     },
-    "break_cage": {
+    "ibexx_itc:break_cage": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/break_cage"
       ]
     },
-    "bottle_drink": {
+    "ibexx_itc:bottle_drink": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/bottle_drink"
       ]
     },
-    "static_low_sanity": {
+    "ibexx_itc:static_low_sanity": {
       "category": "ambient",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/static/camera/static_low_sanity"
       ]
     },
-    "static1": {
+    "ibexx_itc:static1": {
       "category": "ambient",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/static/camera/static1"
       ]
     },
-    "static2": {
+    "ibexx_itc:static2": {
       "category": "ambient",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/static/camera/static2"
       ]
     },
-    "static3": {
+    "ibexx_itc:static3": {
       "category": "ambient",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/static/camera/static3"
       ]
     },
-    "initializationBeforeLockingTheCam": {
+    "ibexx_itc:initializationBeforeLockingTheCam": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/static/camera/initializationBeforeLockingTheCam"
       ]
     },
-    "camera_no_signal": {
+    "ibexx_itc:camera_no_signal": {
       "category": "ambient",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/static/camera/camera_no_signal"
       ]
     },
-    "new_game_started": {
+    "ibexx_itc:new_game_started": {
       "category": "ui",
       "sounds": [
         "sounds/sounds/menu/new_game_started"
       ]
     },
-    "keyboard": {
+    "ibexx_itc:keyboard": {
       "category": "ui",
       "sounds": [
         "sounds/sounds/keyboard"
       ]
     },
-    "engine_start": {
+    "ibexx_itc:engine_start": {
       "category": "neutral",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/menu/truck/truck_engine_start"
       ]
     },
-    "driving": {
+    "ibexx_itc:driving": {
       "category": "neutral",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/menu/truck/truck_driving"
       ]
     },
-    "truck_container": {
+    "ibexx_itc:truck_container": {
       "category": "neutral",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/menu/truck/truck_container"
       ]
     },
-    "close_lid": {
+    "ibexx_itc:close_lid": {
       "category": "neutral",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/menu/truck/truck_close_lid"
       ]
     },
-    "click_choosing": {
+    "ibexx_itc:click_choosing": {
       "category": "ui",
       "sounds": [
         "sounds/sounds/menu/click/choosing"
       ]
     },
-    "click_chose": {
+    "ibexx_itc:click_chose": {
       "category": "ui",
       "sounds": [
         "sounds/sounds/menu/click/chose"
       ]
     },
-    "notification": {
+    "ibexx_itc:notification": {
       "category": "player",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/notification"
       ]
     },
-    "truck_door": {
+    "ibexx_itc:truck_door": {
       "category": "neutral",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/truck_door"
       ]
     },
-    "ghost_spawn": {
+    "ibexx_itc:ghost_spawn": {
       "category": "hostile",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/ghost/ghost_spawn"
       ]
     },
-    "ghost_hurt": {
+    "ibexx_itc:ghost_hurt": {
       "category": "hostile",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/ghost/ghost_hurt"
       ]
     },
-    "ghost_whisper": {
+    "ibexx_itc:ghost_whisper": {
       "category": "hostile",
       "min_distance": 1000,
       "sounds": [

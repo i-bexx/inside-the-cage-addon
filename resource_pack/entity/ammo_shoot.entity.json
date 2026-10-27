@@ -2,7 +2,7 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
-      "identifier": "game:ammo_shoot",
+      "identifier": "ibexx_itc:ammo_shoot",
       "materials": {
         "default": "entity_alphatest"
       },
@@ -10,7 +10,7 @@
         "default": "textures/entity/ammo_shoot"
       },
       "geometry": {
-        "default": "geometry.ammo_shoot"
+        "default": "geometry.ibexx_itc.ammo_shoot"
       },
       "scripts": {
         "animate": [
@@ -18,10 +18,10 @@
         ]
       },
       "animations": {
-        "shoot": "animation.ammo_shoot"
+        "shoot": "animation.ibexx_itc.ammo_shoot"
       },
       "render_controllers": [
-        "controller.render.ammo_shoot"
+        "controller.render.ibexx_itc.ammo_shoot"
       ]
     }
   }

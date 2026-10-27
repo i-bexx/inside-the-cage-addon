@@ -1,7 +1,7 @@
 {
   "format_version": "1.10.0",
   "animation_controllers": {
-    "controller.animation.game_over": {
+    "controller.animation.ibexx_itc.game_over": {
       "states": {
         "default": {
           "transitions": [

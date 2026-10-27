@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.toxic_bomb.first_person_hold": {
+		"animation.ibexx_itc.toxic_bomb.first_person_hold": {
 			"loop": true,
 			"animation_length": 3,
 			"bones": {
@@ -12,7 +12,7 @@
 				}
 			}
 		},
-		"animation.toxic_bomb.third_person_hold": {
+		"animation.ibexx_itc.toxic_bomb.third_person_hold": {
 			"loop": true,
 			"bones": {
 				"root_item": {

@@ -2,7 +2,7 @@
 	"format_version": "1.10.0",
 	"minecraft:attachable": {
 		"description": {
-			"identifier": "game:knife",
+			"identifier": "ibexx_itc:knife",
 			"render_controllers": ["controller.render.item_default"],
 			"materials": {
 				"default": "entity_alphatest",
@@ -13,11 +13,11 @@
 				"enchanted": "textures/misc/enchanted_item_glint"
 			},
 			"geometry": {
-				"default": "geometry.knife"
+				"default": "geometry.ibexx_itc.knife"
 			},
 			"animations": {
-				"first_person_hold": "animation.knife.first_person_hold",
-				"third_person_hold": "animation.knife.third_person_hold"
+				"first_person_hold": "animation.ibexx_itc.knife.first_person_hold",
+				"third_person_hold": "animation.ibexx_itc.knife.third_person_hold"
 			},
 			"scripts": {
 				"animate": [

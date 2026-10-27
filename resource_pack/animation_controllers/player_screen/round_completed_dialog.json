@@ -1,7 +1,7 @@
 {
   "format_version": "1.10.0",
   "animation_controllers": {
-    "controller.animation.round_completed_dialog": {
+    "controller.animation.ibexx_itc.round_completed_dialog": {
       "states": {
         "default": {
           "transitions": [

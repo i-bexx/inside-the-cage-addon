@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.ammo.first_person_hold": {
+		"animation.ibexx_itc.ammo.first_person_hold": {
 			"loop": true,
 			"bones": {
 				"root_item": {
@@ -10,7 +10,7 @@
 				}
 			}
 		},
-		"animation.ammo.third_person_hold": {
+		"animation.ibexx_itc.ammo.third_person_hold": {
 			"loop": true,
 			"bones": {
 				"root_item": {

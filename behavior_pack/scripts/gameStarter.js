@@ -16,7 +16,7 @@ const TELEPORT_BACK_COMMANDS = {
 	tpOut: "tp @a[tag=waiting_for_start] -183 68 -97",
 	removeStarterTag: "tag @a remove starter",
 	removeWaitingForStartTag: "tag @a remove waiting_for_start",
-	eventDoor: `event entity @e[type=game:door] "door_0_event"`
+	eventDoor: `event entity @e[type=ibexx_itc:door] "door_0_event"`
 };
 const REJECT_PLAYER_COMMANDS = {
 	tpOut: "tp @s -183 68 -97",
@@ -186,7 +186,7 @@ export function startFunction() {
 	}
 
 		startCommands();
-		dimension.runCommand("event entity @e[type=game:door] door_game_started_event");
+		dimension.runCommand("event entity @e[type=ibexx_itc:door] door_game_started_event");
 		dimension.runCommand("fill -180 68 -92 -180 71 -84 barrier");
 		stalkerMatch();
 
@@ -208,10 +208,10 @@ async function startCommands() {
 	await sleep(20);
 	runCountdownActionbar("§4< 1 >");
 	await sleep(5);
-	dimension.runCommand("fog @a[tag=waiting_for_start] push game:in_round_default in_round_fog");
+	dimension.runCommand("fog @a[tag=waiting_for_start] push ibexx_itc:in_round_default in_round_fog");
 	dimension.runCommand("tp @a[tag=waiting_for_start] 120 65 -260");
 	await sleep(15);
-	dimension.runCommand("playsound truck_door @a[tag=waiting_for_start]");
+	dimension.runCommand("playsound ibexx_itc:truck_door @a[tag=waiting_for_start]");
 	dimension.runCommand("tag @a remove starter");
 	await sleep(35);
 	dimension.runCommand("tag @a[tag=waiting_for_start] add in_game");
@@ -220,7 +220,7 @@ async function startCommands() {
 	await sleep(170);
 	dimension.runCommand("event entity @a[tag=in_game] curtain_open_event");
 	await sleep(70);
-	dimension.runCommand(`give @a[tag=in_game] game:camera 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
+	dimension.runCommand(`give @a[tag=in_game] ibexx_itc:camera 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
 	dimension.runCommand("tag @a[tag=in_game] add show_in_round_personal_ui");
 	ROUND_STATE_MAP.set("ROUND_STARTED", true);
 }
@@ -237,7 +237,7 @@ function runCountdownActionbar(actionbar, playSound = true) {
 
 function updateDoorEvent() {
 	try {
-		const door = dimension.getEntities({ type: "game:door" })[0];
+		const door = dimension.getEntities({ type: "ibexx_itc:door" })[0];
 		const eventNumber = playersWaitingToStart.length;
 		if (eventNumber > 3) return;
 		const eventString = "door_" + eventNumber.toString() + "_event";

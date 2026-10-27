@@ -1,7 +1,7 @@
 {
   "format_version": "1.10.0",
   "animation_controllers": {
-    "controller.animation.toxic_bomb": {
+    "controller.animation.ibexx_itc.toxic_bomb": {
       "states": {
           "default": {
             "animations": [

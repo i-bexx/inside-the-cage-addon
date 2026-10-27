@@ -8,7 +8,7 @@ const CONFIG = {
         IN_GAME: "in_game",
     },
     ITEMS: {
-        GUN: "game:gun",
+        GUN: "ibexx_itc:gun",
     },
     THRESHOLDS: {
         AMMO_LOW: 3,
@@ -41,5 +41,5 @@ world.afterEvents.itemUse.subscribe(({itemStack, source}) => {
     
     if (source.getItemCooldown("gun") < 11 && getObjectiveScore(getAmmoObjective(), source.scoreboardIdentity) > 0) return;
     
-    source.setProperty("property:is_shooting", true);
+    source.setProperty("ibexx_itc:is_shooting", true);
 });

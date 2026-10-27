@@ -84,7 +84,7 @@ function checkPlayerHeartPoundingState(player, sanityValue) {
 			let shouldHeartPound = (sanityValue <= 33 && component.value === 556);
 
 			if (shouldHeartPound && !isPlayersHeartPounding) {
-				player.runCommand("playsound heart @s");
+				player.runCommand("playsound ibexx_itc:heart @s");
 				playerHeartPounding(player);
 
 			} else if (!shouldHeartPound && isPlayersHeartPounding) {
@@ -93,7 +93,7 @@ function checkPlayerHeartPoundingState(player, sanityValue) {
 					if (playerHeartState) {
 						playsoundHeart.delete(player.id);
 						system.clearRun(playerHeartState);
-						player.runCommand("stopsound @s heart");
+						player.runCommand("stopsound @s ibexx_itc:heart");
 					}
 			}
 }
@@ -102,7 +102,7 @@ function playerHeartPounding(player) {
 
 	let func = system.runInterval(() => {
 		const isPlayersHeartPounding = playsoundHeart.has(player.id);
-		if (isPlayersHeartPounding) player.runCommand("playsound heart @s");
+		if (isPlayersHeartPounding) player.runCommand("playsound ibexx_itc:heart @s");
 	}, 125)
 
 	playsoundHeart.set(player.id, func);
@@ -116,7 +116,7 @@ function checkPlayerSanityLowStaticSound(player, sanityValue) {
 	let shouldPlayStatic = sanityValue <= 33 && component.value === 556;
 
 	if (shouldPlayStatic && !isPlayingStaticSound) {
-		player.runCommand("playsound static_low_sanity @s");
+		player.runCommand("playsound ibexx_itc:static_low_sanity @s");
 		sanityLowStaticSound(player);
 
 	} else if (!shouldPlayStatic && isPlayingStaticSound) {
@@ -125,7 +125,7 @@ function checkPlayerSanityLowStaticSound(player, sanityValue) {
 			if (playerStaticState) {
 				sanityLowStaticSoundId.delete(player.id);
 				system.clearRun(playerStaticState);
-				player.runCommand("stopsound @s static_low_sanity");
+				player.runCommand("stopsound @s ibexx_itc:static_low_sanity");
 			}
 	}
 }
@@ -134,7 +134,7 @@ function sanityLowStaticSound(player) {
 	
 	let func = system.runInterval(() => {
 		const shouldPlayingStaticSound = sanityLowStaticSoundId.has(player.id);
-		if (shouldPlayingStaticSound) player.runCommand("playsound static_low_sanity @s");
+		if (shouldPlayingStaticSound) player.runCommand("playsound ibexx_itc:static_low_sanity @s");
 	}, 60)
 
 	sanityLowStaticSoundId.set(player.id, func);

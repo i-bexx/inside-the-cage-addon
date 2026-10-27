@@ -1,7 +1,7 @@
 {
 	"format_version" : "1.10.0",
 	"animation_controllers" : {
-		"controller.animation.player.root": {
+		"controller.animation.ibexx_itc.player.root": {
             "initial_state": "first_person",
             "states": {
                 "first_person": {

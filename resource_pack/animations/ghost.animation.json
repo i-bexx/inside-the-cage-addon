@@ -1,7 +1,7 @@
 {
 	"format_version": "1.10.0",
 	"animations": {
-		"animation.ghost.spawn": {
+		"animation.ibexx_itc.ghost.spawn": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 4,
 			"bones": {
@@ -183,7 +183,7 @@
 				}
 			}
 		},
-		"animation.ghost.move": {
+		"animation.ibexx_itc.ghost.move": {
 			"loop": true,
 			"animation_length": 1,
 			"bones": {
@@ -314,7 +314,7 @@
 				}
 			}
 		},
-		"animation.ghost.idle": {
+		"animation.ibexx_itc.ghost.idle": {
 			"loop": true,
 			"animation_length": 3,
 			"bones": {
@@ -458,7 +458,7 @@
 				}
 			}
 		},
-		"animation.ghost.attack": {
+		"animation.ibexx_itc.ghost.attack": {
 			"animation_length": 0.45,
 			"bones": {
 				"waist": {
@@ -512,7 +512,7 @@
 				}
 			}
 		},
-		"animation.ghost.die": {
+		"animation.ibexx_itc.ghost.die": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 2,
 			"bones": {

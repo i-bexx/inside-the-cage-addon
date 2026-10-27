@@ -7,7 +7,7 @@ import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 // ==========================================
 
 const CONFIG = {
-    entityType: "game:teleporter",
+    entityType: "ibexx_itc:teleporter",
     tagPrefix: "TeleporterID:",
     cooldownTime: 7000,
     checkInterval: 20  

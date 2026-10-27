@@ -2,7 +2,7 @@
   "format_version": "1.10.0",
   "minecraft:client_entity": {
     "description": {
-      "identifier": "game:computer_desk",
+      "identifier": "ibexx_itc:computer_desk",
 
       "materials": {
         "default": "entity_alphatest"
@@ -13,11 +13,11 @@
       },
 
       "geometry": {
-        "default": "geometry.computer_desk"
+        "default": "geometry.ibexx_itc.computer_desk"
       },
 
       "render_controllers": [
-        "controller.render.default"
+        "controller.render.ibexx_itc.default"
       ]
     }
   }

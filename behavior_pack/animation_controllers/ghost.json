@@ -1,7 +1,7 @@
 {
   "format_version": "1.10.0",
   "animation_controllers": {
-    "controller.animation.ghost": {
+    "controller.animation.ibexx_itc.ghost": {
       "states": {
         "default": {
           "animations": [
