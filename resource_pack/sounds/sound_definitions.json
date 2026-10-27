@@ -180,7 +180,7 @@
       "category": "player",
       "min_distance": 1000,
       "sounds": [
-        "sounds/sounds/static/camera/initializationBeforeLockingTheCam"
+        "sounds/sounds/static/camera/initialization_before_locking_the_cam"
       ]
     },
     "ibexx_itc:camera_no_signal": {

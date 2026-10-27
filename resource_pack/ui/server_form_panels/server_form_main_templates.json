@@ -226,13 +226,13 @@
 
   "scroll_track_image": {
     "type": "image",
-    "texture": "textures/ui/panels/ScrollRail",
+    "texture": "textures/ui/panels/scroll_rail",
     "alpha": 0.3
   },
 
   "scrollbar_box_image": {
     "type": "image",
-    "texture": "textures/ui/panels/ScrollHandle",
+    "texture": "textures/ui/panels/scroll_handle",
     "alpha": "@server_form_main_templates.anim_scrollbar_box_fadeout"
   },
 

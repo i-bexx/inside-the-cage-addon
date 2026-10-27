@@ -8,7 +8,7 @@ import { getObjectiveScore, getValueParticipant } from "./scoreboards";
 import { fastUiTick } from "./UI/fastUiTick";
 import { slowUiTick } from "./UI/slowUiTick";
 import { weaponController } from "./RoundBegin/weaponController";
-import { formerIntervalTeleporter } from "./Teleporter";
+import { formerIntervalTeleporter } from "./teleporter";
 import { gameStarter, isGameStarting } from "./gameStarter";
 import { ROUND_STATE_MAP, checkGameStatus } from "./gameStats";
 import { PlayerCache } from "./Player/playerCache";

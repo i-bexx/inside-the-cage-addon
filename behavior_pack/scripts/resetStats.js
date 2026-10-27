@@ -35,7 +35,7 @@ import { getCloseCamTimeout } from "./RoundBegin/cameraController";
 
 import { ROUND_STATE_MAP } from "./gameStats";
 import { checkIfPositionClear } from "./gameStarter";
-import { getTeleportCooldown } from "./Teleporter";
+import { getTeleportCooldown } from "./teleporter";
 import { getCompassStates, playerCurtainMap } from "./UI/fastUiTick";
 
 import { PlayerCache } from "./Player/playerCache";
