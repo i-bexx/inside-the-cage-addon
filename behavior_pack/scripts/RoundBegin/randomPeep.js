@@ -24,8 +24,8 @@ function randomPeepPanel_1(player, target) {
     target.setDynamicProperty("conversationIsGoing", true);
 
     new ActionFormData()
-    .title("random_peep_panel")
-    .body("conversation_part")
+    .title("random_peep_panels")
+    .body("conversation_start")
     .button("Next")
     .button("H-hey...")
     .button("Ple... please... help me-!")
@@ -40,7 +40,7 @@ function randomPeepPanel_1(player, target) {
 
 function randomPeepPanel_2(player, target) {
     new ActionFormData()
-    .title("random_peep_panel")
+    .title("random_peep_panels")
     .body("conversation_part")
     .button("Next")
     .button("I've been stuck here for... I don't even know how long.")
@@ -57,7 +57,7 @@ function randomPeepPanel_2(player, target) {
 
 function randomPeepPanel_3(player, target) {
     new ActionFormData()
-    .title("random_peep_panel")
+    .title("random_peep_panels")
     .body("conversation_part")
     .button("Next")
     .button("I can barely move... my body feels so heavy.")
@@ -74,7 +74,7 @@ function randomPeepPanel_3(player, target) {
 
 function randomPeepHelpPanel(player, target) {
     new ActionFormData()
-    .title("random_peep_panel")
+    .title("random_peep_panels")
     .body("question_part")
     .button("Yes")
     .button("No")
@@ -105,8 +105,8 @@ function randomPeepPanel_4(player, target) {
     world.getDimension("overworld").spawnParticle("ibexx_itc:kit_used", target.location);
 
     new ActionFormData()
-    .title("random_peep_panel")
-    .body("conversation_part")
+    .title("random_peep_panels")
+    .body("conversation_end")
     .button("Ok")
     .button("Wow... A mere stranger saves my life... I won't forget this.")
     .button("Here, take these. I'm pretty sure you will need them.")
@@ -122,8 +122,8 @@ function randomPeepPanel_4(player, target) {
 
 function randomPeepPanel_5(player, target) {
     new ActionFormData()
-    .title("random_peep_panel")
-    .body("conversation_part")
+    .title("random_peep_panels")
+    .body("conversation_end")
     .button("Ok")
     .button("Heh... farewell o walking spirit.")
     .show(player).then(({ cancelationReason, canceled }) => {
@@ -138,7 +138,7 @@ function randomPeepPanel_5(player, target) {
 
 function randomPeepPanel_6(player, target) {
     new ActionFormData()
-    .title("random_peep_panel")
+    .title("random_peep_panels")
     .body("farewell_part")
     .button("Ok")
     .button("Thanks again.")
@@ -149,7 +149,7 @@ function randomPeepPanel_6(player, target) {
 
 function randomPeepPanel_7(player, target) {
     new ActionFormData()
-    .title("random_peep_panel")
+    .title("random_peep_panels")
     .body("farewell_part")
     .button("Ok")
     .button("Do take your leave.")

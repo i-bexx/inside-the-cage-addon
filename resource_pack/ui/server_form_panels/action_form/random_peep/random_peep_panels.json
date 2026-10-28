@@ -1,0 +1,74 @@
+{
+  "namespace": "random_peep_panels",
+
+  "random_peep_start_panel@random_peep_panels.random_peep_panels_parent": {
+    "$filter_condition": "(#form_text = 'conversation_start')",
+    "$anims": [
+      "@random_peep_anims.entrance_animation_offset",
+      "@random_peep_anims.entrance_animation_fade"
+    ]
+  },
+
+  "random_peep_convo_panel@random_peep_panels.random_peep_panels_parent": {
+    "$filter_condition": "(#form_text = 'conversation_part' or #form_text = 'question_part')",
+    "$anims": []
+  },
+
+  "random_peep_end_panel@random_peep_panels.random_peep_panels_parent": {
+    "$filter_condition": "(#form_text = 'conversation_end')",
+    "$anims": [
+      "@server_form_anims.main_screen_exit_animation_push_offset",
+      "@server_form_anims.main_screen_exit_animation_pop_offset",
+      "@server_form_anims.main_screen_exit_animation_push_fade",
+      "@server_form_anims.main_screen_exit_animation_pop_fade"
+    ]
+  },
+
+  "random_peep_farewell_panel@random_peep_panels.random_peep_panels_parent": {
+    "$filter_condition": "(#form_text = 'farewell_part')",
+    "$anims": [
+      "@random_peep_anims.entrance_animation_offset",
+      "@random_peep_anims.entrance_animation_fade",
+      "@server_form_anims.main_screen_exit_animation_push_offset",
+      "@server_form_anims.main_screen_exit_animation_pop_offset",
+      "@server_form_anims.main_screen_exit_animation_push_fade",
+      "@server_form_anims.main_screen_exit_animation_pop_fade"
+    ]
+  },
+
+  "random_peep_panels_parent": {
+    "type": "panel",
+    "size": [ "100%", "100%" ],
+    "layer": 2,
+    "propagate_alpha": true,
+    "$filter_condition|default": "(#form_text = 'conversation_part')",
+    "$anims|default": [],
+    "anims": "$anims",
+    "bindings": [
+      {
+        "binding_type": "view",
+        "binding_name": "#form_text",
+        "source_property_name": "$filter_condition",
+        "target_property_name": "#visible"
+      }
+    ],
+    "controls": [
+      { "indent_panel@random_peep_panels.indent_panel": {} }
+    ]
+  },
+
+  "indent_panel": {
+    "type": "panel",
+    "size": [ "100%", 100 ],
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": [ 0, -20 ],
+    "propagate_alpha": true,
+    "controls": [
+      { "background@random_peep_templates.background": {} },
+      { "conversation_part_container@random_peep_templates.conversation_part_container": {} },
+      { "question_part_container@random_peep_templates.question_part_container": {} },
+      { "farewell_part_container@random_peep_templates.farewell_part_container": {} }
+    ]
+  }
+}
