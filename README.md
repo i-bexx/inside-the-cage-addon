@@ -10,8 +10,8 @@
 | Metric | Value |
 |--------|------:|
 | Script API Modules | 30+ |
-| JSON UI Files | 40 |
-| Custom Entities | 12 |
+| JSON UI Files | 40+ |
+| Custom Entities | 17 |
 | Animation Controllers | 10+ |
 | Custom Particle Effects | 7 |
 
