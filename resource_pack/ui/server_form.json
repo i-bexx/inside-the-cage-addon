@@ -26,7 +26,7 @@
 
   "screens_container_2@common.base_screen": {
     "$screen_content": "server_form.isolated_screen",
-    "$additional_screen_content": "common.base_screen_empty_panel",
+    "$additional_screen_content": "server_form.instant_screen",
     "$screen_animations": [],
     "$background_animations": []
   },
@@ -117,6 +117,20 @@
     ]
   },
 
+  "instant_screen@common.base_screen": {
+    "$screen_content": "server_form.instant_screen_content",
+    "$additional_screen_content": "common.base_screen_empty_panel",
+    "$screen_animations": [],
+    "$background_animations": [],
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_cancel",
+        "to_button_id": "button.menu_exit",
+        "mapping_type": "global"
+      }
+    ]
+  },
+
   // --- CONTENT FACTORIES ---
 
   "main_screen_content": {
@@ -165,6 +179,21 @@
     ]
   },
 
+  "instant_screen_content": {
+    "type": "panel",
+    "size": [ "100%", "100%" ],
+    "controls": [
+        {
+          "server_form_factory": {
+              "type": "factory",
+              "control_ids": {
+              "long_form": "@server_form.instant_long_form"
+          }
+        }
+      }
+    ]
+  },
+
   // --- PANEL CONTAINERS ---
 
   "main_screen_long_form": {
@@ -173,8 +202,7 @@
     "controls": [
       { "main_panel@server_form.main_panel": {} },
       { "shop_panel@server_form.shop_panel": {} },
-      { "vote_panel@server_form.vote_panel": {} },
-      { "random_peep_panel@server_form.random_peep_panel": {} }
+      { "vote_panel@server_form.vote_panel": {} }
     ]   
   },
 
@@ -202,6 +230,14 @@
     "controls": [
       { "question_panel@server_form.question_panel": {} },
       { "other_panels@server_form.other_panels": {} }
+    ]   
+  },
+
+  "instant_long_form": {
+    "type": "panel",
+    "size": [ "100%", "100%" ],
+    "controls": [
+      { "random_peep_panels@server_form.random_peep_panels": {} }
     ]   
   },
 
@@ -360,34 +396,22 @@
     ]
   },
 
-  "random_peep_panel": {
+  "random_peep_panels": {
     "type": "panel",
     "size": [ "100%", "100%" ],
-    "layer": 2,
     "bindings": [
       {
         "binding_type": "view",
         "binding_name": "#title_text",
-        "source_property_name": "(#title_text = 'random_peep_panel')",
+        "source_property_name": "(#title_text = 'random_peep_panels')",
         "target_property_name": "#visible"
       }
     ],
     "controls": [
-      {
-        "indent_panel": {
-          "type": "panel",
-          "size": [ "100%", 100 ],
-          "anchor_from": "bottom_middle",
-          "anchor_to": "bottom_middle",
-          "offset": [ 0, -20 ],
-          "controls": [
-            { "background@random_peep_panel.background": {} },
-            { "conversation_part_container@random_peep_panel.conversation_part_container": {} },
-            { "question_part_container@random_peep_panel.question_part_container": {} },
-            { "farewell_part_container@random_peep_panel.farewell_part_container": {} }
-          ]
-        }
-      }
+      { "random_peep_start_panel@random_peep_panels.random_peep_start_panel": {} },
+      { "random_peep_convo_panel@random_peep_panels.random_peep_convo_panel": {} },
+      { "random_peep_end_panel@random_peep_panels.random_peep_end_panel": {} },
+      { "random_peep_farewell_panel@random_peep_panels.random_peep_farewell_panel": {} }
     ]
   },
 

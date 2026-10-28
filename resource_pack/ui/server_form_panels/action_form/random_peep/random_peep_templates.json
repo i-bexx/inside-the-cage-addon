@@ -1,5 +1,5 @@
 {
-  "namespace": "random_peep_panel",
+  "namespace": "random_peep_templates",
 
   // --- Main Elements ---
 
@@ -8,11 +8,12 @@
     "size": [ "100%", "100%" ],
     "anchor_from": "center",
     "anchor_to": "center",
+    "propagate_alpha": true,
     "bindings": [
       {
         "binding_type": "view",
         "binding_name": "#form_text",
-        "source_property_name": "(#form_text = 'conversation_part')",
+        "source_property_name": "(#form_text = 'conversation_start' or #form_text = 'conversation_part' or #form_text = 'conversation_end')",
         "target_property_name": "#visible"
       }
     ],
@@ -36,7 +37,7 @@
           },
           "factory": {
             "name": "next_button_factory",
-            "control_name": "random_peep_panel.choice_button"
+            "control_name": "random_peep_templates.choice_button"
           },
           "collection_name": "form_buttons",
 
@@ -58,7 +59,7 @@
           "offset": [ 0, 5 ],
           "maximum_grid_items": 3,
           "grid_dimensions": [ 1, 3 ],
-          "grid_item_template": "random_peep_panel.conversation_text_panel",
+          "grid_item_template": "random_peep_templates.conversation_text_panel",
           "collection_name": "form_buttons"
         }
       }
@@ -137,7 +138,7 @@
           "collection_name": "form_buttons",
           "controls": [
             {
-              "question_text@random_peep_panel.conversation_text_panel": {
+              "question_text@random_peep_templates.conversation_text_panel": {
                 "collection_index": 2,
                 "$anim_duration": 0.2
               }
@@ -153,6 +154,7 @@
     "size": [ "100%", "100%" ],
     "anchor_from": "center",
     "anchor_to": "center",
+    "propagate_alpha": true,
     "bindings": [
       {
         "binding_type": "view",
@@ -165,7 +167,7 @@
       {
         "close_button_container_farewell@server_form_main_templates.close_button_container_detailed": {
           "offset": [ -7, -7 ],
-          "$focus_identifier": "random_peep_panel_close_button_focus_id",
+          "$focus_identifier": "random_peep_panels_close_button_focus_id",
           "$other_focus_container_name": "ok_button_panel"
         }
       },
@@ -201,7 +203,7 @@
           "$anim_duration": 0.4,
           "maximum_grid_items": 2,
           "grid_dimensions": [ 1, 2 ],
-          "grid_item_template": "random_peep_panel.conversation_text_panel",
+          "grid_item_template": "random_peep_templates.conversation_text_panel",
           "collection_name": "form_buttons"
         }
       }
@@ -261,7 +263,7 @@
           "clip_direction": "right",
           "clip_pixelperfect": false,
           "$anim_duration|default": 2.0,
-          "anims": [ "@random_peep_panel.wait_anim" ],
+          "anims": [ "@random_peep_templates.wait_anim" ],
           "bindings": [
             {
               "binding_type": "view",
@@ -288,7 +290,7 @@
   "wait_anim": {
     "anim_type": "wait",
     "duration": 0.5,
-    "next": "@random_peep_panel.anim_clipout"
+    "next": "@random_peep_templates.anim_clipout"
   },
 
   "anim_clipout": {
