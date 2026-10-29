@@ -1,0 +1,75 @@
+{
+  "namespace": "hud_screen_anims",
+
+  // PUSH = Opening a new screen
+  // POP  = Closing a screen
+
+  // Entrance Push: New screen appears
+  "hud_entrance_push_offset": {
+    "anim_type": "offset",
+    "duration": 0.0,
+    "from": [ 0, 0 ],
+    "to": [ 0, 0 ],
+    "play_event": "screen.entrance_push",
+    "end_event": "screen.entrance_end"
+  },
+
+  // Exit Push: Old screen disappears
+  "hud_exit_push_fade_out": {
+    "anim_type": "alpha",
+    "duration": 0.0,
+    "from": 0.0,
+    "to": 0.0,
+    "play_event": "screen.exit_push",
+    "end_event": "screen.exit_end"
+  },
+
+  // Entrance Pop: Old screen appears
+  "hud_entrance_pop_fade_in_delay": {
+    "anim_type": "alpha",
+    "easing": "linear",
+    "duration": 0.8,
+    "from": 0.0,
+    "to": 0.0,
+    "play_event": "screen.entrance_pop",
+    "next": "@hud_screen_anims.hud_entrance_pop_fade_in"
+  },
+
+  "hud_entrance_pop_fade_in": {
+    "anim_type": "alpha",
+    "easing": "out_cubic",
+    "duration": "$transition_time_pop",
+    "from": 0.0,
+    "to": 1.0,
+    "end_event": "screen.entrance_end"
+  },
+
+  // Exit Pop: New screen disappears
+  "hud_exit_pop_fade_out": {
+    "anim_type": "alpha",
+    "duration": 0.0,
+    "from": 0.0,
+    "to": 0.0,
+    "play_event": "screen.exit_pop",
+    "end_event": "screen.exit_end"
+  },
+
+
+
+  "hud_entrance_pop_offset_delay": {
+    "anim_type": "offset",
+    "easing": "linear",
+    "duration": 0.8,
+    "from": [ 0, -5000 ],
+    "to": [ 0, -5000 ],
+    "play_event": "screen.entrance_pop",
+    "next": "@hud_screen_anims.hud_entrance_pop_offset_show"
+  },
+
+  "hud_entrance_pop_offset_show": {
+    "anim_type": "offset",
+    "duration": 0.0,
+    "from": [ 0, 0 ],
+    "to": [ 0, 0 ]
+  }
+}

@@ -12,6 +12,7 @@
     "ui/main_screen/coin.json",
     "ui/main_screen/mini_player.json",
     "ui/main_screen/notification.json",
+    "ui/main_screen/hud_screen_anims.json",
     "ui/main_screen/souls_freed_counter.json",
     "ui/main_screen/round_complete_curtain.json",
 
