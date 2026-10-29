@@ -5,6 +5,7 @@
   // POP  = Closing a screen
 
   // Entrance Push: New screen appears
+  // Designed for the custom renderers
   "hud_entrance_push_offset": {
     "anim_type": "offset",
     "duration": 0.0,
@@ -15,11 +16,12 @@
   },
 
   // Exit Push: Old screen disappears
-  "hud_exit_push_fade_out": {
-    "anim_type": "alpha",
+  // Designed for the custom renderers
+  "hud_exit_push_offset": {
+    "anim_type": "offset",
     "duration": 0.0,
-    "from": 0.0,
-    "to": 0.0,
+    "from": [ 0, -5000 ],
+    "to": [ 0, -5000 ],
     "play_event": "screen.exit_push",
     "end_event": "screen.exit_end"
   },
@@ -45,17 +47,19 @@
   },
 
   // Exit Pop: New screen disappears
-  "hud_exit_pop_fade_out": {
-    "anim_type": "alpha",
+  // Designed for the custom renderers
+  "hud_exit_pop_offset": {
+    "anim_type": "offset",
     "duration": 0.0,
-    "from": 0.0,
-    "to": 0.0,
+    "from": [ 0, -5000 ],
+    "to": [ 0, -5000 ],
     "play_event": "screen.exit_pop",
     "end_event": "screen.exit_end"
   },
 
 
-
+  // Entrance Pop: Old screen appears
+  // Designed for the custom renderers
   "hud_entrance_pop_offset_delay": {
     "anim_type": "offset",
     "easing": "linear",

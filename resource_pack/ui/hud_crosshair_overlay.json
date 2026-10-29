@@ -24,6 +24,8 @@
     "size": [ "100%cm", "100%cm" ],
     "anchor_from": "center",
     "anchor_to": "center",
+    "clips_children": true,
+    "anims": [ "@hud_screen_anims.hud_entrance_pop_offset_delay" ],
     "controls": [
       { "cursor_renderer@hud_crosshair.cursor_renderer": {} },
       { "gun_cursor_states@hud_crosshair.gun_cursor_states": {} }
