@@ -304,5 +304,16 @@
         ]
       }
     ]
+  },
+
+  "hud_screen": {
+    "$screen_animations": [
+      "@hud_screen_anims.hud_exit_push_fade_out",
+      "@hud_screen_anims.hud_exit_pop_fade_out",
+      "@common.screen_entrance_animation_push_fade",
+      "@hud_screen_anims.hud_entrance_push_offset",
+      "@hud_screen_anims.hud_entrance_pop_fade_in_delay",
+      "@hud_screen_anims.hud_entrance_pop_offset_delay"
+    ]
   }
 }
