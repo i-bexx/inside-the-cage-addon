@@ -388,6 +388,14 @@
     ]
   },
 
+  "item_hover_grow": {
+    "anim_type": "size",
+    "easing": "linear",
+    "duration": 0.1,
+    "from": [ 15, 15 ],
+    "to": [ 18, 18 ]
+  },
+
   "gray_slot_button@common.container_slot_button_prototype": {
     "default_control": "default_state",
     "hover_control": "hover_state",
@@ -404,7 +412,8 @@
           "controls": [
             {
               "item_renderer@common.item_renderer": {
-                "size": [ 17, 17 ]
+                "animation_reset_name": "button.container_slot_hovered",
+                "anims": [ "@common.item_hover_grow" ]
               }
             },
             {
