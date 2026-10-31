@@ -21,7 +21,7 @@
 
   "cursor_container": {
     "type": "panel",
-    "size": [ "100%cm", "100%cm" ],
+    "size": [ 44, 44 ],
     "anchor_from": "center",
     "anchor_to": "center",
     "clips_children": true,
@@ -208,16 +208,7 @@
     "frame_count": 24,
     "frame_step": 256,
     "looping": false,
-    "fps": 60,
-    "reversible": false,
-    "next": "@hud_crosshair.hitmarker_fade_out_anim"
-  },
-
-  "hitmarker_fade_out_anim": {
-    "anim_type": "alpha",
-    "easing": "linear",
-    "duration": 0.2,
-    "from": 1.0,
-    "to": 0.0
+    "fps": 80,
+    "reversible": false
   }
 }

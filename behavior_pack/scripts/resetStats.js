@@ -194,11 +194,18 @@ export function clearPlayerMaps(playerId) {
 
 export function setPlayerMaps(playerId) {
   const cache = PlayerCache.get(playerId);
+    cache.skinIdVal = 0;
+    cache.variantVal = 0;
+    cache.mainHandTypeId = null;
+    
     cache.camUsing = false;
+    cache.compassShowing = false;
     cache.stamina = 10;
     cache.staminaLimit = 10;
+
     cache.lastLookedEntityId = undefined;
     cache.stalkerEntity = null;
+    cache.isLooking = false;
 }
 
 
