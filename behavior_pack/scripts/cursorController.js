@@ -66,9 +66,10 @@ const ENTITY_RULES = [
 
 export function startCrosshairTracker(player) {
     const cache = PlayerCache.get(player.id);
-    if (!cache) return;
+    if (!cache || cache.variantVal === 1 || player.getProperty("ibexx_itc:is_shooting")) return;
 
-    const result = player.getEntitiesFromViewDirection(ENTITY_DISTANCE)[0];
+    const result = player.getEntitiesFromViewDirection(ENTITY_DISTANCE)
+        .find(hit => hit.entity.typeId !== "ibexx_itc:ammo_shoot");
     const currentEntityId = result ? result.entity.id : "none";
 
     if (cache.lastLookedEntityId === currentEntityId) return;

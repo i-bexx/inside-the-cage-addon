@@ -126,9 +126,6 @@ export function startCentralTickManager() {
 
             fastUiTick(player, playerState);
 
-            if (currentTick % 5 === 0)
-                weaponController(player, playerState);
-
             // 80 TICK
             if (currentTick % 80 === 0)
                 slowUiTick(player);
@@ -144,13 +141,16 @@ export function startCentralTickManager() {
                     teleportStalkerLoop(player, playerState);
                 }
 
-                // 4 TICK
-                if (currentTick % 4 === 0 && isPhase4or5) startCrosshairTracker(player);
-
                 // 5 TICK
                 if (currentTick % 5 === 0) {
                     playerState.sanity = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
                     Sanity_control(player, playerState);
+
+                    if (isPhase4or5) {
+                        weaponController(player, playerState);
+                        if (playerState.mainHandTypeId === "ibexx_itc:gun")
+                            startCrosshairTracker(player);
+                    }
                 }
 
                 // 10 TICK
