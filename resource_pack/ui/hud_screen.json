@@ -81,6 +81,10 @@
     ]
   },
 
+  "right_helpers": {
+    "offset": [ 0, -25 ]
+  },
+
   "hud_title_text": {
     "modifications": [
       {
