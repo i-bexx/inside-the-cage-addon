@@ -1,4 +1,5 @@
 import { world } from "@minecraft/server";
+import { ItemStack, ItemLockMode, EntityComponentTypes } from "@minecraft/server";
 import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
@@ -99,8 +100,13 @@ function randomPeepHelpPanel(player, target) {
 }
 
 function randomPeepPanel_4(player, target) {
-    player.runCommand(`give @s ibexx_itc:kit 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
-    player.runCommand(`give @s ibexx_itc:discount_ticket 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
+    const container = player.getComponent(EntityComponentTypes.Inventory).container;
+    for (const itemId of ["ibexx_itc:kit", "ibexx_itc:discount_ticket"]) {
+        const item = new ItemStack(itemId, 1);
+        item.lockMode = ItemLockMode.inventory;
+        container.addItem(item);
+    }
+
     world.getDimension("overworld").playSound("ibexx_itc:kit_used", target.location);
     world.getDimension("overworld").spawnParticle("ibexx_itc:kit_used", target.location);
 

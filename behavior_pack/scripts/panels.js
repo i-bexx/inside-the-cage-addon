@@ -1,4 +1,5 @@
-import { world, system, EntityComponentTypes } from "@minecraft/server";
+import { world, system } from "@minecraft/server";
+import { ItemStack, ItemLockMode, EntityComponentTypes, EquipmentSlot } from "@minecraft/server";
 import { ActionFormData, ModalFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 import { getCoinAmountObjective, getSoulsFreedObjective, getValueParticipant, getObjectiveScore } from "./scoreboards";
@@ -8,30 +9,34 @@ import { votePanel } from "./voteManager";
 import { ROUND_STATE_MAP } from "./gameStats";
 import { PlayerCache } from "./Player/playerCache";
 
-let dimension;
-
 const MAIN_PANELS = [ shopPanel, votePanel, upgradeBattery, increaseStaminaLimit ];
-const SHOP_ITEMS = { "ibexx_itc:gun": 4, "ibexx_itc:knife": 2, "ibexx_itc:kit": 7, "ibexx_itc:toxic_bomb": 6, "ibexx_itc:ammo": 1, "ibexx_itc:battery": 3, "ibexx_itc:cage_detector": 9 };
-const ORIGINAL_PRICES = [ 4, 2, 7, 6, 1, 3, 9 ];
 
+const DEFAULT_PRICES = {
+    "ibexx_itc:gun": 4,
+    "ibexx_itc:knife": 2,
+    "ibexx_itc:kit": 7,
+    "ibexx_itc:toxic_bomb": 6,
+    "ibexx_itc:ammo": 1,
+    "ibexx_itc:battery": 3,
+    "ibexx_itc:cage_detector": 9
+};
+let shopPrices = { ...DEFAULT_PRICES };
+
+const UNIQUE_SHOP_ITEMS = new Set(["ibexx_itc:gun", "ibexx_itc:knife", "ibexx_itc:cage_detector"]);
 const ITEMS_NOT_ALLOWED_WHEN_CAM_IS_WORKING = new Set(["ibexx_itc:gun", "ibexx_itc:knife", "ibexx_itc:toxic_bomb", "ibexx_itc:ammo"]);
 
 let timeoutId = undefined;
 
 // --- EVENTS ---
 
-world.afterEvents.itemUse.subscribe((eventData) => {
-      const { source, itemStack } = eventData
-      
-      if (itemStack.typeId == "minecraft:compass") mainPanel(source);
-
-      else if (itemStack.typeId == "ibexx_itc:discount_ticket") {
-        for (const [key, value] of Object.entries(SHOP_ITEMS)) {
-            const newCost = Math.max(1, Math.ceil(value / 2));
-            SHOP_ITEMS[key] = newCost;
+world.afterEvents.itemUse.subscribe(({ source, itemStack }) => {
+    if (itemStack.typeId === "minecraft:compass") mainPanel(source);
+    else if (itemStack.typeId === "ibexx_itc:discount_ticket") {
+        for (const [key, value] of Object.entries(shopPrices)) {
+            shopPrices[key] = Math.max(1, Math.ceil(value / 2));
         }
-        source.runCommand("clear @s ibexx_itc:discount_ticket");
-      }
+        source.getComponent(EntityComponentTypes.Equippable).setEquipment(EquipmentSlot.Mainhand, undefined);
+    }
 });
 
 world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
@@ -41,124 +46,94 @@ world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
 
 // --- PASSWORD PANEL ---
 
-function customPanel(player) {
-    new ModalFormData()
-    .title("PASSWORD PANEL")
-    .textField("First Password", "Type here...")
-    .textField("Second Password", "Type here...")
-    .submitButton("Submit")
-        .show(player).then(({ cancelationReason, canceled, formValues }) => {
-            if (cancelationReason === FormCancelationReason.UserBusy) return;
-            if (canceled) return;
+async function customPanel(player) {
+    const { cancelationReason, canceled, formValues } = await new ModalFormData()
+        .title("PASSWORD PANEL")
+        .textField("First Password", "Type here...")
+        .textField("Second Password", "Type here...")
+        .submitButton("Submit")
+        .show(player);
 
-            const firstPassword = getPasswords()[0];
-            const secondPassword = getPasswords()[1];
+    if (canceled || cancelationReason === FormCancelationReason.UserBusy) return;
 
-            const firstPasswordInput = formValues[0];
-            const secondPasswordInput = formValues[1];
-            
-            if (firstPasswordInput === firstPassword && secondPasswordInput === secondPassword) {
-                passwordEnteredCorrect(player);
-            } else {
-                player.sendMessage(" §c[!] Incorrect Password!");
-                player.playSound("note.bass");
-            }
-    })
+    const [firstPassword, secondPassword] = getPasswords();
+    const [firstPasswordInput, secondPasswordInput] = formValues;
+
+    if (firstPasswordInput === firstPassword && secondPasswordInput === secondPassword) {
+        passwordEnteredCorrect(player);
+    } else {
+        notifyError(player, " §c[!] Incorrect Password!");
+    }
 }
 
 // --- MAIN PANELS ---
 
-function mainPanel(player) {
- 	new ActionFormData()
-    .title("MAIN PANEL")
-    .body("")
-    .button("Shop", "textures/ui/promo_holiday_gift_small")
-    .button("Vote Manager", "textures/ui/panels/main_panel/icons/vote")
-    .button("Upgrade Battery", "textures/ui/panels/main_panel/icons/battery_upgrade")
-    .button("Upgrade Stamina", "textures/ui/panels/main_panel/icons/stamina_limit_increase")
-        .show(player).then(({ cancelationReason, canceled, selection }) => {
-            if (cancelationReason === FormCancelationReason.UserBusy) return;
-            if (canceled) return;
+async function mainPanel(player) {
+    const { cancelationReason, canceled, selection } = await new ActionFormData()
+        .title("MAIN PANEL")
+        .body("")
+        .button("Shop", "textures/ui/promo_holiday_gift_small")
+        .button("Vote Manager", "textures/ui/panels/main_panel/icons/vote")
+        .button("Upgrade Battery", "textures/ui/panels/main_panel/icons/battery_upgrade")
+        .button("Upgrade Stamina", "textures/ui/panels/main_panel/icons/stamina_limit_increase")
+        .show(player);
 
-            const isGameStarted = ROUND_STATE_MAP.get("ROUND_STARTED");
-            if (isGameStarted == 0) {
-                player.sendMessage(" §6[§e!§6] §c§lPanel is currently locked!");
-                player.playSound("note.bass");
-                return;
-            }
+    if (canceled || cancelationReason === FormCancelationReason.UserBusy) return;
 
-            MAIN_PANELS[selection](player);
-    })
+    if (!ROUND_STATE_MAP.get("ROUND_STARTED")) {
+        return notifyError(player, " §6[§e!§6] §c§lPanel is currently locked!");
+    }
+
+    MAIN_PANELS[selection](player);
 }
 
-function shopPanel(player) {
-    const itemsObject = { ...SHOP_ITEMS };
-    hasItem(itemsObject, "checkAllNecessaryItems", player);
+async function shopPanel(player) {
+    const ownedItems = getOwnedUniqueItems(player);
+    const getPriceLabel = (id) => ownedItems.has(id) ? "§l§7Not Sale" : `${shopPrices[id]} Coins`;
 
-    const getText = (val) => (itemsObject[val] === "§l§7Not Sale") ? itemsObject[val] : itemsObject[val] + " Coins";
+    const { cancelationReason, canceled, selection } = await new ActionFormData()
+        .title("SHOP")
+        .body("")
+        .button(`Gun-${getPriceLabel("ibexx_itc:gun")}`, "textures/ui/panels/shop/gun")
+        .button(`Knife-${getPriceLabel("ibexx_itc:knife")}`, "textures/ui/panels/shop/knife")
+        .button(`Kit-${getPriceLabel("ibexx_itc:kit")}`, "textures/ui/panels/shop/kit")
+        .button(`toxic_bomb-${getPriceLabel("ibexx_itc:toxic_bomb")}`, "textures/ui/panels/shop/toxic_bomb")
+        .button(`Ammo-${getPriceLabel("ibexx_itc:ammo")}`, "textures/ui/panels/shop/ammo")
+        .button(`Battery-${getPriceLabel("ibexx_itc:battery")}`, "textures/ui/panels/shop/battery")
+        .button(`Detector-${getPriceLabel("ibexx_itc:cage_detector")}`, "textures/ui/panels/shop/cage_detector")
+        .button("...", "")
+        .button("...", "")
+        .show(player);
 
-	new ActionFormData()
-    .title("SHOP")
-    .body("") 
-    .button(`Gun-${getText("ibexx_itc:gun")}`, "textures/ui/panels/shop/gun")
-    .button(`Knife-${getText("ibexx_itc:knife")}`, "textures/ui/panels/shop/knife")
-    .button(`Kit-${itemsObject["ibexx_itc:kit"]} Coins`, "textures/ui/panels/shop/kit")
-    .button(`toxic_bomb-${itemsObject["ibexx_itc:toxic_bomb"]} Coins`, "textures/ui/panels/shop/toxic_bomb")
-    .button(`Ammo-${itemsObject["ibexx_itc:ammo"]} Coins`, "textures/ui/panels/shop/ammo")
-    .button(`Battery-${itemsObject["ibexx_itc:battery"]} Coins`, "textures/ui/panels/shop/battery")
-    .button(`Detector-${getText("ibexx_itc:cage_detector")}`, "textures/ui/panels/shop/cage_detector")
-    .button(`...`, "")
-    .button(`...`, "")
-		.show(player).then(({ cancelationReason, canceled, selection }) => {
-            if (cancelationReason === FormCancelationReason.UserBusy) return;
-            if (canceled || [7, 8].includes(selection)) return;
+    if (canceled || cancelationReason === FormCancelationReason.UserBusy || [7, 8].includes(selection)) return;
 
-            const coinAmount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity);
-            const soulsFreedValue = getObjectiveScore(getSoulsFreedObjective(), getValueParticipant());
+    const [itemName, itemCost] = Object.entries(shopPrices)[selection] || [];
+    const coinAmount = getObjectiveScore(getCoinAmountObjective(), player.scoreboardIdentity);
+    const soulsFreedValue = getObjectiveScore(getSoulsFreedObjective(), getValueParticipant());
 
-						const [itemName, itemCost] = Object.entries(itemsObject)[selection] || [];
+    if (ITEMS_NOT_ALLOWED_WHEN_CAM_IS_WORKING.has(itemName) && soulsFreedValue !== 4 && soulsFreedValue !== 5) {
+        return notifyError(player, " §6[§e!§6] §cYou can't buy this item right now");
+    }
+    if (ownedItems.has(itemName)) {
+        return notifyError(player, " §6[§e!§6] §cYou can't buy this item twice");
+    }
+    if (coinAmount < itemCost) {
+        return notifyError(player, " §6[§e!§6] §cYou don't have enough coins!");
+    }
 
-                        if (ITEMS_NOT_ALLOWED_WHEN_CAM_IS_WORKING.has(itemName) && (soulsFreedValue != 4 && soulsFreedValue != 5)) {
-                            player.sendMessage(" §6[§e!§6] §cYou can't buy this item right now");
-                            player.playSound("note.bass");
-                            return;
-                        }
-
-                        const isAlreadyOwned = hasItem(itemsObject, itemName, player);
-
-                        if (isAlreadyOwned) {
-                            player.sendMessage(" §6[§e!§6] §cYou can't buy this item twice");
-                            player.playSound("note.bass");
-                            return;
-                        }
-
-						if (coinAmount >= itemCost) {
-							let transactionSuccessful = false;
-
-							if (itemName !== "ibexx_itc:battery") {
-									player.runCommand(`give @s ${itemName} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
-                                    if (itemName == "ibexx_itc:gun")
-                                        player.runCommand(`give @s ibexx_itc:ammo_shoot 10 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
-									transactionSuccessful = true;
-							} else if (player.getDynamicProperty("batteryLevel") < 4) {
-                                    player.setDynamicProperty("batteryIsCollected", true);
-                                    pickupBattery(player, undefined);
-									transactionSuccessful = true;
-							} else {
-									player.sendMessage(" §6[§e!§6] §cYour battery is already full");
-									player.runCommand("playsound ibexx_itc:notification @s");
-							}
-
-							if (transactionSuccessful) {
-									player.runCommand(`xp -${itemCost}L @s`);
-									player.runCommand(`scoreboard players remove @s coin_amount ${itemCost}`);
-							}
-					} else {
-							player.sendMessage(" §6[§e!§6] §cYou don't have enough coins!");
-							player.playSound("note.bass");
-					}
-						return;
-    });
+    if (itemName !== "ibexx_itc:battery") {
+        giveLockedItem(player, itemName, 1);
+        if (itemName === "ibexx_itc:gun") {
+            giveLockedItem(player, "ibexx_itc:ammo_shoot", 10);
+        }
+        deductCoins(player, itemCost);
+    } else if (player.getDynamicProperty("batteryLevel") < 4) {
+        player.setDynamicProperty("batteryIsCollected", true);
+        pickupBattery(player, undefined);
+        deductCoins(player, itemCost);
+    } else {
+        notifyError(player, " §6[§e!§6] §cYour battery is already full", "ibexx_itc:notification");
+    }
 }
 
 function upgradeBattery(player) {
@@ -166,23 +141,16 @@ function upgradeBattery(player) {
     const hasUpgraded = player.getDynamicProperty("batteryIsUpgraded");
 
     if (hasUpgraded) {
-        player.sendMessage(" §6[§e!§6] §cYou already have this feat!");
-		player.playSound("note.bass");
-        return;
+        return notifyError(player, " §6[§e!§6] §cYou already have this feat!");
+    }
+    if (coinAmount < 7) {
+        return notifyError(player, " §6[§e!§6] §cYou need 7 coins!");
     }
 
-    if (coinAmount < 7) {
-        player.sendMessage(" §6[§e!§6] §cYou need 7 coins!");
-		player.playSound("note.bass");
-        return;
-    }
     player.setDynamicProperty("batteryIsUpgraded", true);
     player.sendMessage(" §6[§e!§6] §aBattery efficiency upgraded!");
     player.playSound("random.levelup");
-
-    player.runCommand(`xp -7L @s`);
-	player.runCommand(`scoreboard players remove @s coin_amount 7`);
-    return;
+    deductCoins(player, 7);
 }
 
 function increaseStaminaLimit(player) {
@@ -191,47 +159,62 @@ function increaseStaminaLimit(player) {
     const staminaLimit = cache ? cache.staminaLimit : 10;
 
     if (staminaLimit > 10) {
-        player.sendMessage(" §6[§e!§6] §cYou already have this feat!");
-		player.playSound("note.bass");
-        return;
+        return notifyError(player, " §6[§e!§6] §cYou already have this feat!");
+    }
+    if (coinAmount < 7) {
+        return notifyError(player, " §6[§e!§6] §cYou need 7 coins!");
     }
 
-    if (coinAmount < 7) {
-        player.sendMessage(" §6[§e!§6] §cYou need 7 coins!");
-		player.playSound("note.bass");
-        return;
-    }
     if (cache) cache.staminaLimit = 20;
     player.sendMessage(" §6[§e!§6] §aStamina upgraded!");
     player.playSound("random.levelup");
-
-    player.runCommand(`xp -7L @s`);
-	player.runCommand(`scoreboard players remove @s coin_amount 7`);
-    return;
+    deductCoins(player, 7);
 }
 
-function hasItem(itemsObject, itemTypeId, player) {
-    if (itemTypeId == "checkAllNecessaryItems") {
-        const container = player.getComponent(EntityComponentTypes.Inventory).container;
-        const itemsToCheck = ["ibexx_itc:gun", "ibexx_itc:knife", "ibexx_itc:cage_detector"];
+// --- HELPERS & EXPORTS ---
 
-        for (let i = 0; i < container.size; i++) {
-            const item = container.getItem(i);
+function getOwnedUniqueItems(player) {
+    const owned = new Set();
+    const container = player.getComponent(EntityComponentTypes.Inventory).container;
 
-            if (item && itemsToCheck.includes(item.typeId)) itemsObject[item.typeId] = "§l§7Not Sale";
+    for (let i = 0; i < container.size; i++) {
+        const item = container.getItem(i);
+        if (item && UNIQUE_SHOP_ITEMS.has(item.typeId)) {
+            owned.add(item.typeId);
         }
-        return;
     }
-    if (itemsObject[itemTypeId] == "§l§7Not Sale") return true;
-    else return false;
+    return owned;
+}
+
+function giveLockedItem(player, typeId, amount = 1) {
+    const container = player.getComponent(EntityComponentTypes.Inventory).container;
+    const item = new ItemStack(typeId, amount);
+    item.lockMode = ItemLockMode.inventory;
+    container.addItem(item);
+}
+
+function deductCoins(player, cost) {
+    player.addLevels(-cost);
+    getCoinAmountObjective().addScore(player.scoreboardIdentity, -cost);
+}
+
+function notifyError(player, message, sound = "note.bass") {
+    player.sendMessage(message);
+    player.playSound(sound);
 }
 
 export function givePanelItem() {
     if (timeoutId !== undefined) return;
-    
+
     timeoutId = system.runTimeout(() => {
-        dimension.runCommand(`replaceitem entity @a[tag=in_game] slot.inventory 0 minecraft:compass 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
-    }, 2400)
+        const compass = new ItemStack("minecraft:compass", 1);
+        compass.lockMode = ItemLockMode.inventory;
+
+        for (const player of world.getPlayers({ tags: ["in_game"] })) {
+            const container = player.getComponent(EntityComponentTypes.Inventory).container;
+            container.setItem(9, compass);
+        }
+    }, 2400);
 }
 
 export function stopGivePanelItem() {
@@ -241,10 +224,5 @@ export function stopGivePanelItem() {
 }
 
 export function resetPrices() {
-    const keys = Object.keys(SHOP_ITEMS);
-    for (let i = 0; i < keys.length; i++) {
-        SHOP_ITEMS[keys[i]] = ORIGINAL_PRICES[i];
-    }
+    shopPrices = { ...DEFAULT_PRICES };
 }
-
-export function setGlobalVariables() { dimension = world.getDimension("overworld"); }

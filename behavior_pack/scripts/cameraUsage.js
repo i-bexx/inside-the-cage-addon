@@ -1,4 +1,5 @@
 import { world, system } from "@minecraft/server";
+import { ItemStack, ItemLockMode, EntityComponentTypes, EquipmentSlot } from "@minecraft/server";
 
 import { getPlayersInRound } from "./utils";
 import { PlayerCache } from "./Player/playerCache";
@@ -11,7 +12,8 @@ import { getSoulsFreedObjective, getSanityObjective, getValueParticipant, getObj
 const CONFIG = {
     ITEMS: {
         CAMERA: "ibexx_itc:camera",
-        CAMERA_OFF: "ibexx_itc:camera_turn_off"
+        CAMERA_OFF: "ibexx_itc:camera_turn_off",
+        WARNING: "ibexx_itc:turnoffcamwarning"
     },
     EVENTS: {
         STATIC: "static_event",
@@ -24,12 +26,11 @@ const CONFIG = {
         NORMAL: "normal_event"
     },
     COMMANDS: {
-        CLEAR_CAM: "clear @s ibexx_itc:camera",
-        REPLACE_OFF: `replaceitem entity @s slot.hotbar 8 ibexx_itc:camera_turn_off 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`,
         STOP_SHUTTER: "stopsound @s ibexx_itc:camera_shutter",
-        STOP_STATIC: "stopsound @s ibexx_itc:static_low_sanity",
-        PLAY_INIT_SOUND: "playsound ibexx_itc:initializationBeforeLockingTheCam @s",
-        CLEAR_WARNING: "clear @s ibexx_itc:turnoffcamwarning"
+        STOP_STATIC: "stopsound @s ibexx_itc:static_low_sanity"
+    },
+    SOUNDS: {
+        INIT_SOUND: "ibexx_itc:initializationBeforeLockingTheCam"
     },
     PROPERTIES: {
         IS_USING: "camUsing",
@@ -93,7 +94,7 @@ export function cameraUsed(player, sanityValue, staminaValue) {
     let canPlayerTurnOffCam = player.getDynamicProperty(CONFIG.PROPERTIES.CAN_TURN_OFF);
 
     // Remove the camera item from inventory and mark as using
-    player.runCommand(CONFIG.COMMANDS.CLEAR_CAM);
+    clearCameraItem(player);
     const cache = PlayerCache.get(player.id);
     if (cache) cache.camUsing = true;
 
@@ -113,18 +114,18 @@ export function cameraUsed(player, sanityValue, staminaValue) {
         player.triggerEvent(CONFIG.EVENTS.STATIC);
     }
 
-		// Give the player speed based on their stamina
+    // Give the player speed based on their stamina
     isStaminaEmpty ? player.triggerEvent(CONFIG.EVENTS.SLOWNESS) : player.triggerEvent(CONFIG.EVENTS.STATIC_MOVEMENT);
 
     if (canPlayerTurnOffCam) { 
-        // If allowed, give the 'Turn Off' item
-        player.runCommand(CONFIG.COMMANDS.REPLACE_OFF);
+        // If allowed, give the 'Turn Off' item in hotbar slot 8
+        setHotbarSlot8Item(player, CONFIG.ITEMS.CAMERA_OFF);
     }
     
     // --- SPECIAL ANIMATION (Before Locking) ---
     if (initializationBeforeLockingTheCam) {
         player.triggerEvent(CONFIG.EVENTS.INIT_LOCK);
-        player.runCommand(CONFIG.COMMANDS.PLAY_INIT_SOUND);
+        player.playSound(CONFIG.SOUNDS.INIT_SOUND);
         
         system.runTimeout(() => {
             if (!player || !player.isValid) return;
@@ -143,16 +144,15 @@ export function cameraDeactivated(player, turnedoffAutomatically = false) {
     const stamina = PlayerCache.get(player.id)?.stamina;
     let isStaminaEmpty = stamina === 0;
 
-    const turnOffCommands = [
-        CONFIG.COMMANDS.CLEAR_CAM,
-        `replaceitem entity @s slot.hotbar 8 ${CONFIG.ITEMS.CAMERA} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}` // Give camera back
-    ];
     const stopCameraEffects = [
         CONFIG.COMMANDS.STOP_SHUTTER,
         CONFIG.COMMANDS.STOP_STATIC
-    ]
+    ];
 
-    if (!turnedoffAutomatically) turnOffCommands.forEach(cmd => player.runCommand(cmd));
+    if (!turnedoffAutomatically) {
+        clearCameraItem(player);
+        setHotbarSlot8Item(player, CONFIG.ITEMS.CAMERA);
+    }
     stopCameraEffects.forEach(cmd => player.runCommand(cmd));
 
     // Reset player state
@@ -166,9 +166,32 @@ export function cameraDeactivated(player, turnedoffAutomatically = false) {
     let didPlayerGetWarning = player.getDynamicProperty(CONFIG.PROPERTIES.TOLD_WARNING);
 
     if (didPlayerGetWarning && !turnedoffAutomatically) {
-        player.runCommand(CONFIG.COMMANDS.CLEAR_WARNING);
+        const equippable = player.getComponent(EntityComponentTypes.Equippable);
+        if (equippable.getEquipment(EquipmentSlot.Chest)?.typeId === CONFIG.ITEMS.WARNING) {
+            equippable.setEquipment(EquipmentSlot.Chest, undefined);
+        }
         player.setDynamicProperty(CONFIG.PROPERTIES.WILL_GET_NO_SIGNAL, true);
     }
+}
+
+// =============================================================
+// INVENTORY HELPERS
+// =============================================================
+
+function clearCameraItem(player) {
+    const container = player.getComponent(EntityComponentTypes.Inventory).container;
+    const camSearch = new ItemStack(CONFIG.ITEMS.CAMERA, 1);
+    camSearch.lockMode = ItemLockMode.inventory; // Must match the locked camera!
+
+    const slot = container.find(camSearch);
+    if (slot !== undefined) container.setItem(slot, undefined);
+}
+
+function setHotbarSlot8Item(player, typeId) {
+    const container = player.getComponent(EntityComponentTypes.Inventory).container;
+    const item = new ItemStack(typeId, 1);
+    item.lockMode = ItemLockMode.inventory;
+    container.setItem(8, item);
 }
 
 // =============================================================

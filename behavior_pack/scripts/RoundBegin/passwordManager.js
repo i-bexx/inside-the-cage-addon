@@ -1,4 +1,5 @@
-import { world, ItemStack } from "@minecraft/server";
+import { world } from "@minecraft/server";
+import { ItemStack, ItemLockMode, EntityComponentTypes } from "@minecraft/server";
 
 const PASSWORDS = ["A7K2", "9F3B", "R4D8", "6HW1", "M5X9", "3JP6", "T8C4", "2YN7"];
 let chosenPasswords = [];
@@ -47,9 +48,12 @@ export function passwordEnteredCorrect(player) {
 
 export function passwordManager() {
     const players = world.getPlayers({ tags: ["passwordCorrect"] });
+    const kit = new ItemStack("ibexx_itc:kit", 1);
+    kit.lockMode = ItemLockMode.inventory;
 
     for (const player of players) {
-        player.addItem(new ItemStack("ibexx_itc:kit"));
+        const container = player.getComponent(EntityComponentTypes.Inventory).container;
+        container.addItem(kit);
         player.removeTag("passwordCorrect");
     }
 }
