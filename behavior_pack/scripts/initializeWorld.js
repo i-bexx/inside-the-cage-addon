@@ -13,7 +13,6 @@ import { setGlobalVariables as playerLookingSetGlobalVariables } from "./RoundBe
 
 import { setGlobalVariables as gameStarterSetGlobalVariables } from "./gameStarter";
 import { setGlobalVariables as gameStatsSetGlobalVariables } from "./gameStats";
-import { setGlobalVariables as panelsSetGlobalVariables } from "./panels";
 import { setGlobalVariables as preStartSetGlobalVariables } from "./preStart";
 import { setGlobalVariables as stalkerEntitySetGlobalVariables } from "./stalkerEntity";
 import { setGlobalVariables as teleporterSetGlobalVariables } from "./teleporter";
@@ -36,7 +35,6 @@ world.afterEvents.worldLoad.subscribe(() => {
 
   gameStarterSetGlobalVariables();
   gameStatsSetGlobalVariables();
-  panelsSetGlobalVariables();
   preStartSetGlobalVariables();
   stalkerEntitySetGlobalVariables();
   teleporterSetGlobalVariables();

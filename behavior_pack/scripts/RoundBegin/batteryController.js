@@ -1,4 +1,5 @@
 import { world, system } from "@minecraft/server";
+import { ItemStack, ItemLockMode, EntityComponentTypes, EquipmentSlot } from "@minecraft/server";
 
 // =============================================================
 // CONFIGURATION AND CONSTANTS
@@ -36,16 +37,14 @@ const BATTERY_CONFIG = {
         STATIC_START: "static_event",
         STATIC_MOVEMENT: "static_movement_event"
     },
-    // Item and Command Names
+    // Item Names
     ITEMS: {
         ENTITY_ID: "ibexx_itc:battery",
-        HUD_SLOT: "slot.armor.legs",
-        // Item names
         PREFIX_INCREASE: "ibexx_itc:battery_increase",
         PREFIX_DECREASE: "ibexx_itc:battery_decrease",
         PREFIX_CRITICAL: "ibexx_itc:battery_is_critical",
         // Offset for texture calculation (5 - battery value)
-        TEXTURE_OFFSET: 5 
+        TEXTURE_OFFSET: 5
     }
 };
 
@@ -62,7 +61,7 @@ export function Battery_control(player) {
     if (!batteryIsDrainingOfPlayer && !batteryIsFullyDrainedOfPlayer) {
         batteryDrain(player);
     } else if (batteryIsFullyDrainedOfPlayer) {
-        player.runCommand(`clear @s ${BATTERY_CONFIG.ITEMS.PREFIX_CRITICAL}`);
+        clearLegsHudItem(player, BATTERY_CONFIG.ITEMS.PREFIX_CRITICAL);
         player.triggerEvent(BATTERY_CONFIG.EVENTS.NO_SIGNAL);
     }
 }
@@ -130,7 +129,7 @@ export function pickupBattery(player, target) {
     if (playerIsBatteryCritical.has(player.id)) {
         system.clearRun(playerIsBatteryCritical.get(player.id));
         playerIsBatteryCritical.delete(player.id);
-        player.runCommand(`clear @s ${BATTERY_CONFIG.ITEMS.PREFIX_CRITICAL}`);
+        clearLegsHudItem(player, BATTERY_CONFIG.ITEMS.PREFIX_CRITICAL);
     }
 
     player.setDynamicProperty(BATTERY_CONFIG.PROPERTIES.IS_COLLECTED, false);
@@ -149,29 +148,25 @@ export function pickupBattery(player, target) {
     }
 
     const textureId = BATTERY_CONFIG.ITEMS.TEXTURE_OFFSET - decidedBatteryLevel;
-    const itemCommand = `replaceitem entity @s ${BATTERY_CONFIG.ITEMS.HUD_SLOT} 1 ${BATTERY_CONFIG.ITEMS.PREFIX_INCREASE}${textureId} 1 0 {"minecraft:item_lock": {"mode": "lock_in_slot"}}`;
-    const clearCommand = `clear @s ${BATTERY_CONFIG.ITEMS.PREFIX_INCREASE}${textureId}`;
+    const itemTypeId = `${BATTERY_CONFIG.ITEMS.PREFIX_INCREASE}${textureId}`;
 
-    player.runCommand(itemCommand);
+    setLegsHudItem(player, itemTypeId);
     
     system.runTimeout(() => {
         if (!player || !player.isValid) return;
-        
-        player.runCommand(clearCommand);
+        clearLegsHudItem(player, itemTypeId);
     }, BATTERY_CONFIG.TIME.HUD_ANIMATION);
 }
 
 function decreaseBatteryHud(player, batteryLevel) {
     const textureId = BATTERY_CONFIG.ITEMS.TEXTURE_OFFSET - batteryLevel;
-    const itemCommand = `replaceitem entity @s ${BATTERY_CONFIG.ITEMS.HUD_SLOT} 1 ${BATTERY_CONFIG.ITEMS.PREFIX_DECREASE}${textureId} 1 0 {"minecraft:item_lock": {"mode": "lock_in_slot"}}`;
-    const clearCommand = `clear @s ${BATTERY_CONFIG.ITEMS.PREFIX_DECREASE}${textureId}`;
+    const itemTypeId = `${BATTERY_CONFIG.ITEMS.PREFIX_DECREASE}${textureId}`;
 
-    player.runCommand(itemCommand);
+    setLegsHudItem(player, itemTypeId);
 
     system.runTimeout(() => {
         if (!player || !player.isValid) return;
-
-        player.runCommand(clearCommand);
+        clearLegsHudItem(player, itemTypeId);
     }, BATTERY_CONFIG.TIME.HUD_ANIMATION);
 }
 
@@ -181,11 +176,29 @@ function batteryIsCritical(player) {
     let batteryCriticalId = system.runTimeout(() => {
         if (!player || !player.isValid) return;
         
-        player.runCommand(`replaceitem entity @s ${BATTERY_CONFIG.ITEMS.HUD_SLOT} 1 ${BATTERY_CONFIG.ITEMS.PREFIX_CRITICAL} 1 0 {"minecraft:item_lock": {"mode": "lock_in_slot"}}`);
+        setLegsHudItem(player, BATTERY_CONFIG.ITEMS.PREFIX_CRITICAL);
         playerIsBatteryCritical.delete(player.id);
     }, BATTERY_CONFIG.TIME.CRITICAL_WARNING);
     
     playerIsBatteryCritical.set(player.id, batteryCriticalId);
+}
+
+// =============================================================
+// HUD HELPERS
+// =============================================================
+
+function setLegsHudItem(player, typeId) {
+    const equippable = player.getComponent(EntityComponentTypes.Equippable);
+    const item = new ItemStack(typeId, 1);
+    item.lockMode = ItemLockMode.slot;
+    equippable.setEquipment(EquipmentSlot.Legs, item);
+}
+
+function clearLegsHudItem(player, typeId) {
+    const equippable = player.getComponent(EntityComponentTypes.Equippable);
+    if (equippable.getEquipment(EquipmentSlot.Legs)?.typeId === typeId) {
+        equippable.setEquipment(EquipmentSlot.Legs, undefined);
+    }
 }
 
 // =============================================================

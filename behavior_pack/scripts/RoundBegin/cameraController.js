@@ -1,4 +1,5 @@
 import { system } from "@minecraft/server";
+import { ItemStack, ItemLockMode, EntityComponentTypes, EquipmentSlot } from "@minecraft/server";
 
 import { getSoulsFreedObjective, getValueParticipant, getObjectiveScore } from "../scoreboards";
 import { PlayerCache } from "../Player/playerCache";
@@ -9,10 +10,12 @@ export const CLOSE_CAM_TIMEOUT = new Map();
 
 export function warnPlayerAboutCam() {
     const players = filterPlayers();
+    const warningItem = new ItemStack("ibexx_itc:turnoffcamwarning", 1);
+    warningItem.lockMode = ItemLockMode.slot;
 
     for (const player of players) {
         player.setDynamicProperty("toldPlayerTurnOffCam", true);
-        player.runCommand(`replaceitem entity @s slot.armor.chest 1 ibexx_itc:turnoffcamwarning 1 0 {"minecraft:item_lock": {"mode": "lock_in_slot"}}`);
+        player.getComponent(EntityComponentTypes.Equippable).setEquipment(EquipmentSlot.Chest, warningItem);
 
         closeCamTimeout(player);
     }
