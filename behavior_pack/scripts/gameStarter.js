@@ -1,4 +1,4 @@
-import { world } from "@minecraft/server";
+import { world, BlockVolume } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 
 import { stalkerMatch } from "./stalkerEntity";
@@ -187,7 +187,11 @@ export function startFunction() {
 
 		startCommands();
 		dimension.runCommand("event entity @e[type=ibexx_itc:door] door_game_started_event");
-		dimension.runCommand("fill -180 68 -92 -180 71 -84 barrier");
+		const barrierArea = new BlockVolume(
+        { x:-180, y:68 ,z:-92 },
+        { x:-180 ,y:71 ,z:-84 }
+    );
+    dimension.fillBlocks(barrierArea, "minecraft:barrier");
 		stalkerMatch();
 
 		playersWaitingToStart = [];

@@ -1,4 +1,4 @@
-import { world } from "@minecraft/server";
+import { world, BlockVolume } from "@minecraft/server";
 
 import { stopFunctionsInMaps, clearPlayerMaps, setPlayerMaps, resetPlayerDynamicPropertyData, resetPlayerProperties } from "../../resetStats";
 import { getPlayersInRound, sleep } from "../../utils";
@@ -16,7 +16,6 @@ const CONFIG = {
   TP_ELSEWHERE: "tp @a[tag=!in_lobby] -186 53 -82",
   TP_TO_LOBBBY: "tp @a[tag=!in_lobby] -183 68 -97",
   OPEN_DOOR_EVENT: `event entity @e[type=ibexx_itc:door] "door_0_event"`,
-  REMOVE_DOOR_BARRIERS: "fill -180 68 -92 -180 71 -84 air",
   NORMAL_EVENT_CMD: "event entity @a[tag=!in_lobby] normal_event"
 };
 
@@ -52,7 +51,12 @@ export async function finishRoundEarly() {
 
   await sleep(30);
   dimension.runCommand(CONFIG.OPEN_DOOR_EVENT);
-  dimension.runCommand(CONFIG.REMOVE_DOOR_BARRIERS);
+  
+  const barrierArea = new BlockVolume(
+        { x:-180, y:68 ,z:-92 },
+        { x:-180 ,y:71 ,z:-84 }
+    );
+    dimension.fillBlocks(barrierArea, "minecraft:air");
 }
 
 // ======= HELPER FUNCTION =======
