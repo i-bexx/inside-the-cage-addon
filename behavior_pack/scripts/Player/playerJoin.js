@@ -1,4 +1,4 @@
-import { world, system } from "@minecraft/server";
+import { world, system, BlockVolume } from "@minecraft/server";
 
 import { sleep } from "../utils";
 import { isLookingAtMenuEntity } from "../preStart";
@@ -179,8 +179,12 @@ async function handleOwnerJoinLogic(player) {
     await ensureEntitiesAreReset();
 
     world.setDynamicProperty("reseting_round", false);
-    
-    dimension.runCommand("fill -180 68 -92 -180 71 -84 barrier");
+
+    const barrierArea = new BlockVolume(
+        { x:-180, y:68 ,z:-92 },
+        { x:-180 ,y:71 ,z:-84 }
+    );
+    dimension.fillBlocks(barrierArea, "minecraft:barrier");
 
     startCentralTickManager();
 
