@@ -8,6 +8,8 @@
       }
     },
     "components": {
+      "minecraft:custom_components": [ "ibexx_itc:detect_cages" ],
+
       "minecraft:max_stack_size": 1,
       "minecraft:glint": true,
       "minecraft:hand_equipped": false,

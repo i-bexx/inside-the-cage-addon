@@ -6,15 +6,6 @@ import { loadTickingArea, removeTickingArea, sleep } from "../utils";
 let cageLocations = [];
 let deviationIntegers = [ 15, 17, 13, -12, -14, -11, 9 ];
 
-// --- LISTENER ---
-
-world.afterEvents.itemUse.subscribe(({itemStack, source}) => {
-  if (itemStack.typeId != "ibexx_itc:cage_detector") return;
-  if (source.getItemCooldown("cage_detector") < 195) return;
-
-  openCageDetector(source);
-})
-
 // --- MAIN FUNCTIONS ---
 
 export function InitializeCageDetector() {
@@ -24,10 +15,15 @@ export function InitializeCageDetector() {
   deviationIntegers.sort(() => 0.5 - Math.random());
 }
 
-async function openCageDetector(player) {
+export async function openCageDetector(player) {
+  if (player.getItemCooldown("cage_detector") < 199) return;
+
   player.onScreenDisplay.setActionBar("§eCage Detector: Signal processing...");
 
-  const { direction, cageDistance, deviationInteger, signalImage, elevation, eta } = await getCageInfo(player);
+  const cageInfo = await getCageInfo(player);
+  if (!cageInfo || !player.isValid) return; // Player might get eliminated or left while the signal was processing
+
+  const { direction, cageDistance, deviationInteger, signalImage, elevation, eta } = cageInfo;
 
   new ActionFormData()
   .title("cage_detector_panel")
@@ -48,7 +44,7 @@ async function openCageDetector(player) {
 
 async function getCageInfo(player) {
   const cageData = await getCage();
-  if (player.hasTag("eliminated")) return;
+  if (!player.isValid || player.hasTag("eliminated")) return;
   if (!cageData) return { direction: "None", cageDistance: 0, deviationInteger: 0 };
 
   const deviationInteger = cageData.deviationInteger;

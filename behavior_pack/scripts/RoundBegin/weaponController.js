@@ -1,4 +1,3 @@
-import { world } from "@minecraft/server";
 import { PlayerCache } from "../Player/playerCache";
 import { getAmmoObjective, getObjectiveScore } from "../scoreboards";
 
@@ -36,10 +35,8 @@ export function weaponController(player, playerState) {
     }
 }
 
-world.afterEvents.itemUse.subscribe(({itemStack, source}) => {
-    if (itemStack.typeId !== CONFIG.ITEMS.GUN) return;
+export function gunShooting(player) {
+    if (player.getItemCooldown("gun") < 11 && getObjectiveScore(getAmmoObjective(), player.scoreboardIdentity) > 0) return;
     
-    if (source.getItemCooldown("gun") < 11 && getObjectiveScore(getAmmoObjective(), source.scoreboardIdentity) > 0) return;
-    
-    source.setProperty("ibexx_itc:is_shooting", true);
-});
+    player.setProperty("ibexx_itc:is_shooting", true);
+}

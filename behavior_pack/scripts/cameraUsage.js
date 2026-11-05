@@ -71,11 +71,8 @@ export function initiateCam() {
             // Skip if player is already using the camera
             if (isUsingCam) continue;
 
-            const sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
-            const staminaValue = PlayerCache.get(player.id)?.stamina;
-
             // Force camera usage
-            cameraUsed(player, sanityValue, staminaValue);
+            cameraUsed(player);
         }
     }, 500);
 }
@@ -84,7 +81,11 @@ export function initiateCam() {
  * Main logic when the camera is activated.
  * Handles events, visual effects, and determines if the camera can be turned off.
  */
-export function cameraUsed(player, sanityValue, staminaValue) {
+export function cameraUsed(player) {
+    const sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
+    const staminaValue = PlayerCache.get(player.id)?.stamina;
+
+    stopInitiateCam();
     let toldPlayerTurnOffCam = player.getDynamicProperty(CONFIG.PROPERTIES.TOLD_WARNING);
     let willPlayerGetNoSignalNow = player.getDynamicProperty(CONFIG.PROPERTIES.WILL_GET_NO_SIGNAL);
     let initializationBeforeLockingTheCam = player.getDynamicProperty(CONFIG.PROPERTIES.INIT_BEFORE_LOCK);
@@ -193,24 +194,6 @@ function setHotbarSlot8Item(player, typeId) {
     item.lockMode = ItemLockMode.inventory;
     container.setItem(8, item);
 }
-
-// =============================================================
-// EVENT LISTENERS
-// =============================================================
-
-// Detect if player is using a camera item
-world.afterEvents.itemUse.subscribe(({source, itemStack}) => {
-    if (itemStack.typeId === CONFIG.ITEMS.CAMERA) {
-        const sanityValue = getObjectiveScore(getSanityObjective(), source.scoreboardIdentity);
-        const staminaValue = PlayerCache.get(source.id)?.stamina;
-
-        cameraUsed(source, sanityValue, staminaValue);
-        stopInitiateCam();
-
-    } else if (itemStack.typeId === CONFIG.ITEMS.CAMERA_OFF) {
-        cameraDeactivated(source);
-    }
-});
 
 export function stopInitiateCam() {
     if (timeoutId == undefined) return;
