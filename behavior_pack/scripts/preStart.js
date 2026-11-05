@@ -154,6 +154,11 @@ export function isLookingAtMenuEntity() {
     }, 2);
 }
 
+export function skipCutscene(player) {
+    world.setDynamicProperty("skip_cutscene_limit", world.getDynamicProperty("skip_cutscene_limit") + 1);
+    player.runCommand(`clear @s ${CONFIG.IDS.SKIP_ITEM}`);
+}
+
 world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
     const isNewGame = (target.typeId === CONFIG.IDS.NEW_GAME);
     const isContinue = (target.typeId === CONFIG.IDS.CONTINUE);
@@ -252,13 +257,6 @@ function startSkipSystem(playersInCutscene) {
         }
     }, 15);
 }
-
-world.afterEvents.itemUse.subscribe((event) => {
-    if (event.itemStack.typeId === CONFIG.IDS.SKIP_ITEM) {
-        world.setDynamicProperty("skip_cutscene_limit", world.getDynamicProperty("skip_cutscene_limit") + 1);
-        event.source.runCommand(`clear @s ${CONFIG.IDS.SKIP_ITEM}`);
-    }
-});
 
 // --- SCENE FUNCTIONS ---
 

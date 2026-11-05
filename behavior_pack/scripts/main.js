@@ -3,6 +3,7 @@ import "./tickManager";
 
 import "./cameraUsage";
 import "./cursorController";
+import "./customComponentRegistrations";
 import "./gameStarter";
 import "./gameStats";
 import "./panels";

@@ -7,10 +7,9 @@ import { stopDifficultyMonitor } from "./ghostController";
 import { warnPlayerAboutCam } from "./cameraController";
 import { playerStoppedLooking } from "./playerLooking";
 
-import { getSanityObjective, getObjectiveScore, getValueParticipant } from "../scoreboards";
+import { getValueParticipant } from "../scoreboards";
 import { stalkerMatch } from "../stalkerEntity";
 import { updateGlobalUi } from "../UI/globalUi";
-import { PlayerCache } from "../Player/playerCache";
 
 import { stopTeleportNull } from "./Null/nullTeleport";
 
@@ -81,11 +80,8 @@ async function soulsFreedValueExceeded(players) {
 		player.runCommand("clear @s ibexx_itc:toxic_bomb");
 		player.runCommand("clear @s ibexx_itc:ammo");
 		player.runCommand("clear @a ibexx_itc:ammo_shoot");
-
-		let sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
-		let staminaValue = PlayerCache.get(player.id)?.stamina;
 		
-		cameraUsed(player, sanityValue, staminaValue);
+		cameraUsed(player);
   }
 	stalkerMatch();
 

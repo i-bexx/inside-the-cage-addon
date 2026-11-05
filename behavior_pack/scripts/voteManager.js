@@ -72,6 +72,13 @@ export function votePanel(source) {
     });
 }
 
+export function openNotificationPanel(source, itemStack) {
+    const itemType = itemStack.typeId.split(":")[1];
+
+    if (confirmPanels[itemType] && !source.hasTag(TAGS.REQUESTER))
+        handleVote(source, itemType);
+}
+
 function startRequest(player, type) {
     confirmPanels[type].show(player).then((response) => {
       const { cancelationReason, canceled, selection } = response;
@@ -139,19 +146,6 @@ function runOperation(type) {
     if (type === VOTE_TYPES.RESTART) ROUND_STATE_MAP.set("ROUND_RESTARTED", true);
     else if (type === VOTE_TYPES.END_ROUND) ROUND_STATE_MAP.set("ROUND_ENDED_EARLY", true);
 }
-
-// ======= EVENTS =======
-world.afterEvents.itemUse.subscribe((event) => {
-    const { source, itemStack } = event;
-
-    if (itemStack.typeId.startsWith(ITEMS.NOTIFICATION_PREFIX)) {
-        const itemType = itemStack.typeId.split(":")[1];
-
-        if (confirmPanels[itemType] && !source.hasTag(TAGS.REQUESTER)) {
-            handleVote(source, itemType);
-        }
-    }
-});
 
 export function setGlobalVariables() { dimension = world.getDimension("overworld"); }
 export function setForms() {
