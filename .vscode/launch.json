@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "minecraft-js",
+      "request": "attach",
+      "name": "Debug Inside the Cage",
+      "mode": "listen",
+      "localRoot": "${workspaceFolder}/behavior_pack/scripts",
+      "inputPort": "19144",
+      "port": 19144,
+      "targetModuleUuid": "c6e2eab8-d21f-4373-9cf7-77665211e999"
+    }
+  ]
+}
