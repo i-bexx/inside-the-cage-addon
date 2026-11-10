@@ -1,81 +1,82 @@
 # Inside the Cage ⛓️
 
-> **Developed by [i-bexx](https://github.com/i-bexx)** — Software Engineering Student & Minecraft Bedrock Add-On Developer  
+> **Developed by [i-bexx](https://github.com/i-bexx)** — Minecraft Bedrock Systems & UI Developer  
 > 📧 yigitkarabacak364@gmail.com
 
-**Inside the Cage** is a complex, server-side Minecraft Bedrock Add-On built primarily with the **Minecraft Script API**.
-
-## 📊 Project at a Glance
-
-| Metric | Value |
-|--------|------:|
-| Script API Modules | 30+ |
-| JSON UI Files | 40+ |
-| Custom Entities | 17 |
-| Animation Controllers | 10+ |
-| Custom Particle Effects | 7 |
+**Inside the Cage** is a full-scale, multiplayer-ready survival and action experience built in Minecraft Bedrock Edition.
 
 <div align="center">
-  <img src="./assets/images/full_hud.png" alt="Full Gameplay HUD" width="800"/>
+  <img src="./assets/images/full_hud.png" alt="Full Gameplay HUD" width="850"/>
   <br>
-  <i>Full custom HUD featuring dynamic tracking, live stamina, and animated overlays.</i>
+  <i>Custom in-game HUD featuring live 3D character rendering, stamina tracking, radar telemetry, and animated overlays.</i>
 </div>
 
 ---
 
-## 🛠️ Core Technologies
+## 🎮 Gameplay Showcase
 
-`JavaScript (ES6+)` · `Minecraft Script API` · `JSON UI` · `Molang` · `Event-Driven Architecture` · `State Machines` · `Blockbench`
+### 1. Branching NPC Dialogue Engine
+A multi-scene conversation system with player choices, persistent NPC memory, and synchronized entity animations—built entirely without external mods.
+- **Typewriter Text Reveal:** Progressive left-to-right text animation with custom dialogue framing.
+- **Choices With Consequences:** Selecting *"Yes"* triggers an entity animation where the injured NPC physically stands up; the NPC remembers your decision across visits.
+- **Multiplayer Locking:** Prevents overlapping interactions while a player is mid-conversation.
 
----
-
-## 🏗️ Architecture & System Design
-
-### Modular Codebase
-
-The core game loop is managed through 30+ modular JavaScript modules with a strict separation of concerns, enabling maintainable and scalable gameplay systems.
-
-- **Per-Player Memory Isolation:** Utilized `Map()` objects to maintain isolated player state. Player disconnect event triggers cleanup of all associated references, preventing stale state and memory growth during long-running multiplayer sessions.
-- **Entity-Script Bridge:** A seamless two-way communication layer where the Script API drives entity states via `triggerEvent()`, while entity Animation Controllers execute commands that feed telemetry back to the scripts.
-
-### User Interface
-
-Minecraft Bedrock exposes no official runtime UI API. To overcome this limitation, the project modifies the vanilla JSON UI framework to build a dynamic, real-time interface system.
-
-- **Server Form Routing:** Modified vanilla `server_form.json` elements to act as a dynamic router, switching between panels based on injected string data.
-- **Vanilla Notification Hijacking:** Repurposed the engine's hardcoded "recipe unlock" toast notifications. By modifying scope resolution (`resolve_sibling_scope`), the system displays custom in-game alerts (e.g., "Coin Bag is Full").
-- **Live 3D Rendering:** Embedded `live_player_renderer` components within custom HUD frames, synchronized with global engine variables (`#hud_title_text_string`) to update without redundant server-side polling.
+<div align="center">
+  <img src="./assets/gifs/random_peep.gif" alt="Interactive NPC Dialogue" width="750"/>
+</div>
 
 ---
 
-## 📸 Visual Showcase
+### 2. Handheld Radar Scanner (`Cage Detector`)
+A custom tracking device players use to hunt down 7 hidden cages across the map, displaying real-time spatial telemetry inside a custom UI panel.
+- **Live 3D Math:** Calculates real-time 3D Euclidean distance, compass direction, elevation difference, and walking ETA.
+- **Dynamic Signal & Noise:** Shifts signal-strength icons based on proximity, layered over a 3-phase flickering radar static animation.
+
+<div align="center">
+  <img src="./assets/gifs/cage_detector.gif" alt="Cage Detector Radar" width="750"/>
+</div>
+
+---
+
+### 3. VHS Camera Overlay & Line-of-Sight Sanity System
+Players carry a custom camera that applies a full-screen lens overlay and interacts directly with enemy visibility.
+- **Raycast Sanity Drain:** Maintaining line-of-sight with the Stalker triggers progressive sanity loss, intensifying VHS static, screen shake, and heartbeat audio.
+- **Signal Interference:** Dropping to zero sanity triggers a full camera signal-loss state and animated Game Over sequence.
 
 <table>
   <tr>
-    <td align="center"><b>Live 3D HUD & Sanity Feedback</b><br><img src="./assets/gifs/mini_player.gif" alt="Mini Player" width="400"/></td>
-    <td align="center"><b>Main Panel Section</b><br><img src="./assets/gifs/main_panel.gif" alt="Radar Panel" width="400"/></td>
-  </tr>
-  <tr>
-    <td align="center"><b>Compass Panel & Coordinates</b><br><img src="./assets/gifs/compass.gif" alt="Compass" width="400"/></td>
-    <td align="center"><b>Position Lost Text</b><br><img src="./assets/gifs/position_lost.gif" alt="Position Lost" width="400"/></td>
+    <td align="center"><b>Active Camera View (Normal Signal)</b><br><img src="./assets/gifs/static_normal.gif" alt="Camera Static Normal" width="420"/></td>
+    <td align="center"><b>Sanity Drain & Signal Interference</b><br><img src="./assets/gifs/static_glitch.gif" alt="Camera Glitch" width="420"/></td>
   </tr>
 </table>
 
 ---
 
-## 📚 Detailed Documentation
+### 4. Real-Time HUD Telemetry, Stamina & Custom Alerts
+Every element on the player's screen is dynamically driven by server state.
 
-For deeper technical discussions, refer to the following documentation:
+<table>
+  <tr>
+    <td align="center"><b>Live 3D Doll & Sanity Feedback</b><br><img src="./assets/gifs/mini_player.gif" alt="Mini Player" width="420"/></td>
+    <td align="center"><b>Dynamic Status Panel</b><br><img src="./assets/gifs/main_panel.gif" alt="Main Panel" width="420"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Live Compass & Coordinates</b><br><img src="./assets/gifs/compass.gif" alt="Compass" width="420"/></td>
+    <td align="center"><b>Signal / Position Lost Alert</b><br><img src="./assets/gifs/position_lost.gif" alt="Position Lost" width="420"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Stamina Depletion</b><br><img src="./assets/gifs/stamina_bar_deplete.gif" alt="Stamina Deplete" width="420"/></td>
+    <td align="center"><b>Stamina Regeneration</b><br><img src="./assets/gifs/stamina_bar_fill.gif" alt="Stamina Fill" width="420"/></td>
+  </tr>
+</table>
 
-- 🔬 **[Advanced UI Systems](./docs/ADVANCED_UI.md):** Interactive dialogue engines, radar logic, and toast hijacking.
-- ⚙️ **[Entity Systems & Molang](./docs/ENTITY_SYSTEMS.md):** Custom entity components, render controllers, and conditional Molang expressions.
-- 🎬 **[Animation State Machines](./docs/ANIMATION_STATE_MACHINES.md):** Weapon systems, transitions, and behavior-pack animation logic.
-- 🎮 **[Gameplay Mechanics](./docs/GAMEPLAY_MECHANICS.md):** Overview of the survival, and progression systems.
+<div align="center">
+  <b>Custom Toast Notification Popup (Vanilla Toast Hijacking)</b><br>
+  <img src="./assets/gifs/toast_screen.gif" alt="Custom Toast" width="420"/>
+</div>
 
 ---
 
-## 📥 Current Status & Availability
+## 📥 Project Status
 
-This project is currently in **active development** and is published primarily as a portfolio and technical showcase.
-
-A compiled, playable `.mcpack` release will be made publicly available once development reaches a stable milestone.
+**Inside the Cage** is actively developed as a flagship technical showcase. A compiled `.mcpack` build will be released upon reaching the next major milestone.
