@@ -40,7 +40,7 @@ export async function finishRoundEarly() {
   }
 
   await sleep(10);
- dimension.runCommand(CONFIG.TP_ELSEWHERE);
+  dimension.runCommand(CONFIG.TP_ELSEWHERE);
 
   await sleep(100);
   dimension.runCommand(CONFIG.TP_TO_LOBBBY);
