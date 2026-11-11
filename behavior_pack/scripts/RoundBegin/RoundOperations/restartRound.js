@@ -10,6 +10,7 @@ import { sleep } from "../../utils";
 let dimension;
 const CONFIG = {
   CURTAIN_CLOSE: "curtain_close_event",
+  TP_ELSEWHERE: "tp @a[tag=waiting_for_start] -186 53 -82",
   STOPSOUND: "stopsound @s",
   REMOVE_TAG: "in_game"
 };
@@ -37,11 +38,11 @@ export async function restartRound() {
       resetPlayerDynamicPropertyData(player);
       resetPlayerProperties(player);
 
-      player.teleport({ x: -186, y: 53, z: -82 });
       player.addTag("waiting_for_start");
   }
-  await sleep(10);
 
+  await sleep(10);
+  dimension.runCommand(CONFIG.TP_ELSEWHERE);
   startFunction();
 
   ROUND_STATE_MAP.set("ROUND_RESTARTED", false);
