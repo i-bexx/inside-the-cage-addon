@@ -50,7 +50,7 @@ export function startCentralTickManager() {
 
         const isInMenu = cachedIsInMenu;
         
-        const isGameStarted = (ROUND_STATE_MAP.get("ROUND_STARTED") === true && !ROUND_STATE_MAP.get("ROUND_COMPLETED"));
+        let isGameStarted = (ROUND_STATE_MAP.get("ROUND_STARTED") === true && !ROUND_STATE_MAP.get("ROUND_COMPLETED"));
         let soulsFreedValue;
         let isPhase4or5;
 
@@ -105,7 +105,11 @@ export function startCentralTickManager() {
         // PER-PLAYER TICK SYSTEMS
         // =====================================
 
+        isGameStarted = (ROUND_STATE_MAP.get("ROUND_STARTED") === true && !ROUND_STATE_MAP.get("ROUND_COMPLETED"));
+
         for (const player of allPlayers) {
+            if (!player.isValid) continue;
+
             const pId = player.id;
             
             let cache = PlayerCache.get(pId);
@@ -141,23 +145,23 @@ export function startCentralTickManager() {
                     teleportStalkerLoop(player, playerState);
                 }
 
-                // 5 TICK
-                if (currentTick % 5 === 0) {
-                    playerState.sanity = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
-                    Sanity_control(player, playerState);
-
-                    if (isPhase4or5) {
-                        weaponController(player, playerState);
-                        if (playerState.mainHandTypeId === "ibexx_itc:gun")
-                            startCrosshairTracker(player);
-                    }
-                }
-
                 // 10 TICK
                 if (currentTick % 10 === 0) Battery_control(player, playerState);
 
                 // 20 TICK
                 if (currentTick % 20 === 0) Stamina_control(player);
+
+                // 5 TICK
+                if (currentTick % 5 === 0) {
+                    playerState.sanity = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
+                    Sanity_control(player, playerState);
+
+                    if (isPhase4or5 && player.hasTag("in_game")) {
+                        weaponController(player, playerState);
+                        if (playerState.mainHandTypeId === "ibexx_itc:gun")
+                            startCrosshairTracker(player);
+                    }
+                }
             }
         }
     }, 1);

@@ -1,4 +1,4 @@
-import { world, system } from "@minecraft/server";
+import { system } from "@minecraft/server";
 import { ItemStack, ItemLockMode, EntityComponentTypes, EquipmentSlot } from "@minecraft/server";
 
 import { getPlayersInRound } from "./utils";
@@ -85,7 +85,6 @@ export function cameraUsed(player) {
     const sanityValue = getObjectiveScore(getSanityObjective(), player.scoreboardIdentity);
     const staminaValue = PlayerCache.get(player.id)?.stamina;
 
-    stopInitiateCam();
     let toldPlayerTurnOffCam = player.getDynamicProperty(CONFIG.PROPERTIES.TOLD_WARNING);
     let willPlayerGetNoSignalNow = player.getDynamicProperty(CONFIG.PROPERTIES.WILL_GET_NO_SIGNAL);
     let initializationBeforeLockingTheCam = player.getDynamicProperty(CONFIG.PROPERTIES.INIT_BEFORE_LOCK);
@@ -103,7 +102,7 @@ export function cameraUsed(player) {
     if (!toldPlayerTurnOffCam) { 
         // Scenario 1: First time using camera
         player.triggerEvent(CONFIG.EVENTS.STATIC);
-        player.playAnimation("camera_start_anim");
+        player.playAnimation("camera_start_anim", { players: [player] });
     } else if (willPlayerGetNoSignalNow) { 
         // Scenario 2: Triggers "No Signal" event
         player.triggerEvent(CONFIG.EVENTS.STATIC_NO_SIGNAL);

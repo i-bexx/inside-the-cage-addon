@@ -15,7 +15,8 @@ world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
         return;
     }
     if (conversationIsGoing) {
-        player.sendMessage("Someone else is talking");
+        player.sendMessage("§6[§e!§6] §cHe is currently speaking with another player.");
+        player.playSound("note.bass", { volume: 0.8, pitch: 0.8 });
         return;
     }
     randomPeepPanel_1(player, target);

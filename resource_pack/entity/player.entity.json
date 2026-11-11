@@ -94,17 +94,18 @@
         "animate": [
           { "root": "!variable.is_first_person" },
           
-          { "hands_controller": "variable.is_first_person && (query.mark_variant == 0 || query.mark_variant == 553)" },
-          { "hands_controller_3rd_person": "!variable.is_first_person && !variable.not_holding_special_items" },
+          { "hands_controller": "variable.is_first_person && query.is_local_player && (query.mark_variant == 0 || query.mark_variant == 553)" },
+          { "hands_controller_3rd_person": "!variable.is_first_person && !variable.not_holding_special_items && query.is_local_player" },
+
+          { "new_game_started_controller": "query.is_local_player" },
+          { "round_completed_dialog_controller": "query.is_local_player" },
           
           "camera_rec_controller",
           "camera_line_controller",
           "static_controller",
           "turn_off_cam_warning_controller",
 
-          "new_game_started_controller",
           "game_start_curtain",
-          "round_completed_dialog_controller",
           "game_over_scene",
           
           "batteryhud",
