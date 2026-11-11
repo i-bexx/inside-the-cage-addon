@@ -86,7 +86,10 @@ let ownerPlayer = undefined;
 const COMMANDS = {
     NEW_GAME_INIT: [
         `tag @a add ${CONFIG.TAGS.CUTSCENE}`,
-        "scoreboard players add world new_game 1"
+        "scoreboard players add world new_game 1",
+        "scoreboard players operation @a new_game = world new_game",
+        "scoreboard players set @a coin_amount 0",
+        "xp -10L @a"
     ],
     SCENE_INTRO: [
         `event entity @a[tag=${CONFIG.TAGS.CUTSCENE}] new_game_started`,
@@ -200,10 +203,6 @@ world.afterEvents.playerInteractWithEntity.subscribe(({ player, target }) => {
 
     if (isNewGame) {
         runCommandList(COMMANDS.NEW_GAME_INIT);
-
-        player.runCommand("scoreboard players add @s new_game 1");
-        player.runCommand("scoreboard players set @s coin_amount 0");
-        player.runCommand("xp -10L @s");
         
         const cutscenePlayers = world.getPlayers({ tags: [CONFIG.TAGS.CUTSCENE] });
 

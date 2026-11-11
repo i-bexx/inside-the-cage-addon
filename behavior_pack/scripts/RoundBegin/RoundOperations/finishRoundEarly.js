@@ -1,6 +1,6 @@
 import { world, BlockVolume } from "@minecraft/server";
 
-import { stopFunctionsInMaps, clearPlayerMaps, setPlayerMaps, resetPlayerDynamicPropertyData, resetPlayerProperties } from "../../resetStats";
+import { stopFunctionsInMaps, clearPlayerMaps, setPlayerMaps, resetPlayerDynamicPropertyData, resetPlayerProperties, commandsToResetPlayerData } from "../../resetStats";
 import { getPlayersInRound, sleep } from "../../utils";
 import { ROUND_STATE_MAP } from "../../gameStats";
 
@@ -34,6 +34,7 @@ export async function finishRoundEarly() {
     stopFunctionsInMaps(player.id);
     clearPlayerMaps(player.id);
     setPlayerMaps(player.id);
+    commandsToResetPlayerData(player);
     resetPlayerDynamicPropertyData(player);
     resetPlayerProperties(player);
   }

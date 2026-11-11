@@ -36,6 +36,7 @@ let confirmPanels;
 
 let voteTimeout = undefined;
 let requestExists = false;
+let currentVoteType = undefined;
 
 // ======= CORE FUNCTIONS =======
 
@@ -43,8 +44,14 @@ function cleanup(type) {
     Object.values(TAGS).forEach(tag => {
         dimension.runCommand(`tag @a remove ${tag}`);
     });
-    dimension.runCommand(`clear @a ${ITEMS.NOTIFICATION_PREFIX}${type}`);
+    if (type) {
+        dimension.runCommand(`clear @a ${ITEMS.NOTIFICATION_PREFIX}${type}`);
+    } else {
+        dimension.runCommand(`clear @a ${ITEMS.NOTIFICATION_PREFIX}${VOTE_TYPES.RESTART}`);
+        dimension.runCommand(`clear @a ${ITEMS.NOTIFICATION_PREFIX}${VOTE_TYPES.END_ROUND}`);
+    }
     
+    currentVoteType = undefined;
     requestExists = false;
 
     if (voteTimeout == undefined) return;
@@ -94,6 +101,7 @@ function startRequest(player, type) {
         else if (players.length > 1) {
             player.addTag(TAGS.REQUESTER);
             requestExists = true;
+            currentVoteType = type;
             
             players.filter(p => p.id !== player.id)
                 .forEach(p => {
@@ -119,7 +127,7 @@ function handleVote(player, type) {
 
         const requester = getPlayersInRound().find(p => p.hasTag(TAGS.REQUESTER));
         if (!requester) {
-            player.sendMessage("§cThe request already been declined");
+            cleanup(type);
             return;
         }
 
@@ -145,6 +153,62 @@ function handleVote(player, type) {
 function runOperation(type) {
     if (type === VOTE_TYPES.RESTART) ROUND_STATE_MAP.set("ROUND_RESTARTED", true);
     else if (type === VOTE_TYPES.END_ROUND) ROUND_STATE_MAP.set("ROUND_ENDED_EARLY", true);
+}
+
+export function checkVoteOnPlayerDeath(eliminatedPlayer) {
+    if (!requestExists) return;
+
+    // Silently clean up if the requester dies
+    if (eliminatedPlayer.hasTag(TAGS.REQUESTER)) {
+        cleanup(currentVoteType);
+        return;
+    }
+
+    const remainingInRound = getPlayersInRound().filter(p => p.id !== eliminatedPlayer.id);
+    const others = remainingInRound.filter(p => !p.hasTag(TAGS.REQUESTER));
+
+    // Cancel vote if only the requester remains but no one else left
+    if (others.length === 0) {
+        cleanup(currentVoteType);
+        return;
+    }
+
+    // Execute operation if all remaining players have accepted
+    const acceptedCount = others.filter(p => p.hasTag(TAGS.ACCEPTED)).length;
+    if (others.length === acceptedCount) {
+        runOperation(currentVoteType);
+        cleanup(currentVoteType);
+    }
+}
+
+export function checkVoteOnPlayerLeave() {
+    if (!requestExists) return;
+
+    // Silently clean up if the requester leaves the game
+    const requester = getPlayersInRound().find(p => p.hasTag(TAGS.REQUESTER));
+    if (!requester) {
+        cleanup(currentVoteType);
+        return;
+    }
+
+    const others = getPlayersInRound().filter(p => !p.hasTag(TAGS.REQUESTER));
+
+    // Cancel vote if only the requester remains but no one else left
+    if (others.length === 0) {
+        cleanup(currentVoteType);
+        return;
+    }
+
+    // Execute operation if all remaining players have accepted
+    const acceptedCount = others.filter(p => p.hasTag(TAGS.ACCEPTED)).length;
+    if (others.length === acceptedCount) {
+        runOperation(currentVoteType);
+        cleanup(currentVoteType);
+    }
+}
+
+export function stopVoteManager() {
+    cleanup(currentVoteType);
 }
 
 export function setGlobalVariables() { dimension = world.getDimension("overworld"); }

@@ -1,6 +1,6 @@
 import { world } from "@minecraft/server";
 
-import { stopFunctionsInMaps, clearPlayerMaps, setPlayerMaps, resetPlayerDynamicPropertyData, resetPlayerProperties } from "../../resetStats";
+import { stopFunctionsInMaps, clearPlayerMaps, setPlayerMaps, resetPlayerDynamicPropertyData, resetPlayerProperties, commandsToResetPlayerData } from "../../resetStats";
 import { startFunction, getSessionPlayers } from "../../gameStarter";
 import { ROUND_STATE_MAP } from "../../gameStats";
 import { sleep } from "../../utils";
@@ -11,8 +11,6 @@ let dimension;
 const CONFIG = {
   CURTAIN_CLOSE: "curtain_close_event",
   STOPSOUND: "stopsound @s",
-  TP: "tp @a[tag=!in_lobby] -186 53 -82",
-  ADD_TAG: "tag @a[tag=!in_lobby] add waiting_for_start",
   REMOVE_TAG: "in_game"
 };
 
@@ -24,20 +22,25 @@ export async function restartRound() {
   await sleep(6);
   
   for (const player of players) {
+      if (!player || !player.isValid) continue;
+
       player.removeTag(CONFIG.REMOVE_TAG);
+      player.removeTag("in_lobby");
+      player.removeTag("eliminated");
       player.triggerEvent(CONFIG.CURTAIN_CLOSE);
       player.runCommand(CONFIG.STOPSOUND);
 
       stopFunctionsInMaps(player.id);
       clearPlayerMaps(player.id);
       setPlayerMaps(player.id);
+      commandsToResetPlayerData(player);
       resetPlayerDynamicPropertyData(player);
       resetPlayerProperties(player);
+
+      player.teleport({ x: -186, y: 53, z: -82 });
+      player.addTag("waiting_for_start");
   }
   await sleep(10);
-
-  dimension.runCommand(CONFIG.TP);
-  dimension.runCommand(CONFIG.ADD_TAG);
 
   startFunction();
 

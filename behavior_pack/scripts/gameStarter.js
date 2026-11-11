@@ -75,9 +75,7 @@ return state;
 
 
 export function gameStarter(allPlayers) {
-	const players = allPlayers.filter(p => !p.hasTag("waiting_for_start"));
-			
-		for (const player of players) {
+		for (const player of allPlayers) {
 			player.isInRange = {
 					isInRangeX: false,
 					isInRangeY: false,
@@ -132,8 +130,11 @@ async function playerInRange(player) {
 
 
 function kickOut(player) {
-	for (const command of Object.values(REJECT_PLAYER_COMMANDS)) player.runCommand(command);
+	for (const command of Object.values(REJECT_PLAYER_COMMANDS))
+		player.runCommand(command);
+
 	playersWaitingToStart = playersWaitingToStart.filter(p => p.id !== player.id);
+	STARTER_RANGE_STATES.get(player.id).isPlayerInRange = false; // Instead of waiting 30 ticks to reset, this line resets instantly the state
 }
 
 // -- Game Starter Panel --
@@ -175,7 +176,7 @@ export function startFunction() {
 	const playersToStart = getSessionPlayers();
 	
 	for (const player of playersToStart) {
-		player.addTag("waiting_for_start");
+		player.addTag("starting_game");
 		player.removeTag("in_lobby");
 
 		player.setDynamicProperty("batteryLevel", 4);
@@ -187,6 +188,7 @@ export function startFunction() {
 
 		startCommands();
 		dimension.runCommand("event entity @e[type=ibexx_itc:door] door_game_started_event");
+		dimension.runCommand("tag @a remove waiting_for_start");
 		const barrierArea = new BlockVolume(
         { x:-180, y:68 ,z:-92 },
         { x:-180 ,y:71 ,z:-84 }
@@ -200,7 +202,7 @@ export function startFunction() {
 async function startCommands() {
 	await sleep(60);
 	runCountdownActionbar("Loading...", false);
-	dimension.runCommand("execute if entity @a[tag=!waiting_for_start] run title @a[tag=!waiting_for_start] actionbar §4Waiting room closed");
+	dimension.runCommand("execute if entity @a[tag=!starting_game] run title @a[tag=!starting_game] actionbar §4Waiting room closed");
 	await sleep(310);
 	runCountdownActionbar("§h< 5 >");
 	await sleep(20);
@@ -212,14 +214,14 @@ async function startCommands() {
 	await sleep(20);
 	runCountdownActionbar("§4< 1 >");
 	await sleep(5);
-	dimension.runCommand("fog @a[tag=waiting_for_start] push ibexx_itc:in_round_default in_round_fog");
-	dimension.runCommand("tp @a[tag=waiting_for_start] 120 65 -260");
+	dimension.runCommand("fog @a[tag=starting_game] push ibexx_itc:in_round_default in_round_fog");
+	dimension.runCommand("tp @a[tag=starting_game] 120 65 -260");
 	await sleep(15);
-	dimension.runCommand("playsound ibexx_itc:truck_door @a[tag=waiting_for_start]");
+	dimension.runCommand("playsound ibexx_itc:truck_door @a[tag=starting_game]");
 	dimension.runCommand("tag @a remove starter");
 	await sleep(35);
-	dimension.runCommand("tag @a[tag=waiting_for_start] add in_game");
-	dimension.runCommand("tag @a remove waiting_for_start");
+	dimension.runCommand("tag @a[tag=starting_game] add in_game");
+	dimension.runCommand("tag @a remove starting_game");
 	dimension.runCommand("scoreboard players set @a[tag=in_game] Sanity 100");
 	await sleep(170);
 	dimension.runCommand("event entity @a[tag=in_game] curtain_open_event");
@@ -232,7 +234,7 @@ async function startCommands() {
 // -- Helper Functions --
 
 function runCountdownActionbar(actionbar, playSound = true) {
-	const players = world.getPlayers({ tags: ["waiting_for_start"] });
+	const players = world.getPlayers({ tags: ["starting_game"] });
 	for (const player of players) {
 		player.onScreenDisplay.setActionBar(actionbar);
 		if (playSound) player.playSound("block.click");
@@ -257,7 +259,7 @@ export function getSessionPlayers() {
 
 export function checkIfPositionClear() { return STARTER_RANGE_STATES; }
 export function resetGameStarterSession() {
-    sessionPlayers = []; 
+    sessionPlayers = [];
     isStarting = false;
 }
 export function isGameStarting() { return isStarting; }

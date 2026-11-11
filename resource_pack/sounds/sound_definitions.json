@@ -2,7 +2,7 @@
   "format_version": "1.20.20",
   "sound_definitions": {
     "ibexx_itc:ambiance": {
-      "category": "ambient",
+      "category": "music",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/ambiance/ambiance",
@@ -14,47 +14,6 @@
       "category": "music",
       "sounds": [
         "sounds/sounds/static/game_over"
-      ]
-    },
-    "ibexx_itc:static_game_over": {
-      "category": "music",
-      "sounds": [
-        "sounds/sounds/static/camera/static_game_over"
-      ]
-    },
-    "ibexx_itc:camera_shutter": {
-      "category": "player",
-      "min_distance": 1000,
-      "sounds": [
-        "sounds/sounds/static/camera/camera_shutter"
-      ]
-    },
-    "ibexx_itc:coin_collect": {
-      "category": "player",
-      "min_distance": 1000,
-      "sounds": [
-        "sounds/sounds/coin_collect"
-      ]
-    },
-    "ibexx_itc:heart": {
-      "category": "player",
-      "min_distance": 1000,
-      "sounds": [
-        "sounds/sounds/heart"
-      ]
-    },
-    "ibexx_itc:pick_up": {
-      "category": "player",
-      "min_distance": 1000,
-      "sounds": [
-        "sounds/sounds/tools/pick_up"
-      ]
-    },
-    "ibexx_itc:kit_used": {
-      "category": "player",
-      "min_distance": 1000,
-      "sounds": [
-        "sounds/sounds/tools/kit_used"
       ]
     },
     "ibexx_itc:toxic_bomb": {
@@ -134,57 +93,50 @@
         "sounds/sounds/tools/knife/knife_slice"
       ]
     },
-    "ibexx_itc:break_cage": {
-      "category": "player",
+    "ibexx_itc:heart": {
+      "category": "music",
       "min_distance": 1000,
       "sounds": [
-        "sounds/sounds/break_cage"
-      ]
-    },
-    "ibexx_itc:bottle_drink": {
-      "category": "player",
-      "min_distance": 1000,
-      "sounds": [
-        "sounds/sounds/bottle_drink"
+        "sounds/sounds/heart"
       ]
     },
     "ibexx_itc:static_low_sanity": {
-      "category": "ambient",
+      "category": "music",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/static/camera/static_low_sanity"
       ]
     },
     "ibexx_itc:static1": {
-      "category": "ambient",
+      "category": "music",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/static/camera/static1"
       ]
     },
     "ibexx_itc:static2": {
-      "category": "ambient",
+      "category": "music",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/static/camera/static2"
       ]
     },
     "ibexx_itc:static3": {
-      "category": "ambient",
+      "category": "music",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/static/camera/static3"
       ]
     },
     "ibexx_itc:initializationBeforeLockingTheCam": {
-      "category": "player",
+      "category": "music",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/static/camera/initialization_before_locking_the_cam"
       ]
     },
     "ibexx_itc:camera_no_signal": {
-      "category": "ambient",
+      "category": "music",
       "min_distance": 1000,
       "sounds": [
         "sounds/sounds/static/camera/camera_no_signal"
@@ -256,23 +208,50 @@
         "sounds/sounds/truck_door"
       ]
     },
+    "ibexx_itc:camera_shutter": {
+      "category": "ui",
+      "sounds": [
+        "sounds/sounds/static/camera/camera_shutter"
+      ]
+    },
+    "ibexx_itc:coin_collect": {
+      "category": "ui",
+      "sounds": [
+        "sounds/sounds/coin_collect"
+      ]
+    },
+    "ibexx_itc:break_cage": {
+      "category": "ui",
+      "sounds": [
+        "sounds/sounds/break_cage"
+      ]
+    },
+    "ibexx_itc:pick_up": {
+      "category": "ui",
+      "sounds": [
+        "sounds/sounds/tools/pick_up"
+      ]
+    },
+    "ibexx_itc:kit_used": {
+      "category": "ui",
+      "sounds": [
+        "sounds/sounds/tools/kit_used"
+      ]
+    },
     "ibexx_itc:ghost_spawn": {
       "category": "hostile",
-      "min_distance": 1000,
       "sounds": [
         "sounds/sounds/ghost/ghost_spawn"
       ]
     },
     "ibexx_itc:ghost_hurt": {
       "category": "hostile",
-      "min_distance": 1000,
       "sounds": [
         "sounds/sounds/ghost/ghost_hurt"
       ]
     },
     "ibexx_itc:ghost_whisper": {
       "category": "hostile",
-      "min_distance": 1000,
       "sounds": [
         "sounds/sounds/ghost/ghost_whisper1",
         "sounds/sounds/ghost/ghost_whisper2",

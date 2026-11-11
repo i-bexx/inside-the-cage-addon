@@ -1,4 +1,4 @@
-import { system, world } from "@minecraft/server";
+import { system } from "@minecraft/server";
 
 import { game_over } from "../Player/resetPlayerData";
 import { PlayerCache } from "../Player/playerCache";
@@ -12,6 +12,8 @@ export function Sanity_control(player, playerState) {
 	let sanityValue = playerState.sanity;
 
 	checkPlayerLookingState(player, sanityValue);
+	if (sanityValue == 0) return;
+	
 	checkPlayerHeartPoundingState(player, sanityValue);
 	checkPlayerSanityLowStaticSound(player, sanityValue);
 	lowSanityStatic(player, sanityValue);

@@ -7,6 +7,7 @@ import { world, system } from "@minecraft/server";
 import { stopGivePanelItem, resetPrices } from "./panels";
 import { stopInitiateCam } from "./cameraUsage";
 import { resetGameStarterSession } from "./gameStarter";
+import { stopVoteManager } from "./voteManager";
 
 import { stopTeleportNull } from "./RoundBegin/Null/nullTeleport";
 import { stopAmbiance } from "./RoundBegin/ambianceController";
@@ -48,7 +49,6 @@ const COMMANDS_TO_RESET_GAME = [
     "tag @a remove in_game",
     "tag @a remove waiting_for_start",
     "tag @a remove starter",
-    "tag @a remove eliminated",
     "tag @a remove stalker_matched",
     "tag @a remove hasNotification",
     "tag @a remove requester",
@@ -246,8 +246,9 @@ export function resetFunctions() {
   stopcoinController();
   stopTeleportNull();
   stopAmbiance();
+  stopVoteManager();
   
-  resetGameStarterSession();
+  if (!ROUND_STATE_MAP.get("ROUND_RESTARTED")) resetGameStarterSession();
   resetPrices();
 }
 
@@ -276,12 +277,22 @@ export function commandsToResetTheGame(dimension) {
 // ==========================================
 
 export function resetMaps() {
-  playerDrainingBatteryCountdownMap().clear(); //batteryController
-  playerIsBatteryCriticalCountdownMap().clear();
+  const timerMaps = [
+    playerDrainingBatteryCountdownMap(),
+    playerIsBatteryCriticalCountdownMap(),
+    listOfPlayersPlayingStaticMap(),
+    getCloseCamTimeout(),
+    getPlaysoundHeartMap(),
+    getSanityLowStaticSoundMap()
+  ];
+
+  for (const map of timerMaps) {
+    map.forEach(id => {
+      if (id !== undefined) system.clearRun(id);
+    });
+    map.clear();
+  }
 
   playerResetStaminaCooldownMap().clear(); //staminaController
-
-  getPlaysoundHeartMap().clear(); //sanityController
-  getSanityLowStaticSoundMap().clear();
   getSanityLowStaticEventMap().clear();
 }

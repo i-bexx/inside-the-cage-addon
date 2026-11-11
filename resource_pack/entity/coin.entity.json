@@ -23,9 +23,6 @@
         "spin_anim": "animation.ibexx_itc.coin.spin",
         "collected_anim": "animation.ibexx_itc.coin.collect"
       },
-      "sound_effects": {
-        "coin_collect": "ibexx_itc:coin_collect"
-      },
       "render_controllers": [
          "controller.render.ibexx_itc.coin"
          ]

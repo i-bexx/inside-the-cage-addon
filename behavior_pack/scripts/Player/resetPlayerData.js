@@ -2,6 +2,7 @@ import { system } from "@minecraft/server";
 
 import { sleep } from "../utils";
 import { resetPlayerDynamicPropertyData, resetPlayerProperties, commandsToResetPlayerData, clearPlayerMaps, setPlayerMaps, stopFunctionsInMaps } from "../resetStats";
+import { checkVoteOnPlayerDeath } from "../voteManager";
 
 // ==========================================
 // CONFIGURATION
@@ -36,6 +37,8 @@ const CONFIG = {
 export async function game_over(player) {
     if (player == undefined) return;
 
+    checkVoteOnPlayerDeath(player);
+
 	player.addTag(CONFIG.TAG_ELIMINATED);
     for (const tag of Object.values(CONFIG.TAGS_TO_REMOVE)) player.removeTag(tag);
 
@@ -60,7 +63,10 @@ export async function game_over(player) {
     await sleep(400);
 
     system.clearRun(soundLoop);
+    if (!player || !player.isValid) return;
     player.removeTag(CONFIG.TAG_ELIMINATED);
+
+    if (player.hasTag("starting_game") || player.hasTag("waiting_for_start") || player.hasTag("in_game")) return;
 
     commandsToResetPlayerData(player);
 }
