@@ -3,6 +3,7 @@ import { ActionFormData, FormCancelationReason } from "@minecraft/server-ui";
 
 import { getPlayersInRound } from "./utils";
 import { ROUND_STATE_MAP } from "./gameStats";
+import { slowUiTick } from "./UI/slowUiTick";
 
 let dimension;
 
@@ -16,7 +17,6 @@ const VOTE_TYPES = {
 const TAGS = {
     REQUESTER: "requester",
     ACCEPTED: "accepted_request",
-    REFUSED: "refused_request",
     HAS_NOTIFICATION: "hasNotification"
 };
 
@@ -103,10 +103,11 @@ function startRequest(player, type) {
             requestExists = true;
             currentVoteType = type;
             
-            players.filter(p => p.id !== player.id)
-                .forEach(p => {
-                  p.addTag(TAGS.HAS_NOTIFICATION);
-                  p.runCommand(`give @s ${ITEMS.NOTIFICATION_PREFIX}${type} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
+            players.filter(p => p.id !== player.id).forEach(p => {
+                p.addTag(TAGS.HAS_NOTIFICATION);
+                p.runCommand(`give @s ${ITEMS.NOTIFICATION_PREFIX}${type} 1 0 {"minecraft:item_lock": {"mode": "lock_in_inventory"}}`);
+                
+                slowUiTick(p);
             });
 
             voteTimeout = system.runTimeout(() => {
@@ -126,26 +127,30 @@ function handleVote(player, type) {
         if (canceled) return;
 
         const requester = getPlayersInRound().find(p => p.hasTag(TAGS.REQUESTER));
+        const others = getPlayersInRound().filter(p => !p.hasTag(TAGS.REQUESTER));
+
         if (!requester) {
             cleanup(type);
+            others.forEach(player => slowUiTick(player));
             return;
         }
 
-        if (selection === 0) { // No
-            requester.addTag(TAGS.REFUSED);
-            cleanup(type);
-        } else { // Yes
+        if (selection === 0) { // Yes
             player.addTag(TAGS.ACCEPTED);
             player.removeTag(TAGS.HAS_NOTIFICATION);
             player.runCommand(`clear @s ${ITEMS.NOTIFICATION_PREFIX}${type}`);
 
-            const others = getPlayersInRound().filter(p => !p.hasTag(TAGS.REQUESTER));
             const acceptedCount = others.filter(p => p.hasTag(TAGS.ACCEPTED)).length;
 
             if (others.length === acceptedCount) {
                 runOperation(type);
                 cleanup(type);
+                others.forEach(player => slowUiTick(player));
             }
+        } else { // No
+            requester.runCommand("title @s actionbar §cRequest has been refused");
+            cleanup(type);
+            others.forEach(player => slowUiTick(player));
         }
     });
 }
