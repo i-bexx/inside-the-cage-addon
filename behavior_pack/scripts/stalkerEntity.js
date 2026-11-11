@@ -11,7 +11,7 @@ const CONFIG = {
     OBJECTIVE_ID: "stalker_match_id",
     MATCH_TAG: "stalker_matched",
     IN_GAME: "in_game",
-    WAITING_FOR_START: "waiting_for_start",
+    STARTING_GAME: "starting_game",
     STALKER_DISTANCE: 20
 };
 
@@ -26,7 +26,7 @@ let stalkerMatchIdObjective = undefined;
 
 export function stalkerMatch() {
     const players = world.getAllPlayers()
-                    .filter(player => !player.hasTag(CONFIG.MATCH_TAG) && (player.hasTag(CONFIG.IN_GAME) || player.hasTag(CONFIG.WAITING_FOR_START)));
+                    .filter(player => !player.hasTag(CONFIG.MATCH_TAG) && (player.hasTag(CONFIG.IN_GAME) || player.hasTag(CONFIG.STARTING_GAME)));
 
     for (const player of players)
         stalkerMatchLogic(player);
@@ -40,21 +40,8 @@ function stalkerMatchLogic(player) {
             stalkerMatchIdObjective.setScore(player, linkId);
             stalkerMatchIdObjective.setScore(entity, linkId);
 
-            const stalkerFilter = {
-                type: CONFIG.ENTITY_TYPE,
-                scoreOptions: [
-                    {
-                        objective: CONFIG.OBJECTIVE_ID,
-                        minScore: linkId,
-                        maxScore: linkId
-                    }
-                ]
-            };
-
-            const matchedEntity = dimension.getEntities(stalkerFilter)[0];
-
             const cache = PlayerCache.get(player.id);
-            if (cache) cache.stalkerEntity = matchedEntity;
+            if (cache) cache.stalkerEntity = entity;
 
             player.addTag(CONFIG.MATCH_TAG);
 

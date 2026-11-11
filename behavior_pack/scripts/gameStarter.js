@@ -203,6 +203,7 @@ async function startCommands() {
 	await sleep(60);
 	runCountdownActionbar("Loading...", false);
 	dimension.runCommand("execute if entity @a[tag=!starting_game] run title @a[tag=!starting_game] actionbar §4Waiting room closed");
+	dimension.runCommand("execute as @a[tag=!starting_game] run tp @s -183 68 -97");
 	await sleep(310);
 	runCountdownActionbar("§h< 5 >");
 	await sleep(20);

@@ -48,12 +48,12 @@ import { PlayerCache } from "./Player/playerCache";
 const COMMANDS_TO_RESET_GAME = [
     "tag @a remove in_game",
     "tag @a remove waiting_for_start",
+    "tag @a remove starting_game",
     "tag @a remove starter",
     "tag @a remove stalker_matched",
     "tag @a remove hasNotification",
     "tag @a remove requester",
     "tag @a remove accepted_request",
-    "tag @a remove refused_request",
     "tag @a remove show_in_round_personal_ui",
     "kill @e[type=ibexx_itc:stalker_cursor]",
     "kill @e[type=ibexx_itc:ghost]",
