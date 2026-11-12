@@ -6,7 +6,6 @@ const OBJECTIVE_IDS = [
   "Sanity",
   "ammo",
   "coin_amount",
-  "stalker_match_id",
   "new_game"
 ];
 
@@ -22,7 +21,6 @@ const ScoreboardCache = {
     SANITY:           undefined,
     AMMO:             undefined,
     COIN_AMOUNT:      undefined,
-    STALKER_MATCH_ID: undefined,
     NEW_GAME:         undefined
   },
   participants: {
@@ -50,7 +48,6 @@ export function getSanityObjective() { return ScoreboardCache.objectives.SANITY;
 export function getAmmoObjective() { return ScoreboardCache.objectives.AMMO; }
 export function getUsedToxicBombObjective() { return ScoreboardCache.objectives.USED_TOXIC_BOMB; }
 export function getCoinAmountObjective() { return ScoreboardCache.objectives.COIN_AMOUNT; }
-export function getStalkerMatchIdObjective() { return ScoreboardCache.objectives.STALKER_MATCH_ID; }
 
 // Global-Player Objectives
 export function getNewGameObjective() { return ScoreboardCache.objectives.NEW_GAME; }

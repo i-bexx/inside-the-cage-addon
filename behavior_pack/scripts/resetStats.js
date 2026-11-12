@@ -50,18 +50,15 @@ const COMMANDS_TO_RESET_GAME = [
     "tag @a remove waiting_for_start",
     "tag @a remove starting_game",
     "tag @a remove starter",
-    "tag @a remove stalker_matched",
     "tag @a remove hasNotification",
     "tag @a remove requester",
     "tag @a remove accepted_request",
     "tag @a remove show_in_round_personal_ui",
-    "kill @e[type=ibexx_itc:stalker_cursor]",
     "kill @e[type=ibexx_itc:ghost]",
     "setblock -61 76 -153 air",
     "fill 148 56 -323 136 56 -323 air",
     "fill 148 56 -316 142 56 -316 air",
     "scoreboard players set value souls_freed 0",
-    "scoreboard players set @a stalker_match_id 0",
     "scoreboard players set value show_position 1",
     "scoreboard players set value global_ui 91",
     "tp @e[type=ibexx_itc:null] -65 75 -150",
@@ -104,7 +101,6 @@ export function commandsToResetPlayerData(player, playerJoined = false) {
   player.runCommand("fog @s remove in_round_fog");
   player.runCommand(`recipe take @s "*"`);
   player.runCommand("scoreboard players set @s Sanity 100");
-  player.runCommand("scoreboard players set @s stalker_match_id 0");
 
   player.removeTag("show_in_round_personal_ui");
 }
@@ -204,7 +200,6 @@ export function setPlayerMaps(playerId) {
     cache.staminaLimit = 10;
 
     cache.lastLookedEntityId = undefined;
-    cache.stalkerEntity = null;
     cache.isLooking = false;
 }
 

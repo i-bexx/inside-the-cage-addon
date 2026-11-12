@@ -34,28 +34,44 @@ let listOfPlayersLooking = new Map();
 let listOfPlayersPlayingStatic = new Map();
 
 export function playerLookingControl(player, nullEntity) {
-    if (!nullEntity) return;
+    if (!nullEntity || !nullEntity.isValid || !player || !player.isValid) return;
 
     const cache = PlayerCache.get(player.id);
     if (!cache) return;
     
-    const linkedStalker = cache.stalkerEntity;
-    if (!linkedStalker || !linkedStalker.isValid) return;
-    const linkedStalkerLoc = linkedStalker.location;
-    const nullEntityLoc = nullEntity.location;
-    const playerLoc = player.location;
+    const headLoc = player.getHeadLocation();
+    const monsterLoc = nullEntity.getHeadLocation() ?? nullEntity.location;
 
-    const dx = linkedStalkerLoc.x - nullEntityLoc.x;
-    const dy = linkedStalkerLoc.y - nullEntityLoc.y;
-    const dz = linkedStalkerLoc.z - nullEntityLoc.z;
-    const distance = Math.hypot(dx, dy, dz);
+    // 1. Vector from player's eyes to monster's head
+    const dx = monsterLoc.x - headLoc.x;
+    const dy = monsterLoc.y - headLoc.y;
+    const dz = monsterLoc.z - headLoc.z;
 
-    const pdx = playerLoc.x - nullEntityLoc.x;
-    const pdy = playerLoc.y - nullEntityLoc.y;
-    const pdz = playerLoc.z - nullEntityLoc.z;
-    const distanceToPlayer = Math.hypot(pdx, pdy, pdz);
+    // 2. Distance check (max 20 blocks -> 20^2 = 400)
+    const distSq = dx * dx + dy * dy + dz * dz;
+    let newIsLooking = false;
 
-    const newIsLooking = (distance <= 20 && distanceToPlayer <= 20);
+    if (distSq <= 400) {
+        const dist = Math.sqrt(distSq);
+        const dir = { x: dx / dist, y: dy / dist, z: dz / dist };
+
+        // 3. Dot product FOV check (>= 0.6 is ~106° cone / anywhere on screen)
+        const viewDir = player.getViewDirection();
+        const dot = (viewDir.x * dir.x) + (viewDir.y * dir.y) + (viewDir.z * dir.z);
+
+        if (dot >= 0.6) {
+            // 4. Wall occlusion check (raycast from eyes to monster)
+            const hitBlock = player.dimension.getBlockFromRay(headLoc, dir, {
+                maxDistance: dist,
+                includePassableBlocks: false,
+                includeLiquidBlocks: false
+            });
+
+            // If no solid block was hit, line of sight is clear!
+            newIsLooking = (hitBlock === undefined);
+        }
+    }
+
     const oldIsLooking = cache.isLooking;
 
     if (oldIsLooking !== newIsLooking) {

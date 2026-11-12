@@ -18,7 +18,6 @@ import { startDifficultyMonitor } from "./RoundBegin/ghostController";
 import { startCrosshairTracker } from "./cursorController";
 import { playerLookingControl } from "./RoundBegin/playerLooking";
 import { nullTeleportTimeSetter } from "./RoundBegin/Null/nullController";
-import { teleportStalkerLoop } from "./stalkerEntity";
 import { Battery_control } from "./RoundBegin/batteryController";
 import { Sanity_control } from "./RoundBegin/sanityController";
 import { soulsAmountCheck } from "./RoundBegin/soulController";
@@ -139,10 +138,6 @@ export function startCentralTickManager() {
                 if (currentTick % 2 === 0 && !isPhase4or5) {
                     const nullEntity = getNullEntity();
                     playerLookingControl(player, nullEntity);
-
-                    playerState.viewDirection = player.getViewDirection();
-                    playerState.headLocation = player.getHeadLocation();
-                    teleportStalkerLoop(player, playerState);
                 }
 
                 // 10 TICK
