@@ -4,7 +4,7 @@ import { sleep } from "../utils";
 import { isLookingAtMenuEntity } from "../preStart";
 import { startCentralTickManager } from "../tickManager";
 import { PlayerCache } from "./playerCache";
-import { getNewGameObjective, getStalkerMatchIdObjective, getWorldParticipant, getObjectiveScore } from "../scoreboards";
+import { getNewGameObjective, getWorldParticipant, getObjectiveScore } from "../scoreboards";
 import { commandsToResetTheGame, resetPlayerDynamicPropertyData, resetPlayerProperties, resetWorldDynamicPropertyData, resetEntitiesData, resetMaps, resetFunctions, despawnEntities, commandsToResetPlayerData, clearPlayerMaps, stopFunctionsInMaps } from "../resetStats";
 
 // =============================================================
@@ -17,7 +17,7 @@ const CONFIG = {
         HOST: "host",
         IN_LOBBY: "in_lobby", 
         MENU: "in_menu",
-        TO_REMOVE: ["in_game", "in_lobby", "waiting_for_start", "starting_game", "starter", "menu", "eliminated", "stalker_matched", "hasNotification", "requester", "accepted_request", "show_in_round_personal_ui", "passwordCorrect"]
+        TO_REMOVE: ["in_game", "in_lobby", "waiting_for_start", "starting_game", "starter", "menu", "eliminated", "hasNotification", "requester", "accepted_request", "show_in_round_personal_ui", "passwordCorrect"]
     },
     DYN_PROPS: { 
         IN_MENU: "in_menu",
@@ -27,11 +27,9 @@ const CONFIG = {
     },
     SCORES: {
         NEW_GAME: "new_game",
-        STALKER_MATCH_ID: "stalker_match_id",
         COIN: "coin_amount",
         INITIAL_STATS: {
             Sanity: 100,
-            stalker_match_id: 0,
             is_shooting: 0,
             is_looking_at_ghost: 0,
             ammo: 10
@@ -43,7 +41,6 @@ const CONFIG = {
         MENU_READY_SOUND: "playsound random.levelup @s"
     },
     ENTITIES: {
-        STALKER: "ibexx_itc:stalker_cursor",
         MENU_NEW_GAME: "ibexx_itc:new_game",
         MENU_CONTINUE: "ibexx_itc:continue",
         GAME_DOOR: "ibexx_itc:door"
@@ -74,7 +71,6 @@ const CONFIG = {
 
 let dimension;
 
-let stalkerMatchIdObjective;
 let newGameObjective;
 let worldParticipant;
 
@@ -93,7 +89,6 @@ world.afterEvents.playerSpawn.subscribe(async ({ player }) => {
     resetPlayerDynamicPropertyData(player);
     resetPlayerProperties(player);
 
-    killConnectedStalker(player);
     preparePlayerStats(player);
 
     // Teleportation Logic
@@ -201,28 +196,6 @@ async function handleOwnerJoinLogic(player) {
 	isLookingAtMenuEntity();
 }
 
-function killConnectedStalker(player) {
-    if (!stalkerMatchIdObjective) return;
-    
-    try {
-        const stalkerScore = getObjectiveScore(stalkerMatchIdObjective, player.scoreboardIdentity);
-        if (stalkerScore === undefined) return;
-
-        const filter = {
-            type: CONFIG.ENTITIES.STALKER, 
-            scoreOptions: [{ 
-                objective: CONFIG.SCORES.STALKER_MATCH_ID, 
-                minScore: stalkerScore, 
-                maxScore: stalkerScore 
-            }]
-        };
-
-        const entities = dimension.getEntities(filter);
-        if (entities.length > 0) entities[0].kill();
-        
-    } catch (e) { }
-}
-
 function ensureEntitiesAreReset() {
     return new Promise((resolve) => {
         const attemptReset = () => {
@@ -264,6 +237,5 @@ export function setGlobalVariables() {
     dimension = world.getDimension(CONFIG.DIMENSION);
 
     newGameObjective = getNewGameObjective();
-    stalkerMatchIdObjective = getStalkerMatchIdObjective();
     worldParticipant = getWorldParticipant();
 }

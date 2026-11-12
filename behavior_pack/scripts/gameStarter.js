@@ -1,7 +1,6 @@
 import { world, BlockVolume } from "@minecraft/server";
 import { ActionFormData } from "@minecraft/server-ui";
 
-import { stalkerMatch } from "./stalkerEntity";
 import { ROUND_STATE_MAP } from "./gameStats";
 import { sleep } from "./utils";
 
@@ -194,7 +193,6 @@ export function startFunction() {
         { x:-180 ,y:71 ,z:-84 }
     );
     dimension.fillBlocks(barrierArea, "minecraft:barrier");
-		stalkerMatch();
 
 		playersWaitingToStart = [];
 }

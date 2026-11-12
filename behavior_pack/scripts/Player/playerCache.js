@@ -28,7 +28,6 @@ class PlayerCache {
 
         // Subsystems
         this.lastLookedEntityId = undefined;
-        this.stalkerEntity = null;
         this.isLooking = false;
 
         // UI Subsystems

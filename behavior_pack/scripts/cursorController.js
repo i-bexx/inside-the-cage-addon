@@ -1,3 +1,4 @@
+import { world } from "@minecraft/server";
 import { PlayerCache } from "./Player/playerCache";
 
 // ==========================================
@@ -21,6 +22,8 @@ const CONFIG = {
 // ==========================================
 // FILTERS & VARIABLES
 // ==========================================
+
+let ghostObjective;
 
 // Entity Filters
 const MONSTER_FILTER = {
@@ -75,7 +78,7 @@ export function startCrosshairTracker(player) {
     if (cache.lastLookedEntityId === currentEntityId) return;
     cache.lastLookedEntityId = currentEntityId;
 
-    const setScore = (val) => player.runCommand(`scoreboard players set @s ${CONFIG.SCOREBOARD.GHOST} ${val}`);
+    const setScore = (val) => (ghostObjective ??= world.scoreboard.getObjective(CONFIG.SCOREBOARD.GHOST))?.setScore(player, val);
 
     if (!result) {
         player.triggerEvent(CONFIG.EVENTS.NORMAL);

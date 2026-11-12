@@ -8,7 +8,6 @@ import { warnPlayerAboutCam } from "./cameraController";
 import { playerStoppedLooking } from "./playerLooking";
 
 import { getValueParticipant } from "../scoreboards";
-import { stalkerMatch } from "../stalkerEntity";
 import { updateGlobalUi } from "../UI/globalUi";
 
 import { stopTeleportNull } from "./Null/nullTeleport";
@@ -45,11 +44,8 @@ function soulsFreedValueSufficient(players) {
 	world.setDynamicProperty("nullTeleportChecking", false);
 
 	for (const player of players) {
-    playerStoppedLooking(player);
-    player.removeTag("stalker_matched");
-}
-
-	world.getDimension("overworld").runCommand("kill @e[type=ibexx_itc:stalker_cursor]");
+        playerStoppedLooking(player);
+    }
 }
 
 function soulsFreedValue4() {
@@ -83,7 +79,6 @@ async function soulsFreedValueExceeded(players) {
 		
 		cameraUsed(player);
   }
-	stalkerMatch();
 
 	world.scoreboard.getObjective("show_position").setScore(getValueParticipant(), 0);
 }
