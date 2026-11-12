@@ -28,36 +28,15 @@ const VOTE_CONFIG = {
     TIMEOUT_TICKS: 600, // 30 Seconds
 };
 
-// ======= PANELS =======
 let mainPanel;
 let confirmPanels;
-
-// ======= STATE =======
 
 let voteTimeout = undefined;
 let requestExists = false;
 let currentVoteType = undefined;
 
+
 // ======= CORE FUNCTIONS =======
-
-function cleanup(type) {
-    Object.values(TAGS).forEach(tag => {
-        dimension.runCommand(`tag @a remove ${tag}`);
-    });
-    if (type) {
-        dimension.runCommand(`clear @a ${ITEMS.NOTIFICATION_PREFIX}${type}`);
-    } else {
-        dimension.runCommand(`clear @a ${ITEMS.NOTIFICATION_PREFIX}${VOTE_TYPES.RESTART}`);
-        dimension.runCommand(`clear @a ${ITEMS.NOTIFICATION_PREFIX}${VOTE_TYPES.END_ROUND}`);
-    }
-    
-    currentVoteType = undefined;
-    requestExists = false;
-
-    if (voteTimeout == undefined) return;
-    system.clearRun(voteTimeout);
-    voteTimeout = undefined;
-}
 
 export function votePanel(source) {
     if (requestExists) {
@@ -87,12 +66,23 @@ export function openNotificationPanel(source, itemStack) {
 }
 
 function startRequest(player, type) {
+    if (requestExists) {
+        player.sendMessage("§cThere is already a request submitted at the moment");
+        player.playSound("note.bass");
+        return;
+    }
     confirmPanels[type].show(player).then((response) => {
       const { cancelationReason, canceled, selection } = response;
 
+        if (!player.isValid || !player.hasTag("in_game")) return;
         if (cancelationReason === FormCancelationReason.UserBusy) return;
         if (canceled) return;
         if (selection == 1) return;
+        if (requestExists) {
+            player.sendMessage("§cThere is already a request submitted at the moment");
+            player.playSound("note.bass");
+            return;
+        }
 
         const players = getPlayersInRound();
 
@@ -113,6 +103,7 @@ function startRequest(player, type) {
             voteTimeout = system.runTimeout(() => {
                 const req = getPlayersInRound().find(p => p.hasTag(TAGS.REQUESTER));
                 if (req) req.runCommand("title @s actionbar §cRequest timed out");
+
                 cleanup(type);
             }, VOTE_CONFIG.TIMEOUT_TICKS);
         }
@@ -123,15 +114,21 @@ function startRequest(player, type) {
 function handleVote(player, type) {
     confirmPanels[type].show(player).then((response) => {
       const { cancelationReason, canceled, selection } = response;
+
+        if (!player.isValid || !player.hasTag("in_game")) return;
         if (cancelationReason === FormCancelationReason.UserBusy) return;
         if (canceled) return;
+
+        if (!requestExists || currentVoteType !== type) {
+            player.runCommand(`clear @s ${ITEMS.NOTIFICATION_PREFIX}${type}`);
+            return;
+        }
 
         const requester = getPlayersInRound().find(p => p.hasTag(TAGS.REQUESTER));
         const others = getPlayersInRound().filter(p => !p.hasTag(TAGS.REQUESTER));
 
         if (!requester) {
             cleanup(type);
-            others.forEach(player => slowUiTick(player));
             return;
         }
 
@@ -145,20 +142,64 @@ function handleVote(player, type) {
             if (others.length === acceptedCount) {
                 runOperation(type);
                 cleanup(type);
-                others.forEach(player => slowUiTick(player));
             }
         } else { // No
             requester.runCommand("title @s actionbar §cRequest has been refused");
             cleanup(type);
-            others.forEach(player => slowUiTick(player));
         }
     });
 }
+
+// ======= HELPER FUNCTIONS =======
 
 function runOperation(type) {
     if (type === VOTE_TYPES.RESTART) ROUND_STATE_MAP.set("ROUND_RESTARTED", true);
     else if (type === VOTE_TYPES.END_ROUND) ROUND_STATE_MAP.set("ROUND_ENDED_EARLY", true);
 }
+
+function cleanup(type) {
+    Object.values(TAGS).forEach(tag => {
+        dimension.runCommand(`tag @a remove ${tag}`);
+    });
+    if (type) {
+        dimension.runCommand(`clear @a ${ITEMS.NOTIFICATION_PREFIX}${type}`);
+    } else {
+        dimension.runCommand(`clear @a ${ITEMS.NOTIFICATION_PREFIX}${VOTE_TYPES.RESTART}`);
+        dimension.runCommand(`clear @a ${ITEMS.NOTIFICATION_PREFIX}${VOTE_TYPES.END_ROUND}`);
+    }
+    
+    currentVoteType = undefined;
+    requestExists = false;
+
+    if (voteTimeout == undefined) return;
+    system.clearRun(voteTimeout);
+    voteTimeout = undefined;
+
+    getPlayersInRound().forEach(player => slowUiTick(player));
+}
+
+export function setForms() {
+    mainPanel = new ActionFormData()
+    .title("VOTE PANEL")
+    .button("Restart Round")
+    .button("End Round")
+    .button("Go Back");
+
+    confirmPanels = {
+    [VOTE_TYPES.RESTART]: new ActionFormData()
+        .title("")
+        .body("Do you want to restart?")
+        .button("Yes").button("No"),
+    [VOTE_TYPES.END_ROUND]: new ActionFormData()
+        .title("")
+        .body("Do you want to end this round?")
+        .button("Yes").button("No"),
+    };
+}
+
+export function setGlobalVariables() { dimension = world.getDimension("overworld"); }
+
+// ======= EVENT / LIFECYCLE HANDLERS =======
 
 export function checkVoteOnPlayerDeath(eliminatedPlayer) {
     if (!requestExists) return;
@@ -214,24 +255,4 @@ export function checkVoteOnPlayerLeave() {
 
 export function stopVoteManager() {
     cleanup(currentVoteType);
-}
-
-export function setGlobalVariables() { dimension = world.getDimension("overworld"); }
-export function setForms() {
-    mainPanel = new ActionFormData()
-    .title("VOTE PANEL")
-    .button("Restart Round")
-    .button("End Round")
-    .button("Go Back");
-
-    confirmPanels = {
-    [VOTE_TYPES.RESTART]: new ActionFormData()
-        .title("")
-        .body("Do you want to restart?")
-        .button("Yes").button("No"),
-    [VOTE_TYPES.END_ROUND]: new ActionFormData()
-        .title("")
-        .body("Do you want to end this round?")
-        .button("Yes").button("No"),
-    };
 }
