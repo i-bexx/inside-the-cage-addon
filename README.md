@@ -22,7 +22,7 @@
 | **Custom Entities** | 17 |
 | **Custom Particle Systems** | 6 |
 
-`JavaScript (ES6+)` · `Minecraft Script API` · `JSON UI` · `Molang` · `Blockbench` · `State Machines` · `Spatial Math`
+· `JavaScript (ES6+)` · `Minecraft Script API` · `JSON UI` · `Molang` · `Blockbench`
 
 ---
 
