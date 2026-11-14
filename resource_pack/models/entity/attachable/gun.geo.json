@@ -17,9 +17,9 @@
 					"binding": "q.item_slot_to_bone_name(c.item_slot)"
 				},
 				{
-					"name": "ust",
+					"name": "chamber",
 					"parent": "root_item",
-					"pivot": [0, 0, 0],
+					"pivot": [0.5, 15.9, 1],
 					"cubes": [
 						{"origin": [-0.3, 12.7, -12.1], "size": [1, 3, 18], "inflate": -0.32, "uv": [0, 0]},
 						{"origin": [1.3, 12.7, -12.1], "size": [1, 3, 8], "inflate": -0.32, "uv": [0, 0]},
@@ -30,7 +30,6 @@
 						{"origin": [0, 15.1, -12.1], "size": [2, 1, 8], "inflate": -0.3, "uv": [0, 24]},
 						{"origin": [0.1, 15.1, -5.3], "size": [1, 1, 5], "inflate": -0.3, "uv": [0, 24]},
 						{"origin": [0, 15.1, -1.5], "size": [2, 1, 8], "inflate": -0.3, "uv": [0, 24]},
-						{"origin": [0, 12.8, -12.2], "size": [2, 3, 1], "inflate": -0.25, "uv": [0, 24]},
 						{"origin": [0, 12.8, 4.6], "size": [2, 3, 2], "inflate": -0.22, "uv": [0, 24]},
 						{"origin": [0.5, 13.8, 5.2], "size": [1, 2, 2], "inflate": -0.3, "pivot": [1, 14.2, 5.6], "rotation": [-28, 0, 0], "uv": [48, 48]},
 						{"origin": [-0.5, 12.8, 1.2], "size": [3, 3, 1], "inflate": -0.44, "pivot": [1, 14.3, 1.7], "rotation": [-10, 0, 0], "uv": [48, 24]},
@@ -46,21 +45,15 @@
 						{"origin": [0.1, 15.3, 3.2], "size": [1, 2, 2], "inflate": -0.34, "uv": [48, 24]},
 						{"origin": [0.9, 15.3, 3.2], "size": [1, 2, 2], "inflate": -0.34, "uv": [48, 24]},
 						{"origin": [0.1, 15.6, 4], "size": [1, 1, 1], "inflate": -0.38, "uv": [48, 60]},
-						{"origin": [0.9, 15.6, 4], "size": [1, 1, 1], "inflate": -0.38, "uv": [48, 60]}
-					]
-				},
-				{
-					"name": "chamber",
-					"parent": "ust",
-					"pivot": [0.5, 15.9, 1],
-					"cubes": [
+						{"origin": [0.9, 15.6, 4], "size": [1, 1, 1], "inflate": -0.38, "uv": [48, 60]},
 						{"origin": [0, 13.1, -5.2], "size": [2, 3, 5], "inflate": -0.36, "uv": [48, 0]},
 						{"origin": [0.5, 14.8, -1.4], "size": [1, 1, 7], "inflate": -0.18, "uv": [0, 48]},
-						{"origin": [1.2, 13.9, -1.8], "size": [1, 1, 4], "inflate": -0.32, "uv": [48, 48]}
+						{"origin": [1.2, 13.9, -1.8], "size": [1, 1, 4], "inflate": -0.32, "uv": [48, 48]},
+						{"origin": [0, 12.8, -12.2], "size": [2, 3, 1], "inflate": -0.25, "uv": [0, 24]}
 					]
 				},
 				{
-					"name": "tetik",
+					"name": "trigger",
 					"parent": "root_item",
 					"pivot": [0.5, 10.9, 1.3],
 					"cubes": [
@@ -74,7 +67,7 @@
 					]
 				},
 				{
-					"name": "namlu1",
+					"name": "barrel1",
 					"parent": "root_item",
 					"pivot": [0.3, 15.2, -21],
 					"cubes": [
@@ -86,20 +79,20 @@
 					]
 				},
 				{
-					"name": "namlu2",
+					"name": "barrel2",
 					"parent": "root_item",
 					"pivot": [1.2, 13.2, -15.9],
 					"cubes": [
-						{"origin": [0.5, 12.8, -12.7], "size": [1, 1, 2], "inflate": -0.22, "uv": [0, 48]},
-						{"origin": [0.5, 13, -12.6], "size": [1, 1, 1], "inflate": -0.3, "uv": [48, 24]},
-						{"origin": [0.5, 12.6, -12.6], "size": [1, 1, 1], "inflate": -0.3, "uv": [48, 24]},
-						{"origin": [0.3, 12.8, -12.6], "size": [1, 1, 1], "inflate": -0.3, "uv": [48, 24]},
-						{"origin": [0.7, 12.8, -12.6], "size": [1, 1, 1], "inflate": -0.3, "uv": [48, 24]},
+						{"origin": [0.5, 13.05, -12.7], "size": [1, 1, 12], "inflate": -0.22, "uv": [0, 48]},
+						{"origin": [0.5, 13.25, -12.6], "size": [1, 1, 1], "inflate": -0.3, "uv": [48, 24]},
+						{"origin": [0.5, 12.85, -12.6], "size": [1, 1, 1], "inflate": -0.3, "uv": [48, 24]},
+						{"origin": [0.3, 13.05, -12.6], "size": [1, 1, 1], "inflate": -0.3, "uv": [48, 24]},
+						{"origin": [0.7, 13.05, -12.6], "size": [1, 1, 1], "inflate": -0.3, "uv": [48, 24]},
 						{"origin": [0.5, 11.7, -12.2], "size": [1, 1, 1], "inflate": -0.32, "uv": [48, 0]}
 					]
 				},
 				{
-					"name": "kabza",
+					"name": "handle",
 					"parent": "root_item",
 					"pivot": [0, 0, 0],
 					"cubes": [
@@ -118,7 +111,7 @@
 					]
 				},
 				{
-					"name": "alt",
+					"name": "bottom",
 					"parent": "root_item",
 					"pivot": [0, 0, 0],
 					"cubes": [
