@@ -1,4 +1,4 @@
-import { world, system } from "@minecraft/server";
+import { world, system, BlockVolume } from "@minecraft/server";
 
 import { getRandomPlayer, isValidLocation } from "./helperFunctions";
 import { getPlayersInRound } from "../../utils";
@@ -43,6 +43,7 @@ function attemptNullTeleport(coordinate, entity) {
     const shuffledOffsets = [...TELEPORT_OFFSETS].sort(() => 0.5 - Math.random());
 
     for (let i = 0; i < shuffledOffsets.length && i < MAX_TELEPORT_ATTEMPTS; i++) {
+        let shouldTeleport = false;
         const offset = shuffledOffsets[i];
         
         const targetPos = {
@@ -52,11 +53,31 @@ function attemptNullTeleport(coordinate, entity) {
         };
 
         const beneathPos = { ...targetPos, y: targetPos.y - 1 };
+        const volume = new BlockVolume(
+            {
+                ...targetPos, x: targetPos.x - 1, z: targetPos.z - 1
+            },
+            {
+                x: targetPos.x + 1, y: targetPos.y + 2, z: targetPos.z + 1
+            }
+        )
 
-        if (isValidLocation(dimension, targetPos, beneathPos)) {
-            entity.tryTeleport(targetPos);
-            return true; // Success
+        shouldTeleport = isValidLocation(dimension, targetPos, beneathPos);
+        if (!shouldTeleport) continue; // Fail but continue to try to teleport
+
+        for (const location of volume.getBlockLocationIterator()) {
+            const block = dimension.getBlock(location);
+
+            if (!block || !block.isAir) {
+                shouldTeleport = false;
+                break;
+            }
         }
+
+        if (!shouldTeleport) continue; // Fail but continue to try to teleport
+
+        entity.tryTeleport(targetPos);
+        return true; // Success
     }
 
     return false; // Failed to find a spot
