@@ -1,0 +1,7 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "waiting_for_host",
+		"metalness_emissive_roughness": "waiting_for_host_mer"
+	}
+}
