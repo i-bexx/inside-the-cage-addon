@@ -1,5 +1,5 @@
 {
-	"format_version": "1.16.100",
+	"format_version": "1.21.90",
 	"minecraft:fog_settings": {
 		"description": {
 			"identifier": "ibexx_itc:lobby_default"
@@ -28,8 +28,8 @@
 			"density": {
 				"air": {
 					"max_density": 0.06,
-					"max_density_height": 68,
-					"zero_density_height": 124,
+					"max_density_height": 160.0,
+					"zero_density_height": 320.0,
 					"uniform": false
 				},
 				"water": {
@@ -39,16 +39,20 @@
 			},
 			"media_coefficients": {
 				"air": {
-					"scattering": "#b4bcc0",
-					"absorption": "#050607"
+					"scattering": [0.55, 0.59, 0.62],
+					"absorption": [0.03, 0.03, 0.03]
 				},
 				"water": {
-					"scattering": "#343c38",
-					"absorption": "#121614"
+					"scattering": [0.20, 0.23, 0.22],
+					"absorption": [0.07, 0.08, 0.08]
+				}
+			},
+			"henyey_greenstein_g": {
+				"air": {
+					"henyey_greenstein_g": 0.45
 				},
-				"cloud": {
-					"scattering": "#c0c8cc",
-					"absorption": "#050607"
+				"water": {
+					"henyey_greenstein_g": 0.6
 				}
 			}
 		}
