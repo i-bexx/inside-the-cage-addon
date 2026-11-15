@@ -24,6 +24,11 @@ import { soulsAmountCheck } from "./RoundBegin/soulController";
 import { Stamina_control } from "./RoundBegin/staminaController";
 import { getNullEntity } from "./RoundBegin/Null/nullCache";
 
+const PARTICLE_BIOMES = new Set([
+    "minecraft:birch_forest",
+    "minecraft:birch_forest_mutated",
+]);
+
 let currentTick = 0;
 let previousSoulsFreedValue = -1;
 let cachedAllPlayers = [];
@@ -145,6 +150,14 @@ export function startCentralTickManager() {
 
                 // 20 TICK
                 if (currentTick % 20 === 0) Stamina_control(player);
+
+                // 120 TICK
+                if (currentTick % 120 === 0) {
+                    const playerBiome = player.dimension.getBiome(player.location);
+                    if (PARTICLE_BIOMES.has(playerBiome.id)) player.dimension.spawnParticle("ibexx_itc:falling_ash", player.location);
+
+                    if (isPhase4or5) player.dimension.spawnParticle("ibexx_itc:crimson_embers", player.location);
+                }
 
                 // 5 TICK
                 if (currentTick % 5 === 0) {

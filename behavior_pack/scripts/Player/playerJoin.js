@@ -123,7 +123,7 @@ world.afterEvents.playerSpawn.subscribe(async ({ player }) => {
 // =============================================================
 
 function preparePlayerStats(player) {
-    const commands = ["fog @s remove in_round_fog", "clear @s"];
+    const commands = ["fog @s remove in_round_crimson_fog", "fog @s remove in_round_fog", "clear @s"];
 
     Object.entries(CONFIG.SCORES.INITIAL_STATS).forEach(([objective, value]) => {
         commands.push(`scoreboard players set @s ${objective} ${value}`);

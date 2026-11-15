@@ -1,0 +1,7 @@
+{
+	"format_version": "1.21.30",
+	"minecraft:texture_set": {
+		"color": "random_peep",
+		"metalness_emissive_roughness": "random_peep_mer"
+	}
+}

@@ -6,22 +6,50 @@
 		},
 		"distance": {
 			"air": {
-				"fog_start": 1.0,
-				"fog_end": 20.0,
-				"fog_color": "#000000",
+				"fog_start": 3.5,
+				"fog_end": 26.0,
+				"fog_color": "#a8b0b4",
 				"render_distance_type": "fixed"
 			},
 			"water": {
 				"fog_start": 1.0,
-				"fog_end": 20.0,
-				"fog_color": "#000000",
+				"fog_end": 12.0,
+				"fog_color": "#38403c",
 				"render_distance_type": "fixed"
 			},
 			"weather": {
-				"fog_start": 1.0,
-				"fog_end": 20.0,
-				"fog_color": "#000000",
+				"fog_start": 2.5,
+				"fog_end": 22.0,
+				"fog_color": "#98a0a4",
 				"render_distance_type": "fixed"
+			}
+		},
+		"volumetric": {
+			"density": {
+				"air": {
+					"max_density": 0.12,
+					"max_density_height": 72,
+					"zero_density_height": 128,
+					"uniform": false
+				},
+				"water": {
+					"max_density": 0.3,
+					"uniform": true
+				}
+			},
+			"media_coefficients": {
+				"air": {
+					"scattering": "#c4ccd0",
+					"absorption": "#060708"
+				},
+				"water": {
+					"scattering": "#3a4440",
+					"absorption": "#141816"
+				},
+				"cloud": {
+					"scattering": "#ccd4d8",
+					"absorption": "#060708"
+				}
 			}
 		}
 	}

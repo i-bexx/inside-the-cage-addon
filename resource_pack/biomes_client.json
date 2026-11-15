@@ -1,3 +1,74 @@
 {
-	"biomes": {}
+	"biomes": {
+		"default": {
+			"water_surface_color": "#222624",
+			"water_surface_transparency": 0.9,
+			"water_fog_color": "#121514",
+			"water_fog_distance": 7,
+			"fog_identifier": "ibexx_itc:lobby_default"
+		},
+		"plains": {
+			"water_surface_color": "#222624",
+			"water_surface_transparency": 0.9,
+			"water_fog_color": "#121514",
+			"water_fog_distance": 7,
+			"fog_identifier": "ibexx_itc:lobby_default"
+		},
+		"sunflower_plains": {
+			"water_surface_color": "#222624",
+			"water_surface_transparency": 0.9,
+			"water_fog_color": "#121514",
+			"water_fog_distance": 7,
+			"fog_identifier": "ibexx_itc:lobby_default"
+		},
+		"forest": {
+			"water_surface_color": "#1e2220",
+			"water_surface_transparency": 0.92,
+			"water_fog_color": "#0e1110",
+			"water_fog_distance": 6,
+			"fog_identifier": "ibexx_itc:lobby_default"
+		},
+		"flower_forest": {
+			"water_surface_color": "#1e2220",
+			"water_surface_transparency": 0.92,
+			"water_fog_color": "#0e1110",
+			"water_fog_distance": 6,
+			"fog_identifier": "ibexx_itc:lobby_default"
+		},
+		"birch_forest": {
+			"water_surface_color": "#1e2220",
+			"water_surface_transparency": 0.92,
+			"water_fog_color": "#0e1110",
+			"water_fog_distance": 6,
+			"fog_identifier": "ibexx_itc:lobby_default"
+		},
+		"birch_forest_mutated": {
+			"water_surface_color": "#1e2220",
+			"water_surface_transparency": 0.92,
+			"water_fog_color": "#0e1110",
+			"water_fog_distance": 6,
+			"fog_identifier": "ibexx_itc:lobby_default"
+		},
+		"beach": {
+			"water_surface_color": "#242826",
+			"water_surface_transparency": 0.88,
+			"water_fog_color": "#141816",
+			"water_fog_distance": 7,
+			"fog_identifier": "ibexx_itc:lobby_default"
+		},
+		"river": {
+			"water_surface_color": "#202422",
+			"water_surface_transparency": 0.9,
+			"water_fog_color": "#101312",
+			"water_fog_distance": 6,
+			"fog_identifier": "ibexx_itc:lobby_default"
+		},
+		"ocean": {
+			"water_surface_color": "#1a1e1c",
+			"water_surface_transparency": 0.94,
+			"water_fog_color": "#0b0e0d",
+			"water_fog_distance": 5,
+			"fog_identifier": "ibexx_itc:lobby_default"
+		}
+	}
 }

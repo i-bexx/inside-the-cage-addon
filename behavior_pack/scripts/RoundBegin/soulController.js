@@ -45,6 +45,7 @@ function soulsFreedValueSufficient(players) {
 
 	for (const player of players) {
         playerStoppedLooking(player);
+        player.runCommand("fog @s push ibexx_itc:in_round_crimson in_round_crimson_fog");
     }
 }
 
@@ -76,6 +77,7 @@ async function soulsFreedValueExceeded(players) {
 		player.runCommand("clear @s ibexx_itc:toxic_bomb");
 		player.runCommand("clear @s ibexx_itc:ammo");
 		player.runCommand("clear @a ibexx_itc:ammo_shoot");
+		player.runCommand("fog @s remove in_round_crimson_fog");
 		
 		cameraUsed(player);
   }
