@@ -17,7 +17,7 @@
 
 | Metric | Value |
 |:---|:---:|
-| **Script API Files** | 45 |
+| **Script API Files** | 44 |
 | **JSON UI Files** | 43 |
 | **Custom Entities** | 17 |
 | **Custom Particle Systems** | 6 |
@@ -53,7 +53,7 @@ A custom tracking device players use to hunt down 7 hidden cages across the map,
 
 ### 3. VHS Camera Overlay & Line-of-Sight Sanity System
 Players carry a custom camera that applies a full-screen lens overlay and interacts directly with enemy visibility.
-- **Raycast Sanity Drain:** Maintaining line-of-sight with the Stalker triggers progressive sanity loss, intensifying VHS static, screen shake, and heartbeat audio.
+- **Line-of-Sight Sanity Drain:** Maintaining direct eye contact with Null triggers progressive sanity loss, intensifying VHS static, screen shake, and heartbeat audio.
 - **Signal Interference:** Dropping to zero sanity triggers a full camera signal-loss state and animated Game Over sequence.
 
 <table>
@@ -101,9 +101,9 @@ Minecraft Bedrock's `@minecraft/server-ui` `ActionFormData` is fundamentally res
 - **Animation & Focus Engine:** Implemented procedural entrance/exit offsets and alpha fades (`random_peep_anims.json`) and configured gamepad `$default_focus_precedence` for seamless controller navigation.
 - **Vanilla Toast Hijacking:** Repurposed the engine's hardcoded achievement/recipe toast notifications. By modifying scope resolution (`resolve_sibling_scope`), the system displays custom in-game alerts (e.g., *"Coin Bag is Full"*).
 
-### 2. Spatial Telemetry & Raycast Mathematics (Script API)
+### 2. Spatial Telemetry & Vector Mathematics (Script API)
 - **Real-Time 3D Vector Math:** The `Cage Detector` computes Euclidean distance, elevation delta ($\Delta Y$), cardinal heading, and estimated walking arrival time (ETA) updated dynamically in the HUD.
-- **Line-of-Sight & Sanity Raycasting:** Continuous spatial raycasting between player vectors and stalker bounding boxes drives the dynamic sanity state machine. Crossing the line-of-sight threshold triggers audio attenuation, camera shake, and procedural VHS post-processing overlays.
+- **Pure Math Line-of-Sight Engine:** Evaluates player-to-target unit direction vectors against the player's view vector via dot product ($\vec{u} \cdot \vec{d} \ge 0.6$) for an exact $\sim 106^\circ$ FOV cone, backed by `getBlockFromRay` for real-time wall occlusion and edge-triggered sanity state transitions.
 
 ### 3. Entity State Machines & Client-Server Synchronization
 - **Zero-Latency Visual Feedback:** Utilizes Bedrock Entity Properties with `client_sync: true` (`ibexx_itc:cursor_state`, `ibexx_itc:has_slowness`) to bridge server-side Script API logic directly to client-side animation controllers and Molang queries.
