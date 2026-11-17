@@ -58,35 +58,34 @@ Players carry a custom camera that applies a full-screen lens overlay and intera
 
 <table>
   <tr>
-    <td align="center"><b>Active Camera View (Normal Signal)</b><br><img src="./assets/gifs/static_normal.gif" alt="Camera Static Normal" width="420"/></td>
-    <td align="center"><b>Sanity Drain & Signal Interference</b><br><img src="./assets/gifs/static_glitch.gif" alt="Camera Glitch" width="420"/></td>
+    <td align="center"><b>Active Camera View (Normal Signal)</b><br><img src="./assets/gifs/static_normal.gif" alt="Camera Static Normal" width="350"/></td>
+    <td align="center"><b>Sanity Drain & Signal Interference</b><br><img src="./assets/gifs/static_glitch.gif" alt="Camera Glitch" width="350"/></td>
   </tr>
 </table>
 
 ---
 
-### 4. Real-Time HUD Telemetry, Stamina & Custom Alerts
-Every element on the player's screen is dynamically driven by server state.
+### 4. Real-Time HUD Telemetry, Stamina & Custom UI
+Every element on the player's screen is dynamically driven by server state and custom JSON UI overrides.
 
 <table>
   <tr>
-    <td align="center"><b>Live 3D Doll & Sanity Feedback</b><br><img src="./assets/gifs/mini_player.gif" alt="Mini Player" width="420"/></td>
-    <td align="center"><b>Dynamic Status Panel</b><br><img src="./assets/gifs/main_panel.gif" alt="Main Panel" width="420"/></td>
+    <td align="center"><b>Live 3D Doll & Sanity Feedback</b><br><img src="./assets/gifs/mini_player.gif" alt="Mini Player" width="350"/></td>
+    <td align="center"><b>Dynamic Status Panel</b><br><img src="./assets/gifs/main_panel.gif" alt="Main Panel" width="350"/></td>
   </tr>
   <tr>
-    <td align="center"><b>Live Compass & Coordinates</b><br><img src="./assets/gifs/compass.gif" alt="Compass" width="420"/></td>
-    <td align="center"><b>Signal / Position Lost Alert</b><br><img src="./assets/gifs/position_lost.gif" alt="Position Lost" width="420"/></td>
+    <td align="center"><b>Live Compass & Coordinates</b><br><img src="./assets/gifs/compass.gif" alt="Compass" width="350"/></td>
+    <td align="center"><b>Signal / Position Lost Alert</b><br><img src="./assets/gifs/position_lost.gif" alt="Position Lost" width="350"/></td>
   </tr>
   <tr>
-    <td align="center"><b>Stamina Depletion</b><br><img src="./assets/gifs/stamina_bar_deplete.gif" alt="Stamina Deplete" width="420"/></td>
-    <td align="center"><b>Stamina Regeneration</b><br><img src="./assets/gifs/stamina_bar_fill.gif" alt="Stamina Fill" width="420"/></td>
+    <td align="center"><b>Stamina Depletion</b><br><img src="./assets/gifs/stamina_bar_deplete.gif" alt="Stamina Deplete" width="350"/></td>
+    <td align="center"><b>Stamina Regeneration</b><br><img src="./assets/gifs/stamina_bar_fill.gif" alt="Stamina Fill" width="350"/></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Custom Toast Notification Popup (Vanilla Toast Hijacking)</b><br><img src="./assets/gifs/toast_screen.gif" alt="Custom Toast" width="350"/></td>
+    <td align="center"><b>Interactive Inventory Slot Hover & Focus</b><br><img src="./assets/gifs/inventory_hover.gif" alt="Inventory Item Hover" width="350"/></td>
   </tr>
 </table>
-
-<div align="center">
-  <b>Custom Toast Notification Popup (Vanilla Toast Hijacking)</b><br>
-  <img src="./assets/gifs/toast_screen.gif" alt="Custom Toast" width="420"/>
-</div>
 
 ---
 
@@ -100,6 +99,7 @@ Minecraft Bedrock's `@minecraft/server-ui` `ActionFormData` is fundamentally res
 - **View-Binding State Routing:** Filtered modal visibility and phase transitions (`conversation_start`, `question_part`, `farewell_part`) using `#form_text` view bindings.
 - **Animation & Focus Engine:** Implemented procedural entrance/exit offsets and alpha fades (`random_peep_anims.json`) and configured gamepad `$default_focus_precedence` for seamless controller navigation.
 - **Vanilla Toast Hijacking:** Repurposed the engine's hardcoded achievement/recipe toast notifications. By modifying scope resolution (`resolve_sibling_scope`), the system displays custom in-game alerts (e.g., *"Coin Bag is Full"*).
+- **Container Slot Architecture & Micro-Interactions:** Overrode vanilla `common.container_slot_button_prototype` (`ui_common.json`) with a custom multi-state button hierarchy (`gray_slot_button`), enabling isolated per-slot item hover scaling (`item_hover_grow`) and custom focus rings without triggering grid-wide animation twitching.
 
 ### 2. Spatial Telemetry & Vector Mathematics (Script API)
 - **Real-Time 3D Vector Math:** The `Cage Detector` computes Euclidean distance, elevation delta ($\Delta Y$), cardinal heading, and estimated walking arrival time (ETA) updated dynamically in the HUD.
