@@ -36,7 +36,7 @@ An interactive NPC conversation system with player choices, saved memory, and en
 - **Multiplayer Safe:** Locks the NPC while someone is talking to him so two players can't overlap conversations.
 
 <div align="center">
-  <img src="./assets/gifs/random_peep.gif" alt="Interactive NPC Dialogue" width="750"/>
+  <img src="./assets/gifs/ui/random_peep.gif" alt="Interactive NPC Dialogue" width="750"/>
 </div>
 
 ---
@@ -47,7 +47,7 @@ A tracking device players use to find the 7 hidden cages across the map, showing
 - **Dynamic Signal:** Updates the signal bars based on how close you are.
 
 <div align="center">
-  <img src="./assets/gifs/cage_detector.gif" alt="Cage Detector Radar" width="750"/>
+  <img src="./assets/gifs/ui/cage_detector.gif" alt="Cage Detector Radar" width="750"/>
 </div>
 
 ---
@@ -59,13 +59,13 @@ Players carry a full-screen camera that reacts when you look at Midnight Prayer.
 
 <div align="center">
   <b>Normal Camera View</b><br>
-  <img src="./assets/gifs/static_normal.gif" alt="Camera Static Normal" width="750"/>
+  <img src="./assets/gifs/camera/static_normal.gif" alt="Camera Static Normal" width="750"/>
   <br><br>
   <b>Glitch Camera View</b><br>
-  <img src="./assets/gifs/static_glitch.gif" alt="Camera Glitch" width="750"/>
+  <img src="./assets/gifs/camera/static_glitch.gif" alt="Camera Glitch" width="750"/>
   <br><br>
   <b>Game Over Screen</b><br>
-  <img src="./assets/gifs/game_over.gif" alt="Game Over Screen" width="750"/>
+  <img src="./assets/gifs/camera/game_over.gif" alt="Game Over Screen" width="750"/>
 </div>
 
 ---
@@ -75,20 +75,20 @@ Every HUD element updates live from server scripts and custom JSON UI.
 
 <table>
   <tr>
-    <td align="center"><b>Live 3D Doll & Sanity Feedback</b><br><img src="./assets/gifs/mini_player.gif" alt="Mini Player" width="350"/></td>
-    <td align="center"><b>Shop, Vote & Upgrade Menu</b><br><img src="./assets/gifs/main_panel.gif" alt="Main Panel" width="350"/></td>
+    <td align="center"><b>Live 3D Doll & Sanity Feedback</b><br><img src="./assets/gifs/ui/mini_player.gif" alt="Mini Player" width="350"/></td>
+    <td align="center"><b>Shop, Vote & Upgrade Menu</b><br><img src="./assets/gifs/ui/main_panel.gif" alt="Main Panel" width="350"/></td>
   </tr>
   <tr>
-    <td align="center"><b>Live Compass & Coordinates</b><br><img src="./assets/gifs/compass.gif" alt="Compass" width="350"/></td>
-    <td align="center"><b>Position Lost Alert</b><br><img src="./assets/gifs/position_lost.gif" alt="Position Lost" width="350"/></td>
+    <td align="center"><b>Live Compass & Coordinates</b><br><img src="./assets/gifs/ui/compass.gif" alt="Compass" width="350"/></td>
+    <td align="center"><b>Position Lost Alert</b><br><img src="./assets/gifs/ui/position_lost.gif" alt="Position Lost" width="350"/></td>
   </tr>
   <tr>
-    <td align="center"><b>Stamina Depletion</b><br><img src="./assets/gifs/stamina_bar_deplete.gif" alt="Stamina Deplete" width="350"/></td>
-    <td align="center"><b>Stamina Regeneration</b><br><img src="./assets/gifs/stamina_bar_fill.gif" alt="Stamina Fill" width="350"/></td>
+    <td align="center"><b>Stamina Depletion</b><br><img src="./assets/gifs/ui/stamina_bar_deplete.gif" alt="Stamina Deplete" width="350"/></td>
+    <td align="center"><b>Stamina Regeneration</b><br><img src="./assets/gifs/ui/stamina_bar_fill.gif" alt="Stamina Fill" width="350"/></td>
   </tr>
   <tr>
-    <td align="center"><b>Custom Toast Notification Popup</b><br><img src="./assets/gifs/toast_screen.gif" alt="Custom Toast" width="350"/></td>
-    <td align="center"><b>Inventory Slot Hover Animation</b><br><img src="./assets/gifs/inventory_hover.gif" alt="Inventory Item Hover" width="350"/></td>
+    <td align="center"><b>Custom Toast Notification Popup</b><br><img src="./assets/gifs/ui/toast_screen.gif" alt="Custom Toast" width="350"/></td>
+    <td align="center"><b>Inventory Slot Hover Animation</b><br><img src="./assets/gifs/ui/inventory_hover.gif" alt="Inventory Item Hover" width="350"/></td>
   </tr>
 </table>
 
@@ -113,7 +113,6 @@ Custom two-handed first-person animations replacing vanilla's single arm, paired
 ## 🛠️ Technical Architecture & Systems Deep Dive
 
 ### 1. Custom UI Using Server Forms, Titles & JSON UI
-Minecraft Bedrock's `@minecraft/server-ui` `ActionFormData` is normally limited to plain text and basic buttons. To build animated dialogue, radar panels, and custom HUD popups without external mods:
 - **Rendering Button Text as Dialogue:** Repurposed `form_buttons` so `conversation_text_panel` renders only `#form_button_text` as plain dialogue labels instead of clickable buttons (filtering out `Next`/`Ok` and using `collection_index: 2` for question text), while `collection_index: 0` and `1` render as actual choice buttons.
 - **Switching Panels with Bindings:** Used `#form_text` view bindings to toggle the right panel for each stage (`conversation_start`, `question_part`, `farewell_part`).
 - **Animations & Controller Support:** Added slide and fade animations (`random_peep_anims.json`) and set `$default_focus_precedence` so gamepad navigation works smoothly.
