@@ -109,27 +109,26 @@
             "on_damage": {
               "filters": [
                 {
-                  "test": "is_family",
-                  "subject": "other",
-                  "value": "player"
-                }
-              ],
-              "event": "bad_luck",
-              "target": "other"
-            }
-          },
-          {
-            "on_damage": {
-              "filters": [
-                {
-                  "test": "is_family",
-                  "subject": "other",
-                  "value": "player"
+                  "all_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "player"
+                    },
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "main_hand",
+                      "operator": "equals",
+                      "value": "ibexx_itc:knife"
+                    }
+                  ]
                 }
               ],
               "event": "blood_effect_event",
               "target": "self"
-            }
+            },
+            "cause": "entity_attack"
           },
           {
             "cause": "lava",
@@ -195,7 +194,10 @@
       },
       "spawn_event": {
         "queue_command": {
-          "command": [ "execute at @s run particle ibexx_itc:ghost_spawn ~ ~ ~", "execute at @s run playsound ibexx_itc:ghost_spawn @a[r=15] ~ ~ ~" ]
+          "command": [
+            "execute at @s run particle ibexx_itc:ghost_spawn ~ ~ ~",
+            "execute at @s run playsound ibexx_itc:ghost_spawn @a[r=15] ~ ~ ~"
+          ]
         }
       },
       "can_move_event": {
@@ -203,7 +205,10 @@
       },
       "blood_effect_event": {
         "queue_command": {
-          "command": [ "execute at @s run particle ibexx_itc:blood ~ ~1 ~" ]
+          "command": [
+            "execute at @s run particle ibexx_itc:blood ~ ~1 ~",
+            "execute at @s run playsound ibexx_itc:knife_slice @a ~ ~ ~"
+          ]
         }
       },
       "ghost_dead_event": {

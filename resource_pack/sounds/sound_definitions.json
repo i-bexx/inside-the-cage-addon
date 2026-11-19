@@ -18,7 +18,7 @@
     },
     "ibexx_itc:toxic_bomb": {
       "category": "player",
-      "min_distance": 1000,
+      "max_distance": 10,
       "sounds": [
         "sounds/sounds/tools/toxic_bomb/toxic_bomb"
       ]
@@ -53,7 +53,7 @@
     },
     "ibexx_itc:gun_shoot": {
       "category": "player",
-      "min_distance": 1000,
+      "max_distance": 15,
       "sounds": [
         "sounds/sounds/tools/gun/gun_shoot"
       ]
@@ -87,8 +87,8 @@
       ]
     },
     "ibexx_itc:knife_slice": {
-      "category": "player",
-      "min_distance": 1000,
+      "category": "hostile",
+      "max_distance": 6,
       "sounds": [
         "sounds/sounds/tools/knife/knife_slice"
       ]

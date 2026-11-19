@@ -6,7 +6,7 @@
 				"0.5": [
 					"/execute at @s run particle ibexx_itc:toxic ~ ~ ~",
 					"/execute at @s run kill @e[type=ibexx_itc:ghost,r=15]",
-					"/execute at @s run playsound ibexx_itc:toxic_bomb @a[r=15]",
+					"/execute at @s run playsound ibexx_itc:toxic_bomb @a ~ ~ ~",
 					"/clear @s ibexx_itc:toxic_bomb 0 1"
 				]
 			},

@@ -19,7 +19,7 @@
 			"timeline": {
 				"0.0": [
 					"/camerashake add @s 0.05 0.3 rotational",
-					"/playsound ibexx_itc:gun_shoot @s",
+					"/playsound ibexx_itc:gun_shoot @a ~ ~ ~",
 					"/scoreboard players remove @s ammo 1",
 					"/execute if score @s is_looking_at_ghost matches 1 run playsound ibexx_itc:shot_ghost @s"
 				]

@@ -18,7 +18,7 @@
 			"minecraft:cooldown": {
 				"type": "attack",
 				"category": "knife",
-				"duration": 0.4
+				"duration": 0.45
 			}
 		}
 	}

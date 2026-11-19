@@ -14,7 +14,8 @@ export function stopDifficultyMonitor() {
 }
 
 world.afterEvents.entityHitEntity.subscribe(({ damagingEntity, hitEntity }) => {
-  if (damagingEntity.typeId != "ibexx_itc:ghost") return;
+  if (hitEntity.typeId != "ibexx_itc:ghost") return;
 
-  hitEntity.runCommand("scoreboard players remove @s Sanity 1");
-})
+  damagingEntity.triggerEvent("attacked_ghost_slowness_event");
+  damagingEntity.runCommand("scoreboard players remove @s Sanity 1");
+});

@@ -500,12 +500,12 @@
 					]
 				}
 			},
-			"bad_luck": {
+			"attacked_ghost_slowness_event": {
 				"randomize": [
 					{
 						"weight": 5,
 						"queue_command": {
-							"command": ["effect @s slowness 20 2 true"]
+							"command": [ "effect @s slowness 20 2 true" ]
 						}
 					},
 					{
