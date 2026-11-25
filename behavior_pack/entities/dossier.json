@@ -1,0 +1,92 @@
+{
+  "format_version": "1.21.50",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "ibexx_itc:dossier",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "properties": {
+        "ibexx_itc:visible": {
+          "type": "bool",
+          "default": false,
+          "client_sync": true
+        },
+        "ibexx_itc:rotation": {
+          "type": "float",
+          "range": [-360.0, 360.0],
+          "default": 0.0,
+          "client_sync": true
+        },
+        "ibexx_itc:ahead": {
+          "type": "float",
+          "range": [0.0, 1.0],
+          "default": 0.0,
+          "client_sync": true
+        },
+        "ibexx_itc:page": {
+          "type": "int",
+          "range": [0, 5],
+          "default": 0,
+          "client_sync": true
+        },
+        "ibexx_itc:souls_freed": {
+          "type": "int",
+          "range": [0, 7],
+          "default": 0,
+          "client_sync": true
+        }
+      }
+    },
+    "components": {
+      "minecraft:renders_when_invisible": {},
+      "minecraft:body_rotation_blocked": {},
+      "minecraft:rideable": {
+        "crouching_skip_interact": true,
+        "family_types": ["player"],
+        "interact_text": "",
+        "pull_in_entities": false,
+        "rider_can_interact": true,
+        "seat_count": 1,
+        "dismount_mode": "on_top_center",
+        "seats": [
+          { "position": [0, 0.4, 0] }
+        ]
+      },
+      "minecraft:input_ground_controlled": {},
+      "minecraft:movement": { "value": 0, "max": 0 },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          { "cause": "all", "deals_damage": "no" }
+        ]
+      },
+      "minecraft:type_family": {
+        "family": ["inanimate", "ibexx_itc_dossier"]
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 0.01
+      },
+      "minecraft:custom_hit_test": {
+        "hitboxes": [
+          {
+            "width": 1.5,
+            "height": 2.0,
+            "pivot": [0, 1, 0]
+          }
+        ]
+      },
+      "minecraft:physics": {
+        "has_collision": false,
+        "has_gravity": false
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:knockback_resistance": { "value": 1 },
+      "minecraft:health": { "value": 10, "max": 10, "min": 10 },
+      "minecraft:conditional_bandwidth_optimization": {}
+    }
+  }
+}

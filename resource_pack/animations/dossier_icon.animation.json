@@ -1,0 +1,35 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.ibexx_itc.dossier_icon.main": {
+      "loop": true,
+      "bones": {
+        "icon_root": {
+          "rotation": [0, "q.property('ibexx_itc:rotation')", 0]
+        },
+        "icon_anchor": {
+          "position": [0, 11.5, "q.property('ibexx_itc:ahead') * 16"],
+          "scale": "q.property('ibexx_itc:visible') ? 0.306 : 0"
+        },
+        "icon_offset": {
+          "position": [
+            "q.property('ibexx_itc:icon_pos_x')",
+            "q.property('ibexx_itc:icon_pos_y')",
+            -0.01
+          ],
+          "scale": "q.property('ibexx_itc:icon_scale')"
+        },
+        "icon_flat": {
+          "rotation": [0, 180, 0],
+          "scale": [1, 1, 0.001]
+        },
+        "icon_scale": {
+          "scale": 0.18
+        },
+        "rightItem": {
+          "rotation": [-74.5, -10, 0]
+        }
+      }
+    }
+  }
+}

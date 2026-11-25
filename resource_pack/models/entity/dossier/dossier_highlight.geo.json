@@ -1,0 +1,40 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.ibexx_itc.dossier.highlight",
+				"texture_width": 64,
+				"texture_height": 32,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 4,
+				"visible_bounds_offset": [0, 1.5, 0]
+			},
+			"bones": [
+				{
+					"name": "dossier_root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "dossier_body",
+					"parent": "dossier_root",
+					"pivot": [0, 13, 8]
+				},
+				{
+					"name": "dossier_highlight",
+					"parent": "dossier_body",
+					"pivot": [0, 13, 7.998],
+					"cubes": [
+						{
+							"origin": [-0.5, 12.5, 7.998],
+							"size": [1, 1, 0],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [64, 32]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

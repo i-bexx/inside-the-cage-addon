@@ -1,0 +1,124 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.ibexx_itc.dossier.stamps",
+				"texture_width": 16,
+				"texture_height": 16,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 4,
+				"visible_bounds_offset": [0, 1.5, 0]
+			},
+			"bones": [
+				{
+					"name": "dossier_root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "dossier_body",
+					"parent": "dossier_root",
+					"pivot": [0, 13, 8]
+				},
+				{
+					"name": "soul_stamp_0",
+					"parent": "dossier_body",
+					"pivot": [-14.8, 15.6, 7.995],
+					"cubes": [
+						{
+							"origin": [-16, 14.4, 7.995],
+							"size": [2.4, 2.4, 0],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [16, 16]}
+							}
+						}
+					]
+				},
+				{
+					"name": "soul_stamp_1",
+					"parent": "dossier_body",
+					"pivot": [-10, 15.6, 7.995],
+					"cubes": [
+						{
+							"origin": [-11.2, 14.4, 7.995],
+							"size": [2.4, 2.4, 0],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [16, 16]}
+							}
+						}
+					]
+				},
+				{
+					"name": "soul_stamp_2",
+					"parent": "dossier_body",
+					"pivot": [-5.2, 15.6, 7.995],
+					"cubes": [
+						{
+							"origin": [-6.4, 14.4, 7.995],
+							"size": [2.4, 2.4, 0],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [16, 16]}
+							}
+						}
+					]
+				},
+				{
+					"name": "soul_stamp_3",
+					"parent": "dossier_body",
+					"pivot": [-0.4, 15.6, 7.995],
+					"cubes": [
+						{
+							"origin": [-1.6, 14.4, 7.995],
+							"size": [2.4, 2.4, 0],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [16, 16]}
+							}
+						}
+					]
+				},
+				{
+					"name": "soul_stamp_4",
+					"parent": "dossier_body",
+					"pivot": [4.4, 15.6, 7.995],
+					"cubes": [
+						{
+							"origin": [3.2, 14.4, 7.995],
+							"size": [2.4, 2.4, 0],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [16, 16]}
+							}
+						}
+					]
+				},
+				{
+					"name": "soul_stamp_5",
+					"parent": "dossier_body",
+					"pivot": [9.2, 15.6, 7.995],
+					"cubes": [
+						{
+							"origin": [8, 14.4, 7.995],
+							"size": [2.4, 2.4, 0],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [16, 16]}
+							}
+						}
+					]
+				},
+				{
+					"name": "soul_stamp_6",
+					"parent": "dossier_body",
+					"pivot": [14, 15.6, 7.995],
+					"cubes": [
+						{
+							"origin": [12.8, 14.4, 7.995],
+							"size": [2.4, 2.4, 0],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [16, 16]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

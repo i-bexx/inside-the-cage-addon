@@ -1,0 +1,28 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.ibexx_itc.dossier.main": {
+      "loop": true,
+      "bones": {
+        "dossier_root": {
+          "rotation": [0, "q.property('ibexx_itc:rotation')", 0]
+        },
+        "dossier_body": {
+          "position": [0, 11.5, "q.property('ibexx_itc:ahead') * 16"],
+          "scale": "q.property('ibexx_itc:visible') ? 0.306 : 0"
+        },
+        "dossier_cursor": {
+          "position": [
+            "(v.cursor_x - 200) / 10",
+            "(130 - v.cursor_y) / 10",
+            0
+          ]
+        },
+        "dossier_highlight": {
+          "position": ["v.hover_pos_x", "v.hover_pos_y", 0],
+          "scale": ["v.hover_width", "v.hover_height", 1]
+        }
+      }
+    }
+  }
+}

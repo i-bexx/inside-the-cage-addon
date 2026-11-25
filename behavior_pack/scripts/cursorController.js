@@ -72,7 +72,7 @@ export function startCrosshairTracker(player) {
     if (!cache || cache.variantVal === 1 || player.getProperty("ibexx_itc:is_shooting")) return;
 
     const result = player.getEntitiesFromViewDirection(ENTITY_DISTANCE)
-        .find(hit => hit.entity.typeId !== "ibexx_itc:ammo_shoot");
+        .find(hit => hit.entity.typeId !== "ibexx_itc:ammo_shoot" && hit.entity.typeId !== "ibexx_itc:dossier" && hit.entity.typeId !== "ibexx_itc:dossier_icon");
     const currentEntityId = result ? result.entity.id : "none";
 
     if (cache.lastLookedEntityId === currentEntityId) return;

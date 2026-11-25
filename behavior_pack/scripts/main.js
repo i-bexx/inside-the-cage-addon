@@ -5,6 +5,7 @@ import "./cameraUsage";
 import "./cursorController";
 import "./customComponentRegistrations";
 import "./gameStarter";
+import "./dossierController";
 import "./gameStats";
 import "./panels";
 import "./preStart";

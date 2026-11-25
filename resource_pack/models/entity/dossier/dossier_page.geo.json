@@ -1,0 +1,40 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.ibexx_itc.dossier.page",
+				"texture_width": 400,
+				"texture_height": 260,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 4,
+				"visible_bounds_offset": [0, 1.5, 0]
+			},
+			"bones": [
+				{
+					"name": "dossier_root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "dossier_body",
+					"parent": "dossier_root",
+					"pivot": [0, 13, 8]
+				},
+				{
+					"name": "dossier_page",
+					"parent": "dossier_body",
+					"pivot": [0, 0, 8],
+					"cubes": [
+						{
+							"origin": [-20, 0, 8],
+							"size": [40, 26, 0],
+							"uv": {
+								"north": {"uv": [0, 0], "uv_size": [400, 260]}
+							}
+						}
+					]
+				}
+			]
+		}
+	]
+}

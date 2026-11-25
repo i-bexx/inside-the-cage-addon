@@ -40,6 +40,9 @@
 		},
 		"ibexx_itc:ammo_shoot": {
 			"textures": ["textures/items/ammo_shoot"]
+		},
+		"ibexx_itc:case_dossier": {
+			"textures": ["textures/items/case_dossier"]
 		}
 	}
 }

@@ -1,6 +1,28 @@
 {
   "materials": {
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "ibexx_itc_dossier_page:entity_alphatest": {
+      "-defines": ["FANCY", "USE_OVERLAY"],
+      "+states": ["DisableCulling"],
+      "+samplerStates": [
+        { "samplerIndex": 0, "textureWrap": "Clamp", "textureFilter": "Point" }
+      ]
+    },
+    "ibexx_itc_dossier_cursor:entity_alphatest": {
+      "depthFunc": "Always",
+      "-defines": ["FANCY", "USE_OVERLAY"],
+      "+states": ["DisableCulling"],
+      "+samplerStates": [
+        { "samplerIndex": 0, "textureWrap": "Clamp", "textureFilter": "Point" }
+      ]
+    },
+    "ibexx_itc_dossier_highlight:entity_alphablend": {
+      "depthFunc": "LessEqual",
+      "-defines": ["FANCY", "USE_OVERLAY"],
+      "+states": ["DisableCulling", "DisableDepthWrite"],
+      "+samplerStates": [
+        { "samplerIndex": 0, "textureWrap": "Clamp", "textureFilter": "Point" }
+      ]
+    }
   }
 }
-

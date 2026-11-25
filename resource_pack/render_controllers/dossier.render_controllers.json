@@ -1,0 +1,75 @@
+{
+  "format_version": "1.10.0",
+  "render_controllers": {
+    "controller.render.ibexx_itc.dossier.cover": {
+      "geometry": "Geometry.cover",
+      "materials": [
+        { "*": "Material.cover" }
+      ],
+      "textures": ["Texture.cover"],
+      "ignore_lighting": true
+    },
+    "controller.render.ibexx_itc.dossier.page": {
+      "arrays": {
+        "textures": {
+          "Array.pages": [
+            "Texture.page_0",
+            "Texture.page_1",
+            "Texture.page_2",
+            "Texture.page_3",
+            "Texture.page_4",
+            "Texture.page_5"
+          ]
+        }
+      },
+      "geometry": "Geometry.page",
+      "materials": [
+        { "*": "Material.page" }
+      ],
+      "textures": ["Array.pages[q.property('ibexx_itc:page')]"],
+      "ignore_lighting": true
+    },
+    "controller.render.ibexx_itc.dossier.highlight": {
+      "geometry": "Geometry.highlight",
+      "materials": [
+        { "*": "Material.highlight" }
+      ],
+      "textures": ["Texture.highlight"],
+      "ignore_lighting": true
+    },
+    "controller.render.ibexx_itc.dossier.cursor": {
+      "arrays": {
+        "textures": {
+          "Array.cursors": [
+            "Texture.cursor_normal",
+            "Texture.cursor_hover"
+          ]
+        }
+      },
+      "geometry": "Geometry.cursor",
+      "materials": [
+        { "*": "Material.cursor" }
+      ],
+      "textures": ["Array.cursors[v.is_hovered ? 1 : 0]"],
+      "ignore_lighting": true
+    },
+    "controller.render.ibexx_itc.dossier.stamps": {
+      "geometry": "Geometry.stamps",
+      "materials": [
+        { "*": "Material.page" }
+      ],
+      "textures": ["Texture.soul_stamp"],
+      "ignore_lighting": true,
+      "part_visibility": [
+        { "*": true },
+        { "soul_stamp_0": "q.property('ibexx_itc:page') == 5 && q.property('ibexx_itc:souls_freed') >= 1" },
+        { "soul_stamp_1": "q.property('ibexx_itc:page') == 5 && q.property('ibexx_itc:souls_freed') >= 2" },
+        { "soul_stamp_2": "q.property('ibexx_itc:page') == 5 && q.property('ibexx_itc:souls_freed') >= 3" },
+        { "soul_stamp_3": "q.property('ibexx_itc:page') == 5 && q.property('ibexx_itc:souls_freed') >= 4" },
+        { "soul_stamp_4": "q.property('ibexx_itc:page') == 5 && q.property('ibexx_itc:souls_freed') >= 5" },
+        { "soul_stamp_5": "q.property('ibexx_itc:page') == 5 && q.property('ibexx_itc:souls_freed') >= 6" },
+        { "soul_stamp_6": "q.property('ibexx_itc:page') == 5 && q.property('ibexx_itc:souls_freed') >= 7" }
+      ]
+    }
+  }
+}

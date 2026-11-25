@@ -1,0 +1,46 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.ibexx_itc.dossier_icon",
+				"texture_width": 16,
+				"texture_height": 16,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 4,
+				"visible_bounds_offset": [0, 1.5, 0]
+			},
+			"bones": [
+				{
+					"name": "icon_root",
+					"pivot": [0, 0, 0]
+				},
+				{
+					"name": "icon_anchor",
+					"parent": "icon_root",
+					"pivot": [0, 13, 8]
+				},
+				{
+					"name": "icon_offset",
+					"parent": "icon_anchor",
+					"pivot": [0, 13, 8]
+				},
+				{
+					"name": "icon_flat",
+					"parent": "icon_offset",
+					"pivot": [0, 13, 8]
+				},
+				{
+					"name": "icon_scale",
+					"parent": "icon_flat",
+					"pivot": [0, 13, 8]
+				},
+				{
+					"name": "rightItem",
+					"parent": "icon_scale",
+					"pivot": [0, 13, 8]
+				}
+			]
+		}
+	]
+}

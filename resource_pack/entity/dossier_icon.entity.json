@@ -1,0 +1,27 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "ibexx_itc:dossier_icon",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/dossier/highlight_frame"
+      },
+      "geometry": {
+        "default": "geometry.ibexx_itc.dossier_icon"
+      },
+      "held_item_ignores_lighting": true,
+      "animations": {
+        "main": "animation.ibexx_itc.dossier_icon.main"
+      },
+      "scripts": {
+        "animate": ["main"]
+      },
+      "render_controllers": [
+        "controller.render.ibexx_itc.default"
+      ]
+    }
+  }
+}
